@@ -40161,7 +40161,7 @@ seaIce: Gelato 6.1 </variable>
 			<axis id="hour_in_diurnal_cycle" n_glo="24" value="(0,23)[0.5 1.5 2.5 3.5 4.5 5.5 6.5 7.5 8.5 9.5 10.5 11.5 12.5 13.5 14.5 15.5 16.5 17.5 18.5 19.5 20.5 21.5 22.5 23.5]" name="time3" standard_name="time" unit="days since ?" axis_type="T">
 				<temporal_splitting/>
 			</axis>
-			<axis id="DR_soilpools_soil_carbon_pools" axis_ref="soil_carbon_pools" name="sector" long_name="Soil Pools" dim_name="soilpools" label="(0,2)[  fast medium slow  ]"/>
+			<axis id="DR_soilpools_soil_carbon_pools" axis_ref="soil_carbon_pools" name="soilpools" long_name="Soil Pools" dim_name="soilpools" label="(0,2)[  fast medium slow  ]"/>
 			<axis id="plev7h" positive="down" n_glo="7" value="(0,6)[ 92500. 85000. 70000. 60000. 50000. 25000.  5000. ]" name="plev" standard_name="air_pressure" long_name="pressure" unit="Pa" axis_type="Z">
 				<interpolate_axis type="polynomial" order="1" coordinate="CMIP6_pfull_instant_sampled_3h"/>
 			</axis>
@@ -40172,7 +40172,7 @@ seaIce: Gelato 6.1 </variable>
 			<axis id="plev7hm" positive="down" n_glo="7" value="(0,6)[ 700. 300. 200. 50. 10. 5. 1. ]" name="plev" standard_name="air_pressure" long_name="pressure" unit="Pa" axis_type="Z">
 				<interpolate_axis type="polynomial" order="1" coordinate="CMIP6_pfull_instant_sampled_3h"/>
 			</axis>
-			<axis id="DR_vegtype_vegtype" axis_ref="vegtype" name="sector" long_name="plant functional type" dim_name="type" label="(0,18)[  Bare_soil Rock Permanent_snow Temperate_broad-leaved_decidus Boreal_needleaf_evergreen Tropical_broad-leaved_evergreen C3_crop C4_crop Irrigated_crop C3_grass C4_grass Wetland Tropical_broad-leaved_decidus Temperate_broad-leaved_evergreen Temperate_needleaf_evergreen Boreal_broad-leaved_decidus Boreal_needleaf_decidus Tundra_grass Shrub  ]"/>
+			<axis id="DR_vegtype_vegtype" axis_ref="vegtype" name="type" long_name="plant functional type" dim_name="type" label="(0,18)[  Bare_soil Rock Permanent_snow Temperate_broad-leaved_decidus Boreal_needleaf_evergreen Tropical_broad-leaved_evergreen C3_crop C4_crop Irrigated_crop C3_grass C4_grass Wetland Tropical_broad-leaved_decidus Temperate_broad-leaved_evergreen Temperate_needleaf_evergreen Boreal_broad-leaved_decidus Boreal_needleaf_decidus Tundra_grass Shrub  ]"/>
 		</axis_group>
 	</axis_definition>
 	<domain_definition>
@@ -40494,7 +40494,7 @@ seaIce: Gelato 6.1 </variable>
 		</grid>
 		<grid id="NATURE_soilcpools_complete_soilpools">
 			<domain domain_ref="complete"/>
-			<axis axis_ref="DR_soilpools_soil_carbon_pools" name="sector" id="ref_to_DR_soilpools_soil_carbon_pools_92"/>
+			<axis axis_ref="DR_soilpools_soil_carbon_pools" name="soilpools" id="ref_to_DR_soilpools_soil_carbon_pools_92"/>
 		</grid>
 		<grid id="NATURE_grid_Scaltypec3pft">
 			<domain domain_ref="NATURE"/>
@@ -40660,7 +40660,7 @@ seaIce: Gelato 6.1 </variable>
 		</grid>
 		<grid id="NATURE_vegtype_complete_vegtype">
 			<domain domain_ref="complete"/>
-			<axis axis_ref="DR_vegtype_vegtype" name="sector" id="ref_to_DR_vegtype_vegtype_95"/>
+			<axis axis_ref="DR_vegtype_vegtype" name="type" id="ref_to_DR_vegtype_vegtype_95"/>
 		</grid>
 		<grid id="NATURE_grid_Scaltyperesidual">
 			<domain domain_ref="NATURE"/>

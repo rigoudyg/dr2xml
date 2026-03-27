@@ -31129,7 +31129,7 @@ seaIce: Gelato 6.1 </variable>
 				<interpolate_axis type="polynomial" order="1" coordinate="CMIP6_pfull_instant_sampled_3h"/>
 			</axis>
 			<axis id="DR_alevel_klev_half" axis_ref="klev_half" name="lev" long_name="atmospheric model level" prec="8" axis_type="Z"/>
-			<axis id="DR_soilpools_soil_carbon_pools" axis_ref="soil_carbon_pools" name="sector" long_name="Soil Pools" dim_name="soilpools" label="(0,2)[  fast medium slow  ]"/>
+			<axis id="DR_soilpools_soil_carbon_pools" axis_ref="soil_carbon_pools" name="soilpools" long_name="Soil Pools" dim_name="soilpools" label="(0,2)[  fast medium slow  ]"/>
 			<axis id="Plev39hm" positive="down" n_glo="39" value="(0,38)[ 100000. 92500. 85000. 70000. 60000. 50000. 40000. 30000. 25000. 20000. 17000. 15000. 13000. 11500. 10000. 9000. 8000. 7000. 5000. 3000. 2000. 1500. 1000. 700. 500. 300. 200. 150. 100. 70. 50. 40. 30. 20. 15. 10. 7. 5. 3. ]" name="plev" standard_name="air_pressure" long_name="pressure" unit="Pa" axis_type="Z">
 				<interpolate_axis type="polynomial" order="1" coordinate="CMIP6_pfull_instant_sampled_3h"/>
 			</axis>
@@ -31338,7 +31338,7 @@ seaIce: Gelato 6.1 </variable>
 		</grid>
 		<grid id="NATURE_soilcpools_complete_soilpools">
 			<domain domain_ref="complete"/>
-			<axis axis_ref="DR_soilpools_soil_carbon_pools" name="sector" id="ref_to_DR_soilpools_soil_carbon_pools_72"/>
+			<axis axis_ref="DR_soilpools_soil_carbon_pools" name="soilpools" id="ref_to_DR_soilpools_soil_carbon_pools_72"/>
 		</grid>
 		<grid id="WATER_grid_complete">
 			<domain domain_ref="complete"/>

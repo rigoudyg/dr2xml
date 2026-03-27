@@ -632,7 +632,6 @@ seaIce: Gelato 6.1 </variable>
 				<variable name="history" type="string"> none </variable>
 				<variable name="units" type="string"> m </variable>
 				<variable name="cell_methods" type="string"> area: mean where sea time: mean </variable>
-				<variable name="cell_measures" type="string"> undef </variable>
 				<variable name="interval_operation" type="string"> 1800 s </variable>
 			</field>
 		</file>
@@ -700,7 +699,6 @@ seaIce: Gelato 6.1 </variable>
 				<variable name="history" type="string"> none </variable>
 				<variable name="units" type="string"> m2 </variable>
 				<variable name="cell_methods" type="string"> area: sum </variable>
-				<variable name="cell_measures" type="string"> undef </variable>
 			</field>
 		</file>
 		<file id="deptho_Ofx_gn" name="IOXDIRdeptho_Ofx_CNRM-ESM2-1_historical_r1i1p1f2_gn" output_freq="1d" append="true" output_level="10" compression_level="4" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
@@ -1936,7 +1934,6 @@ seaIce: Gelato 6.1 </variable>
 				<variable name="history" type="string"> none </variable>
 				<variable name="units" type="string"> m </variable>
 				<variable name="cell_methods" type="string"> area: mean where sea time: mean </variable>
-				<variable name="cell_measures" type="string"> undef </variable>
 				<variable name="interval_operation" type="string"> 1800 s </variable>
 			</field>
 		</file>

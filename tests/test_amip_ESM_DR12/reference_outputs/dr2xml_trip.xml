@@ -78,7 +78,6 @@
 	<!--Year processed 1979-->
 	<file_definition type="one_file" enabled="true">
 		<file id="rivo_Eday_gn" name="IOXDIRrivo_Eday_CNRM-ESM2-1_amip_r1i1p1f3_gn_%start_date%-%end_date%" output_freq="1d" append="true" output_level="10" compression_level="4" split_freq="100y" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="1980-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
-			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
@@ -118,7 +117,6 @@ seaIce: gelato </variable>
 			<variable name="sub_experiment_id" type="string"> none </variable>
 			<variable name="sub_experiment" type="string"> none </variable>
 			<variable name="table_id" type="string"> Eday </variable>
-			<variable name="title" type="string"> CNRM-ESM2-1 model output prepared for CMIP6 and CMIP / amip simulation </variable>
 			<variable name="variable_id" type="string"> rivo </variable>
 			<variable name="variant_label" type="string"> r1i1p1f3 </variable>
 			<variable name="CMIP6_CV_version" type="string"> cv=6.2.3.0-7-g2019642 </variable>
@@ -139,7 +137,6 @@ seaIce: gelato </variable>
 			</field>
 		</file>
 		<file id="areacellr_fx_gn" name="IOXDIRareacellr_fx_CNRM-ESM2-1_amip_r1i1p1f3_gn" output_freq="1d" append="true" output_level="10" compression_level="4" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
-			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
@@ -178,7 +175,6 @@ seaIce: gelato </variable>
 			<variable name="sub_experiment_id" type="string"> none </variable>
 			<variable name="sub_experiment" type="string"> none </variable>
 			<variable name="table_id" type="string"> fx </variable>
-			<variable name="title" type="string"> CNRM-ESM2-1 model output prepared for CMIP6 and CMIP / amip simulation </variable>
 			<variable name="variable_id" type="string"> areacellr </variable>
 			<variable name="variant_label" type="string"> r1i1p1f3 </variable>
 			<variable name="CMIP6_CV_version" type="string"> cv=6.2.3.0-7-g2019642 </variable>
@@ -197,7 +193,6 @@ seaIce: gelato </variable>
 			</field>
 		</file>
 		<file id="wtd_Emon_gn" name="IOXDIRwtd_Emon_CNRM-ESM2-1_amip_r1i1p1f3_gn_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="500y" split_freq_format="%y%mo" split_last_date="1980-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
-			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
@@ -237,7 +232,6 @@ seaIce: gelato </variable>
 			<variable name="sub_experiment_id" type="string"> none </variable>
 			<variable name="sub_experiment" type="string"> none </variable>
 			<variable name="table_id" type="string"> Emon </variable>
-			<variable name="title" type="string"> CNRM-ESM2-1 model output prepared for CMIP6 and CMIP / amip simulation </variable>
 			<variable name="variable_id" type="string"> wtd </variable>
 			<variable name="variant_label" type="string"> r1i1p1f3 </variable>
 			<variable name="CMIP6_CV_version" type="string"> cv=6.2.3.0-7-g2019642 </variable>
@@ -258,7 +252,6 @@ seaIce: gelato </variable>
 			</field>
 		</file>
 		<file id="carbdis_HOMALmon_gn" name="IOXDIRcarbdis_HOMALmon_CNRM-ESM2-1_amip_r1i1p1f3_gn_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="500y" split_freq_format="%y%mo" split_last_date="1980-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
-			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
@@ -298,7 +291,6 @@ seaIce: gelato </variable>
 			<variable name="sub_experiment_id" type="string"> none </variable>
 			<variable name="sub_experiment" type="string"> none </variable>
 			<variable name="table_id" type="string"> HOMALmon </variable>
-			<variable name="title" type="string"> CNRM-ESM2-1 model output prepared for CMIP6 and CMIP / amip simulation </variable>
 			<variable name="variable_id" type="string"> carbdis </variable>
 			<variable name="variant_label" type="string"> r1i1p1f3 </variable>
 			<variable name="CMIP6_CV_version" type="string"> cv=6.2.3.0-7-g2019642 </variable>
@@ -318,7 +310,6 @@ seaIce: gelato </variable>
 			</field>
 		</file>
 		<file id="carbin_HOMALmon_gn" name="IOXDIRcarbin_HOMALmon_CNRM-ESM2-1_amip_r1i1p1f3_gn_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="500y" split_freq_format="%y%mo" split_last_date="1980-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
-			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
@@ -358,7 +349,6 @@ seaIce: gelato </variable>
 			<variable name="sub_experiment_id" type="string"> none </variable>
 			<variable name="sub_experiment" type="string"> none </variable>
 			<variable name="table_id" type="string"> HOMALmon </variable>
-			<variable name="title" type="string"> CNRM-ESM2-1 model output prepared for CMIP6 and CMIP / amip simulation </variable>
 			<variable name="variable_id" type="string"> carbin </variable>
 			<variable name="variant_label" type="string"> r1i1p1f3 </variable>
 			<variable name="CMIP6_CV_version" type="string"> cv=6.2.3.0-7-g2019642 </variable>
@@ -378,7 +368,6 @@ seaIce: gelato </variable>
 			</field>
 		</file>
 		<file id="carbw_HOMALmon_gn" name="IOXDIRcarbw_HOMALmon_CNRM-ESM2-1_amip_r1i1p1f3_gn_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="500y" split_freq_format="%y%mo" split_last_date="1980-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
-			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
@@ -418,7 +407,6 @@ seaIce: gelato </variable>
 			<variable name="sub_experiment_id" type="string"> none </variable>
 			<variable name="sub_experiment" type="string"> none </variable>
 			<variable name="table_id" type="string"> HOMALmon </variable>
-			<variable name="title" type="string"> CNRM-ESM2-1 model output prepared for CMIP6 and CMIP / amip simulation </variable>
 			<variable name="variable_id" type="string"> carbw </variable>
 			<variable name="variant_label" type="string"> r1i1p1f3 </variable>
 			<variable name="CMIP6_CV_version" type="string"> cv=6.2.3.0-7-g2019642 </variable>
@@ -438,7 +426,6 @@ seaIce: gelato </variable>
 			</field>
 		</file>
 		<file id="fldf_HOMALmon_gn" name="IOXDIRfldf_HOMALmon_CNRM-ESM2-1_amip_r1i1p1f3_gn_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="500y" split_freq_format="%y%mo" split_last_date="1980-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
-			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
@@ -478,7 +465,6 @@ seaIce: gelato </variable>
 			<variable name="sub_experiment_id" type="string"> none </variable>
 			<variable name="sub_experiment" type="string"> none </variable>
 			<variable name="table_id" type="string"> HOMALmon </variable>
-			<variable name="title" type="string"> CNRM-ESM2-1 model output prepared for CMIP6 and CMIP / amip simulation </variable>
 			<variable name="variable_id" type="string"> fldf </variable>
 			<variable name="variant_label" type="string"> r1i1p1f3 </variable>
 			<variable name="CMIP6_CV_version" type="string"> cv=6.2.3.0-7-g2019642 </variable>
@@ -498,7 +484,6 @@ seaIce: gelato </variable>
 			</field>
 		</file>
 		<file id="fwtd_HOMALmon_gn" name="IOXDIRfwtd_HOMALmon_CNRM-ESM2-1_amip_r1i1p1f3_gn_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="500y" split_freq_format="%y%mo" split_last_date="1980-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
-			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
@@ -538,7 +523,6 @@ seaIce: gelato </variable>
 			<variable name="sub_experiment_id" type="string"> none </variable>
 			<variable name="sub_experiment" type="string"> none </variable>
 			<variable name="table_id" type="string"> HOMALmon </variable>
-			<variable name="title" type="string"> CNRM-ESM2-1 model output prepared for CMIP6 and CMIP / amip simulation </variable>
 			<variable name="variable_id" type="string"> fwtd </variable>
 			<variable name="variant_label" type="string"> r1i1p1f3 </variable>
 			<variable name="CMIP6_CV_version" type="string"> cv=6.2.3.0-7-g2019642 </variable>

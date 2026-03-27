@@ -9661,9 +9661,9 @@ seaIce: Gelato 6.1 </variable>
 	</field_definition>
 	<axis_definition>
 		<axis_group prec="8">
-			<axis id="DR_basin_basin" axis_ref="basin" name="sector" standard_name="region" long_name="ocean basin" dim_name="basin" label="(0,4)[  global_ocean atlantic_arctic_ocean indian_pacific_ocean dummy dummy  ]"/>
-			<axis id="DR_oline_oline" axis_ref="oline" name="sector" standard_name="region" long_name="ocean passage" dim_name="line" label="(0,14)[  barents_opening bering_strait canadian_archipelago denmark_strait drake_passage english_channel pacific_equatorial_undercurrent faroe_scotland_channel florida_bahamas_strait fram_strait iceland_faroe_channel indonesian_throughflow mozambique_channel taiwan_luzon_straits windward_passage  ]"/>
-			<axis id="DR_siline_siline" axis_ref="siline" name="sector" standard_name="region" long_name="ocean passage" dim_name="line" label="(0,3)[  fram_strait canadian_archipelego barents_opening bering_strait  ]"/>
+			<axis id="DR_basin_basin" axis_ref="basin" name="basin" standard_name="region" long_name="ocean basin" dim_name="basin" label="(0,4)[  global_ocean atlantic_arctic_ocean indian_pacific_ocean dummy dummy  ]"/>
+			<axis id="DR_oline_oline" axis_ref="oline" name="line" standard_name="region" long_name="ocean passage" dim_name="line" label="(0,14)[  barents_opening bering_strait canadian_archipelago denmark_strait drake_passage english_channel pacific_equatorial_undercurrent faroe_scotland_channel florida_bahamas_strait fram_strait iceland_faroe_channel indonesian_throughflow mozambique_channel taiwan_luzon_straits windward_passage  ]"/>
+			<axis id="DR_siline_siline" axis_ref="siline" name="line" standard_name="region" long_name="ocean passage" dim_name="line" label="(0,3)[  fram_strait canadian_archipelego barents_opening bering_strait  ]"/>
 		</axis_group>
 	</axis_definition>
 	<domain_definition>
@@ -9704,18 +9704,18 @@ seaIce: Gelato 6.1 </variable>
 		</grid>
 		<grid id="grid_znl_3basin_basin">
 			<axis axis_ref="j-mean"/>
-			<axis axis_ref="DR_basin_basin" name="sector" id="ref_to_DR_basin_basin_5"/>
+			<axis axis_ref="DR_basin_basin" name="basin" id="ref_to_DR_basin_basin_5"/>
 		</grid>
 		<grid id="grid_TRO_oline">
-			<axis axis_ref="DR_oline_oline" name="sector" id="ref_to_DR_oline_oline_6"/>
+			<axis axis_ref="DR_oline_oline" name="line" id="ref_to_DR_oline_oline_6"/>
 		</grid>
 		<grid id="grid_znl_3basin_2D_basin">
 			<axis axis_ref="j-mean"/>
 			<axis axis_ref="depthw" name="lev"/>
-			<axis axis_ref="DR_basin_basin" name="sector" id="ref_to_DR_basin_basin_7"/>
+			<axis axis_ref="DR_basin_basin" name="basin" id="ref_to_DR_basin_basin_7"/>
 		</grid>
 		<grid id="grid_TRI_siline">
-			<axis axis_ref="DR_siline_siline" name="sector" id="ref_to_DR_siline_siline_8"/>
+			<axis axis_ref="DR_siline_siline" name="line" id="ref_to_DR_siline_siline_8"/>
 		</grid>
 	</grid_definition>
 	<scalar_definition>

@@ -65,6 +65,5 @@ test_script "create_ping_files.py" "--lab=cnrm --out=test"
 echo "Out code sum: ${out_code_sum}" >> ${log_file}
 
 cat ${log_file}
-rm -f ${log_file}
 
 exit ${out_code_sum}

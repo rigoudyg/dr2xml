@@ -58,27 +58,28 @@ def test_reference_init(func):
 			time_stats = dict()
 			with codecs.open(log, 'w', encoding="utf-8") as logfile:
 				with codecs.open(stats, "w", encoding="utf-8") as statfile:
+					if add_profile:
+						pr = cProfile.Profile()
+						pr.enable()
 					for context in contexts:
 						print("Execute context %s" % context)
 						sys.stdout = logfile
-						if add_profile:
-							pr = cProfile.Profile()
-							pr.enable()
 						start_time = time.time()
 						rep = func.__call__(context=context, force_reset=context == contexts[0], **config_dict, **kwargs)
 						end_time = time.time()
-						if add_profile:
-							pr.disable()
 						sys.stdout = statfile
 						total_time = end_time - start_time
 						print("It took %d s to execute context %s" % (total_time, context))
-						if add_profile:
-							s = io.StringIO()
-							sortby = 'cumulative'
-							ps = pstats.Stats(pr, stream=s).sort_stats(sortby)
-							ps.print_stats()
-							print(s.getvalue())
 						time_stats[context] = total_time
+						sys.stdout = old_stdout
+					if add_profile:
+						pr.disable()
+						sys.stdout = statfile
+						s = io.StringIO()
+						sortby = 'cumulative'
+						ps = pstats.Stats(pr, stream=s).sort_stats(sortby)
+						ps.print_stats()
+						print(s.getvalue())
 						sys.stdout = old_stdout
 
 			if check_time_file is not None:

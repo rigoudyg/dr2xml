@@ -87,7 +87,7 @@ seaIce: Gelato 6.1',
 'variant_info' = ''}-->
 	<!--Year processed 1850-->
 	<file_definition type="one_file" enabled="true">
-		<file id="pr_tavg-u-hxy-u_gr" name="IOXDIRpr_tavg-u-hxy-u_day_GLB_gr_CNRM-ESM2-1e_historical_r1i1p1f2_%start_date%-%end_date%" output_freq="1d" append="true" output_level="10" compression_level="4" split_freq="100y" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
+		<file id="pr_tavg-u-hxy-u_day_GLB_gr" name="IOXDIRpr_tavg-u-hxy-u_day_GLB_gr_CNRM-ESM2-1e_historical_r1i1p1f2_%start_date%-%end_date%" output_freq="1d" append="true" output_level="10" compression_level="4" split_freq="100y" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14107/%uuid%" convention_str="CF-1.7 CMIP-6.2" format="netcdf4_classic">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="area_label" type="string"> u </variable>
 			<variable name="branch_time_in_child" type="double"> 0.0D </variable>
@@ -100,26 +100,26 @@ seaIce: Gelato 6.1',
 			<variable name="experiment" type="string"> Simulation of the climate of the recent past (typically meaning 1850 to present-day) with prescribed carbon dioxide concentrations (for prescribed carbon dioxide emissions, see `esm-hist`). </variable>
 			<variable name="experiment_id" type="string"> historical </variable>
 			<variable name="external_variables" type="string"> areacella </variable>
-			<variable name="forcing_index" type="int"> f2 </variable>
+			<variable name="forcing_index" type="string"> f2 </variable>
 			<variable name="frequency" type="string"> day </variable>
 			<variable name="grid_label" type="string"> gr </variable>
 			<variable name="history" type="string"> none </variable>
 			<variable name="horizontal_label" type="string"> hxy </variable>
-			<variable name="initialization_index" type="int"> i1 </variable>
+			<variable name="initialization_index" type="string"> i1 </variable>
 			<variable name="institution" type="string"> CNRM (Centre National de Recherches Meteorologiques, Toulouse 31057, France), CERFACS (Centre Europeen de Recherche et de Formation Avancee en Calcul Scientifique, Toulouse 31057, France) </variable>
 			<variable name="institution_id" type="string"> CNRM-CERFACS </variable>
 			<variable name="license_id" type="string"> CC-BY-4-0 </variable>
 			<variable name="mip_era" type="string"> CMIP7 </variable>
-			<variable name="nominal_resolution" type="string"> 250 km </variable>
+			<variable name="nominal_resolution" type="string"> 250-km </variable>
 			<variable name="parent_activity_id" type="string"> CMIP </variable>
 			<variable name="parent_experiment_id" type="string"> piControl </variable>
 			<variable name="parent_mip_era" type="string"> CMIP7 </variable>
 			<variable name="parent_source_id" type="string"> CNRM-ESM2-1e </variable>
 			<variable name="parent_time_units" type="string"> days since 1850-01-01 00:00:00 </variable>
 			<variable name="parent_variant_label" type="string"> r1i1p1f2 </variable>
-			<variable name="physics_index" type="int"> p1 </variable>
+			<variable name="physics_index" type="string"> p1 </variable>
 			<variable name="product" type="string"> model-output </variable>
-			<variable name="realization_index" type="int"> r1 </variable>
+			<variable name="realization_index" type="string"> r1 </variable>
 			<variable name="realm" type="string"> atmos </variable>
 			<variable name="region" type="string"> GLB </variable>
 			<variable name="source_id" type="string"> CNRM-ESM2-1e </variable>
@@ -145,7 +145,7 @@ seaIce: Gelato 6.1',
 				<variable name="interval_operation" type="string"> 900 s </variable>
 			</field>
 		</file>
-		<file id="psl_tavg-u-hxy-u_gr" name="IOXDIRpsl_tavg-u-hxy-u_day_GLB_gr_CNRM-ESM2-1e_historical_r1i1p1f2_%start_date%-%end_date%" output_freq="1d" append="true" output_level="10" compression_level="4" split_freq="100y" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
+		<file id="psl_tavg-u-hxy-u_day_GLB_gr" name="IOXDIRpsl_tavg-u-hxy-u_day_GLB_gr_CNRM-ESM2-1e_historical_r1i1p1f2_%start_date%-%end_date%" output_freq="1d" append="true" output_level="10" compression_level="4" split_freq="100y" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14107/%uuid%" convention_str="CF-1.7 CMIP-6.2" format="netcdf4_classic">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="area_label" type="string"> u </variable>
 			<variable name="branch_time_in_child" type="double"> 0.0D </variable>
@@ -158,26 +158,26 @@ seaIce: Gelato 6.1',
 			<variable name="experiment" type="string"> Simulation of the climate of the recent past (typically meaning 1850 to present-day) with prescribed carbon dioxide concentrations (for prescribed carbon dioxide emissions, see `esm-hist`). </variable>
 			<variable name="experiment_id" type="string"> historical </variable>
 			<variable name="external_variables" type="string"> areacella </variable>
-			<variable name="forcing_index" type="int"> f2 </variable>
+			<variable name="forcing_index" type="string"> f2 </variable>
 			<variable name="frequency" type="string"> day </variable>
 			<variable name="grid_label" type="string"> gr </variable>
 			<variable name="history" type="string"> none </variable>
 			<variable name="horizontal_label" type="string"> hxy </variable>
-			<variable name="initialization_index" type="int"> i1 </variable>
+			<variable name="initialization_index" type="string"> i1 </variable>
 			<variable name="institution" type="string"> CNRM (Centre National de Recherches Meteorologiques, Toulouse 31057, France), CERFACS (Centre Europeen de Recherche et de Formation Avancee en Calcul Scientifique, Toulouse 31057, France) </variable>
 			<variable name="institution_id" type="string"> CNRM-CERFACS </variable>
 			<variable name="license_id" type="string"> CC-BY-4-0 </variable>
 			<variable name="mip_era" type="string"> CMIP7 </variable>
-			<variable name="nominal_resolution" type="string"> 250 km </variable>
+			<variable name="nominal_resolution" type="string"> 250-km </variable>
 			<variable name="parent_activity_id" type="string"> CMIP </variable>
 			<variable name="parent_experiment_id" type="string"> piControl </variable>
 			<variable name="parent_mip_era" type="string"> CMIP7 </variable>
 			<variable name="parent_source_id" type="string"> CNRM-ESM2-1e </variable>
 			<variable name="parent_time_units" type="string"> days since 1850-01-01 00:00:00 </variable>
 			<variable name="parent_variant_label" type="string"> r1i1p1f2 </variable>
-			<variable name="physics_index" type="int"> p1 </variable>
+			<variable name="physics_index" type="string"> p1 </variable>
 			<variable name="product" type="string"> model-output </variable>
-			<variable name="realization_index" type="int"> r1 </variable>
+			<variable name="realization_index" type="string"> r1 </variable>
 			<variable name="realm" type="string"> atmos </variable>
 			<variable name="region" type="string"> GLB </variable>
 			<variable name="source_id" type="string"> CNRM-ESM2-1e </variable>
@@ -203,7 +203,7 @@ seaIce: Gelato 6.1',
 				<variable name="interval_operation" type="string"> 900 s </variable>
 			</field>
 		</file>
-		<file id="sfcWind_tavg-h10m-hxy-u_gr" name="IOXDIRsfcWind_tavg-h10m-hxy-u_day_GLB_gr_CNRM-ESM2-1e_historical_r1i1p1f2_%start_date%-%end_date%" output_freq="1d" append="true" output_level="10" compression_level="4" split_freq="100y" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
+		<file id="sfcWind_tavg-h10m-hxy-u_day_GLB_gr" name="IOXDIRsfcWind_tavg-h10m-hxy-u_day_GLB_gr_CNRM-ESM2-1e_historical_r1i1p1f2_%start_date%-%end_date%" output_freq="1d" append="true" output_level="10" compression_level="4" split_freq="100y" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14107/%uuid%" convention_str="CF-1.7 CMIP-6.2" format="netcdf4_classic">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="area_label" type="string"> u </variable>
 			<variable name="branch_time_in_child" type="double"> 0.0D </variable>
@@ -216,26 +216,26 @@ seaIce: Gelato 6.1',
 			<variable name="experiment" type="string"> Simulation of the climate of the recent past (typically meaning 1850 to present-day) with prescribed carbon dioxide concentrations (for prescribed carbon dioxide emissions, see `esm-hist`). </variable>
 			<variable name="experiment_id" type="string"> historical </variable>
 			<variable name="external_variables" type="string"> areacella </variable>
-			<variable name="forcing_index" type="int"> f2 </variable>
+			<variable name="forcing_index" type="string"> f2 </variable>
 			<variable name="frequency" type="string"> day </variable>
 			<variable name="grid_label" type="string"> gr </variable>
 			<variable name="history" type="string"> none </variable>
 			<variable name="horizontal_label" type="string"> hxy </variable>
-			<variable name="initialization_index" type="int"> i1 </variable>
+			<variable name="initialization_index" type="string"> i1 </variable>
 			<variable name="institution" type="string"> CNRM (Centre National de Recherches Meteorologiques, Toulouse 31057, France), CERFACS (Centre Europeen de Recherche et de Formation Avancee en Calcul Scientifique, Toulouse 31057, France) </variable>
 			<variable name="institution_id" type="string"> CNRM-CERFACS </variable>
 			<variable name="license_id" type="string"> CC-BY-4-0 </variable>
 			<variable name="mip_era" type="string"> CMIP7 </variable>
-			<variable name="nominal_resolution" type="string"> 250 km </variable>
+			<variable name="nominal_resolution" type="string"> 250-km </variable>
 			<variable name="parent_activity_id" type="string"> CMIP </variable>
 			<variable name="parent_experiment_id" type="string"> piControl </variable>
 			<variable name="parent_mip_era" type="string"> CMIP7 </variable>
 			<variable name="parent_source_id" type="string"> CNRM-ESM2-1e </variable>
 			<variable name="parent_time_units" type="string"> days since 1850-01-01 00:00:00 </variable>
 			<variable name="parent_variant_label" type="string"> r1i1p1f2 </variable>
-			<variable name="physics_index" type="int"> p1 </variable>
+			<variable name="physics_index" type="string"> p1 </variable>
 			<variable name="product" type="string"> model-output </variable>
-			<variable name="realization_index" type="int"> r1 </variable>
+			<variable name="realization_index" type="string"> r1 </variable>
 			<variable name="realm" type="string"> atmos </variable>
 			<variable name="region" type="string"> GLB </variable>
 			<variable name="source_id" type="string"> CNRM-ESM2-1e </variable>
@@ -261,7 +261,7 @@ seaIce: Gelato 6.1',
 				<variable name="interval_operation" type="string"> 900 s </variable>
 			</field>
 		</file>
-		<file id="tas_tavg-h2m-hxy-u_gr" name="IOXDIRtas_tavg-h2m-hxy-u_day_GLB_gr_CNRM-ESM2-1e_historical_r1i1p1f2_%start_date%-%end_date%" output_freq="1d" append="true" output_level="10" compression_level="4" split_freq="100y" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
+		<file id="tas_tavg-h2m-hxy-u_day_GLB_gr" name="IOXDIRtas_tavg-h2m-hxy-u_day_GLB_gr_CNRM-ESM2-1e_historical_r1i1p1f2_%start_date%-%end_date%" output_freq="1d" append="true" output_level="10" compression_level="4" split_freq="100y" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14107/%uuid%" convention_str="CF-1.7 CMIP-6.2" format="netcdf4_classic">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="area_label" type="string"> u </variable>
 			<variable name="branch_time_in_child" type="double"> 0.0D </variable>
@@ -274,26 +274,26 @@ seaIce: Gelato 6.1',
 			<variable name="experiment" type="string"> Simulation of the climate of the recent past (typically meaning 1850 to present-day) with prescribed carbon dioxide concentrations (for prescribed carbon dioxide emissions, see `esm-hist`). </variable>
 			<variable name="experiment_id" type="string"> historical </variable>
 			<variable name="external_variables" type="string"> areacella </variable>
-			<variable name="forcing_index" type="int"> f2 </variable>
+			<variable name="forcing_index" type="string"> f2 </variable>
 			<variable name="frequency" type="string"> day </variable>
 			<variable name="grid_label" type="string"> gr </variable>
 			<variable name="history" type="string"> none </variable>
 			<variable name="horizontal_label" type="string"> hxy </variable>
-			<variable name="initialization_index" type="int"> i1 </variable>
+			<variable name="initialization_index" type="string"> i1 </variable>
 			<variable name="institution" type="string"> CNRM (Centre National de Recherches Meteorologiques, Toulouse 31057, France), CERFACS (Centre Europeen de Recherche et de Formation Avancee en Calcul Scientifique, Toulouse 31057, France) </variable>
 			<variable name="institution_id" type="string"> CNRM-CERFACS </variable>
 			<variable name="license_id" type="string"> CC-BY-4-0 </variable>
 			<variable name="mip_era" type="string"> CMIP7 </variable>
-			<variable name="nominal_resolution" type="string"> 250 km </variable>
+			<variable name="nominal_resolution" type="string"> 250-km </variable>
 			<variable name="parent_activity_id" type="string"> CMIP </variable>
 			<variable name="parent_experiment_id" type="string"> piControl </variable>
 			<variable name="parent_mip_era" type="string"> CMIP7 </variable>
 			<variable name="parent_source_id" type="string"> CNRM-ESM2-1e </variable>
 			<variable name="parent_time_units" type="string"> days since 1850-01-01 00:00:00 </variable>
 			<variable name="parent_variant_label" type="string"> r1i1p1f2 </variable>
-			<variable name="physics_index" type="int"> p1 </variable>
+			<variable name="physics_index" type="string"> p1 </variable>
 			<variable name="product" type="string"> model-output </variable>
-			<variable name="realization_index" type="int"> r1 </variable>
+			<variable name="realization_index" type="string"> r1 </variable>
 			<variable name="realm" type="string"> atmos </variable>
 			<variable name="region" type="string"> GLB </variable>
 			<variable name="source_id" type="string"> CNRM-ESM2-1e </variable>
@@ -319,7 +319,7 @@ seaIce: Gelato 6.1',
 				<variable name="interval_operation" type="string"> 900 s </variable>
 			</field>
 		</file>
-		<file id="tasmax_tmax-h2m-hxy-u_gr" name="IOXDIRtasmax_tmax-h2m-hxy-u_day_GLB_gr_CNRM-ESM2-1e_historical_r1i1p1f2_%start_date%-%end_date%" output_freq="1d" append="true" output_level="10" compression_level="4" split_freq="100y" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
+		<file id="tasmax_tmax-h2m-hxy-u_day_GLB_gr" name="IOXDIRtasmax_tmax-h2m-hxy-u_day_GLB_gr_CNRM-ESM2-1e_historical_r1i1p1f2_%start_date%-%end_date%" output_freq="1d" append="true" output_level="10" compression_level="4" split_freq="100y" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14107/%uuid%" convention_str="CF-1.7 CMIP-6.2" format="netcdf4_classic">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="area_label" type="string"> u </variable>
 			<variable name="branch_time_in_child" type="double"> 0.0D </variable>
@@ -332,26 +332,26 @@ seaIce: Gelato 6.1',
 			<variable name="experiment" type="string"> Simulation of the climate of the recent past (typically meaning 1850 to present-day) with prescribed carbon dioxide concentrations (for prescribed carbon dioxide emissions, see `esm-hist`). </variable>
 			<variable name="experiment_id" type="string"> historical </variable>
 			<variable name="external_variables" type="string"> areacella </variable>
-			<variable name="forcing_index" type="int"> f2 </variable>
+			<variable name="forcing_index" type="string"> f2 </variable>
 			<variable name="frequency" type="string"> day </variable>
 			<variable name="grid_label" type="string"> gr </variable>
 			<variable name="history" type="string"> none </variable>
 			<variable name="horizontal_label" type="string"> hxy </variable>
-			<variable name="initialization_index" type="int"> i1 </variable>
+			<variable name="initialization_index" type="string"> i1 </variable>
 			<variable name="institution" type="string"> CNRM (Centre National de Recherches Meteorologiques, Toulouse 31057, France), CERFACS (Centre Europeen de Recherche et de Formation Avancee en Calcul Scientifique, Toulouse 31057, France) </variable>
 			<variable name="institution_id" type="string"> CNRM-CERFACS </variable>
 			<variable name="license_id" type="string"> CC-BY-4-0 </variable>
 			<variable name="mip_era" type="string"> CMIP7 </variable>
-			<variable name="nominal_resolution" type="string"> 250 km </variable>
+			<variable name="nominal_resolution" type="string"> 250-km </variable>
 			<variable name="parent_activity_id" type="string"> CMIP </variable>
 			<variable name="parent_experiment_id" type="string"> piControl </variable>
 			<variable name="parent_mip_era" type="string"> CMIP7 </variable>
 			<variable name="parent_source_id" type="string"> CNRM-ESM2-1e </variable>
 			<variable name="parent_time_units" type="string"> days since 1850-01-01 00:00:00 </variable>
 			<variable name="parent_variant_label" type="string"> r1i1p1f2 </variable>
-			<variable name="physics_index" type="int"> p1 </variable>
+			<variable name="physics_index" type="string"> p1 </variable>
 			<variable name="product" type="string"> model-output </variable>
-			<variable name="realization_index" type="int"> r1 </variable>
+			<variable name="realization_index" type="string"> r1 </variable>
 			<variable name="realm" type="string"> atmos </variable>
 			<variable name="region" type="string"> GLB </variable>
 			<variable name="source_id" type="string"> CNRM-ESM2-1e </variable>
@@ -377,7 +377,7 @@ seaIce: Gelato 6.1',
 				<variable name="interval_operation" type="string"> 900 s </variable>
 			</field>
 		</file>
-		<file id="tasmin_tmin-h2m-hxy-u_gr" name="IOXDIRtasmin_tmin-h2m-hxy-u_day_GLB_gr_CNRM-ESM2-1e_historical_r1i1p1f2_%start_date%-%end_date%" output_freq="1d" append="true" output_level="10" compression_level="4" split_freq="100y" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
+		<file id="tasmin_tmin-h2m-hxy-u_day_GLB_gr" name="IOXDIRtasmin_tmin-h2m-hxy-u_day_GLB_gr_CNRM-ESM2-1e_historical_r1i1p1f2_%start_date%-%end_date%" output_freq="1d" append="true" output_level="10" compression_level="4" split_freq="100y" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14107/%uuid%" convention_str="CF-1.7 CMIP-6.2" format="netcdf4_classic">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="area_label" type="string"> u </variable>
 			<variable name="branch_time_in_child" type="double"> 0.0D </variable>
@@ -390,26 +390,26 @@ seaIce: Gelato 6.1',
 			<variable name="experiment" type="string"> Simulation of the climate of the recent past (typically meaning 1850 to present-day) with prescribed carbon dioxide concentrations (for prescribed carbon dioxide emissions, see `esm-hist`). </variable>
 			<variable name="experiment_id" type="string"> historical </variable>
 			<variable name="external_variables" type="string"> areacella </variable>
-			<variable name="forcing_index" type="int"> f2 </variable>
+			<variable name="forcing_index" type="string"> f2 </variable>
 			<variable name="frequency" type="string"> day </variable>
 			<variable name="grid_label" type="string"> gr </variable>
 			<variable name="history" type="string"> none </variable>
 			<variable name="horizontal_label" type="string"> hxy </variable>
-			<variable name="initialization_index" type="int"> i1 </variable>
+			<variable name="initialization_index" type="string"> i1 </variable>
 			<variable name="institution" type="string"> CNRM (Centre National de Recherches Meteorologiques, Toulouse 31057, France), CERFACS (Centre Europeen de Recherche et de Formation Avancee en Calcul Scientifique, Toulouse 31057, France) </variable>
 			<variable name="institution_id" type="string"> CNRM-CERFACS </variable>
 			<variable name="license_id" type="string"> CC-BY-4-0 </variable>
 			<variable name="mip_era" type="string"> CMIP7 </variable>
-			<variable name="nominal_resolution" type="string"> 250 km </variable>
+			<variable name="nominal_resolution" type="string"> 250-km </variable>
 			<variable name="parent_activity_id" type="string"> CMIP </variable>
 			<variable name="parent_experiment_id" type="string"> piControl </variable>
 			<variable name="parent_mip_era" type="string"> CMIP7 </variable>
 			<variable name="parent_source_id" type="string"> CNRM-ESM2-1e </variable>
 			<variable name="parent_time_units" type="string"> days since 1850-01-01 00:00:00 </variable>
 			<variable name="parent_variant_label" type="string"> r1i1p1f2 </variable>
-			<variable name="physics_index" type="int"> p1 </variable>
+			<variable name="physics_index" type="string"> p1 </variable>
 			<variable name="product" type="string"> model-output </variable>
-			<variable name="realization_index" type="int"> r1 </variable>
+			<variable name="realization_index" type="string"> r1 </variable>
 			<variable name="realm" type="string"> atmos </variable>
 			<variable name="region" type="string"> GLB </variable>
 			<variable name="source_id" type="string"> CNRM-ESM2-1e </variable>
@@ -435,7 +435,7 @@ seaIce: Gelato 6.1',
 				<variable name="interval_operation" type="string"> 900 s </variable>
 			</field>
 		</file>
-		<file id="ta_tavg-p19-hxy-air_gr" name="IOXDIRta_tavg-p19-hxy-air_day_GLB_gr_CNRM-ESM2-1e_historical_r1i1p1f2_%start_date%-%end_date%" output_freq="1d" append="true" output_level="10" compression_level="4" split_freq="5y" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
+		<file id="ta_tavg-p19-hxy-air_day_GLB_gr" name="IOXDIRta_tavg-p19-hxy-air_day_GLB_gr_CNRM-ESM2-1e_historical_r1i1p1f2_%start_date%-%end_date%" output_freq="1d" append="true" output_level="10" compression_level="4" split_freq="5y" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14107/%uuid%" convention_str="CF-1.7 CMIP-6.2" format="netcdf4_classic">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="area_label" type="string"> air </variable>
 			<variable name="branch_time_in_child" type="double"> 0.0D </variable>
@@ -448,26 +448,26 @@ seaIce: Gelato 6.1',
 			<variable name="experiment" type="string"> Simulation of the climate of the recent past (typically meaning 1850 to present-day) with prescribed carbon dioxide concentrations (for prescribed carbon dioxide emissions, see `esm-hist`). </variable>
 			<variable name="experiment_id" type="string"> historical </variable>
 			<variable name="external_variables" type="string"> areacella </variable>
-			<variable name="forcing_index" type="int"> f2 </variable>
+			<variable name="forcing_index" type="string"> f2 </variable>
 			<variable name="frequency" type="string"> day </variable>
 			<variable name="grid_label" type="string"> gr </variable>
 			<variable name="history" type="string"> none </variable>
 			<variable name="horizontal_label" type="string"> hxy </variable>
-			<variable name="initialization_index" type="int"> i1 </variable>
+			<variable name="initialization_index" type="string"> i1 </variable>
 			<variable name="institution" type="string"> CNRM (Centre National de Recherches Meteorologiques, Toulouse 31057, France), CERFACS (Centre Europeen de Recherche et de Formation Avancee en Calcul Scientifique, Toulouse 31057, France) </variable>
 			<variable name="institution_id" type="string"> CNRM-CERFACS </variable>
 			<variable name="license_id" type="string"> CC-BY-4-0 </variable>
 			<variable name="mip_era" type="string"> CMIP7 </variable>
-			<variable name="nominal_resolution" type="string"> 250 km </variable>
+			<variable name="nominal_resolution" type="string"> 250-km </variable>
 			<variable name="parent_activity_id" type="string"> CMIP </variable>
 			<variable name="parent_experiment_id" type="string"> piControl </variable>
 			<variable name="parent_mip_era" type="string"> CMIP7 </variable>
 			<variable name="parent_source_id" type="string"> CNRM-ESM2-1e </variable>
 			<variable name="parent_time_units" type="string"> days since 1850-01-01 00:00:00 </variable>
 			<variable name="parent_variant_label" type="string"> r1i1p1f2 </variable>
-			<variable name="physics_index" type="int"> p1 </variable>
+			<variable name="physics_index" type="string"> p1 </variable>
 			<variable name="product" type="string"> model-output </variable>
-			<variable name="realization_index" type="int"> r1 </variable>
+			<variable name="realization_index" type="string"> r1 </variable>
 			<variable name="realm" type="string"> atmos </variable>
 			<variable name="region" type="string"> GLB </variable>
 			<variable name="source_id" type="string"> CNRM-ESM2-1e </variable>
@@ -493,7 +493,7 @@ seaIce: Gelato 6.1',
 				<variable name="interval_operation" type="string"> 3h </variable>
 			</field>
 		</file>
-		<file id="zg_tavg-p19-hxy-air_gr" name="IOXDIRzg_tavg-p19-hxy-air_day_GLB_gr_CNRM-ESM2-1e_historical_r1i1p1f2_%start_date%-%end_date%" output_freq="1d" append="true" output_level="10" compression_level="4" split_freq="5y" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
+		<file id="zg_tavg-p19-hxy-air_day_GLB_gr" name="IOXDIRzg_tavg-p19-hxy-air_day_GLB_gr_CNRM-ESM2-1e_historical_r1i1p1f2_%start_date%-%end_date%" output_freq="1d" append="true" output_level="10" compression_level="4" split_freq="5y" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14107/%uuid%" convention_str="CF-1.7 CMIP-6.2" format="netcdf4_classic">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="area_label" type="string"> air </variable>
 			<variable name="branch_time_in_child" type="double"> 0.0D </variable>
@@ -506,26 +506,26 @@ seaIce: Gelato 6.1',
 			<variable name="experiment" type="string"> Simulation of the climate of the recent past (typically meaning 1850 to present-day) with prescribed carbon dioxide concentrations (for prescribed carbon dioxide emissions, see `esm-hist`). </variable>
 			<variable name="experiment_id" type="string"> historical </variable>
 			<variable name="external_variables" type="string"> areacella </variable>
-			<variable name="forcing_index" type="int"> f2 </variable>
+			<variable name="forcing_index" type="string"> f2 </variable>
 			<variable name="frequency" type="string"> day </variable>
 			<variable name="grid_label" type="string"> gr </variable>
 			<variable name="history" type="string"> none </variable>
 			<variable name="horizontal_label" type="string"> hxy </variable>
-			<variable name="initialization_index" type="int"> i1 </variable>
+			<variable name="initialization_index" type="string"> i1 </variable>
 			<variable name="institution" type="string"> CNRM (Centre National de Recherches Meteorologiques, Toulouse 31057, France), CERFACS (Centre Europeen de Recherche et de Formation Avancee en Calcul Scientifique, Toulouse 31057, France) </variable>
 			<variable name="institution_id" type="string"> CNRM-CERFACS </variable>
 			<variable name="license_id" type="string"> CC-BY-4-0 </variable>
 			<variable name="mip_era" type="string"> CMIP7 </variable>
-			<variable name="nominal_resolution" type="string"> 250 km </variable>
+			<variable name="nominal_resolution" type="string"> 250-km </variable>
 			<variable name="parent_activity_id" type="string"> CMIP </variable>
 			<variable name="parent_experiment_id" type="string"> piControl </variable>
 			<variable name="parent_mip_era" type="string"> CMIP7 </variable>
 			<variable name="parent_source_id" type="string"> CNRM-ESM2-1e </variable>
 			<variable name="parent_time_units" type="string"> days since 1850-01-01 00:00:00 </variable>
 			<variable name="parent_variant_label" type="string"> r1i1p1f2 </variable>
-			<variable name="physics_index" type="int"> p1 </variable>
+			<variable name="physics_index" type="string"> p1 </variable>
 			<variable name="product" type="string"> model-output </variable>
-			<variable name="realization_index" type="int"> r1 </variable>
+			<variable name="realization_index" type="string"> r1 </variable>
 			<variable name="realm" type="string"> atmos </variable>
 			<variable name="region" type="string"> GLB </variable>
 			<variable name="source_id" type="string"> CNRM-ESM2-1e </variable>
@@ -551,7 +551,7 @@ seaIce: Gelato 6.1',
 				<variable name="interval_operation" type="string"> 3h </variable>
 			</field>
 		</file>
-		<file id="areacella_ti-u-hxy-u_gr" name="IOXDIRareacella_ti-u-hxy-u_fx_GLB_gr_CNRM-ESM2-1e_historical_r1i1p1f2" output_freq="1d" append="true" output_level="10" compression_level="4" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
+		<file id="areacella_ti-u-hxy-u_fx_GLB_gr" name="IOXDIRareacella_ti-u-hxy-u_fx_GLB_gr_CNRM-ESM2-1e_historical_r1i1p1f2" output_freq="1d" append="true" output_level="10" compression_level="4" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14107/%uuid%" convention_str="CF-1.7 CMIP-6.2" format="netcdf4_classic">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="area_label" type="string"> u </variable>
 			<variable name="branch_time_in_child" type="double"> 0.0D </variable>
@@ -563,26 +563,26 @@ seaIce: Gelato 6.1',
 			<variable name="drs_specs" type="string"> MIP-DRS7 </variable>
 			<variable name="experiment" type="string"> Simulation of the climate of the recent past (typically meaning 1850 to present-day) with prescribed carbon dioxide concentrations (for prescribed carbon dioxide emissions, see `esm-hist`). </variable>
 			<variable name="experiment_id" type="string"> historical </variable>
-			<variable name="forcing_index" type="int"> f2 </variable>
+			<variable name="forcing_index" type="string"> f2 </variable>
 			<variable name="frequency" type="string"> fx </variable>
 			<variable name="grid_label" type="string"> gr </variable>
 			<variable name="history" type="string"> none </variable>
 			<variable name="horizontal_label" type="string"> hxy </variable>
-			<variable name="initialization_index" type="int"> i1 </variable>
+			<variable name="initialization_index" type="string"> i1 </variable>
 			<variable name="institution" type="string"> CNRM (Centre National de Recherches Meteorologiques, Toulouse 31057, France), CERFACS (Centre Europeen de Recherche et de Formation Avancee en Calcul Scientifique, Toulouse 31057, France) </variable>
 			<variable name="institution_id" type="string"> CNRM-CERFACS </variable>
 			<variable name="license_id" type="string"> CC-BY-4-0 </variable>
 			<variable name="mip_era" type="string"> CMIP7 </variable>
-			<variable name="nominal_resolution" type="string"> 250 km </variable>
+			<variable name="nominal_resolution" type="string"> 250-km </variable>
 			<variable name="parent_activity_id" type="string"> CMIP </variable>
 			<variable name="parent_experiment_id" type="string"> piControl </variable>
 			<variable name="parent_mip_era" type="string"> CMIP7 </variable>
 			<variable name="parent_source_id" type="string"> CNRM-ESM2-1e </variable>
 			<variable name="parent_time_units" type="string"> days since 1850-01-01 00:00:00 </variable>
 			<variable name="parent_variant_label" type="string"> r1i1p1f2 </variable>
-			<variable name="physics_index" type="int"> p1 </variable>
+			<variable name="physics_index" type="string"> p1 </variable>
 			<variable name="product" type="string"> model-output </variable>
-			<variable name="realization_index" type="int"> r1 </variable>
+			<variable name="realization_index" type="string"> r1 </variable>
 			<variable name="realm" type="string"> atmos,land </variable>
 			<variable name="region" type="string"> GLB </variable>
 			<variable name="source_id" type="string"> CNRM-ESM2-1e </variable>
@@ -607,7 +607,7 @@ seaIce: Gelato 6.1',
 				<variable name="cell_measures" type="string"> undef </variable>
 			</field>
 		</file>
-		<file id="orog_ti-u-hxy-u_gr" name="IOXDIRorog_ti-u-hxy-u_fx_GLB_gr_CNRM-ESM2-1e_historical_r1i1p1f2" output_freq="1d" append="true" output_level="10" compression_level="4" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
+		<file id="orog_ti-u-hxy-u_fx_GLB_gr" name="IOXDIRorog_ti-u-hxy-u_fx_GLB_gr_CNRM-ESM2-1e_historical_r1i1p1f2" output_freq="1d" append="true" output_level="10" compression_level="4" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14107/%uuid%" convention_str="CF-1.7 CMIP-6.2" format="netcdf4_classic">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="area_label" type="string"> u </variable>
 			<variable name="branch_time_in_child" type="double"> 0.0D </variable>
@@ -620,26 +620,26 @@ seaIce: Gelato 6.1',
 			<variable name="experiment" type="string"> Simulation of the climate of the recent past (typically meaning 1850 to present-day) with prescribed carbon dioxide concentrations (for prescribed carbon dioxide emissions, see `esm-hist`). </variable>
 			<variable name="experiment_id" type="string"> historical </variable>
 			<variable name="external_variables" type="string"> areacella </variable>
-			<variable name="forcing_index" type="int"> f2 </variable>
+			<variable name="forcing_index" type="string"> f2 </variable>
 			<variable name="frequency" type="string"> fx </variable>
 			<variable name="grid_label" type="string"> gr </variable>
 			<variable name="history" type="string"> none </variable>
 			<variable name="horizontal_label" type="string"> hxy </variable>
-			<variable name="initialization_index" type="int"> i1 </variable>
+			<variable name="initialization_index" type="string"> i1 </variable>
 			<variable name="institution" type="string"> CNRM (Centre National de Recherches Meteorologiques, Toulouse 31057, France), CERFACS (Centre Europeen de Recherche et de Formation Avancee en Calcul Scientifique, Toulouse 31057, France) </variable>
 			<variable name="institution_id" type="string"> CNRM-CERFACS </variable>
 			<variable name="license_id" type="string"> CC-BY-4-0 </variable>
 			<variable name="mip_era" type="string"> CMIP7 </variable>
-			<variable name="nominal_resolution" type="string"> 250 km </variable>
+			<variable name="nominal_resolution" type="string"> 250-km </variable>
 			<variable name="parent_activity_id" type="string"> CMIP </variable>
 			<variable name="parent_experiment_id" type="string"> piControl </variable>
 			<variable name="parent_mip_era" type="string"> CMIP7 </variable>
 			<variable name="parent_source_id" type="string"> CNRM-ESM2-1e </variable>
 			<variable name="parent_time_units" type="string"> days since 1850-01-01 00:00:00 </variable>
 			<variable name="parent_variant_label" type="string"> r1i1p1f2 </variable>
-			<variable name="physics_index" type="int"> p1 </variable>
+			<variable name="physics_index" type="string"> p1 </variable>
 			<variable name="product" type="string"> model-output </variable>
-			<variable name="realization_index" type="int"> r1 </variable>
+			<variable name="realization_index" type="string"> r1 </variable>
 			<variable name="realm" type="string"> land </variable>
 			<variable name="region" type="string"> GLB </variable>
 			<variable name="source_id" type="string"> CNRM-ESM2-1e </variable>
@@ -664,7 +664,7 @@ seaIce: Gelato 6.1',
 				<variable name="cell_measures" type="string"> area: areacella </variable>
 			</field>
 		</file>
-		<file id="rootd_ti-u-hxy-lnd_gr" name="IOXDIRrootd_ti-u-hxy-lnd_fx_GLB_gr_CNRM-ESM2-1e_historical_r1i1p1f2" output_freq="1d" append="true" output_level="10" compression_level="4" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
+		<file id="rootd_ti-u-hxy-lnd_fx_GLB_gr" name="IOXDIRrootd_ti-u-hxy-lnd_fx_GLB_gr_CNRM-ESM2-1e_historical_r1i1p1f2" output_freq="1d" append="true" output_level="10" compression_level="4" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14107/%uuid%" convention_str="CF-1.7 CMIP-6.2" format="netcdf4_classic">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="area_label" type="string"> lnd </variable>
 			<variable name="branch_time_in_child" type="double"> 0.0D </variable>
@@ -677,26 +677,26 @@ seaIce: Gelato 6.1',
 			<variable name="experiment" type="string"> Simulation of the climate of the recent past (typically meaning 1850 to present-day) with prescribed carbon dioxide concentrations (for prescribed carbon dioxide emissions, see `esm-hist`). </variable>
 			<variable name="experiment_id" type="string"> historical </variable>
 			<variable name="external_variables" type="string"> areacella </variable>
-			<variable name="forcing_index" type="int"> f2 </variable>
+			<variable name="forcing_index" type="string"> f2 </variable>
 			<variable name="frequency" type="string"> fx </variable>
 			<variable name="grid_label" type="string"> gr </variable>
 			<variable name="history" type="string"> none </variable>
 			<variable name="horizontal_label" type="string"> hxy </variable>
-			<variable name="initialization_index" type="int"> i1 </variable>
+			<variable name="initialization_index" type="string"> i1 </variable>
 			<variable name="institution" type="string"> CNRM (Centre National de Recherches Meteorologiques, Toulouse 31057, France), CERFACS (Centre Europeen de Recherche et de Formation Avancee en Calcul Scientifique, Toulouse 31057, France) </variable>
 			<variable name="institution_id" type="string"> CNRM-CERFACS </variable>
 			<variable name="license_id" type="string"> CC-BY-4-0 </variable>
 			<variable name="mip_era" type="string"> CMIP7 </variable>
-			<variable name="nominal_resolution" type="string"> 250 km </variable>
+			<variable name="nominal_resolution" type="string"> 250-km </variable>
 			<variable name="parent_activity_id" type="string"> CMIP </variable>
 			<variable name="parent_experiment_id" type="string"> piControl </variable>
 			<variable name="parent_mip_era" type="string"> CMIP7 </variable>
 			<variable name="parent_source_id" type="string"> CNRM-ESM2-1e </variable>
 			<variable name="parent_time_units" type="string"> days since 1850-01-01 00:00:00 </variable>
 			<variable name="parent_variant_label" type="string"> r1i1p1f2 </variable>
-			<variable name="physics_index" type="int"> p1 </variable>
+			<variable name="physics_index" type="string"> p1 </variable>
 			<variable name="product" type="string"> model-output </variable>
-			<variable name="realization_index" type="int"> r1 </variable>
+			<variable name="realization_index" type="string"> r1 </variable>
 			<variable name="realm" type="string"> land </variable>
 			<variable name="region" type="string"> GLB </variable>
 			<variable name="source_id" type="string"> CNRM-ESM2-1e </variable>
@@ -721,7 +721,7 @@ seaIce: Gelato 6.1',
 				<variable name="cell_measures" type="string"> area: areacella </variable>
 			</field>
 		</file>
-		<file id="sftlf_ti-u-hxy-u_gr" name="IOXDIRsftlf_ti-u-hxy-u_fx_GLB_gr_CNRM-ESM2-1e_historical_r1i1p1f2" output_freq="1d" append="true" output_level="10" compression_level="4" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
+		<file id="sftlf_ti-u-hxy-u_fx_GLB_gr" name="IOXDIRsftlf_ti-u-hxy-u_fx_GLB_gr_CNRM-ESM2-1e_historical_r1i1p1f2" output_freq="1d" append="true" output_level="10" compression_level="4" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14107/%uuid%" convention_str="CF-1.7 CMIP-6.2" format="netcdf4_classic">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="area_label" type="string"> u </variable>
 			<variable name="branch_time_in_child" type="double"> 0.0D </variable>
@@ -734,26 +734,26 @@ seaIce: Gelato 6.1',
 			<variable name="experiment" type="string"> Simulation of the climate of the recent past (typically meaning 1850 to present-day) with prescribed carbon dioxide concentrations (for prescribed carbon dioxide emissions, see `esm-hist`). </variable>
 			<variable name="experiment_id" type="string"> historical </variable>
 			<variable name="external_variables" type="string"> areacella </variable>
-			<variable name="forcing_index" type="int"> f2 </variable>
+			<variable name="forcing_index" type="string"> f2 </variable>
 			<variable name="frequency" type="string"> fx </variable>
 			<variable name="grid_label" type="string"> gr </variable>
 			<variable name="history" type="string"> none </variable>
 			<variable name="horizontal_label" type="string"> hxy </variable>
-			<variable name="initialization_index" type="int"> i1 </variable>
+			<variable name="initialization_index" type="string"> i1 </variable>
 			<variable name="institution" type="string"> CNRM (Centre National de Recherches Meteorologiques, Toulouse 31057, France), CERFACS (Centre Europeen de Recherche et de Formation Avancee en Calcul Scientifique, Toulouse 31057, France) </variable>
 			<variable name="institution_id" type="string"> CNRM-CERFACS </variable>
 			<variable name="license_id" type="string"> CC-BY-4-0 </variable>
 			<variable name="mip_era" type="string"> CMIP7 </variable>
-			<variable name="nominal_resolution" type="string"> 250 km </variable>
+			<variable name="nominal_resolution" type="string"> 250-km </variable>
 			<variable name="parent_activity_id" type="string"> CMIP </variable>
 			<variable name="parent_experiment_id" type="string"> piControl </variable>
 			<variable name="parent_mip_era" type="string"> CMIP7 </variable>
 			<variable name="parent_source_id" type="string"> CNRM-ESM2-1e </variable>
 			<variable name="parent_time_units" type="string"> days since 1850-01-01 00:00:00 </variable>
 			<variable name="parent_variant_label" type="string"> r1i1p1f2 </variable>
-			<variable name="physics_index" type="int"> p1 </variable>
+			<variable name="physics_index" type="string"> p1 </variable>
 			<variable name="product" type="string"> model-output </variable>
-			<variable name="realization_index" type="int"> r1 </variable>
+			<variable name="realization_index" type="string"> r1 </variable>
 			<variable name="realm" type="string"> atmos </variable>
 			<variable name="region" type="string"> GLB </variable>
 			<variable name="source_id" type="string"> CNRM-ESM2-1e </variable>
@@ -778,7 +778,7 @@ seaIce: Gelato 6.1',
 				<variable name="cell_measures" type="string"> area: areacella </variable>
 			</field>
 		</file>
-		<file id="wilt_hr_gr" name="IOXDIRwilt_hr_1hr_undef_gr_CNRM-ESM2-1e_historical_r1i1p1f2_%start_date%-%end_date%" output_freq="1h" append="true" output_level="10" compression_level="4" split_freq="5y" split_freq_format="%y%mo%d%h%mi" split_start_offset="30mi" split_end_offset="-30mi" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
+		<file id="wilt_hr_1hr_undef_gr" name="IOXDIRwilt_hr_1hr_undef_gr_CNRM-ESM2-1e_historical_r1i1p1f2_%start_date%-%end_date%" output_freq="1h" append="true" output_level="10" compression_level="4" split_freq="5y" split_freq_format="%y%mo%d%h%mi" split_start_offset="30mi" split_end_offset="-30mi" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14107/%uuid%" convention_str="CF-1.7 CMIP-6.2" format="netcdf4_classic">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="area_label" type="string"> undef </variable>
 			<variable name="branch_time_in_child" type="double"> 0.0D </variable>
@@ -790,26 +790,26 @@ seaIce: Gelato 6.1',
 			<variable name="drs_specs" type="string"> MIP-DRS7 </variable>
 			<variable name="experiment" type="string"> Simulation of the climate of the recent past (typically meaning 1850 to present-day) with prescribed carbon dioxide concentrations (for prescribed carbon dioxide emissions, see `esm-hist`). </variable>
 			<variable name="experiment_id" type="string"> historical </variable>
-			<variable name="forcing_index" type="int"> f2 </variable>
+			<variable name="forcing_index" type="string"> f2 </variable>
 			<variable name="frequency" type="string"> 1hr </variable>
 			<variable name="grid_label" type="string"> gr </variable>
 			<variable name="history" type="string"> none </variable>
 			<variable name="horizontal_label" type="string"> undef </variable>
-			<variable name="initialization_index" type="int"> i1 </variable>
+			<variable name="initialization_index" type="string"> i1 </variable>
 			<variable name="institution" type="string"> CNRM (Centre National de Recherches Meteorologiques, Toulouse 31057, France), CERFACS (Centre Europeen de Recherche et de Formation Avancee en Calcul Scientifique, Toulouse 31057, France) </variable>
 			<variable name="institution_id" type="string"> CNRM-CERFACS </variable>
 			<variable name="license_id" type="string"> CC-BY-4-0 </variable>
 			<variable name="mip_era" type="string"> CMIP7 </variable>
-			<variable name="nominal_resolution" type="string"> 250 km </variable>
+			<variable name="nominal_resolution" type="string"> 250-km </variable>
 			<variable name="parent_activity_id" type="string"> CMIP </variable>
 			<variable name="parent_experiment_id" type="string"> piControl </variable>
 			<variable name="parent_mip_era" type="string"> CMIP7 </variable>
 			<variable name="parent_source_id" type="string"> CNRM-ESM2-1e </variable>
 			<variable name="parent_time_units" type="string"> days since 1850-01-01 00:00:00 </variable>
 			<variable name="parent_variant_label" type="string"> r1i1p1f2 </variable>
-			<variable name="physics_index" type="int"> p1 </variable>
+			<variable name="physics_index" type="string"> p1 </variable>
 			<variable name="product" type="string"> model-output </variable>
-			<variable name="realization_index" type="int"> r1 </variable>
+			<variable name="realization_index" type="string"> r1 </variable>
 			<variable name="realm" type="string"> land </variable>
 			<variable name="region" type="string"> undef </variable>
 			<variable name="source_id" type="string"> CNRM-ESM2-1e </variable>
@@ -833,7 +833,7 @@ seaIce: Gelato 6.1',
 				<variable name="interval_operation" type="string"> 900 s </variable>
 			</field>
 		</file>
-		<file id="ta_tavg-p19-hxy-air_gr" name="IOXDIRta_tavg-p19-hxy-air_mon_GLB_gr_CNRM-ESM2-1e_historical_r1i1p1f2_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="100y" split_freq_format="%y%mo" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
+		<file id="ta_tavg-p19-hxy-air_mon_GLB_gr" name="IOXDIRta_tavg-p19-hxy-air_mon_GLB_gr_CNRM-ESM2-1e_historical_r1i1p1f2_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="100y" split_freq_format="%y%mo" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14107/%uuid%" convention_str="CF-1.7 CMIP-6.2" format="netcdf4_classic">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="area_label" type="string"> air </variable>
 			<variable name="branch_time_in_child" type="double"> 0.0D </variable>
@@ -846,26 +846,26 @@ seaIce: Gelato 6.1',
 			<variable name="experiment" type="string"> Simulation of the climate of the recent past (typically meaning 1850 to present-day) with prescribed carbon dioxide concentrations (for prescribed carbon dioxide emissions, see `esm-hist`). </variable>
 			<variable name="experiment_id" type="string"> historical </variable>
 			<variable name="external_variables" type="string"> areacella </variable>
-			<variable name="forcing_index" type="int"> f2 </variable>
+			<variable name="forcing_index" type="string"> f2 </variable>
 			<variable name="frequency" type="string"> mon </variable>
 			<variable name="grid_label" type="string"> gr </variable>
 			<variable name="history" type="string"> none </variable>
 			<variable name="horizontal_label" type="string"> hxy </variable>
-			<variable name="initialization_index" type="int"> i1 </variable>
+			<variable name="initialization_index" type="string"> i1 </variable>
 			<variable name="institution" type="string"> CNRM (Centre National de Recherches Meteorologiques, Toulouse 31057, France), CERFACS (Centre Europeen de Recherche et de Formation Avancee en Calcul Scientifique, Toulouse 31057, France) </variable>
 			<variable name="institution_id" type="string"> CNRM-CERFACS </variable>
 			<variable name="license_id" type="string"> CC-BY-4-0 </variable>
 			<variable name="mip_era" type="string"> CMIP7 </variable>
-			<variable name="nominal_resolution" type="string"> 250 km </variable>
+			<variable name="nominal_resolution" type="string"> 250-km </variable>
 			<variable name="parent_activity_id" type="string"> CMIP </variable>
 			<variable name="parent_experiment_id" type="string"> piControl </variable>
 			<variable name="parent_mip_era" type="string"> CMIP7 </variable>
 			<variable name="parent_source_id" type="string"> CNRM-ESM2-1e </variable>
 			<variable name="parent_time_units" type="string"> days since 1850-01-01 00:00:00 </variable>
 			<variable name="parent_variant_label" type="string"> r1i1p1f2 </variable>
-			<variable name="physics_index" type="int"> p1 </variable>
+			<variable name="physics_index" type="string"> p1 </variable>
 			<variable name="product" type="string"> model-output </variable>
-			<variable name="realization_index" type="int"> r1 </variable>
+			<variable name="realization_index" type="string"> r1 </variable>
 			<variable name="realm" type="string"> atmos </variable>
 			<variable name="region" type="string"> GLB </variable>
 			<variable name="source_id" type="string"> CNRM-ESM2-1e </variable>
@@ -891,7 +891,7 @@ seaIce: Gelato 6.1',
 				<variable name="interval_operation" type="string"> 3h </variable>
 			</field>
 		</file>
-		<file id="zg_tavg-p19-hxy-air_gr" name="IOXDIRzg_tavg-p19-hxy-air_mon_GLB_gr_CNRM-ESM2-1e_historical_r1i1p1f2_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="100y" split_freq_format="%y%mo" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
+		<file id="zg_tavg-p19-hxy-air_mon_GLB_gr" name="IOXDIRzg_tavg-p19-hxy-air_mon_GLB_gr_CNRM-ESM2-1e_historical_r1i1p1f2_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="100y" split_freq_format="%y%mo" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14107/%uuid%" convention_str="CF-1.7 CMIP-6.2" format="netcdf4_classic">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="area_label" type="string"> air </variable>
 			<variable name="branch_time_in_child" type="double"> 0.0D </variable>
@@ -904,26 +904,26 @@ seaIce: Gelato 6.1',
 			<variable name="experiment" type="string"> Simulation of the climate of the recent past (typically meaning 1850 to present-day) with prescribed carbon dioxide concentrations (for prescribed carbon dioxide emissions, see `esm-hist`). </variable>
 			<variable name="experiment_id" type="string"> historical </variable>
 			<variable name="external_variables" type="string"> areacella </variable>
-			<variable name="forcing_index" type="int"> f2 </variable>
+			<variable name="forcing_index" type="string"> f2 </variable>
 			<variable name="frequency" type="string"> mon </variable>
 			<variable name="grid_label" type="string"> gr </variable>
 			<variable name="history" type="string"> none </variable>
 			<variable name="horizontal_label" type="string"> hxy </variable>
-			<variable name="initialization_index" type="int"> i1 </variable>
+			<variable name="initialization_index" type="string"> i1 </variable>
 			<variable name="institution" type="string"> CNRM (Centre National de Recherches Meteorologiques, Toulouse 31057, France), CERFACS (Centre Europeen de Recherche et de Formation Avancee en Calcul Scientifique, Toulouse 31057, France) </variable>
 			<variable name="institution_id" type="string"> CNRM-CERFACS </variable>
 			<variable name="license_id" type="string"> CC-BY-4-0 </variable>
 			<variable name="mip_era" type="string"> CMIP7 </variable>
-			<variable name="nominal_resolution" type="string"> 250 km </variable>
+			<variable name="nominal_resolution" type="string"> 250-km </variable>
 			<variable name="parent_activity_id" type="string"> CMIP </variable>
 			<variable name="parent_experiment_id" type="string"> piControl </variable>
 			<variable name="parent_mip_era" type="string"> CMIP7 </variable>
 			<variable name="parent_source_id" type="string"> CNRM-ESM2-1e </variable>
 			<variable name="parent_time_units" type="string"> days since 1850-01-01 00:00:00 </variable>
 			<variable name="parent_variant_label" type="string"> r1i1p1f2 </variable>
-			<variable name="physics_index" type="int"> p1 </variable>
+			<variable name="physics_index" type="string"> p1 </variable>
 			<variable name="product" type="string"> model-output </variable>
-			<variable name="realization_index" type="int"> r1 </variable>
+			<variable name="realization_index" type="string"> r1 </variable>
 			<variable name="realm" type="string"> atmos </variable>
 			<variable name="region" type="string"> GLB </variable>
 			<variable name="source_id" type="string"> CNRM-ESM2-1e </variable>
@@ -949,7 +949,7 @@ seaIce: Gelato 6.1',
 				<variable name="interval_operation" type="string"> 3h </variable>
 			</field>
 		</file>
-		<file id="pr_tavg-u-hxy-u_gr" name="IOXDIRpr_tavg-u-hxy-u_mon_GLB_gr_CNRM-ESM2-1e_historical_r1i1p1f2_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="500y" split_freq_format="%y%mo" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
+		<file id="pr_tavg-u-hxy-u_mon_GLB_gr" name="IOXDIRpr_tavg-u-hxy-u_mon_GLB_gr_CNRM-ESM2-1e_historical_r1i1p1f2_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="500y" split_freq_format="%y%mo" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14107/%uuid%" convention_str="CF-1.7 CMIP-6.2" format="netcdf4_classic">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="area_label" type="string"> u </variable>
 			<variable name="branch_time_in_child" type="double"> 0.0D </variable>
@@ -962,26 +962,26 @@ seaIce: Gelato 6.1',
 			<variable name="experiment" type="string"> Simulation of the climate of the recent past (typically meaning 1850 to present-day) with prescribed carbon dioxide concentrations (for prescribed carbon dioxide emissions, see `esm-hist`). </variable>
 			<variable name="experiment_id" type="string"> historical </variable>
 			<variable name="external_variables" type="string"> areacella </variable>
-			<variable name="forcing_index" type="int"> f2 </variable>
+			<variable name="forcing_index" type="string"> f2 </variable>
 			<variable name="frequency" type="string"> mon </variable>
 			<variable name="grid_label" type="string"> gr </variable>
 			<variable name="history" type="string"> none </variable>
 			<variable name="horizontal_label" type="string"> hxy </variable>
-			<variable name="initialization_index" type="int"> i1 </variable>
+			<variable name="initialization_index" type="string"> i1 </variable>
 			<variable name="institution" type="string"> CNRM (Centre National de Recherches Meteorologiques, Toulouse 31057, France), CERFACS (Centre Europeen de Recherche et de Formation Avancee en Calcul Scientifique, Toulouse 31057, France) </variable>
 			<variable name="institution_id" type="string"> CNRM-CERFACS </variable>
 			<variable name="license_id" type="string"> CC-BY-4-0 </variable>
 			<variable name="mip_era" type="string"> CMIP7 </variable>
-			<variable name="nominal_resolution" type="string"> 250 km </variable>
+			<variable name="nominal_resolution" type="string"> 250-km </variable>
 			<variable name="parent_activity_id" type="string"> CMIP </variable>
 			<variable name="parent_experiment_id" type="string"> piControl </variable>
 			<variable name="parent_mip_era" type="string"> CMIP7 </variable>
 			<variable name="parent_source_id" type="string"> CNRM-ESM2-1e </variable>
 			<variable name="parent_time_units" type="string"> days since 1850-01-01 00:00:00 </variable>
 			<variable name="parent_variant_label" type="string"> r1i1p1f2 </variable>
-			<variable name="physics_index" type="int"> p1 </variable>
+			<variable name="physics_index" type="string"> p1 </variable>
 			<variable name="product" type="string"> model-output </variable>
-			<variable name="realization_index" type="int"> r1 </variable>
+			<variable name="realization_index" type="string"> r1 </variable>
 			<variable name="realm" type="string"> atmos </variable>
 			<variable name="region" type="string"> GLB </variable>
 			<variable name="source_id" type="string"> CNRM-ESM2-1e </variable>
@@ -1007,7 +1007,7 @@ seaIce: Gelato 6.1',
 				<variable name="interval_operation" type="string"> 900 s </variable>
 			</field>
 		</file>
-		<file id="prc_tavg-u-hxy-u_gr" name="IOXDIRprc_tavg-u-hxy-u_mon_GLB_gr_CNRM-ESM2-1e_historical_r1i1p1f2_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="500y" split_freq_format="%y%mo" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
+		<file id="prc_tavg-u-hxy-u_mon_GLB_gr" name="IOXDIRprc_tavg-u-hxy-u_mon_GLB_gr_CNRM-ESM2-1e_historical_r1i1p1f2_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="500y" split_freq_format="%y%mo" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14107/%uuid%" convention_str="CF-1.7 CMIP-6.2" format="netcdf4_classic">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="area_label" type="string"> u </variable>
 			<variable name="branch_time_in_child" type="double"> 0.0D </variable>
@@ -1020,26 +1020,26 @@ seaIce: Gelato 6.1',
 			<variable name="experiment" type="string"> Simulation of the climate of the recent past (typically meaning 1850 to present-day) with prescribed carbon dioxide concentrations (for prescribed carbon dioxide emissions, see `esm-hist`). </variable>
 			<variable name="experiment_id" type="string"> historical </variable>
 			<variable name="external_variables" type="string"> areacella </variable>
-			<variable name="forcing_index" type="int"> f2 </variable>
+			<variable name="forcing_index" type="string"> f2 </variable>
 			<variable name="frequency" type="string"> mon </variable>
 			<variable name="grid_label" type="string"> gr </variable>
 			<variable name="history" type="string"> none </variable>
 			<variable name="horizontal_label" type="string"> hxy </variable>
-			<variable name="initialization_index" type="int"> i1 </variable>
+			<variable name="initialization_index" type="string"> i1 </variable>
 			<variable name="institution" type="string"> CNRM (Centre National de Recherches Meteorologiques, Toulouse 31057, France), CERFACS (Centre Europeen de Recherche et de Formation Avancee en Calcul Scientifique, Toulouse 31057, France) </variable>
 			<variable name="institution_id" type="string"> CNRM-CERFACS </variable>
 			<variable name="license_id" type="string"> CC-BY-4-0 </variable>
 			<variable name="mip_era" type="string"> CMIP7 </variable>
-			<variable name="nominal_resolution" type="string"> 250 km </variable>
+			<variable name="nominal_resolution" type="string"> 250-km </variable>
 			<variable name="parent_activity_id" type="string"> CMIP </variable>
 			<variable name="parent_experiment_id" type="string"> piControl </variable>
 			<variable name="parent_mip_era" type="string"> CMIP7 </variable>
 			<variable name="parent_source_id" type="string"> CNRM-ESM2-1e </variable>
 			<variable name="parent_time_units" type="string"> days since 1850-01-01 00:00:00 </variable>
 			<variable name="parent_variant_label" type="string"> r1i1p1f2 </variable>
-			<variable name="physics_index" type="int"> p1 </variable>
+			<variable name="physics_index" type="string"> p1 </variable>
 			<variable name="product" type="string"> model-output </variable>
-			<variable name="realization_index" type="int"> r1 </variable>
+			<variable name="realization_index" type="string"> r1 </variable>
 			<variable name="realm" type="string"> atmos </variable>
 			<variable name="region" type="string"> GLB </variable>
 			<variable name="source_id" type="string"> CNRM-ESM2-1e </variable>
@@ -1065,7 +1065,7 @@ seaIce: Gelato 6.1',
 				<variable name="interval_operation" type="string"> 900 s </variable>
 			</field>
 		</file>
-		<file id="sfcWind_tavg-h10m-hxy-u_gr" name="IOXDIRsfcWind_tavg-h10m-hxy-u_mon_GLB_gr_CNRM-ESM2-1e_historical_r1i1p1f2_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="500y" split_freq_format="%y%mo" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
+		<file id="sfcWind_tavg-h10m-hxy-u_mon_GLB_gr" name="IOXDIRsfcWind_tavg-h10m-hxy-u_mon_GLB_gr_CNRM-ESM2-1e_historical_r1i1p1f2_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="500y" split_freq_format="%y%mo" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14107/%uuid%" convention_str="CF-1.7 CMIP-6.2" format="netcdf4_classic">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="area_label" type="string"> u </variable>
 			<variable name="branch_time_in_child" type="double"> 0.0D </variable>
@@ -1078,26 +1078,26 @@ seaIce: Gelato 6.1',
 			<variable name="experiment" type="string"> Simulation of the climate of the recent past (typically meaning 1850 to present-day) with prescribed carbon dioxide concentrations (for prescribed carbon dioxide emissions, see `esm-hist`). </variable>
 			<variable name="experiment_id" type="string"> historical </variable>
 			<variable name="external_variables" type="string"> areacella </variable>
-			<variable name="forcing_index" type="int"> f2 </variable>
+			<variable name="forcing_index" type="string"> f2 </variable>
 			<variable name="frequency" type="string"> mon </variable>
 			<variable name="grid_label" type="string"> gr </variable>
 			<variable name="history" type="string"> none </variable>
 			<variable name="horizontal_label" type="string"> hxy </variable>
-			<variable name="initialization_index" type="int"> i1 </variable>
+			<variable name="initialization_index" type="string"> i1 </variable>
 			<variable name="institution" type="string"> CNRM (Centre National de Recherches Meteorologiques, Toulouse 31057, France), CERFACS (Centre Europeen de Recherche et de Formation Avancee en Calcul Scientifique, Toulouse 31057, France) </variable>
 			<variable name="institution_id" type="string"> CNRM-CERFACS </variable>
 			<variable name="license_id" type="string"> CC-BY-4-0 </variable>
 			<variable name="mip_era" type="string"> CMIP7 </variable>
-			<variable name="nominal_resolution" type="string"> 250 km </variable>
+			<variable name="nominal_resolution" type="string"> 250-km </variable>
 			<variable name="parent_activity_id" type="string"> CMIP </variable>
 			<variable name="parent_experiment_id" type="string"> piControl </variable>
 			<variable name="parent_mip_era" type="string"> CMIP7 </variable>
 			<variable name="parent_source_id" type="string"> CNRM-ESM2-1e </variable>
 			<variable name="parent_time_units" type="string"> days since 1850-01-01 00:00:00 </variable>
 			<variable name="parent_variant_label" type="string"> r1i1p1f2 </variable>
-			<variable name="physics_index" type="int"> p1 </variable>
+			<variable name="physics_index" type="string"> p1 </variable>
 			<variable name="product" type="string"> model-output </variable>
-			<variable name="realization_index" type="int"> r1 </variable>
+			<variable name="realization_index" type="string"> r1 </variable>
 			<variable name="realm" type="string"> atmos </variable>
 			<variable name="region" type="string"> GLB </variable>
 			<variable name="source_id" type="string"> CNRM-ESM2-1e </variable>
@@ -1123,7 +1123,7 @@ seaIce: Gelato 6.1',
 				<variable name="interval_operation" type="string"> 900 s </variable>
 			</field>
 		</file>
-		<file id="tas_tavg-h2m-hxy-u_gr" name="IOXDIRtas_tavg-h2m-hxy-u_mon_GLB_gr_CNRM-ESM2-1e_historical_r1i1p1f2_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="500y" split_freq_format="%y%mo" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
+		<file id="tas_tavg-h2m-hxy-u_mon_GLB_gr" name="IOXDIRtas_tavg-h2m-hxy-u_mon_GLB_gr_CNRM-ESM2-1e_historical_r1i1p1f2_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="500y" split_freq_format="%y%mo" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14107/%uuid%" convention_str="CF-1.7 CMIP-6.2" format="netcdf4_classic">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="area_label" type="string"> u </variable>
 			<variable name="branch_time_in_child" type="double"> 0.0D </variable>
@@ -1136,26 +1136,26 @@ seaIce: Gelato 6.1',
 			<variable name="experiment" type="string"> Simulation of the climate of the recent past (typically meaning 1850 to present-day) with prescribed carbon dioxide concentrations (for prescribed carbon dioxide emissions, see `esm-hist`). </variable>
 			<variable name="experiment_id" type="string"> historical </variable>
 			<variable name="external_variables" type="string"> areacella </variable>
-			<variable name="forcing_index" type="int"> f2 </variable>
+			<variable name="forcing_index" type="string"> f2 </variable>
 			<variable name="frequency" type="string"> mon </variable>
 			<variable name="grid_label" type="string"> gr </variable>
 			<variable name="history" type="string"> none </variable>
 			<variable name="horizontal_label" type="string"> hxy </variable>
-			<variable name="initialization_index" type="int"> i1 </variable>
+			<variable name="initialization_index" type="string"> i1 </variable>
 			<variable name="institution" type="string"> CNRM (Centre National de Recherches Meteorologiques, Toulouse 31057, France), CERFACS (Centre Europeen de Recherche et de Formation Avancee en Calcul Scientifique, Toulouse 31057, France) </variable>
 			<variable name="institution_id" type="string"> CNRM-CERFACS </variable>
 			<variable name="license_id" type="string"> CC-BY-4-0 </variable>
 			<variable name="mip_era" type="string"> CMIP7 </variable>
-			<variable name="nominal_resolution" type="string"> 250 km </variable>
+			<variable name="nominal_resolution" type="string"> 250-km </variable>
 			<variable name="parent_activity_id" type="string"> CMIP </variable>
 			<variable name="parent_experiment_id" type="string"> piControl </variable>
 			<variable name="parent_mip_era" type="string"> CMIP7 </variable>
 			<variable name="parent_source_id" type="string"> CNRM-ESM2-1e </variable>
 			<variable name="parent_time_units" type="string"> days since 1850-01-01 00:00:00 </variable>
 			<variable name="parent_variant_label" type="string"> r1i1p1f2 </variable>
-			<variable name="physics_index" type="int"> p1 </variable>
+			<variable name="physics_index" type="string"> p1 </variable>
 			<variable name="product" type="string"> model-output </variable>
-			<variable name="realization_index" type="int"> r1 </variable>
+			<variable name="realization_index" type="string"> r1 </variable>
 			<variable name="realm" type="string"> atmos </variable>
 			<variable name="region" type="string"> GLB </variable>
 			<variable name="source_id" type="string"> CNRM-ESM2-1e </variable>
@@ -1181,7 +1181,7 @@ seaIce: Gelato 6.1',
 				<variable name="interval_operation" type="string"> 900 s </variable>
 			</field>
 		</file>
-		<file id="tasmax_tmax-h2m-hxy-u_gr" name="IOXDIRtasmax_tmax-h2m-hxy-u_mon_GLB_gr_CNRM-ESM2-1e_historical_r1i1p1f2_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="500y" split_freq_format="%y%mo" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
+		<file id="tasmax_tmax-h2m-hxy-u_mon_GLB_gr" name="IOXDIRtasmax_tmax-h2m-hxy-u_mon_GLB_gr_CNRM-ESM2-1e_historical_r1i1p1f2_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="500y" split_freq_format="%y%mo" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14107/%uuid%" convention_str="CF-1.7 CMIP-6.2" format="netcdf4_classic">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="area_label" type="string"> u </variable>
 			<variable name="branch_time_in_child" type="double"> 0.0D </variable>
@@ -1194,26 +1194,26 @@ seaIce: Gelato 6.1',
 			<variable name="experiment" type="string"> Simulation of the climate of the recent past (typically meaning 1850 to present-day) with prescribed carbon dioxide concentrations (for prescribed carbon dioxide emissions, see `esm-hist`). </variable>
 			<variable name="experiment_id" type="string"> historical </variable>
 			<variable name="external_variables" type="string"> areacella </variable>
-			<variable name="forcing_index" type="int"> f2 </variable>
+			<variable name="forcing_index" type="string"> f2 </variable>
 			<variable name="frequency" type="string"> mon </variable>
 			<variable name="grid_label" type="string"> gr </variable>
 			<variable name="history" type="string"> none </variable>
 			<variable name="horizontal_label" type="string"> hxy </variable>
-			<variable name="initialization_index" type="int"> i1 </variable>
+			<variable name="initialization_index" type="string"> i1 </variable>
 			<variable name="institution" type="string"> CNRM (Centre National de Recherches Meteorologiques, Toulouse 31057, France), CERFACS (Centre Europeen de Recherche et de Formation Avancee en Calcul Scientifique, Toulouse 31057, France) </variable>
 			<variable name="institution_id" type="string"> CNRM-CERFACS </variable>
 			<variable name="license_id" type="string"> CC-BY-4-0 </variable>
 			<variable name="mip_era" type="string"> CMIP7 </variable>
-			<variable name="nominal_resolution" type="string"> 250 km </variable>
+			<variable name="nominal_resolution" type="string"> 250-km </variable>
 			<variable name="parent_activity_id" type="string"> CMIP </variable>
 			<variable name="parent_experiment_id" type="string"> piControl </variable>
 			<variable name="parent_mip_era" type="string"> CMIP7 </variable>
 			<variable name="parent_source_id" type="string"> CNRM-ESM2-1e </variable>
 			<variable name="parent_time_units" type="string"> days since 1850-01-01 00:00:00 </variable>
 			<variable name="parent_variant_label" type="string"> r1i1p1f2 </variable>
-			<variable name="physics_index" type="int"> p1 </variable>
+			<variable name="physics_index" type="string"> p1 </variable>
 			<variable name="product" type="string"> model-output </variable>
-			<variable name="realization_index" type="int"> r1 </variable>
+			<variable name="realization_index" type="string"> r1 </variable>
 			<variable name="realm" type="string"> atmos </variable>
 			<variable name="region" type="string"> GLB </variable>
 			<variable name="source_id" type="string"> CNRM-ESM2-1e </variable>
@@ -1239,7 +1239,7 @@ seaIce: Gelato 6.1',
 				<variable name="interval_operation" type="string"> 900 s </variable>
 			</field>
 		</file>
-		<file id="tasmin_tmin-h2m-hxy-u_gr" name="IOXDIRtasmin_tmin-h2m-hxy-u_mon_GLB_gr_CNRM-ESM2-1e_historical_r1i1p1f2_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="500y" split_freq_format="%y%mo" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
+		<file id="tasmin_tmin-h2m-hxy-u_mon_GLB_gr" name="IOXDIRtasmin_tmin-h2m-hxy-u_mon_GLB_gr_CNRM-ESM2-1e_historical_r1i1p1f2_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="500y" split_freq_format="%y%mo" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14107/%uuid%" convention_str="CF-1.7 CMIP-6.2" format="netcdf4_classic">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="area_label" type="string"> u </variable>
 			<variable name="branch_time_in_child" type="double"> 0.0D </variable>
@@ -1252,26 +1252,26 @@ seaIce: Gelato 6.1',
 			<variable name="experiment" type="string"> Simulation of the climate of the recent past (typically meaning 1850 to present-day) with prescribed carbon dioxide concentrations (for prescribed carbon dioxide emissions, see `esm-hist`). </variable>
 			<variable name="experiment_id" type="string"> historical </variable>
 			<variable name="external_variables" type="string"> areacella </variable>
-			<variable name="forcing_index" type="int"> f2 </variable>
+			<variable name="forcing_index" type="string"> f2 </variable>
 			<variable name="frequency" type="string"> mon </variable>
 			<variable name="grid_label" type="string"> gr </variable>
 			<variable name="history" type="string"> none </variable>
 			<variable name="horizontal_label" type="string"> hxy </variable>
-			<variable name="initialization_index" type="int"> i1 </variable>
+			<variable name="initialization_index" type="string"> i1 </variable>
 			<variable name="institution" type="string"> CNRM (Centre National de Recherches Meteorologiques, Toulouse 31057, France), CERFACS (Centre Europeen de Recherche et de Formation Avancee en Calcul Scientifique, Toulouse 31057, France) </variable>
 			<variable name="institution_id" type="string"> CNRM-CERFACS </variable>
 			<variable name="license_id" type="string"> CC-BY-4-0 </variable>
 			<variable name="mip_era" type="string"> CMIP7 </variable>
-			<variable name="nominal_resolution" type="string"> 250 km </variable>
+			<variable name="nominal_resolution" type="string"> 250-km </variable>
 			<variable name="parent_activity_id" type="string"> CMIP </variable>
 			<variable name="parent_experiment_id" type="string"> piControl </variable>
 			<variable name="parent_mip_era" type="string"> CMIP7 </variable>
 			<variable name="parent_source_id" type="string"> CNRM-ESM2-1e </variable>
 			<variable name="parent_time_units" type="string"> days since 1850-01-01 00:00:00 </variable>
 			<variable name="parent_variant_label" type="string"> r1i1p1f2 </variable>
-			<variable name="physics_index" type="int"> p1 </variable>
+			<variable name="physics_index" type="string"> p1 </variable>
 			<variable name="product" type="string"> model-output </variable>
-			<variable name="realization_index" type="int"> r1 </variable>
+			<variable name="realization_index" type="string"> r1 </variable>
 			<variable name="realm" type="string"> atmos </variable>
 			<variable name="region" type="string"> GLB </variable>
 			<variable name="source_id" type="string"> CNRM-ESM2-1e </variable>
@@ -1297,7 +1297,7 @@ seaIce: Gelato 6.1',
 				<variable name="interval_operation" type="string"> 900 s </variable>
 			</field>
 		</file>
-		<file id="ts_tavg-u-hxy-u_gr" name="IOXDIRts_tavg-u-hxy-u_mon_GLB_gr_CNRM-ESM2-1e_historical_r1i1p1f2_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="500y" split_freq_format="%y%mo" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
+		<file id="ts_tavg-u-hxy-u_mon_GLB_gr" name="IOXDIRts_tavg-u-hxy-u_mon_GLB_gr_CNRM-ESM2-1e_historical_r1i1p1f2_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="500y" split_freq_format="%y%mo" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14107/%uuid%" convention_str="CF-1.7 CMIP-6.2" format="netcdf4_classic">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="area_label" type="string"> u </variable>
 			<variable name="branch_time_in_child" type="double"> 0.0D </variable>
@@ -1310,26 +1310,26 @@ seaIce: Gelato 6.1',
 			<variable name="experiment" type="string"> Simulation of the climate of the recent past (typically meaning 1850 to present-day) with prescribed carbon dioxide concentrations (for prescribed carbon dioxide emissions, see `esm-hist`). </variable>
 			<variable name="experiment_id" type="string"> historical </variable>
 			<variable name="external_variables" type="string"> areacella </variable>
-			<variable name="forcing_index" type="int"> f2 </variable>
+			<variable name="forcing_index" type="string"> f2 </variable>
 			<variable name="frequency" type="string"> mon </variable>
 			<variable name="grid_label" type="string"> gr </variable>
 			<variable name="history" type="string"> none </variable>
 			<variable name="horizontal_label" type="string"> hxy </variable>
-			<variable name="initialization_index" type="int"> i1 </variable>
+			<variable name="initialization_index" type="string"> i1 </variable>
 			<variable name="institution" type="string"> CNRM (Centre National de Recherches Meteorologiques, Toulouse 31057, France), CERFACS (Centre Europeen de Recherche et de Formation Avancee en Calcul Scientifique, Toulouse 31057, France) </variable>
 			<variable name="institution_id" type="string"> CNRM-CERFACS </variable>
 			<variable name="license_id" type="string"> CC-BY-4-0 </variable>
 			<variable name="mip_era" type="string"> CMIP7 </variable>
-			<variable name="nominal_resolution" type="string"> 250 km </variable>
+			<variable name="nominal_resolution" type="string"> 250-km </variable>
 			<variable name="parent_activity_id" type="string"> CMIP </variable>
 			<variable name="parent_experiment_id" type="string"> piControl </variable>
 			<variable name="parent_mip_era" type="string"> CMIP7 </variable>
 			<variable name="parent_source_id" type="string"> CNRM-ESM2-1e </variable>
 			<variable name="parent_time_units" type="string"> days since 1850-01-01 00:00:00 </variable>
 			<variable name="parent_variant_label" type="string"> r1i1p1f2 </variable>
-			<variable name="physics_index" type="int"> p1 </variable>
+			<variable name="physics_index" type="string"> p1 </variable>
 			<variable name="product" type="string"> model-output </variable>
-			<variable name="realization_index" type="int"> r1 </variable>
+			<variable name="realization_index" type="string"> r1 </variable>
 			<variable name="realm" type="string"> atmos </variable>
 			<variable name="region" type="string"> GLB </variable>
 			<variable name="source_id" type="string"> CNRM-ESM2-1e </variable>
@@ -1355,7 +1355,7 @@ seaIce: Gelato 6.1',
 				<variable name="interval_operation" type="string"> 900 s </variable>
 			</field>
 		</file>
-		<file id="snc_tavg-u-hxy-lnd_gr" name="IOXDIRsnc_tavg-u-hxy-lnd_mon_GLB_gr_CNRM-ESM2-1e_historical_r1i1p1f2_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="500y" split_freq_format="%y%mo" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
+		<file id="snc_tavg-u-hxy-lnd_mon_GLB_gr" name="IOXDIRsnc_tavg-u-hxy-lnd_mon_GLB_gr_CNRM-ESM2-1e_historical_r1i1p1f2_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="500y" split_freq_format="%y%mo" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14107/%uuid%" convention_str="CF-1.7 CMIP-6.2" format="netcdf4_classic">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="area_label" type="string"> lnd </variable>
 			<variable name="branch_time_in_child" type="double"> 0.0D </variable>
@@ -1368,26 +1368,26 @@ seaIce: Gelato 6.1',
 			<variable name="experiment" type="string"> Simulation of the climate of the recent past (typically meaning 1850 to present-day) with prescribed carbon dioxide concentrations (for prescribed carbon dioxide emissions, see `esm-hist`). </variable>
 			<variable name="experiment_id" type="string"> historical </variable>
 			<variable name="external_variables" type="string"> areacella </variable>
-			<variable name="forcing_index" type="int"> f2 </variable>
+			<variable name="forcing_index" type="string"> f2 </variable>
 			<variable name="frequency" type="string"> mon </variable>
 			<variable name="grid_label" type="string"> gr </variable>
 			<variable name="history" type="string"> none </variable>
 			<variable name="horizontal_label" type="string"> hxy </variable>
-			<variable name="initialization_index" type="int"> i1 </variable>
+			<variable name="initialization_index" type="string"> i1 </variable>
 			<variable name="institution" type="string"> CNRM (Centre National de Recherches Meteorologiques, Toulouse 31057, France), CERFACS (Centre Europeen de Recherche et de Formation Avancee en Calcul Scientifique, Toulouse 31057, France) </variable>
 			<variable name="institution_id" type="string"> CNRM-CERFACS </variable>
 			<variable name="license_id" type="string"> CC-BY-4-0 </variable>
 			<variable name="mip_era" type="string"> CMIP7 </variable>
-			<variable name="nominal_resolution" type="string"> 250 km </variable>
+			<variable name="nominal_resolution" type="string"> 250-km </variable>
 			<variable name="parent_activity_id" type="string"> CMIP </variable>
 			<variable name="parent_experiment_id" type="string"> piControl </variable>
 			<variable name="parent_mip_era" type="string"> CMIP7 </variable>
 			<variable name="parent_source_id" type="string"> CNRM-ESM2-1e </variable>
 			<variable name="parent_time_units" type="string"> days since 1850-01-01 00:00:00 </variable>
 			<variable name="parent_variant_label" type="string"> r1i1p1f2 </variable>
-			<variable name="physics_index" type="int"> p1 </variable>
+			<variable name="physics_index" type="string"> p1 </variable>
 			<variable name="product" type="string"> model-output </variable>
-			<variable name="realization_index" type="int"> r1 </variable>
+			<variable name="realization_index" type="string"> r1 </variable>
 			<variable name="realm" type="string"> landIce,land </variable>
 			<variable name="region" type="string"> GLB </variable>
 			<variable name="source_id" type="string"> CNRM-ESM2-1e </variable>
@@ -1414,7 +1414,7 @@ seaIce: Gelato 6.1',
 				<variable name="interval_operation" type="string"> 900 s </variable>
 			</field>
 		</file>
-		<file id="lai_tavg-u-hxy-lnd_gr" name="IOXDIRlai_tavg-u-hxy-lnd_mon_GLB_gr_CNRM-ESM2-1e_historical_r1i1p1f2_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="500y" split_freq_format="%y%mo" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
+		<file id="lai_tavg-u-hxy-lnd_mon_GLB_gr" name="IOXDIRlai_tavg-u-hxy-lnd_mon_GLB_gr_CNRM-ESM2-1e_historical_r1i1p1f2_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="500y" split_freq_format="%y%mo" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14107/%uuid%" convention_str="CF-1.7 CMIP-6.2" format="netcdf4_classic">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="area_label" type="string"> lnd </variable>
 			<variable name="branch_time_in_child" type="double"> 0.0D </variable>
@@ -1427,26 +1427,26 @@ seaIce: Gelato 6.1',
 			<variable name="experiment" type="string"> Simulation of the climate of the recent past (typically meaning 1850 to present-day) with prescribed carbon dioxide concentrations (for prescribed carbon dioxide emissions, see `esm-hist`). </variable>
 			<variable name="experiment_id" type="string"> historical </variable>
 			<variable name="external_variables" type="string"> areacella </variable>
-			<variable name="forcing_index" type="int"> f2 </variable>
+			<variable name="forcing_index" type="string"> f2 </variable>
 			<variable name="frequency" type="string"> mon </variable>
 			<variable name="grid_label" type="string"> gr </variable>
 			<variable name="history" type="string"> none </variable>
 			<variable name="horizontal_label" type="string"> hxy </variable>
-			<variable name="initialization_index" type="int"> i1 </variable>
+			<variable name="initialization_index" type="string"> i1 </variable>
 			<variable name="institution" type="string"> CNRM (Centre National de Recherches Meteorologiques, Toulouse 31057, France), CERFACS (Centre Europeen de Recherche et de Formation Avancee en Calcul Scientifique, Toulouse 31057, France) </variable>
 			<variable name="institution_id" type="string"> CNRM-CERFACS </variable>
 			<variable name="license_id" type="string"> CC-BY-4-0 </variable>
 			<variable name="mip_era" type="string"> CMIP7 </variable>
-			<variable name="nominal_resolution" type="string"> 250 km </variable>
+			<variable name="nominal_resolution" type="string"> 250-km </variable>
 			<variable name="parent_activity_id" type="string"> CMIP </variable>
 			<variable name="parent_experiment_id" type="string"> piControl </variable>
 			<variable name="parent_mip_era" type="string"> CMIP7 </variable>
 			<variable name="parent_source_id" type="string"> CNRM-ESM2-1e </variable>
 			<variable name="parent_time_units" type="string"> days since 1850-01-01 00:00:00 </variable>
 			<variable name="parent_variant_label" type="string"> r1i1p1f2 </variable>
-			<variable name="physics_index" type="int"> p1 </variable>
+			<variable name="physics_index" type="string"> p1 </variable>
 			<variable name="product" type="string"> model-output </variable>
-			<variable name="realization_index" type="int"> r1 </variable>
+			<variable name="realization_index" type="string"> r1 </variable>
 			<variable name="realm" type="string"> land </variable>
 			<variable name="region" type="string"> GLB </variable>
 			<variable name="source_id" type="string"> CNRM-ESM2-1e </variable>
@@ -1472,7 +1472,7 @@ seaIce: Gelato 6.1',
 				<variable name="interval_operation" type="string"> 900 s </variable>
 			</field>
 		</file>
-		<file id="mrso_tavg-u-hxy-lnd_gr" name="IOXDIRmrso_tavg-u-hxy-lnd_mon_GLB_gr_CNRM-ESM2-1e_historical_r1i1p1f2_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="500y" split_freq_format="%y%mo" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
+		<file id="mrso_tavg-u-hxy-lnd_mon_GLB_gr" name="IOXDIRmrso_tavg-u-hxy-lnd_mon_GLB_gr_CNRM-ESM2-1e_historical_r1i1p1f2_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="500y" split_freq_format="%y%mo" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14107/%uuid%" convention_str="CF-1.7 CMIP-6.2" format="netcdf4_classic">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="area_label" type="string"> lnd </variable>
 			<variable name="branch_time_in_child" type="double"> 0.0D </variable>
@@ -1485,26 +1485,26 @@ seaIce: Gelato 6.1',
 			<variable name="experiment" type="string"> Simulation of the climate of the recent past (typically meaning 1850 to present-day) with prescribed carbon dioxide concentrations (for prescribed carbon dioxide emissions, see `esm-hist`). </variable>
 			<variable name="experiment_id" type="string"> historical </variable>
 			<variable name="external_variables" type="string"> areacella </variable>
-			<variable name="forcing_index" type="int"> f2 </variable>
+			<variable name="forcing_index" type="string"> f2 </variable>
 			<variable name="frequency" type="string"> mon </variable>
 			<variable name="grid_label" type="string"> gr </variable>
 			<variable name="history" type="string"> none </variable>
 			<variable name="horizontal_label" type="string"> hxy </variable>
-			<variable name="initialization_index" type="int"> i1 </variable>
+			<variable name="initialization_index" type="string"> i1 </variable>
 			<variable name="institution" type="string"> CNRM (Centre National de Recherches Meteorologiques, Toulouse 31057, France), CERFACS (Centre Europeen de Recherche et de Formation Avancee en Calcul Scientifique, Toulouse 31057, France) </variable>
 			<variable name="institution_id" type="string"> CNRM-CERFACS </variable>
 			<variable name="license_id" type="string"> CC-BY-4-0 </variable>
 			<variable name="mip_era" type="string"> CMIP7 </variable>
-			<variable name="nominal_resolution" type="string"> 250 km </variable>
+			<variable name="nominal_resolution" type="string"> 250-km </variable>
 			<variable name="parent_activity_id" type="string"> CMIP </variable>
 			<variable name="parent_experiment_id" type="string"> piControl </variable>
 			<variable name="parent_mip_era" type="string"> CMIP7 </variable>
 			<variable name="parent_source_id" type="string"> CNRM-ESM2-1e </variable>
 			<variable name="parent_time_units" type="string"> days since 1850-01-01 00:00:00 </variable>
 			<variable name="parent_variant_label" type="string"> r1i1p1f2 </variable>
-			<variable name="physics_index" type="int"> p1 </variable>
+			<variable name="physics_index" type="string"> p1 </variable>
 			<variable name="product" type="string"> model-output </variable>
-			<variable name="realization_index" type="int"> r1 </variable>
+			<variable name="realization_index" type="string"> r1 </variable>
 			<variable name="realm" type="string"> land </variable>
 			<variable name="region" type="string"> GLB </variable>
 			<variable name="source_id" type="string"> CNRM-ESM2-1e </variable>
@@ -1530,7 +1530,7 @@ seaIce: Gelato 6.1',
 				<variable name="interval_operation" type="string"> 900 s </variable>
 			</field>
 		</file>
-		<file id="mrsos_tavg-d10cm-hxy-lnd_gr" name="IOXDIRmrsos_tavg-d10cm-hxy-lnd_mon_GLB_gr_CNRM-ESM2-1e_historical_r1i1p1f2_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="500y" split_freq_format="%y%mo" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
+		<file id="mrsos_tavg-d10cm-hxy-lnd_mon_GLB_gr" name="IOXDIRmrsos_tavg-d10cm-hxy-lnd_mon_GLB_gr_CNRM-ESM2-1e_historical_r1i1p1f2_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="500y" split_freq_format="%y%mo" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14107/%uuid%" convention_str="CF-1.7 CMIP-6.2" format="netcdf4_classic">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="area_label" type="string"> lnd </variable>
 			<variable name="branch_time_in_child" type="double"> 0.0D </variable>
@@ -1543,26 +1543,26 @@ seaIce: Gelato 6.1',
 			<variable name="experiment" type="string"> Simulation of the climate of the recent past (typically meaning 1850 to present-day) with prescribed carbon dioxide concentrations (for prescribed carbon dioxide emissions, see `esm-hist`). </variable>
 			<variable name="experiment_id" type="string"> historical </variable>
 			<variable name="external_variables" type="string"> areacella </variable>
-			<variable name="forcing_index" type="int"> f2 </variable>
+			<variable name="forcing_index" type="string"> f2 </variable>
 			<variable name="frequency" type="string"> mon </variable>
 			<variable name="grid_label" type="string"> gr </variable>
 			<variable name="history" type="string"> none </variable>
 			<variable name="horizontal_label" type="string"> hxy </variable>
-			<variable name="initialization_index" type="int"> i1 </variable>
+			<variable name="initialization_index" type="string"> i1 </variable>
 			<variable name="institution" type="string"> CNRM (Centre National de Recherches Meteorologiques, Toulouse 31057, France), CERFACS (Centre Europeen de Recherche et de Formation Avancee en Calcul Scientifique, Toulouse 31057, France) </variable>
 			<variable name="institution_id" type="string"> CNRM-CERFACS </variable>
 			<variable name="license_id" type="string"> CC-BY-4-0 </variable>
 			<variable name="mip_era" type="string"> CMIP7 </variable>
-			<variable name="nominal_resolution" type="string"> 250 km </variable>
+			<variable name="nominal_resolution" type="string"> 250-km </variable>
 			<variable name="parent_activity_id" type="string"> CMIP </variable>
 			<variable name="parent_experiment_id" type="string"> piControl </variable>
 			<variable name="parent_mip_era" type="string"> CMIP7 </variable>
 			<variable name="parent_source_id" type="string"> CNRM-ESM2-1e </variable>
 			<variable name="parent_time_units" type="string"> days since 1850-01-01 00:00:00 </variable>
 			<variable name="parent_variant_label" type="string"> r1i1p1f2 </variable>
-			<variable name="physics_index" type="int"> p1 </variable>
+			<variable name="physics_index" type="string"> p1 </variable>
 			<variable name="product" type="string"> model-output </variable>
-			<variable name="realization_index" type="int"> r1 </variable>
+			<variable name="realization_index" type="string"> r1 </variable>
 			<variable name="realm" type="string"> land </variable>
 			<variable name="region" type="string"> GLB </variable>
 			<variable name="source_id" type="string"> CNRM-ESM2-1e </variable>
@@ -1588,7 +1588,7 @@ seaIce: Gelato 6.1',
 				<variable name="interval_operation" type="string"> 900 s </variable>
 			</field>
 		</file>
-		<file id="wilt_6hr_gr" name="IOXDIRwilt_6hr_6hr_undef_gr_CNRM-ESM2-1e_historical_r1i1p1f2_%start_date%-%end_date%" output_freq="6h" append="true" output_level="10" compression_level="4" split_freq="25y" split_freq_format="%y%mo%d%h%mi" split_start_offset="3h" split_end_offset="-3h" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
+		<file id="wilt_6hr_6hr_undef_gr" name="IOXDIRwilt_6hr_6hr_undef_gr_CNRM-ESM2-1e_historical_r1i1p1f2_%start_date%-%end_date%" output_freq="6h" append="true" output_level="10" compression_level="4" split_freq="25y" split_freq_format="%y%mo%d%h%mi" split_start_offset="3h" split_end_offset="-3h" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14107/%uuid%" convention_str="CF-1.7 CMIP-6.2" format="netcdf4_classic">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="area_label" type="string"> undef </variable>
 			<variable name="branch_time_in_child" type="double"> 0.0D </variable>
@@ -1600,26 +1600,26 @@ seaIce: Gelato 6.1',
 			<variable name="drs_specs" type="string"> MIP-DRS7 </variable>
 			<variable name="experiment" type="string"> Simulation of the climate of the recent past (typically meaning 1850 to present-day) with prescribed carbon dioxide concentrations (for prescribed carbon dioxide emissions, see `esm-hist`). </variable>
 			<variable name="experiment_id" type="string"> historical </variable>
-			<variable name="forcing_index" type="int"> f2 </variable>
+			<variable name="forcing_index" type="string"> f2 </variable>
 			<variable name="frequency" type="string"> 6hr </variable>
 			<variable name="grid_label" type="string"> gr </variable>
 			<variable name="history" type="string"> none </variable>
 			<variable name="horizontal_label" type="string"> undef </variable>
-			<variable name="initialization_index" type="int"> i1 </variable>
+			<variable name="initialization_index" type="string"> i1 </variable>
 			<variable name="institution" type="string"> CNRM (Centre National de Recherches Meteorologiques, Toulouse 31057, France), CERFACS (Centre Europeen de Recherche et de Formation Avancee en Calcul Scientifique, Toulouse 31057, France) </variable>
 			<variable name="institution_id" type="string"> CNRM-CERFACS </variable>
 			<variable name="license_id" type="string"> CC-BY-4-0 </variable>
 			<variable name="mip_era" type="string"> CMIP7 </variable>
-			<variable name="nominal_resolution" type="string"> 250 km </variable>
+			<variable name="nominal_resolution" type="string"> 250-km </variable>
 			<variable name="parent_activity_id" type="string"> CMIP </variable>
 			<variable name="parent_experiment_id" type="string"> piControl </variable>
 			<variable name="parent_mip_era" type="string"> CMIP7 </variable>
 			<variable name="parent_source_id" type="string"> CNRM-ESM2-1e </variable>
 			<variable name="parent_time_units" type="string"> days since 1850-01-01 00:00:00 </variable>
 			<variable name="parent_variant_label" type="string"> r1i1p1f2 </variable>
-			<variable name="physics_index" type="int"> p1 </variable>
+			<variable name="physics_index" type="string"> p1 </variable>
 			<variable name="product" type="string"> model-output </variable>
-			<variable name="realization_index" type="int"> r1 </variable>
+			<variable name="realization_index" type="string"> r1 </variable>
 			<variable name="realm" type="string"> land </variable>
 			<variable name="region" type="string"> undef </variable>
 			<variable name="source_id" type="string"> CNRM-ESM2-1e </variable>
