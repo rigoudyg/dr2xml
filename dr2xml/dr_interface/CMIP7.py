@@ -196,8 +196,8 @@ class DataRequest(DataRequestBasic):
     def get_cmorvars_list(self, select_mips, select_max_priority, select_included_vars, select_excluded_vars,
                           select_included_tables, select_excluded_tables, select_excluded_pairs,
                           select_included_opportunities, select_excluded_opportunities, select_included_vargroups,
-                          select_excluded_vargroups, select_excluded_regions, select_on_year, experiment_filter=False,
-                          **kwargs):
+                          select_excluded_vargroups, select_excluded_regions, select_max_priority_per_frequency,
+                          select_on_year, experiment_filter=False, **kwargs):
         rep = defaultdict(set)
         # Filter var list per priority and experiment
         if experiment_filter:
@@ -211,7 +211,8 @@ class DataRequest(DataRequestBasic):
         # Apply other filters
         for var in var_list:
             dr_var = SimpleCMORVar.get_from_dr(var, **kwargs)
-            if is_elt_applicable(dr_var.mipTable, excluded=select_excluded_tables, included=select_included_tables) and \
+            if (dr_var.Priority <= select_max_priority_per_frequency.get(dr_var.frequency, select_max_priority)) and \
+                    is_elt_applicable(dr_var.mipTable, excluded=select_excluded_tables, included=select_included_tables) and \
                     is_elt_applicable(dr_var.mipVarLabel, excluded=select_excluded_vars, included=select_included_vars) \
                     and is_elt_applicable((dr_var.mipVarLabel, dr_var.mipTable), excluded=select_excluded_pairs) \
                     and is_elt_applicable(dr_var.region, excluded=select_excluded_regions) \
@@ -294,28 +295,28 @@ class SimpleCMORVar(SimpleCMORVarBasic):
         return cls(from_dr=True,
                    type="cmor",
                    modeling_realm=[realm.id for realm in input_var.modelling_realm],
-                   label=input_var.physical_parameter.name,
-                   mipVarLabel=input_var.physical_parameter.name,
+                   label=str(input_var.physical_parameter.name),
+                   mipVarLabel=str(input_var.physical_parameter.name),
                    official_label=official_label,
-                   label_without_psuffix=input_var.physical_parameter.variablerootdd,
-                   label_non_ambiguous=input_var.name,
-                   frequency=input_var.cmip7_frequency.name,
-                   mipTable=input_var.cmip6_tables_identifier.name,
-                   description=input_var.description,
-                   stdname=input_var.physical_parameter.cf_standard_name.name,
-                   units=input_var.physical_parameter.units,
-                   long_name=input_var.physical_parameter.title,
+                   label_without_psuffix=str(input_var.physical_parameter.variablerootdd),
+                   label_non_ambiguous=str(input_var.name),
+                   frequency=str(input_var.cmip7_frequency.name),
+                   mipTable=str(input_var.cmip6_tables_identifier.name),
+                   description=str(input_var.description),
+                   stdname=str(input_var.physical_parameter.cf_standard_name.name),
+                   units=str(input_var.physical_parameter.units),
+                   long_name=str(input_var.physical_parameter.title),
                    sdims=sdims,
                    other_dims_size=product_of_other_dims,
                    cell_methods=cell_methods,
-                   cm=input_var.cell_methods.cell_methods,
+                   cm=str(input_var.cell_methods.cell_methods),
                    cell_measures=cell_measures,
-                   spatial_shp=input_var.spatial_shape.name,
-                   temporal_shp=input_var.temporal_shape.name,
-                   id=input_var.id,
+                   spatial_shp=str(input_var.spatial_shape.name),
+                   temporal_shp=str(input_var.temporal_shape.name),
+                   id=str(input_var.id),
                    cmvar=input_var,
                    Priority=data_request.data_request.find_priority_per_variable(input_var),
-                   region=input_var.region
+                   region=str(input_var.region)
                    )
 
 

@@ -459,6 +459,17 @@
         }
       ]
     },
+    "parent_calendar": {
+      "forbidden_values": ["", "None", null],
+      "values": [
+        {
+          "type": "value",
+          "origin": "simulation",
+          "keys": ["parent_calendar"]
+        },
+        "standard"
+      ]
+    },
     "parent_experiment_id": {
       "values": [
         {
@@ -1004,9 +1015,10 @@
         "branding_suffix", "Conventions", "data_specs_version", "drs_specs", "experiment", "expid_in_filename",
         "external_variables", "forcing_index", "frequency", "grid_label", "history", "horizontal_label",
         "initialization_index", "institution", "institution_id", "license", "mip_era", "nominal_resolution",
-        "parent_activity_id", "parent_experiment_id", "parent_mip_era", "parent_source_id", "parent_time_units",
-        "parent_variant_label","physics_index", "product", "realization_index", "realm", "region", "source_id",
-        "temporal_label", "variable_id", "variant_label", "vertical_label", "dr2xml_version", "physical_parameter"
+        "parent_activity_id", "parent_calendar", "parent_experiment_id", "parent_mip_era", "parent_source_id",
+        "parent_time_units", "parent_variant_label","physics_index", "product", "realization_index", "realm", "region",
+        "source_id", "temporal_label", "variable_id", "variant_label", "vertical_label", "dr2xml_version",
+        "physical_parameter"
       ],
       "vars_constraints": {
         "activity_id": {
@@ -1323,6 +1335,33 @@
               }
             ]
         },
+        "parent_calendar": {
+            "help": "Calendar associated with the parent experiment.",
+            "values": [
+              {
+                "type": "condition",
+                "value_to_check": {
+                  "type": "value",
+                  "origin": "common",
+                  "keys": ["parent_experiment_id"]
+                },
+                "check_to_perform": "neq",
+                "reference_values": ["no parent", "", "None", null],
+                "values": [
+                  {
+                    "type": "value",
+                    "origin": "attrs",
+                    "keys": ["parent_calendar"]
+                  },
+                  {
+                    "type": "value",
+                    "origin": "common",
+                    "keys": ["parent_calendar"]
+                  }
+                ]
+              }
+            ]
+          },
         "physical_parameter": {
           "help": "Physical parameter used to derive the variable",
           "fatal": true,
@@ -1347,7 +1386,21 @@
           "num_type": "string"
         },
         "realm": {
-          "fatal": true
+          "fatal": true,
+            "values": [
+              {
+                "type": "value",
+                "origin": "common_tag",
+                "keys": ["variable","modeling_realm"],
+                "format": {
+                  "type": "func",
+                  "origin": "self",
+                  "keys": ["join"],
+                  "template": " ",
+                  "type_condition": "list"
+                }
+              }
+            ]
         },
         "region": {
           "help": "the domain over which data are reported",

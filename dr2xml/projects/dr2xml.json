@@ -609,21 +609,6 @@
       ],
       "target_type": "dict"
     },
-    "extravar_regions": {
-      "help": "Regions for extra variables",
-      "fatal": true,
-      "target_type": "dict",
-      "values": [
-        {
-          "type": "value",
-          "origin": "laboratory",
-          "keys": "extravar_regions"
-        },
-        {
-          "default": "undef"
-        }
-      ]
-    },
     "filter_on_realization": {
       "help": "If you want to produce the same variables set for all members, set this parameter to False.",
       "values": [
@@ -941,6 +926,24 @@
           "keys": ["max_priority"]
         }
       ]
+    },
+    "max_priority_per_frequency": {
+      "help": "Max variable priority level per frequency to be output from lab settings.",
+      "fatal": true,
+      "values": [
+        {
+          "type": "value",
+          "origin": "simulation",
+          "keys": ["max_priority_per_frequency"]
+        },
+        {
+          "type": "value",
+          "origin": "laboratory",
+          "keys": ["max_priority_per_frequency"]
+        },
+        {}
+      ],
+      "target_type": "dict"
     },
     "max_split_freq": {
       "help": "The maximum number of years that should be putted in a single file.",
@@ -1775,6 +1778,33 @@
               "origin": "internal",
               "keys": ["max_priority_lset"]
             }
+          ]
+        }
+      ]
+    },
+    "select_max_priority_per_frequency": {
+      "help": "Max priority per frequency for variable selection.",
+      "fatal": true,
+      "target_type": "dict",
+      "values": [
+        {
+          "type": "condition",
+          "value_to_check": {
+            "type": "value",
+            "origin": "internal",
+            "keys": ["select_on_inc_and_exc"]
+          },
+          "check_to_perform": "eq",
+          "reference_values": [true],
+          "values": [
+            {
+              "type": "value",
+              "origin": "internal",
+              "keys": ["max_priority_per_frequency"]
+            }
+          ],
+          "not_values": [
+            {}
           ]
         }
       ]
