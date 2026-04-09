@@ -38,8 +38,8 @@ jobs:
     - name: Test with unittest
       run: |
         export CMIP7_DR_API_CONFIGFILE=$PWD/dr2xml/dr_interface/CMIP7_config
-        python3 -m data_request_api.command_line.config offline_mode false
+        python3 -m data_request_api.command_line.config offline false
         esgvoc clean
         esgvoc init
-        python3 -m data_request_api.command_line.config offline_mode true
+        python3 -m data_request_api.command_line.config offline true
         bash launch_tests.sh
