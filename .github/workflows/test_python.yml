@@ -39,7 +39,7 @@ jobs:
       run: |
         export CMIP7_DR_API_CONFIGFILE=$PWD/dr2xml/dr_interface/CMIP7_config
         python3 -m data_request_api.command_line.config offline false
-        esgvoc clean --force all
+        esgvoc clean all --force
         esgvoc init
         python3 -m data_request_api.command_line.config offline true
         bash launch_tests.sh
