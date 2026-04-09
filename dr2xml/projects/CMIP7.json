@@ -675,11 +675,6 @@
             {
               "type": "value",
               "origin": "common_tag",
-              "keys": ["variable", "cmvar", "attributes", "physical_parameter", "attributes", "variablerootdd"]
-            },
-            {
-              "type": "value",
-              "origin": "common_tag",
               "keys": ["variable", "cmvar", "cmvar", "attributes", "physical_parameter", "attributes", "variablerootdd"]
             },
             {
@@ -871,11 +866,6 @@
           "fatal": true,
           "forbidden_values": ["", "None", null, "undef"],
           "values": [
-            {
-              "type": "value",
-              "origin": "common_tag",
-              "keys": ["variable", "cmvar", "attributes", "physical_parameter", "attributes", "variablerootdd"]
-            },
             {
               "type": "value",
               "origin": "common_tag",

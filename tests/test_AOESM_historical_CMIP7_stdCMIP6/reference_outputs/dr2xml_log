@@ -25,9 +25,9 @@ Processing context  nemo
 
 **************************************************
 
-Number of distinct CMOR variables (whatever the grid): 66
-Number of distinct var labels is: 45
-Number of simplified vars is: 66
+Number of distinct CMOR variables (whatever the grid): 70
+Number of distinct var labels is: 50
+Number of simplified vars is: 70
 Issues with standard names are: []
 homevars file: current_directory/test_AOESM_historical_CMIP7_stdCMIP6/input/home_data_request/home_data_request_test.txt
 Number of 'cmor', 'dev' and 'perso' among home variables: 11
@@ -50,6 +50,7 @@ Note: assuming that 'time: mean where sea_ice'  for         sithick in table SId
 Duplicate variable sithick,sithick in table SIday is skipped, preferred is sithick
 Note: assuming that 'time: mean where sea_ice'  for             siu in table SIday is well handled by 'detect_missing'
 Note: assuming that 'time: mean where sea_ice'  for             siv in table SIday is well handled by 'detect_missing'
+Note: assuming that 'time: mean where sea_ice'  for          simass in table SImon is well handled by 'detect_missing'
 Note: assuming that 'time: mean where sea_ice'  for         sithick in table SImon is well handled by 'detect_missing'
 Duplicate variable sithick,sithick in table SImon is skipped, preferred is sithick
 Note: assuming that 'time: mean where sea_ice'  for             siu in table SImon is well handled by 'detect_missing'
@@ -57,6 +58,7 @@ Note: assuming that 'time: mean where sea_ice'  for             siv in table SIm
 Note: assuming that 'time: mean where sea_ice'  for         sithick in table SIday is well handled by 'detect_missing'
 Note: assuming that 'time: mean where sea_ice'  for             siu in table SIday is well handled by 'detect_missing'
 Note: assuming that 'time: mean where sea_ice'  for             siv in table SIday is well handled by 'detect_missing'
+Note: assuming that 'time: mean where sea_ice'  for          simass in table SImon is well handled by 'detect_missing'
 Note: assuming that 'time: mean where sea_ice'  for         sithick in table SImon is well handled by 'detect_missing'
 Note: assuming that 'time: mean where sea_ice'  for             siu in table SImon is well handled by 'detect_missing'
 Note: assuming that 'time: mean where sea_ice'  for             siv in table SImon is well handled by 'detect_missing'
@@ -64,9 +66,11 @@ Note: assuming that 'time: mean where sea_ice'  for             siv in table SIm
 file_def written as current_directory/test_AOESM_historical_CMIP7_stdCMIP6/test_outputs/dr2xml_nemo.xml
 
 Skipped variables (i.e. whose alias is not present in the pingfile):
->>> TABLE:             6hr 04/04 ----> mpw(2) swh(2) swhmax(2) wpp(2)
+>>> TABLE:           3hrPt 03/03 ----> mpw(2) swh(2) wpp(2)
 
->>> TABLE:            Omon 04/15 ----> mpw(2) swh(2) swhmax(2) wpp(2)
+>>> TABLE:             Ofx 04/07 ----> basin(1) hfgeou(1) sftof(1) thkcello(1)
+
+>>> TABLE:            Omon 03/14 ----> mpw(2) swh(2) wpp(2)
 
 
 
@@ -146,7 +150,7 @@ Some Statistics on actually written variables per variable...
 -----------------------
               *     mon_Omon_XY-na_2 mlotstmin
 --------------------
---- VARNAME: siconc: Sea-Ice Area Fraction (Ocean Grid)
+--- VARNAME: siconc: Sea-Ice Area Percentage (Ocean Grid)
 --------------------
               *    day_SIday_XY-na_1 siconc
               *    mon_SImon_XY-na_1 siconc
@@ -216,7 +220,7 @@ Some Statistics on actually written variables per variable...
               *     mon_Omon_na-na_1 zostoga
 
 Warnings about cell methods (with var list)
-	time: mean where sea_ice for vars: {'sithick', 'siu', 'siv'}
+	time: mean where sea_ice for vars: {'simass', 'sithick', 'siu', 'siv'}
 sync universe
 Universe is in offline mode
 Running in offline mode - only using local repositories and databases
@@ -244,9 +248,9 @@ Processing context  surfex
 
 **************************************************
 
-Number of distinct CMOR variables (whatever the grid): 66
-Number of distinct var labels is: 45
-Number of simplified vars is: 66
+Number of distinct CMOR variables (whatever the grid): 70
+Number of distinct var labels is: 50
+Number of simplified vars is: 70
 Issues with standard names are: []
 homevars file: current_directory/test_AOESM_historical_CMIP7_stdCMIP6/input/home_data_request/home_data_request_test.txt
 Number of 'cmor', 'dev' and 'perso' among home variables: 11
@@ -275,13 +279,13 @@ Duplicate variable areacella,areacella in table fx is skipped, preferred is area
 file_def written as current_directory/test_AOESM_historical_CMIP7_stdCMIP6/test_outputs/dr2xml_surfex.xml
 
 Skipped variables (i.e. whose alias is not present in the pingfile):
->>> TABLE:           3hrPt 01/03 ----> bldep(2)
-
->>> TABLE:             6hr 04/05 ----> mpw(2) swh(2) swhmax(2) wpp(2)
+>>> TABLE:           3hrPt 04/06 ----> bldep(2) mpw(2) swh(2) wpp(2)
 
 >>> TABLE:             Efx 01/01 ----> slthick(1)
 
->>> TABLE:            Omon 04/04 ----> mpw(2) swh(2) swhmax(2) wpp(2)
+>>> TABLE:            Omon 03/03 ----> mpw(2) swh(2) wpp(2)
+
+>>> TABLE:              fx 02/07 ----> mrsofc(1) sftgif(1)
 
 
 
@@ -442,9 +446,9 @@ Processing context  trip
 
 **************************************************
 
-Number of distinct CMOR variables (whatever the grid): 66
-Number of distinct var labels is: 45
-Number of simplified vars is: 66
+Number of distinct CMOR variables (whatever the grid): 70
+Number of distinct var labels is: 50
+Number of simplified vars is: 70
 Issues with standard names are: []
 homevars file: current_directory/test_AOESM_historical_CMIP7_stdCMIP6/input/home_data_request/home_data_request_test.txt
 Number of 'cmor', 'dev' and 'perso' among home variables: 11

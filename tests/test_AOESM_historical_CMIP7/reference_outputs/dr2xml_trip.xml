@@ -2,7 +2,7 @@
 <context id="trip">
 	<!--CMIP7 Data Request version Software current_cmip7_dr_software - Content test-->
 	<!--CMIP7-CV version ??-->
-	<!--CMIP7_conventions_version CF-1.12-->
+	<!--CMIP7_conventions_version CF-1.12 CMIP-7.0-->
 	<!--dr2xml version current_version-->
 	<!--Lab_and_model settings
 {'allow_duplicates_in_same_table' = 'False',
@@ -93,23 +93,23 @@ seaIce: Gelato 6.1',
 	</axis_definition>
 	<domain_definition>
 		<domain_group prec="8">
-			<domain id="CMIP7_25km" ni_glo="1440" nj_glo="720" type="rectilinear" prec="8">
+			<domain id="CMIP7_25km" ni_glo="1440" nj_glo="720" type="rectilinear" prec="8" bounds_lat_name="lat_bnds" bounds_lon_name="lon_bnds">
 				<generate_rectilinear_domain/>
 				<interpolate_domain order="1" renormalize="true" mode="read_or_compute" write_weight="true"/>
 			</domain>
-			<domain id="CMIP7_50km" ni_glo="720" nj_glo="360" type="rectilinear" prec="8">
+			<domain id="CMIP7_50km" ni_glo="720" nj_glo="360" type="rectilinear" prec="8" bounds_lat_name="lat_bnds" bounds_lon_name="lon_bnds">
 				<generate_rectilinear_domain/>
 				<interpolate_domain order="1" renormalize="true" mode="read_or_compute" write_weight="true"/>
 			</domain>
-			<domain id="CMIP7_100km" ni_glo="360" nj_glo="180" type="rectilinear" prec="8">
+			<domain id="CMIP7_100km" ni_glo="360" nj_glo="180" type="rectilinear" prec="8" bounds_lat_name="lat_bnds" bounds_lon_name="lon_bnds">
 				<generate_rectilinear_domain/>
 				<interpolate_domain order="1" renormalize="true" mode="read_or_compute" write_weight="true"/>
 			</domain>
-			<domain id="CMIP7_1deg" ni_glo="360" nj_glo="180" type="rectilinear" prec="8">
+			<domain id="CMIP7_1deg" ni_glo="360" nj_glo="180" type="rectilinear" prec="8" bounds_lat_name="lat_bnds" bounds_lon_name="lon_bnds">
 				<generate_rectilinear_domain/>
 				<interpolate_domain order="1" renormalize="true" mode="read_or_compute" write_weight="true"/>
 			</domain>
-			<domain id="CMIP7_2deg" ni_glo="180" nj_glo="90" type="rectilinear" prec="8">
+			<domain id="CMIP7_2deg" ni_glo="180" nj_glo="90" type="rectilinear" prec="8" bounds_lat_name="lat_bnds" bounds_lon_name="lon_bnds">
 				<generate_rectilinear_domain/>
 				<interpolate_domain order="1" renormalize="true" mode="read_or_compute" write_weight="true"/>
 			</domain>

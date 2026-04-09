@@ -1652,14 +1652,14 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="arpege_minor_version" type="string"> 6.3.2 </variable>
 			<variable name="nemo_gelato_commit" type="string"> 49095b3accd5d4c_6524fe19b00467a </variable>
 			<variable name="xios_commit" type="string"> 1442-shuffle </variable>
-			<field field_ref="CMIP7_snc_average" name="snc" grid_ref="NATURE_grid_complete" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="area: time: mean" cell_methods_mode="overwrite" operation="average" freq_op="1mo">				@CMIP7_snc_average
+			<field field_ref="CMIP7_snc_average" name="snc" grid_ref="NATURE_grid_complete" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="area: mean where land time: mean" cell_methods_mode="overwrite" operation="average" freq_op="1mo">				@CMIP7_snc_average
 				<variable name="comment" type="string"> ISBA snow cover over bare ground comparable with stallite data (Psng in equation C1 in Decharme et al. 2016) </variable>
 				<variable name="standard_name" type="string"> surface_snow_area_fraction </variable>
 				<variable name="description" type="string"> Fraction of each grid cell that is occupied by snow that rests on land portion of cell. </variable>
 				<variable name="long_name" type="string"> Snow Area Percentage </variable>
 				<variable name="history" type="string"> none </variable>
 				<variable name="units" type="string"> % </variable>
-				<variable name="cell_methods" type="string"> area: time: mean </variable>
+				<variable name="cell_methods" type="string"> area: mean where land time: mean </variable>
 				<variable name="cell_measures" type="string"> area: areacella </variable>
 				<variable name="interval_operation" type="string"> 900 s </variable>
 			</field>

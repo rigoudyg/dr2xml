@@ -33,7 +33,7 @@ data_request = None
 
 def get_value_from_constant(value):
     if isinstance(value, ConstantValueObj):
-        return value.value
+        return str(value)
     elif isinstance(value, list):
         return [get_value_from_constant(val) for val in value]
     elif isinstance(value, set):
@@ -295,28 +295,28 @@ class SimpleCMORVar(SimpleCMORVarBasic):
         return cls(from_dr=True,
                    type="cmor",
                    modeling_realm=[realm.id for realm in input_var.modelling_realm],
-                   label=str(input_var.physical_parameter.name),
-                   mipVarLabel=str(input_var.physical_parameter.name),
+                   label=input_var.physical_parameter.name,
+                   mipVarLabel=input_var.physical_parameter.name,
                    official_label=official_label,
-                   label_without_psuffix=str(input_var.physical_parameter.variablerootdd),
-                   label_non_ambiguous=str(input_var.name),
-                   frequency=str(input_var.cmip7_frequency.name),
-                   mipTable=str(input_var.cmip6_tables_identifier.name),
-                   description=str(input_var.description),
-                   stdname=str(input_var.physical_parameter.cf_standard_name.name),
-                   units=str(input_var.physical_parameter.units),
-                   long_name=str(input_var.physical_parameter.title),
+                   label_without_psuffix=input_var.physical_parameter.variablerootdd,
+                   label_non_ambiguous=input_var.name,
+                   frequency=input_var.cmip7_frequency.name,
+                   mipTable=input_var.cmip6_tables_identifier.name,
+                   description=input_var.description,
+                   stdname=input_var.physical_parameter.cf_standard_name.name,
+                   units=input_var.physical_parameter.units,
+                   long_name=input_var.physical_parameter.title,
                    sdims=sdims,
                    other_dims_size=product_of_other_dims,
                    cell_methods=cell_methods,
-                   cm=str(input_var.cell_methods.cell_methods),
+                   cm=input_var.cell_methods.cell_methods,
                    cell_measures=cell_measures,
-                   spatial_shp=str(input_var.spatial_shape.name),
-                   temporal_shp=str(input_var.temporal_shape.name),
-                   id=str(input_var.id),
+                   spatial_shp=input_var.spatial_shape.name,
+                   temporal_shp=input_var.temporal_shape.name,
+                   id=input_var.id,
                    cmvar=input_var,
                    Priority=data_request.data_request.find_priority_per_variable(input_var),
-                   region=str(input_var.region)
+                   region=input_var.region
                    )
 
 

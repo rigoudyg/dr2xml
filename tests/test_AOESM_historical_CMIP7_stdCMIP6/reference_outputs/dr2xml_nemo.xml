@@ -559,7 +559,7 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="xios_commit" type="string"> 1442-shuffle </variable>
 			<field field_ref="CMIP7_zos_average" name="zos" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="area: mean where sea time: mean" cell_methods_mode="overwrite" operation="average">
 				<variable name="standard_name" type="string"> sea_surface_height_above_geoid </variable>
-				<variable name="description" type="string"> This is the dynamic sea level, so should have zero global area mean. zos is the effective sea level as if sea ice (and snow) at a grid cell were converted to liquid seawater (Campin et al., 2008). For OMIP, do _not _record inverse barometer responses from sea-ice (and snow) loading in zos. See (Griffies et al, 2016, https://doi.org/10.5194/gmd-9-3231-2016). </variable>
+				<variable name="description" type="string"> This is the effective dynamic sea level, so should have zero global area mean. zos is the effective sea level as if sea ice (and snow) at a grid cell were converted to liquid seawater (Campin et al., 2008). For OMIP, do _not _record inverse barometer responses from sea-ice (and snow) loading in zos. See (Griffies et al, 2016, https://doi.org/10.5194/gmd-9-3231-2016). </variable>
 				<variable name="long_name" type="string"> Sea Surface Height Above Geoid </variable>
 				<variable name="history" type="string"> none </variable>
 				<variable name="units" type="string"> m </variable>
@@ -897,10 +897,10 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="xios_commit" type="string"> 1442-shuffle </variable>
 			<field field_ref="CMIP7_siconc_average" name="siconc" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="area: time: mean" cell_methods_mode="overwrite" operation="average">
 				<variable name="standard_name" type="string"> sea_ice_area_fraction </variable>
-				<variable name="description" type="string"> Areal fraction of a given grid cell that is covered by sea ice on the ocean grid, independent of the thickness of that ice. </variable>
-				<variable name="long_name" type="string"> Sea-Ice Area Fraction (Ocean Grid) </variable>
+				<variable name="description" type="string"> Percentage of a given grid cell that is covered by sea ice on the ocean grid, independent of the thickness of that ice. </variable>
+				<variable name="long_name" type="string"> Sea-Ice Area Percentage (Ocean Grid) </variable>
 				<variable name="history" type="string"> none </variable>
-				<variable name="units" type="string"> 1 </variable>
+				<variable name="units" type="string"> % </variable>
 				<variable name="cell_methods" type="string"> area: time: mean </variable>
 				<variable name="cell_measures" type="string"> area: areacello </variable>
 				<variable name="interval_operation" type="string"> 1800 s </variable>
@@ -1039,7 +1039,7 @@ seaIce: Gelato 6.1 </variable>
 				<variable name="history" type="string"> none </variable>
 				<variable name="units" type="string"> m s-1 </variable>
 				<variable name="cell_methods" type="string"> area: time: mean where sea_ice (mask=siconc) </variable>
-				<variable name="cell_measures" type="string"> ::MODEL </variable>
+				<variable name="cell_measures" type="string"> --MODEL </variable>
 				<variable name="interval_operation" type="string"> 1800 s </variable>
 			</field>
 		</file>
@@ -1107,7 +1107,7 @@ seaIce: Gelato 6.1 </variable>
 				<variable name="history" type="string"> none </variable>
 				<variable name="units" type="string"> m s-1 </variable>
 				<variable name="cell_methods" type="string"> area: time: mean where sea_ice (mask=siconc) </variable>
-				<variable name="cell_measures" type="string"> ::MODEL </variable>
+				<variable name="cell_measures" type="string"> --MODEL </variable>
 				<variable name="interval_operation" type="string"> 1800 s </variable>
 			</field>
 		</file>
@@ -1465,7 +1465,7 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="description" type="string"> CMIP6 historical </variable>
 			<variable name="title" type="string"> CMIP6 historical </variable>
 			<variable name="experiment" type="string"> all-forcing simulation of the recent past </variable>
-			<variable name="external_variables" type="string"> areacella </variable>
+			<variable name="external_variables" type="string"> areacello </variable>
 			<variable name="forcing_index" type="int"> 2 </variable>
 			<variable name="frequency" type="string"> mon </variable>
 			<variable name="further_info_url" type="string"> https://furtherinfo.es-doc.org/False.CNRM-CERFACS.CNRM-ESM2-1.historical.none.r1i1p1f2 </variable>
@@ -1521,7 +1521,7 @@ seaIce: Gelato 6.1 </variable>
 				<variable name="history" type="string"> none </variable>
 				<variable name="units" type="string"> m </variable>
 				<variable name="cell_methods" type="string"> area: mean where sea time: maximum </variable>
-				<variable name="cell_measures" type="string"> area: areacella </variable>
+				<variable name="cell_measures" type="string"> area: areacello </variable>
 				<variable name="interval_operation" type="string"> 1800 s </variable>
 			</field>
 		</file>
@@ -1792,7 +1792,7 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="xios_commit" type="string"> 1442-shuffle </variable>
 			<field field_ref="CMIP7_zos_average" name="zos" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="area: mean where sea time: mean" cell_methods_mode="overwrite" operation="average">
 				<variable name="standard_name" type="string"> sea_surface_height_above_geoid </variable>
-				<variable name="description" type="string"> This is the dynamic sea level, so should have zero global area mean. It should not include inverse barometer depressions from sea ice. </variable>
+				<variable name="description" type="string"> This is the effective dynamic sea level, so should have zero global area mean. It should not include inverse barometer depressions from sea ice. </variable>
 				<variable name="long_name" type="string"> Sea Surface Height Above Geoid </variable>
 				<variable name="history" type="string"> none </variable>
 				<variable name="units" type="string"> m </variable>
@@ -1997,10 +1997,10 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="xios_commit" type="string"> 1442-shuffle </variable>
 			<field field_ref="CMIP7_siconc_average" name="siconc" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="area: time: mean" cell_methods_mode="overwrite" operation="average">
 				<variable name="standard_name" type="string"> sea_ice_area_fraction </variable>
-				<variable name="description" type="string"> Areal fraction of a given grid cell that is covered by sea ice on the ocean grid, independent of the thickness of that ice. </variable>
-				<variable name="long_name" type="string"> Sea-Ice Area Fraction (Ocean Grid) </variable>
+				<variable name="description" type="string"> Percentage of a given grid cell that is covered by sea ice on the ocean grid, independent of the thickness of that ice. </variable>
+				<variable name="long_name" type="string"> Sea-Ice Area Percentage (Ocean Grid) </variable>
 				<variable name="history" type="string"> none </variable>
-				<variable name="units" type="string"> 1 </variable>
+				<variable name="units" type="string"> % </variable>
 				<variable name="cell_methods" type="string"> area: time: mean </variable>
 				<variable name="cell_measures" type="string"> area: areacello </variable>
 				<variable name="interval_operation" type="string"> 1800 s </variable>
@@ -2064,13 +2064,13 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="arpege_minor_version" type="string"> 6.3.2 </variable>
 			<variable name="nemo_gelato_commit" type="string"> 49095b3accd5d4c_6524fe19b00467a </variable>
 			<variable name="xios_commit" type="string"> 1442-shuffle </variable>
-			<field field_ref="CMIP7_simass_average" name="simass" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="area: mean where sea time: mean" cell_methods_mode="overwrite" operation="average">
+			<field field_ref="CMIP7_simass_average" name="simass" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="area: time: mean where sea_ice over all_area_types" cell_methods_mode="overwrite" operation="average">
 				<variable name="standard_name" type="string"> sea_ice_amount </variable>
 				<variable name="description" type="string"> Total mass of sea ice divided by grid-cell area. </variable>
 				<variable name="long_name" type="string"> Sea-Ice Mass </variable>
 				<variable name="history" type="string"> none </variable>
 				<variable name="units" type="string"> kg m-2 </variable>
-				<variable name="cell_methods" type="string"> area: mean where sea time: mean </variable>
+				<variable name="cell_methods" type="string"> area: time: mean where sea_ice over all_area_types </variable>
 				<variable name="cell_measures" type="string"> area: areacello </variable>
 				<variable name="interval_operation" type="string"> 1800 s </variable>
 			</field>
@@ -2208,7 +2208,7 @@ seaIce: Gelato 6.1 </variable>
 				<variable name="history" type="string"> none </variable>
 				<variable name="units" type="string"> m s-1 </variable>
 				<variable name="cell_methods" type="string"> area: time: mean where sea_ice (mask=siconc) </variable>
-				<variable name="cell_measures" type="string"> ::MODEL </variable>
+				<variable name="cell_measures" type="string"> --MODEL </variable>
 				<variable name="interval_operation" type="string"> 1800 s </variable>
 			</field>
 		</file>
@@ -2276,7 +2276,7 @@ seaIce: Gelato 6.1 </variable>
 				<variable name="history" type="string"> none </variable>
 				<variable name="units" type="string"> m s-1 </variable>
 				<variable name="cell_methods" type="string"> area: time: mean where sea_ice (mask=siconc) </variable>
-				<variable name="cell_measures" type="string"> ::MODEL </variable>
+				<variable name="cell_measures" type="string"> --MODEL </variable>
 				<variable name="interval_operation" type="string"> 1800 s </variable>
 			</field>
 		</file>
@@ -2478,7 +2478,7 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="xios_commit" type="string"> 1442-shuffle </variable>
 			<field field_ref="CMIP7_zos_average" name="zos" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="area: mean where sea time: mean" cell_methods_mode="overwrite" operation="average">
 				<variable name="standard_name" type="string"> sea_surface_height_above_geoid </variable>
-				<variable name="description" type="string"> This is the dynamic sea level, so should have zero global area mean. It should not include inverse barometer depressions from sea ice. </variable>
+				<variable name="description" type="string"> This is the effective dynamic sea level, so should have zero global area mean. It should not include inverse barometer depressions from sea ice. </variable>
 				<variable name="long_name" type="string"> Sea Surface Height Above Geoid </variable>
 				<variable name="history" type="string"> none </variable>
 				<variable name="units" type="string"> m </variable>

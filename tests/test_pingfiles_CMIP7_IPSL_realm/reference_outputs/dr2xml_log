@@ -71,6 +71,7 @@ For parameter listof_home_vars, found value None
 For parameter max_file_size_in_floats, found value 500000000.0
 Could not find a proper value for max_priority
 For parameter max_priority_lset, found value 3
+For parameter max_priority_per_frequency, found value {}
 For parameter max_split_freq, found value None
 For parameter mips, found value OrderedDict()
 For parameter nemo_sources_management_policy_master_of_the_world, found value False
@@ -108,8 +109,10 @@ Could not find a proper value for select_included_tables
 Could not find a proper value for select_included_vargroups
 Could not find a proper value for select_included_vars
 Could not find a proper value for select_max_priority
+Could not find a proper value for select_max_priority_per_frequency
 Could not find a proper value for select_mips
 For parameter select_on_expt, found value False
+For parameter select_on_inc_and_exc, found value False
 For parameter select_on_year, found value False
 For parameter select_sizes, found value {'nb_cosp_sites': 129, 'nb_lidar_temp': 40, 'nb_parasol_refl': 5, 'nb_isccp_tau': 7, 'nb_isccp_pc': 7, 'nb_curtain_sites': 1000, 'nho': 106428, 'nlo': 75, 'nha': 32768, 'nla': 91, 'nlas': 30, 'nls': 14, 'nh1': 128}
 Could not find a proper value for select_tierMax
@@ -156,6 +159,7 @@ For parameter select_included_tables, found value []
 For parameter select_included_vargroups, found value []
 For parameter select_included_vars, found value []
 For parameter select_max_priority, found value 3
+For parameter select_max_priority_per_frequency, found value {}
 For parameter select_mips, found value []
 For parameter select_tierMax, found value 3
 Could not find a proper value for simple_domain_grid_regexp
@@ -2847,6 +2851,7 @@ For parameter listof_home_vars, found value None
 For parameter max_file_size_in_floats, found value 500000000.0
 Could not find a proper value for max_priority
 For parameter max_priority_lset, found value 3
+For parameter max_priority_per_frequency, found value {}
 For parameter max_split_freq, found value None
 For parameter mips, found value OrderedDict()
 For parameter nemo_sources_management_policy_master_of_the_world, found value False
@@ -2884,8 +2889,10 @@ Could not find a proper value for select_included_tables
 Could not find a proper value for select_included_vargroups
 Could not find a proper value for select_included_vars
 Could not find a proper value for select_max_priority
+Could not find a proper value for select_max_priority_per_frequency
 Could not find a proper value for select_mips
 For parameter select_on_expt, found value False
+For parameter select_on_inc_and_exc, found value False
 For parameter select_on_year, found value False
 For parameter select_sizes, found value {'nb_cosp_sites': 129, 'nb_lidar_temp': 40, 'nb_parasol_refl': 5, 'nb_isccp_tau': 7, 'nb_isccp_pc': 7, 'nb_curtain_sites': 1000, 'nho': 106428, 'nlo': 75, 'nha': 32768, 'nla': 91, 'nlas': 30, 'nls': 14, 'nh1': 128}
 Could not find a proper value for select_tierMax
@@ -2932,6 +2939,7 @@ For parameter select_included_tables, found value []
 For parameter select_included_vargroups, found value []
 For parameter select_included_vars, found value []
 For parameter select_max_priority, found value 3
+For parameter select_max_priority_per_frequency, found value {}
 For parameter select_mips, found value []
 For parameter select_tierMax, found value 3
 Could not find a proper value for simple_domain_grid_regexp
@@ -3976,6 +3984,7 @@ For parameter listof_home_vars, found value None
 For parameter max_file_size_in_floats, found value 500000000.0
 Could not find a proper value for max_priority
 For parameter max_priority_lset, found value 3
+For parameter max_priority_per_frequency, found value {}
 For parameter max_split_freq, found value None
 For parameter mips, found value OrderedDict()
 For parameter nemo_sources_management_policy_master_of_the_world, found value False
@@ -4013,8 +4022,10 @@ Could not find a proper value for select_included_tables
 Could not find a proper value for select_included_vargroups
 Could not find a proper value for select_included_vars
 Could not find a proper value for select_max_priority
+Could not find a proper value for select_max_priority_per_frequency
 Could not find a proper value for select_mips
 For parameter select_on_expt, found value False
+For parameter select_on_inc_and_exc, found value False
 For parameter select_on_year, found value False
 For parameter select_sizes, found value {'nb_cosp_sites': 129, 'nb_lidar_temp': 40, 'nb_parasol_refl': 5, 'nb_isccp_tau': 7, 'nb_isccp_pc': 7, 'nb_curtain_sites': 1000, 'nho': 106428, 'nlo': 75, 'nha': 32768, 'nla': 91, 'nlas': 30, 'nls': 14, 'nh1': 128}
 Could not find a proper value for select_tierMax
@@ -4061,6 +4072,7 @@ For parameter select_included_tables, found value []
 For parameter select_included_vargroups, found value []
 For parameter select_included_vars, found value []
 For parameter select_max_priority, found value 3
+For parameter select_max_priority_per_frequency, found value {}
 For parameter select_mips, found value []
 For parameter select_tierMax, found value 3
 Could not find a proper value for simple_domain_grid_regexp
