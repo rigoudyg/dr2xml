@@ -269,6 +269,11 @@ class SimpleCMORVar(SimpleCMORVarBasic):
             kwargs[key] = get_value_from_constant(value)
         super().__init__(**kwargs)
 
+    def correct_data_request(self):
+        if self.cell_measures in ['--MODEL', ]:
+            self.cell_measures = ''
+        elif self.cell_measures in ['--OPT', ]:
+            self.cell_measures = ''
 
     @classmethod
     def get_from_dr(cls, input_var, **kwargs):

@@ -18,7 +18,8 @@ from .home_data_request import process_home_vars
 
 def test_variables_similar(var_1, var_2):
     return var_1.label == var_2.label and var_1.spatial_shp == var_2.spatial_shp and \
-           var_1.frequency == var_2.frequency and var_1.cell_methods == var_2.cell_methods
+           var_1.frequency == var_2.frequency and var_1.cell_methods == var_2.cell_methods and \
+           var_1.region == var_2.region
 
 
 def check_exclusion(var, *exclusions):
@@ -51,19 +52,20 @@ def select_variables_to_be_processed():
     # --------------------------------------------------------------------
     mip_vars_list = gather_AllSimpleVars()
     # Group vars per realm
-    svars_per_realm = defaultdict(list)
+    svars_per_realm = defaultdict(lambda: defaultdict(list))
     for svar in mip_vars_list:
+        region = svar.region
         for realm in svar.modeling_realm:
-            if svar not in svars_per_realm[realm]:
-                add = not any([test_variables_similar(svar, ovar) for ovar in svars_per_realm[realm]])
+            if svar not in svars_per_realm[realm][region]:
+                add = not any([test_variables_similar(svar, ovar) for ovar in svars_per_realm[realm][region]])
                 # Settings may allow for duplicate var in two tables.
                 # In DR01.00.21, this actually applies to very few fields (ps-Aermon, tas-ImonAnt, areacellg)
                 if internal_dict['allow_duplicates'] or add:
-                    svars_per_realm[realm].append(svar)
+                    svars_per_realm[realm][region].append(svar)
                 else:
                     logger.warning("Not adding duplicate %s (from %s) for realm %s" % (svar.label, svar.mipTable, realm))
             else:
-                logger.warning("Duplicate svar %s %s" % (svar.label, svar.grids))
+                logger.warning("Duplicate svar %s %s %s %s" % (svar.label, svar.grids, realm, region))
     list_svars_per_realms = set(list(svars_per_realm))
     if None in list_svars_per_realms:
         list_svars_per_realms = list_svars_per_realms & {""} - {None}
@@ -79,29 +81,31 @@ def select_variables_to_be_processed():
     non_processed_realms = sorted(list(set(context_realms) - set(list(svars_per_realm))))
     for realm in non_processed_realms:
         print("Processing realm '%s' of context '%s' -- no variable asked (skip)" % (realm, context))
-    svars_per_table = defaultdict(list)
+    svars_per_table = defaultdict(lambda: defaultdict(list))
     for realm in processed_realms:
         print("Processing realm '%s' of context '%s'" % (realm, context))
         excluded_vars = defaultdict(list)
-        for svar in svars_per_realm[realm]:
-            # exclusion de certaines spatial shapes (ex. Polar Stereograpic Antarctic/Groenland)
-            test, reason = check_exclusion(svar,
-                                           ("label", internal_dict["excluded_vars_lset"],
-                                            "They are in exclusion list"),
-                                           ("spatial_shp", [None, False], "They have no spatial shape"),
-                                           ("spatial_shp", internal_dict["excluded_spshapes_lset"],
-                                            "They have excluded spatial shape : %s" % svar.spatial_shp),
-                                           ("label", internal_dict["excluded_vars_per_shape"].get(svar.spatial_shp, list()), "Label %s is excluded for shape %s" % (svar.label, svar.spatial_shp)))
-            if test:
-                excluded_vars[reason].append((svar.label, svar.mipTable))
-            else:
-                svars_per_table[svar.mipTable].append(svar)
+        for region in svars_per_realm[realm]:
+            for svar in svars_per_realm[realm][region]:
+                # exclusion de certaines spatial shapes (ex. Polar Stereograpic Antarctic/Groenland)
+                test, reason = check_exclusion(svar,
+                                               ("label", internal_dict["excluded_vars_lset"],
+                                                "They are in exclusion list"),
+                                               ("spatial_shp", [None, False], "They have no spatial shape"),
+                                               ("spatial_shp", internal_dict["excluded_spshapes_lset"],
+                                                "They have excluded spatial shape : %s" % svar.spatial_shp),
+                                               ("label", internal_dict["excluded_vars_per_shape"].get(svar.spatial_shp, list()), "Label %s is excluded for shape %s" % (svar.label, svar.spatial_shp)))
+                if test:
+                    excluded_vars[reason].append((svar.label, svar.mipTable))
+                else:
+                    svars_per_table[svar.mipTable][region].append(svar)
         if len(excluded_vars) > 0:
             logger.info("The following pairs (variable,table) have been excluded for these reasons:\n%s" %
                         "\n".join(["%s: %s" % (reason, print_struct(excluded_vars[reason], skip_sep=True, sort=True))
                                    for reason in sorted(list(excluded_vars))]))
     for table in sorted(list(svars_per_table)):
-        logger.debug("For table %s: %s" % (table, " ".join([v.label for v in svars_per_table[table]])))
+        for region in sorted(list(svars_per_realm[table])):
+            logger.debug("For table %s and region %s: %s" % (table, region, " ".join([v.label for v in svars_per_table[table][region]])))
     #
     # --------------------------------------------------------------------
     # Add svars belonging to the orphan list
@@ -115,7 +119,7 @@ def select_variables_to_be_processed():
                                            ("spatial_shp", internal_dict["excluded_spshapes_lset"],
                                             "They have excluded spatial shape : %s" % svar.spatial_shp))
             if not test:
-                svars_per_table[svar.mipTable].append(svar)
+                svars_per_table[svar.mipTable][svar.region].append(svar)
     #
     # --------------------------------------------------------------------
     # Remove svars belonging to other contexts' orphan lists
@@ -126,7 +130,8 @@ def select_variables_to_be_processed():
         orphans.extend(orphan_variables[other_context])
     orphans = sorted(list(set(orphans)))
     for table in svars_per_table:
-        svars_per_table[table] = [svar for svar in svars_per_table[table] if svar.label not in orphans]
+        for region in svars_per_table[table]:
+            svars_per_table[table][region] = [svar for svar in svars_per_table[table][region] if svar.label not in orphans]
     return svars_per_table
 
 

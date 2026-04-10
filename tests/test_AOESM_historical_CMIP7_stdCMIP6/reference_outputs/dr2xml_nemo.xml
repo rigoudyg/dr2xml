@@ -1039,7 +1039,6 @@ seaIce: Gelato 6.1 </variable>
 				<variable name="history" type="string"> none </variable>
 				<variable name="units" type="string"> m s-1 </variable>
 				<variable name="cell_methods" type="string"> area: time: mean where sea_ice (mask=siconc) </variable>
-				<variable name="cell_measures" type="string"> --MODEL </variable>
 				<variable name="interval_operation" type="string"> 1800 s </variable>
 			</field>
 		</file>
@@ -1107,7 +1106,6 @@ seaIce: Gelato 6.1 </variable>
 				<variable name="history" type="string"> none </variable>
 				<variable name="units" type="string"> m s-1 </variable>
 				<variable name="cell_methods" type="string"> area: time: mean where sea_ice (mask=siconc) </variable>
-				<variable name="cell_measures" type="string"> --MODEL </variable>
 				<variable name="interval_operation" type="string"> 1800 s </variable>
 			</field>
 		</file>
@@ -2208,7 +2206,6 @@ seaIce: Gelato 6.1 </variable>
 				<variable name="history" type="string"> none </variable>
 				<variable name="units" type="string"> m s-1 </variable>
 				<variable name="cell_methods" type="string"> area: time: mean where sea_ice (mask=siconc) </variable>
-				<variable name="cell_measures" type="string"> --MODEL </variable>
 				<variable name="interval_operation" type="string"> 1800 s </variable>
 			</field>
 		</file>
@@ -2276,7 +2273,6 @@ seaIce: Gelato 6.1 </variable>
 				<variable name="history" type="string"> none </variable>
 				<variable name="units" type="string"> m s-1 </variable>
 				<variable name="cell_methods" type="string"> area: time: mean where sea_ice (mask=siconc) </variable>
-				<variable name="cell_measures" type="string"> --MODEL </variable>
 				<variable name="interval_operation" type="string"> 1800 s </variable>
 			</field>
 		</file>

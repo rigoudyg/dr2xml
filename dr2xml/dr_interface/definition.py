@@ -201,7 +201,7 @@ class SimpleCMORVar(SimpleObject):
                  cell_methods=None, cell_measures=None, spatial_shp=None, temporal_shp=None, experiment=None,
                  Priority=1, mip_era=False, prec="float", missing=1.e+20, cmvar=None, ref_var=None, mip=None,
                  sdims=dict(), comments=None, coordinates=None, cm=False, id=None, flag_meanings=None, flag_values=None,
-                 region="undef", official_label=None, extravar=None, **kwargs):
+                 region=None, official_label=None, extravar=None, **kwargs):
         self.type = type
         self.modeling_realm = modeling_realm
         self.set_modeling_realms = set()
@@ -241,6 +241,8 @@ class SimpleCMORVar(SimpleObject):
         self.id = id
         self.flag_meanings = flag_meanings
         self.flag_values = flag_values
+        if region is None:
+            region = get_settings_values("internal", "default_region")
         self.region = region
         self.official_label = official_label
         super(SimpleCMORVar, self).__init__(**kwargs)
@@ -262,7 +264,8 @@ class SimpleCMORVar(SimpleObject):
     def __eq__(self, other):
         return self.label == other.label and self.modeling_realm == other.modeling_realm and \
                self.frequency == other.frequency and self.mipTable == other.mipTable and \
-               self.temporal_shp == other.temporal_shp and self.spatial_shp == other.spatial_shp
+               self.temporal_shp == other.temporal_shp and self.spatial_shp == other.spatial_shp and \
+               self.region == other.region
 
     def __lt__(self, other):
         return self.label < other.label
@@ -287,7 +290,10 @@ class SimpleCMORVar(SimpleObject):
     @classmethod
     def get_from_extra(cls, input_var, mip_era=None, freq=None, table=None, **kwargs):
         default_regions = get_settings_values("internal", "extravar_regions")
-        default_regions = default_regions.get(input_var["out_name"], default_regions.get("default", "undef"))
+        default_regions = default_regions.get(input_var["out_name"],
+                                              default_regions.get("default",
+                                                                  get_settings_values("internal",
+                                                                                      "default_region")))
         input_var_dict = dict(type="extra", mip_era=mip_era, label=input_var["out_name"],
                               mipVarLabel=input_var["out_name"], stdname=input_var.get("standard_name", ""),
                               long_name=input_var["long_name"], units=input_var["units"],

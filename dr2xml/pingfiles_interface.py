@@ -216,15 +216,16 @@ def ping_file_for_realms_list(context, svars, lrealms, path_special, dummy="fiel
         name += "_" + r.replace(" ", "%")
     lvars = []
     for table in svars:
-        for v in svars[table]:
-            added = False
-            if len(set(v.modeling_realm) & set(lrealms)) > 0 or \
-                    (not(exact) and len(set(lrealms) & v.set_modeling_realms) > 0):
-                lvars.append(v)
-                added = True
-            if not added and context in internal_values['orphan_variables'] and \
-                    v.label in internal_values['orphan_variables'][context]:
-                lvars.append(v)
+        for region in svars[table]:
+            for v in svars[table][region]:
+                added = False
+                if len(set(v.modeling_realm) & set(lrealms)) > 0 or \
+                        (not(exact) and len(set(lrealms) & v.set_modeling_realms) > 0):
+                    lvars.append(v)
+                    added = True
+                if not added and context in internal_values['orphan_variables'] and \
+                        v.label in internal_values['orphan_variables'][context]:
+                    lvars.append(v)
     lvars.sort(key=lambda x: x.label_without_psuffix)
 
     # Remove duplicates : want to get one single entry for all variables having

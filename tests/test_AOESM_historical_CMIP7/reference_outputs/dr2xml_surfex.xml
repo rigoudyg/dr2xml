@@ -801,7 +801,7 @@ seaIce: Gelato 6.1',
 				<variable name="cell_measures" type="string"> area: areacella </variable>
 			</field>
 		</file>
-		<file id="wilt_hr_1hr_undef_gr" name="IOXDIRwilt_hr_1hr_undef_gr_CNRM-ESM2-1e_historical_r1i1p1f2_%start_date%-%end_date%" output_freq="1h" append="true" output_level="10" compression_level="4" split_freq="5y" split_freq_format="%y%mo%d%h%mi" split_start_offset="30mi" split_end_offset="-30mi" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14107/%uuid%" convention_str="CF-1.7 CMIP-6.2">
+		<file id="wilt_hr_1hr_default_gr" name="IOXDIRwilt_hr_1hr_default_gr_CNRM-ESM2-1e_historical_r1i1p1f2_%start_date%-%end_date%" output_freq="1h" append="true" output_level="10" compression_level="4" split_freq="5y" split_freq_format="%y%mo%d%h%mi" split_start_offset="30mi" split_end_offset="-30mi" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14107/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="area_label" type="string"> undef </variable>
 			<variable name="branch_time_in_child" type="double"> 0.0D </variable>
@@ -835,7 +835,7 @@ seaIce: Gelato 6.1',
 			<variable name="product" type="string"> model-output </variable>
 			<variable name="realization_index" type="string"> r1 </variable>
 			<variable name="realm" type="string"> land </variable>
-			<variable name="region" type="string"> undef </variable>
+			<variable name="region" type="string"> default </variable>
 			<variable name="source_id" type="string"> CNRM-ESM2-1e </variable>
 			<variable name="temporal_label" type="string"> undef </variable>
 			<variable name="variable_id" type="string"> wilt </variable>
@@ -1639,7 +1639,7 @@ seaIce: Gelato 6.1',
 				<variable name="interval_operation" type="string"> 900 s </variable>
 			</field>
 		</file>
-		<file id="wilt_6hr_6hr_undef_gr" name="IOXDIRwilt_6hr_6hr_undef_gr_CNRM-ESM2-1e_historical_r1i1p1f2_%start_date%-%end_date%" output_freq="6h" append="true" output_level="10" compression_level="4" split_freq="25y" split_freq_format="%y%mo%d%h%mi" split_start_offset="3h" split_end_offset="-3h" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14107/%uuid%" convention_str="CF-1.7 CMIP-6.2">
+		<file id="wilt_6hr_6hr_default_gr" name="IOXDIRwilt_6hr_6hr_default_gr_CNRM-ESM2-1e_historical_r1i1p1f2_%start_date%-%end_date%" output_freq="6h" append="true" output_level="10" compression_level="4" split_freq="25y" split_freq_format="%y%mo%d%h%mi" split_start_offset="3h" split_end_offset="-3h" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14107/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="area_label" type="string"> undef </variable>
 			<variable name="branch_time_in_child" type="double"> 0.0D </variable>
@@ -1673,7 +1673,7 @@ seaIce: Gelato 6.1',
 			<variable name="product" type="string"> model-output </variable>
 			<variable name="realization_index" type="string"> r1 </variable>
 			<variable name="realm" type="string"> land </variable>
-			<variable name="region" type="string"> undef </variable>
+			<variable name="region" type="string"> default </variable>
 			<variable name="source_id" type="string"> CNRM-ESM2-1e </variable>
 			<variable name="temporal_label" type="string"> undef </variable>
 			<variable name="variable_id" type="string"> wilt </variable>

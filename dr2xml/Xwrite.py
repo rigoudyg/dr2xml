@@ -56,7 +56,7 @@ from .Xparse import id2gridid, id_has_expr_with_at
 warnings_for_optimisation = []
 
 
-def create_xios_aux_elmts_defs(sv, alias, table, context, target_hgrid_id, zgrid_id, alias_ping, source_grid):
+def create_xios_aux_elmts_defs(sv, alias, table, context, target_hgrid_id, zgrid_id, alias_ping, source_grid, region):
     """
     Create a field_ref string for a simplified variable object sv (with
     lab prefix for the variable name) and returns it
@@ -544,7 +544,7 @@ def write_xios_file_def(filename, svars_per_table, year, dummies, skipped_vars_p
 def write_xios_file_def_for_svars_list(vars_list, hgrid, xml_file_definition, freq, split_freq, split_freq_format,
                                        split_start_offset, split_end_offset, split_last_date, grid_description,
                                        grid_label, grid_resolution, table, skipped_vars_per_table, dummies,
-                                       target_hgrid_id, zgrid_id, source_grid, actually_written_vars, attributes=list(),
+                                       target_hgrid_id, zgrid_id, source_grid, region, actually_written_vars, attributes=list(),
                                        debug=list()):
     logger = get_logger()
     internal_dict = get_settings_values("internal")
@@ -563,7 +563,7 @@ def write_xios_file_def_for_svars_list(vars_list, hgrid, xml_file_definition, fr
                                  split_freq_format=split_freq_format, split_start_offset=split_start_offset,
                                  split_end_offset=split_end_offset, split_last_date=split_last_date, grid=grid_description,
                                  grid_label=grid_label, nominal_resolution=grid_resolution, variable=[real_vars_list[0][0], ],
-                                 context=context, table_id=table)
+                                 context=context, table_id=table, region=region)
         # Add several attributes
         for name, value in sorted(list(attributes)):
             xml_file.append(wrv(name, value))
@@ -586,10 +586,10 @@ def write_xios_file_def_for_svars_list(vars_list, hgrid, xml_file_definition, fr
             check_for_file_input(svar, hgrid)
             end_field = create_xios_aux_elmts_defs(sv=svar, alias=alias, table=table, context=context,
                                                    target_hgrid_id=target_hgrid_id, zgrid_id=zgrid_id,
-                                                   alias_ping=alias_ping, source_grid=source_grid)
+                                                   alias_ping=alias_ping, source_grid=source_grid, region=region)
             xml_file.append(end_field)
-            actually_written_vars.append((svar.label, svar.long_name, svar.stdname, svar.mipTable, svar.frequency,
-                                          svar.Priority, svar.spatial_shp))
+            actually_written_vars.append((svar.label, svar.long_name, svar.stdname, svar.mipTable, svar.region,
+                                          svar.frequency, svar.Priority, svar.spatial_shp))
         # Add content to xml_file to out
         if found_begin_A:
             # create a field_def entry for surface pressure
@@ -601,7 +601,8 @@ def write_xios_file_def_for_svars_list(vars_list, hgrid, xml_file_definition, fr
                 # get_DR_version()
                 psol_field = create_xios_aux_elmts_defs(sv=sv_psol, alias=prefix + "ps", table=table, context=context,
                                                         target_hgrid_id=target_hgrid_id, zgrid_id=zgrid_id,
-                                                        alias_ping=ping_alias(sv_psol), source_grid=source_grid)
+                                                        alias_ping=ping_alias(sv_psol), source_grid=source_grid,
+                                                        region=region)
                 xml_file.append(psol_field)
             else:
                 logger.warning("Warning: Cannot complement model levels with psol for table %s for frequency %s" %
@@ -642,32 +643,34 @@ def determine_files_list(svars_per_table, enddate, year, debug):
     svar_tuple = namedtuple("svar_tuple", ["freq", "table", "grid_label", "split_freq", "split_freq_format",
                                            "split_last_date", "split_start_offset", "split_end_offset",
                                            "grid_description", "grid_resolution", "target_hgrid_id", "zgrid_id",
-                                           "source_grid"])
+                                           "source_grid", "region"])
     # Loop on values to fill the xml element
     for table in sorted(list(svars_per_table)):
-        count = OrderedDict()
-        for svar in sorted(svars_per_table[table], key=lambda x: "_".join([x.official_label, x.frequency, x.region])):
-            if allow_duplicates_in_same_table or svar.mipVarLabel not in count:
-                if not use_cmorvar_label_in_filename and svar.mipVarLabel in count:
-                    form = "If you really want to actually produce both %s and %s in table %s, " + \
-                           "you must set 'use_cmorvar_label_in_filename' to True in lab settings"
-                    raise Dr2xmlError(form % (svar.label, count[svar.mipVarLabel].label, table))
-                count[svar.mipVarLabel] = svar
-                freq = longest_possible_period(cmip6_freq_to_xios_freq(svar.frequency, table), too_long_periods)
-                split_freq_format, split_last_date, split_start_offset, split_end_offset, split_freq = \
-                    get_split_info(svar, table, enddate, year, debug)
-                for grid in svar.grids:
-                    grid_label, grid_description, grid_resolution, target_hgrid_id, zgrid_id, source_grid = \
-                        get_grid_info(svar, grid, table)
-                    files_dict[svar_tuple(freq=freq, split_freq_format=split_freq_format,
-                                          split_last_date=split_last_date, split_start_offset=split_start_offset,
-                                          split_end_offset=split_end_offset, grid_label=grid_label,
-                                          grid_description=grid_description, zgrid_id=zgrid_id,
-                                          grid_resolution=grid_resolution, target_hgrid_id=target_hgrid_id,
-                                          source_grid=source_grid, split_freq=split_freq, table=table)].append(svar)
-            else:
-                logger.warning("Duplicate variable %s,%s in table %s is skipped, preferred is %s" %
-                               (svar.label, svar.mipVarLabel, table, count[svar.mipVarLabel].label))
+        for region in sorted(list(svars_per_table[table])):
+            count = OrderedDict()
+            for svar in sorted(svars_per_table[table][region], key=lambda x: "_".join([x.official_label, x.frequency, x.region])):
+                if allow_duplicates_in_same_table or svar.mipVarLabel not in count:
+                    if not use_cmorvar_label_in_filename and svar.mipVarLabel in count:
+                        form = "If you really want to actually produce both %s and %s in table %s, " + \
+                               "you must set 'use_cmorvar_label_in_filename' to True in lab settings"
+                        raise Dr2xmlError(form % (svar.label, count[svar.mipVarLabel].label, table))
+                    count[svar.mipVarLabel] = svar
+                    freq = longest_possible_period(cmip6_freq_to_xios_freq(svar.frequency, table), too_long_periods)
+                    split_freq_format, split_last_date, split_start_offset, split_end_offset, split_freq = \
+                        get_split_info(svar, table, enddate, year, debug)
+                    for grid in svar.grids:
+                        grid_label, grid_description, grid_resolution, target_hgrid_id, zgrid_id, source_grid = \
+                            get_grid_info(svar, grid, table)
+                        files_dict[svar_tuple(freq=freq, split_freq_format=split_freq_format,
+                                              split_last_date=split_last_date, split_start_offset=split_start_offset,
+                                              split_end_offset=split_end_offset, grid_label=grid_label,
+                                              grid_description=grid_description, zgrid_id=zgrid_id,
+                                              grid_resolution=grid_resolution, target_hgrid_id=target_hgrid_id,
+                                              source_grid=source_grid, split_freq=split_freq, table=table,
+                                              region=region)].append(svar)
+                else:
+                    logger.warning("Duplicate variable %s,%s in table %s and region %s is skipped, preferred is %s" %
+                                   (svar.label, svar.mipVarLabel, table, region, count[svar.mipVarLabel].label))
     files_list = list()
     for elts in sorted(list(files_dict), key=lambda x: str(x)):
         vars_list = files_dict[elts]
@@ -712,8 +715,11 @@ def find_alias(sv, skipped_vars_per_table, debug=list()):
     if alias_ping not in get_config_variable("pingvars") and sv.type not in ["dev", "perso"]:
         table = sv.mipTable
         if table not in skipped_vars_per_table:
-            skipped_vars_per_table[table] = []
-        skipped_vars_per_table[table].append(sv.label + "(" + str(sv.Priority) + ")")
+            skipped_vars_per_table[table] = dict()
+        region = sv.region
+        if region not in skipped_vars_per_table[table]:
+            skipped_vars_per_table[table][region] = list()
+        skipped_vars_per_table[table][region].append(sv.label + "(" + str(sv.Priority) + ")")
         return
     else:
         return alias, alias_ping

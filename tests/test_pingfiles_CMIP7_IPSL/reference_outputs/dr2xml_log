@@ -26,6 +26,7 @@ For parameter bytes_per_float, found value 2
 For parameter configuration, found value None
 For parameter context, found value nemo
 For parameter debug_parsing, found value False
+For parameter default_region, found value default
 For parameter dr2xml_manages_enddate, found value True
 For parameter end_year, found value False
 For parameter excluded_expgroups_lset, found value []
@@ -47,7 +48,7 @@ For parameter excluded_vars_per_shape, found value {}
 For parameter excluded_vars_sset, found value []
 For parameter experiment_for_requests, found value None
 For parameter experiment_id, found value None
-For parameter extravar_regions, found value {'default': 'undef'}
+For parameter extravar_regions, found value {'default': 'default'}
 For parameter filter_on_realization, found value True
 For parameter fx_from_file, found value []
 For parameter grid_choice, found value None
@@ -2162,15 +2163,6 @@ Realms for these CMORvars: aerosol atmos land landIce ocean ocnBgchem seaIce
 Processing realm 'ocean' of context 'nemo'
 Processing realm 'ocnBgchem' of context 'nemo'
 Processing realm 'seaIce' of context 'nemo'
-For table 3hr: tos
-For table 3hrPt: mpw swh wpp
-For table Eday: mlotst
-For table Oday: bigthetao so sos thetao tos tossq uos vos zos zostoga chl o2 ph
-For table Ofx: areacello basin deptho hfgeou masscello sftof thkcello
-For table Omon: bigthetao mlotstmax mlotstmin mpw so sos swh thetao tos wo wpp zos zossq zostoga arag aragos calc calcos dissic talk
-For table Oyr: tnkebto
-For table SIday: sithick siconc sithick siu siv
-For table SImon: sithick siconc simass sithick siu siv
 For parameter id, found value nemo
 For parameter DR_version, found value CMIP7 Data Request version Software current_cmip7_dr_software - Content test
 For parameter dr2xml_version, found value dr2xml version 3.1
@@ -2799,6 +2791,7 @@ For parameter bytes_per_float, found value 2
 For parameter configuration, found value None
 For parameter context, found value orchidee
 For parameter debug_parsing, found value False
+For parameter default_region, found value default
 For parameter dr2xml_manages_enddate, found value True
 For parameter end_year, found value False
 For parameter excluded_expgroups_lset, found value []
@@ -2820,7 +2813,7 @@ For parameter excluded_vars_per_shape, found value {}
 For parameter excluded_vars_sset, found value []
 For parameter experiment_for_requests, found value None
 For parameter experiment_id, found value None
-For parameter extravar_regions, found value {'default': 'undef'}
+For parameter extravar_regions, found value {'default': 'default'}
 For parameter filter_on_realization, found value True
 For parameter fx_from_file, found value []
 For parameter grid_choice, found value None
@@ -3645,12 +3638,6 @@ Info: No HOMEvars list provided.
 Realms for these CMORvars: aerosol atmos land landIce ocean ocnBgchem seaIce
 Processing realm 'land' of context 'orchidee'
 Processing realm 'landIce' of context 'orchidee'
-For table 3hr: hfdsl mrso100 mrsos srfrad tran tslsi
-For table 3hrPt: bldep
-For table Efx: slthick
-For table LImon: snc snc
-For table Lmon: lai mrso mrsos
-For table fx: areacella mrsofc orog rootd sftgif
 For parameter id, found value orchidee
 For parameter DR_version, found value CMIP7 Data Request version Software 1.5.dev2+g5aacd4b7a - Content test
 For parameter dr2xml_version, found value dr2xml version 3.1
@@ -3928,6 +3915,7 @@ For parameter bytes_per_float, found value 2
 For parameter configuration, found value None
 For parameter context, found value LMDZ
 For parameter debug_parsing, found value False
+For parameter default_region, found value default
 For parameter dr2xml_manages_enddate, found value True
 For parameter end_year, found value False
 For parameter excluded_expgroups_lset, found value []
@@ -3949,7 +3937,7 @@ For parameter excluded_vars_per_shape, found value {}
 For parameter excluded_vars_sset, found value []
 For parameter experiment_for_requests, found value None
 For parameter experiment_id, found value None
-For parameter extravar_regions, found value {'default': 'undef'}
+For parameter extravar_regions, found value {'default': 'default'}
 For parameter filter_on_realization, found value True
 For parameter fx_from_file, found value []
 For parameter grid_choice, found value None
@@ -4777,20 +4765,6 @@ Processing realm 'aerosol' of context 'LMDZ'
 Processing realm 'atmos' of context 'LMDZ'
 Processing realm 'land' of context 'LMDZ'
 Processing realm 'landIce' of context 'LMDZ'
-For table 3hr: hfls hfss huss pr ps rlds rlus tas hfdsl mrso100 mrsos srfrad tran tslsi
-For table 3hrPt: bldep bldep mpw swh wpp bldep
-For table 6hrPlev: hurs
-For table 6hrPlevPt: ta
-For table Amon: pr prc sfcWind ta tas tasmax tasmin ts zg
-For table CFday: ps
-For table E1hr: pr psl uas vas
-For table E3hrPt: ta6
-For table Efx: slthick
-For table LImon: snc snc
-For table Lmon: lai mrso mrsos
-For table Omon: mpw swh wpp
-For table day: pr psl sfcWind ta tas tasmax tasmin zg
-For table fx: areacella sftlf areacella mrsofc orog rootd sftgif
 For parameter id, found value LMDZ
 For parameter DR_version, found value CMIP7 Data Request version Software 1.5.dev2+g5aacd4b7a - Content test
 For parameter dr2xml_version, found value dr2xml version 3.1

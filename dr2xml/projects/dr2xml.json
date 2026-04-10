@@ -333,6 +333,17 @@
         false
       ]
     },
+    "default_region": {
+      "help": "Default region to be used",
+      "values": [
+        {
+          "type": "value",
+          "origin": "laboratory",
+          "keys": ["default_region"]
+        },
+        "default"
+      ]
+    },
     "dr2xml_manages_enddate": {
       "help": "A smart workflow will allow you to extend a simulation during it course and to complement the output files accordingly, by managing the 'end date' part in filenames. You can then set next setting to False.",
       "values": [
@@ -604,7 +615,7 @@
           "keys": ["extravar_regions"]
         },
         {
-          "default": "undef"
+          "default": "default"
         }
       ],
       "target_type": "dict"

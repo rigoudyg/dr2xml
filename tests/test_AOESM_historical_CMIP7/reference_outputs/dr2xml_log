@@ -47,12 +47,12 @@ OK current_directory/test_AOESM_historical_CMIP7/input/xml/ping_trip.xml
 processing file current_directory/test_AOESM_historical_CMIP7/input/xml/ping_nemo.xml:
 OK current_directory/test_AOESM_historical_CMIP7/input/xml/ping_nemo.xml
 Note: assuming that 'time: mean where sea_ice'  for         sithick in table SIday is well handled by 'detect_missing'
-Duplicate variable sithick,sithick in table SIday is skipped, preferred is sithick
+Duplicate variable sithick,sithick in table SIday and region glb is skipped, preferred is sithick
 Note: assuming that 'time: mean where sea_ice'  for             siu in table SIday is well handled by 'detect_missing'
 Note: assuming that 'time: mean where sea_ice'  for             siv in table SIday is well handled by 'detect_missing'
 Note: assuming that 'time: mean where sea_ice'  for          simass in table SImon is well handled by 'detect_missing'
 Note: assuming that 'time: mean where sea_ice'  for         sithick in table SImon is well handled by 'detect_missing'
-Duplicate variable sithick,sithick in table SImon is skipped, preferred is sithick
+Duplicate variable sithick,sithick in table SImon and region glb is skipped, preferred is sithick
 Note: assuming that 'time: mean where sea_ice'  for             siu in table SImon is well handled by 'detect_missing'
 Note: assuming that 'time: mean where sea_ice'  for             siv in table SImon is well handled by 'detect_missing'
 Note: assuming that 'time: mean where sea_ice'  for         sithick in table SIday is well handled by 'detect_missing'
@@ -66,158 +66,161 @@ Note: assuming that 'time: mean where sea_ice'  for             siv in table SIm
 file_def written as current_directory/test_AOESM_historical_CMIP7/test_outputs/dr2xml_nemo.xml
 
 Skipped variables (i.e. whose alias is not present in the pingfile):
->>> TABLE:           3hrPt 03/03 ----> mpw(2) swh(2) wpp(2)
+>>> TABLE:           3hrPt REGION:             glb 03/03 ----> mpw(2) swh(2) wpp(2)
 
->>> TABLE:             Ofx 04/07 ----> basin(1) hfgeou(1) sftof(1) thkcello(1)
 
->>> TABLE:            Omon 03/14 ----> mpw(2) swh(2) wpp(2)
+>>> TABLE:             Ofx REGION:             glb 04/07 ----> basin(1) hfgeou(1) sftof(1) thkcello(1)
+
+
+>>> TABLE:            Omon REGION:             glb 03/14 ----> mpw(2) swh(2) wpp(2)
+
 
 
 
 
 Some Statistics on actually written variables per frequency+shape...
-                         None6hr P1   3: sos tos zos
-       6hr    XY-na    -------- ---   3
+                         None6hr        glb P1   3: sos tos zos
+       6hr    XY-na    --------            ---   3
 
-       6hr --------    -------- ---   3
+       6hr --------    --------            ---   3
 
-                            Eday P2   1: mlotst
-                            Oday P1   3: sos tos zos
-                            Oday P2   3: bigthetao thetao tossq
-                           SIday P1   1: siconc
-                           SIday P2   3: sithick siu siv
-       day    XY-na    -------- ---  11
+                            Eday        glb P2   1: mlotst
+                            Oday        glb P1   3: sos tos zos
+                            Oday        glb P2   3: bigthetao thetao tossq
+                           SIday        glb P1   1: siconc
+                           SIday        glb P2   3: sithick siu siv
+       day    XY-na    --------            ---  11
 
-                            Oday P2   1: zostoga
-       day    na-na    -------- ---   1
+                            Oday        glb P2   1: zostoga
+       day    na-na    --------            ---   1
 
-       day --------    -------- ---  12
+       day --------    --------            ---  12
 
-                             Ofx P1   1: masscello
-        fx     XY-O    -------- ---   1
+                             Ofx        glb P1   1: masscello
+        fx     XY-O    --------            ---   1
 
-                             Ofx P1   2: areacello deptho
-        fx    XY-na    -------- ---   2
+                             Ofx        glb P1   2: areacello deptho
+        fx    XY-na    --------            ---   2
 
-        fx --------    -------- ---   3
+        fx --------    --------            ---   3
 
-                            Omon P1   4: bigthetao so thetao wo
-       mon     XY-O    -------- ---   4
+                            Omon        glb P1   4: bigthetao so thetao wo
+       mon     XY-O    --------            ---   4
 
-                         Nonemon P2   1: tos
-                            Omon P1   3: sos tos zos
-                            Omon P2   3: mlotstmax mlotstmin zossq
-                           SImon P1   5: siconc simass sithick siu siv
-       mon    XY-na    -------- ---  12
+                         Nonemon        glb P2   1: tos
+                            Omon        glb P1   3: sos tos zos
+                            Omon        glb P2   3: mlotstmax mlotstmin zossq
+                           SImon        glb P1   5: siconc simass sithick siu siv
+       mon    XY-na    --------            ---  12
 
-                            Omon P1   1: zostoga
-       mon    na-na    -------- ---   1
+                            Omon        glb P1   1: zostoga
+       mon    na-na    --------            ---   1
 
-       mon --------    -------- ---  17
+       mon --------    --------            ---  17
 
 
----------- --------    -------- ---  35
+---------- --------    --------            ---  35
 
 
 Some Statistics on actually written variables per variable...
 -----------------------
 --- VARNAME: areacello: Grid-Cell Area for Ocean Variables
 -----------------------
-              *       fx_Ofx_XY-na_1 areacello
+              *   fx_Ofx_glb_XY-na_1 areacello
 -----------------------
 --- VARNAME: bigthetao: Sea Water Conservative Temperature
 -----------------------
-              *     day_Oday_XY-na_2 bigthetao
-              *      mon_Omon_XY-O_1 bigthetao
+              * day_Oday_glb_XY-na_2 bigthetao
+              *  mon_Omon_glb_XY-O_1 bigthetao
 --------------------
 --- VARNAME: deptho: Sea Floor Depth Below Geoid
 --------------------
-              *       fx_Ofx_XY-na_1 deptho
+              *   fx_Ofx_glb_XY-na_1 deptho
 -----------------------
 --- VARNAME: masscello: Ocean Grid-Cell Mass per Area
 -----------------------
-              *        fx_Ofx_XY-O_1 masscello
+              *    fx_Ofx_glb_XY-O_1 masscello
 --------------------
 --- VARNAME: mlotst: Ocean Mixed Layer Thickness Defined by Sigma T of 0.03 kg m-3
 --------------------
-              *     day_Eday_XY-na_2 mlotst
+              * day_Eday_glb_XY-na_2 mlotst
 -----------------------
 --- VARNAME: mlotstmax: Maximum Ocean Mixed Layer Thickness Defined by Sigma T
 -----------------------
-              *     mon_Omon_XY-na_2 mlotstmax
+              * mon_Omon_glb_XY-na_2 mlotstmax
 -----------------------
 --- VARNAME: mlotstmin: Minimum Ocean Mixed Layer Thickness Defined by Sigma T
 -----------------------
-              *     mon_Omon_XY-na_2 mlotstmin
+              * mon_Omon_glb_XY-na_2 mlotstmin
 --------------------
 --- VARNAME: siconc: Sea-Ice Area Percentage (Ocean Grid)
 --------------------
-              *    day_SIday_XY-na_1 siconc
-              *    mon_SImon_XY-na_1 siconc
+              * day_SIday_glb_XY-na_1 siconc
+              * mon_SImon_glb_XY-na_1 siconc
 --------------------
 --- VARNAME: simass: Sea-Ice Mass
 --------------------
-              *    mon_SImon_XY-na_1 simass
+              * mon_SImon_glb_XY-na_1 simass
 ---------------------
 --- VARNAME: sithick: Sea-Ice Thickness
 ---------------------
-              *    day_SIday_XY-na_2 sithick
-              *    mon_SImon_XY-na_1 sithick
+              * day_SIday_glb_XY-na_2 sithick
+              * mon_SImon_glb_XY-na_1 sithick
 -----------------
 --- VARNAME: siu: X-Component of Sea-Ice Velocity
 -----------------
-              *    day_SIday_XY-na_2 siu
-              *    mon_SImon_XY-na_1 siu
+              * day_SIday_glb_XY-na_2 siu
+              * mon_SImon_glb_XY-na_1 siu
 -----------------
 --- VARNAME: siv: Y-Component of Sea-Ice Velocity
 -----------------
-              *    day_SIday_XY-na_2 siv
-              *    mon_SImon_XY-na_1 siv
+              * day_SIday_glb_XY-na_2 siv
+              * mon_SImon_glb_XY-na_1 siv
 ----------------
 --- VARNAME: so: Sea Water Salinity
 ----------------
-              *      mon_Omon_XY-O_1 so
+              *  mon_Omon_glb_XY-O_1 so
 -----------------
 --- VARNAME: sos: Sea Surface Salinity
 -----------------
-              *     day_Oday_XY-na_1 sos
-              *     mon_Omon_XY-na_1 sos
-              *  6hr_None6hr_XY-na_1 sos
+              * day_Oday_glb_XY-na_1 sos
+              * mon_Omon_glb_XY-na_1 sos
+              * 6hr_None6hr_glb_XY-na_1 sos
 --------------------
 --- VARNAME: thetao: Sea Water Potential Temperature
 --------------------
-              *     day_Oday_XY-na_2 thetao
-              *      mon_Omon_XY-O_1 thetao
+              * day_Oday_glb_XY-na_2 thetao
+              *  mon_Omon_glb_XY-O_1 thetao
 -----------------
 --- VARNAME: tos: Sea Surface Temperature
 -----------------
-              *     day_Oday_XY-na_1 tos
-              *  mon_Nonemon_XY-na_2 tos
-              *     mon_Omon_XY-na_1 tos
-              *  6hr_None6hr_XY-na_1 tos
+              * day_Oday_glb_XY-na_1 tos
+              * mon_Nonemon_glb_XY-na_2 tos
+              * mon_Omon_glb_XY-na_1 tos
+              * 6hr_None6hr_glb_XY-na_1 tos
 -------------------
 --- VARNAME: tossq: Square of Sea Surface Temperature
 -------------------
-              *     day_Oday_XY-na_2 tossq
+              * day_Oday_glb_XY-na_2 tossq
 ----------------
 --- VARNAME: wo: Sea Water Vertical Velocity
 ----------------
-              *      mon_Omon_XY-O_1 wo
+              *  mon_Omon_glb_XY-O_1 wo
 -----------------
 --- VARNAME: zos: Sea Surface Height Above Geoid
 -----------------
-              *     day_Oday_XY-na_1 zos
-              *     mon_Omon_XY-na_1 zos
-              *  6hr_None6hr_XY-na_1 zos
+              * day_Oday_glb_XY-na_1 zos
+              * mon_Omon_glb_XY-na_1 zos
+              * 6hr_None6hr_glb_XY-na_1 zos
 -------------------
 --- VARNAME: zossq: Square of Sea Surface Height Above Geoid
 -------------------
-              *     mon_Omon_XY-na_2 zossq
+              * mon_Omon_glb_XY-na_2 zossq
 ---------------------
 --- VARNAME: zostoga: Global Average Thermosteric Sea Level Change
 ---------------------
-              *     day_Oday_na-na_2 zostoga
-              *     mon_Omon_na-na_1 zostoga
+              * day_Oday_glb_na-na_2 zostoga
+              * mon_Omon_glb_na-na_1 zostoga
 
 Warnings about cell methods (with var list)
 	time: mean where sea_ice for vars: {'simass', 'sithick', 'siu', 'siv'}
@@ -271,143 +274,147 @@ processing file current_directory/test_AOESM_historical_CMIP7/input/xml/ping_tri
 OK current_directory/test_AOESM_historical_CMIP7/input/xml/ping_trip.xml
 processing file current_directory/test_AOESM_historical_CMIP7/input/xml/ping_nemo.xml:
 OK current_directory/test_AOESM_historical_CMIP7/input/xml/ping_nemo.xml
-Duplicate variable bldep,bldep in table 3hrPt is skipped, preferred is bldep
-Duplicate variable bldep,bldep in table 3hrPt is skipped, preferred is bldep
-Duplicate variable snc,snc in table LImon is skipped, preferred is snc
-Duplicate variable areacella,areacella in table fx is skipped, preferred is areacella
+Duplicate variable bldep,bldep in table 3hrPt and region glb is skipped, preferred is bldep
+Duplicate variable bldep,bldep in table 3hrPt and region glb is skipped, preferred is bldep
+Duplicate variable snc,snc in table LImon and region glb is skipped, preferred is snc
+Duplicate variable areacella,areacella in table fx and region glb is skipped, preferred is areacella
 
 file_def written as current_directory/test_AOESM_historical_CMIP7/test_outputs/dr2xml_surfex.xml
 
 Skipped variables (i.e. whose alias is not present in the pingfile):
->>> TABLE:           3hrPt 04/06 ----> bldep(2) mpw(2) swh(2) wpp(2)
+>>> TABLE:           3hrPt REGION:             glb 04/06 ----> bldep(2) mpw(2) swh(2) wpp(2)
 
->>> TABLE:             Efx 01/01 ----> slthick(1)
 
->>> TABLE:            Omon 03/03 ----> mpw(2) swh(2) wpp(2)
+>>> TABLE:             Efx REGION:             glb 01/01 ----> slthick(1)
 
->>> TABLE:              fx 02/07 ----> mrsofc(1) sftgif(1)
+
+>>> TABLE:            Omon REGION:             glb 03/03 ----> mpw(2) swh(2) wpp(2)
+
+
+>>> TABLE:              fx REGION:             glb 02/07 ----> mrsofc(1) sftgif(1)
+
 
 
 
 
 Some Statistics on actually written variables per frequency+shape...
-                              hr P1   1: wilt
-       1hr    XY-na    -------- ---   1
+                              hr    default P1   1: wilt
+       1hr    XY-na    --------            ---   1
 
-       1hr --------    -------- ---   1
+       1hr --------    --------            ---   1
 
-                             6hr P1   1: wilt
-       6hr    XY-na    -------- ---   1
+                             6hr    default P1   1: wilt
+       6hr    XY-na    --------            ---   1
 
-       6hr --------    -------- ---   1
+       6hr --------    --------            ---   1
 
-                             day P1   2: ta zg
-       day   XY-P19    -------- ---   2
+                             day        glb P1   2: ta zg
+       day   XY-P19    --------            ---   2
 
-                             day P1   6: pr psl sfcWind tas tasmax tasmin
-       day    XY-na    -------- ---   6
+                             day        glb P1   6: pr psl sfcWind tas tasmax tasmin
+       day    XY-na    --------            ---   6
 
-       day --------    -------- ---   8
+       day --------    --------            ---   8
 
-                              fx P1   4: areacella orog rootd sftlf
-        fx    XY-na    -------- ---   4
+                              fx        glb P1   4: areacella orog rootd sftlf
+        fx    XY-na    --------            ---   4
 
-        fx --------    -------- ---   4
+        fx --------    --------            ---   4
 
-                            Amon P1   2: ta zg
-       mon   XY-P19    -------- ---   2
+                            Amon        glb P1   2: ta zg
+       mon   XY-P19    --------            ---   2
 
-                            Amon P1   7: pr prc sfcWind tas tasmax tasmin ts
-                           LImon P1   1: snc
-                            Lmon P1   3: lai mrso mrsos
-       mon    XY-na    -------- ---  11
+                            Amon        glb P1   7: pr prc sfcWind tas tasmax tasmin ts
+                           LImon        glb P1   1: snc
+                            Lmon        glb P1   3: lai mrso mrsos
+       mon    XY-na    --------            ---  11
 
-       mon --------    -------- ---  13
+       mon --------    --------            ---  13
 
 
----------- --------    -------- ---  27
+---------- --------    --------            ---  27
 
 
 Some Statistics on actually written variables per variable...
 -----------------------
 --- VARNAME: areacella: Grid-Cell Area for Atmospheric Grid Variables
 -----------------------
-              *        fx_fx_XY-na_1 areacella
+              *    fx_fx_glb_XY-na_1 areacella
 -----------------
 --- VARNAME: lai: Leaf Area Index
 -----------------
-              *     mon_Lmon_XY-na_1 lai
+              * mon_Lmon_glb_XY-na_1 lai
 ------------------
 --- VARNAME: mrso: Total Soil Moisture Content
 ------------------
-              *     mon_Lmon_XY-na_1 mrso
+              * mon_Lmon_glb_XY-na_1 mrso
 -------------------
 --- VARNAME: mrsos: Moisture in Upper Portion of Soil Column
 -------------------
-              *     mon_Lmon_XY-na_1 mrsos
+              * mon_Lmon_glb_XY-na_1 mrsos
 ------------------
 --- VARNAME: orog: Surface Altitude
 ------------------
-              *        fx_fx_XY-na_1 orog
+              *    fx_fx_glb_XY-na_1 orog
 ----------------
 --- VARNAME: pr: Precipitation
 ----------------
-              *      day_day_XY-na_1 pr
-              *     mon_Amon_XY-na_1 pr
+              *  day_day_glb_XY-na_1 pr
+              * mon_Amon_glb_XY-na_1 pr
 -----------------
 --- VARNAME: prc: Convective Precipitation
 -----------------
-              *     mon_Amon_XY-na_1 prc
+              * mon_Amon_glb_XY-na_1 prc
 -----------------
 --- VARNAME: psl: Sea Level Pressure
 -----------------
-              *      day_day_XY-na_1 psl
+              *  day_day_glb_XY-na_1 psl
 -------------------
 --- VARNAME: rootd: Maximum Root Depth
 -------------------
-              *        fx_fx_XY-na_1 rootd
+              *    fx_fx_glb_XY-na_1 rootd
 ---------------------
 --- VARNAME: sfcWind: Near-Surface Wind Speed
 ---------------------
-              *      day_day_XY-na_1 sfcWind
-              *     mon_Amon_XY-na_1 sfcWind
+              *  day_day_glb_XY-na_1 sfcWind
+              * mon_Amon_glb_XY-na_1 sfcWind
 -------------------
 --- VARNAME: sftlf: Percentage of the Grid Cell Occupied by Land (Including Lakes)
 -------------------
-              *        fx_fx_XY-na_1 sftlf
+              *    fx_fx_glb_XY-na_1 sftlf
 -----------------
 --- VARNAME: snc: Snow Area Percentage
 -----------------
-              *    mon_LImon_XY-na_1 snc
+              * mon_LImon_glb_XY-na_1 snc
 ----------------
 --- VARNAME: ta: Air Temperature
 ----------------
-              *     day_day_XY-P19_1 ta
-              *    mon_Amon_XY-P19_1 ta
+              * day_day_glb_XY-P19_1 ta
+              * mon_Amon_glb_XY-P19_1 ta
 -----------------
 --- VARNAME: tas: Near-Surface Air Temperature
 -----------------
-              *      day_day_XY-na_1 tas
-              *     mon_Amon_XY-na_1 tas
+              *  day_day_glb_XY-na_1 tas
+              * mon_Amon_glb_XY-na_1 tas
 --------------------
 --- VARNAME: tasmax: Daily Maximum Near-Surface Air Temperature
 --------------------
-              *      day_day_XY-na_1 tasmax
-              *     mon_Amon_XY-na_1 tasmax
+              *  day_day_glb_XY-na_1 tasmax
+              * mon_Amon_glb_XY-na_1 tasmax
 --------------------
 --- VARNAME: tasmin: Daily Minimum Near-Surface Air Temperature
 --------------------
-              *      day_day_XY-na_1 tasmin
-              *     mon_Amon_XY-na_1 tasmin
+              *  day_day_glb_XY-na_1 tasmin
+              * mon_Amon_glb_XY-na_1 tasmin
 ----------------
 --- VARNAME: ts: Surface Temperature
 ----------------
-              *     mon_Amon_XY-na_1 ts
+              * mon_Amon_glb_XY-na_1 ts
 ------------------
 --- VARNAME: wilt: None
 ------------------
-              *       1hr_hr_XY-na_1 wilt
-              *      6hr_6hr_XY-na_1 wilt
+              * 1hr_hr_default_XY-na_1 wilt
+              * 6hr_6hr_default_XY-na_1 wilt
               Warning: several long names are available:
                   - None
                   - Wilting Point over land
@@ -417,8 +424,8 @@ Some Statistics on actually written variables per variable...
 ----------------
 --- VARNAME: zg: Geopotential Height
 ----------------
-              *     day_day_XY-P19_1 zg
-              *    mon_Amon_XY-P19_1 zg
+              * day_day_glb_XY-P19_1 zg
+              * mon_Amon_glb_XY-P19_1 zg
 sync universe
 Universe is in offline mode
 Running in offline mode - only using local repositories and databases
@@ -470,7 +477,7 @@ file_def written as current_directory/test_AOESM_historical_CMIP7/test_outputs/d
 
 Some Statistics on actually written variables per frequency+shape...
 
----------- --------    -------- ---   0
+---------- --------    --------            ---   0
 
 
 Some Statistics on actually written variables per variable...

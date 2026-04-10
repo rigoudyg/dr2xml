@@ -711,8 +711,9 @@ on
     # --------------------------------------------------------------------
     if internal_settings["use_union_zoom"]:
         svars_full_list = list()
-        for svl in svars_per_table.values():
-            svars_full_list.extend(svl)
+        for table in svars_per_table:
+            for svl in svars_per_table[table].values():
+                svars_full_list.extend(svl)
         create_xios_axis_and_grids_for_plevs_unions(svars_full_list, multi_plev_suffixes.union(single_plev_suffixes),
                                                     dummies)
     #
