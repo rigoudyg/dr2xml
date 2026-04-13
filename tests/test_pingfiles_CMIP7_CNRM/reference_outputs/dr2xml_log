@@ -3657,7 +3657,7 @@ No file
 processing file ./input/special_defs/DX_field_defs_landIce.xml:
 No file
 For parameter id, found value arpsfx
-For parameter DR_version, found value CMIP7 Data Request version Software 1.5.dev2+g5aacd4b7a - Content test
+For parameter DR_version, found value CMIP7 Data Request version Software current_cmip7_dr_software - Content test
 For parameter dr2xml_version, found value dr2xml version 3.1
 For parameter lab_settings, found value Lab_and_model settings
 {'data_request_content_version' = 'test',

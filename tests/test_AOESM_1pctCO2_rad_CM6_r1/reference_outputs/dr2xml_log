@@ -769,7 +769,7 @@ Note: assuming that 'time: mean where trees'  for          rhTree in table Emon 
 Will not explicitly handle time: mean (with samples weighted by snow mass) for          agesno in table LImon -> averaging
 Will not explicitly handle time: mean (with samples weighted by snow mass) for             tsn in table LImon -> averaging
 
-file_def written as /home/rigoudyg/dev/DR2XML/dr2xml_source/tests/test_AOESM_1pctCO2_rad_CM6_r1/test_outputs/dr2xml_surfex.xml
+file_def written as current_directory/test_AOESM_1pctCO2_rad_CM6_r1/test_outputs/dr2xml_surfex.xml
 
 Skipped variables (i.e. whose alias is not present in the pingfile):
 >>> TABLE:            Amon REGION:         default 02/59 ----> rtmt(1) sci(1)

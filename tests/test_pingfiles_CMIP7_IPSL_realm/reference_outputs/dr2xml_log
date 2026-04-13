@@ -3702,7 +3702,7 @@ Realms for these CMORvars: aerosol atmos land landIce ocean ocnBgchem seaIce
 Processing realm 'land' of context 'orchidee'
 Processing realm 'landIce' of context 'orchidee'
 For parameter id, found value orchidee
-For parameter DR_version, found value CMIP7 Data Request version Software 1.5.dev2+g5aacd4b7a - Content test
+For parameter DR_version, found value CMIP7 Data Request version Software current_cmip7_dr_software - Content test
 For parameter dr2xml_version, found value dr2xml version 3.1
 For parameter lab_settings, found value Lab_and_model settings
 {'data_request_content_version' = 'test',

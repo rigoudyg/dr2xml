@@ -25,24 +25,5 @@
         "offline_mode": true
       }
     ]
-  },
-  "CMIP7_test": {
-    "universe": {
-      "github_repo": "https://github.com/WCRP-CMIP/WCRP-universe",
-      "branch": "esgvoc_dr_1.2.2",
-      "local_path": "repos/CMIP7_test_WCRP-universe",
-      "db_path": "dbs/CMIP7_test_universe.sqlite",
-      "offline_mode": true
-    },
-    "projects": [
-      {
-        "project_name": "cmip7_test",
-        "github_repo": "https://github.com/WCRP-CMIP/CMIP7_CVs",
-        "branch": "esgvoc_dr_1.2.2",
-        "local_path": "repos/CMIP7_test_CVs",
-        "db_path": "dbs/CMIP7_test_CVs.sqlite",
-        "offline_mode": true
-      }
-    ]
   }
 }
