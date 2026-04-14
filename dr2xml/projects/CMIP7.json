@@ -300,7 +300,7 @@
               "origin": "init",
               "keys": ["vocabulary_project"]
             },
-            "collection_id": "organisation",
+            "collection_id": "institution",
             "term_id": {
               "type": "value",
               "origin": "init",
