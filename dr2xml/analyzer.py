@@ -147,7 +147,7 @@ def freq2datefmt(in_freq, operation, table):
     return datefmt, offset, offset_end
 
 
-def analyze_cell_time_method(cm, label, table):
+def analyze_cell_time_method(sv, table):
     """
     Depending on cell method string CM, tells / returns
     - which time operation should be done
@@ -158,13 +158,16 @@ def analyze_cell_time_method(cm, label, table):
     "where sea-ice", "where cloud" since we suppose fields required in this way
     are physically undefined except on "where something".
     """
+    cm = sv.cell_methods
+    label = sv.label
+    freq = sv.frequency
     logger = get_logger()
     operation = None
     detect_missing = False
     clim = False
     #
     if cm is None:
-        if "fx" in table:
+        if "fx" in table or "fx" in freq:
             # Case of fixed fields required by home data request
             operation = "once"
         else:
@@ -317,7 +320,7 @@ def analyze_cell_time_method(cm, label, table):
     # ----------------------------------------------------------------------------------------------------------------
     elif "time: maximum within days time: mean over days" in cm:
         # [dmax]: Daily Maximum : tasmax Amon seulement
-        if label != 'tasmax' and label != 'sfcWindmax':
+        if label not in ['tasmax', 'sfcWindmax', "hursmax"]:
             logger.error("Error: issue with variable %s in table %s "
                          "and cell method time: maximum within days time: mean over days" % (label, table))
         # we assume that pingfile provides a reference field which already implements "max within days"
@@ -325,7 +328,7 @@ def analyze_cell_time_method(cm, label, table):
     # ----------------------------------------------------------------------------------------------------------------
     elif "time: minimum within days time: mean over days" in cm:
         # [dmin]: Daily Minimum : tasmin Amon seulement
-        if label != 'tasmin':
+        if label not in ['tasmin', "hursmin"]:
             logger.error("Error: issue with variable %s in table %s  "
                          "and cell method time: minimum within days time: mean over days" % (label, table))
         # we assume that pingfile provides a reference field which already implements "min within days"
@@ -373,7 +376,7 @@ def analyze_cell_time_method(cm, label, table):
     # ----------------------------------------------------------------------------------------------------------------
     elif "time: point" in cm:
         operation = "instant"
-    elif table == 'fx' or table == 'Efx' or table == 'Ofx':
+    elif table == 'fx' or table == 'Efx' or table == 'Ofx' or freq in ["fx", ]:
         operation = "once"
     # ----------------------------------------------------------------------------------------------------------------
     else:

@@ -18,13 +18,12 @@ from .settings_interface import get_settings_values
 from .utils import Dr2xmlError
 
 # Logger
-from utilities.logger import get_logger, change_log_level
+from utilities.logger import get_logger
 
 # Global variables and configuration tools
 from .config import get_config_variable, set_config_variable, add_value_in_dict_config_variable
 
 # Interface to Data Request
-from .dr_interface import get_dr_object
 
 from .xml_interface import DR2XMLElement, create_pretty_xml_doc, find_rank_xml_subelement, wrv
 
@@ -36,7 +35,7 @@ from .analyzer import DR_grid_to_grid_atts, analyze_cell_time_method, freq2datef
 from .cfsites import cfsites_domain_id, add_cfsites_in_defs, cfsites_grid_id, cfsites_input_filedef
 
 # Tools to deal with ping files
-from .pingfiles_interface import check_for_file_input
+from .pingfiles_interface import check_for_file_input, find_alias
 
 # Grids tools
 from .grids import change_domain_in_grid, change_axes_in_grid, get_grid_def_with_lset, create_standard_domains, \
@@ -108,7 +107,7 @@ def create_xios_aux_elmts_defs(sv, alias, table, context, target_hgrid_id, zgrid
     grid_with_vertical_interpolation = None
 
     # translate 'outermost' time cell_methods to Xios 'operation')
-    operation, detect_missing, clim = analyze_cell_time_method(sv.cell_methods, sv.label, table)
+    operation, detect_missing, clim = analyze_cell_time_method(sv, table)
     #
     # --------------------------------------------------------------------
     # Handle vertical interpolation, both XY-any and Y-P outputs
@@ -403,10 +402,10 @@ def is_singleton(sdim):
     """
     if sdim.axis in ['', ]:
         # Case of non-spatial dims. Singleton only have a 'value' (except Scatratio has a lot (in DR01.00.21))
-        return sdim.value not in ['', ] and " " not in sdim.value.strip()
+        return sdim.value not in ['', "undef"] and " " not in sdim.value.strip() and "undef" not in sdim.value.strip()
     else:
         # Case of space dimension singletons. Should a 'value' and no 'requested'
-        return sdim.value not in ['', ] and sdim.requested.strip() in ['', ]
+        return sdim.value not in ['', "undef"] and sdim.requested.strip() in ['', "undef"]
 
 
 def write_xios_file_def(filename, svars_per_table, year, dummies, skipped_vars_per_table, actually_written_vars,
@@ -588,8 +587,8 @@ def write_xios_file_def_for_svars_list(vars_list, hgrid, xml_file_definition, fr
                                                    target_hgrid_id=target_hgrid_id, zgrid_id=zgrid_id,
                                                    alias_ping=alias_ping, source_grid=source_grid, region=region)
             xml_file.append(end_field)
-            actually_written_vars.append((svar.label, svar.long_name, svar.stdname, svar.mipTable, svar.region,
-                                          svar.frequency, svar.Priority, svar.spatial_shp))
+            actually_written_vars.append((svar.label, svar.long_name, svar.stdname, " ".join(svar.modeling_realm),
+                                          svar.mipTable, svar.region, svar.frequency, svar.Priority, svar.spatial_shp))
         # Add content to xml_file to out
         if found_begin_A:
             # create a field_def entry for surface pressure
@@ -649,12 +648,12 @@ def determine_files_list(svars_per_table, enddate, year, debug):
         for region in sorted(list(svars_per_table[table])):
             count = OrderedDict()
             for svar in sorted(svars_per_table[table][region], key=lambda x: "_".join([x.official_label, x.frequency, x.region])):
-                if allow_duplicates_in_same_table or svar.mipVarLabel not in count:
-                    if not use_cmorvar_label_in_filename and svar.mipVarLabel in count:
+                if allow_duplicates_in_same_table or svar.official_label not in count:
+                    if not use_cmorvar_label_in_filename and svar.official_label in count:
                         form = "If you really want to actually produce both %s and %s in table %s, " + \
                                "you must set 'use_cmorvar_label_in_filename' to True in lab settings"
-                        raise Dr2xmlError(form % (svar.label, count[svar.mipVarLabel].label, table))
-                    count[svar.mipVarLabel] = svar
+                        raise Dr2xmlError(form % (svar.label, count[svar.official_label].label, table))
+                    count[svar.official_label] = svar
                     freq = longest_possible_period(cmip6_freq_to_xios_freq(svar.frequency, table), too_long_periods)
                     split_freq_format, split_last_date, split_start_offset, split_end_offset, split_freq = \
                         get_split_info(svar, table, enddate, year, debug)
@@ -670,7 +669,7 @@ def determine_files_list(svars_per_table, enddate, year, debug):
                                               region=region)].append(svar)
                 else:
                     logger.warning("Duplicate variable %s,%s in table %s and region %s is skipped, preferred is %s" %
-                                   (svar.label, svar.mipVarLabel, table, region, count[svar.mipVarLabel].label))
+                                   (svar.official_label, svar.mipVarLabel, table, region, count[svar.official_label].official_label))
     files_list = list()
     for elts in sorted(list(files_dict), key=lambda x: str(x)):
         vars_list = files_dict[elts]
@@ -688,50 +687,13 @@ def determine_files_list(svars_per_table, enddate, year, debug):
     return files_list
 
 
-def find_alias(sv, skipped_vars_per_table, debug=list()):
-    internal_dict = get_settings_values("internal")
-    logger = get_logger()
-    # We use a simple convention for variable names in ping files :
-    if sv.type in ['perso', 'dev']:
-        alias = sv.label
-        alias_ping = sv.ref_var
-    else:
-        # MPM : si on a defini un label non ambigu alors on l'utilise comme alias (i.e. le field_ref)
-        # et pour l'alias seulement (le nom de variable dans le nom de fichier restant svar.label)
-        if sv.label_non_ambiguous:
-            alias = internal_dict["ping_variables_prefix"] + sv.label_non_ambiguous
-        else:
-            alias = internal_dict["ping_variables_prefix"] + sv.ref_var
-        if sv.label in debug:
-            logger.debug("write_xios_file_def_for_svar ... processing %s, alias=%s" % (sv.label, alias))
-
-        # suppression des terminaisons en "Clim" pour l'alias : elles concernent uniquement les cas
-        # d'absence de variation inter-annuelle sur les GHG. Peut-etre genant pour IPSL ?
-        # Du coup, les simus avec constance des GHG (picontrol) sont traitees comme celles avec variation
-        split_alias = alias.split("Clim")
-        alias = split_alias[0]
-        alias_ping = ping_alias(sv)
-
-    if alias_ping not in get_config_variable("pingvars") and sv.type not in ["dev", "perso"]:
-        table = sv.mipTable
-        if table not in skipped_vars_per_table:
-            skipped_vars_per_table[table] = dict()
-        region = sv.region
-        if region not in skipped_vars_per_table[table]:
-            skipped_vars_per_table[table][region] = list()
-        skipped_vars_per_table[table][region].append(sv.label + "(" + str(sv.Priority) + ")")
-        return
-    else:
-        return alias, alias_ping
-
-
 def get_split_info(sv, table, enddate, year, debug):
     logger = get_logger()
     internal_dict = get_settings_values("internal")
     experiment_id = internal_dict["experiment_id"]
     context = internal_dict["context"]
     grid_choice = internal_dict["grid_choice"]
-    operation, detect_missing, _ = analyze_cell_time_method(sv.cell_methods, sv.label, table)
+    operation, detect_missing, _ = analyze_cell_time_method(sv, table)
     date_format, offset_begin, offset_end = freq2datefmt(sv.frequency, operation, table)
     split_freq_format = None
     split_start_offset = None

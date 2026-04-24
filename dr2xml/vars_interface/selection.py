@@ -77,8 +77,8 @@ def select_variables_to_be_processed():
     # Excluding 'excluded_vars' and 'excluded_spshapes' lists
     # --------------------------------------------------------------------
     context_realms = internal_dict['realms_per_context']
-    processed_realms = sorted(list(set(context_realms) & set(list(svars_per_realm))))
-    non_processed_realms = sorted(list(set(context_realms) - set(list(svars_per_realm))))
+    processed_realms = sorted(list(set(context_realms) & set(list_svars_per_realms)))
+    non_processed_realms = sorted(list(set(context_realms) - set(list_svars_per_realms)))
     for realm in non_processed_realms:
         print("Processing realm '%s' of context '%s' -- no variable asked (skip)" % (realm, context))
     svars_per_table = defaultdict(lambda: defaultdict(list))

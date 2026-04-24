@@ -13,6 +13,7 @@ import os
 import sys
 import six
 
+from . import get_config_variable
 # Utilities
 from .settings_interface import get_settings_values
 from .utils import Dr2xmlError
@@ -23,6 +24,7 @@ from utilities.logger import get_logger
 # Global variables and configuration tools
 from .config import get_config_variable, add_value_in_dict_config_variable, set_config_variable, \
     add_value_in_list_config_variable
+from .vars_interface.cmor import ping_alias
 
 # Interface to xml tools
 from .xml_interface import get_root_of_xml_file, DR2XMLElement, DR2XMLComment, parse_xml_file, create_pretty_xml_doc
@@ -384,3 +386,43 @@ def highest_rank(svar):
         shape += "_" + d
     #
     return shape
+
+
+def find_alias(sv, skipped_vars_per_table, debug=list()):
+    internal_dict = get_settings_values("internal")
+    logger = get_logger()
+    # We use a simple convention for variable names in ping files :
+    if sv.type in ['perso', 'dev']:
+        alias = sv.label
+        alias_ping = sv.ref_var
+    else:
+        # MPM : si on a defini un label non ambigu alors on l'utilise comme alias (i.e. le field_ref)
+        # et pour l'alias seulement (le nom de variable dans le nom de fichier restant svar.label)
+        if sv.label_non_ambiguous:
+            alias = internal_dict["ping_variables_prefix"] + sv.label_non_ambiguous
+        else:
+            alias = internal_dict["ping_variables_prefix"] + sv.ref_var
+        if sv.label in debug:
+            logger.debug("write_xios_file_def_for_svar ... processing %s, alias=%s" % (sv.label, alias))
+
+        # suppression des terminaisons en "Clim" pour l'alias : elles concernent uniquement les cas
+        # d'absence de variation inter-annuelle sur les GHG. Peut-etre genant pour IPSL ?
+        # Du coup, les simus avec constance des GHG (picontrol) sont traitees comme celles avec variation
+        split_alias = alias.split("Clim")
+        alias = split_alias[0]
+        alias_ping = ping_alias(sv)
+
+    if alias_ping not in get_config_variable("pingvars") and sv.type not in ["dev", "perso"]:
+        table = sv.mipTable
+        realm = " ".join(sv.modeling_realm)
+        if realm not in skipped_vars_per_table:
+            skipped_vars_per_table[realm] = dict()
+        if table not in skipped_vars_per_table[realm]:
+            skipped_vars_per_table[realm][table] = dict()
+        region = sv.region
+        if region not in skipped_vars_per_table[realm][table]:
+            skipped_vars_per_table[realm][table][region] = list()
+        skipped_vars_per_table[realm][table][region].append(sv.official_label + "(" + str(sv.Priority) + ")")
+        return
+    else:
+        return alias, alias_ping

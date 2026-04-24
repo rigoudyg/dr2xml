@@ -201,7 +201,7 @@ class SimpleCMORVar(SimpleObject):
                  cell_methods=None, cell_measures=None, spatial_shp=None, temporal_shp=None, experiment=None,
                  Priority=1, mip_era=False, prec="float", missing=1.e+20, cmvar=None, ref_var=None, mip=None,
                  sdims=dict(), comments=None, coordinates=None, cm=False, id=None, flag_meanings=None, flag_values=None,
-                 region=None, official_label=None, extravar=None, **kwargs):
+                 region=None, official_label=None, extravar=None, extra_name=None, **kwargs):
         self.type = type
         self.modeling_realm = modeling_realm
         self.set_modeling_realms = set()
@@ -245,6 +245,7 @@ class SimpleCMORVar(SimpleObject):
             region = get_settings_values("internal", "default_region")
         self.region = region
         self.official_label = official_label
+        self.extra_name = extra_name
         super(SimpleCMORVar, self).__init__(**kwargs)
     
     def set_attributes(self, **kwargs):
@@ -265,7 +266,7 @@ class SimpleCMORVar(SimpleObject):
         return self.label == other.label and self.modeling_realm == other.modeling_realm and \
                self.frequency == other.frequency and self.mipTable == other.mipTable and \
                self.temporal_shp == other.temporal_shp and self.spatial_shp == other.spatial_shp and \
-               self.region == other.region
+               self.region == other.region and self.official_label == other.official_label
 
     def __lt__(self, other):
         return self.label < other.label
@@ -288,7 +289,7 @@ class SimpleCMORVar(SimpleObject):
         raise NotImplementedError()
 
     @classmethod
-    def get_from_extra(cls, input_var, mip_era=None, freq=None, table=None, **kwargs):
+    def get_from_extra(cls, input_var, label, mip_era=None, freq=None, table=None, **kwargs):
         default_regions = get_settings_values("internal", "extravar_regions")
         default_regions = default_regions.get(input_var["out_name"],
                                               default_regions.get("default",
@@ -302,7 +303,8 @@ class SimpleCMORVar(SimpleObject):
                               positive=input_var["positive"], Priority=float(input_var[mip_era.lower() + "_priority"]),
                               label_without_psuffix=input_var["out_name"],
                               coordinates=input_var.get("dimensions", None),
-                              extravar=input_var, region=default_regions, official_label=input_var.get("branded_name"))
+                              extravar=input_var, region=default_regions, official_label=input_var.get("branded_name"),
+                              extra_name=label)
         return cls(**input_var_dict)
 
 
@@ -323,6 +325,8 @@ class SimpleDim(SimpleObject):
         self.stdname = stdname
         self.long_name = long_name
         self.positive = positive
+        if requested in ["undef", ]:
+            requested = ""
         self.requested = requested
         self.value = value
         self.out_name = out_name
@@ -364,6 +368,6 @@ class SimpleDim(SimpleObject):
                               units=input_dim["units"], long_name=input_dim["long_name"],
                               out_name=input_dim["out_name"], positive=input_dim["positive"],
                               title=input_dim.get("title", input_dim["long_name"]),
-                              requested=" ".join([ilev for ilev in input_dim["requested"]]).rstrip(),
+                              requested=" ".join([ilev for ilev in input_dim["requested"] if ilev not in ["undef", ]]).rstrip(),
                               value=input_dim["value"], type=input_dim["type"])
         return cls(**input_dim_dict)

@@ -547,7 +547,6 @@
     },
     "source_input": {
       "help": "Source information from input",
-      "fatal": true,
       "forbidden_values": [null, ""],
       "values": [
         {

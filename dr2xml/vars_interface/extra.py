@@ -14,7 +14,7 @@ from collections import OrderedDict, defaultdict
 from dr2xml.analyzer import guess_freq_from_table_name
 from dr2xml.dr_interface import get_dr_object
 from utilities.logger import get_logger
-from dr2xml.settings_interface import get_values_from_internal_settings
+from dr2xml.settings_interface import get_values_from_internal_settings, get_settings_values
 from dr2xml.utils import VarsError
 from utilities.json_tools import read_json_content
 from .generic import read_home_var, multi_plev_suffixes, single_plev_suffixes, remove_p_suffix
@@ -41,7 +41,7 @@ def read_home_var_extra(line_split, expid, mips, path_extra_tables=None, extra_v
         var_found = extra_vars_per_table[table]
     else:
         # find home_var in extra_vars
-        var_found = [var for var in extra_vars_per_table[table] if var.label == home_var.label]
+        var_found = [var for var in extra_vars_per_table[table] if var.extra_name == home_var.label]
         if len(var_found) == 0:
             print("Warning: 'extra' variable %s not found in table %s" % (home_var.label, table))
             var_found = list()
@@ -53,7 +53,7 @@ def read_home_var_extra(line_split, expid, mips, path_extra_tables=None, extra_v
                 var_found.set_attributes(official_label="_".join([var_found.label, var_found.mipTable]))
             var_found = [var_found, ]
     if home_var.mip in ["ANY", ] or home_var.mip in mips:
-        if home_var.experiment not in ["ANY", ]:
+        if get_settings_values("internal", "select_on_expt") and home_var.experiment not in ["ANY", ]:
             if expid in home_var.experiment:
                 rep.extend(var_found)
         else:
@@ -109,7 +109,7 @@ def read_extra_table(path, table):
             else:
                 freq = guess_freq_from_table_name(tbl)
             extra_var = get_dr_object("SimpleCMORVar").get_from_extra(input_var=v, mip_era=mip_era,
-                                                                      freq=freq, table=tbl)
+                                                                      freq=freq, table=tbl, label=k)
             dims = v["dimensions"].split(" ")
             # get the index of time dimension to supress, if any
             dr_dims = list()

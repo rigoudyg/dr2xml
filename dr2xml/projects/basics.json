@@ -3033,7 +3033,7 @@
               "keys": ["standard_name"]
             }
           ],
-          "forbidden_values": ["", "None", null]
+          "forbidden_values": ["", "None", null, "undef"]
         },
         "axis_type": {
           "help": "Axis type of the scalar.",
@@ -3044,7 +3044,7 @@
               "keys": ["axis_type"]
             }
           ],
-          "forbidden_values": ["", "None", null]
+          "forbidden_values": ["", "None", null, "undef"]
         },
         "unit": {
           "help": "Unit of the scalar.",
@@ -3055,7 +3055,7 @@
               "keys": ["unit"]
             }
           ],
-          "forbidden_values": ["", "None", null]
+          "forbidden_values": ["", "None", null, "undef"]
         },
         "label": {
           "help": "Label of the scalar.",
@@ -3066,7 +3066,7 @@
               "keys": ["label"]
             }
           ],
-          "forbidden_values": ["", "None", null]
+          "forbidden_values": ["", "None", null, "undef"]
         },
         "bounds": {
           "help": "Bounds of the scalar.",
@@ -3077,7 +3077,7 @@
               "keys": ["bounds"]
             }
           ],
-          "forbidden_values": ["", "None", null]
+          "forbidden_values": ["", "None", null, "undef"]
         },
         "bounds_name": {
           "help": "Bounds name of the scalar.",
@@ -3088,7 +3088,7 @@
               "keys": ["bounds_name"]
             }
           ],
-          "forbidden_values": ["", "None", null]
+          "forbidden_values": ["", "None", null, "undef"]
         },
         "prec": {
           "help": "Precision of the scalar.",
@@ -3099,7 +3099,7 @@
               "keys": ["prec"]
             }
           ],
-          "forbidden_values": ["", "None", null],
+          "forbidden_values": ["", "None", null, "undef"],
           "authorized_values": ["2", "4", "8"],
           "corrections": {
             "": "4",
@@ -3119,7 +3119,7 @@
               "keys": ["value"]
             }
           ],
-          "forbidden_values": ["", "None", null]
+          "forbidden_values": ["", "None", null, "undef"]
         },
         "positive": {
           "help": "Orientation of the scalar.",
@@ -3130,7 +3130,7 @@
               "keys": ["positive"]
             }
           ],
-          "forbidden_values": ["", "None", null]
+          "forbidden_values": ["", "None", null, "undef"]
         }
       }
     },

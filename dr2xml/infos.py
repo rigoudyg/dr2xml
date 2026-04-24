@@ -24,19 +24,6 @@ def print_some_stats(context, svars_per_table, skipped_vars_per_table, actually_
     :return:
     """
     logger = get_logger()
-    if False:
-        # --------------------------------------------------------------------
-        # Print Summary: list of  considered variables per table
-        # (i.e. not excuded_vars and not excluded_shapes)
-        # --------------------------------------------------------------------
-        logger.info("\nTables concerned by context %s : " % context, list(svars_per_table))
-        logger.info("\nVariables per table :")
-        for table in list(svars_per_table):
-            logger.info("\n>>> TABLE:")
-            logger.info("%15s %02d ---->" % (table, len(svars_per_table[table])))
-            for svar in svars_per_table[table]:
-                logger.info("%s (%s)" % (svar.label, str(svar.Priority)))
-        logger.info("")
 
     if True:
         # --------------------------------------------------------------------
@@ -45,75 +32,66 @@ def print_some_stats(context, svars_per_table, skipped_vars_per_table, actually_
         # --------------------------------------------------------------------
         if skipped_vars_per_table:
             logger.info("\nSkipped variables (i.e. whose alias is not present in the pingfile):")
-            for table in sorted(list(skipped_vars_per_table)):
-                for region in sorted(list(skipped_vars_per_table[table])):
-                    skipvars = sorted(skipped_vars_per_table[table][region])
-                    logger.info(">>> TABLE: %15s REGION: %15s %02d/%02d ----> %s" % (table, region, len(skipvars),
-                                                                                     len(svars_per_table[table][region]),
-                                                                                     " ".join(skipvars)))
-                    # TBS# print "\n\t",table ," ",len(skipvars),"--->",
+            for realm in sorted(list(skipped_vars_per_table)):
+                for table in sorted(list(skipped_vars_per_table[realm])):
+                    for region in sorted(list(skipped_vars_per_table[realm][table])):
+                        skipvars = sorted(skipped_vars_per_table[realm][table][region])
+                        logger.info(">>> REALM: %15s TABLE: %15s REGION: %15s %02d/%02d ----> %s" %
+                                    (realm, table, region, len(skipvars), len(svars_per_table[table][region]),
+                                     " ".join(skipvars)))
+                        # TBS# print "\n\t",table ," ",len(skipvars),"--->",
+                        logger.info("")
                     logger.info("")
                 logger.info("")
             logger.info("")
 
-        # --------------------------------------------------------------------
-        # Print Summary: list of variables really written in the file_def
-        # (i.e. not excluded and not skipped)
-        # --------------------------------------------------------------------
-        stats_out = {}
-        for table in sorted(list(svars_per_table)):
-            for region in sorted(list(svars_per_table[table])):
-                for sv in sorted(list(svars_per_table[table][region])):
-                    dic_freq = {}
-                    dic_shp = {}
-                    if table not in skipped_vars_per_table or region not in skipped_vars_per_table[table] or \
-                            sv.label + "(" + str(sv.Priority) + ")" not in skipped_vars_per_table[table][region]:
-                        freq = sv.frequency
-                        shp = sv.spatial_shp
-                        prio = sv.Priority
-                        var = sv.label
-                        if freq in stats_out:
-                            dic_freq = stats_out[freq]
-                            if shp in dic_freq:
-                                dic_shp = dic_freq[shp]
-                        dic_shp.update({var: table + "-P" + str(prio)})
-                        dic_freq.update({shp: dic_shp})
-                        stats_out.update({freq: dic_freq})
-
         logger.info("\n\nSome Statistics on actually written variables per frequency+shape...")
 
         #    ((sv.label,sv.table,sv.frequency,sv.Priority,sv.spatial_shp))
-        dic = defaultdict(lambda: defaultdict(lambda: defaultdict(lambda: defaultdict(lambda: defaultdict(list)))))
-        for (label, long_name, stdname, table, region, frequency, Priority, spatial_shp) in actually_written_vars:
-            dic[frequency][spatial_shp][table][region][Priority].append(label)
-        tot_among_freqs = 0
-        for frequency in sorted(list(dic)):
-            tot_for_freq_among_shapes = 0
-            for spatial_shp in sorted(list(dic[frequency])):
-                tot_for_freq_and_shape_among_tables = 0
-                for table in sorted(list(dic[frequency][spatial_shp])):
-                    for region in sorted(list(dic[frequency][spatial_shp][table])):
-                        for Priority in sorted(list(dic[frequency][spatial_shp][table][region])):
-                            list_priority = sorted(dic[frequency][spatial_shp][table][region][Priority])
-                            tot_for_freq_and_shape_among_tables += len(list_priority)
-                            logger.info("%10s %8s %12s %10s P%1d %3d: %s" % (" ", " ", table, region, Priority, len(list_priority),
-                                                                    " ".join(list_priority)))
-                logger.info("%10s %8s %11s %10s --- %3d" % (frequency, spatial_shp, "--------", " ",
-                                                       tot_for_freq_and_shape_among_tables))
-                tot_for_freq_among_shapes += tot_for_freq_and_shape_among_tables
+        dic = defaultdict(lambda: defaultdict(lambda: defaultdict(lambda: defaultdict(lambda: defaultdict(lambda: defaultdict(list))))))
+        for (label, long_name, stdname, realm, table, region, frequency, Priority, spatial_shp) in actually_written_vars:
+            realm = " ".join(sorted(realm.split(" ")))
+            dic[realm][frequency][spatial_shp][table][region][Priority].append(label)
+        tot_among_realms = 0
+        for realm in sorted(list(dic)):
+            tot_among_freqs = 0
+            for frequency in sorted(list(dic[realm])):
+                tot_for_freq_among_shapes = 0
+                for spatial_shp in sorted(list(dic[realm][frequency])):
+                    tot_for_freq_and_shape_among_tables = 0
+                    for table in sorted(list(dic[realm][frequency][spatial_shp])):
+                        tot_for_regions_among_table = 0
+                        for region in sorted(list(dic[realm][frequency][spatial_shp][table])):
+                            for Priority in sorted(list(dic[realm][frequency][spatial_shp][table][region])):
+                                list_priority = sorted(dic[realm][frequency][spatial_shp][table][region][Priority])
+                                tot_for_freq_and_shape_among_tables += len(list_priority)
+                                logger.info("%15s %10s %8s %12s %10s P%1d %3d: %s" %
+                                            (" ", " ", " ", table, region, Priority, len(list_priority),
+                                             " ".join(list_priority)))
+                            tot_for_regions_among_table += tot_for_freq_and_shape_among_tables
+                            logger.info("%15s %10s %8s %12s %10s -- %3d" %
+                                        (realm, frequency, spatial_shp, table, region, tot_for_freq_and_shape_among_tables))
+                        logger.info("%15s %10s %8s %12s %10s -- %3d" %
+                                    (realm, frequency, spatial_shp, table, "--------", tot_for_regions_among_table))
+                    logger.info("%15s %10s %8s %12s %10s -- %3d" % (realm, frequency, spatial_shp, "--------", "--------",
+                                                           tot_for_freq_and_shape_among_tables))
+                    tot_for_freq_among_shapes += tot_for_freq_and_shape_among_tables
+                    logger.info("")
+                logger.info("%15s %10s %8s %12s %10s -- %3d" % (realm, frequency, "--------", "--------", "--------", tot_for_freq_among_shapes))
+                tot_among_freqs += tot_for_freq_among_shapes
                 logger.info("")
-            logger.info("%10s %8s %11s %10s --- %3d" % (frequency, "--------", "--------", " ", tot_for_freq_among_shapes))
-            tot_among_freqs += tot_for_freq_among_shapes
             logger.info("")
+            logger.info("%15s %10s %8s %11s %10s -- %3d" % (realm, "----------", "--------", "--------", "--------", tot_among_freqs))
+            tot_among_realms += tot_among_freqs
         logger.info("")
-        logger.info("%10s %8s %11s %10s --- %3d" % ("----------", "--------", "--------", " ", tot_among_freqs))
+        logger.info("%15s %10s %8s %11s %10s -- %3d" % ("----------", "----------", "--------", "--------", "--------", tot_among_realms))
 
         if extended:
             logger.info("\n\nSome Statistics on actually written variables per variable...")
             dic = OrderedDict()
             dic_ln = defaultdict(set)
             dic_sn = defaultdict(set)
-            for label, long_name, stdname, table, region, frequency, Priority, spatial_shp in actually_written_vars:
+            for label, long_name, stdname, realm, table, region, frequency, Priority, spatial_shp in actually_written_vars:
                 dic_ln[label].add(long_name)
                 dic_sn[label].add(stdname)
                 if label not in dic:

@@ -211,7 +211,15 @@ class DataRequest(DataRequestBasic):
         # Apply other filters
         for var in var_list:
             dr_var = SimpleCMORVar.get_from_dr(var, **kwargs)
-            if (dr_var.Priority <= select_max_priority_per_frequency.get(dr_var.frequency, select_max_priority)) and \
+            current_max_priority_per_frequency = select_max_priority_per_frequency.get(dr_var.frequency, select_max_priority)
+            if isinstance(current_max_priority_per_frequency, dict):
+                default_current_max_priority_per_frequency = current_max_priority_per_frequency.get("default", select_max_priority)
+                current_max_priority_per_frequency = [val for (key, val) in default_current_max_priority_per_frequency.items() if key in dr_var.modeling_realms]
+                if len(current_max_priority_per_frequency) > 0:
+                    current_max_priority_per_frequency = min(current_max_priority_per_frequency)
+                else:
+                    current_max_priority_per_frequency = default_current_max_priority_per_frequency
+            if (dr_var.Priority <= current_max_priority_per_frequency) and \
                     is_elt_applicable(dr_var.mipTable, excluded=select_excluded_tables, included=select_included_tables) and \
                     is_elt_applicable(dr_var.mipVarLabel, excluded=select_excluded_vars, included=select_included_vars) \
                     and is_elt_applicable((dr_var.mipVarLabel, dr_var.mipTable), excluded=select_excluded_pairs) \

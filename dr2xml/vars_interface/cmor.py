@@ -7,6 +7,8 @@ CMOR variables
 
 from __future__ import print_function, division, absolute_import, unicode_literals
 
+import copy
+
 from dr2xml.dr_interface import get_dr_object
 from utilities.logger import get_logger
 from dr2xml.settings_interface import get_settings_values
@@ -57,6 +59,16 @@ def get_cmor_var(**kwargs):
              if all([cmvar.__getattribute__(key) == val for key, val in kwargs.items()])]
     if len(cmvar) > 0:
         return cmvar[0]
+    elif kwargs["label"] in ["ps", "psol"] and "frequency" in kwargs:
+        frequency = kwargs.pop("frequency")
+        cmvar = [cmvar for cmvar in data_request.get_list_by_id("CMORvar", elt_type="variable")
+                 if all([cmvar.__getattribute__(key) == val for key, val in kwargs.items()])]
+        if len(cmvar) > 0:
+            rep = copy.deepcopy(cmvar[0])
+            rep.set_attributes(frequency=frequency)
+            return rep
+        else:
+            return None
     else:
         return None
 

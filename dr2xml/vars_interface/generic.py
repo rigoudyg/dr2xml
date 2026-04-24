@@ -87,6 +87,8 @@ def fill_homevar(home_var):
     actual_mip = home_var.mip
     if actual_mip.startswith(r"[") and actual_mip.endswith(r"]"):
         home_var.mip = actual_mip.lstrip("[").rstrip("]").split(",")
+    region = get_settings_values("internal", "extravar_regions")
+    home_var.set_attributes(region=region.get(home_var.label, region["default"]))
     return home_var
 
 
@@ -94,7 +96,7 @@ def check_homevar(home_var, mips, expid):
     add = False
     if (isinstance(home_var.mip, six.string_types) and (home_var.mip == "ANY" or home_var.mip in mips)) or \
             (isinstance(home_var.mip, list) and mips.issuperset(home_var.mip)):
-        if home_var.experiment not in ["ANY", ]:
+        if get_settings_values("internal", "select_on_expt") and home_var.experiment not in ["ANY", ]:
             if expid in home_var.experiment:
                 add = True
         else:
@@ -211,7 +213,9 @@ def complement_svar_using_cmorvar(svar, cmvar, debug=[]):
                         sdims=cmvar.sdims, other_dims_size=cmvar.other_dims_size, mip_era=cmvar.mip_era,
                         flag_meanings=cmvar.flag_meanings, flag_values=cmvar.flag_values,
                         modeling_realm=cmvar.modeling_realm, set_modeling_realms=cmvar.set_modeling_realms,
-                        region=cmvar.region, official_label=cmvar.official_label)
+                        official_label=cmvar.official_label)
+    if svar.region in ["default", ]:
+        svar.set_attributes(region=cmvar.region)
     area = cellmethod2area(svar.cell_methods)
     if svar.label in debug:
         logger.debug("complement_svar ... processing %s, area=%s" % (svar.label, str(area)))
