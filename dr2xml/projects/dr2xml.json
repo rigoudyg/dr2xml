@@ -366,6 +366,18 @@
         false
       ]
     },
+    "excluded_dimensions": {
+      "help": "List of dimensions to be excluded.",
+      "target_type": "list",
+      "values": [
+        {
+          "type": "value",
+          "origin": "laboratory",
+          "keys": ["excluded_dimensions"]
+        },
+        []
+      ]
+    },
     "excluded_expgroups_lset": {
       "help": "List of the experiments groups that will be excluded from outputs from laboratory settings.",
       "target_type": "list",
@@ -474,6 +486,18 @@
         []
       ]
     },
+    "excluded_tpshapes_lset": {
+      "help": "The list of shapes that should be excluded (all variables in those shapes will be excluded from outputs).",
+      "target_type": "list",
+      "values": [
+        {
+          "type": "value",
+          "origin": "laboratory",
+          "keys": ["excluded_tpshapes"]
+        },
+        []
+      ]
+    },
     "excluded_tables_lset": {
       "help": "List of the tables that will be excluded from outputs from laboratory settings.",
       "target_type": "list",
@@ -551,6 +575,20 @@
           ]
         },
         []
+      ]
+    },
+    "excluded_vars_per_frequency": {
+      "help": "A dictionary which keys are frequencies and values the list of variables that must be excluded for each frequency.",
+      "target_type": "dict",
+      "values": [
+        {
+          "type": "value",
+          "origin": "laboratory",
+          "keys": [
+            "excluded_vars_per_frequency"
+          ]
+        },
+        {}
       ]
     },
     "excluded_vars_per_shape": {
@@ -1293,6 +1331,30 @@
             }
           ],
           "not_values": ["LR"]
+        }
+      ]
+    },
+    "select_excluded_dimensions": {
+      "help": "Excluded dimensions for variable selection.",
+      "fatal": true,
+      "values": [
+        {
+          "type": "condition",
+          "value_to_check": {
+            "type": "value",
+            "origin": "internal",
+            "keys": ["select_on_inc_and_exc"]
+          },
+          "check_to_perform": "eq",
+          "reference_values": [true],
+          "values": [
+            {
+              "type": "value",
+              "origin": "internal",
+              "keys": ["excluded_dimensions"]
+            }
+          ],
+          "not_values": [null]
         }
       ]
     },

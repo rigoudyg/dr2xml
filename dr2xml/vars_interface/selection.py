@@ -94,7 +94,10 @@ def select_variables_to_be_processed():
                                                ("spatial_shp", [None, False], "They have no spatial shape"),
                                                ("spatial_shp", internal_dict["excluded_spshapes_lset"],
                                                 "They have excluded spatial shape : %s" % svar.spatial_shp),
-                                               ("label", internal_dict["excluded_vars_per_shape"].get(svar.spatial_shp, list()), "Label %s is excluded for shape %s" % (svar.label, svar.spatial_shp)))
+                                               ("temporal_shp", internal_dict["excluded_tpshapes_lset"],
+                                                "They have excluded temporal shape : %s" % svar.temporal_shp),
+                                               ("label", internal_dict["excluded_vars_per_shape"].get(svar.spatial_shp, list()), "Label %s is excluded for shape %s" % (svar.label, svar.spatial_shp)),
+                                               ("label", internal_dict["excluded_vars_per_frequency"].get(svar.frequency, list()), "Label %s is excluded for frequency %s" % (svar.label, svar.spatial_shp)))
                 if test:
                     excluded_vars[reason].append((svar.label, svar.mipTable))
                 else:

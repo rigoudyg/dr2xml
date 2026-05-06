@@ -197,7 +197,7 @@ class DataRequest(DataRequestBasic):
                           select_included_tables, select_excluded_tables, select_excluded_pairs,
                           select_included_opportunities, select_excluded_opportunities, select_included_vargroups,
                           select_excluded_vargroups, select_excluded_regions, select_max_priority_per_frequency,
-                          select_on_year, experiment_filter=False, **kwargs):
+                          select_on_year, select_excluded_dimensions, experiment_filter=False, **kwargs):
         rep = defaultdict(set)
         # Filter var list per priority and experiment
         if experiment_filter:
@@ -214,7 +214,7 @@ class DataRequest(DataRequestBasic):
             current_max_priority_per_frequency = select_max_priority_per_frequency.get(dr_var.frequency, select_max_priority)
             if isinstance(current_max_priority_per_frequency, dict):
                 default_current_max_priority_per_frequency = current_max_priority_per_frequency.get("default", select_max_priority)
-                current_max_priority_per_frequency = [val for (key, val) in default_current_max_priority_per_frequency.items() if key in dr_var.modeling_realms]
+                current_max_priority_per_frequency = [val for (key, val) in current_max_priority_per_frequency.items() if key in dr_var.modeling_realm]
                 if len(current_max_priority_per_frequency) > 0:
                     current_max_priority_per_frequency = min(current_max_priority_per_frequency)
                 else:
@@ -225,7 +225,8 @@ class DataRequest(DataRequestBasic):
                     and is_elt_applicable((dr_var.mipVarLabel, dr_var.mipTable), excluded=select_excluded_pairs) \
                     and is_elt_applicable(dr_var.region, excluded=select_excluded_regions) \
                     and self.get_endyear_for_cmorvar(cmorvar=dr_var, experiment=experiment, year=select_on_year,
-                                                     internal_dict=get_settings_values("internal")) is not False:
+                                                     internal_dict=get_settings_values("internal")) is not False \
+                    and len(set(list(dr_var.sdims)) & set(select_excluded_dimensions)) == 0:
                 rep[dr_var.id] = rep[dr_var.id] | set(dr_var.grids)
         return rep
 
