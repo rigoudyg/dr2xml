@@ -38,6 +38,25 @@
         }
       ]
     },
+    "CV_project": {
+      "help": "Controlled vocabulary file containing project characteristics.",
+      "forbidden_values": [null, ""],
+      "fatal": true,
+      "values": [
+        {
+          "type": "func",
+          "origin": "vocabulary_server",
+          "keys": ["get_project"],
+          "options": {
+            "project_id": {
+              "type": "value",
+              "origin": "init",
+              "keys": ["vocabulary_project"]
+            }
+          }
+        }
+      ]
+    },
     "CV_experiment": {
       "help": "Controlled vocabulary file containing experiment characteristics.",
       "forbidden_values": [null, ""],
@@ -1007,7 +1026,7 @@
         "parent_activity_id", "parent_calendar", "parent_experiment_id", "parent_mip_era", "parent_source_id",
         "parent_time_units", "parent_variant_label","physics_index", "product", "realization_index", "realm", "region",
         "source_id", "temporal_label", "variable_id", "variant_label", "vertical_label", "dr2xml_version",
-        "physical_parameter"
+        "physical_parameter", "dr_version", "cv_version"
       ],
       "vars_constraints": {
         "activity_id": {
@@ -1143,6 +1162,38 @@
               "type": "value",
               "origin": "common_tag",
               "keys": ["variable_esgvoc", "cmip6_compound_name"]
+            }
+          ]
+        },
+        "cv_version": {
+          "help": "Version of the CVs",
+          "values": [
+            {
+              "type": "func",
+              "origin": "self",
+              "keys": ["format"],
+              "template": "ESGVOC version {esgvoc_version} - CV content {cv_content}",
+              "options": {
+                "esgvoc_version": {
+                  "type": "value",
+                  "origin": "vocabulary_server"
+                },
+                "cv_content": {
+                  "type": "value",
+                  "origin": "internal",
+                  "keys": ["CV_project", "version"]
+                }
+              }
+            }
+          ]
+        },
+        "dr_version": {
+          "help": "Version of the DR",
+          "values": [
+            {
+              "type": "value",
+              "origin": "common",
+              "keys": ["data_request_version_string"]
             }
           ]
         },

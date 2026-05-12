@@ -543,8 +543,8 @@ def write_xios_file_def(filename, svars_per_table, year, dummies, skipped_vars_p
 def write_xios_file_def_for_svars_list(vars_list, hgrid, xml_file_definition, freq, split_freq, split_freq_format,
                                        split_start_offset, split_end_offset, split_last_date, grid_description,
                                        grid_label, grid_resolution, table, skipped_vars_per_table, dummies,
-                                       target_hgrid_id, zgrid_id, source_grid, region, actually_written_vars, attributes=list(),
-                                       debug=list()):
+                                       target_hgrid_id, zgrid_id, source_grid, region, cell_measures, cell_methods,
+                                       actually_written_vars, attributes=list(), debug=list()):
     logger = get_logger()
     internal_dict = get_settings_values("internal")
     context = internal_dict["context"]
@@ -587,7 +587,7 @@ def write_xios_file_def_for_svars_list(vars_list, hgrid, xml_file_definition, fr
                                                    target_hgrid_id=target_hgrid_id, zgrid_id=zgrid_id,
                                                    alias_ping=alias_ping, source_grid=source_grid, region=region)
             xml_file.append(end_field)
-            actually_written_vars.append((svar.label, svar.long_name, svar.stdname, " ".join(svar.modeling_realm),
+            actually_written_vars.append((svar.ref_var, svar.long_name, svar.stdname, " ".join(svar.modeling_realm),
                                           svar.mipTable, svar.region, svar.frequency, svar.Priority, svar.spatial_shp))
         # Add content to xml_file to out
         if found_begin_A:
@@ -642,7 +642,7 @@ def determine_files_list(svars_per_table, enddate, year, debug):
     svar_tuple = namedtuple("svar_tuple", ["freq", "table", "grid_label", "split_freq", "split_freq_format",
                                            "split_last_date", "split_start_offset", "split_end_offset",
                                            "grid_description", "grid_resolution", "target_hgrid_id", "zgrid_id",
-                                           "source_grid", "region"])
+                                           "source_grid", "region", "cell_measures", "cell_methods"])
     # Loop on values to fill the xml element
     for table in sorted(list(svars_per_table)):
         for region in sorted(list(svars_per_table[table])):
@@ -666,7 +666,8 @@ def determine_files_list(svars_per_table, enddate, year, debug):
                                               grid_description=grid_description, zgrid_id=zgrid_id,
                                               grid_resolution=grid_resolution, target_hgrid_id=target_hgrid_id,
                                               source_grid=source_grid, split_freq=split_freq, table=table,
-                                              region=region)].append(svar)
+                                              region=region, cell_measures=svar.cell_measures,
+                                              cell_methods=svar.cell_methods)].append(svar)
                 else:
                     logger.warning("Duplicate variable %s,%s in table %s and region %s is skipped, preferred is %s" %
                                    (svar.official_label, svar.mipVarLabel, table, region, count[svar.official_label].official_label))
@@ -714,7 +715,7 @@ def get_split_info(sv, table, enddate, year, debug):
             # print "calling endyear_for... for %s, with year="%(sv.label), year
             lastyear = endyear_for_CMORvar(sv.cmvar, experiment_id, year)
             # print "lastyear=",lastyear," enddate=",enddate
-        if lastyear is None or (enddate is not None and lastyear >= int(enddate[0:4])):
+        if lastyear in [None, False] or (enddate is not None and lastyear >= int(enddate[0:4])):
             # DR doesn't specify an end date for that var, or a very late one
             if internal_dict['dr2xml_manages_enddate']:
                 # Use run end date as the latest possible date

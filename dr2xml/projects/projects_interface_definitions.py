@@ -367,12 +367,12 @@ class ValueSettings(Settings):
                 raise ValueError("Values must be specified for %s" % self.key)
         elif self.type in ["value", ]:
             if self.origin not in ["attrs", "common", "config", "dict", "init", "internal", "laboratory", "simulation",
-                                   "variable", "common_tag"]:
+                                   "variable", "common_tag", "vocabulary_server"]:
                 logger.error("'Origin' must be specified among 'attrs', 'common', 'config', 'dict', 'init', 'internal',"
-                             " 'common_tag', 'laboratory', 'simulation' and 'variable' for %s, not %s" %
+                             " 'common_tag', 'laboratory', 'simulation', 'vocabulary_server' and 'variable' for %s, not %s" %
                              (self.key, self.origin))
                 raise ValueError("'Origin' must be specified among 'attrs', 'common', 'config', 'dict', 'init',"
-                                 " 'internal', 'common_tag', 'laboratory', 'simulation' and 'variable' for %s, not %s" %
+                                 " 'internal', 'common_tag', 'laboratory', 'simulation', 'vocabulary_server' and 'variable' for %s, not %s" %
                                  (self.key, self.origin))
         else:
             logger.error("'Type' must be specified among 'file', 'merge' and 'value' for %s, not %s" % (self.key, self.type))
@@ -456,6 +456,10 @@ class ValueSettings(Settings):
                 if isinstance(value, list):
                     value = value[0]
                 value = value.__dict__
+                found = True
+            elif self.origin in ["vocabulary_server", ] and allow_additional_keytypes:
+                from dr2xml.vocabulary import get_version
+                value = get_version()
                 found = True
             elif self.origin in ["config", "simulation", "laboratory"]:
                 if len(keys) == 0:

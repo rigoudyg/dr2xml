@@ -23,3 +23,7 @@ def load_vocabulary():
 
 def get_vocabulary():
 	return vocab
+
+def get_version():
+	import esgvoc
+	return esgvoc.__version__
