@@ -283,6 +283,10 @@ class SimpleCMORVar(SimpleCMORVarBasic):
             self.cell_measures = ''
         elif self.cell_measures in ['--OPT', ]:
             self.cell_measures = ''
+        if self.temporal_shp in ["time-mean", ]:
+            self.temporal_shp = "time-intv"
+        if self.official_label in ["rsus_tavg-u-hxy-lnd", ] and self.frequency in ["mon", ]:
+            self.cell_methods = "area: mean where land time: mean"
 
     @classmethod
     def get_from_dr(cls, input_var, **kwargs):

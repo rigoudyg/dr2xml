@@ -32,7 +32,7 @@ from .grids import is_vert_dim, create_axis_def, create_grid_def, change_domain_
 from .Xparse import id2grid
 
 
-def process_vertical_interpolation(sv, alias, src_grid_id):
+def process_vertical_interpolation(sv, alias, alias_in_ping, src_grid_id):
     """
     Based on vertical dimension of variable SV, creates the intermediate fields
     for triggering vertical interpolation with the required levels; also includes
@@ -77,11 +77,6 @@ def process_vertical_interpolation(sv, alias, src_grid_id):
                 return src_grid_id, alias_with_levels
                 # raise Dr2xmlError("Finding an alias with levels (%s) in pingfile is unexpected")
             else:
-                alias_in_ping = find_alias(sv, dict())
-                if alias_in_ping is None:
-                    raise Dr2xmlError("Field id " + sv.label + " expected in pingfile but not found.")
-                else:
-                    alias_in_ping = alias_in_ping[0]
                 #
                 # Create field alias_for_sampling for enforcing the operation before time sampling
                 operation = internal_dict["vertical_interpolation_operation"]
@@ -311,7 +306,7 @@ def process_diurnal_cycle(alias):
     return alias_24h_id, grid_24h_id
 
 
-def process_levels_over_orog(sv, alias, src_grid_id):
+def process_levels_over_orog(sv, alias, alias_in_ping, src_grid_id):
     internal_dict = get_settings_values("internal")
     logger = get_logger()
     vdims = [sd for sd in sv.sdims.values() if is_vert_dim(sd)]
@@ -334,12 +329,6 @@ def process_levels_over_orog(sv, alias, src_grid_id):
         grid_id = src_grid_id
     else:
         context_index = get_config_variable("context_index")
-        # Check that the ping alias exists
-        alias_in_ping = find_alias(sv, dict())
-        if alias_in_ping is None:
-            raise Dr2xmlError("Field id " + sv.label + " expected in pingfile but not found.")
-        else:
-            alias_in_ping = alias_in_ping[0]
         # Find out if the height over orog field is already defined
         height_over_orog_field_name = "height_over_orog"
         if height_over_orog_field_name not in context_index:

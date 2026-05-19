@@ -122,13 +122,13 @@ def create_xios_aux_elmts_defs(sv, alias, table, context, target_hgrid_id, zgrid
             ((ssh.startswith('XY-na') or ssh.startswith('Y-na')) and
              prefix + sv.label not in pingvars and sv.label_without_psuffix != sv.label):
         # TBD check - last case is for singleton
-        last_grid_id, last_field_id = process_vertical_interpolation(sv, alias, last_grid_id)
+        last_grid_id, last_field_id = process_vertical_interpolation(sv, alias, alias_ping, last_grid_id)
         # If vertical interpolation is done, change the value of those boolean to modify the behaviour of dr2xml
         grid_with_vertical_interpolation = True
     elif ssh in ["XY-HG", ]:
         # Handle interpolation on a height level over the ground
         logger.debug("Deal with XY-HG spatial shape for %s,%s" % (sv.label, sv.ref_var))
-        last_field_id, last_grid_id = process_levels_over_orog(sv, alias, last_grid_id)
+        last_field_id, last_grid_id = process_levels_over_orog(sv, alias, alias_ping, last_grid_id)
 
     #
     # --------------------------------------------------------------------
@@ -492,18 +492,18 @@ def write_xios_file_def(filename, svars_per_table, year, dummies, skipped_vars_p
     field_defs = get_config_variable("field_defs")
     if is_reset_field_group:
         xml_field_group = DR2XMLElement(tag="field_group", freq_op="_reset_", freq_offset="_reset_")
-        for xml_field in list(field_defs):
+        for xml_field in sorted(list(field_defs)):
             xml_field_group.append(field_defs[xml_field])
         xml_field_definition.append(xml_field_group)
     else:
-        for xml_field in list(field_defs):
+        for xml_field in sorted(list(field_defs)):
             xml_field_definition.append(field_defs[xml_field])
     xml_context.append(xml_field_definition)
     #
     xml_axis_definition = DR2XMLElement(tag="axis_definition")
     xml_axis_group = DR2XMLElement(tag="axis_group")
     axis_defs = get_config_variable("axis_defs")
-    for xml_axis in list(axis_defs):
+    for xml_axis in sorted(list(axis_defs)):
         xml_axis_group.append(axis_defs[xml_axis])
     if False and internal_dict['use_union_zoom']:
         union_axis_defs = get_config_variable("union_axis_defs")
@@ -517,23 +517,23 @@ def write_xios_file_def(filename, svars_per_table, year, dummies, skipped_vars_p
     domain_defs = get_config_variable("domain_defs")
     if internal_dict['grid_policy'] not in ["native", ]:
         create_standard_domains(domain_defs)
-    for xml_domain in list(domain_defs):
+    for xml_domain in sorted(list(domain_defs)):
         xml_domain_group.append(domain_defs[xml_domain])
     xml_domain_definition.append(xml_domain_group)
     xml_context.append(xml_domain_definition)
     #
     xml_grid_definition = DR2XMLElement(tag="grid_definition")
-    for xml_grid in list(grid_defs):
+    for xml_grid in sorted(list(grid_defs)):
         xml_grid_definition.append(grid_defs[xml_grid])
     if False and internal_dict['use_union_zoom']:
         union_grid_defs = get_config_variable("union_grid_defs")
-        for xml_grid in list(union_grid_defs):
+        for xml_grid in sorted(list(union_grid_defs)):
             xml_grid_definition.append(union_grid_defs[xml_grid])
     xml_context.append(xml_grid_definition)
     #
     xml_scalar_definition = DR2XMLElement(tag="scalar_definition")
     scalar_defs = get_config_variable("scalar_defs")
-    for xml_scalar in list(scalar_defs):
+    for xml_scalar in sorted(list(scalar_defs)):
         xml_scalar_definition.append(scalar_defs[xml_scalar])
     xml_context.append(xml_scalar_definition)
     # Write the xml element to the dedicated file

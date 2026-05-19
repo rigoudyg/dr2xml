@@ -108,6 +108,7 @@ def get_simplevar(label, reference_var):
     """
     Returns 'simplified variable' for a given CMORvar label and table
     """
+    logger = get_logger()
     svar = get_dr_object("SimpleCMORVar")()
     psvar = get_cmor_var(label=label, mipTable=reference_var.mipTable)
     #
@@ -118,6 +119,10 @@ def get_simplevar(label, reference_var):
         psvar_dict = dr.get_ps_data(reference_var)
         if psvar_dict is not None:
             psvar = get_cmor_var(**psvar_dict)
+            if psvar is None:
+                logger.warning("Cannot find psvar for %s" % psvar_dict)
+        else:
+            logger.warning("Cannot find psvar dict for %s" % reference_var)
     if psvar:
         complement_svar_using_cmorvar(svar, psvar, [])
         return svar

@@ -159,7 +159,7 @@ def analyze_cell_time_method(sv, table):
     are physically undefined except on "where something".
     """
     cm = sv.cell_methods
-    label = sv.label
+    label = sv.ref_var
     freq = sv.frequency
     logger = get_logger()
     operation = None

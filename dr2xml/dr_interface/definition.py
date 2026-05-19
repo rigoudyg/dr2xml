@@ -295,6 +295,11 @@ class SimpleCMORVar(SimpleObject):
                                               default_regions.get("default",
                                                                   get_settings_values("internal",
                                                                                       "default_region")))
+        temporal_shp = None
+        if "time: point" in input_var["cell_methods"]:
+            temporal_shp = "time-point"
+        elif "time: mean" in input_var["cell_methods"]:
+            temporal_shp = "time-mean"
         input_var_dict = dict(type="extra", mip_era=mip_era, label=input_var["out_name"],
                               mipVarLabel=input_var["out_name"], stdname=input_var.get("standard_name", ""),
                               long_name=input_var["long_name"], units=input_var["units"],
@@ -304,7 +309,7 @@ class SimpleCMORVar(SimpleObject):
                               label_without_psuffix=input_var["out_name"],
                               coordinates=input_var.get("dimensions", None),
                               extravar=input_var, region=default_regions, official_label=input_var.get("branded_name"),
-                              extra_name=label)
+                              extra_name=label, temporal_shp=temporal_shp)
         return cls(**input_var_dict)
 
 

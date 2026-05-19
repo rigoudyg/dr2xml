@@ -1172,11 +1172,16 @@
               "type": "func",
               "origin": "self",
               "keys": ["format"],
-              "template": "ESGVOC version {esgvoc_version} - CV content {cv_content}",
+              "template": "ESGVOC version {esgvoc_version} - CV content {project} {cv_content}",
               "options": {
                 "esgvoc_version": {
                   "type": "value",
                   "origin": "vocabulary_server"
+                },
+                "project": {
+                  "type": "value",
+                  "origin": "init",
+                  "keys": ["vocabulary_project"]
                 },
                 "cv_content": {
                   "type": "value",

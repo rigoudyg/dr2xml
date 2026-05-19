@@ -1,29 +1,20 @@
 {
   "dr2xml_default": {
-    "universe": {
-      "github_repo": "https://github.com/WCRP-CMIP/WCRP-universe",
-      "branch": "esgvoc",
-      "local_path": "repos/WCRP-universe",
-      "db_path": "dbs/universe.sqlite",
-      "offline_mode": true
+    "default": {
+      "database_directory": "esgvoc_dbs",
+      "offline": false
     },
-    "projects": [
-      {
-        "project_name": "cmip6",
-        "github_repo": "https://github.com/WCRP-CMIP/CMIP6_CVs",
-        "branch": "esgvoc",
-        "local_path": "repos/CMIP6_CVs",
-        "db_path": "dbs/CMIP6_CVs.sqlite",
-        "offline_mode": true
-      },
-      {
-        "project_name": "cmip7",
-        "github_repo": "https://github.com/WCRP-CMIP/CMIP7_CVs",
-        "branch": "esgvoc",
-        "local_path": "repos/CMIP7_CVs",
-        "db_path": "dbs/CMIP7_CVs.sqlite",
-        "offline_mode": true
-      }
-    ]
+    "cmip6": {
+      "project_version": "1.0.0",
+      "universe_version": "1.0.2"
+    },
+    "cmip7": {
+      "project_version": "1.1.0",
+      "universe_version": "1.0.2"
+    },
+    "cordex-cmip6": {
+      "project_version": "1.0.0",
+      "universe_version": "1.0.2"
+    }
   }
 }

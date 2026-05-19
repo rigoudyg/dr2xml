@@ -15,10 +15,8 @@ def load_vocabulary():
 
 	if vocabulary_project is not None:
 		from .esgvoc_configuration import setup_esgvoc_config
-		setup_esgvoc_config(config_name=vocabulary_used, project=vocabulary_project, config_file=vocabulary_config)
-		import esgvoc.api as ev
 		global vocab
-		vocab = ev
+		vocab = setup_esgvoc_config(config_name=vocabulary_used, project=vocabulary_project, config_file=vocabulary_config)
 
 
 def get_vocabulary():
