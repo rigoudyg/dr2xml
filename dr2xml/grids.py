@@ -329,7 +329,7 @@ def create_axis_from_dim(dim, labels, axis_ref):
     if dim.type not in ["character", ]:
         if dim.requested not in ['', 'undef']:
             nb = len(dim.requested.split())
-            value = "(0,{})[ {} ]".format(nb, dim.requested.strip())
+            value = "(0,{})[ {} ]".format(nb -1, dim.requested.strip())
             if isinstance(dim.boundsRequested, list):
                 vals = " ".join([str(v) for v in dim.boundsRequested])
                 valsr = reduce(lambda x, y: x + y, vals)
