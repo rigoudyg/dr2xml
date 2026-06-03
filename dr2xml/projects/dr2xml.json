@@ -731,14 +731,38 @@
         }
       ]
     },
+    "variables_per_grid_type": {
+      "help": "List of variables associated with a grid type",
+      "values": [
+        {
+          "type": "value",
+          "origin": "laboratory",
+          "keys": ["variables_per_grid_type"]
+        },
+        {}
+      ],
+      "target_type": "dict"
+    },
     "grids": {
       "help": "Grids : per model resolution and per context :\\n- CMIP6 qualifier (i.e. 'gn' or 'gr') for the main grid chosen (because you  may choose has main production grid a regular one, when the native grid is e.g. unstructured)\\n- Xios id for the production grid (if it is not the native grid)\\n- Xios id for the latitude axis used for zonal means (mist match latitudes for grid above)\\n- resolution of the production grid (using CMIP6 conventions)\\n- grid description",
       "fatal": true,
       "values": [
         {
-          "type": "value",
-          "origin": "laboratory",
-          "keys": ["grids"]
+          "type": "func",
+          "origin": "functions_file",
+          "keys": ["format_grids"],
+          "options": {
+            "grids": {
+              "type": "value",
+              "origin": "laboratory",
+              "keys": ["grids"]
+            },
+            "variables_per_grid_type": {
+              "type": "value",
+              "origin": "internal",
+              "keys": ["variables_per_grid_type"]
+            }
+          }
         }
       ]
     },
@@ -1354,9 +1378,10 @@
               "keys": ["excluded_dimensions"]
             }
           ],
-          "not_values": [null]
+          "not_values": [[]]
         }
-      ]
+      ],
+      "target_type": "list"
     },
     "select_excluded_expgroups": {
       "help": "Excluded experiments groups for variable selection.",

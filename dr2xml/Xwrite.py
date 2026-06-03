@@ -464,8 +464,8 @@ def write_xios_file_def(filename, svars_per_table, year, dummies, skipped_vars_p
     set_config_variable("domain_defs", OrderedDict())
     # Add xml_file_definition
     xml_file_definition = DR2XMLElement(tag="file_definition")
-    _, hgrid, _, _, _ = internal_dict['grids'][internal_dict["select_grid_choice"]][context]
     files_list = determine_files_list(svars_per_table, enddate, year, debug)
+    _, hgrid, _, _, _ = internal_dict['grids'][internal_dict["select_grid_choice"]][context]["default"]
     for file_dict in files_list:
         write_xios_file_def_for_svars_list(hgrid=hgrid, xml_file_definition=xml_file_definition, dummies=dummies,
                                            skipped_vars_per_table=skipped_vars_per_table,
@@ -751,6 +751,7 @@ def get_grid_info(sv, grid, table):
     grid_choice = internal_dict["grid_choice"]
     context_index = get_config_variable("context_index")
     if grid in ["", ]:
+        internal_grids = internal_dict["grids"][grid_choice][context]
         # either native or close-to-native
         if sv.type in ["dev", ]:
             target_grid = sv.description.split('|')[1]
@@ -767,10 +768,10 @@ def get_grid_info(sv, grid, table):
                         grids_dev[sv.label][grid_choice][context]
             else:
                 grid_label, target_hgrid_id, zgrid_id, grid_resolution, grid_description = \
-                    internal_dict["grids"][grid_choice][context]
+                    internal_grids.get(sv.label, internal_grids["default"])
         else:
             grid_label, target_hgrid_id, zgrid_id, grid_resolution, grid_description = \
-                internal_dict["grids"][grid_choice][context]
+                internal_grids.get(sv.label, internal_grids["default"])
     else:
         if grid in ['cfsites', ]:
             target_hgrid_id = cfsites_domain_id

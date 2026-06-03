@@ -7,6 +7,9 @@ Function used for dr2xml projects
 
 from __future__ import print_function, division, absolute_import, unicode_literals
 
+import copy
+from collections import defaultdict
+
 from utilities.logger import get_logger
 
 
@@ -65,3 +68,40 @@ def sort_mips(mips):
 	else:
 		rep = mips
 	return sorted(list(rep))
+
+
+def format_grids(grids, variables_per_grid_type):
+	logger = get_logger()
+	if not isinstance(grids, dict) or any([not isinstance(grids[elt], dict) for elt in grids]):
+		logger.error("Grids must be defined as a dict of resolution, realm and grid_type")
+		raise ValueError("Grids must be defined as a dict of resolution, realm and grid_type")
+	else:
+		issues = list()
+		for (resolution, dict_resolution) in grids.items():
+			for (realm, dict_realm) in dict_resolution.items():
+				if isinstance(dict_realm, list) and len(dict_realm) == 5:
+					new_dict_realm = dict(default=dict_realm)
+					grids[resolution][realm] = copy.deepcopy(new_dict_realm)
+				elif isinstance(dict_realm, dict) and \
+						all([isinstance(elt, dict) and len(elt) == 5 for elt in dict_realm.values()]) and \
+						"default" in dict_realm:
+					pass
+				else:
+					issues.append((resolution, realm))
+		if len(issues) > 0:
+			logger.error("Issues in grids definition for the following (resolution, realm) couples:\n%s" % issues)
+			raise ValueError("Issues in grids definition for the following (resolution, realm) couples:\n%s" % issues)
+		else:
+			rep = defaultdict(lambda: defaultdict(dict))
+			for (resolution, dict_resolution) in grids.items():
+				for (realm, dict_realm) in dict_resolution.items():
+					rep[resolution][realm]["default"] = copy.deepcopy(grids[resolution][realm]["default"])
+					for (grid_type, grid_type_list) in dict_realm.items():
+						grid_def = copy.deepcopy(grids[resolution][realm][grid_type])
+						if grid_type in grids[resolution][realm]:
+							for var in grid_type_list:
+								rep[resolution][realm][var] = grid_def
+						else:
+							logger.warning("Could not find grid_type %s for resolution %s and realm %s, use default." %
+							               (grid_type, resolution, realm))
+			return rep
