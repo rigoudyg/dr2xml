@@ -12,7 +12,7 @@ import re
 
 import six
 
-from dr2xml.projects.dr2xml_func import sort_mips, format_sizes
+from dr2xml.projects.dr2xml_func import sort_mips, format_sizes, format_grids
 
 
 def build_external_variables(cell_measures):

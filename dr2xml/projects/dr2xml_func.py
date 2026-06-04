@@ -76,6 +76,7 @@ def format_grids(grids, variables_per_grid_type):
 		logger.error("Grids must be defined as a dict of resolution, realm and grid_type")
 		raise ValueError("Grids must be defined as a dict of resolution, realm and grid_type")
 	else:
+		grids = copy.deepcopy(grids)
 		issues = list()
 		for (resolution, dict_resolution) in grids.items():
 			for (realm, dict_realm) in dict_resolution.items():

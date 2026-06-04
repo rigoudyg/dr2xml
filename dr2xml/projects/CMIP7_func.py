@@ -8,7 +8,7 @@ CMIP7 python tools
 from __future__ import print_function, division, absolute_import, unicode_literals
 
 
-from dr2xml.projects.dr2xml_func import sort_mips, format_sizes, get_logger
+from dr2xml.projects.dr2xml_func import sort_mips, format_sizes, get_logger, format_grids
 from dr2xml.projects.basics_func import build_external_variables, compute_nb_days
 from dr2xml.projects.CMIP6_esgvoc_func import get_ids_from_list
 

@@ -9,7 +9,7 @@ from __future__ import print_function, division, absolute_import, unicode_litera
 
 import six
 
-from dr2xml.projects.dr2xml_func import sort_mips, format_sizes
+from dr2xml.projects.dr2xml_func import sort_mips, format_sizes, format_grids
 from dr2xml.projects.basics_func import build_external_variables, compute_nb_days
 
 

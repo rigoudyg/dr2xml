@@ -8,7 +8,7 @@ CMIP6 python tools
 from __future__ import print_function, division, absolute_import, unicode_literals
 
 
-from dr2xml.projects.dr2xml_func import sort_mips, format_sizes
+from dr2xml.projects.dr2xml_func import sort_mips, format_sizes, format_grids
 from dr2xml.projects.basics_func import build_external_variables, compute_nb_days
 
 def build_filename(frequency, prefix, source_id, expid_in_filename, date_range, var_type, list_perso_dev_file, label,
