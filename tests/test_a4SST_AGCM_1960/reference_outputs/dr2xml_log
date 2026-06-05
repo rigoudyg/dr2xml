@@ -85,76 +85,209 @@ OK current_directory/test_a4SST_AGCM_1960/input/xml/ping_trip.xml
 file_def written as current_directory/test_a4SST_AGCM_1960/test_outputs/dr2xml_surfex.xml
 
 Skipped variables (i.e. whose alias is not present in the pingfile):
->>> TABLE:          AERmon REGION:         default 04/14 ----> dms(1) mmrnh4(1) mmrno3(1) mmrsoa(1)
+>>> REALM:         aerosol TABLE:          AERmon REGION:         default 04/14 ----> dms_AERmon(1) mmrnh4_AERmon(1) mmrno3_AERmon(1) mmrsoa_AERmon(1)
 
 
->>> TABLE:            Amon REGION:         default 02/56 ----> rtmt(1) sci(1)
+
+>>> REALM:           atmos TABLE:            Amon REGION:         default 02/56 ----> rtmt_Amon(1) sci_Amon(1)
 
 
->>> TABLE:            Lmon REGION:         default 01/18 ----> pastureFrac(1)
+
+>>> REALM:            land TABLE:            Lmon REGION:         default 01/18 ----> pastureFrac_Lmon(1)
+
 
 
 
 
 
 Some Statistics on actually written variables per frequency+shape...
-                          E3hrPt    default P1   1: cltcalipso
-     3hrPt    XY-na    --------            ---   1
+                                          AERmon    default P1   1: cdnc
+        aerosol        mon     XY-A       AERmon    default --   1
+        aerosol        mon     XY-A       AERmon   -------- --   1
+        aerosol        mon     XY-A     --------   -------- --   1
 
-                      HOMAL3hrPt    default P1   1: parasolCRefl
-     3hrPt  XY-sza5    --------            ---   1
+                                          AERmon    default P1   9: abs550aer od550aer ptp rlutaf rlutcsaf rsutaf rsutcsaf toz ztp
+        aerosol        mon    XY-na       AERmon    default --   9
+        aerosol        mon    XY-na       AERmon   -------- --   9
+                                        HOMALmon    default P1  12: RADabs550aer RADasy550aer RADod550aer RADssa550aer rldsaf rldscsaf rlusaf rluscsaf rsdsaf rsdscsaf rsusaf rsuscsaf
+        aerosol        mon    XY-na     HOMALmon    default --  21
+        aerosol        mon    XY-na     HOMALmon   -------- --  21
+        aerosol        mon    XY-na     --------   -------- --  21
 
-     3hrPt --------    --------            ---   2
-
-                             day    default P1   6: hur hus ta ua va wap
-       day    XY-P8    --------            ---   6
-
-                             day    default P1  30: CMIP6_albsrfc clt hfls hfss hurs hursmax hursmin huss mrro mrso mrsos pr prc prsn psl rlds rlus rlut rsds rsus sfcWind sfcWindmax snc snw tas tasmax tasmin tslsi uas vas
-       day    XY-na    --------            ---  30
-
-       day --------    --------            ---  36
-
-                              fx    default P1   4: areacella orog sftlakef sftlf
-        fx    XY-na    --------            ---   4
-
-        fx --------    --------            ---   4
-
-                          AERmon    default P1   1: cdnc
-                            Amon    default P1   3: cl cli clw
-       mon     XY-A    --------            ---   4
-
-                            Amon    default P1   1: mc
-       mon    XY-AH    --------            ---   1
-
-                            Amon    default P1   8: hur hus o3 ta ua va wap zg
-       mon   XY-P19    --------            ---   8
-
-                        HOMEPmon    default P1   6: hus ta ua va wap zg
-       mon  XY-P7HM    --------            ---   6
-
-                            Emon    default P1   1: mrsol
-                            Lmon    default P2   1: tsl
-       mon     XY-S    --------            ---   2
-
-                          AERmon    default P1   9: abs550aer od550aer ptp rlutaf rlutcsaf rsutaf rsutcsaf toz ztp
-                            Amon    default P1  39: ccb cct ci clivi clt clwvi evspsbl hfls hfss hurs huss pr prc prsn prw ps psl rlds rldscs rlus rlut rlutcs rsds rsdscs rsdt rsus rsuscs rsut rsutcs sbl sfcWind tas tasmax tasmin tauu tauv ts uas vas
-                            Emon    default P1   6: evspsblpot intuadse intuaw intvadse intvaw sfcWindmax
-                            Emon    default P2   1: mrtws
-                        HOMALmon    default P1  30: RADabs550aer RADasy550aer RADod550aer RADssa550aer albsrfc albsrfcLa cdnctop clth cltl cltm fsat icedLa icod lcod reffclitop reffclwtopcnrm rldsaf rldscsaf rlusaf rluscs rluscsaf rsdsaf rsdscsaf rsusaf rsuscsaf snct sndLa tmxlLa tsLa vegstress
-                           LImon    default P1   3: snc snd snw
-                           LImon    default P2   1: lwsnl
-                            Lmon    default P1  15: baresoilFrac cropFrac evspsblsoi evspsblveg gpp grassFrac mrfso mrro mrros mrso mrsos npp residualFrac tran treeFrac
-                            Lmon    default P2   1: prveg
-                         Nonemon    default P1   7: albsn cw dmlt et hfdsl mrsow rzwc
-       mon    XY-na    --------            --- 112
-
-                            Amon    default P1   3: ch4global co2mass n2oglobal
-       mon    na-na    --------            ---   3
-
-       mon --------    --------            --- 136
+        aerosol        mon --------     --------   -------- --  22
 
 
----------- --------    --------            --- 178
+        aerosol ---------- --------    --------   -------- --  22
+                                          E3hrPt    default P1   1: cltcalipso
+          atmos      3hrPt    XY-na       E3hrPt    default --   1
+          atmos      3hrPt    XY-na       E3hrPt   -------- --   1
+          atmos      3hrPt    XY-na     --------   -------- --   1
+
+                                      HOMAL3hrPt    default P1   1: parasolCRefl
+          atmos      3hrPt  XY-sza5   HOMAL3hrPt    default --   1
+          atmos      3hrPt  XY-sza5   HOMAL3hrPt   -------- --   1
+          atmos      3hrPt  XY-sza5     --------   -------- --   1
+
+          atmos      3hrPt --------     --------   -------- --   2
+
+                                             day    default P1   6: hur hus ta ua va wap
+          atmos        day    XY-P8          day    default --   6
+          atmos        day    XY-P8          day   -------- --   6
+          atmos        day    XY-P8     --------   -------- --   6
+
+                                             day    default P1  23: clt hfls hfss hurs hursmax hursmin huss pr prc prsn psl rlds rlus rlut rsds rsus sfcWind sfcWindmax tas tasmax tasmin uas vas
+          atmos        day    XY-na          day    default --  23
+          atmos        day    XY-na          day   -------- --  23
+          atmos        day    XY-na     --------   -------- --  23
+
+          atmos        day --------     --------   -------- --  29
+
+                                              fx    default P1   2: sftlakef sftlf
+          atmos         fx    XY-na           fx    default --   2
+          atmos         fx    XY-na           fx   -------- --   2
+          atmos         fx    XY-na     --------   -------- --   2
+
+          atmos         fx --------     --------   -------- --   2
+
+                                            Amon    default P1   3: cl cli clw
+          atmos        mon     XY-A         Amon    default --   3
+          atmos        mon     XY-A         Amon   -------- --   3
+          atmos        mon     XY-A     --------   -------- --   3
+
+                                            Amon    default P1   1: mc
+          atmos        mon    XY-AH         Amon    default --   1
+          atmos        mon    XY-AH         Amon   -------- --   1
+          atmos        mon    XY-AH     --------   -------- --   1
+
+                                            Amon    default P1   7: hur hus ta ua va wap zg
+          atmos        mon   XY-P19         Amon    default --   7
+          atmos        mon   XY-P19         Amon   -------- --   7
+          atmos        mon   XY-P19     --------   -------- --   7
+
+                                        HOMEPmon    default P1   6: hus ta ua va wap zg
+          atmos        mon  XY-P7HM     HOMEPmon    default --   6
+          atmos        mon  XY-P7HM     HOMEPmon   -------- --   6
+          atmos        mon  XY-P7HM     --------   -------- --   6
+
+                                            Amon    default P1  38: ccb cct ci clivi clt clwvi evspsbl hfls hfss hurs huss pr prc prsn prw ps psl rlds rldscs rlus rlut rlutcs rsds rsdscs rsdt rsus rsuscs rsut rsutcs sfcWind tas tasmax tasmin tauu tauv ts uas vas
+          atmos        mon    XY-na         Amon    default --  38
+          atmos        mon    XY-na         Amon   -------- --  38
+                                            Emon    default P1   5: intuadse intuaw intvadse intvaw sfcWindmax
+          atmos        mon    XY-na         Emon    default --  43
+          atmos        mon    XY-na         Emon   -------- --  43
+                                        HOMALmon    default P1  10: albsrfc cdnctop clth cltl cltm icod lcod reffclitop reffclwtopcnrm rluscs
+          atmos        mon    XY-na     HOMALmon    default --  53
+          atmos        mon    XY-na     HOMALmon   -------- --  53
+                                         Nonemon    default P1   1: hfdsl
+          atmos        mon    XY-na      Nonemon    default --  54
+          atmos        mon    XY-na      Nonemon   -------- --  54
+          atmos        mon    XY-na     --------   -------- --  54
+
+                                            Amon    default P1   1: co2mass
+          atmos        mon    na-na         Amon    default --   1
+          atmos        mon    na-na         Amon   -------- --   1
+          atmos        mon    na-na     --------   -------- --   1
+
+          atmos        mon --------     --------   -------- --  72
+
+
+          atmos ---------- --------    --------   -------- -- 105
+                                            Amon    default P1   1: o3
+atmos atmosChem        mon   XY-P19         Amon    default --   1
+atmos atmosChem        mon   XY-P19         Amon   -------- --   1
+atmos atmosChem        mon   XY-P19     --------   -------- --   1
+
+                                            Amon    default P1   2: ch4global n2oglobal
+atmos atmosChem        mon    na-na         Amon    default --   2
+atmos atmosChem        mon    na-na         Amon   -------- --   2
+atmos atmosChem        mon    na-na     --------   -------- --   2
+
+atmos atmosChem        mon --------     --------   -------- --   3
+
+
+atmos atmosChem ---------- --------    --------   -------- --   3
+                                              fx    default P1   1: areacella
+     atmos land         fx    XY-na           fx    default --   1
+     atmos land         fx    XY-na           fx   -------- --   1
+     atmos land         fx    XY-na     --------   -------- --   1
+
+     atmos land         fx --------     --------   -------- --   1
+
+
+     atmos land ---------- --------    --------   -------- --   1
+                                             day    default P1   5: CMIP6_albsrfc mrro mrso mrsos tslsi
+           land        day    XY-na          day    default --   5
+           land        day    XY-na          day   -------- --   5
+           land        day    XY-na     --------   -------- --   5
+
+           land        day --------     --------   -------- --   5
+
+                                              fx    default P1   1: orog
+           land         fx    XY-na           fx    default --   1
+           land         fx    XY-na           fx   -------- --   1
+           land         fx    XY-na     --------   -------- --   1
+
+           land         fx --------     --------   -------- --   1
+
+                                            Emon    default P1   1: mrsol
+           land        mon     XY-S         Emon    default --   1
+           land        mon     XY-S         Emon   -------- --   1
+                                            Lmon    default P2   1: tsl
+           land        mon     XY-S         Lmon    default --   2
+           land        mon     XY-S         Lmon   -------- --   2
+           land        mon     XY-S     --------   -------- --   2
+
+                                            Emon    default P1   1: evspsblpot
+                                            Emon    default P2   1: mrtws
+           land        mon    XY-na         Emon    default --   2
+           land        mon    XY-na         Emon   -------- --   2
+                                        HOMALmon    default P1   8: albsrfcLa fsat icedLa snct sndLa tmxlLa tsLa vegstress
+           land        mon    XY-na     HOMALmon    default --  10
+           land        mon    XY-na     HOMALmon   -------- --  10
+                                            Lmon    default P1  14: baresoilFrac cropFrac evspsblsoi evspsblveg gpp grassFrac mrro mrros mrso mrsos npp residualFrac tran treeFrac
+                                            Lmon    default P2   1: prveg
+           land        mon    XY-na         Lmon    default --  25
+           land        mon    XY-na         Lmon   -------- --  25
+                                         Nonemon    default P1   6: albsn cw dmlt et mrsow rzwc
+           land        mon    XY-na      Nonemon    default --  31
+           land        mon    XY-na      Nonemon   -------- --  31
+           land        mon    XY-na     --------   -------- --  31
+
+           land        mon --------     --------   -------- --  33
+
+
+           land ---------- --------    --------   -------- --  39
+                                             day    default P1   2: snc snw
+   land landIce        day    XY-na          day    default --   2
+   land landIce        day    XY-na          day   -------- --   2
+   land landIce        day    XY-na     --------   -------- --   2
+
+   land landIce        day --------     --------   -------- --   2
+
+                                           LImon    default P1   3: snc snd snw
+                                           LImon    default P2   1: lwsnl
+   land landIce        mon    XY-na        LImon    default --   4
+   land landIce        mon    XY-na        LImon   -------- --   4
+                                            Lmon    default P1   1: mrfso
+   land landIce        mon    XY-na         Lmon    default --   5
+   land landIce        mon    XY-na         Lmon   -------- --   5
+   land landIce        mon    XY-na     --------   -------- --   5
+
+   land landIce        mon --------     --------   -------- --   5
+
+
+   land landIce ---------- --------    --------   -------- --   7
+                                            Amon    default P1   1: sbl
+        landIce        mon    XY-na         Amon    default --   1
+        landIce        mon    XY-na         Amon   -------- --   1
+        landIce        mon    XY-na     --------   -------- --   1
+
+        landIce        mon --------     --------   -------- --   1
+
+
+        landIce ---------- --------    --------   -------- --   1
+
+     ---------- ---------- --------    --------   -------- -- 178
 
 
 Some Statistics on actually written variables per variable...
@@ -830,19 +963,27 @@ file_def written as current_directory/test_a4SST_AGCM_1960/test_outputs/dr2xml_t
 
 
 Some Statistics on actually written variables per frequency+shape...
-                            Eday    default P1   1: rivo
-       day    XY-na    --------            ---   1
+                                            Eday    default P1   1: rivo
+           land        day    XY-na         Eday    default --   1
+           land        day    XY-na         Eday   -------- --   1
+           land        day    XY-na     --------   -------- --   1
 
-       day --------    --------            ---   1
+           land        day --------     --------   -------- --   1
 
-                            Emon    default P2   1: wtd
-                        HOMALmon    default P1   2: fldf fwtd
-       mon    XY-na    --------            ---   3
+                                            Emon    default P2   1: wtd
+           land        mon    XY-na         Emon    default --   1
+           land        mon    XY-na         Emon   -------- --   1
+                                        HOMALmon    default P1   2: fldf fwtd
+           land        mon    XY-na     HOMALmon    default --   3
+           land        mon    XY-na     HOMALmon   -------- --   3
+           land        mon    XY-na     --------   -------- --   3
 
-       mon --------    --------            ---   3
+           land        mon --------     --------   -------- --   3
 
 
----------- --------    --------            ---   4
+           land ---------- --------    --------   -------- --   4
+
+     ---------- ---------- --------    --------   -------- --   4
 
 
 Some Statistics on actually written variables per variable...

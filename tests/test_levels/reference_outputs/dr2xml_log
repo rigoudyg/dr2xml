@@ -50,29 +50,38 @@ file_def written as current_directory/test_levels/test_outputs/dr2xml_surfex.xml
 
 
 Some Statistics on actually written variables per frequency+shape...
-                             day    default P1   1: zg50
-       day    XY-HG    --------            ---   1
+                                             day    default P1   1: zg
+          atmos        day    XY-HG          day    default --   1
+          atmos        day    XY-HG          day   -------- --   1
+          atmos        day    XY-HG     --------   -------- --   1
 
-       day --------    --------            ---   1
+          atmos        day --------     --------   -------- --   1
 
-                            Amon    default P1   1: zg
-       mon   XY-P19    --------            ---   1
+                                            Amon    default P1   1: zg
+          atmos        mon   XY-P19         Amon    default --   1
+          atmos        mon   XY-P19         Amon   -------- --   1
+          atmos        mon   XY-P19     --------   -------- --   1
 
-       mon --------    --------            ---   1
+          atmos        mon --------     --------   -------- --   1
 
 
----------- --------    --------            ---   2
+          atmos ---------- --------    --------   -------- --   2
+
+     ---------- ---------- --------    --------   -------- --   2
 
 
 Some Statistics on actually written variables per variable...
 ----------------
 --- VARNAME: zg: Geopotential Height
 ----------------
+              * day_day_default_XY-HG_1 zg
               * mon_Amon_default_XY-P19_1 zg
-------------------
---- VARNAME: zg50: empty in DR 01.00.21.post1
-------------------
-              * day_day_default_XY-HG_1 zg50
+              Warning: several long names are available:
+                  - Geopotential Height
+                  - empty in DR 01.00.21.post1
+              Warning: several standard names are available:
+                  - None
+                  - geopotential_height
 
  **************************************************
 *
@@ -110,7 +119,7 @@ file_def written as current_directory/test_levels/test_outputs/dr2xml_trip.xml
 
 Some Statistics on actually written variables per frequency+shape...
 
----------- --------    --------            ---   0
+     ---------- ---------- --------    --------   -------- --   0
 
 
 Some Statistics on actually written variables per variable...

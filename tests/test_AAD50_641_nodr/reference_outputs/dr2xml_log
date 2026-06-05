@@ -311,78 +311,138 @@ file_def written as current_directory/test_AAD50_641_nodr/test_outputs/dr2xml_su
 
 
 Some Statistics on actually written variables per frequency+shape...
-                      HOMAL1hrPt    default P1   1: tssea
-       1hr    XY-na    --------            ---   1
+                                        HOMALday    default P1   8: rldsaf rldscsaf rlusaf rluscsaf rsdsaf rsdscsaf rsusaf rsuscsaf
+        aerosol        day    XY-na     HOMALday    default --   8
+        aerosol        day    XY-na     HOMALday   -------- --   8
+        aerosol        day    XY-na     --------   -------- --   8
 
-       1hr --------    --------            ---   1
+        aerosol        day --------     --------   -------- --   8
 
-                    HOME6hrPlevPt    default P1   5: hus200 ta200 ua200 va200 zg200
-       6hr XY-P200HM    --------            ---   5
+                                        HOMALmon    default P1  12: RADabs550aer RADasy550aer RADod550aer RADssa550aer rldsaf rldscsaf rlusaf rluscsaf rsdsaf rsdscsaf rsusaf rsuscsaf
+        aerosol        mon    XY-na     HOMALmon    default --  12
+        aerosol        mon    XY-na     HOMALmon   -------- --  12
+        aerosol        mon    XY-na     --------   -------- --  12
 
-                    HOME6hrPlevPt    default P1   5: hus500 ta500 ua500 va500 zg500
-       6hr XY-P500HM    --------            ---   5
-
-                    HOME6hrPlevPt    default P1   5: hus700 ta700 ua700 va700 zg700
-       6hr XY-P700HM    --------            ---   5
-
-                    HOME6hrPlevPt    default P1   5: hus850 ta850 ua850 va850 zg850
-       6hr XY-P850HM    --------            ---   5
-
-                    HOME6hrPlevPt    default P1   5: hus925 ta925 ua925 va925 zg925
-       6hr XY-P925HM    --------            ---   5
-
-                        HOMAL6hr    default P1   3: clth cltl cltm
-       6hr    XY-na    --------            ---   3
-
-       6hr --------    --------            ---  28
-
-                        HOMAL6hr    default P1   2: mrfso mrso
-     6hrPt    XY-na    --------            ---   2
-
-     6hrPt --------    --------            ---   2
-
-                        HOMEPday    default P1   5: hus200 ta200 ua200 va200 zg200
-       day XY-P200HM    --------            ---   5
-
-                        HOMEPday    default P1   5: hus500 ta500 ua500 va500 zg500
-       day XY-P500HM    --------            ---   5
-
-                        HOMEPday    default P1   5: hus700 ta700 ua700 va700 zg700
-       day XY-P700HM    --------            ---   5
-
-                        HOMEPday    default P1   5: hus850 ta850 ua850 va850 zg850
-       day XY-P850HM    --------            ---   5
-
-                        HOMEPday    default P1   5: hus925 ta925 ua925 va925 zg925
-       day XY-P925HM    --------            ---   5
-
-                        HOMALday    default P1  17: clth cltl cltm husll rldsaf rldscsaf rlusaf rluscs rluscsaf rsdsaf rsdscsaf rsusaf rsuscsaf tall tssea uall vall
-       day    XY-na    --------            ---  17
-
-       day --------    --------            ---  42
-
-                        HOMEPmon    default P1   7: hur200 hus200 ta200 ua200 va200 wap200 zg200
-       mon XY-P200HM    --------            ---   7
-
-                        HOMEPmon    default P1   7: hur500 hus500 ta500 ua500 va500 wap500 zg500
-       mon XY-P500HM    --------            ---   7
-
-                        HOMEPmon    default P1   7: hur700 hus700 ta700 ua700 va700 wap700 zg700
-       mon XY-P700HM    --------            ---   7
-
-                        HOMEPmon    default P1   7: hur850 hus850 ta850 ua850 va850 wap850 zg850
-       mon XY-P850HM    --------            ---   7
-
-                        HOMEPmon    default P1   7: hur925 hus925 ta925 ua925 va925 wap925 zg925
-       mon XY-P925HM    --------            ---   7
-
-                        HOMALmon    default P1  24: RADabs550aer RADasy550aer RADod550aer RADssa550aer cdnctop clth cltl cltm husll reffclitop reffclwtopcnrm rldsaf rldscsaf rlusaf rluscs rluscsaf rsdsaf rsdscsaf rsusaf rsuscsaf tall tssea uall vall
-       mon    XY-na    --------            ---  24
-
-       mon --------    --------            ---  59
+        aerosol        mon --------     --------   -------- --  12
 
 
----------- --------    --------            --- 132
+        aerosol ---------- --------    --------   -------- --  20
+                                      HOMAL1hrPt    default P1   1: tssea
+          atmos        1hr    XY-na   HOMAL1hrPt    default --   1
+          atmos        1hr    XY-na   HOMAL1hrPt   -------- --   1
+          atmos        1hr    XY-na     --------   -------- --   1
+
+          atmos        1hr --------     --------   -------- --   1
+
+                                    HOME6hrPlevPt    default P1   5: hus200 ta200 ua200 va200 zg200
+          atmos        6hr XY-P200HM HOME6hrPlevPt    default --   5
+          atmos        6hr XY-P200HM HOME6hrPlevPt   -------- --   5
+          atmos        6hr XY-P200HM     --------   -------- --   5
+
+                                    HOME6hrPlevPt    default P1   5: hus500 ta500 ua500 va500 zg500
+          atmos        6hr XY-P500HM HOME6hrPlevPt    default --   5
+          atmos        6hr XY-P500HM HOME6hrPlevPt   -------- --   5
+          atmos        6hr XY-P500HM     --------   -------- --   5
+
+                                    HOME6hrPlevPt    default P1   5: hus700 ta700 ua700 va700 zg700
+          atmos        6hr XY-P700HM HOME6hrPlevPt    default --   5
+          atmos        6hr XY-P700HM HOME6hrPlevPt   -------- --   5
+          atmos        6hr XY-P700HM     --------   -------- --   5
+
+                                    HOME6hrPlevPt    default P1   5: hus850 ta850 ua850 va850 zg850
+          atmos        6hr XY-P850HM HOME6hrPlevPt    default --   5
+          atmos        6hr XY-P850HM HOME6hrPlevPt   -------- --   5
+          atmos        6hr XY-P850HM     --------   -------- --   5
+
+                                    HOME6hrPlevPt    default P1   5: hus925 ta925 ua925 va925 zg925
+          atmos        6hr XY-P925HM HOME6hrPlevPt    default --   5
+          atmos        6hr XY-P925HM HOME6hrPlevPt   -------- --   5
+          atmos        6hr XY-P925HM     --------   -------- --   5
+
+                                        HOMAL6hr    default P1   3: clth cltl cltm
+          atmos        6hr    XY-na     HOMAL6hr    default --   3
+          atmos        6hr    XY-na     HOMAL6hr   -------- --   3
+          atmos        6hr    XY-na     --------   -------- --   3
+
+          atmos        6hr --------     --------   -------- --  28
+
+                                        HOMEPday    default P1   5: hus200 ta200 ua200 va200 zg200
+          atmos        day XY-P200HM     HOMEPday    default --   5
+          atmos        day XY-P200HM     HOMEPday   -------- --   5
+          atmos        day XY-P200HM     --------   -------- --   5
+
+                                        HOMEPday    default P1   5: hus500 ta500 ua500 va500 zg500
+          atmos        day XY-P500HM     HOMEPday    default --   5
+          atmos        day XY-P500HM     HOMEPday   -------- --   5
+          atmos        day XY-P500HM     --------   -------- --   5
+
+                                        HOMEPday    default P1   5: hus700 ta700 ua700 va700 zg700
+          atmos        day XY-P700HM     HOMEPday    default --   5
+          atmos        day XY-P700HM     HOMEPday   -------- --   5
+          atmos        day XY-P700HM     --------   -------- --   5
+
+                                        HOMEPday    default P1   5: hus850 ta850 ua850 va850 zg850
+          atmos        day XY-P850HM     HOMEPday    default --   5
+          atmos        day XY-P850HM     HOMEPday   -------- --   5
+          atmos        day XY-P850HM     --------   -------- --   5
+
+                                        HOMEPday    default P1   5: hus925 ta925 ua925 va925 zg925
+          atmos        day XY-P925HM     HOMEPday    default --   5
+          atmos        day XY-P925HM     HOMEPday   -------- --   5
+          atmos        day XY-P925HM     --------   -------- --   5
+
+                                        HOMALday    default P1   9: clth cltl cltm husll rluscs tall tssea uall vall
+          atmos        day    XY-na     HOMALday    default --   9
+          atmos        day    XY-na     HOMALday   -------- --   9
+          atmos        day    XY-na     --------   -------- --   9
+
+          atmos        day --------     --------   -------- --  34
+
+                                        HOMEPmon    default P1   7: hur200 hus200 ta200 ua200 va200 wap200 zg200
+          atmos        mon XY-P200HM     HOMEPmon    default --   7
+          atmos        mon XY-P200HM     HOMEPmon   -------- --   7
+          atmos        mon XY-P200HM     --------   -------- --   7
+
+                                        HOMEPmon    default P1   7: hur500 hus500 ta500 ua500 va500 wap500 zg500
+          atmos        mon XY-P500HM     HOMEPmon    default --   7
+          atmos        mon XY-P500HM     HOMEPmon   -------- --   7
+          atmos        mon XY-P500HM     --------   -------- --   7
+
+                                        HOMEPmon    default P1   7: hur700 hus700 ta700 ua700 va700 wap700 zg700
+          atmos        mon XY-P700HM     HOMEPmon    default --   7
+          atmos        mon XY-P700HM     HOMEPmon   -------- --   7
+          atmos        mon XY-P700HM     --------   -------- --   7
+
+                                        HOMEPmon    default P1   7: hur850 hus850 ta850 ua850 va850 wap850 zg850
+          atmos        mon XY-P850HM     HOMEPmon    default --   7
+          atmos        mon XY-P850HM     HOMEPmon   -------- --   7
+          atmos        mon XY-P850HM     --------   -------- --   7
+
+                                        HOMEPmon    default P1   7: hur925 hus925 ta925 ua925 va925 wap925 zg925
+          atmos        mon XY-P925HM     HOMEPmon    default --   7
+          atmos        mon XY-P925HM     HOMEPmon   -------- --   7
+          atmos        mon XY-P925HM     --------   -------- --   7
+
+                                        HOMALmon    default P1  12: cdnctop clth cltl cltm husll reffclitop reffclwtopcnrm rluscs tall tssea uall vall
+          atmos        mon    XY-na     HOMALmon    default --  12
+          atmos        mon    XY-na     HOMALmon   -------- --  12
+          atmos        mon    XY-na     --------   -------- --  12
+
+          atmos        mon --------     --------   -------- --  47
+
+
+          atmos ---------- --------    --------   -------- -- 110
+                                        HOMAL6hr    default P1   2: mrfso mrso
+           land      6hrPt    XY-na     HOMAL6hr    default --   2
+           land      6hrPt    XY-na     HOMAL6hr   -------- --   2
+           land      6hrPt    XY-na     --------   -------- --   2
+
+           land      6hrPt --------     --------   -------- --   2
+
+
+           land ---------- --------    --------   -------- --   2
+
+     ---------- ---------- --------    --------   -------- -- 132
 
 
 Some Statistics on actually written variables per variable...
@@ -1006,7 +1066,7 @@ file_def written as current_directory/test_AAD50_641_nodr/test_outputs/dr2xml_tr
 
 Some Statistics on actually written variables per frequency+shape...
 
----------- --------    --------            ---   0
+     ---------- ---------- --------    --------   -------- --   0
 
 
 Some Statistics on actually written variables per variable...

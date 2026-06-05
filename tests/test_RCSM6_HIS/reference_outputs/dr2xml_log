@@ -98,8 +98,6 @@ OK current_directory/test_RCSM6_HIS/input/xml/ping_trip.xml
 Cannot normalize an axis in grid grid_T_3D: no axis_ref for axis 				<axis id="deptht"/>
 Cannot normalize an axis in grid grid_T_3D: no axis_ref for axis 				<axis id="deptht"/>
 Cannot normalize an axis in grid grid_W_3D: no axis_ref for axis 				<axis id="depthw"/>
-Cannot normalize an axis in grid grid_T_3D: no axis_ref for axis 				<axis id="deptht"/>
-Cannot normalize an axis in grid grid_T_3D: no axis_ref for axis 				<axis id="deptht"/>
 Cannot normalize an axis in grid grid_U_3D: no axis_ref for axis 				<axis id="depthu"/>
 Cannot normalize an axis in grid grid_V_3D: no axis_ref for axis 				<axis id="depthv"/>
 Cannot normalize an axis in grid grid_W_3D: no axis_ref for axis 				<axis id="depthw"/>
@@ -119,6 +117,8 @@ Cannot normalize an axis in grid grid_T_3D: no axis_ref for axis 				<axis id="d
 Cannot normalize an axis in grid grid_T_3D: no axis_ref for axis 				<axis id="deptht"/>
 Cannot normalize an axis in grid grid_T_3D: no axis_ref for axis 				<axis id="deptht"/>
 Cannot normalize an axis in grid grid_T_3D: no axis_ref for axis 				<axis id="deptht"/>
+Cannot normalize an axis in grid grid_T_3D: no axis_ref for axis 				<axis id="deptht"/>
+Cannot normalize an axis in grid grid_T_3D: no axis_ref for axis 				<axis id="deptht"/>
 Cannot normalize an axis in grid grid_U_3D: no axis_ref for axis 				<axis id="depthu"/>
 Cannot normalize an axis in grid grid_U_3D: no axis_ref for axis 				<axis id="depthu"/>
 Cannot normalize an axis in grid grid_U_3D: no axis_ref for axis 				<axis id="depthu"/>
@@ -140,49 +140,87 @@ Cannot normalize an axis in grid grid_V_3D: no axis_ref for axis 				<axis id="d
 Cannot normalize an axis in grid grid_V_3D: no axis_ref for axis 				<axis id="depthv"/>
 Cannot normalize an axis in grid grid_V_3D: no axis_ref for axis 				<axis id="depthv"/>
 Cannot normalize an axis in grid grid_V_3D: no axis_ref for axis 				<axis id="depthv"/>
-Cannot normalize an axis in grid grid_T_3D: no axis_ref for axis 				<axis id="deptht"/>
-Cannot normalize an axis in grid grid_T_3D: no axis_ref for axis 				<axis id="deptht"/>
 Cannot normalize an axis in grid grid_U_3D: no axis_ref for axis 				<axis id="depthu"/>
 Cannot normalize an axis in grid grid_V_3D: no axis_ref for axis 				<axis id="depthv"/>
 Cannot normalize an axis in grid grid_W_3D: no axis_ref for axis 				<axis id="depthw"/>
+Cannot normalize an axis in grid grid_T_3D: no axis_ref for axis 				<axis id="deptht"/>
+Cannot normalize an axis in grid grid_T_3D: no axis_ref for axis 				<axis id="deptht"/>
 Cannot normalize an axis in grid grid_W_3D: no axis_ref for axis 				<axis id="depthw"/>
 
 file_def written as current_directory/test_RCSM6_HIS/test_outputs/dr2xml_nemo.xml
 
 
 Some Statistics on actually written variables per frequency+shape...
-                         None1hr    default P3   1: tos
-       1hr    XY-na    --------            ---   1
+                                         None1hr    default P3   1: tos
+          ocean        1hr    XY-na      None1hr    default --   1
+          ocean        1hr    XY-na      None1hr   -------- --   1
+          ocean        1hr    XY-na     --------   -------- --   1
 
-       1hr --------    --------            ---   1
+          ocean        1hr --------     --------   -------- --   1
 
-                         HOMOday    default P1   5: diftrblo2d diftrxylo2d rhop votke votkeavt
-                         Noneday    default P1   5: so thetao uo vo wo
-       day     XY-O    --------            ---  10
+                                         HOMOday    default P1   5: diftrblo2d diftrxylo2d rhop votke votkeavt
+          ocean        day     XY-O      HOMOday    default --   5
+          ocean        day     XY-O      HOMOday   -------- --   5
+                                         Noneday    default P1   5: so thetao uo vo wo
+          ocean        day     XY-O      Noneday    default --  10
+          ocean        day     XY-O      Noneday   -------- --  10
+          ocean        day     XY-O     --------   -------- --  10
 
-                         HOMOday    default P1  11: mxldepth somixhgt tml tmlatf tmlfor tmlldf tmlres tmltot tmlyad tmlzad tmlzdf
-                         Noneday    default P1   5: hfds sfdsi wfo wfonocorr zos
-                         Noneday    default P2   2: friver rsntds
-                         Noneday    default P3   2: sos tos
-       day    XY-na    --------            ---  20
+                                         HOMOday    default P1  11: mxldepth somixhgt tml tmlatf tmlfor tmlldf tmlres tmltot tmlyad tmlzad tmlzdf
+          ocean        day    XY-na      HOMOday    default --  11
+          ocean        day    XY-na      HOMOday   -------- --  11
+                                         Noneday    default P1   4: hfds wfo wfonocorr zos
+                                         Noneday    default P2   2: friver rsntds
+                                         Noneday    default P3   2: sos tos
+          ocean        day    XY-na      Noneday    default --  19
+          ocean        day    XY-na      Noneday   -------- --  19
+          ocean        day    XY-na     --------   -------- --  19
 
-       day --------    --------            ---  30
+          ocean        day --------     --------   -------- --  29
 
-                         HOMOmon    default P1  34: rhop strdldf strdtot strdxad strdyad strdzad strdzdf ttrdldf ttrdtot ttrdxad ttrdyad ttrdzad ttrdzdf utrdbfr utrdhpg utrdkeg utrdldf utrdpvo utrdrvo utrdspg utrdtot utrdzad utrdzdf voavtbn2 vtrdbfr vtrdhpg vtrdkeg vtrdldf vtrdpvo vtrdrvo vtrdspg vtrdtot vtrdzad vtrdzdf
-                         Nonemon    default P1   5: so thetao uo vo wo
-                            Omon    default P1   1: obvfsq
-       mon     XY-O    --------            ---  40
+                                         HOMOmon    default P1  34: rhop strdldf strdtot strdxad strdyad strdzad strdzdf ttrdldf ttrdtot ttrdxad ttrdyad ttrdzad ttrdzdf utrdbfr utrdhpg utrdkeg utrdldf utrdpvo utrdrvo utrdspg utrdtot utrdzad utrdzdf voavtbn2 vtrdbfr vtrdhpg vtrdkeg vtrdldf vtrdpvo vtrdrvo vtrdspg vtrdtot vtrdzad vtrdzdf
+          ocean        mon     XY-O      HOMOmon    default --  34
+          ocean        mon     XY-O      HOMOmon   -------- --  34
+                                         Nonemon    default P1   5: so thetao uo vo wo
+          ocean        mon     XY-O      Nonemon    default --  39
+          ocean        mon     XY-O      Nonemon   -------- --  39
+                                            Omon    default P1   1: obvfsq
+          ocean        mon     XY-O         Omon    default --  40
+          ocean        mon     XY-O         Omon   -------- --  40
+          ocean        mon     XY-O     --------   -------- --  40
 
-                         HOMOmon    default P1   9: strdatf strdcdt strdsad ttrdatf ttrdqns ttrdqsr ttrdsad utrdtau vtrdtau
-                         Nonemon    default P1   5: hfds sfdsi wfo wfonocorr zos
-                         Nonemon    default P2   2: friver rsntds
-                         Nonemon    default P3   2: sos tos
-       mon    XY-na    --------            ---  18
+                                         HOMOmon    default P1   9: strdatf strdcdt strdsad ttrdatf ttrdqns ttrdqsr ttrdsad utrdtau vtrdtau
+          ocean        mon    XY-na      HOMOmon    default --   9
+          ocean        mon    XY-na      HOMOmon   -------- --   9
+                                         Nonemon    default P1   4: hfds wfo wfonocorr zos
+                                         Nonemon    default P2   2: friver rsntds
+                                         Nonemon    default P3   2: sos tos
+          ocean        mon    XY-na      Nonemon    default --  17
+          ocean        mon    XY-na      Nonemon   -------- --  17
+          ocean        mon    XY-na     --------   -------- --  17
 
-       mon --------    --------            ---  58
+          ocean        mon --------     --------   -------- --  57
 
 
----------- --------    --------            ---  89
+          ocean ---------- --------    --------   -------- --  87
+                                         Noneday    default P1   1: sfdsi
+   ocean seaIce        day    XY-na      Noneday    default --   1
+   ocean seaIce        day    XY-na      Noneday   -------- --   1
+   ocean seaIce        day    XY-na     --------   -------- --   1
+
+   ocean seaIce        day --------     --------   -------- --   1
+
+                                         Nonemon    default P1   1: sfdsi
+   ocean seaIce        mon    XY-na      Nonemon    default --   1
+   ocean seaIce        mon    XY-na      Nonemon   -------- --   1
+   ocean seaIce        mon    XY-na     --------   -------- --   1
+
+   ocean seaIce        mon --------     --------   -------- --   1
+
+
+   ocean seaIce ---------- --------    --------   -------- --   2
+
+     ---------- ---------- --------    --------   -------- --  89
 
 
 Some Statistics on actually written variables per variable...
@@ -595,47 +633,132 @@ file_def written as current_directory/test_RCSM6_HIS/test_outputs/dr2xml_surfex.
 
 
 Some Statistics on actually written variables per frequency+shape...
-                              fx    default P1   6: areacella mrsofc orog rootd sftgif sftlf
-        fx    XY-na    --------            ---   6
+                                          AERmon    default P1   1: cdnc
+        aerosol        mon     XY-A       AERmon    default --   1
+        aerosol        mon     XY-A       AERmon   -------- --   1
+        aerosol        mon     XY-A     --------   -------- --   1
 
-        fx --------    --------            ---   6
+                                          AERmon    default P1  14: cltc lwp od550aer od550bc od550dust od550no3 od550oa od550so4 od550ss rlutaf rlutcsaf rsutaf rsutcsaf toz
+        aerosol        mon    XY-na       AERmon    default --  14
+        aerosol        mon    XY-na       AERmon   -------- --  14
+                                        HOMALmon    default P1  18: RADabs550aer RADasy550aer RADod550aer RADssa550aer od550dustbin1 od550dustbin2 od550nh4 od550no3bin1 od550ssbin1 od550ssbin2 rldsaf rldscsaf rlusaf rluscsaf rsdsaf rsdscsaf rsusaf rsuscsaf
+        aerosol        mon    XY-na     HOMALmon    default --  32
+        aerosol        mon    XY-na     HOMALmon   -------- --  32
+        aerosol        mon    XY-na     --------   -------- --  32
 
-                          AERmon    default P1   1: cdnc
-       mon     XY-A    --------            ---   1
-
-                            Amon    default P1   7: hur hus ta ua va wap zg
-       mon   XY-P19    --------            ---   7
-
-                        HOMEPmon    default P1   7: hur200 hus200 ta200 ua200 va200 wap200 zg200
-       mon XY-P200HM    --------            ---   7
-
-                        HOMEPmon    default P1   7: hur500 hus500 ta500 ua500 va500 wap500 zg500
-       mon XY-P500HM    --------            ---   7
-
-                        HOMEPmon    default P1   7: hur700 hus700 ta700 ua700 va700 wap700 zg700
-       mon XY-P700HM    --------            ---   7
-
-                        HOMEPmon    default P1   7: hur850 hus850 ta850 ua850 va850 wap850 zg850
-       mon XY-P850HM    --------            ---   7
-
-                        HOMEPmon    default P1   7: hur925 hus925 ta925 ua925 va925 wap925 zg925
-       mon XY-P925HM    --------            ---   7
-
-                          AERmon    default P1  14: cltc lwp od550aer od550bc od550dust od550no3 od550oa od550so4 od550ss rlutaf rlutcsaf rsutaf rsutcsaf toz
-                            Amon    default P1  34: clivi clt clwvi evspsbl hfls hfss hurs pr prc prsn prw ps psl rlds rldscs rlus rlut rlutcs rsds rsdscs rsdt rsus rsuscs rsut rsutcs sfcWind tas tasmax tasmin tauu tauv ts uas vas
-                            Emon    default P1   1: sfcWindmax
-                            Emon    default P2   1: mrtws
-                        HOMALmon    default P1  31: RADabs550aer RADasy550aer RADod550aer RADssa550aer cdnctop clth cltl cltm husll od550dustbin1 od550dustbin2 od550nh4 od550no3bin1 od550ssbin1 od550ssbin2 reffclitop reffclwtopcnrm rldsaf rldscsaf rlusaf rluscs rluscsaf rsdsaf rsdscsaf rsusaf rsuscsaf snct tall tssea uall vall
-                           LImon    default P1   5: agesno snc snd snm snw
-                            Lmon    default P1   4: mrfso mrro mrros mrso
-                         Nonemon    default P1   2: tsland tsns
-                           SImon    default P1   1: siconca
-       mon    XY-na    --------            ---  93
-
-       mon --------    --------            --- 136
+        aerosol        mon --------     --------   -------- --  33
 
 
----------- --------    --------            --- 142
+        aerosol ---------- --------    --------   -------- --  33
+                                              fx    default P1   1: sftlf
+          atmos         fx    XY-na           fx    default --   1
+          atmos         fx    XY-na           fx   -------- --   1
+          atmos         fx    XY-na     --------   -------- --   1
+
+          atmos         fx --------     --------   -------- --   1
+
+                                            Amon    default P1   7: hur hus ta ua va wap zg
+          atmos        mon   XY-P19         Amon    default --   7
+          atmos        mon   XY-P19         Amon   -------- --   7
+          atmos        mon   XY-P19     --------   -------- --   7
+
+                                        HOMEPmon    default P1   7: hur200 hus200 ta200 ua200 va200 wap200 zg200
+          atmos        mon XY-P200HM     HOMEPmon    default --   7
+          atmos        mon XY-P200HM     HOMEPmon   -------- --   7
+          atmos        mon XY-P200HM     --------   -------- --   7
+
+                                        HOMEPmon    default P1   7: hur500 hus500 ta500 ua500 va500 wap500 zg500
+          atmos        mon XY-P500HM     HOMEPmon    default --   7
+          atmos        mon XY-P500HM     HOMEPmon   -------- --   7
+          atmos        mon XY-P500HM     --------   -------- --   7
+
+                                        HOMEPmon    default P1   7: hur700 hus700 ta700 ua700 va700 wap700 zg700
+          atmos        mon XY-P700HM     HOMEPmon    default --   7
+          atmos        mon XY-P700HM     HOMEPmon   -------- --   7
+          atmos        mon XY-P700HM     --------   -------- --   7
+
+                                        HOMEPmon    default P1   7: hur850 hus850 ta850 ua850 va850 wap850 zg850
+          atmos        mon XY-P850HM     HOMEPmon    default --   7
+          atmos        mon XY-P850HM     HOMEPmon   -------- --   7
+          atmos        mon XY-P850HM     --------   -------- --   7
+
+                                        HOMEPmon    default P1   7: hur925 hus925 ta925 ua925 va925 wap925 zg925
+          atmos        mon XY-P925HM     HOMEPmon    default --   7
+          atmos        mon XY-P925HM     HOMEPmon   -------- --   7
+          atmos        mon XY-P925HM     --------   -------- --   7
+
+                                            Amon    default P1  34: clivi clt clwvi evspsbl hfls hfss hurs pr prc prsn prw ps psl rlds rldscs rlus rlut rlutcs rsds rsdscs rsdt rsus rsuscs rsut rsutcs sfcWind tas tasmax tasmin tauu tauv ts uas vas
+          atmos        mon    XY-na         Amon    default --  34
+          atmos        mon    XY-na         Amon   -------- --  34
+                                            Emon    default P1   1: sfcWindmax
+          atmos        mon    XY-na         Emon    default --  35
+          atmos        mon    XY-na         Emon   -------- --  35
+                                        HOMALmon    default P1  12: cdnctop clth cltl cltm husll reffclitop reffclwtopcnrm rluscs tall tssea uall vall
+          atmos        mon    XY-na     HOMALmon    default --  47
+          atmos        mon    XY-na     HOMALmon   -------- --  47
+                                         Nonemon    default P1   2: tsland tsns
+          atmos        mon    XY-na      Nonemon    default --  49
+          atmos        mon    XY-na      Nonemon   -------- --  49
+          atmos        mon    XY-na     --------   -------- --  49
+
+          atmos        mon --------     --------   -------- --  91
+
+
+          atmos ---------- --------    --------   -------- --  92
+                                              fx    default P1   1: areacella
+     atmos land         fx    XY-na           fx    default --   1
+     atmos land         fx    XY-na           fx   -------- --   1
+     atmos land         fx    XY-na     --------   -------- --   1
+
+     atmos land         fx --------     --------   -------- --   1
+
+
+     atmos land ---------- --------    --------   -------- --   1
+                                              fx    default P1   4: mrsofc orog rootd sftgif
+           land         fx    XY-na           fx    default --   4
+           land         fx    XY-na           fx   -------- --   4
+           land         fx    XY-na     --------   -------- --   4
+
+           land         fx --------     --------   -------- --   4
+
+                                            Emon    default P2   1: mrtws
+           land        mon    XY-na         Emon    default --   1
+           land        mon    XY-na         Emon   -------- --   1
+                                        HOMALmon    default P1   1: snct
+           land        mon    XY-na     HOMALmon    default --   2
+           land        mon    XY-na     HOMALmon   -------- --   2
+                                            Lmon    default P1   3: mrro mrros mrso
+           land        mon    XY-na         Lmon    default --   5
+           land        mon    XY-na         Lmon   -------- --   5
+           land        mon    XY-na     --------   -------- --   5
+
+           land        mon --------     --------   -------- --   5
+
+
+           land ---------- --------    --------   -------- --   9
+                                           LImon    default P1   5: agesno snc snd snm snw
+   land landIce        mon    XY-na        LImon    default --   5
+   land landIce        mon    XY-na        LImon   -------- --   5
+                                            Lmon    default P1   1: mrfso
+   land landIce        mon    XY-na         Lmon    default --   6
+   land landIce        mon    XY-na         Lmon   -------- --   6
+   land landIce        mon    XY-na     --------   -------- --   6
+
+   land landIce        mon --------     --------   -------- --   6
+
+
+   land landIce ---------- --------    --------   -------- --   6
+                                           SImon    default P1   1: siconca
+         seaIce        mon    XY-na        SImon    default --   1
+         seaIce        mon    XY-na        SImon   -------- --   1
+         seaIce        mon    XY-na     --------   -------- --   1
+
+         seaIce        mon --------     --------   -------- --   1
+
+
+         seaIce ---------- --------    --------   -------- --   1
+
+     ---------- ---------- --------    --------   -------- -- 142
 
 
 Some Statistics on actually written variables per variable...
@@ -1300,19 +1423,27 @@ file_def written as current_directory/test_RCSM6_HIS/test_outputs/dr2xml_trip.xm
 
 
 Some Statistics on actually written variables per frequency+shape...
-                            Eday    default P1   1: rivo
-       day    XY-na    --------            ---   1
+                                            Eday    default P1   1: rivo
+           land        day    XY-na         Eday    default --   1
+           land        day    XY-na         Eday   -------- --   1
+           land        day    XY-na     --------   -------- --   1
 
-       day --------    --------            ---   1
+           land        day --------     --------   -------- --   1
 
-                            Emon    default P2   1: wtd
-                        HOMALmon    default P1   2: fldf fwtd
-       mon    XY-na    --------            ---   3
+                                            Emon    default P2   1: wtd
+           land        mon    XY-na         Emon    default --   1
+           land        mon    XY-na         Emon   -------- --   1
+                                        HOMALmon    default P1   2: fldf fwtd
+           land        mon    XY-na     HOMALmon    default --   3
+           land        mon    XY-na     HOMALmon   -------- --   3
+           land        mon    XY-na     --------   -------- --   3
 
-       mon --------    --------            ---   3
+           land        mon --------     --------   -------- --   3
 
 
----------- --------    --------            ---   4
+           land ---------- --------    --------   -------- --   4
+
+     ---------- ---------- --------    --------   -------- --   4
 
 
 Some Statistics on actually written variables per variable...

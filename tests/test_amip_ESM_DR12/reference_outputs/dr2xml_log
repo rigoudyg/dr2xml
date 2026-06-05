@@ -1,14 +1,3 @@
-sync universe
-Universe is in offline mode
-Running in offline mode - only using local repositories and databases
-Cache db is uptodate from local repository
-sync projects
-Project cmip6 is in offline mode
-Running in offline mode - only using local repositories and databases
-Cache db is uptodate from local repository
-Project cmip7 is in offline mode
-Running in offline mode - only using local repositories and databases
-Cache db is uptodate from local repository
 
  **************************************************
 *
@@ -74,11 +63,11 @@ For extra table CNRM_HOMAL3hrPt (which has 93 variables):
 Number of 'cmor', 'dev' and 'perso' among home variables: 245
 Number of 'extra' among home variables: 132
 homevars list: psl ps pr prsn prc rsdscs rsuscs rldscs rsdt rsut rsutcs rsutaf rsutcsaf rlut rlutcs rlutaf rlutcsaf prw clt clwvi clivi intuaw intvaw intuadse intvadse toz ta ua va zg hus hur wap ztp ptp clc cls clic clis clwc clws mcd mcu clc cls clic clis clwc clws prlsns prlsprof prcprof prsnc ta zfull zhalf hus ua va wap tas rsds rsus rlds rlus mrso mrsos mrfso mrros mrro tsl snd snw snc lwsnl mrtws dmlt prveg gpp npp ts evspsbl evspsblpot sbl hfls hfss tasmin tasmax hfdsl albsn cw rzwc mrsow et uas vas sfcWind sfcWindmax hurs huss tauu tauv wtd rivo od550aer od550ss od550dust od550so4 od550bc od550oa abs550aer emiso2 emiss emidust emiso4 emibc emioa dryso2 dryss drydust dryso4 drybc dryoa wetss wetdust wetso4 wetbc wetoa sconcss sconcdust sconcso4 bry ch4 cly h2o hcl hno3 ho2 meanage n2o noy o3 oh lai gppGrass gppTree ra raGrass raTree rh rhSoil rhLitter rhGrass rhTree nppGrass nppTree nep cVeg cVegGrass cVegTree cLitter cSoil cSoilFast cSoilSlow cSoilGrass cSoilTree cSoilMedium cProduct cLand cLeaf cStem cWood cRoot cLitterSurf cLitterSubSurf cLitterBelow cLitterGrass cLitterTree fVegLitter fLitterSoil burntFractionAll fFireNat fFireAll fVegFire fDeforestToAtmos fDeforestToProduct fProductDecomp fLuc nbp cSoilPools tSoilPools airmass areacella cdnc clc cltc co co2 cod h2o hcho hcl hno3 hur hus lwp mcu mmrpm1 n2o no no2 o3 o3loss o3prod od870aer oh orog ps rsdsdiff sftlf so2 ta ta tatp tnhus tnhusa tnhusc tnhusmp tnhusscpbl tnt tnta tntc tntmp tntr tntrl tntrs tntscpbl ttop ua ua va va wa zg zg ta ua va zg hus wap cltl cltm clth rluscs rsdsaf rsusaf rldsaf rlusaf rldscsaf rluscsaf rsdscsaf rsuscsaf lcod icod reffclwtopcnrm reffclitop cdnctop RADasy550aer RADssa550aer RADod550aer RADabs550aer cllcalipsoice clmcalipsoice clhcalipsoice cltcalipsoice cllcalipsoliq clmcalipsoliq clhcalipsoliq cltcalipsoliq cllcalipsoun clmcalipsoun clhcalipsoun cltcalipsoun clcalipsoun clcalipsotmp clcalipsotmpice clcalipsotmpliq clcalipsotmpun parasolCRefl cltlidarradar tauisccp meantbisccp meantbclrisccp clhmodis clmmodis cllmodis tautmodis tauwmodis tauimodis reffclwmodis reffclimodis pctmodis lwpmodis iwpmodis clmodis cllcalipsoice clmcalipsoice clhcalipsoice cltcalipsoice cllcalipsoliq clmcalipsoliq clhcalipsoliq cltcalipsoliq cllcalipsoun clmcalipsoun clhcalipsoun cltcalipsoun clcalipsoun clcalipsotmp clcalipsotmpice clcalipsotmpliq clcalipsotmpun parasolCRefl cltlidarradar tauisccp meantbisccp meantbclrisccp clhmodis clmmodis cllmodis tautmodis tauwmodis tauimodis reffclwmodis reffclimodis pctmodis lwpmodis iwpmodis clmodis albsrfc vegstress snct fsat albsrfcLa sndLa icedLa tsLa tmxlLa fldf fwtd o3 co no2 asy550aer ssa550aer od550acldaer od550ssbin1 od550ssbin2 od550dustbin1 od550dustbin2 TACabs550aer sconcbc sconcoa ext550ss ext550dust ext550so4 ext550bc ext550oa necb fDeforestToL fRegrowth burntArea fFireBCarb carbw carbdis carbin
-Error: {'varname': 'et', 'realm': 'land', 'freq': 'mon', 'table': 'NONE'} HOMEVar announced as cmor but no corresponding CMORVar found => Not taken into account.
+Error: {'varname': 'et', 'realm': 'land', 'freq': 'mon', 'table': 'NONE', 'region': 'default'} HOMEVar announced as cmor but no corresponding CMORVar found => Not taken into account.
 (cSoilPools Emon) HOMEVar: Spatial and Temporal Shapes specified DO NOT match CMORvar ones. -> Provided: (XY-na, time-point) Expected: (XY-na, time-mean)
-Error: {'varname': 'cSoilPools', 'realm': 'land', 'freq': 'mon', 'table': 'Emon'} HOMEVar announced as cmor but no corresponding CMORVar found => Not taken into account.
+Error: {'varname': 'cSoilPools', 'realm': 'land', 'freq': 'mon', 'table': 'Emon', 'region': 'default'} HOMEVar announced as cmor but no corresponding CMORVar found => Not taken into account.
 (tSoilPools Emon) HOMEVar: Spatial and Temporal Shapes specified DO NOT match CMORvar ones. -> Provided: (XY-na, time-point) Expected: (XY-na, time-mean)
-Error: {'varname': 'tSoilPools', 'realm': 'land', 'freq': 'mon', 'table': 'Emon'} HOMEVar announced as cmor but no corresponding CMORVar found => Not taken into account.
+Error: {'varname': 'tSoilPools', 'realm': 'land', 'freq': 'mon', 'table': 'Emon', 'region': 'default'} HOMEVar announced as cmor but no corresponding CMORVar found => Not taken into account.
 
 Realms for these CMORvars: aerosol atmos atmos atmosChem atmos land atmosChem land land landIce landIce landIce land ocean ocnBgchem seaIce seaIce ocean
 Processing realm 'aerosol' of context 'surfex'
@@ -124,7 +113,6 @@ Note: assuming that 'time: mean where trees'  for          raTree in table Emon 
 Note: assuming that 'time: mean where natural_grasses'  for         rhGrass in table Emon is well handled by 'detect_missing'
 Note: assuming that 'time: mean where trees'  for          rhTree in table Emon is well handled by 'detect_missing'
 Note: assuming that 'time: mean where vegetation'  for       vegHeight in table Emon is well handled by 'detect_missing'
-Warning: issue when analyzing cell_time_method area: sum for       areacellg in table IfxGre, assuming it is once
 Note: assuming that 'time: mean where ice_sheet'  for             tas in table ImonGre is well handled by 'detect_missing'
 Will not explicitly handle time: mean (with samples weighted by snow mass) for          agesno in table LImon -> averaging
 Note: assuming that 'time: mean where ice_sheet'  for          hflsIs in table LImon is well handled by 'detect_missing'
@@ -146,22 +134,23 @@ Note: assuming that 'time: mean where ice_sheet'  for           tsnIs in table L
 Will not explicitly handle time: mean (with samples weighted by snow mass) for             tsn in table LImon -> averaging
 Note: assuming that for        albisccp in table CFday is well handled by 'detect_missing'
 Note: assuming that for        pctisccp in table CFday is well handled by 'detect_missing'
+Cannot find psvar dict for SimpleCMORVar zfull of type cmor and priority 1 (with standard name height_above_reference_ellipsoid and units m)
 Warning: Cannot complement model levels with psol for table fx for frequency 1d
 Note: assuming that for        albisccp in table CFmon is well handled by 'detect_missing'
 Note: assuming that for        pctisccp in table CFmon is well handled by 'detect_missing'
 Note: assuming that 'time: mean where natural_grasses'  for    cLitterGrass in table Emon is well handled by 'detect_missing'
-Note: assuming that 'time: mean where trees'  for     cLitterTree in table Emon is well handled by 'detect_missing'
 Note: assuming that 'time: mean where natural_grasses'  for      cSoilGrass in table Emon is well handled by 'detect_missing'
-Note: assuming that 'time: mean where trees'  for       cSoilTree in table Emon is well handled by 'detect_missing'
 Note: assuming that 'time: mean where natural_grasses'  for       cVegGrass in table Emon is well handled by 'detect_missing'
-Note: assuming that 'time: mean where trees'  for        cVegTree in table Emon is well handled by 'detect_missing'
 Note: assuming that 'time: mean where natural_grasses'  for        gppGrass in table Emon is well handled by 'detect_missing'
-Note: assuming that 'time: mean where trees'  for         gppTree in table Emon is well handled by 'detect_missing'
 Note: assuming that 'time: mean where natural_grasses'  for        nppGrass in table Emon is well handled by 'detect_missing'
-Note: assuming that 'time: mean where trees'  for         nppTree in table Emon is well handled by 'detect_missing'
 Note: assuming that 'time: mean where natural_grasses'  for         raGrass in table Emon is well handled by 'detect_missing'
-Note: assuming that 'time: mean where trees'  for          raTree in table Emon is well handled by 'detect_missing'
 Note: assuming that 'time: mean where natural_grasses'  for         rhGrass in table Emon is well handled by 'detect_missing'
+Note: assuming that 'time: mean where trees'  for     cLitterTree in table Emon is well handled by 'detect_missing'
+Note: assuming that 'time: mean where trees'  for       cSoilTree in table Emon is well handled by 'detect_missing'
+Note: assuming that 'time: mean where trees'  for        cVegTree in table Emon is well handled by 'detect_missing'
+Note: assuming that 'time: mean where trees'  for         gppTree in table Emon is well handled by 'detect_missing'
+Note: assuming that 'time: mean where trees'  for         nppTree in table Emon is well handled by 'detect_missing'
+Note: assuming that 'time: mean where trees'  for          raTree in table Emon is well handled by 'detect_missing'
 Note: assuming that 'time: mean where trees'  for          rhTree in table Emon is well handled by 'detect_missing'
 Note: assuming that 'time: mean where ice_sheet'  for             tas in table ImonGre is well handled by 'detect_missing'
 Will not explicitly handle time: mean (with samples weighted by snow mass) for          agesno in table LImon -> averaging
@@ -170,210 +159,493 @@ Will not explicitly handle time: mean (with samples weighted by snow mass) for  
 file_def written as current_directory/test_amip_ESM_DR12/test_outputs/dr2xml_surfex.xml
 
 Skipped variables (i.e. whose alias is not present in the pingfile):
->>> TABLE:          AERday REGION:         default 03/11 ----> maxpblz(1) minpblz(1) sfo3max(1)
+>>> REALM:         aerosol TABLE:          AERday REGION:         default 03/11 ----> maxpblz_AERday(1) minpblz_AERday(1) sfo3max_AERday(1)
 
 
->>> TABLE:          AERmon REGION:         default 55/124 ----> aoanh(1) bldep(1) c2h2(1) c2h6(1) c3h6(1) c3h8(1) ccn(1) ch3coch3(1) cheaqpso4(1) chegpso4(1) chepasoa(1) chepsoa(1) dms(1) drynh3(1) drynh4(1) drynoy(1) dryo3(1) emiaco(1) emianox(1) emiaoa(1) emibvoc(1) emico(1) emidms(1) emiisop(1) emilnox(1) eminh3(1) eminox(1) emivoc(1) isop(1) jno2(1) lossch4(1) lossco(1) lossn2o(1) mmraerh2o(1) mmrnh4(1) mmrno3(1) mmrpm10(1) mmrpm2p5(1) mmrsoa(1) nh50(1) o3ste(1) od550aerh2o(1) od550bb(1) od550csaer(1) od550no3(1) od550soa(1) pan(1) photo1d(1) pod0(1) reffclwtop(1) tropoz(1) wetnh3(1) wetnh4(1) wetnoy(1) wetso2(1)
+>>> REALM:         aerosol TABLE:          AERmon REGION:         default 55/124 ----> aoanh_AERmon(1) bldep_AERmon(1) c2h2_AERmon(1) c2h6_AERmon(1) c3h6_AERmon(1) c3h8_AERmon(1) ccn_AERmon(1) ch3coch3_AERmon(1) cheaqpso4_AERmon(1) chegpso4_AERmon(1) chepasoa_AERmon(1) chepsoa_AERmon(1) dms_AERmon(1) drynh3_AERmon(1) drynh4_AERmon(1) drynoy_AERmon(1) dryo3_AERmon(1) emiaco_AERmon(1) emianox_AERmon(1) emiaoa_AERmon(1) emibvoc_AERmon(1) emico_AERmon(1) emidms_AERmon(1) emiisop_AERmon(1) emilnox_AERmon(1) eminh3_AERmon(1) eminox_AERmon(1) emivoc_AERmon(1) isop_AERmon(1) jno2_AERmon(1) lossch4_AERmon(1) lossco_AERmon(1) lossn2o_AERmon(1) mmraerh2o_AERmon(1) mmrnh4_AERmon(1) mmrno3_AERmon(1) mmrpm10_AERmon(1) mmrpm2p5_AERmon(1) mmrsoa_AERmon(1) nh50_AERmon(1) o3ste_AERmon(1) od550aerh2o_AERmon(1) od550bb_AERmon(1) od550csaer_AERmon(1) od550no3_AERmon(1) od550soa_AERmon(1) pan_AERmon(1) photo1d_AERmon(1) pod0_AERmon(1) reffclwtop_AERmon(1) tropoz_AERmon(1) wetnh3_AERmon(1) wetnh4_AERmon(1) wetnoy_AERmon(1) wetso2_AERmon(1)
 
 
->>> TABLE:            Amon REGION:         default 02/59 ----> rtmt(1) sci(1)
+>>> REALM:         aerosol TABLE:            Emon REGION:         default 02/145 ----> depdust_Emon(1) mmrno3_Emon(1)
 
 
->>> TABLE:           CFmon REGION:         default 03/54 ----> edt(1) evu(1) tnhusd(1)
+
+>>> REALM:           atmos TABLE:            Amon REGION:         default 02/59 ----> rtmt_Amon(1) sci_Amon(1)
 
 
->>> TABLE:            Eday REGION:         default 13/32 ----> ccldncl(1) cldnci(1) cldnvi(1) loadnh4(1) loadno3(1) loadpoa(1) loadsoa(1) prhmax(1) reffcclwtop(1) reffsclwtop(1) rsdscsdiff(1) scldncl(1) zmla(1)
+>>> REALM:           atmos TABLE:           CFmon REGION:         default 03/54 ----> edt_CFmon(1) evu_CFmon(1) tnhusd_CFmon(1)
 
 
->>> TABLE:             Efx REGION:         default 01/02 ----> sftflf(1)
+>>> REALM:           atmos TABLE:            Eday REGION:         default 13/32 ----> ccldncl_Eday(1) cldnci_Eday(1) cldnvi_Eday(1) loadnh4_Eday(1) loadno3_Eday(1) loadpoa_Eday(1) loadsoa_Eday(1) prhmax_Eday(1) reffcclwtop_Eday(1) reffsclwtop_Eday(1) rsdscsdiff_Eday(1) scldncl_Eday(1) zmla_Eday(1)
 
 
->>> TABLE:            Emon REGION:         default 59/145 ----> cSoilAbove1m(1) depdust(1) diabdrag(1) fBNF(1) fCLandToOcean(1) fHarvestToProduct(1) fN2O(1) fNAnthDisturb(1) fNLandToOcean(1) fNLitterSoil(1) fNProduct(1) fNVegLitter(1) fNVegSoil(1) fNdep(1) fNfert(1) fNgas(1) fNleach(1) fNloss(1) fNnetmin(1) fNup(1) flashrate(1) lwsrfasdust(1) lwsrfcsdust(1) lwtoaasdust(1) lwtoacsaer(1) lwtoacsdust(1) md(1) mmrno3(1) mrsol(1) nLand(1) nLitter(1) nMineral(1) nProduct(1) nSoil(1) nVeg(1) od550aerso(1) od550so4so(1) pastureFracC3(1) pastureFracC4(1) pr17O(1) pr18O(1) pr2h(1) prsn17O(1) prsn18O(1) prsn2h(1) prw17O(1) prw2H(1) swsrfasdust(1) swsrfcsdust(1) swtoaasdust(1) swtoacsdust(1) tdps(1) tntd(1) treeFracBdlDcd(1) treeFracBdlEvg(1) treeFracNdlDcd(1) treeFracNdlEvg(1) vegHeight(1) wetlandFrac(1)
+>>> REALM:           atmos TABLE:            Emon REGION:         default 23/145 ----> diabdrag_Emon(1) lwsrfasdust_Emon(1) lwsrfcsdust_Emon(1) lwtoaasdust_Emon(1) lwtoacsaer_Emon(1) lwtoacsdust_Emon(1) md_Emon(1) od550aerso_Emon(1) od550so4so_Emon(1) pr17O_Emon(1) pr18O_Emon(1) pr2h_Emon(1) prsn17O_Emon(1) prsn18O_Emon(1) prsn2h_Emon(1) prw17O_Emon(1) prw2H_Emon(1) swsrfasdust_Emon(1) swsrfcsdust_Emon(1) swtoaasdust_Emon(1) swtoacsdust_Emon(1) tdps_Emon(1) tntd_Emon(1)
 
 
->>> TABLE:           EmonZ REGION:         default 07/11 ----> epfy(1) epfz(1) jo2(1) jo3(1) utendepfd(1) vtem(1) wtem(1)
+>>> REALM:           atmos TABLE:           EmonZ REGION:         default 07/11 ----> epfy_EmonZ(1) epfz_EmonZ(1) jo2_EmonZ(1) jo3_EmonZ(1) utendepfd_EmonZ(1) vtem_EmonZ(1) wtem_EmonZ(1)
 
 
->>> TABLE:          Esubhr REGION:         default 01/07 ----> tntd(1)
+>>> REALM:           atmos TABLE:          Esubhr REGION:         default 01/07 ----> tntd_Esubhr(1)
 
 
->>> TABLE:          IfxGre REGION:         default 01/01 ----> areacellg(1)
+
+>>> REALM:       atmosChem TABLE:            Emon REGION:         default 01/145 ----> flashrate_Emon(1)
 
 
->>> TABLE:           LImon REGION:         default 17/29 ----> hflsIs(1) hfssIs(1) mrroIs(1) orogIs(1) prraIs(1) prsnIs(1) rldsIs(1) rlusIs(1) rsdsIs(1) rsusIs(1) sblIs(1) sftflf(1) sncIs(1) snmIs(1) tasIs(1) tsIs(1) tsnIs(1)
+
+>>> REALM:            land TABLE:            Emon REGION:         default 33/145 ----> cSoilAbove1m_Emon(1) fBNF_Emon(1) fCLandToOcean_Emon(1) fHarvestToProduct_Emon(1) fN2O_Emon(1) fNAnthDisturb_Emon(1) fNLandToOcean_Emon(1) fNLitterSoil_Emon(1) fNProduct_Emon(1) fNVegLitter_Emon(1) fNVegSoil_Emon(1) fNdep_Emon(1) fNfert_Emon(1) fNgas_Emon(1) fNleach_Emon(1) fNloss_Emon(1) fNnetmin_Emon(1) fNup_Emon(1) mrsol_Emon(1) nLand_Emon(1) nLitter_Emon(1) nMineral_Emon(1) nProduct_Emon(1) nSoil_Emon(1) nVeg_Emon(1) pastureFracC3_Emon(1) pastureFracC4_Emon(1) treeFracBdlDcd_Emon(1) treeFracBdlEvg_Emon(1) treeFracNdlDcd_Emon(1) treeFracNdlEvg_Emon(1) vegHeight_Emon(1) wetlandFrac_Emon(1)
 
 
->>> TABLE:            Lmon REGION:         default 09/46 ----> fGrazing(1) fHarvest(1) fVegSoil(1) pastureFrac(1) shrubFrac(1) treeFracPrimDec(1) treeFracPrimEver(1) treeFracSecDec(1) treeFracSecEver(1)
+>>> REALM:            land TABLE:          IfxGre REGION:         default 01/01 ----> areacellg_IfxGre(1)
+
+
+>>> REALM:            land TABLE:            Lmon REGION:         default 09/46 ----> fGrazing_Lmon(1) fHarvest_Lmon(1) fVegSoil_Lmon(1) pastureFrac_Lmon(1) shrubFrac_Lmon(1) treeFracPrimDec_Lmon(1) treeFracPrimEver_Lmon(1) treeFracSecDec_Lmon(1) treeFracSecEver_Lmon(1)
+
+
+
+>>> REALM:         landIce TABLE:             Efx REGION:         default 01/02 ----> sftflf_Efx(1)
+
+
+>>> REALM:         landIce TABLE:           LImon REGION:         default 17/29 ----> hflsIs_LImon(1) hfssIs_LImon(1) mrroIs_LImon(1) orogIs_LImon(1) prraIs_LImon(1) prsnIs_LImon(1) rldsIs_LImon(1) rlusIs_LImon(1) rsdsIs_LImon(1) rsusIs_LImon(1) sblIs_LImon(1) sftflf_LImon(1) sncIs_LImon(1) snmIs_LImon(1) tasIs_LImon(1) tsIs_LImon(1) tsnIs_LImon(1)
+
 
 
 
 
 
 Some Statistics on actually written variables per frequency+shape...
-                     E1hrClimMon    default P1   5: rlut rlutcs rsdt rsut rsutcs
-     1hrCM    XY-na    --------            ---   5
+                                          AERday    default P1   7: cod od550aer toz ua10 zg10 zg100 zg500
+        aerosol        day    XY-na       AERday    default --   7
+        aerosol        day    XY-na       AERday   -------- --   7
+        aerosol        day    XY-na     --------   -------- --   7
 
-     1hrCM --------    --------            ---   5
+        aerosol        day --------     --------   -------- --   7
 
-                           CF3hr    default P2   8: clc clic clis cls clwc clws ta zfull
-                          E3hrPt    default P1   1: hus
-                       None3hrPt    default P1   2: ua va
-                       None3hrPt    default P3   1: wap
-     3hrPt     XY-A    --------            ---  12
+                                          AERmon    default P1  28: airmass cdnc ch4 co co2 h2o hcho hcl hno3 mmrbc mmrdust mmroa mmrpm1 mmrso4 mmrss n2o no no2 o3 o3loss o3prod oh so2 tntrl tntrs ua va wa
+        aerosol        mon     XY-A       AERmon    default --  28
+        aerosol        mon     XY-A       AERmon   -------- --  28
+        aerosol        mon     XY-A     --------   -------- --  28
 
-                           CF3hr    default P2   5: prcprof prlsns prlsprof prsnc zhalf
-     3hrPt    XY-AH    --------            ---   5
+                                        HOMALmon    default P1   5: ext550bc ext550dust ext550oa ext550so4 ext550ss
+        aerosol        mon   XY-P19     HOMALmon    default --   5
+        aerosol        mon   XY-P19     HOMALmon   -------- --   5
+        aerosol        mon   XY-P19     --------   -------- --   5
 
-                          E3hrPt    default P1   1: clmisr
-     3hrPt   XY-H16    --------            ---   1
+                                          AERmon    default P1  39: abs550aer cltc cod drybc drydust dryoa dryso2 dryso4 dryss emibc emidust emioa emiso2 emiso4 emiss lwp od440aer od550aer od550bc od550dust od550lt1aer od550oa od550so4 od550ss od870aer ptp rlutaf rlutcsaf rsutaf rsutcsaf tatp toz ttop wetbc wetdust wetoa wetso4 wetss ztp
+        aerosol        mon    XY-na       AERmon    default --  39
+        aerosol        mon    XY-na       AERmon   -------- --  39
+                                            Emon    default P1   1: sedustCI
+        aerosol        mon    XY-na         Emon    default --  40
+        aerosol        mon    XY-na         Emon   -------- --  40
+                                        HOMALmon    default P1  22: RADabs550aer RADasy550aer RADod550aer RADssa550aer TACabs550aer asy550aer od550acldaer od550dustbin1 od550dustbin2 od550ssbin1 od550ssbin2 rldsaf rldscsaf rlusaf rluscsaf rsdsaf rsdscsaf rsusaf rsuscsaf sconcbc sconcoa ssa550aer
+        aerosol        mon    XY-na     HOMALmon    default --  62
+        aerosol        mon    XY-na     HOMALmon   -------- --  62
+        aerosol        mon    XY-na     --------   -------- --  62
 
-                          E3hrPt    default P1   4: cfadDbze94 cfadLidarsr532 clcalipso clcalipso2
-                      HOMAL3hrPt    default P1   1: clcalipsoun
-     3hrPt   XY-H40    --------            ---   5
+                                         AERmonZ    default P1  15: bry ch4 cly h2o hcl hno3 ho2 meanage n2o noy o3 oh ta ua va
+        aerosol        mon    Y-P39      AERmonZ    default --  15
+        aerosol        mon    Y-P39      AERmonZ   -------- --  15
+        aerosol        mon    Y-P39     --------   -------- --  15
 
-                          E3hrPt    default P1   1: clisccp
-     3hrPt    XY-P7    --------            ---   1
+                                         AERmonZ    default P1   1: vt100
+        aerosol        mon     Y-na      AERmonZ    default --   1
+        aerosol        mon     Y-na      AERmonZ   -------- --   1
+        aerosol        mon     Y-na     --------   -------- --   1
 
-                          E3hrPt    default P1   7: clhcalipso cllcalipso clmcalipso cltcalipso jpdftaureicemodis jpdftaureliqmodis parasolRefl
-                      HOMAL3hrPt    default P1  27: clhcalipsoice clhcalipsoliq clhcalipsoun clhmodis cllcalipsoice cllcalipsoliq cllcalipsoun cllmodis clmcalipsoice clmcalipsoliq clmcalipsoun clmmodis cltcalipsoice cltcalipsoliq cltcalipsoun cltlidarradar iwpmodis lwpmodis meantbclrisccp meantbisccp pctmodis reffclimodis reffclwmodis tauimodis tauisccp tautmodis tauwmodis
-     3hrPt    XY-na    --------            ---  34
-
-                      HOMAL3hrPt    default P1   1: parasolCRefl
-     3hrPt  XY-sza5    --------            ---   1
-
-                      HOMAL3hrPt    default P1   1: clmodis
-     3hrPt XY-tau|P7C    --------            ---   1
-
-                      HOMAL3hrPt    default P1   4: clcalipsotmp clcalipsotmpice clcalipsotmpliq clcalipsotmpun
-     3hrPt  XY-temp    --------            ---   4
-
-     3hrPt --------    --------            ---  64
-
-                           CFday    default P1  10: cl cli clw hur hus ta ua va wap zg
-       day     XY-A    --------            ---  10
-
-                           CFday    default P1   1: mc
-       day    XY-AH    --------            ---   1
-
-                           CFday    default P1   1: clcalipso
-       day   XY-H40    --------            ---   1
-
-                            Eday    default P1   2: ua va
-       day   XY-P19    --------            ---   2
-
-                           CFday    default P1   1: clisccp
-       day    XY-P7    --------            ---   1
-
-                             day    default P1   6: hur hus ta ua va wap
-       day    XY-P8    --------            ---   6
-
-                          AERday    default P1   8: cod od550aer toz ua10 zg10 zg100 zg1000 zg500
-                           CFday    default P1  21: albisccp ccb cct clhcalipso clivi cllcalipso clmcalipso cltcalipso cltisccp clwvi pctisccp ps rldscs rlutcs rsdscs rsdt rsuscs rsut rsutcs ta700 wap500
-                            Eday    default P1  17: clivic clwvic hus850 jpdftaureicemodis jpdftaureliqmodis loadbc loaddust loadoa loadso4 loadss parasolRefl rsdsdiff ta500 ta850 tauu tauv ts
-                           SIday    default P1   1: siconca
-                             day    default P1  29: clt hfls hfss hurs hursmax hursmin huss mrro mrso mrsos pr prc prsn psl rlds rlus rlut rsds rsus sfcWind sfcWindmax snc snw tas tasmax tasmin tslsi uas vas
-       day    XY-na    --------            ---  76
-
-                           EdayZ    default P1   4: hus ta va zg
-       day    Y-P19    --------            ---   4
-
-                           EdayZ    default P1   1: ua
-       day    Y-P39    --------            ---   1
-
-       day --------    --------            --- 102
-
-                              fx    default P1   1: zfull
-        fx     XY-A    --------            ---   1
-
-                             Efx    default P1   1: sftgrf
-                              fx    default P1   6: areacella mrsofc orog rootd sftgif sftlf
-        fx    XY-na    --------            ---   7
-
-        fx --------    --------            ---   8
-
-                          AERmon    default P1  29: airmass cdnc ch4 co co2 h2o hcho hcl hno3 mmrbc mmrdust mmroa mmrpm1 mmrso4 mmrss n2o no no2 o3 o3loss o3prod oh so2 tntrl tntrs ua va wa zg
-                            Amon    default P1   3: cl cli clw
-                           CFmon    default P1  16: clc cls hur hus ta tnhus tnhusa tnhusc tnhusmp tnhusscpbl tnt tnta tntc tntmp tntr tntscpbl
-                           CFmon    default P2   4: clic clis clwc clws
-                            Emon    default P1   7: concdust tnhuspbl tnhusscp tntpbl tntrlcs tntrscs tntscp
-       mon     XY-A    --------            ---  59
-
-                            Amon    default P1   1: mc
-                           CFmon    default P1  17: mcu rld rld4co2 rldcs rldcs4co2 rlu rlu4co2 rlucs rlucs4co2 rsd rsd4co2 rsdcs rsdcs4co2 rsu rsu4co2 rsucs rsucs4co2
-                           CFmon    default P2   1: mcd
-       mon    XY-AH    --------            ---  19
-
-                            Emon    default P1   1: clmisr
-       mon   XY-H16    --------            ---   1
-
-                           CFmon    default P1   1: clcalipso
-                            Emon    default P1   4: cfadDbze94 cfadLidarsr532 clcalipsoice clcalipsoliq
-                        HOMALmon    default P1   1: clcalipsoun
-       mon   XY-H40    --------            ---   6
-
-                            Amon    default P1  11: ch4 co2 hur hus n2o o3 ta ua va wap zg
-                            Emon    default P1   2: utendnogw utendogw
-                        HOMALmon    default P1   5: ext550bc ext550dust ext550oa ext550so4 ext550ss
-       mon   XY-P19    --------            ---  18
-
-                           CFmon    default P1   1: clisccp
-       mon    XY-P7    --------            ---   1
-
-                        HOMEPmon    default P1   6: hus ta ua va wap zg
-       mon  XY-P7HM    --------            ---   6
-
-                            Emon    default P1   3: hus ua va
-       mon   XY-P7T    --------            ---   3
-
-                        HOMEPmon    default P1   3: co no2 o3
-       mon XY-Plev39hm    --------            ---   3
-
-                            Emon    default P1   2: mrsfl mrsll
-                            Lmon    default P1   1: tsl
-       mon     XY-S    --------            ---   3
-
-                          AERmon    default P1  40: abs550aer cltc cod drybc drydust dryoa dryso2 dryso4 dryss emibc emidust emioa emiso2 emiso4 emiss lwp od440aer od550aer od550bc od550dust od550lt1aer od550oa od550so4 od550ss od870aer ps ptp rlutaf rlutcsaf rsutaf rsutcsaf tatp toz ttop wetbc wetdust wetoa wetso4 wetss ztp
-                            Amon    default P1  42: ccb cct ci clivi clt clwvi evspsbl fco2antt fco2fos fco2nat hfls hfss hurs huss pr prc prsn prw ps psl rlds rldscs rlus rlut rlutcs rsds rsdscs rsdt rsus rsuscs rsut rsutcs sbl sfcWind tas tasmax tasmin tauu tauv ts uas vas
-                           CFmon    default P1  11: albisccp clhcalipso cllcalipso clmcalipso cltcalipso cltisccp pctisccp rlut4co2 rlutcs4co2 rsut4co2 rsutcs4co2
-                            Emon    default P1  43: cLand cSoil climodis cltmodis clwmodis clwvic cropFracC3 cropFracC4 evspsblpot fAnthDisturb fDeforestToProduct fFireNat fLuc fProductDecomp fracLut grassFracC3 grassFracC4 intuadse intuaw intvadse intvaw jpdftaureicemodis jpdftaureliqmodis loaddust mrlso nep netAtmosLandCO2Flux nwdFracLut od443dust od865dust orog parasolRefl rls rsdsdiff rss sconcdust sconcso4 sconcss sedustCI sfcWindmax uqint vegFrac vqint
-                            Emon    default P2  24: cLitterGrass cLitterSubSurf cLitterSurf cLitterTree cSoilGrass cSoilTree cStem cVegGrass cVegTree cWood fDeforestToAtmos fFireAll fVegFire gppGrass gppTree mrtws nppGrass nppTree raGrass raTree rhGrass rhLitter rhSoil rhTree
-                        HOMALmon    default P1  72: RADabs550aer RADasy550aer RADod550aer RADssa550aer TACabs550aer albsrfc albsrfcLa asy550aer burntArea cdnctop clhcalipsoice clhcalipsoliq clhcalipsoun clhmodis cllcalipsoice cllcalipsoliq cllcalipsoun cllmodis clmcalipsoice clmcalipsoliq clmcalipsoun clmmodis cltcalipsoice cltcalipsoliq cltcalipsoun clth cltl cltlidarradar cltm fDeforestToL fFireBCarb fRegrowth fsat icedLa icod iwpmodis lcod lwpmodis meantbclrisccp meantbisccp necb od550acldaer od550dustbin1 od550dustbin2 od550ssbin1 od550ssbin2 pctmodis reffclimodis reffclitop reffclwmodis reffclwtopcnrm rldsaf rldscsaf rlusaf rluscs rluscsaf rsdsaf rsdscsaf rsusaf rsuscsaf sconcbc sconcoa snct sndLa ssa550aer tauimodis tauisccp tautmodis tauwmodis tmxlLa tsLa vegstress
-                           LImon    default P1  11: agesno hfdsn sbl sftgif sftgrf snc snd snm snw tpf tsn
-                           LImon    default P2   1: lwsnl
-                            Lmon    default P1  29: baresoilFrac burntFractionAll c3PftFrac c4PftFrac cLitter cProduct cVeg cropFrac evspsblsoi evspsblveg fFire fLitterSoil fVegLitter gpp grassFrac lai landCoverFrac mrfso mrro mrros mrso mrsos nbp npp ra residualFrac rh tran treeFrac
-                            Lmon    default P2   7: cLeaf cLitterBelow cRoot cSoilFast cSoilMedium cSoilSlow prveg
-                         Nonemon    default P1   6: albsn cw dmlt hfdsl mrsow rzwc
-                           SImon    default P1   1: siconca
-       mon    XY-na    --------            --- 287
-
-                        HOMALmon    default P1   1: parasolCRefl
-       mon  XY-sza5    --------            ---   1
-
-                        HOMALmon    default P1   1: clmodis
-       mon XY-tau|P7C    --------            ---   1
-
-                        HOMALmon    default P1   4: clcalipsotmp clcalipsotmpice clcalipsotmpliq clcalipsotmpun
-       mon  XY-temp    --------            ---   4
-
-                         AERmonZ    default P1  16: bry ch4 cly h2o hcl hno3 ho2 meanage n2o noy o3 oh ta ua va zg
-                           EmonZ    default P1   4: oxloss oxprod vmrox zmtnt
-       mon    Y-P39    --------            ---  20
-
-                         AERmonZ    default P1   1: vt100
-       mon     Y-na    --------            ---   1
-
-                         ImonGre    default P1   1: tas
-       mon    na-na    --------            ---   1
-
-       mon --------    --------            --- 434
-
-                          Esubhr    default P1   6: tnhuspbl tnhusscp tntpbl tntrlcs tntrscs tntscp
-   subhrPt      S-A    --------            ---   6
-
-   subhrPt --------    --------            ---   6
+        aerosol        mon --------     --------   -------- -- 111
 
 
----------- --------    --------            --- 619
+        aerosol ---------- --------    --------   -------- -- 118
+                                     E1hrClimMon    default P1   5: rlut rlutcs rsdt rsut rsutcs
+          atmos      1hrCM    XY-na  E1hrClimMon    default --   5
+          atmos      1hrCM    XY-na  E1hrClimMon   -------- --   5
+          atmos      1hrCM    XY-na     --------   -------- --   5
+
+          atmos      1hrCM --------     --------   -------- --   5
+
+                                           CF3hr    default P2   8: clc clic clis cls clwc clws ta zfull
+          atmos      3hrPt     XY-A        CF3hr    default --   8
+          atmos      3hrPt     XY-A        CF3hr   -------- --   8
+                                          E3hrPt    default P1   1: hus
+          atmos      3hrPt     XY-A       E3hrPt    default --   9
+          atmos      3hrPt     XY-A       E3hrPt   -------- --   9
+                                       None3hrPt    default P1   2: ua va
+                                       None3hrPt    default P3   1: wap
+          atmos      3hrPt     XY-A    None3hrPt    default --  12
+          atmos      3hrPt     XY-A    None3hrPt   -------- --  12
+          atmos      3hrPt     XY-A     --------   -------- --  12
+
+                                           CF3hr    default P2   5: prcprof prlsns prlsprof prsnc zhalf
+          atmos      3hrPt    XY-AH        CF3hr    default --   5
+          atmos      3hrPt    XY-AH        CF3hr   -------- --   5
+          atmos      3hrPt    XY-AH     --------   -------- --   5
+
+                                          E3hrPt    default P1   1: clmisr
+          atmos      3hrPt   XY-H16       E3hrPt    default --   1
+          atmos      3hrPt   XY-H16       E3hrPt   -------- --   1
+          atmos      3hrPt   XY-H16     --------   -------- --   1
+
+                                          E3hrPt    default P1   4: cfadDbze94 cfadLidarsr532 clcalipso clcalipso2
+          atmos      3hrPt   XY-H40       E3hrPt    default --   4
+          atmos      3hrPt   XY-H40       E3hrPt   -------- --   4
+                                      HOMAL3hrPt    default P1   1: clcalipsoun
+          atmos      3hrPt   XY-H40   HOMAL3hrPt    default --   5
+          atmos      3hrPt   XY-H40   HOMAL3hrPt   -------- --   5
+          atmos      3hrPt   XY-H40     --------   -------- --   5
+
+                                          E3hrPt    default P1   1: clisccp
+          atmos      3hrPt    XY-P7       E3hrPt    default --   1
+          atmos      3hrPt    XY-P7       E3hrPt   -------- --   1
+          atmos      3hrPt    XY-P7     --------   -------- --   1
+
+                                          E3hrPt    default P1   7: clhcalipso cllcalipso clmcalipso cltcalipso jpdftaureicemodis jpdftaureliqmodis parasolRefl
+          atmos      3hrPt    XY-na       E3hrPt    default --   7
+          atmos      3hrPt    XY-na       E3hrPt   -------- --   7
+                                      HOMAL3hrPt    default P1  27: clhcalipsoice clhcalipsoliq clhcalipsoun clhmodis cllcalipsoice cllcalipsoliq cllcalipsoun cllmodis clmcalipsoice clmcalipsoliq clmcalipsoun clmmodis cltcalipsoice cltcalipsoliq cltcalipsoun cltlidarradar iwpmodis lwpmodis meantbclrisccp meantbisccp pctmodis reffclimodis reffclwmodis tauimodis tauisccp tautmodis tauwmodis
+          atmos      3hrPt    XY-na   HOMAL3hrPt    default --  34
+          atmos      3hrPt    XY-na   HOMAL3hrPt   -------- --  34
+          atmos      3hrPt    XY-na     --------   -------- --  34
+
+                                      HOMAL3hrPt    default P1   1: parasolCRefl
+          atmos      3hrPt  XY-sza5   HOMAL3hrPt    default --   1
+          atmos      3hrPt  XY-sza5   HOMAL3hrPt   -------- --   1
+          atmos      3hrPt  XY-sza5     --------   -------- --   1
+
+                                      HOMAL3hrPt    default P1   1: clmodis
+          atmos      3hrPt XY-tau|P7C   HOMAL3hrPt    default --   1
+          atmos      3hrPt XY-tau|P7C   HOMAL3hrPt   -------- --   1
+          atmos      3hrPt XY-tau|P7C     --------   -------- --   1
+
+                                      HOMAL3hrPt    default P1   4: clcalipsotmp clcalipsotmpice clcalipsotmpliq clcalipsotmpun
+          atmos      3hrPt  XY-temp   HOMAL3hrPt    default --   4
+          atmos      3hrPt  XY-temp   HOMAL3hrPt   -------- --   4
+          atmos      3hrPt  XY-temp     --------   -------- --   4
+
+          atmos      3hrPt --------     --------   -------- --  64
+
+                                           CFday    default P1  10: cl cli clw hur hus ta ua va wap zg
+          atmos        day     XY-A        CFday    default --  10
+          atmos        day     XY-A        CFday   -------- --  10
+          atmos        day     XY-A     --------   -------- --  10
+
+                                           CFday    default P1   1: mc
+          atmos        day    XY-AH        CFday    default --   1
+          atmos        day    XY-AH        CFday   -------- --   1
+          atmos        day    XY-AH     --------   -------- --   1
+
+                                           CFday    default P1   1: clcalipso
+          atmos        day   XY-H40        CFday    default --   1
+          atmos        day   XY-H40        CFday   -------- --   1
+          atmos        day   XY-H40     --------   -------- --   1
+
+                                            Eday    default P1   2: ua va
+          atmos        day   XY-P19         Eday    default --   2
+          atmos        day   XY-P19         Eday   -------- --   2
+          atmos        day   XY-P19     --------   -------- --   2
+
+                                           CFday    default P1   1: clisccp
+          atmos        day    XY-P7        CFday    default --   1
+          atmos        day    XY-P7        CFday   -------- --   1
+          atmos        day    XY-P7     --------   -------- --   1
+
+                                             day    default P1   6: hur hus ta ua va wap
+          atmos        day    XY-P8          day    default --   6
+          atmos        day    XY-P8          day   -------- --   6
+          atmos        day    XY-P8     --------   -------- --   6
+
+                                          AERday    default P1   1: zg1000
+          atmos        day    XY-na       AERday    default --   1
+          atmos        day    XY-na       AERday   -------- --   1
+                                           CFday    default P1  21: albisccp ccb cct clhcalipso clivi cllcalipso clmcalipso cltcalipso cltisccp clwvi pctisccp ps rldscs rlutcs rsdscs rsdt rsuscs rsut rsutcs ta700 wap500
+          atmos        day    XY-na        CFday    default --  22
+          atmos        day    XY-na        CFday   -------- --  22
+                                            Eday    default P1  17: clivic clwvic hus850 jpdftaureicemodis jpdftaureliqmodis loadbc loaddust loadoa loadso4 loadss parasolRefl rsdsdiff ta500 ta850 tauu tauv ts
+          atmos        day    XY-na         Eday    default --  39
+          atmos        day    XY-na         Eday   -------- --  39
+                                             day    default P1  23: clt hfls hfss hurs hursmax hursmin huss pr prc prsn psl rlds rlus rlut rsds rsus sfcWind sfcWindmax tas tasmax tasmin uas vas
+          atmos        day    XY-na          day    default --  62
+          atmos        day    XY-na          day   -------- --  62
+          atmos        day    XY-na     --------   -------- --  62
+
+                                           EdayZ    default P1   4: hus ta va zg
+          atmos        day    Y-P19        EdayZ    default --   4
+          atmos        day    Y-P19        EdayZ   -------- --   4
+          atmos        day    Y-P19     --------   -------- --   4
+
+                                           EdayZ    default P1   1: ua
+          atmos        day    Y-P39        EdayZ    default --   1
+          atmos        day    Y-P39        EdayZ   -------- --   1
+          atmos        day    Y-P39     --------   -------- --   1
+
+          atmos        day --------     --------   -------- --  88
+
+                                              fx    default P1   1: zfull
+          atmos         fx     XY-A           fx    default --   1
+          atmos         fx     XY-A           fx   -------- --   1
+          atmos         fx     XY-A     --------   -------- --   1
+
+                                              fx    default P1   1: sftlf
+          atmos         fx    XY-na           fx    default --   1
+          atmos         fx    XY-na           fx   -------- --   1
+          atmos         fx    XY-na     --------   -------- --   1
+
+          atmos         fx --------     --------   -------- --   2
+
+                                          AERmon    default P1   1: zg
+          atmos        mon     XY-A       AERmon    default --   1
+          atmos        mon     XY-A       AERmon   -------- --   1
+                                            Amon    default P1   3: cl cli clw
+          atmos        mon     XY-A         Amon    default --   4
+          atmos        mon     XY-A         Amon   -------- --   4
+                                           CFmon    default P1  16: clc cls hur hus ta tnhus tnhusa tnhusc tnhusmp tnhusscpbl tnt tnta tntc tntmp tntr tntscpbl
+                                           CFmon    default P2   4: clic clis clwc clws
+          atmos        mon     XY-A        CFmon    default --  24
+          atmos        mon     XY-A        CFmon   -------- --  24
+                                            Emon    default P1   7: concdust tnhuspbl tnhusscp tntpbl tntrlcs tntrscs tntscp
+          atmos        mon     XY-A         Emon    default --  31
+          atmos        mon     XY-A         Emon   -------- --  31
+          atmos        mon     XY-A     --------   -------- --  31
+
+                                            Amon    default P1   1: mc
+          atmos        mon    XY-AH         Amon    default --   1
+          atmos        mon    XY-AH         Amon   -------- --   1
+                                           CFmon    default P1  17: mcu rld rld4co2 rldcs rldcs4co2 rlu rlu4co2 rlucs rlucs4co2 rsd rsd4co2 rsdcs rsdcs4co2 rsu rsu4co2 rsucs rsucs4co2
+                                           CFmon    default P2   1: mcd
+          atmos        mon    XY-AH        CFmon    default --  19
+          atmos        mon    XY-AH        CFmon   -------- --  19
+          atmos        mon    XY-AH     --------   -------- --  19
+
+                                            Emon    default P1   1: clmisr
+          atmos        mon   XY-H16         Emon    default --   1
+          atmos        mon   XY-H16         Emon   -------- --   1
+          atmos        mon   XY-H16     --------   -------- --   1
+
+                                           CFmon    default P1   1: clcalipso
+          atmos        mon   XY-H40        CFmon    default --   1
+          atmos        mon   XY-H40        CFmon   -------- --   1
+                                            Emon    default P1   4: cfadDbze94 cfadLidarsr532 clcalipsoice clcalipsoliq
+          atmos        mon   XY-H40         Emon    default --   5
+          atmos        mon   XY-H40         Emon   -------- --   5
+                                        HOMALmon    default P1   1: clcalipsoun
+          atmos        mon   XY-H40     HOMALmon    default --   6
+          atmos        mon   XY-H40     HOMALmon   -------- --   6
+          atmos        mon   XY-H40     --------   -------- --   6
+
+                                            Amon    default P1   8: co2 hur hus ta ua va wap zg
+          atmos        mon   XY-P19         Amon    default --   8
+          atmos        mon   XY-P19         Amon   -------- --   8
+                                            Emon    default P1   2: utendnogw utendogw
+          atmos        mon   XY-P19         Emon    default --  10
+          atmos        mon   XY-P19         Emon   -------- --  10
+          atmos        mon   XY-P19     --------   -------- --  10
+
+                                           CFmon    default P1   1: clisccp
+          atmos        mon    XY-P7        CFmon    default --   1
+          atmos        mon    XY-P7        CFmon   -------- --   1
+          atmos        mon    XY-P7     --------   -------- --   1
+
+                                        HOMEPmon    default P1   6: hus ta ua va wap zg
+          atmos        mon  XY-P7HM     HOMEPmon    default --   6
+          atmos        mon  XY-P7HM     HOMEPmon   -------- --   6
+          atmos        mon  XY-P7HM     --------   -------- --   6
+
+                                            Emon    default P1   3: hus ua va
+          atmos        mon   XY-P7T         Emon    default --   3
+          atmos        mon   XY-P7T         Emon   -------- --   3
+          atmos        mon   XY-P7T     --------   -------- --   3
+
+                                        HOMEPmon    default P1   3: co no2 o3
+          atmos        mon XY-Plev39hm     HOMEPmon    default --   3
+          atmos        mon XY-Plev39hm     HOMEPmon   -------- --   3
+          atmos        mon XY-Plev39hm     --------   -------- --   3
+
+                                          AERmon    default P1   1: ps
+          atmos        mon    XY-na       AERmon    default --   1
+          atmos        mon    XY-na       AERmon   -------- --   1
+                                            Amon    default P1  41: ccb cct ci clivi clt clwvi evspsbl fco2antt fco2fos fco2nat hfls hfss hurs huss pr prc prsn prw ps psl rlds rldscs rlus rlut rlutcs rsds rsdscs rsdt rsus rsuscs rsut rsutcs sfcWind tas tasmax tasmin tauu tauv ts uas vas
+          atmos        mon    XY-na         Amon    default --  42
+          atmos        mon    XY-na         Amon   -------- --  42
+                                           CFmon    default P1  11: albisccp clhcalipso cllcalipso clmcalipso cltcalipso cltisccp pctisccp rlut4co2 rlutcs4co2 rsut4co2 rsutcs4co2
+          atmos        mon    XY-na        CFmon    default --  53
+          atmos        mon    XY-na        CFmon   -------- --  53
+                                            Emon    default P1  23: climodis cltmodis clwmodis clwvic intuadse intuaw intvadse intvaw jpdftaureicemodis jpdftaureliqmodis loaddust od443dust od865dust parasolRefl rls rsdsdiff rss sconcdust sconcso4 sconcss sfcWindmax uqint vqint
+          atmos        mon    XY-na         Emon    default --  76
+          atmos        mon    XY-na         Emon   -------- --  76
+                                        HOMALmon    default P1  37: albsrfc cdnctop clhcalipsoice clhcalipsoliq clhcalipsoun clhmodis cllcalipsoice cllcalipsoliq cllcalipsoun cllmodis clmcalipsoice clmcalipsoliq clmcalipsoun clmmodis cltcalipsoice cltcalipsoliq cltcalipsoun clth cltl cltlidarradar cltm icod iwpmodis lcod lwpmodis meantbclrisccp meantbisccp pctmodis reffclimodis reffclitop reffclwmodis reffclwtopcnrm rluscs tauimodis tauisccp tautmodis tauwmodis
+          atmos        mon    XY-na     HOMALmon    default -- 113
+          atmos        mon    XY-na     HOMALmon   -------- -- 113
+                                         Nonemon    default P1   1: hfdsl
+          atmos        mon    XY-na      Nonemon    default -- 114
+          atmos        mon    XY-na      Nonemon   -------- -- 114
+          atmos        mon    XY-na     --------   -------- -- 114
+
+                                        HOMALmon    default P1   1: parasolCRefl
+          atmos        mon  XY-sza5     HOMALmon    default --   1
+          atmos        mon  XY-sza5     HOMALmon   -------- --   1
+          atmos        mon  XY-sza5     --------   -------- --   1
+
+                                        HOMALmon    default P1   1: clmodis
+          atmos        mon XY-tau|P7C     HOMALmon    default --   1
+          atmos        mon XY-tau|P7C     HOMALmon   -------- --   1
+          atmos        mon XY-tau|P7C     --------   -------- --   1
+
+                                        HOMALmon    default P1   4: clcalipsotmp clcalipsotmpice clcalipsotmpliq clcalipsotmpun
+          atmos        mon  XY-temp     HOMALmon    default --   4
+          atmos        mon  XY-temp     HOMALmon   -------- --   4
+          atmos        mon  XY-temp     --------   -------- --   4
+
+                                         AERmonZ    default P1   1: zg
+          atmos        mon    Y-P39      AERmonZ    default --   1
+          atmos        mon    Y-P39      AERmonZ   -------- --   1
+                                           EmonZ    default P1   1: zmtnt
+          atmos        mon    Y-P39        EmonZ    default --   2
+          atmos        mon    Y-P39        EmonZ   -------- --   2
+          atmos        mon    Y-P39     --------   -------- --   2
+
+          atmos        mon --------     --------   -------- -- 202
+
+                                          Esubhr    default P1   6: tnhuspbl tnhusscp tntpbl tntrlcs tntrscs tntscp
+          atmos    subhrPt      S-A       Esubhr    default --   6
+          atmos    subhrPt      S-A       Esubhr   -------- --   6
+          atmos    subhrPt      S-A     --------   -------- --   6
+
+          atmos    subhrPt --------     --------   -------- --   6
+
+
+          atmos ---------- --------    --------   -------- -- 367
+                                            Amon    default P1   3: ch4 n2o o3
+atmos atmosChem        mon   XY-P19         Amon    default --   3
+atmos atmosChem        mon   XY-P19         Amon   -------- --   3
+atmos atmosChem        mon   XY-P19     --------   -------- --   3
+
+atmos atmosChem        mon --------     --------   -------- --   3
+
+
+atmos atmosChem ---------- --------    --------   -------- --   3
+                                              fx    default P1   1: areacella
+     atmos land         fx    XY-na           fx    default --   1
+     atmos land         fx    XY-na           fx   -------- --   1
+     atmos land         fx    XY-na     --------   -------- --   1
+
+     atmos land         fx --------     --------   -------- --   1
+
+
+     atmos land ---------- --------    --------   -------- --   1
+                                           EmonZ    default P1   3: oxloss oxprod vmrox
+      atmosChem        mon    Y-P39        EmonZ    default --   3
+      atmosChem        mon    Y-P39        EmonZ   -------- --   3
+      atmosChem        mon    Y-P39     --------   -------- --   3
+
+      atmosChem        mon --------     --------   -------- --   3
+
+
+      atmosChem ---------- --------    --------   -------- --   3
+                                             day    default P1   4: mrro mrso mrsos tslsi
+           land        day    XY-na          day    default --   4
+           land        day    XY-na          day   -------- --   4
+           land        day    XY-na     --------   -------- --   4
+
+           land        day --------     --------   -------- --   4
+
+                                              fx    default P1   4: mrsofc orog rootd sftgif
+           land         fx    XY-na           fx    default --   4
+           land         fx    XY-na           fx   -------- --   4
+           land         fx    XY-na     --------   -------- --   4
+
+           land         fx --------     --------   -------- --   4
+
+                                            Emon    default P1   2: mrsfl mrsll
+           land        mon     XY-S         Emon    default --   2
+           land        mon     XY-S         Emon   -------- --   2
+                                            Lmon    default P1   1: tsl
+           land        mon     XY-S         Lmon    default --   3
+           land        mon     XY-S         Lmon   -------- --   3
+           land        mon     XY-S     --------   -------- --   3
+
+                                            Emon    default P1  19: cLand cSoil cropFracC3 cropFracC4 evspsblpot fAnthDisturb fDeforestToProduct fFireNat fLuc fProductDecomp fracLut grassFracC3 grassFracC4 mrlso nep netAtmosLandCO2Flux nwdFracLut orog vegFrac
+                                            Emon    default P2  24: cLitterGrass cLitterSubSurf cLitterSurf cLitterTree cSoilGrass cSoilTree cStem cVegGrass cVegTree cWood fDeforestToAtmos fFireAll fVegFire gppGrass gppTree mrtws nppGrass nppTree raGrass raTree rhGrass rhLitter rhSoil rhTree
+           land        mon    XY-na         Emon    default --  43
+           land        mon    XY-na         Emon   -------- --  43
+                                        HOMALmon    default P1  13: albsrfcLa burntArea fDeforestToL fFireBCarb fRegrowth fsat icedLa necb snct sndLa tmxlLa tsLa vegstress
+           land        mon    XY-na     HOMALmon    default --  56
+           land        mon    XY-na     HOMALmon   -------- --  56
+                                           LImon    default P1   1: sftgif
+           land        mon    XY-na        LImon    default --  57
+           land        mon    XY-na        LImon   -------- --  57
+                                            Lmon    default P1  28: baresoilFrac burntFractionAll c3PftFrac c4PftFrac cLitter cProduct cVeg cropFrac evspsblsoi evspsblveg fFire fLitterSoil fVegLitter gpp grassFrac lai landCoverFrac mrro mrros mrso mrsos nbp npp ra residualFrac rh tran treeFrac
+                                            Lmon    default P2   7: cLeaf cLitterBelow cRoot cSoilFast cSoilMedium cSoilSlow prveg
+           land        mon    XY-na         Lmon    default --  92
+           land        mon    XY-na         Lmon   -------- --  92
+                                         Nonemon    default P1   5: albsn cw dmlt mrsow rzwc
+           land        mon    XY-na      Nonemon    default --  97
+           land        mon    XY-na      Nonemon   -------- --  97
+           land        mon    XY-na     --------   -------- --  97
+
+           land        mon --------     --------   -------- -- 100
+
+
+           land ---------- --------    --------   -------- -- 108
+                                             day    default P1   2: snc snw
+   land landIce        day    XY-na          day    default --   2
+   land landIce        day    XY-na          day   -------- --   2
+   land landIce        day    XY-na     --------   -------- --   2
+
+   land landIce        day --------     --------   -------- --   2
+
+                                           LImon    default P1   8: agesno hfdsn snc snd snm snw tpf tsn
+                                           LImon    default P2   1: lwsnl
+   land landIce        mon    XY-na        LImon    default --   9
+   land landIce        mon    XY-na        LImon   -------- --   9
+                                            Lmon    default P1   1: mrfso
+   land landIce        mon    XY-na         Lmon    default --  10
+   land landIce        mon    XY-na         Lmon   -------- --  10
+   land landIce        mon    XY-na     --------   -------- --  10
+
+                                         ImonGre    default P1   1: tas
+   land landIce        mon    na-na      ImonGre    default --   1
+   land landIce        mon    na-na      ImonGre   -------- --   1
+   land landIce        mon    na-na     --------   -------- --   1
+
+   land landIce        mon --------     --------   -------- --  11
+
+
+   land landIce ---------- --------    --------   -------- --  13
+                                             Efx    default P1   1: sftgrf
+        landIce         fx    XY-na          Efx    default --   1
+        landIce         fx    XY-na          Efx   -------- --   1
+        landIce         fx    XY-na     --------   -------- --   1
+
+        landIce         fx --------     --------   -------- --   1
+
+                                            Amon    default P1   1: sbl
+        landIce        mon    XY-na         Amon    default --   1
+        landIce        mon    XY-na         Amon   -------- --   1
+                                           LImon    default P1   2: sbl sftgrf
+        landIce        mon    XY-na        LImon    default --   3
+        landIce        mon    XY-na        LImon   -------- --   3
+        landIce        mon    XY-na     --------   -------- --   3
+
+        landIce        mon --------     --------   -------- --   3
+
+
+        landIce ---------- --------    --------   -------- --   4
+                                           SIday    default P1   1: siconca
+         seaIce        day    XY-na        SIday    default --   1
+         seaIce        day    XY-na        SIday   -------- --   1
+         seaIce        day    XY-na     --------   -------- --   1
+
+         seaIce        day --------     --------   -------- --   1
+
+                                           SImon    default P1   1: siconca
+         seaIce        mon    XY-na        SImon    default --   1
+         seaIce        mon    XY-na        SImon   -------- --   1
+         seaIce        mon    XY-na     --------   -------- --   1
+
+         seaIce        mon --------     --------   -------- --   1
+
+
+         seaIce ---------- --------    --------   -------- --   2
+
+     ---------- ---------- --------    --------   -------- -- 619
 
 
 Some Statistics on actually written variables per variable...
@@ -2302,17 +2574,6 @@ Warnings about cell methods (with var list)
 	time: mean where vegetation for vars: {'vegHeight'}
 	time: mean where ice_sheet for vars: {'hflsIs', 'hfssIs', 'mrroIs', 'orogIs', 'prraIs', 'prsnIs', 'rldsIs', 'rlusIs', 'rsdsIs', 'rsusIs', 'sblIs', 'sncIs', 'snmIs', 'tas', 'tasIs', 'tsIs', 'tsnIs'}
 	Cannot yet handle time: mean (with samples weighted by snow mass) for vars: {'agesno', 'tsn'}
-sync universe
-Universe is in offline mode
-Running in offline mode - only using local repositories and databases
-Cache db is uptodate from local repository
-sync projects
-Project cmip6 is in offline mode
-Running in offline mode - only using local repositories and databases
-Cache db is uptodate from local repository
-Project cmip7 is in offline mode
-Running in offline mode - only using local repositories and databases
-Cache db is uptodate from local repository
 
  **************************************************
 *
@@ -2371,11 +2632,11 @@ For extra table CNRM_HOMAL3hrPt (which has 93 variables):
 Number of 'cmor', 'dev' and 'perso' among home variables: 245
 Number of 'extra' among home variables: 132
 homevars list: psl ps pr prsn prc rsdscs rsuscs rldscs rsdt rsut rsutcs rsutaf rsutcsaf rlut rlutcs rlutaf rlutcsaf prw clt clwvi clivi intuaw intvaw intuadse intvadse toz ta ua va zg hus hur wap ztp ptp clc cls clic clis clwc clws mcd mcu clc cls clic clis clwc clws prlsns prlsprof prcprof prsnc ta zfull zhalf hus ua va wap tas rsds rsus rlds rlus mrso mrsos mrfso mrros mrro tsl snd snw snc lwsnl mrtws dmlt prveg gpp npp ts evspsbl evspsblpot sbl hfls hfss tasmin tasmax hfdsl albsn cw rzwc mrsow et uas vas sfcWind sfcWindmax hurs huss tauu tauv wtd rivo od550aer od550ss od550dust od550so4 od550bc od550oa abs550aer emiso2 emiss emidust emiso4 emibc emioa dryso2 dryss drydust dryso4 drybc dryoa wetss wetdust wetso4 wetbc wetoa sconcss sconcdust sconcso4 bry ch4 cly h2o hcl hno3 ho2 meanage n2o noy o3 oh lai gppGrass gppTree ra raGrass raTree rh rhSoil rhLitter rhGrass rhTree nppGrass nppTree nep cVeg cVegGrass cVegTree cLitter cSoil cSoilFast cSoilSlow cSoilGrass cSoilTree cSoilMedium cProduct cLand cLeaf cStem cWood cRoot cLitterSurf cLitterSubSurf cLitterBelow cLitterGrass cLitterTree fVegLitter fLitterSoil burntFractionAll fFireNat fFireAll fVegFire fDeforestToAtmos fDeforestToProduct fProductDecomp fLuc nbp cSoilPools tSoilPools airmass areacella cdnc clc cltc co co2 cod h2o hcho hcl hno3 hur hus lwp mcu mmrpm1 n2o no no2 o3 o3loss o3prod od870aer oh orog ps rsdsdiff sftlf so2 ta ta tatp tnhus tnhusa tnhusc tnhusmp tnhusscpbl tnt tnta tntc tntmp tntr tntrl tntrs tntscpbl ttop ua ua va va wa zg zg ta ua va zg hus wap cltl cltm clth rluscs rsdsaf rsusaf rldsaf rlusaf rldscsaf rluscsaf rsdscsaf rsuscsaf lcod icod reffclwtopcnrm reffclitop cdnctop RADasy550aer RADssa550aer RADod550aer RADabs550aer cllcalipsoice clmcalipsoice clhcalipsoice cltcalipsoice cllcalipsoliq clmcalipsoliq clhcalipsoliq cltcalipsoliq cllcalipsoun clmcalipsoun clhcalipsoun cltcalipsoun clcalipsoun clcalipsotmp clcalipsotmpice clcalipsotmpliq clcalipsotmpun parasolCRefl cltlidarradar tauisccp meantbisccp meantbclrisccp clhmodis clmmodis cllmodis tautmodis tauwmodis tauimodis reffclwmodis reffclimodis pctmodis lwpmodis iwpmodis clmodis cllcalipsoice clmcalipsoice clhcalipsoice cltcalipsoice cllcalipsoliq clmcalipsoliq clhcalipsoliq cltcalipsoliq cllcalipsoun clmcalipsoun clhcalipsoun cltcalipsoun clcalipsoun clcalipsotmp clcalipsotmpice clcalipsotmpliq clcalipsotmpun parasolCRefl cltlidarradar tauisccp meantbisccp meantbclrisccp clhmodis clmmodis cllmodis tautmodis tauwmodis tauimodis reffclwmodis reffclimodis pctmodis lwpmodis iwpmodis clmodis albsrfc vegstress snct fsat albsrfcLa sndLa icedLa tsLa tmxlLa fldf fwtd o3 co no2 asy550aer ssa550aer od550acldaer od550ssbin1 od550ssbin2 od550dustbin1 od550dustbin2 TACabs550aer sconcbc sconcoa ext550ss ext550dust ext550so4 ext550bc ext550oa necb fDeforestToL fRegrowth burntArea fFireBCarb carbw carbdis carbin
-Error: {'varname': 'et', 'realm': 'land', 'freq': 'mon', 'table': 'NONE'} HOMEVar announced as cmor but no corresponding CMORVar found => Not taken into account.
+Error: {'varname': 'et', 'realm': 'land', 'freq': 'mon', 'table': 'NONE', 'region': 'default'} HOMEVar announced as cmor but no corresponding CMORVar found => Not taken into account.
 (cSoilPools Emon) HOMEVar: Spatial and Temporal Shapes specified DO NOT match CMORvar ones. -> Provided: (XY-na, time-point) Expected: (XY-na, time-mean)
-Error: {'varname': 'cSoilPools', 'realm': 'land', 'freq': 'mon', 'table': 'Emon'} HOMEVar announced as cmor but no corresponding CMORVar found => Not taken into account.
+Error: {'varname': 'cSoilPools', 'realm': 'land', 'freq': 'mon', 'table': 'Emon', 'region': 'default'} HOMEVar announced as cmor but no corresponding CMORVar found => Not taken into account.
 (tSoilPools Emon) HOMEVar: Spatial and Temporal Shapes specified DO NOT match CMORvar ones. -> Provided: (XY-na, time-point) Expected: (XY-na, time-mean)
-Error: {'varname': 'tSoilPools', 'realm': 'land', 'freq': 'mon', 'table': 'Emon'} HOMEVar announced as cmor but no corresponding CMORVar found => Not taken into account.
+Error: {'varname': 'tSoilPools', 'realm': 'land', 'freq': 'mon', 'table': 'Emon', 'region': 'default'} HOMEVar announced as cmor but no corresponding CMORVar found => Not taken into account.
 
 Realms for these CMORvars: aerosol atmos atmos atmosChem atmos land atmosChem land land landIce landIce landIce land ocean ocnBgchem seaIce seaIce ocean
 processing file current_directory/test_amip_ESM_DR12/input/xml/ping_surfex.xml:
@@ -2387,24 +2648,34 @@ file_def written as current_directory/test_amip_ESM_DR12/test_outputs/dr2xml_tri
 
 
 Some Statistics on actually written variables per frequency+shape...
-                            Eday    default P1   1: rivo
-       day    XY-na    --------            ---   1
+                                            Eday    default P1   1: rivo
+           land        day    XY-na         Eday    default --   1
+           land        day    XY-na         Eday   -------- --   1
+           land        day    XY-na     --------   -------- --   1
 
-       day --------    --------            ---   1
+           land        day --------     --------   -------- --   1
 
-                              fx    default P1   1: areacellr
-        fx    XY-na    --------            ---   1
+                                              fx    default P1   1: areacellr
+           land         fx    XY-na           fx    default --   1
+           land         fx    XY-na           fx   -------- --   1
+           land         fx    XY-na     --------   -------- --   1
 
-        fx --------    --------            ---   1
+           land         fx --------     --------   -------- --   1
 
-                            Emon    default P2   1: wtd
-                        HOMALmon    default P1   5: carbdis carbin carbw fldf fwtd
-       mon    XY-na    --------            ---   6
+                                            Emon    default P2   1: wtd
+           land        mon    XY-na         Emon    default --   1
+           land        mon    XY-na         Emon   -------- --   1
+                                        HOMALmon    default P1   5: carbdis carbin carbw fldf fwtd
+           land        mon    XY-na     HOMALmon    default --   6
+           land        mon    XY-na     HOMALmon   -------- --   6
+           land        mon    XY-na     --------   -------- --   6
 
-       mon --------    --------            ---   6
+           land        mon --------     --------   -------- --   6
 
 
----------- --------    --------            ---   8
+           land ---------- --------    --------   -------- --   8
+
+     ---------- ---------- --------    --------   -------- --   8
 
 
 Some Statistics on actually written variables per variable...

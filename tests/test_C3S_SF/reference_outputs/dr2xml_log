@@ -36,39 +36,73 @@ processing file current_directory/test_C3S_SF/input/xml/ping_nemo.xml:
 OK current_directory/test_C3S_SF/input/xml/ping_nemo.xml
 processing file current_directory/test_C3S_SF/input/xml/ping_trip.xml:
 OK current_directory/test_C3S_SF/input/xml/ping_trip.xml
+Cannot find psvar dict for SimpleCMORVar hus of type cmor and priority 1 (with standard name specific_humidity and units 1)
 Warning: Cannot complement model levels with psol for table C3S for frequency 12h
+Cannot find psvar dict for SimpleCMORVar ta of type cmor and priority 1 (with standard name air_temperature and units K)
 Warning: Cannot complement model levels with psol for table C3S for frequency 12h
+Cannot find psvar dict for SimpleCMORVar ua of type cmor and priority 1 (with standard name x_wind and units m s-1)
 Warning: Cannot complement model levels with psol for table C3S for frequency 12h
+Cannot find psvar dict for SimpleCMORVar va of type cmor and priority 1 (with standard name y_wind and units m s-1)
 Warning: Cannot complement model levels with psol for table C3S for frequency 12h
+Cannot find psvar dict for SimpleCMORVar zg of type cmor and priority 1 (with standard name geopotential_height and units m)
 Warning: Cannot complement model levels with psol for table C3S for frequency 12h
 
 file_def written as current_directory/test_C3S_SF/test_outputs/dr2xml_surfex.xml
 
 Skipped variables (i.e. whose alias is not present in the pingfile):
->>> TABLE:             C3S REGION:         default 02/36 ----> lweprs(1) mrroa(1)
+>>> REALM:           atmos TABLE:             C3S REGION:         default 01/36 ----> lweprs(1)
+
+
+
+>>> REALM:            land TABLE:             C3S REGION:         default 01/36 ----> mrroa(1)
+
 
 
 
 
 
 Some Statistics on actually written variables per frequency+shape...
-                             C3S    default P1   5: hus ta ua va zg
-      12hr     XY-A    --------            ---   5
+                                             C3S    default P1   5: hus ta ua va zg
+          atmos       12hr     XY-A          C3S    default --   5
+          atmos       12hr     XY-A          C3S   -------- --   5
+          atmos       12hr     XY-A     --------   -------- --   5
 
-      12hr --------    --------            ---   5
+          atmos       12hr --------     --------   -------- --   5
 
-                             C3S    default P1   7: clt psl tas tdps tsl uas vas
-       6hr    XY-na    --------            ---   7
+                                             C3S    default P1   6: clt psl tas tdps uas vas
+          atmos        6hr    XY-na          C3S    default --   6
+          atmos        6hr    XY-na          C3S   -------- --   6
+          atmos        6hr    XY-na     --------   -------- --   6
 
-       6hr --------    --------            ---   7
+          atmos        6hr --------     --------   -------- --   6
 
-                             C3S    default P1  22: hfls hfss lwee lwepr lweprc lweprsn lwesnw mrroab mrroas rhosn rlds rls rlt rsds rsdt rss rst tasmax tasmin tauu tauv wsgmax
-       day    XY-na    --------            ---  22
+                                             C3S    default P1  17: hfls hfss lwepr lweprc lweprsn rlds rls rlt rsds rsdt rss rst tasmax tasmin tauu tauv wsgmax
+          atmos        day    XY-na          C3S    default --  17
+          atmos        day    XY-na          C3S   -------- --  17
+          atmos        day    XY-na     --------   -------- --  17
 
-       day --------    --------            ---  22
+          atmos        day --------     --------   -------- --  17
 
 
----------- --------    --------            ---  34
+          atmos ---------- --------    --------   -------- --  28
+                                             C3S    default P1   1: tsl
+           land        6hr    XY-na          C3S    default --   1
+           land        6hr    XY-na          C3S   -------- --   1
+           land        6hr    XY-na     --------   -------- --   1
+
+           land        6hr --------     --------   -------- --   1
+
+                                             C3S    default P1   5: lwee lwesnw mrroab mrroas rhosn
+           land        day    XY-na          C3S    default --   5
+           land        day    XY-na          C3S   -------- --   5
+           land        day    XY-na     --------   -------- --   5
+
+           land        day --------     --------   -------- --   5
+
+
+           land ---------- --------    --------   -------- --   6
+
+     ---------- ---------- --------    --------   -------- --  34
 
 
 Some Statistics on actually written variables per variable...
@@ -246,20 +280,25 @@ OK current_directory/test_C3S_SF/input/xml/ping_trip.xml
 file_def written as current_directory/test_C3S_SF/test_outputs/dr2xml_nemo.xml
 
 Skipped variables (i.e. whose alias is not present in the pingfile):
->>> TABLE:             C3S REGION:         default 02/03 ----> sic(1) sitemptop(1)
+>>> REALM:          seaIce TABLE:             C3S REGION:         default 02/03 ----> sic(1) sitemptop(1)
+
 
 
 
 
 
 Some Statistics on actually written variables per frequency+shape...
-                             C3S    default P1   1: tso
-       6hr    XY-na    --------            ---   1
+                                             C3S    default P1   1: tso
+          ocean        6hr    XY-na          C3S    default --   1
+          ocean        6hr    XY-na          C3S   -------- --   1
+          ocean        6hr    XY-na     --------   -------- --   1
 
-       6hr --------    --------            ---   1
+          ocean        6hr --------     --------   -------- --   1
 
 
----------- --------    --------            ---   1
+          ocean ---------- --------    --------   -------- --   1
+
+     ---------- ---------- --------    --------   -------- --   1
 
 
 Some Statistics on actually written variables per variable...
@@ -302,7 +341,7 @@ file_def written as current_directory/test_C3S_SF/test_outputs/dr2xml_trip.xml
 
 Some Statistics on actually written variables per frequency+shape...
 
----------- --------    --------            ---   0
+     ---------- ---------- --------    --------   -------- --   0
 
 
 Some Statistics on actually written variables per variable...

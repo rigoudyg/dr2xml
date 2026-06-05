@@ -44,8 +44,6 @@
 		<!--P1 (kg m-2) mass_content_of_water_in_soil : the mass per unit area  (summed over all soil layers) of water in all phases.-->
 		<field id="CMIP7_mrso100" field_ref="?dummy_XY_sdepth100cm"/>
 		<!--P3 (kg m-2) mass_content_of_water_in_soil_layer : Soil moisture at 3hr but for 0-1m-->
-		<field id="CMIP7_mrsofc" field_ref="?dummy_XY"/>
-		<!--P1 (kg m-2) soil_moisture_content_at_field_capacity : reported "where land": divide the total water holding capacity of all the soil in the grid cell by the land area in the grid cell;  reported as "missing" where the land fraction is 0.-->
 		<field id="CMIP7_mrsos" field_ref="?dummy_XY_sdepth10cm"/>
 		<!--P1 (kg m-2) mass_content_of_water_in_soil_layer : the mass of water in all phases in a thin surface soil layer.-->
 		<field id="CMIP7_orog" field_ref="?dummy_XY"/>
@@ -66,8 +64,6 @@
 		<!--P1 (m) root_depth : report the maximum soil depth reachable by plant roots (if defined in model), i.e., the maximum soil depth from which they can extract moisture; report as "missing" where the land fraction is 0.-->
 		<field id="CMIP7_sfcWind" field_ref="?dummy_XY_height10m"/>
 		<!--P1 (m s-1) wind_speed : near-surface (usually, 10 meters) wind speed.-->
-		<field id="CMIP7_sftgif" field_ref="?dummy_XY"/>
-		<!--P1 (%) land_ice_area_fraction : fraction of grid cell occupied by "permanent" ice (i.e., glaciers).-->
 		<field id="CMIP7_sftlf" field_ref="?dummy_XY"/>
 		<!--P1 (%) land_area_fraction : Percentage of horizontal area occupied by land.-->
 		<field id="CMIP7_slthick" field_ref="?dummy_XYSo_sdepth"/>
@@ -78,6 +74,8 @@
 		<!--P2 (W m-2) surface_net_downward_radiative_flux : Net radiative flux at surface-->
 		<field id="CMIP7_swh" field_ref="?dummy_XY"/>
 		<!--P2 (m) sea_surface_wave_significant_height : Average height of the highest one-third of waves present in the sea state, incorporating both wind-sea and swell waves. This is a key parameter for describing wave energy and is derived from the wave spectrum using spectral moments. Specifically, this parameter is four times the square root of the integral over all directions and all frequencies of the two-dimensional wave spectrum.-->
+		<field id="CMIP7_swhmax" field_ref="?dummy_XY"/>
+		<!--P2 (m) sea_surface_wave_significant_height : Highest value of the significant wave height simulated within a given time range (e.g., daily or monthly). The significant wave height (swh) is derived from the wave spectrum using spectral moments. Specifically, swh is four times the square root of the integral over all directions and all frequencies of the two-dimensional wave spectrum.-->
 		<field id="CMIP7_ta" field_ref="?dummy_XY_plev19"/>
 		<!--P1 (K) air_temperature : Air Temperature-->
 		<field id="CMIP7_ta6" field_ref="?dummy_XY_plev6"/>

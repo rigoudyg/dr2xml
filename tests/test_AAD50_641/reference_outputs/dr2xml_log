@@ -198,147 +198,356 @@ TBD: Cannot yet compute maximum hourly rate for          prhmax in table Eday ->
 file_def written as current_directory/test_AAD50_641/test_outputs/dr2xml_surfex.xml
 
 Skipped variables (i.e. whose alias is not present in the pingfile):
->>> TABLE:        HOMAL1hr REGION:         default 01/05 ----> wetno3(1.0)
+>>> REALM:         aerosol TABLE:        HOMAL1hr REGION:         default 01/05 ----> wetno3_HOMAL1hr(1.0)
 
 
->>> TABLE:        HOMALmon REGION:         default 01/51 ----> wetno3(1.0)
+>>> REALM:         aerosol TABLE:        HOMALmon REGION:         default 01/51 ----> wetno3_HOMALmon(1.0)
+
 
 
 
 
 
 Some Statistics on actually written variables per frequency+shape...
-                            E1hr    default P1   1: pr
-                        HOMAL1hr    default P1   4: dryno3 seddust sedno3 sedss
-                      HOMAL1hrPt    default P1   1: tssea
-                         None1hr    default P1  20: drybc drydust drynh4 dryoa dryso4 dryss evspsbl hfls hfss rlds rlus rsds rsus tauv wetbc wetdust wetnh4 wetoa wetso4 wetss
-                         None1hr    default P3   1: tauu
-       1hr    XY-na    --------            ---  27
+                                        HOMAL1hr    default P1   4: dryno3 seddust sedno3 sedss
+        aerosol        1hr    XY-na     HOMAL1hr    default --   4
+        aerosol        1hr    XY-na     HOMAL1hr   -------- --   4
+                                         None1hr    default P1  12: drybc drydust drynh4 dryoa dryso4 dryss wetbc wetdust wetnh4 wetoa wetso4 wetss
+        aerosol        1hr    XY-na      None1hr    default --  16
+        aerosol        1hr    XY-na      None1hr   -------- --  16
+        aerosol        1hr    XY-na     --------   -------- --  16
 
-       1hr --------    --------            ---  27
+        aerosol        1hr --------     --------   -------- --  16
 
-                            E1hr    default P3   1: psl
-                       None1hrPt    default P1   5: hurs huss sfcWind uas vas
-                       None1hrPt    default P3   1: tas
-     1hrPt    XY-na    --------            ---   7
+                                          AERday    default P1   1: od550aer
+        aerosol        day    XY-na       AERday    default --   1
+        aerosol        day    XY-na       AERday   -------- --   1
+                                        HOMALday    default P1  15: asy550aer od550nh4 rldsaf rldscsaf rlusaf rluscsaf rsdsaf rsdscsaf rsusaf rsuscsaf sconcbc sconcnh4 sconcno3 sconcoa ssa550aer
+        aerosol        day    XY-na     HOMALday    default --  16
+        aerosol        day    XY-na     HOMALday   -------- --  16
+                                         Noneday    default P1  14: abs550aer emidust emiss lwp od550bc od550dust od550no3 od550oa od550so4 od550ss rlutaf rlutcsaf rsutaf rsutcsaf
+        aerosol        day    XY-na      Noneday    default --  30
+        aerosol        day    XY-na      Noneday   -------- --  30
+        aerosol        day    XY-na     --------   -------- --  30
 
-     1hrPt --------    --------            ---   7
+        aerosol        day --------     --------   -------- --  30
 
-                             3hr    default P1  10: clt hfls hfss pr prc prsn rlds rlus rsds rsus
-       3hr    XY-na    --------            ---  10
+                                          AERmon    default P1   1: cdnc
+        aerosol        mon     XY-A       AERmon    default --   1
+        aerosol        mon     XY-A       AERmon   -------- --   1
+        aerosol        mon     XY-A     --------   -------- --   1
 
-       3hr --------    --------            ---  10
+                                        HOMALmon    default P1   7: ext550bc ext550dust ext550nh4 ext550no3 ext550oa ext550so4 ext550ss
+        aerosol        mon   XY-P19     HOMALmon    default --   7
+        aerosol        mon   XY-P19     HOMALmon   -------- --   7
+        aerosol        mon   XY-P19     --------   -------- --   7
 
-                             3hr    default P1   5: huss ps tas uas vas
-                       None3hrPt    default P1   3: hurs psl sfcWind
-     3hrPt    XY-na    --------            ---   8
+                                          AERmon    default P1  38: abs550aer cltc drybc drydust drynh3 drynh4 dryoa dryso2 dryso4 dryss emibc emidust eminh3 emioa emiso2 emiso4 emiss lwp od440aer od550aer od550bc od550dust od550no3 od550oa od550so4 od550ss od870aer rlutaf rlutcsaf rsutaf rsutcsaf toz wetbc wetdust wetnh4 wetoa wetso4 wetss
+        aerosol        mon    XY-na       AERmon    default --  38
+        aerosol        mon    XY-na       AERmon   -------- --  38
+                                        HOMALmon    default P1  31: RADabs550aer RADasy550aer RADod550aer RADssa550aer TACabs550aer asy550aer dryno3 eminh4 emino3 od550dustbin1 od550dustbin2 od550nh4 od550no3bin1 od550ssbin1 od550ssbin2 rldsaf rldscsaf rlusaf rluscsaf rsdsaf rsdscsaf rsusaf rsuscsaf sconcbc sconcnh4 sconcno3 sconcoa seddust sedno3 sedss ssa550aer
+        aerosol        mon    XY-na     HOMALmon    default --  69
+        aerosol        mon    XY-na     HOMALmon   -------- --  69
+        aerosol        mon    XY-na     --------   -------- --  69
 
-     3hrPt --------    --------            ---   8
-
-                    HOME6hrPlevPt    default P1   5: hus200 ta200 ua200 va200 zg200
-       6hr XY-P200HM    --------            ---   5
-
-                    HOME6hrPlevPt    default P1   5: hus500 ta500 ua500 va500 zg500
-       6hr XY-P500HM    --------            ---   5
-
-                    HOME6hrPlevPt    default P1   5: hus700 ta700 ua700 va700 zg700
-       6hr XY-P700HM    --------            ---   5
-
-                    HOME6hrPlevPt    default P1   5: hus850 ta850 ua850 va850 zg850
-       6hr XY-P850HM    --------            ---   5
-
-                    HOME6hrPlevPt    default P1   5: hus925 ta925 ua925 va925 zg925
-       6hr XY-P925HM    --------            ---   5
-
-                        HOMAL6hr    default P1   3: clth cltl cltm
-                         None6hr    default P1  10: evspsbl mrro mrros rsdt rsut snc snd snm snw tauv
-                         None6hr    default P2   1: rlut
-                         None6hr    default P3   1: tauu
-       6hr    XY-na    --------            ---  15
-
-       6hr --------    --------            ---  40
-
-                       6hrPlevPt    default P1   2: uas vas
-                       6hrPlevPt    default P3   1: ts
-                        HOMAL6hr    default P1   2: mrfso mrso
-                       None6hrPt    default P1   2: clivi clwvi
-     6hrPt    XY-na    --------            ---   7
-
-     6hrPt --------    --------            ---   7
-
-                        HOMEPday    default P1   5: hus200 ta200 ua200 va200 zg200
-       day XY-P200HM    --------            ---   5
-
-                        HOMEPday    default P1   5: hus500 ta500 ua500 va500 zg500
-       day XY-P500HM    --------            ---   5
-
-                        HOMEPday    default P1   5: hus700 ta700 ua700 va700 zg700
-       day XY-P700HM    --------            ---   5
-
-                             day    default P1   6: hur hus ta ua va wap
-                             day    default P2   1: zg
-       day    XY-P8    --------            ---   7
-
-                        HOMEPday    default P1   5: hus850 ta850 ua850 va850 zg850
-       day XY-P850HM    --------            ---   5
-
-                        HOMEPday    default P1   5: hus925 ta925 ua925 va925 zg925
-       day XY-P925HM    --------            ---   5
-
-                          AERday    default P1   1: od550aer
-                            Eday    default P1   6: mrros prhmax prw snm ts tsland
-                            Eday    default P3   1: snd
-                        HOMALday    default P1  24: asy550aer clth cltl cltm husll od550nh4 rldsaf rldscsaf rlusaf rluscs rluscsaf rsdsaf rsdscsaf rsusaf rsuscsaf sconcbc sconcnh4 sconcno3 sconcoa ssa550aer tall tssea uall vall
-                         Noneday    default P1  29: abs550aer clivi clwvi emidust emiss evspsbl lwp mrfso od550bc od550dust od550no3 od550oa od550so4 od550ss ps rldscs rlutaf rlutcsaf rsdscs rsdt rsuscs rsut rsutaf rsutcs rsutcsaf sconcdust sconcso4 sconcss tauv
-                         Noneday    default P2   1: rlutcs
-                         Noneday    default P3   1: tauu
-                           SIday    default P1   1: siconca
-                             day    default P1  25: clt hfls hfss hurs huss mrro mrso pr prc prsn psl rlds rlus rlut rsds rsus sfcWind sfcWindmax snc snw tas tasmax tasmin uas vas
-       day    XY-na    --------            ---  89
-
-       day --------    --------            --- 121
-
-                              fx    default P1   6: areacella mrsofc orog rootd sftgif sftlf
-        fx    XY-na    --------            ---   6
-
-        fx --------    --------            ---   6
-
-                          AERmon    default P1   1: cdnc
-       mon     XY-A    --------            ---   1
-
-                            Amon    default P1   7: hur hus ta ua va wap zg
-                        HOMALmon    default P1   7: ext550bc ext550dust ext550nh4 ext550no3 ext550oa ext550so4 ext550ss
-       mon   XY-P19    --------            ---  14
-
-                        HOMEPmon    default P1   7: hur200 hus200 ta200 ua200 va200 wap200 zg200
-       mon XY-P200HM    --------            ---   7
-
-                        HOMEPmon    default P1   7: hur500 hus500 ta500 ua500 va500 wap500 zg500
-       mon XY-P500HM    --------            ---   7
-
-                        HOMEPmon    default P1   7: hur700 hus700 ta700 ua700 va700 wap700 zg700
-       mon XY-P700HM    --------            ---   7
-
-                        HOMEPmon    default P1   7: hur850 hus850 ta850 ua850 va850 wap850 zg850
-       mon XY-P850HM    --------            ---   7
-
-                        HOMEPmon    default P1   7: hur925 hus925 ta925 ua925 va925 wap925 zg925
-       mon XY-P925HM    --------            ---   7
-
-                          AERmon    default P1  38: abs550aer cltc drybc drydust drynh3 drynh4 dryoa dryso2 dryso4 dryss emibc emidust eminh3 emioa emiso2 emiso4 emiss lwp od440aer od550aer od550bc od550dust od550no3 od550oa od550so4 od550ss od870aer rlutaf rlutcsaf rsutaf rsutcsaf toz wetbc wetdust wetnh4 wetoa wetso4 wetss
-                            Amon    default P1  34: clivi clt clwvi evspsbl hfls hfss hurs pr prc prsn prw ps psl rlds rldscs rlus rlut rlutcs rsds rsdscs rsdt rsus rsuscs rsut rsutcs sfcWind tas tasmax tasmin tauu tauv ts uas vas
-                            Emon    default P1   4: sconcdust sconcso4 sconcss sfcWindmax
-                        HOMALmon    default P1  43: RADabs550aer RADasy550aer RADod550aer RADssa550aer TACabs550aer asy550aer cdnctop clth cltl cltm dryno3 eminh4 emino3 husll od550dustbin1 od550dustbin2 od550nh4 od550no3bin1 od550ssbin1 od550ssbin2 reffclitop reffclwtopcnrm rldsaf rldscsaf rlusaf rluscs rluscsaf rsdsaf rsdscsaf rsusaf rsuscsaf sconcbc sconcnh4 sconcno3 sconcoa seddust sedno3 sedss ssa550aer tall tssea uall vall
-                           LImon    default P1   4: snc snd snm snw
-                            Lmon    default P1   4: mrfso mrro mrros mrso
-                         Nonemon    default P1   1: tsland
-                           SImon    default P1   1: siconca
-       mon    XY-na    --------            --- 129
-
-       mon --------    --------            --- 179
+        aerosol        mon --------     --------   -------- --  77
 
 
----------- --------    --------            --- 405
+        aerosol ---------- --------    --------   -------- -- 123
+                                            E1hr    default P1   1: pr
+          atmos        1hr    XY-na         E1hr    default --   1
+          atmos        1hr    XY-na         E1hr   -------- --   1
+                                      HOMAL1hrPt    default P1   1: tssea
+          atmos        1hr    XY-na   HOMAL1hrPt    default --   2
+          atmos        1hr    XY-na   HOMAL1hrPt   -------- --   2
+                                         None1hr    default P1   8: evspsbl hfls hfss rlds rlus rsds rsus tauv
+                                         None1hr    default P3   1: tauu
+          atmos        1hr    XY-na      None1hr    default --  11
+          atmos        1hr    XY-na      None1hr   -------- --  11
+          atmos        1hr    XY-na     --------   -------- --  11
+
+          atmos        1hr --------     --------   -------- --  11
+
+                                            E1hr    default P3   1: psl
+          atmos      1hrPt    XY-na         E1hr    default --   1
+          atmos      1hrPt    XY-na         E1hr   -------- --   1
+                                       None1hrPt    default P1   5: hurs huss sfcWind uas vas
+                                       None1hrPt    default P3   1: tas
+          atmos      1hrPt    XY-na    None1hrPt    default --   7
+          atmos      1hrPt    XY-na    None1hrPt   -------- --   7
+          atmos      1hrPt    XY-na     --------   -------- --   7
+
+          atmos      1hrPt --------     --------   -------- --   7
+
+                                             3hr    default P1  10: clt hfls hfss pr prc prsn rlds rlus rsds rsus
+          atmos        3hr    XY-na          3hr    default --  10
+          atmos        3hr    XY-na          3hr   -------- --  10
+          atmos        3hr    XY-na     --------   -------- --  10
+
+          atmos        3hr --------     --------   -------- --  10
+
+                                             3hr    default P1   5: huss ps tas uas vas
+          atmos      3hrPt    XY-na          3hr    default --   5
+          atmos      3hrPt    XY-na          3hr   -------- --   5
+                                       None3hrPt    default P1   3: hurs psl sfcWind
+          atmos      3hrPt    XY-na    None3hrPt    default --   8
+          atmos      3hrPt    XY-na    None3hrPt   -------- --   8
+          atmos      3hrPt    XY-na     --------   -------- --   8
+
+          atmos      3hrPt --------     --------   -------- --   8
+
+                                    HOME6hrPlevPt    default P1   5: hus200 ta200 ua200 va200 zg200
+          atmos        6hr XY-P200HM HOME6hrPlevPt    default --   5
+          atmos        6hr XY-P200HM HOME6hrPlevPt   -------- --   5
+          atmos        6hr XY-P200HM     --------   -------- --   5
+
+                                    HOME6hrPlevPt    default P1   5: hus500 ta500 ua500 va500 zg500
+          atmos        6hr XY-P500HM HOME6hrPlevPt    default --   5
+          atmos        6hr XY-P500HM HOME6hrPlevPt   -------- --   5
+          atmos        6hr XY-P500HM     --------   -------- --   5
+
+                                    HOME6hrPlevPt    default P1   5: hus700 ta700 ua700 va700 zg700
+          atmos        6hr XY-P700HM HOME6hrPlevPt    default --   5
+          atmos        6hr XY-P700HM HOME6hrPlevPt   -------- --   5
+          atmos        6hr XY-P700HM     --------   -------- --   5
+
+                                    HOME6hrPlevPt    default P1   5: hus850 ta850 ua850 va850 zg850
+          atmos        6hr XY-P850HM HOME6hrPlevPt    default --   5
+          atmos        6hr XY-P850HM HOME6hrPlevPt   -------- --   5
+          atmos        6hr XY-P850HM     --------   -------- --   5
+
+                                    HOME6hrPlevPt    default P1   5: hus925 ta925 ua925 va925 zg925
+          atmos        6hr XY-P925HM HOME6hrPlevPt    default --   5
+          atmos        6hr XY-P925HM HOME6hrPlevPt   -------- --   5
+          atmos        6hr XY-P925HM     --------   -------- --   5
+
+                                        HOMAL6hr    default P1   3: clth cltl cltm
+          atmos        6hr    XY-na     HOMAL6hr    default --   3
+          atmos        6hr    XY-na     HOMAL6hr   -------- --   3
+                                         None6hr    default P1   4: evspsbl rsdt rsut tauv
+                                         None6hr    default P2   1: rlut
+                                         None6hr    default P3   1: tauu
+          atmos        6hr    XY-na      None6hr    default --   9
+          atmos        6hr    XY-na      None6hr   -------- --   9
+          atmos        6hr    XY-na     --------   -------- --   9
+
+          atmos        6hr --------     --------   -------- --  34
+
+                                       6hrPlevPt    default P1   2: uas vas
+                                       6hrPlevPt    default P3   1: ts
+          atmos      6hrPt    XY-na    6hrPlevPt    default --   3
+          atmos      6hrPt    XY-na    6hrPlevPt   -------- --   3
+                                       None6hrPt    default P1   2: clivi clwvi
+          atmos      6hrPt    XY-na    None6hrPt    default --   5
+          atmos      6hrPt    XY-na    None6hrPt   -------- --   5
+          atmos      6hrPt    XY-na     --------   -------- --   5
+
+          atmos      6hrPt --------     --------   -------- --   5
+
+                                        HOMEPday    default P1   5: hus200 ta200 ua200 va200 zg200
+          atmos        day XY-P200HM     HOMEPday    default --   5
+          atmos        day XY-P200HM     HOMEPday   -------- --   5
+          atmos        day XY-P200HM     --------   -------- --   5
+
+                                        HOMEPday    default P1   5: hus500 ta500 ua500 va500 zg500
+          atmos        day XY-P500HM     HOMEPday    default --   5
+          atmos        day XY-P500HM     HOMEPday   -------- --   5
+          atmos        day XY-P500HM     --------   -------- --   5
+
+                                        HOMEPday    default P1   5: hus700 ta700 ua700 va700 zg700
+          atmos        day XY-P700HM     HOMEPday    default --   5
+          atmos        day XY-P700HM     HOMEPday   -------- --   5
+          atmos        day XY-P700HM     --------   -------- --   5
+
+                                             day    default P1   6: hur hus ta ua va wap
+                                             day    default P2   1: zg
+          atmos        day    XY-P8          day    default --   7
+          atmos        day    XY-P8          day   -------- --   7
+          atmos        day    XY-P8     --------   -------- --   7
+
+                                        HOMEPday    default P1   5: hus850 ta850 ua850 va850 zg850
+          atmos        day XY-P850HM     HOMEPday    default --   5
+          atmos        day XY-P850HM     HOMEPday   -------- --   5
+          atmos        day XY-P850HM     --------   -------- --   5
+
+                                        HOMEPday    default P1   5: hus925 ta925 ua925 va925 zg925
+          atmos        day XY-P925HM     HOMEPday    default --   5
+          atmos        day XY-P925HM     HOMEPday   -------- --   5
+          atmos        day XY-P925HM     --------   -------- --   5
+
+                                            Eday    default P1   4: prhmax prw ts tsland
+          atmos        day    XY-na         Eday    default --   4
+          atmos        day    XY-na         Eday   -------- --   4
+                                        HOMALday    default P1   9: clth cltl cltm husll rluscs tall tssea uall vall
+          atmos        day    XY-na     HOMALday    default --  13
+          atmos        day    XY-na     HOMALday   -------- --  13
+                                         Noneday    default P1  14: clivi clwvi evspsbl ps rldscs rsdscs rsdt rsuscs rsut rsutcs sconcdust sconcso4 sconcss tauv
+                                         Noneday    default P2   1: rlutcs
+                                         Noneday    default P3   1: tauu
+          atmos        day    XY-na      Noneday    default --  29
+          atmos        day    XY-na      Noneday   -------- --  29
+                                             day    default P1  21: clt hfls hfss hurs huss pr prc prsn psl rlds rlus rlut rsds rsus sfcWind sfcWindmax tas tasmax tasmin uas vas
+          atmos        day    XY-na          day    default --  50
+          atmos        day    XY-na          day   -------- --  50
+          atmos        day    XY-na     --------   -------- --  50
+
+          atmos        day --------     --------   -------- --  82
+
+                                              fx    default P1   1: sftlf
+          atmos         fx    XY-na           fx    default --   1
+          atmos         fx    XY-na           fx   -------- --   1
+          atmos         fx    XY-na     --------   -------- --   1
+
+          atmos         fx --------     --------   -------- --   1
+
+                                            Amon    default P1   7: hur hus ta ua va wap zg
+          atmos        mon   XY-P19         Amon    default --   7
+          atmos        mon   XY-P19         Amon   -------- --   7
+          atmos        mon   XY-P19     --------   -------- --   7
+
+                                        HOMEPmon    default P1   7: hur200 hus200 ta200 ua200 va200 wap200 zg200
+          atmos        mon XY-P200HM     HOMEPmon    default --   7
+          atmos        mon XY-P200HM     HOMEPmon   -------- --   7
+          atmos        mon XY-P200HM     --------   -------- --   7
+
+                                        HOMEPmon    default P1   7: hur500 hus500 ta500 ua500 va500 wap500 zg500
+          atmos        mon XY-P500HM     HOMEPmon    default --   7
+          atmos        mon XY-P500HM     HOMEPmon   -------- --   7
+          atmos        mon XY-P500HM     --------   -------- --   7
+
+                                        HOMEPmon    default P1   7: hur700 hus700 ta700 ua700 va700 wap700 zg700
+          atmos        mon XY-P700HM     HOMEPmon    default --   7
+          atmos        mon XY-P700HM     HOMEPmon   -------- --   7
+          atmos        mon XY-P700HM     --------   -------- --   7
+
+                                        HOMEPmon    default P1   7: hur850 hus850 ta850 ua850 va850 wap850 zg850
+          atmos        mon XY-P850HM     HOMEPmon    default --   7
+          atmos        mon XY-P850HM     HOMEPmon   -------- --   7
+          atmos        mon XY-P850HM     --------   -------- --   7
+
+                                        HOMEPmon    default P1   7: hur925 hus925 ta925 ua925 va925 wap925 zg925
+          atmos        mon XY-P925HM     HOMEPmon    default --   7
+          atmos        mon XY-P925HM     HOMEPmon   -------- --   7
+          atmos        mon XY-P925HM     --------   -------- --   7
+
+                                            Amon    default P1  34: clivi clt clwvi evspsbl hfls hfss hurs pr prc prsn prw ps psl rlds rldscs rlus rlut rlutcs rsds rsdscs rsdt rsus rsuscs rsut rsutcs sfcWind tas tasmax tasmin tauu tauv ts uas vas
+          atmos        mon    XY-na         Amon    default --  34
+          atmos        mon    XY-na         Amon   -------- --  34
+                                            Emon    default P1   4: sconcdust sconcso4 sconcss sfcWindmax
+          atmos        mon    XY-na         Emon    default --  38
+          atmos        mon    XY-na         Emon   -------- --  38
+                                        HOMALmon    default P1  12: cdnctop clth cltl cltm husll reffclitop reffclwtopcnrm rluscs tall tssea uall vall
+          atmos        mon    XY-na     HOMALmon    default --  50
+          atmos        mon    XY-na     HOMALmon   -------- --  50
+                                         Nonemon    default P1   1: tsland
+          atmos        mon    XY-na      Nonemon    default --  51
+          atmos        mon    XY-na      Nonemon   -------- --  51
+          atmos        mon    XY-na     --------   -------- --  51
+
+          atmos        mon --------     --------   -------- --  93
+
+
+          atmos ---------- --------    --------   -------- -- 251
+                                              fx    default P1   1: areacella
+     atmos land         fx    XY-na           fx    default --   1
+     atmos land         fx    XY-na           fx   -------- --   1
+     atmos land         fx    XY-na     --------   -------- --   1
+
+     atmos land         fx --------     --------   -------- --   1
+
+
+     atmos land ---------- --------    --------   -------- --   1
+                                         None6hr    default P1   2: mrro mrros
+           land        6hr    XY-na      None6hr    default --   2
+           land        6hr    XY-na      None6hr   -------- --   2
+           land        6hr    XY-na     --------   -------- --   2
+
+           land        6hr --------     --------   -------- --   2
+
+                                        HOMAL6hr    default P1   2: mrfso mrso
+           land      6hrPt    XY-na     HOMAL6hr    default --   2
+           land      6hrPt    XY-na     HOMAL6hr   -------- --   2
+           land      6hrPt    XY-na     --------   -------- --   2
+
+           land      6hrPt --------     --------   -------- --   2
+
+                                            Eday    default P1   1: mrros
+           land        day    XY-na         Eday    default --   1
+           land        day    XY-na         Eday   -------- --   1
+                                             day    default P1   2: mrro mrso
+           land        day    XY-na          day    default --   3
+           land        day    XY-na          day   -------- --   3
+           land        day    XY-na     --------   -------- --   3
+
+           land        day --------     --------   -------- --   3
+
+                                              fx    default P1   4: mrsofc orog rootd sftgif
+           land         fx    XY-na           fx    default --   4
+           land         fx    XY-na           fx   -------- --   4
+           land         fx    XY-na     --------   -------- --   4
+
+           land         fx --------     --------   -------- --   4
+
+                                            Lmon    default P1   3: mrro mrros mrso
+           land        mon    XY-na         Lmon    default --   3
+           land        mon    XY-na         Lmon   -------- --   3
+           land        mon    XY-na     --------   -------- --   3
+
+           land        mon --------     --------   -------- --   3
+
+
+           land ---------- --------    --------   -------- --  14
+                                         None6hr    default P1   4: snc snd snm snw
+   land landIce        6hr    XY-na      None6hr    default --   4
+   land landIce        6hr    XY-na      None6hr   -------- --   4
+   land landIce        6hr    XY-na     --------   -------- --   4
+
+   land landIce        6hr --------     --------   -------- --   4
+
+                                            Eday    default P1   1: snm
+                                            Eday    default P3   1: snd
+   land landIce        day    XY-na         Eday    default --   2
+   land landIce        day    XY-na         Eday   -------- --   2
+                                         Noneday    default P1   1: mrfso
+   land landIce        day    XY-na      Noneday    default --   3
+   land landIce        day    XY-na      Noneday   -------- --   3
+                                             day    default P1   2: snc snw
+   land landIce        day    XY-na          day    default --   5
+   land landIce        day    XY-na          day   -------- --   5
+   land landIce        day    XY-na     --------   -------- --   5
+
+   land landIce        day --------     --------   -------- --   5
+
+                                           LImon    default P1   4: snc snd snm snw
+   land landIce        mon    XY-na        LImon    default --   4
+   land landIce        mon    XY-na        LImon   -------- --   4
+                                            Lmon    default P1   1: mrfso
+   land landIce        mon    XY-na         Lmon    default --   5
+   land landIce        mon    XY-na         Lmon   -------- --   5
+   land landIce        mon    XY-na     --------   -------- --   5
+
+   land landIce        mon --------     --------   -------- --   5
+
+
+   land landIce ---------- --------    --------   -------- --  14
+                                           SIday    default P1   1: siconca
+         seaIce        day    XY-na        SIday    default --   1
+         seaIce        day    XY-na        SIday   -------- --   1
+         seaIce        day    XY-na     --------   -------- --   1
+
+         seaIce        day --------     --------   -------- --   1
+
+                                           SImon    default P1   1: siconca
+         seaIce        mon    XY-na        SImon    default --   1
+         seaIce        mon    XY-na        SImon   -------- --   1
+         seaIce        mon    XY-na     --------   -------- --   1
+
+         seaIce        mon --------     --------   -------- --   1
+
+
+         seaIce ---------- --------    --------   -------- --   2
+
+     ---------- ---------- --------    --------   -------- -- 405
 
 
 Some Statistics on actually written variables per variable...
@@ -1518,19 +1727,27 @@ file_def written as current_directory/test_AAD50_641/test_outputs/dr2xml_trip.xm
 
 
 Some Statistics on actually written variables per frequency+shape...
-                            Eday    default P1   1: rivo
-       day    XY-na    --------            ---   1
+                                            Eday    default P1   1: rivo
+           land        day    XY-na         Eday    default --   1
+           land        day    XY-na         Eday   -------- --   1
+           land        day    XY-na     --------   -------- --   1
 
-       day --------    --------            ---   1
+           land        day --------     --------   -------- --   1
 
-                            Emon    default P2   1: wtd
-                        HOMALmon    default P1   2: fldf fwtd
-       mon    XY-na    --------            ---   3
+                                            Emon    default P2   1: wtd
+           land        mon    XY-na         Emon    default --   1
+           land        mon    XY-na         Emon   -------- --   1
+                                        HOMALmon    default P1   2: fldf fwtd
+           land        mon    XY-na     HOMALmon    default --   3
+           land        mon    XY-na     HOMALmon   -------- --   3
+           land        mon    XY-na     --------   -------- --   3
 
-       mon --------    --------            ---   3
+           land        mon --------     --------   -------- --   3
 
 
----------- --------    --------            ---   4
+           land ---------- --------    --------   -------- --   4
+
+     ---------- ---------- --------    --------   -------- --   4
 
 
 Some Statistics on actually written variables per variable...

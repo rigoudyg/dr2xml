@@ -2,7 +2,7 @@
 <context id="trip">
 	<!--CMIP7 Data Request version Software current_cmip7_dr_software - Content test-->
 	<!--CMIP7-CV version ??-->
-	<!--CMIP7_conventions_version CF-1.12 CMIP-7.0-->
+	<!--CMIP7_conventions_version CF-1.11 CF-1.12 CF-1.13-->
 	<!--dr2xml version current_version-->
 	<!--Lab_and_model settings
 {'allow_duplicates_in_same_table' = 'False',

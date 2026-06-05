@@ -23,11 +23,11 @@
 	<field_definition>
 		<field id="CMIP7_arag" field_ref="?dummy_XYO"/>
 		<!--P3 (mol m-3) mole_concentration_of_aragonite_expressed_as_carbon_in_sea_water : sum of particulate aragonite components (e.g. Phytoplankton, Detrital, etc.)-->
-		<field id="CMIP7_aragos" field_ref="?dummy_XY_osurf"/>
+		<field id="CMIP7_aragos" field_ref="?dummy_XY"/>
 		<!--P3 (mol m-3) mole_concentration_of_aragonite_expressed_as_carbon_in_sea_water : sum of particulate aragonite components (e.g. Phytoplankton, Detrital, etc.)-->
 		<field id="CMIP7_calc" field_ref="?dummy_XYO"/>
 		<!--P3 (mol m-3) mole_concentration_of_calcite_expressed_as_carbon_in_sea_water : sum of particulate calcite component concentrations (e.g. Phytoplankton, Detrital, etc.)-->
-		<field id="CMIP7_calcos" field_ref="?dummy_XY_osurf"/>
+		<field id="CMIP7_calcos" field_ref="?dummy_XY"/>
 		<!--P3 (mol m-3) mole_concentration_of_calcite_expressed_as_carbon_in_sea_water : sum of particulate calcite component concentrations (e.g. Phytoplankton, Detrital, etc.)-->
 		<field id="CMIP7_chl" field_ref="?dummy_XY_op20bar"/>
 		<!--P3 (kg m-3) mass_concentration_of_phytoplankton_expressed_as_chlorophyll_in_sea_water : Sum of chlorophyll from all phytoplankton group concentrations. In most models this is equal to chldiat+chlmisc, that is the sum of Diatom Chlorophyll Mass Concentration and Other Phytoplankton Chlorophyll Mass Concentration-->

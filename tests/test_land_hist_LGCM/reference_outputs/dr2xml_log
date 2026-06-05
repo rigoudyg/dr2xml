@@ -49,23 +49,33 @@ file_def written as current_directory/test_land_hist_LGCM/test_outputs/dr2xml_su
 
 
 Some Statistics on actually written variables per frequency+shape...
-                          E3hrPt    default P1   1: cltcalipso
-     3hrPt    XY-na    --------            ---   1
+                                          E3hrPt    default P1   1: cltcalipso
+          atmos      3hrPt    XY-na       E3hrPt    default --   1
+          atmos      3hrPt    XY-na       E3hrPt   -------- --   1
+          atmos      3hrPt    XY-na     --------   -------- --   1
 
-     3hrPt --------    --------            ---   1
+          atmos      3hrPt --------     --------   -------- --   1
 
-                             day    default P1   1: CMIP6_albsrfc
-       day    XY-na    --------            ---   1
+                                              fx    default P1   1: sftlakef
+          atmos         fx    XY-na           fx    default --   1
+          atmos         fx    XY-na           fx   -------- --   1
+          atmos         fx    XY-na     --------   -------- --   1
 
-       day --------    --------            ---   1
-
-                              fx    default P1   1: sftlakef
-        fx    XY-na    --------            ---   1
-
-        fx --------    --------            ---   1
+          atmos         fx --------     --------   -------- --   1
 
 
----------- --------    --------            ---   3
+          atmos ---------- --------    --------   -------- --   2
+                                             day    default P1   1: CMIP6_albsrfc
+           land        day    XY-na          day    default --   1
+           land        day    XY-na          day   -------- --   1
+           land        day    XY-na     --------   -------- --   1
+
+           land        day --------     --------   -------- --   1
+
+
+           land ---------- --------    --------   -------- --   1
+
+     ---------- ---------- --------    --------   -------- --   3
 
 
 Some Statistics on actually written variables per variable...
@@ -117,7 +127,7 @@ file_def written as current_directory/test_land_hist_LGCM/test_outputs/dr2xml_tr
 
 Some Statistics on actually written variables per frequency+shape...
 
----------- --------    --------            ---   0
+     ---------- ---------- --------    --------   -------- --   0
 
 
 Some Statistics on actually written variables per variable...

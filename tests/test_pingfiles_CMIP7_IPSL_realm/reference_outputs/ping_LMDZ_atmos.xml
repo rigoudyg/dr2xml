@@ -54,6 +54,8 @@
 		<!--P1 (%) land_area_fraction : Percentage of horizontal area occupied by land.-->
 		<field id="CMIP7_swh" field_ref="?dummy_XY"/>
 		<!--P2 (m) sea_surface_wave_significant_height : Average height of the highest one-third of waves present in the sea state, incorporating both wind-sea and swell waves. This is a key parameter for describing wave energy and is derived from the wave spectrum using spectral moments. Specifically, this parameter is four times the square root of the integral over all directions and all frequencies of the two-dimensional wave spectrum.-->
+		<field id="CMIP7_swhmax" field_ref="?dummy_XY"/>
+		<!--P2 (m) sea_surface_wave_significant_height : Highest value of the significant wave height simulated within a given time range (e.g., daily or monthly). The significant wave height (swh) is derived from the wave spectrum using spectral moments. Specifically, swh is four times the square root of the integral over all directions and all frequencies of the two-dimensional wave spectrum.-->
 		<field id="CMIP7_ta" field_ref="?dummy_XY_plev19"/>
 		<!--P1 (K) air_temperature : Air Temperature-->
 		<field id="CMIP7_ta6" field_ref="?dummy_XY_plev6"/>
