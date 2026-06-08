@@ -29,7 +29,8 @@ def read_home_var_dev(line_split, mips, expid):
         else:
             cell_methods = tcmName2tcmValue[home_var.temporal_shp]
         home_var.set_attributes(label_with_area=home_var.label, mip_era="DEV", mipVarLabel=home_var.label,
-                                cell_methods=cell_methods, label_without_psuffix=home_var.label, cell_measures="")
+                                cell_methods=cell_methods, label_without_psuffix=home_var.label, cell_measures="",
+                                home=True)
         home_var = fill_homevar(home_var)
         if check_homevar(home_var, mips, expid):
             return home_var

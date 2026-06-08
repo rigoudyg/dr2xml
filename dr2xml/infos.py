@@ -6,6 +6,7 @@ Tools to print statistics
 """
 from __future__ import print_function, division, absolute_import, unicode_literals
 
+import csv
 from collections import OrderedDict, defaultdict
 
 from utilities.logger import get_logger
@@ -13,7 +14,8 @@ from utilities.logger import get_logger
 
 # mpmoine_petitplus: nouvelle fonction print_some_stats (plus d'info sur les skipped_vars, nbre de vars / (shape,freq) )
 # SS - non : gros plus
-def print_some_stats(context, svars_per_table, skipped_vars_per_table, actually_written_vars, extended=False):
+def print_some_stats(context, svars_per_table, skipped_vars_per_table, actually_written_vars, csv_file_content,
+                     extended=False, csv_file=False):
     """
 
     :param context:
@@ -116,5 +118,31 @@ def print_some_stats(context, svars_per_table, skipped_vars_per_table, actually_
                     logger.warning(14 * " " + "Warning: several standard names are available:")
                     for stdname in sn:
                         logger.warning(18 * " " + "- %s" % stdname)
+        if csv_file:
+            table_titles = ["Modeling realms", "Variable", "Home Data Request", "Frequency", "Temporal structure",
+                            "Vertical structure", "Horizontal Structure", "Mask", "Region", "Physical parameter",
+                            "Priority"]
+            csv_content = list()
+            for (realms, official_label, home, frequency, label, region, Priority) in csv_file_content:
+                official_label = official_label.split("_")
+                (tmp_struct, vert_struct, horz_struct, mask) = official_label[1].split("-")
+                csv_content.append({
+                    "Modeling realms": realms,
+                    "Variable": official_label[0],
+                    "Home Data Request": home,
+                    "Frequency": frequency,
+                    "Temporal structure": tmp_struct,
+                    "Vertical structure": vert_struct,
+                    "Horizontal Structure": horz_struct,
+                    "Mask": mask,
+                    "Region": region,
+                    "Physical parameter": label,
+                    "Priority": Priority})
+            with open(csv_file % context, "w", newline="") as csv_fic:
+                writer = csv.DictWriter(csv_fic, fieldnames=table_titles)
+                writer.writeheader()
+                writer.writerows(csv_content)
+
+            logger.info("\n\nSome Statistics in csv file will be available in %s..." % csv_file)
 
         return True

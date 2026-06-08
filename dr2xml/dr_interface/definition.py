@@ -201,7 +201,7 @@ class SimpleCMORVar(SimpleObject):
                  cell_methods=None, cell_measures=None, spatial_shp=None, temporal_shp=None, experiment=None,
                  Priority=1, mip_era=False, prec="float", missing=1.e+20, cmvar=None, ref_var=None, mip=None,
                  sdims=dict(), comments=None, coordinates=None, cm=False, id=None, flag_meanings=None, flag_values=None,
-                 region=None, official_label=None, extravar=None, extra_name=None, **kwargs):
+                 region=None, official_label=None, extravar=None, extra_name=None, home=False, **kwargs):
         self.type = type
         self.modeling_realm = modeling_realm
         self.set_modeling_realms = set()
@@ -246,6 +246,7 @@ class SimpleCMORVar(SimpleObject):
         self.region = region
         self.official_label = official_label
         self.extra_name = extra_name
+        self.home = home
         super(SimpleCMORVar, self).__init__(**kwargs)
     
     def set_attributes(self, **kwargs):

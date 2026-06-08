@@ -322,6 +322,17 @@
         }
       ]
     },
+    "create_csv_file": {
+      "help": "Pattern containing context if a csv file should be produced, else False.",
+      "values": [
+        {
+          "type": "value",
+          "origin": "laboratory",
+          "keys": ["create_csv_file"]
+        },
+        false
+      ]
+    },
     "debug_parsing": {
       "help": "In order to identify which xml files generates a problem, you can use this flag.",
       "values": [

@@ -52,6 +52,7 @@ def read_home_var_extra(line_split, expid, mips, path_extra_tables=None, extra_v
             if var_found.official_label is None:
                 var_found.set_attributes(official_label="_".join([var_found.label, var_found.mipTable]))
             var_found = [var_found, ]
+
     if home_var.mip in ["ANY", ] or home_var.mip in mips:
         if get_settings_values("internal", "select_on_expt") and home_var.experiment not in ["ANY", ]:
             if expid in home_var.experiment:
@@ -173,7 +174,7 @@ def read_extra_table(path, table):
                 label_without_psuffix=remove_p_suffix(extra_var, multi_plev_suffixes | add_multi_plevs_suffixes,
                                                       single_plev_suffixes | add_single_plevs_suffixes,
                                                       realms=["atmos", "aerosol", "atmosChem"]))
-            extra_var.set_attributes(ref_var=extra_var.label_without_psuffix)
+            extra_var.set_attributes(ref_var=extra_var.label_without_psuffix, home=True)
             extravars.append(extra_var)
     logger.info("For extra table %s (which has %d variables):" % (table, len(extravars)))
     logger.info("\tVariables which dim was found in extra coordinates table:\n%s" %

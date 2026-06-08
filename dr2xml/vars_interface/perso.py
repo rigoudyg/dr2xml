@@ -20,7 +20,7 @@ def read_home_var_perso(line_split, mips, expid):
     home_var = read_home_var(line_split, home_attrs)
     home_var.set_attributes(label_with_area=home_var.label, mip_era="PERSO", label_without_psuffix=home_var.label,
                             cell_measures="",
-                            cell_methods=tcmName2tcmValue[home_var.temporal_shp])
+                            cell_methods=tcmName2tcmValue[home_var.temporal_shp], home=True)
     home_var = fill_homevar(home_var)
     if check_homevar(home_var, mips, expid):
         return home_var

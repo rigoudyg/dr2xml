@@ -23,7 +23,7 @@ home_attrs = ['type', 'label', 'modeling_realm', 'frequency', 'mipTable', 'tempo
 
 def read_home_var_cmor(line_split, mips, expid):
     home_var = read_home_var(line_split, home_attrs)
-    home_var.set_attributes(label_with_area=home_var.label)
+    home_var.set_attributes(label_with_area=home_var.label, home=True)
     home_var = fill_homevar(home_var)
     if check_homevar(home_var, mips, expid):
         return home_var

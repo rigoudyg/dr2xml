@@ -409,7 +409,7 @@ def is_singleton(sdim):
 
 
 def write_xios_file_def(filename, svars_per_table, year, dummies, skipped_vars_per_table, actually_written_vars,
-                        context, enddate=None, attributes=[]):
+                        csv_file_content, context, enddate=None, attributes=[]):
     """
     Write XIOS file_def.
     """
@@ -470,6 +470,7 @@ def write_xios_file_def(filename, svars_per_table, year, dummies, skipped_vars_p
         write_xios_file_def_for_svars_list(hgrid=hgrid, xml_file_definition=xml_file_definition, dummies=dummies,
                                            skipped_vars_per_table=skipped_vars_per_table,
                                            actually_written_vars=actually_written_vars,
+                                           csv_file_content=csv_file_content,
                                            attributes=attributes, **file_dict)
     grid_defs = get_config_variable("grid_defs")
     # Add cfsites if needed
@@ -544,7 +545,7 @@ def write_xios_file_def_for_svars_list(vars_list, hgrid, xml_file_definition, fr
                                        split_start_offset, split_end_offset, split_last_date, grid_description,
                                        grid_label, grid_resolution, table, skipped_vars_per_table, dummies,
                                        target_hgrid_id, zgrid_id, source_grid, region, cell_measures, cell_methods,
-                                       actually_written_vars, attributes=list(), debug=list()):
+                                       actually_written_vars, csv_file_content, attributes=list(), debug=list()):
     logger = get_logger()
     internal_dict = get_settings_values("internal")
     context = internal_dict["context"]
@@ -589,6 +590,8 @@ def write_xios_file_def_for_svars_list(vars_list, hgrid, xml_file_definition, fr
             xml_file.append(end_field)
             actually_written_vars.append((svar.ref_var, svar.long_name, svar.stdname, " ".join(svar.modeling_realm),
                                           svar.mipTable, svar.region, svar.frequency, svar.Priority, svar.spatial_shp))
+            csv_file_content.append(("-".join(svar.modeling_realm), svar.official_label, svar.home, svar.frequency,
+                                     svar.label, svar.region, svar.Priority))
         # Add content to xml_file to out
         if found_begin_A:
             # create a field_def entry for surface pressure

@@ -699,6 +699,7 @@ on
     # --------------------------------------------------------------------
     skipped_vars_per_table = OrderedDict()
     actually_written_vars = list()
+    csv_file_content = list()
     svars_per_table = select_variables_to_be_processed()
     #
     # --------------------------------------------------------------------
@@ -724,7 +725,7 @@ on
     os.chdir(dirname)
     filename = dirname + "dr2xml_%s.xml" % context
     write_xios_file_def(filename, svars_per_table, year, dummies, skipped_vars_per_table, actually_written_vars,
-                        context, enddate, attributes)
+                        csv_file_content, context, enddate, attributes)
     logger.info("\nfile_def written as %s" % filename)
 
     #
@@ -734,7 +735,8 @@ on
     # mpmoine_petitplus:generate_file_defs: pour sortir des stats sur ce que l'on sort reelement
     # SS - non : gros plus
     print_some_stats(context, svars_per_table, skipped_vars_per_table,
-                     actually_written_vars, internal_settings["print_stats_per_var_label"])
+                     actually_written_vars, csv_file_content, extended=internal_settings["print_stats_per_var_label"],
+                     csv_file=internal_settings["create_csv_file"])
 
     warn = OrderedDict()
     for warning, label, table in get_config_variable("cell_method_warnings", to_change=True):
