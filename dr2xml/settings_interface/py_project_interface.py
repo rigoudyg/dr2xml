@@ -239,6 +239,7 @@ def solve_values(values, init_dict=dict(), internal_dict=dict(), common_dict=dic
         test = len(items_to_treat) == 0
 
     if not test:
+        print(rep)
         raise ValueError("Could not evaluate all %s values: the following are missing %s" % (values, items_to_treat))
     return rep
 

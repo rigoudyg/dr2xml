@@ -53,7 +53,7 @@ class DR2XMLElement(xml_writer.Element):
             if output_key is False:
                 output_key = key
             if test:
-                attrib[output_key] = value
+                attrib[output_key] = reduce_and_strip(value)
         super(DR2XMLElement, self).__init__(tag=tag, text=text, attrib=attrib)
         comments_list = tag_settings.comments_list
         comments_constraints = tag_settings.comments_constraints

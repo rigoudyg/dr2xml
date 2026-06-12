@@ -84,7 +84,7 @@ def format_grids(grids, variables_per_grid_type):
 					new_dict_realm = dict(default=dict_realm)
 					grids[resolution][realm] = copy.deepcopy(new_dict_realm)
 				elif isinstance(dict_realm, dict) and \
-						all([isinstance(elt, dict) and len(elt) == 5 for elt in dict_realm.values()]) and \
+						all([isinstance(elt, list) and len(elt) == 5 for elt in dict_realm.values()]) and \
 						"default" in dict_realm:
 					pass
 				else:

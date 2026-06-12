@@ -277,7 +277,7 @@ class SimpleCMORVar(SimpleObject):
 
     def __str__(self):
         return (f"SimpleCMORVar {self.label} of type {self.type} and priority {self.Priority} "
-                f"(with standard name {self.stdname} and units {self.units})")
+                f"(with standard name {self.stdname}, units {self.units} and official label {self.official_label})")
 
     def __repr__(self):
         return str(self)
