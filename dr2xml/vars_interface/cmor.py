@@ -85,23 +85,27 @@ def ping_alias(svar, error_on_fail=False):
     """
     pingvars = get_config_variable("pingvars")
     pref = get_settings_values("internal", "ping_variables_prefix")
+    list_checked = list()
     if svar.label_non_ambiguous:
         # print "+++ non ambiguous", svar.label,svar.label_non_ambiguous
         alias_ping = pref + svar.label_non_ambiguous  # e.g. 'CMIP6_tsn_land' and not 'CMIP6_tsn'
+        list_checked.append(alias_ping)
     else:
         # print "+++ ambiguous", svar.label
         # Ping file may provide the variable on the relevant pressure level - e.g. CMIP6_rv850
         alias_ping = pref + svar.ref_var
+        list_checked.append(alias_ping)
         if alias_ping not in pingvars:
             # if not, ping_alias is supposed to be without a pressure level suffix
             alias_ping = pref + svar.label_without_psuffix  # e.g. 'CMIP6_hus' and not 'CMIP6_hus7h'
+            list_checked.append(alias_ping)
         # print "+++ alias_ping = ", pref, svar.label_without_psuffix, alias_ping
     if alias_ping not in pingvars:
         if error_on_fail:
             raise Dr2xmlError("Cannot find an alias in ping for variable %s" % svar.label)
         else:
-            return None
-    return alias_ping
+            return None, list_checked
+    return alias_ping, None
 
 
 def get_simplevar(label, reference_var):
