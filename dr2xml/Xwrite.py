@@ -298,7 +298,7 @@ def process_singleton(sv, alias, last_grid_id):
         alias_ping = sv.label
         input_grid_id = id2gridid(alias_ping, context_index)
     else:
-        alias_ping = ping_alias(sv)
+        alias_ping, _ = ping_alias(sv)
         input_grid_id = id2gridid(alias_ping, context_index)
     input_grid_def = get_grid_def_with_lset(input_grid_id)
     logger.debug("process_singleton : processing %s with grid %s " % (alias, input_grid_id))
@@ -603,7 +603,7 @@ def write_xios_file_def_for_svars_list(vars_list, hgrid, xml_file_definition, fr
                 # get_DR_version()
                 psol_field = create_xios_aux_elmts_defs(sv=sv_psol, alias=prefix + "ps", table=table, context=context,
                                                         target_hgrid_id=target_hgrid_id, zgrid_id=zgrid_id,
-                                                        alias_ping=ping_alias(sv_psol), source_grid=source_grid,
+                                                        alias_ping=ping_alias(sv_psol)[0], source_grid=source_grid,
                                                         region=region)
                 xml_file.append(psol_field)
             else:

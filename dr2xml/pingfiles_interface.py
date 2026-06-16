@@ -410,7 +410,7 @@ def find_alias(sv, skipped_vars_per_table, debug=list()):
         # Du coup, les simus avec constance des GHG (picontrol) sont traitees comme celles avec variation
         split_alias = alias.split("Clim")
         alias = split_alias[0]
-        alias_ping = ping_alias(sv)
+        alias_ping, missed = ping_alias(sv)
 
     if alias_ping not in get_config_variable("pingvars") and sv.type not in ["dev", "perso"]:
         table = sv.mipTable
@@ -422,7 +422,7 @@ def find_alias(sv, skipped_vars_per_table, debug=list()):
         region = sv.region
         if region not in skipped_vars_per_table[realm][table]:
             skipped_vars_per_table[realm][table][region] = list()
-        skipped_vars_per_table[realm][table][region].append(sv.official_label + "(" + str(sv.Priority) + ", " + str(alias_ping) + ")")
+        skipped_vars_per_table[realm][table][region].append(sv.official_label + "(" + str(sv.Priority) + ", " + str(missed) + ")")
         return
     else:
         return alias, alias_ping
