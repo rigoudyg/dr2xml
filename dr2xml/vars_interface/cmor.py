@@ -98,7 +98,8 @@ def ping_alias(svar, error_on_fail=False):
         if alias_ping not in pingvars:
             # if not, ping_alias is supposed to be without a pressure level suffix
             alias_ping = pref + svar.label_without_psuffix  # e.g. 'CMIP6_hus' and not 'CMIP6_hus7h'
-            list_checked.append(alias_ping)
+            if alias_ping not in list_checked:
+                list_checked.append(alias_ping)
         # print "+++ alias_ping = ", pref, svar.label_without_psuffix, alias_ping
     if alias_ping not in pingvars:
         if error_on_fail:
