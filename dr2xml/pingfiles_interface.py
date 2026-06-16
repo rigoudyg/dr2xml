@@ -422,7 +422,7 @@ def find_alias(sv, skipped_vars_per_table, debug=list()):
         region = sv.region
         if region not in skipped_vars_per_table[realm][table]:
             skipped_vars_per_table[realm][table][region] = list()
-        skipped_vars_per_table[realm][table][region].append(sv.official_label + "(" + str(sv.Priority) + ", " + alias_ping + ")")
+        skipped_vars_per_table[realm][table][region].append(sv.official_label + "(" + str(sv.Priority) + ", " + str(alias_ping) + ")")
         return
     else:
         return alias, alias_ping
