@@ -100,7 +100,7 @@ def format_grids(grids, variables_per_grid_type):
 					for (grid_type, grid_type_list) in dict_realm.items():
 						grid_def = copy.deepcopy(grids[resolution][realm][grid_type])
 						if grid_type in grids[resolution][realm]:
-							for var in grid_type_list:
+							for var in variables_per_grid_type.get(resolution, dict()).get(realm, dict()).get(grid_type, list()):
 								rep[resolution][realm][var] = grid_def
 						else:
 							logger.warning("Could not find grid_type %s for resolution %s and realm %s, use default." %

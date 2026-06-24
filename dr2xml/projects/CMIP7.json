@@ -1026,7 +1026,7 @@
         "parent_activity_id", "parent_calendar", "parent_experiment_id", "parent_mip_era", "parent_source_id",
         "parent_time_units", "parent_variant_label","physics_index", "product", "realization_index", "realm", "region",
         "source_id", "temporal_label", "variable_id", "variant_label", "vertical_label", "dr2xml_version",
-        "physical_parameter", "dr_version", "cv_version", "contact"
+        "physical_parameter", "dr_version", "cv_version", "contact", "comment"
       ],
       "vars_constraints": {
         "activity_id": {

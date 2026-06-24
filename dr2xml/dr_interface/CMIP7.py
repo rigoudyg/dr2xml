@@ -187,7 +187,7 @@ class DataRequest(DataRequestBasic):
         if len(select_mips) > 0:
             request_dict_all_of_any["mip"] = select_mips
         if experiment is not None:
-            request_dict_all_of_any["experiment"] = experiment.lower()
+            request_dict_all_of_any["experiment"] = experiment
         if variable is not None:
             request_dict_all_of_any["variable"] = variable
         return dict(requests=request_dict_all_of_any, request_operation="all_of_any", not_requests=not_request_dict_any,
