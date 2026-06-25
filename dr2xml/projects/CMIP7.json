@@ -116,6 +116,16 @@
         },
         "r1"
       ]
+    },
+    "update_grid_label": {
+      "values": [
+        {
+          "type": "value",
+          "origin": "laboratory",
+          "keys": ["update_grid_label"]
+        },
+        false
+      ]
     }
   },
   "common": {

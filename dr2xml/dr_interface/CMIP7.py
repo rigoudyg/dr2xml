@@ -323,7 +323,7 @@ class SimpleCMORVar(SimpleCMORVarBasic):
                    description=input_var.description,
                    stdname=input_var.physical_parameter.cf_standard_name.name,
                    units=input_var.physical_parameter.units,
-                   long_name=input_var.physical_parameter.title,
+                   long_name=input_var.title,
                    sdims=sdims,
                    other_dims_size=product_of_other_dims,
                    cell_methods=cell_methods,

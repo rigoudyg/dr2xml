@@ -2217,6 +2217,17 @@
         []
       ]
     },
+    "update_grid_label": {
+      "help": "Should grid label be updated according to table?",
+      "values": [
+        {
+          "type": "value",
+          "origin": "laboratory",
+          "keys": ["update_grid_label"]
+        },
+        true
+      ]
+    },
     "use_cmorvar_label_in_filename": {
       "help": "CMIP6 rule is that filenames includes the variable label, and that this variable label is not the CMORvar label, but 'MIPvar' label. This may lead to conflicts, e.g. for 'ua' and 'ua7h' in table 6hPlevPt; allows to avoid that, if set to True.",
       "fatal": true,

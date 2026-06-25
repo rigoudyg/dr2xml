@@ -810,11 +810,12 @@ def get_grid_info(sv, grid, table):
     else:
         source_grid = None
 
-    if table.endswith("Z"):  # e.g. 'AERmonZ','EmonZ', 'EdayZ'
-        grid_label += "z"
+    if internal_dict["update_grid_label"]:
+        if table.endswith("Z"):  # e.g. 'AERmonZ','EmonZ', 'EdayZ'
+            grid_label += "z"
 
-    if "Ant" in table:
-        grid_label += "a"
-    if "Gre" in table:
-        grid_label += "g"
+        if "Ant" in table:
+            grid_label += "a"
+        if "Gre" in table:
+            grid_label += "g"
     return grid_label, grid_description, grid_resolution, target_hgrid_id, zgrid_id, source_grid
