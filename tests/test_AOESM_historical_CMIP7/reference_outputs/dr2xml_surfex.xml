@@ -1573,6 +1573,7 @@ seaIce: Gelato 6.1',
 			<variable name="physical_parameter" type="string"> lai </variable>
 			<variable name="dr_version" type="string"> Software current_cmip7_dr_software - Content test </variable>
 			<variable name="cv_version" type="string"> ESGVOC version 4.1.1 - CV content cmip7 1.1.0 </variable>
+			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
 			<variable name="CMIP6_CV_version" type="string"> cv=6.2.3.0-7-g2019642 </variable>
 			<variable name="EXPID" type="string"> CNRM-ESM2-1_historical_r1i1p1f2_v2 </variable>
 			<variable name="dr2xml_md5sum" type="string"> 7040f60f6bf3118dc6c58b9fb8727d87 </variable>
@@ -1635,6 +1636,7 @@ seaIce: Gelato 6.1',
 			<variable name="physical_parameter" type="string"> mrso </variable>
 			<variable name="dr_version" type="string"> Software current_cmip7_dr_software - Content test </variable>
 			<variable name="cv_version" type="string"> ESGVOC version 4.1.1 - CV content cmip7 1.1.0 </variable>
+			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
 			<variable name="CMIP6_CV_version" type="string"> cv=6.2.3.0-7-g2019642 </variable>
 			<variable name="EXPID" type="string"> CNRM-ESM2-1_historical_r1i1p1f2_v2 </variable>
 			<variable name="dr2xml_md5sum" type="string"> 7040f60f6bf3118dc6c58b9fb8727d87 </variable>
@@ -1697,6 +1699,7 @@ seaIce: Gelato 6.1',
 			<variable name="physical_parameter" type="string"> mrsos </variable>
 			<variable name="dr_version" type="string"> Software current_cmip7_dr_software - Content test </variable>
 			<variable name="cv_version" type="string"> ESGVOC version 4.1.1 - CV content cmip7 1.1.0 </variable>
+			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
 			<variable name="CMIP6_CV_version" type="string"> cv=6.2.3.0-7-g2019642 </variable>
 			<variable name="EXPID" type="string"> CNRM-ESM2-1_historical_r1i1p1f2_v2 </variable>
 			<variable name="dr2xml_md5sum" type="string"> 7040f60f6bf3118dc6c58b9fb8727d87 </variable>
@@ -1758,6 +1761,7 @@ seaIce: Gelato 6.1',
 			<variable name="physical_parameter" type="string"> wilt </variable>
 			<variable name="dr_version" type="string"> Software current_cmip7_dr_software - Content test </variable>
 			<variable name="cv_version" type="string"> ESGVOC version 4.1.1 - CV content cmip7 1.1.0 </variable>
+			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
 			<variable name="CMIP6_CV_version" type="string"> cv=6.2.3.0-7-g2019642 </variable>
 			<variable name="EXPID" type="string"> CNRM-ESM2-1_historical_r1i1p1f2_v2 </variable>
 			<variable name="dr2xml_md5sum" type="string"> 7040f60f6bf3118dc6c58b9fb8727d87 </variable>

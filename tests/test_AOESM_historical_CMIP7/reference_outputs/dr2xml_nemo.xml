@@ -1391,7 +1391,7 @@ seaIce: Gelato 6.1',
 			<field field_ref="CMIP7_mlotstmax_Scaldeltasigt_maximum" name="mlotst" grid_ref="grid_T_2D_Scaldeltasigt" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="area: mean where sea time: maximum" cell_methods_mode="overwrite" operation="maximum">
 				<variable name="standard_name" type="string"> ocean_mixed_layer_thickness_defined_by_sigma_t </variable>
 				<variable name="description" type="string"> Sigma T is potential density referenced to ocean surface. Defined by Sigma T of 0.03 kg m-3 wrt to model level closest to 10 m depth. </variable>
-				<variable name="long_name" type="string"> Maximum Ocean Mixed Layer Thickness Defined by Sigma T </variable>
+				<variable name="long_name" type="string"> Maximum Ocean Mixed Layer Thickness Defined by Delta Sigma T of 0.03 kg m-3 referenced to the model level closest to 10 m depth </variable>
 				<variable name="history" type="string"> none </variable>
 				<variable name="units" type="string"> m </variable>
 				<variable name="cell_methods" type="string"> area: mean where sea time: maximum </variable>
@@ -1706,7 +1706,7 @@ seaIce: Gelato 6.1',
 			<field field_ref="CMIP7_mlotstmin_Scaldeltasigt_minimum" name="mlotst" grid_ref="grid_T_2D_Scaldeltasigt" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="area: mean where sea time: minimum" cell_methods_mode="overwrite" operation="minimum">
 				<variable name="standard_name" type="string"> ocean_mixed_layer_thickness_defined_by_sigma_t </variable>
 				<variable name="description" type="string"> Sigma T is potential density referenced to ocean surface. Defined by Sigma T of 0.03 kg m-3 wrt to model level closest to 10 m depth. </variable>
-				<variable name="long_name" type="string"> Minimum Ocean Mixed Layer Thickness Defined by Sigma T </variable>
+				<variable name="long_name" type="string"> Minimum Ocean Mixed Layer Thickness Defined by Delta Sigma T of 0.03 kg m-3 referenced to the model level closest to 10 m depth </variable>
 				<variable name="history" type="string"> none </variable>
 				<variable name="units" type="string"> m </variable>
 				<variable name="cell_methods" type="string"> area: mean where sea time: minimum </variable>
