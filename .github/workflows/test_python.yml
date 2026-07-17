@@ -38,7 +38,6 @@ jobs:
       run: |
         export CMIP7_DR_API_CONFIGFILE=$PWD/dr2xml/dr_interface/CMIP7_config
         python3 -m data_request_api.command_line.config offline false
-        esgvoc clean all
         esgvoc use cmip6@v1.0.0
         esgvoc use cordex-cmip6@v1.0.0
         esgvoc use cmip7@1.1.0
