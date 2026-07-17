@@ -20,7 +20,7 @@
   "dr2xml_test": {
     "default": {
       "database_directory": "esgvoc_dbs",
-      "offline": false
+      "offline": true
     },
     "cmip6": {
       "project_version": "v1.0.0",
