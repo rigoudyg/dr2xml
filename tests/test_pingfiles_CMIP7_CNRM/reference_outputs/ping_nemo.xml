@@ -23,15 +23,17 @@
 	<field_definition>
 		<field id="CMIP7_arag" field_ref="?dummy_XYO"/>
 		<!--P3 (mol m-3) mole_concentration_of_aragonite_expressed_as_carbon_in_sea_water : sum of particulate aragonite components (e.g. Phytoplankton, Detrital, etc.)-->
-		<field id="CMIP7_aragos" field_ref="?dummy_XY"/>
+		<field id="CMIP7_aragos" field_ref="?dummy_XY_osurf"/>
 		<!--P3 (mol m-3) mole_concentration_of_aragonite_expressed_as_carbon_in_sea_water : sum of particulate aragonite components (e.g. Phytoplankton, Detrital, etc.)-->
 		<field id="CMIP7_areacello" field_ref="?dummy_XY"/>
 		<!--P1 (m2) cell_area : Cell areas for any grid used to report ocean variables and variables which are requested as used on the model ocean grid (e.g. hfsso, which is a downward heat flux from the atmosphere interpolated onto the ocean grid). These cell areas should be defined to enable exact calculation of global integrals (e.g., of vertical fluxes of energy at the surface and top of the atmosphere).-->
+		<field id="CMIP7_basin" field_ref="?dummy_XY"/>
+		<!--P1 (1) region : A variable with the standard name of region contains strings which indicate geographical regions. These strings must be chosen from the standard region list.-->
 		<field id="CMIP7_bigthetao" field_ref="?dummy_XYO"/>
 		<!--P1 (degC) sea_water_conservative_temperature : Diagnostic should be contributed only for models using conservative temperature as prognostic field.-->
 		<field id="CMIP7_calc" field_ref="?dummy_XYO"/>
 		<!--P3 (mol m-3) mole_concentration_of_calcite_expressed_as_carbon_in_sea_water : sum of particulate calcite component concentrations (e.g. Phytoplankton, Detrital, etc.)-->
-		<field id="CMIP7_calcos" field_ref="?dummy_XY"/>
+		<field id="CMIP7_calcos" field_ref="?dummy_XY_osurf"/>
 		<!--P3 (mol m-3) mole_concentration_of_calcite_expressed_as_carbon_in_sea_water : sum of particulate calcite component concentrations (e.g. Phytoplankton, Detrital, etc.)-->
 		<field id="CMIP7_chl" field_ref="?dummy_XY_op20bar"/>
 		<!--P3 (kg m-3) mass_concentration_of_phytoplankton_expressed_as_chlorophyll_in_sea_water : Sum of chlorophyll from all phytoplankton group concentrations. In most models this is equal to chldiat+chlmisc, that is the sum of Diatom Chlorophyll Mass Concentration and Other Phytoplankton Chlorophyll Mass Concentration-->
@@ -39,6 +41,8 @@
 		<!--P1 (m) sea_floor_depth_below_geoid : Ocean bathymetry. Reported here is the sea floor depth for present day relative to z=0 geoid. Reported as missing for land grid cells.-->
 		<field id="CMIP7_dissic" field_ref="?dummy_XYO"/>
 		<!--P3 (mol m-3) mole_concentration_of_dissolved_inorganic_carbon_in_sea_water : Dissolved inorganic carbon (CO3+HCO3+H2CO3) concentration-->
+		<field id="CMIP7_hfgeou" field_ref="?dummy_XY"/>
+		<!--P1 (W m-2) upward_geothermal_heat_flux_at_sea_floor : Upward geothermal heat flux per unit area on the sea floor-->
 		<field id="CMIP7_masscello" field_ref="?dummy_XYO"/>
 		<!--P1 (kg m-2) sea_water_mass_per_unit_area : Tracer grid-cell mass per unit area used for computing tracer budgets. For Boussinesq models with static ocean grid cell thickness, masscello = rhozero\*thickcello, where thickcello is static cell thickness and rhozero is constant Boussinesq reference density. More generally, masscello is time dependent and reported as part of Omon.-->
 		<field id="CMIP7_mlotst" field_ref="?dummy_XY_deltasigt"/>
@@ -53,8 +57,10 @@
 		<!--P3 (mol m-3) mole_concentration_of_dissolved_molecular_oxygen_in_sea_water : 'Mole concentration' means number of moles per unit volume, also called "molarity", and is used in the construction mole\_concentration\_of\_X\_in\_Y, where X is a material constituent of Y. A chemical or biological species denoted by X may be described by a single term such as 'nitrogen' or a phrase such as 'nox\_expressed\_as\_nitrogen'.-->
 		<field id="CMIP7_ph" field_ref="?dummy_XY_op20bar"/>
 		<!--P3 (1) sea_water_ph_reported_on_total_scale : negative log10 of hydrogen ion concentration with the concentration expressed as mol H kg-1.-->
+		<field id="CMIP7_sftof" field_ref="?dummy_XY"/>
+		<!--P1 (%) sea_area_fraction : This is the area fraction at the ocean surface.-->
 		<field id="CMIP7_siconc" field_ref="?dummy_XY"/>
-		<!--P1 (1) sea_ice_area_fraction : Areal fraction of a given grid cell that is covered by sea ice on the ocean grid, independent of the thickness of that ice.-->
+		<!--P1 (%) sea_ice_area_fraction : Percentage of a given grid cell that is covered by sea ice on the ocean grid, independent of the thickness of that ice.-->
 		<field id="CMIP7_simass" field_ref="?dummy_XY"/>
 		<!--P1 (kg m-2) sea_ice_amount : Total mass of sea ice divided by grid-cell area.-->
 		<field id="CMIP7_sithick" field_ref="?dummy_XY"/>
@@ -69,28 +75,28 @@
 		<!--P1 (1E-03) sea_surface_salinity : Sea water salinity is the salt content of sea water, often on the Practical Salinity Scale of 1978. However, the unqualified term 'salinity' is generic and does not necessarily imply any particular method of calculation. The units of salinity are dimensionless and the units attribute should normally be given as 1e-3 or 0.001 i.e. parts per thousand.-->
 		<field id="CMIP7_swh" field_ref="?dummy_XY"/>
 		<!--P2 (m) sea_surface_wave_significant_height : Average height of the highest one-third of waves present in the sea state, incorporating both wind-sea and swell waves. This is a key parameter for describing wave energy and is derived from the wave spectrum using spectral moments. Specifically, this parameter is four times the square root of the integral over all directions and all frequencies of the two-dimensional wave spectrum.-->
-		<field id="CMIP7_swhmax" field_ref="?dummy_XY"/>
-		<!--P2 (m) sea_surface_wave_significant_height : Highest value of the significant wave height simulated within a given time range (e.g., daily or monthly). The significant wave height (swh) is derived from the wave spectrum using spectral moments. Specifically, swh is four times the square root of the integral over all directions and all frequencies of the two-dimensional wave spectrum.-->
 		<field id="CMIP7_talk" field_ref="?dummy_XYO"/>
 		<!--P3 (mol m-3) sea_water_alkalinity_expressed_as_mole_equivalent : total alkalinity equivalent concentration (including carbonate, borate, phosphorus, silicon, and nitrogen components)-->
 		<field id="CMIP7_thetao" field_ref="?dummy_XYO"/>
 		<!--P1 (degC) sea_water_potential_temperature : Diagnostic should be contributed even for models using conservative temperature as prognostic field.-->
+		<field id="CMIP7_thkcello" field_ref="?dummy_XYO"/>
+		<!--P1 (m) cell_thickness : Thickness of ocean cells. "Thickness" means the vertical extent of a layer. "Cell" refers to a model grid-cell.-->
 		<field id="CMIP7_tnkebto" field_ref="?dummy_XY"/>
 		<!--P3 (W m-2) tendency_of_ocean_eddy_kinetic_energy_content_due_to_parameterized_eddy_advection : Depth integrated impacts on kinetic energy arising from parameterized eddy-induced advection. For CMIP5, this diagnostic was 3d, whereas the CMIP6 depth integrated diagnostic is sufficient for many purposes and reduces archive requirements.-->
 		<field id="CMIP7_tos" field_ref="?dummy_XY"/>
 		<!--P1 (degC) sea_surface_temperature : This may differ from "surface temperature" in regions of sea ice or floating ice shelves. For models using conservative temperature as the prognostic field, they should report the top ocean layer as surface potential temperature, which is the same as surface in situ temperature.-->
 		<field id="CMIP7_tossq" field_ref="?dummy_XY"/>
 		<!--P2 (degC2) square_of_sea_surface_temperature : Square of temperature of liquid ocean, averaged over the day.-->
-		<field id="CMIP7_uos" field_ref="?dummy_XY_depth0m"/>
+		<field id="CMIP7_uos" field_ref="?dummy_XY"/>
 		<!--P3 (m s-1) surface_sea_water_x_velocity : Daily surface prognostic x-ward velocity component resolved by the model.-->
-		<field id="CMIP7_vos" field_ref="?dummy_XY_depth0m"/>
+		<field id="CMIP7_vos" field_ref="?dummy_XY"/>
 		<!--P3 (m s-1) surface_sea_water_y_velocity : Daily surface prognostic y-ward velocity component resolved by the model.-->
 		<field id="CMIP7_wo" field_ref="?dummy_XYO"/>
 		<!--P1 (m s-1) upward_sea_water_velocity : Prognostic z-ward velocity component resolved by the model.-->
 		<field id="CMIP7_wpp" field_ref="?dummy_XY"/>
 		<!--P2 (s) sea_surface_wave_period_at_variance_spectral_density_maximum : Wave period associated with the most energetic waves in total wave spectrum, incorporating both wind-sea and swell waves. In spectral wind wave models, this represents the spectral peak across the entire two-dimensional wave spectrum, incorporating both wind-sea and swell waves.-->
 		<field id="CMIP7_zos" field_ref="?dummy_XY"/>
-		<!--P1 (m) sea_surface_height_above_geoid : This is the dynamic sea level, so should have zero global area mean. It should not include inverse barometer depressions from sea ice.-->
+		<!--P1 (m) sea_surface_height_above_geoid : This is the effective dynamic sea level, so should have zero global area mean. It should not include inverse barometer depressions from sea ice.-->
 		<field id="CMIP7_zossq" field_ref="?dummy_XY"/>
 		<!--P2 (m2) square_of_sea_surface_height_above_geoid : Surface ocean geoid defines z=0.-->
 		<field id="CMIP7_zostoga" field_ref="?dummy_0d"/>

@@ -211,10 +211,10 @@ TBD: Cannot yet compute maximum hourly rate for          prhmax in table Eday ->
 file_def written as current_directory/test_RCSM6_CTL/test_outputs/dr2xml_surfex.xml
 
 Skipped variables (i.e. whose alias is not present in the pingfile):
->>> REALM:         aerosol TABLE:        HOMAL1hr REGION:         default 01/05 ----> wetno3_HOMAL1hr(1.0)
+>>> REALM:         aerosol TABLE:        HOMAL1hr REGION:         default 01/05 ----> wetno3_HOMAL1hr(1.0, ['CMIP6_wetno3'])
 
 
->>> REALM:         aerosol TABLE:        HOMALmon REGION:         default 01/51 ----> wetno3_HOMALmon(1.0)
+>>> REALM:         aerosol TABLE:        HOMALmon REGION:         default 01/51 ----> wetno3_HOMALmon(1.0, ['CMIP6_wetno3'])
 
 
 

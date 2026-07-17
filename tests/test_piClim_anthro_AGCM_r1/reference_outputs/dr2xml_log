@@ -89,15 +89,15 @@ Note: assuming that for        pctisccp in table CFmon is well handled by 'detec
 file_def written as current_directory/test_piClim_anthro_AGCM_r1/test_outputs/dr2xml_surfex.xml
 
 Skipped variables (i.e. whose alias is not present in the pingfile):
->>> REALM:         aerosol TABLE:          AERmon REGION:         default 07/21 ----> mmraerh2o_AERmon(1) mmrno3_AERmon(1) mmrsoa_AERmon(1) od550aerh2o_AERmon(1) od550bb_AERmon(1) od550no3_AERmon(1) od550soa_AERmon(1)
+>>> REALM:         aerosol TABLE:          AERmon REGION:         default 07/21 ----> mmraerh2o_AERmon(1, ['CMIP6_mmraerh2o']) mmrno3_AERmon(1, ['CMIP6_mmrno3']) mmrsoa_AERmon(1, ['CMIP6_mmrsoa']) od550aerh2o_AERmon(1, ['CMIP6_od550aerh2o']) od550bb_AERmon(1, ['CMIP6_od550bb']) od550no3_AERmon(1, ['CMIP6_od550no3']) od550soa_AERmon(1, ['CMIP6_od550soa'])
 
 
 
->>> REALM:           atmos TABLE:            Amon REGION:         default 02/56 ----> rtmt_Amon(1) sci_Amon(1)
+>>> REALM:           atmos TABLE:            Amon REGION:         default 02/56 ----> rtmt_Amon(1, ['CMIP6_rtmt']) sci_Amon(1, ['CMIP6_sci'])
 
 
 
->>> REALM:            land TABLE:            Lmon REGION:         default 04/24 ----> fGrazing_Lmon(1) fHarvest_Lmon(1) fVegSoil_Lmon(1) pastureFrac_Lmon(1)
+>>> REALM:            land TABLE:            Lmon REGION:         default 04/24 ----> fGrazing_Lmon(1, ['CMIP6_fGrazing']) fHarvest_Lmon(1, ['CMIP6_fHarvest']) fVegSoil_Lmon(1, ['CMIP6_fVegSoil']) pastureFrac_Lmon(1, ['CMIP6_pastureFrac'])
 
 
 

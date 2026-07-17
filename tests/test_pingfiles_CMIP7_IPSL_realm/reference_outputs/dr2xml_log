@@ -25,10 +25,12 @@ For parameter bypass_CV_components, found value False
 For parameter bytes_per_float, found value 2
 For parameter configuration, found value None
 For parameter context, found value nemo
+For parameter create_csv_file, found value False
 For parameter debug_parsing, found value False
 For parameter default_region, found value default
 For parameter dr2xml_manages_enddate, found value True
 For parameter end_year, found value False
+For parameter excluded_dimensions, found value []
 For parameter excluded_expgroups_lset, found value []
 For parameter excluded_expgroups_sset, found value []
 For parameter excluded_opportunities_lset, found value []
@@ -40,10 +42,12 @@ For parameter excluded_request_links, found value []
 For parameter excluded_spshapes_lset, found value []
 For parameter excluded_tables_lset, found value []
 For parameter excluded_tables_sset, found value []
+For parameter excluded_tpshapes_lset, found value []
 For parameter excluded_vargroups_lset, found value []
 For parameter excluded_vargroups_sset, found value []
 For parameter excluded_vars_lset, found value []
 For parameter excluded_vars_per_config, found value []
+For parameter excluded_vars_per_frequency, found value {}
 For parameter excluded_vars_per_shape, found value {}
 For parameter excluded_vars_sset, found value []
 For parameter experiment_for_requests, found value None
@@ -94,6 +98,7 @@ For parameter required_model_components, found value []
 For parameter sampling_timestep, found value None
 Could not find a proper value for sectors
 For parameter select, found value no
+Could not find a proper value for select_excluded_dimensions
 Could not find a proper value for select_excluded_expgroups
 Could not find a proper value for select_excluded_opportunities
 Could not find a proper value for select_excluded_pairs
@@ -127,9 +132,11 @@ For parameter synchronisation_frequency, found value None
 Could not find a proper value for tierMax
 For parameter tierMax_lset, found value 3
 For parameter too_long_periods, found value []
+For parameter update_grid_label, found value True
 For parameter useAtForInstant, found value False
 For parameter use_cmorvar_label_in_filename, found value False
 For parameter use_union_zoom, found value False
+For parameter variables_per_grid_type, found value {}
 For parameter vertical_interpolation_operation, found value instant
 Could not find a proper value for vertical_interpolation_sample_freq
 For parameter xios_version, found value 2
@@ -144,6 +151,7 @@ For parameter included_vargroups, found value []
 For parameter included_vars, found value []
 For parameter max_priority, found value 3
 Could not find a proper value for sectors
+For parameter select_excluded_dimensions, found value []
 For parameter select_excluded_expgroups, found value []
 For parameter select_excluded_opportunities, found value []
 For parameter select_excluded_pairs, found value []
@@ -180,12 +188,12 @@ For parameter comment_sset, found value ''
 For parameter compression_level, found value 0
 For parameter contact, found value None
 For parameter convention_str, found value CF-1.7 CMIP-6.2
-Function 'get_transformed_content': Passing merged **kwargs (potential function call overrides applied to config defaults: {'version': 'test', 'force_retrieve': False, 'cache_dir': 'data_request_directory', 'check_api_version': False, 'consolidate': False, 'export': 'release', 'log_file': 'default', 'log_level': 'info', 'offline': True, 'variable_name': 'CMIP7 Compound Name'}).
+Function 'get_transformed_content': Passing merged **kwargs (potential function call overrides applied to config defaults: {'version': 'test', 'force_retrieve': False, 'cache_dir': '/home/rigoudyg/dev/data_request/CMIP7_DReq_Software/data_request_api/data_request_api/content/dreq_api/dreq_res', 'check_api_version': False, 'consolidate': False, 'export': 'release', 'log_file': 'default', 'log_level': 'info', 'offline': True, 'variable_name': 'CMIP7 Compound Name'}).
 For parameter data_request_version_string, found value Software current_cmip7_dr_software - Content test
 For parameter data_specs_version, found value Software current_cmip7_dr_software - Content test
 For parameter date_range, found value %start_date%-%end_date%
 Could not find a proper value for description
-For parameter dr2xml_version, found value 3.1
+For parameter dr2xml_version, found value current_version
 Could not find a proper value for experiment
 For parameter expid_in_filename, found value None
 For parameter forcing_index, found value 1
@@ -2165,7 +2173,7 @@ Processing realm 'ocnBgchem' of context 'nemo'
 Processing realm 'seaIce' of context 'nemo'
 For parameter id, found value nemo
 For parameter DR_version, found value CMIP7 Data Request version Software current_cmip7_dr_software - Content test
-For parameter dr2xml_version, found value dr2xml version 3.1
+For parameter dr2xml_version, found value dr2xml version current_version
 For parameter lab_settings, found value Lab_and_model settings
 {'data_request_content_version' = 'test',
 'data_request_used' = 'CMIP7',
@@ -2264,7 +2272,7 @@ Could not find a proper value for prec
   5 variables written for current_directory/test_pingfiles_CMIP7_IPSL_realm/test_outputs//ping_nemo_seaIce.xml
 For parameter id, found value nemo
 For parameter DR_version, found value CMIP7 Data Request version Software current_cmip7_dr_software - Content test
-For parameter dr2xml_version, found value dr2xml version 3.1
+For parameter dr2xml_version, found value dr2xml version current_version
 For parameter lab_settings, found value Lab_and_model settings
 {'data_request_content_version' = 'test',
 'data_request_used' = 'CMIP7',
@@ -2679,7 +2687,7 @@ Could not find a proper value for prec
  27 variables written for current_directory/test_pingfiles_CMIP7_IPSL_realm/test_outputs//ping_nemo_ocean.xml
 For parameter id, found value nemo
 For parameter DR_version, found value CMIP7 Data Request version Software current_cmip7_dr_software - Content test
-For parameter dr2xml_version, found value dr2xml version 3.1
+For parameter dr2xml_version, found value dr2xml version current_version
 For parameter lab_settings, found value Lab_and_model settings
 {'data_request_content_version' = 'test',
 'data_request_used' = 'CMIP7',
@@ -2853,10 +2861,12 @@ For parameter bypass_CV_components, found value False
 For parameter bytes_per_float, found value 2
 For parameter configuration, found value None
 For parameter context, found value orchidee
+For parameter create_csv_file, found value False
 For parameter debug_parsing, found value False
 For parameter default_region, found value default
 For parameter dr2xml_manages_enddate, found value True
 For parameter end_year, found value False
+For parameter excluded_dimensions, found value []
 For parameter excluded_expgroups_lset, found value []
 For parameter excluded_expgroups_sset, found value []
 For parameter excluded_opportunities_lset, found value []
@@ -2868,10 +2878,12 @@ For parameter excluded_request_links, found value []
 For parameter excluded_spshapes_lset, found value []
 For parameter excluded_tables_lset, found value []
 For parameter excluded_tables_sset, found value []
+For parameter excluded_tpshapes_lset, found value []
 For parameter excluded_vargroups_lset, found value []
 For parameter excluded_vargroups_sset, found value []
 For parameter excluded_vars_lset, found value []
 For parameter excluded_vars_per_config, found value []
+For parameter excluded_vars_per_frequency, found value {}
 For parameter excluded_vars_per_shape, found value {}
 For parameter excluded_vars_sset, found value []
 For parameter experiment_for_requests, found value None
@@ -2922,6 +2934,7 @@ For parameter required_model_components, found value []
 For parameter sampling_timestep, found value None
 Could not find a proper value for sectors
 For parameter select, found value no
+Could not find a proper value for select_excluded_dimensions
 Could not find a proper value for select_excluded_expgroups
 Could not find a proper value for select_excluded_opportunities
 Could not find a proper value for select_excluded_pairs
@@ -2955,9 +2968,11 @@ For parameter synchronisation_frequency, found value None
 Could not find a proper value for tierMax
 For parameter tierMax_lset, found value 3
 For parameter too_long_periods, found value []
+For parameter update_grid_label, found value True
 For parameter useAtForInstant, found value False
 For parameter use_cmorvar_label_in_filename, found value False
 For parameter use_union_zoom, found value False
+For parameter variables_per_grid_type, found value {}
 For parameter vertical_interpolation_operation, found value instant
 Could not find a proper value for vertical_interpolation_sample_freq
 For parameter xios_version, found value 2
@@ -2972,6 +2987,7 @@ For parameter included_vargroups, found value []
 For parameter included_vars, found value []
 For parameter max_priority, found value 3
 Could not find a proper value for sectors
+For parameter select_excluded_dimensions, found value []
 For parameter select_excluded_expgroups, found value []
 For parameter select_excluded_opportunities, found value []
 For parameter select_excluded_pairs, found value []
@@ -3012,7 +3028,7 @@ For parameter data_request_version_string, found value Software current_cmip7_dr
 For parameter data_specs_version, found value Software current_cmip7_dr_software - Content test
 For parameter date_range, found value %start_date%-%end_date%
 Could not find a proper value for description
-For parameter dr2xml_version, found value 3.1
+For parameter dr2xml_version, found value current_version
 Could not find a proper value for experiment
 For parameter expid_in_filename, found value None
 For parameter forcing_index, found value 1
@@ -3703,7 +3719,7 @@ Processing realm 'land' of context 'orchidee'
 Processing realm 'landIce' of context 'orchidee'
 For parameter id, found value orchidee
 For parameter DR_version, found value CMIP7 Data Request version Software current_cmip7_dr_software - Content test
-For parameter dr2xml_version, found value dr2xml version 3.1
+For parameter dr2xml_version, found value dr2xml version current_version
 For parameter lab_settings, found value Lab_and_model settings
 {'data_request_content_version' = 'test',
 'data_request_used' = 'CMIP7',
@@ -3952,7 +3968,7 @@ Could not find a proper value for prec
  16 variables written for current_directory/test_pingfiles_CMIP7_IPSL_realm/test_outputs//ping_orchidee_land.xml
 For parameter id, found value orchidee
 For parameter DR_version, found value CMIP7 Data Request version Software current_cmip7_dr_software - Content test
-For parameter dr2xml_version, found value dr2xml version 3.1
+For parameter dr2xml_version, found value dr2xml version current_version
 For parameter lab_settings, found value Lab_and_model settings
 {'data_request_content_version' = 'test',
 'data_request_used' = 'CMIP7',
@@ -4015,10 +4031,12 @@ For parameter bypass_CV_components, found value False
 For parameter bytes_per_float, found value 2
 For parameter configuration, found value None
 For parameter context, found value LMDZ
+For parameter create_csv_file, found value False
 For parameter debug_parsing, found value False
 For parameter default_region, found value default
 For parameter dr2xml_manages_enddate, found value True
 For parameter end_year, found value False
+For parameter excluded_dimensions, found value []
 For parameter excluded_expgroups_lset, found value []
 For parameter excluded_expgroups_sset, found value []
 For parameter excluded_opportunities_lset, found value []
@@ -4030,10 +4048,12 @@ For parameter excluded_request_links, found value []
 For parameter excluded_spshapes_lset, found value []
 For parameter excluded_tables_lset, found value []
 For parameter excluded_tables_sset, found value []
+For parameter excluded_tpshapes_lset, found value []
 For parameter excluded_vargroups_lset, found value []
 For parameter excluded_vargroups_sset, found value []
 For parameter excluded_vars_lset, found value []
 For parameter excluded_vars_per_config, found value []
+For parameter excluded_vars_per_frequency, found value {}
 For parameter excluded_vars_per_shape, found value {}
 For parameter excluded_vars_sset, found value []
 For parameter experiment_for_requests, found value None
@@ -4084,6 +4104,7 @@ For parameter required_model_components, found value []
 For parameter sampling_timestep, found value None
 Could not find a proper value for sectors
 For parameter select, found value no
+Could not find a proper value for select_excluded_dimensions
 Could not find a proper value for select_excluded_expgroups
 Could not find a proper value for select_excluded_opportunities
 Could not find a proper value for select_excluded_pairs
@@ -4117,9 +4138,11 @@ For parameter synchronisation_frequency, found value None
 Could not find a proper value for tierMax
 For parameter tierMax_lset, found value 3
 For parameter too_long_periods, found value []
+For parameter update_grid_label, found value True
 For parameter useAtForInstant, found value False
 For parameter use_cmorvar_label_in_filename, found value False
 For parameter use_union_zoom, found value False
+For parameter variables_per_grid_type, found value {}
 For parameter vertical_interpolation_operation, found value instant
 Could not find a proper value for vertical_interpolation_sample_freq
 For parameter xios_version, found value 2
@@ -4134,6 +4157,7 @@ For parameter included_vargroups, found value []
 For parameter included_vars, found value []
 For parameter max_priority, found value 3
 Could not find a proper value for sectors
+For parameter select_excluded_dimensions, found value []
 For parameter select_excluded_expgroups, found value []
 For parameter select_excluded_opportunities, found value []
 For parameter select_excluded_pairs, found value []
@@ -4174,7 +4198,7 @@ For parameter data_request_version_string, found value Software current_cmip7_dr
 For parameter data_specs_version, found value Software current_cmip7_dr_software - Content test
 For parameter date_range, found value %start_date%-%end_date%
 Could not find a proper value for description
-For parameter dr2xml_version, found value 3.1
+For parameter dr2xml_version, found value current_version
 Could not find a proper value for experiment
 For parameter expid_in_filename, found value None
 For parameter forcing_index, found value 1
@@ -4868,7 +4892,7 @@ Processing realm 'land' of context 'LMDZ'
 Processing realm 'landIce' of context 'LMDZ'
 For parameter id, found value LMDZ
 For parameter DR_version, found value CMIP7 Data Request version Software current_cmip7_dr_software - Content test
-For parameter dr2xml_version, found value dr2xml version 3.1
+For parameter dr2xml_version, found value dr2xml version current_version
 For parameter lab_settings, found value Lab_and_model settings
 {'data_request_content_version' = 'test',
 'data_request_used' = 'CMIP7',
@@ -5322,7 +5346,7 @@ Could not find a proper value for prec
  26 variables written for current_directory/test_pingfiles_CMIP7_IPSL_realm/test_outputs//ping_LMDZ_atmos.xml
 For parameter id, found value LMDZ
 For parameter DR_version, found value CMIP7 Data Request version Software current_cmip7_dr_software - Content test
-For parameter dr2xml_version, found value dr2xml version 3.1
+For parameter dr2xml_version, found value dr2xml version current_version
 For parameter lab_settings, found value Lab_and_model settings
 {'data_request_content_version' = 'test',
 'data_request_used' = 'CMIP7',
@@ -5574,7 +5598,7 @@ Could not find a proper value for prec
  16 variables written for current_directory/test_pingfiles_CMIP7_IPSL_realm/test_outputs//ping_LMDZ_land.xml
 For parameter id, found value LMDZ
 For parameter DR_version, found value CMIP7 Data Request version Software current_cmip7_dr_software - Content test
-For parameter dr2xml_version, found value dr2xml version 3.1
+For parameter dr2xml_version, found value dr2xml version current_version
 For parameter lab_settings, found value Lab_and_model settings
 {'data_request_content_version' = 'test',
 'data_request_used' = 'CMIP7',
@@ -5612,7 +5636,7 @@ Could not find a proper value for prec
   1 variables written for current_directory/test_pingfiles_CMIP7_IPSL_realm/test_outputs//ping_LMDZ_landIce.xml
 For parameter id, found value LMDZ
 For parameter DR_version, found value CMIP7 Data Request version Software current_cmip7_dr_software - Content test
-For parameter dr2xml_version, found value dr2xml version 3.1
+For parameter dr2xml_version, found value dr2xml version current_version
 For parameter lab_settings, found value Lab_and_model settings
 {'data_request_content_version' = 'test',
 'data_request_used' = 'CMIP7',
@@ -5683,7 +5707,7 @@ Could not find a proper value for prec
   0 variables written for current_directory/test_pingfiles_CMIP7_IPSL_realm/test_outputs//ping_LMDZ_atmosChem.xml
 For parameter id, found value LMDZ
 For parameter DR_version, found value CMIP7 Data Request version Software current_cmip7_dr_software - Content test
-For parameter dr2xml_version, found value dr2xml version 3.1
+For parameter dr2xml_version, found value dr2xml version current_version
 For parameter lab_settings, found value Lab_and_model settings
 {'data_request_content_version' = 'test',
 'data_request_used' = 'CMIP7',

@@ -559,7 +559,7 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="xios_commit" type="string"> 1442-shuffle </variable>
 			<field field_ref="CMIP7_zos_average" name="zos" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="area: mean where sea time: mean" cell_methods_mode="overwrite" operation="average">
 				<variable name="standard_name" type="string"> sea_surface_height_above_geoid </variable>
-				<variable name="description" type="string"> This is the dynamic sea level, so should have zero global area mean. zos is the effective sea level as if sea ice (and snow) at a grid cell were converted to liquid seawater (Campin et al., 2008). For OMIP, do _not _record inverse barometer responses from sea-ice (and snow) loading in zos. See (Griffies et al, 2016, https://doi.org/10.5194/gmd-9-3231-2016). </variable>
+				<variable name="description" type="string"> This is the effective dynamic sea level, so should have zero global area mean. zos is the effective sea level as if sea ice (and snow) at a grid cell were converted to liquid seawater (Campin et al., 2008). For OMIP, do _not _record inverse barometer responses from sea-ice (and snow) loading in zos. See (Griffies et al, 2016, https://doi.org/10.5194/gmd-9-3231-2016). </variable>
 				<variable name="long_name" type="string"> Sea Surface Height Above Geoid </variable>
 				<variable name="history" type="string"> none </variable>
 				<variable name="units" type="string"> m </variable>
@@ -1100,10 +1100,10 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="xios_commit" type="string"> 1442-shuffle </variable>
 			<field field_ref="CMIP7_siconc_average" name="siconc" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="area: time: mean" cell_methods_mode="overwrite" operation="average">
 				<variable name="standard_name" type="string"> sea_ice_area_fraction </variable>
-				<variable name="description" type="string"> Areal fraction of a given grid cell that is covered by sea ice on the ocean grid, independent of the thickness of that ice. </variable>
-				<variable name="long_name" type="string"> Sea-Ice Area Fraction (Ocean Grid) </variable>
+				<variable name="description" type="string"> Percentage of a given grid cell that is covered by sea ice on the ocean grid, independent of the thickness of that ice. </variable>
+				<variable name="long_name" type="string"> Sea-Ice Area Percentage (Ocean Grid) </variable>
 				<variable name="history" type="string"> none </variable>
-				<variable name="units" type="string"> 1 </variable>
+				<variable name="units" type="string"> % </variable>
 				<variable name="cell_methods" type="string"> area: time: mean </variable>
 				<variable name="cell_measures" type="string"> area: areacello </variable>
 				<variable name="interval_operation" type="string"> 1800 s </variable>
@@ -1721,7 +1721,7 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="xios_commit" type="string"> 1442-shuffle </variable>
 			<field field_ref="CMIP7_zos_average" name="zos" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="area: mean where sea time: mean" cell_methods_mode="overwrite" operation="average">
 				<variable name="standard_name" type="string"> sea_surface_height_above_geoid </variable>
-				<variable name="description" type="string"> This is the dynamic sea level, so should have zero global area mean. It should not include inverse barometer depressions from sea ice. </variable>
+				<variable name="description" type="string"> This is the effective dynamic sea level, so should have zero global area mean. It should not include inverse barometer depressions from sea ice. </variable>
 				<variable name="long_name" type="string"> Sea Surface Height Above Geoid </variable>
 				<variable name="history" type="string"> none </variable>
 				<variable name="units" type="string"> m </variable>
@@ -2069,75 +2069,6 @@ seaIce: Gelato 6.1 </variable>
 				<variable name="interval_operation" type="string"> 1800 s </variable>
 			</field>
 		</file>
-		<file id="simass_SImon_gn" name="IOXDIRsimass_SImon_CNRM-ESM2-1_historical_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="500y" split_freq_format="%y%mo" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
-			<variable name="activity_id" type="string"> CMIP </variable>
-			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> Software current_cmip7_dr_software - Content test </variable>
-			<variable name="dr2xml_version" type="string"> current_version </variable>
-			<variable name="experiment_id" type="string"> historical </variable>
-			<variable name="description" type="string"> CMIP6 historical </variable>
-			<variable name="title" type="string"> CMIP6 historical </variable>
-			<variable name="experiment" type="string"> all-forcing simulation of the recent past </variable>
-			<variable name="external_variables" type="string"> areacello </variable>
-			<variable name="forcing_index" type="int"> 2 </variable>
-			<variable name="frequency" type="string"> mon </variable>
-			<variable name="further_info_url" type="string"> https://furtherinfo.es-doc.org/False.CNRM-CERFACS.CNRM-ESM2-1.historical.none.r1i1p1f2 </variable>
-			<variable name="grid" type="string"> native ocean tri-polar grid with 105 k ocean cells </variable>
-			<variable name="grid_label" type="string"> gn </variable>
-			<variable name="nominal_resolution" type="string"> 100 km </variable>
-			<variable name="history" type="string"> none </variable>
-			<variable name="initialization_index" type="int"> 1 </variable>
-			<variable name="institution_id" type="string"> CNRM-CERFACS </variable>
-			<variable name="institution" type="string"> CNRM (Centre National de Recherches Meteorologiques, Toulouse 31057, France), CERFACS (Centre Europeen de Recherche et de Formation Avancee en Calcul Scientifique, Toulouse 31057, France) </variable>
-			<variable name="license" type="string"> CMIP6 model data produced by CNRM-CERFACS is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License (https://creativecommons.org/licenses). Consult https://pcmdi.llnl.gov/CMIP6/TermsOfUse for terms of use governing CMIP6 output, including citation requirements and proper acknowledgment. Further information about this data, including some limitations, can be found via the further_info_url (recorded as a global attribute in this file) and at http://www.umr-cnrm.fr/cmip6/. The data producers and data providers make no warranty, either express or implied, including, but not limited to, warranties of merchantability and fitness for a particular purpose. All liabilities arising from the supply of the information (including any liability arising in negligence) are excluded to the fullest extent permitted by law. </variable>
-			<variable name="mip_era" type="string"> False </variable>
-			<variable name="parent_experiment_id" type="string"> piControl </variable>
-			<variable name="parent_mip_era" type="string"> False </variable>
-			<variable name="parent_activity_id" type="string"> CMIP </variable>
-			<variable name="parent_source_id" type="string"> CNRM-ESM2-1 </variable>
-			<variable name="parent_time_units" type="string"> days since 1850-01-01 00:00:00 </variable>
-			<variable name="parent_variant_label" type="string"> r1i1p1f2 </variable>
-			<variable name="branch_method" type="string"> standard </variable>
-			<variable name="branch_time_in_parent" type="double"> 36524.0D </variable>
-			<variable name="branch_time_in_child" type="double"> 0.0D </variable>
-			<variable name="physics_index" type="int"> 1 </variable>
-			<variable name="product" type="string"> model-output </variable>
-			<variable name="realization_index" type="int"> 1 </variable>
-			<variable name="realm" type="string"> seaIce </variable>
-			<variable name="references" type="string"> http://www.umr-cnrm.fr/cmip6/references </variable>
-			<variable name="source" type="string"> CNRM-ESM2-1 (2017):
-aerosol: TACTIC_v2
-atmos: Arpege 6.3 (T127; Gaussian Reduced with 24572 grid points in total distributed over 128 latitude circles (with 256 grid points per latitude circle between 30degN and 30degS reducing to 20 grid points per latitude circle at 88.9degN and 88.9degS); 91 levels; top level 78.4 km)
-atmosChem: REPROBUS-C_v2
-land: Surfex 8.0c
-ocean: Nemo 3.6 (eORCA1, tripolar primarily 1deg; 362 x 294 longitude/latitude; 75 levels; top grid cell 0-1 m)
-ocnBgchem: Pisces 2.s
-seaIce: Gelato 6.1 </variable>
-			<variable name="source_id" type="string"> CNRM-ESM2-1 </variable>
-			<variable name="source_type" type="string"> AOGCM BGC AER CHEM </variable>
-			<variable name="sub_experiment_id" type="string"> none </variable>
-			<variable name="sub_experiment" type="string"> none </variable>
-			<variable name="table_id" type="string"> SImon </variable>
-			<variable name="title" type="string"> CNRM-ESM2-1 model output prepared for CMIP6 / CMIP historical </variable>
-			<variable name="variable_id" type="string"> simass </variable>
-			<variable name="variant_label" type="string"> r1i1p1f2 </variable>
-			<variable name="CMIP6_CV_version" type="string"> cv=6.2.3.0-7-g2019642 </variable>
-			<variable name="EXPID" type="string"> CNRM-ESM2-1_historical_r1i1p1f2_v2 </variable>
-			<variable name="dr2xml_md5sum" type="string"> 7040f60f6bf3118dc6c58b9fb8727d87 </variable>
-			<variable name="arpege_minor_version" type="string"> 6.3.2 </variable>
-			<variable name="nemo_gelato_commit" type="string"> 49095b3accd5d4c_6524fe19b00467a </variable>
-			<variable name="xios_commit" type="string"> 1442-shuffle </variable>
-			<field field_ref="CMIP7_simass_average" name="simass" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="area: mean where sea time: mean" cell_methods_mode="overwrite" operation="average">
-				<variable name="standard_name" type="string"> sea_ice_amount </variable>
-				<variable name="description" type="string"> Total mass of sea ice divided by grid-cell area. </variable>
-				<variable name="long_name" type="string"> Sea-Ice Mass </variable>
-				<variable name="history" type="string"> none </variable>
-				<variable name="units" type="string"> kg m-2 </variable>
-				<variable name="cell_methods" type="string"> area: mean where sea time: mean </variable>
-				<variable name="cell_measures" type="string"> area: areacello </variable>
-				<variable name="interval_operation" type="string"> 1800 s </variable>
-			</field>
-		</file>
 		<file id="sithick_SImon_gn" name="IOXDIRsithick_SImon_CNRM-ESM2-1_historical_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="500y" split_freq_format="%y%mo" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
@@ -2207,6 +2138,75 @@ seaIce: Gelato 6.1 </variable>
 				<variable name="interval_operation" type="string"> 1800 s </variable>
 			</field>
 		</file>
+		<file id="simass_SImon_gn" name="IOXDIRsimass_SImon_CNRM-ESM2-1_historical_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="500y" split_freq_format="%y%mo" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
+			<variable name="activity_id" type="string"> CMIP </variable>
+			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
+			<variable name="data_specs_version" type="string"> Software current_cmip7_dr_software - Content test </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
+			<variable name="experiment_id" type="string"> historical </variable>
+			<variable name="description" type="string"> CMIP6 historical </variable>
+			<variable name="title" type="string"> CMIP6 historical </variable>
+			<variable name="experiment" type="string"> all-forcing simulation of the recent past </variable>
+			<variable name="external_variables" type="string"> areacello </variable>
+			<variable name="forcing_index" type="int"> 2 </variable>
+			<variable name="frequency" type="string"> mon </variable>
+			<variable name="further_info_url" type="string"> https://furtherinfo.es-doc.org/False.CNRM-CERFACS.CNRM-ESM2-1.historical.none.r1i1p1f2 </variable>
+			<variable name="grid" type="string"> native ocean tri-polar grid with 105 k ocean cells </variable>
+			<variable name="grid_label" type="string"> gn </variable>
+			<variable name="nominal_resolution" type="string"> 100 km </variable>
+			<variable name="history" type="string"> none </variable>
+			<variable name="initialization_index" type="int"> 1 </variable>
+			<variable name="institution_id" type="string"> CNRM-CERFACS </variable>
+			<variable name="institution" type="string"> CNRM (Centre National de Recherches Meteorologiques, Toulouse 31057, France), CERFACS (Centre Europeen de Recherche et de Formation Avancee en Calcul Scientifique, Toulouse 31057, France) </variable>
+			<variable name="license" type="string"> CMIP6 model data produced by CNRM-CERFACS is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License (https://creativecommons.org/licenses). Consult https://pcmdi.llnl.gov/CMIP6/TermsOfUse for terms of use governing CMIP6 output, including citation requirements and proper acknowledgment. Further information about this data, including some limitations, can be found via the further_info_url (recorded as a global attribute in this file) and at http://www.umr-cnrm.fr/cmip6/. The data producers and data providers make no warranty, either express or implied, including, but not limited to, warranties of merchantability and fitness for a particular purpose. All liabilities arising from the supply of the information (including any liability arising in negligence) are excluded to the fullest extent permitted by law. </variable>
+			<variable name="mip_era" type="string"> False </variable>
+			<variable name="parent_experiment_id" type="string"> piControl </variable>
+			<variable name="parent_mip_era" type="string"> False </variable>
+			<variable name="parent_activity_id" type="string"> CMIP </variable>
+			<variable name="parent_source_id" type="string"> CNRM-ESM2-1 </variable>
+			<variable name="parent_time_units" type="string"> days since 1850-01-01 00:00:00 </variable>
+			<variable name="parent_variant_label" type="string"> r1i1p1f2 </variable>
+			<variable name="branch_method" type="string"> standard </variable>
+			<variable name="branch_time_in_parent" type="double"> 36524.0D </variable>
+			<variable name="branch_time_in_child" type="double"> 0.0D </variable>
+			<variable name="physics_index" type="int"> 1 </variable>
+			<variable name="product" type="string"> model-output </variable>
+			<variable name="realization_index" type="int"> 1 </variable>
+			<variable name="realm" type="string"> seaIce </variable>
+			<variable name="references" type="string"> http://www.umr-cnrm.fr/cmip6/references </variable>
+			<variable name="source" type="string"> CNRM-ESM2-1 (2017):
+aerosol: TACTIC_v2
+atmos: Arpege 6.3 (T127; Gaussian Reduced with 24572 grid points in total distributed over 128 latitude circles (with 256 grid points per latitude circle between 30degN and 30degS reducing to 20 grid points per latitude circle at 88.9degN and 88.9degS); 91 levels; top level 78.4 km)
+atmosChem: REPROBUS-C_v2
+land: Surfex 8.0c
+ocean: Nemo 3.6 (eORCA1, tripolar primarily 1deg; 362 x 294 longitude/latitude; 75 levels; top grid cell 0-1 m)
+ocnBgchem: Pisces 2.s
+seaIce: Gelato 6.1 </variable>
+			<variable name="source_id" type="string"> CNRM-ESM2-1 </variable>
+			<variable name="source_type" type="string"> AOGCM BGC AER CHEM </variable>
+			<variable name="sub_experiment_id" type="string"> none </variable>
+			<variable name="sub_experiment" type="string"> none </variable>
+			<variable name="table_id" type="string"> SImon </variable>
+			<variable name="title" type="string"> CNRM-ESM2-1 model output prepared for CMIP6 / CMIP historical </variable>
+			<variable name="variable_id" type="string"> simass </variable>
+			<variable name="variant_label" type="string"> r1i1p1f2 </variable>
+			<variable name="CMIP6_CV_version" type="string"> cv=6.2.3.0-7-g2019642 </variable>
+			<variable name="EXPID" type="string"> CNRM-ESM2-1_historical_r1i1p1f2_v2 </variable>
+			<variable name="dr2xml_md5sum" type="string"> 7040f60f6bf3118dc6c58b9fb8727d87 </variable>
+			<variable name="arpege_minor_version" type="string"> 6.3.2 </variable>
+			<variable name="nemo_gelato_commit" type="string"> 49095b3accd5d4c_6524fe19b00467a </variable>
+			<variable name="xios_commit" type="string"> 1442-shuffle </variable>
+			<field field_ref="CMIP7_simass_average" name="simass" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="area: time: mean where sea_ice over all_area_types" cell_methods_mode="overwrite" operation="average">
+				<variable name="standard_name" type="string"> sea_ice_amount </variable>
+				<variable name="description" type="string"> Total mass of sea ice divided by grid-cell area. </variable>
+				<variable name="long_name" type="string"> Sea-Ice Mass </variable>
+				<variable name="history" type="string"> none </variable>
+				<variable name="units" type="string"> kg m-2 </variable>
+				<variable name="cell_methods" type="string"> area: time: mean where sea_ice over all_area_types </variable>
+				<variable name="cell_measures" type="string"> area: areacello </variable>
+				<variable name="interval_operation" type="string"> 1800 s </variable>
+			</field>
+		</file>
 		<file id="siconc_SImon_gn" name="IOXDIRsiconc_SImon_CNRM-ESM2-1_historical_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="500y" split_freq_format="%y%mo" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
@@ -2267,10 +2267,10 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="xios_commit" type="string"> 1442-shuffle </variable>
 			<field field_ref="CMIP7_siconc_average" name="siconc" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="area: time: mean" cell_methods_mode="overwrite" operation="average">
 				<variable name="standard_name" type="string"> sea_ice_area_fraction </variable>
-				<variable name="description" type="string"> Areal fraction of a given grid cell that is covered by sea ice on the ocean grid, independent of the thickness of that ice. </variable>
-				<variable name="long_name" type="string"> Sea-Ice Area Fraction (Ocean Grid) </variable>
+				<variable name="description" type="string"> Percentage of a given grid cell that is covered by sea ice on the ocean grid, independent of the thickness of that ice. </variable>
+				<variable name="long_name" type="string"> Sea-Ice Area Percentage (Ocean Grid) </variable>
 				<variable name="history" type="string"> none </variable>
-				<variable name="units" type="string"> 1 </variable>
+				<variable name="units" type="string"> % </variable>
 				<variable name="cell_methods" type="string"> area: time: mean </variable>
 				<variable name="cell_measures" type="string"> area: areacello </variable>
 				<variable name="interval_operation" type="string"> 1800 s </variable>
@@ -2474,7 +2474,7 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="xios_commit" type="string"> 1442-shuffle </variable>
 			<field field_ref="CMIP7_zos_average" name="zos" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="area: mean where sea time: mean" cell_methods_mode="overwrite" operation="average">
 				<variable name="standard_name" type="string"> sea_surface_height_above_geoid </variable>
-				<variable name="description" type="string"> This is the dynamic sea level, so should have zero global area mean. It should not include inverse barometer depressions from sea ice. </variable>
+				<variable name="description" type="string"> This is the effective dynamic sea level, so should have zero global area mean. It should not include inverse barometer depressions from sea ice. </variable>
 				<variable name="long_name" type="string"> Sea Surface Height Above Geoid </variable>
 				<variable name="history" type="string"> none </variable>
 				<variable name="units" type="string"> m </variable>
@@ -2556,6 +2556,6 @@ seaIce: Gelato 6.1 </variable>
 		<scalar id="Scaldeltasigt" name="deltasigt" standard_name="sea_water_sigma_t_difference" long_name="sigma_t criterion that determines  layer thickness.
 
 The method to calculate the mixed layer depth (mlotst) is documented in Griffies et al. 2016 ( https://doi.org/10.5194/gmd-9-3231-2016 ). It is the depth at which density is larger than the density of the first model level+ a threshold of 0.03 kg.m-3 (appendix H24). For CMIP7, we propose to make the reference depth 10 m instead of the first model level (note than some modelling groups already did it that way for CMIP6). A recent study based on OMIP (Treguier et al. 2023, https://doi.org/10.5194/gmd-16-3849-2023 )discusses the fact that using the first model level as a reference makes mlotst less comparable with obs (obs-based datasets reference the MLD to 10m because the diurnal cycle is not well-sampled by observations). Furthermore, the difference of the depth of the first model level between different models makes a significant difference in the computed MLDs in some seasons/regions (Treguier et al., 2023)." prec="8" value="0.03" unit="kg m-3"/>
-		<scalar id="Scalop20bar" name="pdepth" standard_name="sea_water_pressure_due_to_sea_water" long_name="Hydrostatic Pressure 20.2bar" prec="8" value="20.2" axis_type="Z" positive="down" unit="bar"/>
+		<scalar id="Scalop20bar" name="pdepth" standard_name="sea_water_pressure_due_to_sea_water" long_name="Hydrostatic Pressure 20.2 bar" prec="8" value="20.2" axis_type="Z" positive="down" unit="bar"/>
 	</scalar_definition>
 </context>

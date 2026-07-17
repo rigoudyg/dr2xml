@@ -536,10 +536,10 @@ OK current_directory/test_hist_aer_CM6_r4/input/xml/ping_trip.xml
 file_def written as current_directory/test_hist_aer_CM6_r4/test_outputs/dr2xml_surfex.xml
 
 Skipped variables (i.e. whose alias is not present in the pingfile):
->>> REALM:            land TABLE:            Emon REGION:         default 02/10 ----> cSoilAbove1m_Emon(1) cSoilBelow1m_Emon(1)
+>>> REALM:            land TABLE:            Emon REGION:         default 02/10 ----> cSoilAbove1m_Emon(1, ['CMIP6_cSoilAbove1m']) cSoilBelow1m_Emon(1, ['CMIP6_cSoilBelow1m'])
 
 
->>> REALM:            land TABLE:            Lmon REGION:         default 01/17 ----> pastureFrac_Lmon(1)
+>>> REALM:            land TABLE:            Lmon REGION:         default 01/17 ----> pastureFrac_Lmon(1, ['CMIP6_pastureFrac'])
 
 
 

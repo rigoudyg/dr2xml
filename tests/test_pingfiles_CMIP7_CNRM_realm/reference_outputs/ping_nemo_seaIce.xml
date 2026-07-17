@@ -22,7 +22,7 @@
 	<!--Year processed None-->
 	<field_definition>
 		<field id="CMIP7_siconc" field_ref="?dummy_XY"/>
-		<!--P1 (1) sea_ice_area_fraction : Areal fraction of a given grid cell that is covered by sea ice on the ocean grid, independent of the thickness of that ice.-->
+		<!--P1 (%) sea_ice_area_fraction : Percentage of a given grid cell that is covered by sea ice on the ocean grid, independent of the thickness of that ice.-->
 		<field id="CMIP7_simass" field_ref="?dummy_XY"/>
 		<!--P1 (kg m-2) sea_ice_amount : Total mass of sea ice divided by grid-cell area.-->
 		<field id="CMIP7_sithick" field_ref="?dummy_XY"/>

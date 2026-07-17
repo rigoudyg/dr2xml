@@ -694,7 +694,7 @@ def determine_files_list(svars_per_table, enddate, year, debug):
 def get_split_info(sv, table, enddate, year, debug):
     logger = get_logger()
     internal_dict = get_settings_values("internal")
-    experiment_id = internal_dict["experiment_id"]
+    experiment_for_requests = internal_dict["experiment_for_requests"]
     context = internal_dict["context"]
     grid_choice = internal_dict["grid_choice"]
     operation, detect_missing, _ = analyze_cell_time_method(sv, table)
@@ -716,7 +716,7 @@ def get_split_info(sv, table, enddate, year, debug):
         # Try to get enddate for the CMOR variable from the DR
         if sv.cmvar is not None:
             # print "calling endyear_for... for %s, with year="%(sv.label), year
-            lastyear = endyear_for_CMORvar(sv.cmvar, experiment_id, year)
+            lastyear = endyear_for_CMORvar(sv.cmvar, experiment_for_requests, year)
             # print "lastyear=",lastyear," enddate=",enddate
         if lastyear in [None, False] or (enddate is not None and lastyear >= int(enddate[0:4])):
             # DR doesn't specify an end date for that var, or a very late one

@@ -1,14 +1,3 @@
-sync universe
-Universe is in offline mode
-Running in offline mode - only using local repositories and databases
-Cache db is uptodate from local repository
-sync projects
-Project cmip6 is in offline mode
-Running in offline mode - only using local repositories and databases
-Cache db is uptodate from local repository
-Project cmip7 is in offline mode
-Running in offline mode - only using local repositories and databases
-Cache db is uptodate from local repository
 
  **************************************************
 *
@@ -55,25 +44,25 @@ Note: assuming that 'time: mean where sea_ice'  for         sithick in table SIm
 Duplicate variable sithick_tavg-u-hxy-si,sithick in table SImon and region glb is skipped, preferred is sithick_tavg-u-hxy-si
 Note: assuming that 'time: mean where sea_ice'  for             siu in table SImon is well handled by 'detect_missing'
 Note: assuming that 'time: mean where sea_ice'  for             siv in table SImon is well handled by 'detect_missing'
-Note: assuming that 'time: mean where sea_ice'  for         sithick in table SIday is well handled by 'detect_missing'
 Note: assuming that 'time: mean where sea_ice'  for             siu in table SIday is well handled by 'detect_missing'
 Note: assuming that 'time: mean where sea_ice'  for             siv in table SIday is well handled by 'detect_missing'
-Note: assuming that 'time: mean where sea_ice'  for          simass in table SImon is well handled by 'detect_missing'
-Note: assuming that 'time: mean where sea_ice'  for         sithick in table SImon is well handled by 'detect_missing'
+Note: assuming that 'time: mean where sea_ice'  for         sithick in table SIday is well handled by 'detect_missing'
 Note: assuming that 'time: mean where sea_ice'  for             siu in table SImon is well handled by 'detect_missing'
 Note: assuming that 'time: mean where sea_ice'  for             siv in table SImon is well handled by 'detect_missing'
+Note: assuming that 'time: mean where sea_ice'  for         sithick in table SImon is well handled by 'detect_missing'
+Note: assuming that 'time: mean where sea_ice'  for          simass in table SImon is well handled by 'detect_missing'
 
 file_def written as current_directory/test_AOESM_historical_CMIP7/test_outputs/dr2xml_nemo.xml
 
 Skipped variables (i.e. whose alias is not present in the pingfile):
->>> REALM:           ocean TABLE:             Ofx REGION:             glb 04/07 ----> basin_ti-u-hxy-u(1) hfgeou_ti-u-hxy-sea(1) sftof_ti-u-hxy-u(1) thkcello_ti-ol-hxy-sea(1)
+>>> REALM:           ocean TABLE:             Ofx REGION:             glb 04/07 ----> basin_ti-u-hxy-u(1, ['CMIP7_basin']) hfgeou_ti-u-hxy-sea(1, ['CMIP7_hfgeou']) sftof_ti-u-hxy-u(1, ['CMIP7_sftof']) thkcello_ti-ol-hxy-sea(1, ['CMIP7_thkcello'])
 
 
 
->>> REALM:     ocean atmos TABLE:           3hrPt REGION:             glb 03/03 ----> mpw_tpt-u-hxy-sea(2) swh_tpt-u-hxy-sea(2) wpp_tpt-u-hxy-sea(2)
+>>> REALM:     ocean atmos TABLE:           3hrPt REGION:             glb 03/03 ----> mpw_tpt-u-hxy-sea(2, ['CMIP7_mpw']) swh_tpt-u-hxy-sea(2, ['CMIP7_swh']) wpp_tpt-u-hxy-sea(2, ['CMIP7_wpp'])
 
 
->>> REALM:     ocean atmos TABLE:            Omon REGION:             glb 03/14 ----> mpw_tavg-u-hxy-sea(2) swh_tavg-u-hxy-sea(2) wpp_tavg-u-hxy-sea(2)
+>>> REALM:     ocean atmos TABLE:            Omon REGION:             glb 03/14 ----> mpw_tavg-u-hxy-sea(2, ['CMIP7_mpw']) swh_tavg-u-hxy-sea(2, ['CMIP7_swh']) wpp_tavg-u-hxy-sea(2, ['CMIP7_wpp'])
 
 
 
@@ -186,6 +175,9 @@ Some Statistics on actually written variables per variable...
 -----------------------
               * day_Oday_glb_XY-na_2 bigthetao
               *  mon_Omon_glb_XY-O_1 bigthetao
+              Warning: several long names are available:
+                  - Sea Water Conservative Temperature
+                  - Sea Water Conservative Temperature at 200 meters
 --------------------
 --- VARNAME: deptho: Sea Floor Depth Below Geoid
 --------------------
@@ -195,15 +187,15 @@ Some Statistics on actually written variables per variable...
 -----------------------
               *    fx_Ofx_glb_XY-O_1 masscello
 --------------------
---- VARNAME: mlotst: Ocean Mixed Layer Thickness Defined by Sigma T of 0.03 kg m-3
+--- VARNAME: mlotst: Ocean Mixed Layer Thickness Defined by Delta Sigma T of 0.03 kg m-3 referenced to the model level closest to 10 m depth
 --------------------
               * day_Eday_glb_XY-na_2 mlotst
 -----------------------
---- VARNAME: mlotstmax: Maximum Ocean Mixed Layer Thickness Defined by Sigma T
+--- VARNAME: mlotstmax: Maximum Ocean Mixed Layer Thickness Defined by Delta Sigma T of 0.03 kg m-3 referenced to the model level closest to 10 m depth
 -----------------------
               * mon_Omon_glb_XY-na_2 mlotstmax
 -----------------------
---- VARNAME: mlotstmin: Minimum Ocean Mixed Layer Thickness Defined by Sigma T
+--- VARNAME: mlotstmin: Minimum Ocean Mixed Layer Thickness Defined by Delta Sigma T of 0.03 kg m-3 referenced to the model level closest to 10 m depth
 -----------------------
               * mon_Omon_glb_XY-na_2 mlotstmin
 --------------------
@@ -245,6 +237,9 @@ Some Statistics on actually written variables per variable...
 --------------------
               * day_Oday_glb_XY-na_2 thetao
               *  mon_Omon_glb_XY-O_1 thetao
+              Warning: several long names are available:
+                  - Sea Water Potential Temperature
+                  - Sea Water Potential Temperature at 200 meters
 -----------------
 --- VARNAME: tos: Sea Surface Temperature
 -----------------
@@ -278,17 +273,6 @@ Some Statistics on actually written variables per variable...
 
 Warnings about cell methods (with var list)
 	time: mean where sea_ice for vars: {'simass', 'sithick', 'siu', 'siv'}
-sync universe
-Universe is in offline mode
-Running in offline mode - only using local repositories and databases
-Cache db is uptodate from local repository
-sync projects
-Project cmip6 is in offline mode
-Running in offline mode - only using local repositories and databases
-Cache db is uptodate from local repository
-Project cmip7 is in offline mode
-Running in offline mode - only using local repositories and databases
-Cache db is uptodate from local repository
 
  **************************************************
 *
@@ -328,7 +312,7 @@ processing file current_directory/test_AOESM_historical_CMIP7/input/xml/ping_tri
 OK current_directory/test_AOESM_historical_CMIP7/input/xml/ping_trip.xml
 processing file current_directory/test_AOESM_historical_CMIP7/input/xml/ping_nemo.xml:
 OK current_directory/test_AOESM_historical_CMIP7/input/xml/ping_nemo.xml
--Duplicate variable bldep_tpt-u-hxy-u,bldep in table 3hrPt and region glb is skipped, preferred is bldep_tpt-u-hxy-u
+Duplicate variable bldep_tpt-u-hxy-u,bldep in table 3hrPt and region glb is skipped, preferred is bldep_tpt-u-hxy-u
 Duplicate variable bldep_tpt-u-hxy-u,bldep in table 3hrPt and region glb is skipped, preferred is bldep_tpt-u-hxy-u
 Duplicate variable snc_tavg-u-hxy-lnd,snc in table LImon and region glb is skipped, preferred is snc_tavg-u-hxy-lnd
 Duplicate variable areacella_ti-u-hxy-u,areacella in table fx and region glb is skipped, preferred is areacella_ti-u-hxy-u
@@ -336,21 +320,21 @@ Duplicate variable areacella_ti-u-hxy-u,areacella in table fx and region glb is 
 file_def written as current_directory/test_AOESM_historical_CMIP7/test_outputs/dr2xml_surfex.xml
 
 Skipped variables (i.e. whose alias is not present in the pingfile):
->>> REALM: atmos aerosol land TABLE:           3hrPt REGION:             glb 01/06 ----> bldep_tpt-u-hxy-u(2)
+>>> REALM: atmos aerosol land TABLE:           3hrPt REGION:             glb 01/06 ----> bldep_tpt-u-hxy-u(2, ['CMIP7_bldep'])
 
 
 
->>> REALM:            land TABLE:             Efx REGION:             glb 01/01 ----> slthick_ti-sl-hxy-lnd(1)
+>>> REALM:            land TABLE:             Efx REGION:             glb 01/01 ----> slthick_ti-sl-hxy-lnd(1, ['CMIP7_slthick'])
 
 
->>> REALM:            land TABLE:              fx REGION:             glb 02/07 ----> mrsofc_ti-u-hxy-lnd(1) sftgif_ti-u-hxy-u(1)
+>>> REALM:            land TABLE:              fx REGION:             glb 02/07 ----> mrsofc_ti-u-hxy-lnd(1, ['CMIP7_mrsofc']) sftgif_ti-u-hxy-u(1, ['CMIP7_sftgif'])
 
 
 
->>> REALM:     ocean atmos TABLE:           3hrPt REGION:             glb 03/06 ----> mpw_tpt-u-hxy-sea(2) swh_tpt-u-hxy-sea(2) wpp_tpt-u-hxy-sea(2)
+>>> REALM:     ocean atmos TABLE:           3hrPt REGION:             glb 03/06 ----> mpw_tpt-u-hxy-sea(2, ['CMIP7_mpw']) swh_tpt-u-hxy-sea(2, ['CMIP7_swh']) wpp_tpt-u-hxy-sea(2, ['CMIP7_wpp'])
 
 
->>> REALM:     ocean atmos TABLE:            Omon REGION:             glb 03/03 ----> mpw_tavg-u-hxy-sea(2) swh_tavg-u-hxy-sea(2) wpp_tavg-u-hxy-sea(2)
+>>> REALM:     ocean atmos TABLE:            Omon REGION:             glb 03/03 ----> mpw_tavg-u-hxy-sea(2, ['CMIP7_mpw']) swh_tavg-u-hxy-sea(2, ['CMIP7_swh']) wpp_tavg-u-hxy-sea(2, ['CMIP7_wpp'])
 
 
 
@@ -534,17 +518,6 @@ Some Statistics on actually written variables per variable...
 ----------------
               * day_day_glb_XY-P19_1 zg
               * mon_Amon_glb_XY-P19_1 zg
-sync universe
-Universe is in offline mode
-Running in offline mode - only using local repositories and databases
-Cache db is uptodate from local repository
-sync projects
-Project cmip6 is in offline mode
-Running in offline mode - only using local repositories and databases
-Cache db is uptodate from local repository
-Project cmip7 is in offline mode
-Running in offline mode - only using local repositories and databases
-Cache db is uptodate from local repository
 
  **************************************************
 *

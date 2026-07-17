@@ -151,53 +151,53 @@ Will not explicitly handle time: mean (with samples weighted by snow mass) for  
 file_def written as current_directory/test_amip_ESM/test_outputs/dr2xml_surfex.xml
 
 Skipped variables (i.e. whose alias is not present in the pingfile):
->>> REALM:         aerosol TABLE:          AERday REGION:         default 03/11 ----> maxpblz_AERday(1) minpblz_AERday(1) sfo3max_AERday(1)
+>>> REALM:         aerosol TABLE:          AERday REGION:         default 03/11 ----> maxpblz_AERday(1, ['CMIP6_maxpblz']) minpblz_AERday(1, ['CMIP6_minpblz']) sfo3max_AERday(1, ['CMIP6_sfo3max'])
 
 
->>> REALM:         aerosol TABLE:          AERmon REGION:         default 55/124 ----> aoanh_AERmon(1) bldep_AERmon(1) c2h2_AERmon(1) c2h6_AERmon(1) c3h6_AERmon(1) c3h8_AERmon(1) ccn_AERmon(1) ch3coch3_AERmon(1) cheaqpso4_AERmon(1) chegpso4_AERmon(1) chepasoa_AERmon(1) chepsoa_AERmon(1) dms_AERmon(1) drynh3_AERmon(1) drynh4_AERmon(1) drynoy_AERmon(1) dryo3_AERmon(1) emiaco_AERmon(1) emianox_AERmon(1) emiaoa_AERmon(1) emibvoc_AERmon(1) emico_AERmon(1) emidms_AERmon(1) emiisop_AERmon(1) emilnox_AERmon(1) eminh3_AERmon(1) eminox_AERmon(1) emivoc_AERmon(1) isop_AERmon(1) jno2_AERmon(1) lossch4_AERmon(1) lossco_AERmon(1) lossn2o_AERmon(1) mmraerh2o_AERmon(1) mmrnh4_AERmon(1) mmrno3_AERmon(1) mmrpm10_AERmon(1) mmrpm2p5_AERmon(1) mmrsoa_AERmon(1) nh50_AERmon(1) o3ste_AERmon(1) od550aerh2o_AERmon(1) od550bb_AERmon(1) od550csaer_AERmon(1) od550no3_AERmon(1) od550soa_AERmon(1) pan_AERmon(1) photo1d_AERmon(1) pod0_AERmon(1) reffclwtop_AERmon(1) tropoz_AERmon(1) wetnh3_AERmon(1) wetnh4_AERmon(1) wetnoy_AERmon(1) wetso2_AERmon(1)
+>>> REALM:         aerosol TABLE:          AERmon REGION:         default 55/124 ----> aoanh_AERmon(1, ['CMIP6_aoanh']) bldep_AERmon(1, ['CMIP6_bldep']) c2h2_AERmon(1, ['CMIP6_c2h2']) c2h6_AERmon(1, ['CMIP6_c2h6']) c3h6_AERmon(1, ['CMIP6_c3h6']) c3h8_AERmon(1, ['CMIP6_c3h8']) ccn_AERmon(1, ['CMIP6_ccn']) ch3coch3_AERmon(1, ['CMIP6_ch3coch3']) cheaqpso4_AERmon(1, ['CMIP6_cheaqpso4']) chegpso4_AERmon(1, ['CMIP6_chegpso4']) chepasoa_AERmon(1, ['CMIP6_chepasoa']) chepsoa_AERmon(1, ['CMIP6_chepsoa']) dms_AERmon(1, ['CMIP6_dms']) drynh3_AERmon(1, ['CMIP6_drynh3']) drynh4_AERmon(1, ['CMIP6_drynh4']) drynoy_AERmon(1, ['CMIP6_drynoy']) dryo3_AERmon(1, ['CMIP6_dryo3']) emiaco_AERmon(1, ['CMIP6_emiaco']) emianox_AERmon(1, ['CMIP6_emianox']) emiaoa_AERmon(1, ['CMIP6_emiaoa']) emibvoc_AERmon(1, ['CMIP6_emibvoc']) emico_AERmon(1, ['CMIP6_emico']) emidms_AERmon(1, ['CMIP6_emidms']) emiisop_AERmon(1, ['CMIP6_emiisop']) emilnox_AERmon(1, ['CMIP6_emilnox']) eminh3_AERmon(1, ['CMIP6_eminh3']) eminox_AERmon(1, ['CMIP6_eminox']) emivoc_AERmon(1, ['CMIP6_emivoc']) isop_AERmon(1, ['CMIP6_isop']) jno2_AERmon(1, ['CMIP6_jno2']) lossch4_AERmon(1, ['CMIP6_lossch4']) lossco_AERmon(1, ['CMIP6_lossco']) lossn2o_AERmon(1, ['CMIP6_lossn2o']) mmraerh2o_AERmon(1, ['CMIP6_mmraerh2o']) mmrnh4_AERmon(1, ['CMIP6_mmrnh4']) mmrno3_AERmon(1, ['CMIP6_mmrno3']) mmrpm10_AERmon(1, ['CMIP6_mmrpm10']) mmrpm2p5_AERmon(1, ['CMIP6_mmrpm2p5']) mmrsoa_AERmon(1, ['CMIP6_mmrsoa']) nh50_AERmon(1, ['CMIP6_nh50']) o3ste_AERmon(1, ['CMIP6_o3ste']) od550aerh2o_AERmon(1, ['CMIP6_od550aerh2o']) od550bb_AERmon(1, ['CMIP6_od550bb']) od550csaer_AERmon(1, ['CMIP6_od550csaer']) od550no3_AERmon(1, ['CMIP6_od550no3']) od550soa_AERmon(1, ['CMIP6_od550soa']) pan_AERmon(1, ['CMIP6_pan']) photo1d_AERmon(1, ['CMIP6_photo1d']) pod0_AERmon(1, ['CMIP6_pod0']) reffclwtop_AERmon(1, ['CMIP6_reffclwtop']) tropoz_AERmon(1, ['CMIP6_tropoz']) wetnh3_AERmon(1, ['CMIP6_wetnh3']) wetnh4_AERmon(1, ['CMIP6_wetnh4']) wetnoy_AERmon(1, ['CMIP6_wetnoy']) wetso2_AERmon(1, ['CMIP6_wetso2'])
 
 
->>> REALM:         aerosol TABLE:            Emon REGION:         default 02/144 ----> depdust_Emon(1) mmrno3_Emon(1)
-
-
-
->>> REALM:           atmos TABLE:            Amon REGION:         default 02/59 ----> rtmt_Amon(1) sci_Amon(1)
-
-
->>> REALM:           atmos TABLE:           CFmon REGION:         default 03/54 ----> edt_CFmon(1) evu_CFmon(1) tnhusd_CFmon(1)
-
-
->>> REALM:           atmos TABLE:            Eday REGION:         default 13/32 ----> ccldncl_Eday(1) cldnci_Eday(1) cldnvi_Eday(1) loadnh4_Eday(1) loadno3_Eday(1) loadpoa_Eday(1) loadsoa_Eday(1) prhmax_Eday(1) reffcclwtop_Eday(1) reffsclwtop_Eday(1) rsdscsdiff_Eday(1) scldncl_Eday(1) zmla_Eday(1)
-
-
->>> REALM:           atmos TABLE:            Emon REGION:         default 24/144 ----> H2p_Emon(1) H2s_Emon(1) H2wv_Emon(1) O17p_Emon(1) O17s_Emon(1) O17wv_Emon(1) O18p_Emon(1) O18s_Emon(1) O18wv_Emon(1) diabdrag_Emon(1) lwsrfasdust_Emon(1) lwsrfcsdust_Emon(1) lwtoaasdust_Emon(1) lwtoacsaer_Emon(1) lwtoacsdust_Emon(1) md_Emon(1) od550aerso_Emon(1) od550so4so_Emon(1) swsrfasdust_Emon(1) swsrfcsdust_Emon(1) swtoaasdust_Emon(1) swtoacsdust_Emon(1) tdps_Emon(1) tntd_Emon(1)
-
-
->>> REALM:           atmos TABLE:           EmonZ REGION:         default 07/11 ----> epfy_EmonZ(1) epfz_EmonZ(1) jo2_EmonZ(1) jo3_EmonZ(1) utendepfd_EmonZ(1) vtem_EmonZ(1) wtem_EmonZ(1)
-
-
->>> REALM:           atmos TABLE:          Esubhr REGION:         default 01/07 ----> tntd_Esubhr(1)
-
-
->>> REALM:           atmos TABLE:         ImonGre REGION:         default 01/01 ----> tas_ImonGre(1)
+>>> REALM:         aerosol TABLE:            Emon REGION:         default 02/144 ----> depdust_Emon(1, ['CMIP6_depdust']) mmrno3_Emon(1, ['CMIP6_mmrno3'])
 
 
 
->>> REALM:       atmosChem TABLE:            Emon REGION:         default 01/144 ----> flashrate_Emon(1)
+>>> REALM:           atmos TABLE:            Amon REGION:         default 02/59 ----> rtmt_Amon(1, ['CMIP6_rtmt']) sci_Amon(1, ['CMIP6_sci'])
+
+
+>>> REALM:           atmos TABLE:           CFmon REGION:         default 03/54 ----> edt_CFmon(1, ['CMIP6_edt']) evu_CFmon(1, ['CMIP6_evu']) tnhusd_CFmon(1, ['CMIP6_tnhusd'])
+
+
+>>> REALM:           atmos TABLE:            Eday REGION:         default 13/32 ----> ccldncl_Eday(1, ['CMIP6_ccldncl']) cldnci_Eday(1, ['CMIP6_cldnci']) cldnvi_Eday(1, ['CMIP6_cldnvi']) loadnh4_Eday(1, ['CMIP6_loadnh4']) loadno3_Eday(1, ['CMIP6_loadno3']) loadpoa_Eday(1, ['CMIP6_loadpoa']) loadsoa_Eday(1, ['CMIP6_loadsoa']) prhmax_Eday(1, ['CMIP6_prhmax']) reffcclwtop_Eday(1, ['CMIP6_reffcclwtop']) reffsclwtop_Eday(1, ['CMIP6_reffsclwtop']) rsdscsdiff_Eday(1, ['CMIP6_rsdscsdiff']) scldncl_Eday(1, ['CMIP6_scldncl']) zmla_Eday(1, ['CMIP6_zmla'])
+
+
+>>> REALM:           atmos TABLE:            Emon REGION:         default 24/144 ----> H2p_Emon(1, ['CMIP6_H2p']) H2s_Emon(1, ['CMIP6_H2s']) H2wv_Emon(1, ['CMIP6_H2wv']) O17p_Emon(1, ['CMIP6_O17p']) O17s_Emon(1, ['CMIP6_O17s']) O17wv_Emon(1, ['CMIP6_O17wv']) O18p_Emon(1, ['CMIP6_O18p']) O18s_Emon(1, ['CMIP6_O18s']) O18wv_Emon(1, ['CMIP6_O18wv']) diabdrag_Emon(1, ['CMIP6_diabdrag']) lwsrfasdust_Emon(1, ['CMIP6_lwsrfasdust']) lwsrfcsdust_Emon(1, ['CMIP6_lwsrfcsdust']) lwtoaasdust_Emon(1, ['CMIP6_lwtoaasdust']) lwtoacsaer_Emon(1, ['CMIP6_lwtoacsaer']) lwtoacsdust_Emon(1, ['CMIP6_lwtoacsdust']) md_Emon(1, ['CMIP6_md']) od550aerso_Emon(1, ['CMIP6_od550aerso']) od550so4so_Emon(1, ['CMIP6_od550so4so']) swsrfasdust_Emon(1, ['CMIP6_swsrfasdust']) swsrfcsdust_Emon(1, ['CMIP6_swsrfcsdust']) swtoaasdust_Emon(1, ['CMIP6_swtoaasdust']) swtoacsdust_Emon(1, ['CMIP6_swtoacsdust']) tdps_Emon(1, ['CMIP6_tdps']) tntd_Emon(1, ['CMIP6_tntd'])
+
+
+>>> REALM:           atmos TABLE:           EmonZ REGION:         default 07/11 ----> epfy_EmonZ(1, ['CMIP6_epfy']) epfz_EmonZ(1, ['CMIP6_epfz']) jo2_EmonZ(1, ['CMIP6_jo2']) jo3_EmonZ(1, ['CMIP6_jo3']) utendepfd_EmonZ(1, ['CMIP6_utendepfd']) vtem_EmonZ(1, ['CMIP6_vtem']) wtem_EmonZ(1, ['CMIP6_wtem'])
+
+
+>>> REALM:           atmos TABLE:          Esubhr REGION:         default 01/07 ----> tntd_Esubhr(1, ['CMIP6_tntd'])
+
+
+>>> REALM:           atmos TABLE:         ImonGre REGION:         default 01/01 ----> tas_ImonGre(1, ['CMIP6_tas_ist'])
 
 
 
->>> REALM:            land TABLE:            Emon REGION:         default 30/144 ----> cSoilAbove1m_Emon(1) cSoilBelow1m_Emon(1) fBNF_Emon(1) fCLandToOcean_Emon(1) fHarvestToProduct_Emon(1) fN2O_Emon(1) fNAnthDisturb_Emon(1) fNLandToOcean_Emon(1) fNLitterSoil_Emon(1) fNProduct_Emon(1) fNVegLitter_Emon(1) fNVegSoil_Emon(1) fNdep_Emon(1) fNfert_Emon(1) fNgas_Emon(1) fNleach_Emon(1) fNloss_Emon(1) fNnetmin_Emon(1) fNup_Emon(1) nLand_Emon(1) nLitter_Emon(1) nMineral_Emon(1) nProduct_Emon(1) nSoil_Emon(1) nVeg_Emon(1) treeFracBdlDcd_Emon(1) treeFracBdlEvg_Emon(1) treeFracNdlDcd_Emon(1) treeFracNdlEvg_Emon(1) vegHeight_Emon(1)
-
-
->>> REALM:            land TABLE:          IfxGre REGION:         default 01/01 ----> areacellg_IfxGre(1)
-
-
->>> REALM:            land TABLE:            Lmon REGION:         default 05/42 ----> fGrazing_Lmon(1) fHarvest_Lmon(1) fVegSoil_Lmon(1) pastureFrac_Lmon(1) shrubFrac_Lmon(1)
+>>> REALM:       atmosChem TABLE:            Emon REGION:         default 01/144 ----> flashrate_Emon(1, ['CMIP6_flashrate'])
 
 
 
->>> REALM:         landIce TABLE:           LImon REGION:         default 16/28 ----> hflsIs_LImon(1) hfssIs_LImon(1) mrroIs_LImon(1) orogIs_LImon(1) prraIs_LImon(1) prsnIs_LImon(1) rldsIs_LImon(1) rlusIs_LImon(1) rsdsIs_LImon(1) rsusIs_LImon(1) sblIs_LImon(1) sncIs_LImon(1) snmIs_LImon(1) tasIs_LImon(1) tsIs_LImon(1) tsnIs_LImon(1)
+>>> REALM:            land TABLE:            Emon REGION:         default 30/144 ----> cSoilAbove1m_Emon(1, ['CMIP6_cSoilAbove1m']) cSoilBelow1m_Emon(1, ['CMIP6_cSoilBelow1m']) fBNF_Emon(1, ['CMIP6_fBNF']) fCLandToOcean_Emon(1, ['CMIP6_fCLandToOcean']) fHarvestToProduct_Emon(1, ['CMIP6_fHarvestToProduct']) fN2O_Emon(1, ['CMIP6_fN2O']) fNAnthDisturb_Emon(1, ['CMIP6_fNAnthDisturb']) fNLandToOcean_Emon(1, ['CMIP6_fNLandToOcean']) fNLitterSoil_Emon(1, ['CMIP6_fNLitterSoil']) fNProduct_Emon(1, ['CMIP6_fNProduct']) fNVegLitter_Emon(1, ['CMIP6_fNVegLitter']) fNVegSoil_Emon(1, ['CMIP6_fNVegSoil']) fNdep_Emon(1, ['CMIP6_fNdep']) fNfert_Emon(1, ['CMIP6_fNfert']) fNgas_Emon(1, ['CMIP6_fNgas']) fNleach_Emon(1, ['CMIP6_fNleach']) fNloss_Emon(1, ['CMIP6_fNloss']) fNnetmin_Emon(1, ['CMIP6_fNnetmin']) fNup_Emon(1, ['CMIP6_fNup']) nLand_Emon(1, ['CMIP6_nLand']) nLitter_Emon(1, ['CMIP6_nLitter']) nMineral_Emon(1, ['CMIP6_nMineral']) nProduct_Emon(1, ['CMIP6_nProduct']) nSoil_Emon(1, ['CMIP6_nSoil']) nVeg_Emon(1, ['CMIP6_nVeg']) treeFracBdlDcd_Emon(1, ['CMIP6_treeFracBdlDcd']) treeFracBdlEvg_Emon(1, ['CMIP6_treeFracBdlEvg']) treeFracNdlDcd_Emon(1, ['CMIP6_treeFracNdlDcd']) treeFracNdlEvg_Emon(1, ['CMIP6_treeFracNdlEvg']) vegHeight_Emon(1, ['CMIP6_vegHeight'])
+
+
+>>> REALM:            land TABLE:          IfxGre REGION:         default 01/01 ----> areacellg_IfxGre(1, ['CMIP6_areacellg'])
+
+
+>>> REALM:            land TABLE:            Lmon REGION:         default 05/42 ----> fGrazing_Lmon(1, ['CMIP6_fGrazing']) fHarvest_Lmon(1, ['CMIP6_fHarvest']) fVegSoil_Lmon(1, ['CMIP6_fVegSoil']) pastureFrac_Lmon(1, ['CMIP6_pastureFrac']) shrubFrac_Lmon(1, ['CMIP6_shrubFrac'])
+
+
+
+>>> REALM:         landIce TABLE:           LImon REGION:         default 16/28 ----> hflsIs_LImon(1, ['CMIP6_hflsIs']) hfssIs_LImon(1, ['CMIP6_hfssIs']) mrroIs_LImon(1, ['CMIP6_mrroIs']) orogIs_LImon(1, ['CMIP6_orogIs']) prraIs_LImon(1, ['CMIP6_prraIs']) prsnIs_LImon(1, ['CMIP6_prsnIs']) rldsIs_LImon(1, ['CMIP6_rldsIs']) rlusIs_LImon(1, ['CMIP6_rlusIs']) rsdsIs_LImon(1, ['CMIP6_rsdsIs']) rsusIs_LImon(1, ['CMIP6_rsusIs']) sblIs_LImon(1, ['CMIP6_sblIs']) sncIs_LImon(1, ['CMIP6_sncIs']) snmIs_LImon(1, ['CMIP6_snmIs']) tasIs_LImon(1, ['CMIP6_tasIs']) tsIs_LImon(1, ['CMIP6_tsIs']) tsnIs_LImon(1, ['CMIP6_tsnIs'])
 
 
 

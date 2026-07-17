@@ -35,7 +35,7 @@
       "values": [
         {
           "type": "func",
-          "origin": "vocabulary_server",
+          "origin": "vocabulary",
           "keys": ["get_term_in_collection"],
           "options": {
             "project_id": {
@@ -152,7 +152,7 @@
       "values": [
         {
           "type": "func",
-          "origin": "vocabulary_server",
+          "origin": "vocabulary",
           "keys": ["get_term_in_collection"],
           "options": {
             "project_id": {
@@ -382,7 +382,7 @@
       "values": [
         {
           "type": "func",
-          "origin": "vocabulary_server",
+          "origin": "vocabulary",
           "keys": ["get_term_in_collection"],
           "options": {
             "project_id": {

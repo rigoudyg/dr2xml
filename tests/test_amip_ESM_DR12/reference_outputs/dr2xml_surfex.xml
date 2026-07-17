@@ -51,7 +51,8 @@
 'too_long_periods' = ['dec', 'yr'],
 'use_cmorvar_label_in_filename' = 'False',
 'vertical_interpolation_operation' = 'instant',
-'vertical_interpolation_sample_freq' = '3h'}-->
+'vertical_interpolation_sample_freq' = '3h',
+'vocabulary_used' = 'dr2xml_test'}-->
 	<!--Simulation settings
 {'branch_method' = 'standard',
 'branch_year_in_child' = '1850',

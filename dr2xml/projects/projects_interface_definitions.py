@@ -367,12 +367,12 @@ class ValueSettings(Settings):
                 raise ValueError("Values must be specified for %s" % self.key)
         elif self.type in ["value", ]:
             if self.origin not in ["attrs", "common", "config", "dict", "init", "internal", "laboratory", "simulation",
-                                   "variable", "common_tag", "vocabulary_server"]:
+                                   "variable", "common_tag", "vocabulary"]:
                 logger.error("'Origin' must be specified among 'attrs', 'common', 'config', 'dict', 'init', 'internal',"
-                             " 'common_tag', 'laboratory', 'simulation', 'vocabulary_server' and 'variable' for %s, not %s" %
+                             " 'common_tag', 'laboratory', 'simulation', 'vocabulary' and 'variable' for %s, not %s" %
                              (self.key, self.origin))
                 raise ValueError("'Origin' must be specified among 'attrs', 'common', 'config', 'dict', 'init',"
-                                 " 'internal', 'common_tag', 'laboratory', 'simulation', 'vocabulary_server' and 'variable' for %s, not %s" %
+                                 " 'internal', 'common_tag', 'laboratory', 'simulation', 'vocabulary' and 'variable' for %s, not %s" %
                                  (self.key, self.origin))
         else:
             logger.error("'Type' must be specified among 'file', 'merge' and 'value' for %s, not %s" % (self.key, self.type))
@@ -457,7 +457,7 @@ class ValueSettings(Settings):
                     value = value[0]
                 value = value.__dict__
                 found = True
-            elif self.origin in ["vocabulary_server", ] and allow_additional_keytypes:
+            elif self.origin in ["vocabulary", ] and allow_additional_keytypes:
                 from dr2xml.vocabulary import get_version
                 value = get_version()
                 found = True
@@ -570,6 +570,8 @@ class ValueSettings(Settings):
                 tmp_rep += "[%s]" % key_value
         elif value_type in ["merge", ]:
             tmp_rep = "merge_lists(%s)" % ", ".join(self.dump_doc_inner(self.keys, format_struct=False))
+        else:
+            raise ValueError("Unexpected value type %s" % value_type)
         if self.format is not False:
             if isinstance(self.format, FunctionSettings):
                 tmp_rep += " formatted with %s" % self.dump_doc_inner(self.format, force_void=force_void, remove_new_lines=True)[0]
@@ -1020,7 +1022,7 @@ class FunctionSettings(Settings):
                 raise ValueError("Could not find function %s from file %s" % (self.keys[0], self.functions_file))
             else:
                 self.func = self.functions_file.__getattribute__(self.keys[0])
-        elif self.origin in ["data_request", "vocabulary_server"]:
+        elif self.origin in ["data_request", "vocabulary"]:
             pass
         else:
             raise ValueError(self.origin)
@@ -1054,10 +1056,10 @@ class FunctionSettings(Settings):
             if keyword in ["type",] and val not in ["func", ]:
                 logger.error("Attribute '%s' of FunctionSettings %s must be 'func' not %s" % (keyword, key, val))
                 raise ValueError("Attribute '%s' of FunctionSettings %s must be 'func' not %s" % (keyword, key, val))
-            elif keyword in ["origin",] and val not in ["functions_file", "self", "vocabulary_server", "data_request"]:
-                logger.error("Attribute '%s' of FunctionSettings %s must be 'functions_file', 'self', 'vocabulary_server' and"
+            elif keyword in ["origin",] and val not in ["functions_file", "self", "vocabulary", "data_request"]:
+                logger.error("Attribute '%s' of FunctionSettings %s must be 'functions_file', 'self', 'vocabulary' and"
                              " 'data_request' not %s" % (keyword, key, val))
-                raise ValueError("Attribute '%s' of FunctionSettings %s must be 'functions_file', 'self', 'vocabulary_server'"
+                raise ValueError("Attribute '%s' of FunctionSettings %s must be 'functions_file', 'self', 'vocabulary'"
                                  " and 'data_request' not %s" % (keyword, key, val))
             elif keyword in ["keys", "options", "format", "template"]:
                 if isinstance(val, list):
@@ -1108,7 +1110,7 @@ class FunctionSettings(Settings):
             if self.origin in ["data_request", ]:
                 from dr2xml.dr_interface import get_dr_object
                 value = get_dr_object("get_data_request")
-            elif self.origin in ["vocabulary_server", ]:
+            elif self.origin in ["vocabulary", ]:
                 from dr2xml.vocabulary import get_vocabulary
                 value = get_vocabulary()
             else:

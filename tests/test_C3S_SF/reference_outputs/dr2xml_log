@@ -36,25 +36,25 @@ processing file current_directory/test_C3S_SF/input/xml/ping_nemo.xml:
 OK current_directory/test_C3S_SF/input/xml/ping_nemo.xml
 processing file current_directory/test_C3S_SF/input/xml/ping_trip.xml:
 OK current_directory/test_C3S_SF/input/xml/ping_trip.xml
-Cannot find psvar dict for SimpleCMORVar hus of type cmor and priority 1 (with standard name specific_humidity and units 1)
+Cannot find psvar dict for SimpleCMORVar hus of type cmor and priority 1 (with standard name specific_humidity, units 1 and official label hus)
 Warning: Cannot complement model levels with psol for table C3S for frequency 12h
-Cannot find psvar dict for SimpleCMORVar ta of type cmor and priority 1 (with standard name air_temperature and units K)
+Cannot find psvar dict for SimpleCMORVar ta of type cmor and priority 1 (with standard name air_temperature, units K and official label ta)
 Warning: Cannot complement model levels with psol for table C3S for frequency 12h
-Cannot find psvar dict for SimpleCMORVar ua of type cmor and priority 1 (with standard name x_wind and units m s-1)
+Cannot find psvar dict for SimpleCMORVar ua of type cmor and priority 1 (with standard name x_wind, units m s-1 and official label ua)
 Warning: Cannot complement model levels with psol for table C3S for frequency 12h
-Cannot find psvar dict for SimpleCMORVar va of type cmor and priority 1 (with standard name y_wind and units m s-1)
+Cannot find psvar dict for SimpleCMORVar va of type cmor and priority 1 (with standard name y_wind, units m s-1 and official label va)
 Warning: Cannot complement model levels with psol for table C3S for frequency 12h
-Cannot find psvar dict for SimpleCMORVar zg of type cmor and priority 1 (with standard name geopotential_height and units m)
+Cannot find psvar dict for SimpleCMORVar zg of type cmor and priority 1 (with standard name geopotential_height, units m and official label zg)
 Warning: Cannot complement model levels with psol for table C3S for frequency 12h
 
 file_def written as current_directory/test_C3S_SF/test_outputs/dr2xml_surfex.xml
 
 Skipped variables (i.e. whose alias is not present in the pingfile):
->>> REALM:           atmos TABLE:             C3S REGION:         default 01/36 ----> lweprs(1)
+>>> REALM:           atmos TABLE:             C3S REGION:         default 01/36 ----> lweprs(1, ['C3S_lweprs'])
 
 
 
->>> REALM:            land TABLE:             C3S REGION:         default 01/36 ----> mrroa(1)
+>>> REALM:            land TABLE:             C3S REGION:         default 01/36 ----> mrroa(1, ['C3S_mrroa'])
 
 
 
@@ -280,7 +280,7 @@ OK current_directory/test_C3S_SF/input/xml/ping_trip.xml
 file_def written as current_directory/test_C3S_SF/test_outputs/dr2xml_nemo.xml
 
 Skipped variables (i.e. whose alias is not present in the pingfile):
->>> REALM:          seaIce TABLE:             C3S REGION:         default 02/03 ----> sic(1) sitemptop(1)
+>>> REALM:          seaIce TABLE:             C3S REGION:         default 02/03 ----> sic(1, ['C3S_sic']) sitemptop(1, ['C3S_sitemptop'])
 
 
 

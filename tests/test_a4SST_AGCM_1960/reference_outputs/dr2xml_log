@@ -85,15 +85,15 @@ OK current_directory/test_a4SST_AGCM_1960/input/xml/ping_trip.xml
 file_def written as current_directory/test_a4SST_AGCM_1960/test_outputs/dr2xml_surfex.xml
 
 Skipped variables (i.e. whose alias is not present in the pingfile):
->>> REALM:         aerosol TABLE:          AERmon REGION:         default 04/14 ----> dms_AERmon(1) mmrnh4_AERmon(1) mmrno3_AERmon(1) mmrsoa_AERmon(1)
+>>> REALM:         aerosol TABLE:          AERmon REGION:         default 04/14 ----> dms_AERmon(1, ['CMIP6_dms']) mmrnh4_AERmon(1, ['CMIP6_mmrnh4']) mmrno3_AERmon(1, ['CMIP6_mmrno3']) mmrsoa_AERmon(1, ['CMIP6_mmrsoa'])
 
 
 
->>> REALM:           atmos TABLE:            Amon REGION:         default 02/56 ----> rtmt_Amon(1) sci_Amon(1)
+>>> REALM:           atmos TABLE:            Amon REGION:         default 02/56 ----> rtmt_Amon(1, ['CMIP6_rtmt']) sci_Amon(1, ['CMIP6_sci'])
 
 
 
->>> REALM:            land TABLE:            Lmon REGION:         default 01/18 ----> pastureFrac_Lmon(1)
+>>> REALM:            land TABLE:            Lmon REGION:         default 01/18 ----> pastureFrac_Lmon(1, ['CMIP6_pastureFrac'])
 
 
 
