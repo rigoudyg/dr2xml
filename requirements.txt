@@ -9,4 +9,4 @@ coverage
 xlsxwriter
 six
 importlib
-esgvoc
+esgvoc==4.1.1
