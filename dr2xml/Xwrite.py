@@ -544,7 +544,7 @@ def write_xios_file_def(filename, svars_per_table, year, dummies, skipped_vars_p
 def write_xios_file_def_for_svars_list(vars_list, hgrid, xml_file_definition, freq, split_freq, split_freq_format,
                                        split_start_offset, split_end_offset, split_last_date, grid_description,
                                        grid_label, grid_resolution, table, skipped_vars_per_table, dummies,
-                                       target_hgrid_id, zgrid_id, source_grid, region, cell_measures, cell_methods,
+                                       target_hgrid_id, zgrid_id, source_grid, region,
                                        actually_written_vars, csv_file_content, attributes=list(), debug=list()):
     logger = get_logger()
     internal_dict = get_settings_values("internal")
@@ -645,7 +645,7 @@ def determine_files_list(svars_per_table, enddate, year, debug):
     svar_tuple = namedtuple("svar_tuple", ["freq", "table", "grid_label", "split_freq", "split_freq_format",
                                            "split_last_date", "split_start_offset", "split_end_offset",
                                            "grid_description", "grid_resolution", "target_hgrid_id", "zgrid_id",
-                                           "source_grid", "region", "cell_measures", "cell_methods"])
+                                           "source_grid", "region"])
     # Loop on values to fill the xml element
     for table in sorted(list(svars_per_table)):
         for region in sorted(list(svars_per_table[table])):
@@ -669,8 +669,7 @@ def determine_files_list(svars_per_table, enddate, year, debug):
                                               grid_description=grid_description, zgrid_id=zgrid_id,
                                               grid_resolution=grid_resolution, target_hgrid_id=target_hgrid_id,
                                               source_grid=source_grid, split_freq=split_freq, table=table,
-                                              region=region, cell_measures=svar.cell_measures,
-                                              cell_methods=svar.cell_methods)].append(svar)
+                                              region=region)].append(svar)
                 else:
                     logger.warning("Duplicate variable %s,%s in table %s and region %s is skipped, preferred is %s" %
                                    (svar.official_label, svar.mipVarLabel, table, region, count[svar.official_label].official_label))
@@ -685,7 +684,7 @@ def determine_files_list(svars_per_table, enddate, year, debug):
                 # Take into account the first one only
                 grouped_vars[found.index(True)].append(var)
             else:
-                grouped_vars[var.label + "_" + elts["table"]].append(var)
+                grouped_vars[var.official_label].append(var)
         for i in sorted(list(grouped_vars)):
             files_list.append(dict(vars_list=grouped_vars[i], **elts))
     return files_list
