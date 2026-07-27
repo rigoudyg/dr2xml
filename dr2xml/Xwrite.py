@@ -7,6 +7,7 @@ XIOS writing files tools.
 
 from __future__ import print_function, division, absolute_import, unicode_literals
 
+import copy
 import os
 # To have ordered dictionaries
 from collections import OrderedDict, defaultdict, namedtuple
@@ -466,9 +467,8 @@ def write_xios_file_def(filename, svars_per_table, year, dummies, skipped_vars_p
     # Add xml_file_definition
     xml_file_definition = DR2XMLElement(tag="file_definition")
     files_list = determine_files_list(svars_per_table, enddate, year, debug)
-    _, hgrid, _, _, _ = internal_dict['grids'][internal_dict["select_grid_choice"]][context]["default"]
     for file_dict in files_list:
-        write_xios_file_def_for_svars_list(hgrid=hgrid, xml_file_definition=xml_file_definition, dummies=dummies,
+        write_xios_file_def_for_svars_list(xml_file_definition=xml_file_definition, dummies=dummies,
                                            skipped_vars_per_table=skipped_vars_per_table,
                                            actually_written_vars=actually_written_vars,
                                            csv_file_content=csv_file_content,
@@ -646,7 +646,7 @@ def determine_files_list(svars_per_table, enddate, year, debug):
     svar_tuple = namedtuple("svar_tuple", ["freq", "table", "grid_label", "split_freq", "split_freq_format",
                                            "split_last_date", "split_start_offset", "split_end_offset",
                                            "grid_description", "grid_resolution", "target_hgrid_id", "zgrid_id",
-                                           "source_grid", "region"])
+                                           "source_grid", "region", "hgrid"])
     write_split_freq = internal_dict["write_split_freq"]
     split_freq_dict = defaultdict(lambda: dict())
     # Loop on values to fill the xml element
@@ -665,15 +665,14 @@ def determine_files_list(svars_per_table, enddate, year, debug):
                         get_split_info(svar, table, enddate, year, debug)
                     split_freq_dict[svar.label][table] = split_freq
                     for grid in svar.grids:
-                        grid_label, grid_description, grid_resolution, target_hgrid_id, zgrid_id, source_grid = \
-                            get_grid_info(svar, grid, table)
-                        files_dict[svar_tuple(freq=freq, split_freq_format=split_freq_format,
-                                              split_last_date=split_last_date, split_start_offset=split_start_offset,
-                                              split_end_offset=split_end_offset, grid_label=grid_label,
-                                              grid_description=grid_description, zgrid_id=zgrid_id,
-                                              grid_resolution=grid_resolution, target_hgrid_id=target_hgrid_id,
-                                              source_grid=source_grid, split_freq=split_freq, table=table,
-                                              region=region)].append(svar)
+                        for (grid_label, target_hgrid_id, zgrid_id, grid_resolution, grid_description, source_grid, hgrid) in get_grid_info(svar, grid, table):
+                            files_dict[svar_tuple(freq=freq, split_freq_format=split_freq_format,
+                                                  split_last_date=split_last_date, split_start_offset=split_start_offset,
+                                                  split_end_offset=split_end_offset, grid_label=grid_label,
+                                                  grid_description=grid_description, zgrid_id=zgrid_id,
+                                                  grid_resolution=grid_resolution, target_hgrid_id=target_hgrid_id,
+                                                  source_grid=source_grid, split_freq=split_freq, table=table,
+                                                  region=region, hgrid=hgrid)].append(svar)
                 else:
                     logger.warning("Duplicate variable %s,%s in table %s and region %s is skipped, preferred is %s" %
                                    (svar.official_label, svar.mipVarLabel, table, region, count[svar.official_label].official_label))
@@ -757,6 +756,7 @@ def get_split_info(sv, table, enddate, year, debug):
 
 
 def get_grid_info(sv, grid, table):
+    rep = list()
     internal_dict = get_settings_values("internal")
     context = internal_dict["context"]
     grid_choice = internal_dict["grid_choice"]
@@ -775,14 +775,12 @@ def get_grid_info(sv, grid, table):
                     raise KeyError("Could not find the grid description for variable %s, grid_choice %s and context %s"
                                    " in entry grids_dev: %s" % (sv.label, grid_choice, context, str(grids_dev)))
                 else:
-                    grid_label, target_hgrid_id, zgrid_id, grid_resolution, grid_description = \
-                        grids_dev[sv.label][grid_choice][context]
+                    rep.append(grids_dev[sv.label][grid_choice][context])
             else:
-                grid_label, target_hgrid_id, zgrid_id, grid_resolution, grid_description = \
-                    internal_grids.get(sv.label, internal_grids["default"])
+                rep.append(internal_grids.get(sv.label, internal_grids["default"]))
         else:
-            grid_label, target_hgrid_id, zgrid_id, grid_resolution, grid_description = \
-                internal_grids.get(sv.label, internal_grids["default"])
+            # grid_label, target_hgrid_id, zgrid_id, grid_resolution, grid_description
+            rep = internal_grids.get(sv.label, internal_grids["default"])
     else:
         if grid in ['cfsites', ]:
             target_hgrid_id = cfsites_domain_id
@@ -791,39 +789,48 @@ def get_grid_info(sv, grid, table):
             target_hgrid_id = internal_dict["grid_prefix"] + grid
             zgrid_id = "TBD : Should create zonal grid for CMIP6 standard grid %s" % grid
         grid_label, grid_resolution, grid_description = DR_grid_to_grid_atts(grid)
+        rep.append((grid_label, target_hgrid_id, zgrid_id, grid_resolution, grid_description))
 
+    new_rep = list()
     if sv.type in ["dev", ]:
-        (source_grid, target_grid) = sv.description.split("|")
-        sv.description = None
-        if target_grid.lower() in ["none", "native"]:
-            target_hgrid_id = ""
-        else:
-            grid_defs = get_config_variable("grid_defs")
-            if target_grid in grid_defs:
-                target_grid_def = grid_defs[target_grid]
-            elif target_grid in context_index:
-                target_grid_def = context_index[target_grid]
+        for (grid_label, target_hgrid_id, zgrid_id, grid_resolution, grid_description) in rep:
+            hgrid = copy.deepcopy(target_hgrid_id)
+            (source_grid, target_grid) = sv.description.split("|")
+            sv.description = None
+            if target_grid.lower() in ["none", "native"]:
+                target_hgrid_id = ""
             else:
-                raise Dr2xmlError("Target horizontal is not defined in grid %s" % target_grid)
-            target_hgrid_id = find_rank_xml_subelement(target_grid_def, tag="domain")
-            if len(target_hgrid_id) == 0:
-                raise KeyError("Could not find any domain in target_grid_def %s" % target_grid_def)
-            else:
-                target_hgrid_id = target_hgrid_id[0]
-            target_hgrid_id = target_grid_def[target_hgrid_id]
-            if "id" in target_hgrid_id.attrib:
-                target_hgrid_id = target_hgrid_id.attrib["id"]
-            else:
-                target_hgrid_id = target_hgrid_id.get_attrib("domain_ref")
+                grid_defs = get_config_variable("grid_defs")
+                if target_grid in grid_defs:
+                    target_grid_def = grid_defs[target_grid]
+                elif target_grid in context_index:
+                    target_grid_def = context_index[target_grid]
+                else:
+                    raise Dr2xmlError("Target horizontal is not defined in grid %s" % target_grid)
+                target_hgrid_id = find_rank_xml_subelement(target_grid_def, tag="domain")
+                if len(target_hgrid_id) == 0:
+                    raise KeyError("Could not find any domain in target_grid_def %s" % target_grid_def)
+                else:
+                    target_hgrid_id = target_hgrid_id[0]
+                target_hgrid_id = target_grid_def[target_hgrid_id]
+                if "id" in target_hgrid_id.attrib:
+                    target_hgrid_id = target_hgrid_id.attrib["id"]
+                else:
+                    target_hgrid_id = target_hgrid_id.get_attrib("domain_ref")
+            new_rep.append((grid_label, target_hgrid_id, zgrid_id, grid_resolution, grid_description, source_grid, hgrid))
     else:
-        source_grid = None
+        new_rep = [(grid_label, target_hgrid_id, zgrid_id, grid_resolution, grid_description, None, target_hgrid_id)
+                   for (grid_label, target_hgrid_id, zgrid_id, grid_resolution, grid_description) in rep]
 
     if internal_dict["update_grid_label"]:
         if table.endswith("Z"):  # e.g. 'AERmonZ','EmonZ', 'EdayZ'
-            grid_label += "z"
+            new_rep = [(grid_label + "z", target_hgrid_id, zgrid_id, grid_resolution, grid_description, source_grid, hgrid)
+                       for (grid_label, target_hgrid_id, zgrid_id, grid_resolution, grid_description, source_grid, hgrid) in new_rep]
 
         if "Ant" in table:
-            grid_label += "a"
+            new_rep = [(grid_label + "a", target_hgrid_id, zgrid_id, grid_resolution, grid_description, source_grid, hgrid)
+                       for (grid_label, target_hgrid_id, zgrid_id, grid_resolution, grid_description, source_grid, hgrid) in new_rep]
         if "Gre" in table:
-            grid_label += "g"
-    return grid_label, grid_description, grid_resolution, target_hgrid_id, zgrid_id, source_grid
+            new_rep = [(grid_label + "g", target_hgrid_id, zgrid_id, grid_resolution, grid_description, source_grid, hgrid)
+                       for (grid_label, target_hgrid_id, zgrid_id, grid_resolution, grid_description, source_grid, hgrid) in new_rep]
+    return new_rep

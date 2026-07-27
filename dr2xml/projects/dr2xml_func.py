@@ -93,15 +93,15 @@ def format_grids(grids, variables_per_grid_type):
 			logger.error("Issues in grids definition for the following (resolution, realm) couples:\n%s" % issues)
 			raise ValueError("Issues in grids definition for the following (resolution, realm) couples:\n%s" % issues)
 		else:
-			rep = defaultdict(lambda: defaultdict(dict))
+			rep = defaultdict(lambda: defaultdict(lambda: defaultdict(list)))
 			for (resolution, dict_resolution) in grids.items():
 				for (realm, dict_realm) in dict_resolution.items():
-					rep[resolution][realm]["default"] = copy.deepcopy(grids[resolution][realm]["default"])
+					rep[resolution][realm]["default"] = [copy.deepcopy(grids[resolution][realm]["default"]), ]
 					for (grid_type, grid_type_list) in dict_realm.items():
 						grid_def = copy.deepcopy(grids[resolution][realm][grid_type])
 						if grid_type in grids[resolution][realm]:
 							for var in variables_per_grid_type.get(resolution, dict()).get(realm, dict()).get(grid_type, list()):
-								rep[resolution][realm][var] = grid_def
+								rep[resolution][realm][var].append(grid_def)
 						else:
 							logger.warning("Could not find grid_type %s for resolution %s and realm %s, use default." %
 							               (grid_type, resolution, realm))
