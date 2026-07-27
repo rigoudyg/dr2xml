@@ -7,6 +7,7 @@ XIOS writing files tools.
 
 from __future__ import print_function, division, absolute_import, unicode_literals
 
+import os
 # To have ordered dictionaries
 from collections import OrderedDict, defaultdict, namedtuple
 
@@ -646,6 +647,8 @@ def determine_files_list(svars_per_table, enddate, year, debug):
                                            "split_last_date", "split_start_offset", "split_end_offset",
                                            "grid_description", "grid_resolution", "target_hgrid_id", "zgrid_id",
                                            "source_grid", "region"])
+    write_split_freq = internal_dict["write_split_freq"]
+    split_freq_dict = defaultdict(lambda: dict())
     # Loop on values to fill the xml element
     for table in sorted(list(svars_per_table)):
         for region in sorted(list(svars_per_table[table])):
@@ -660,6 +663,7 @@ def determine_files_list(svars_per_table, enddate, year, debug):
                     freq = longest_possible_period(cmip6_freq_to_xios_freq(svar.frequency, table), too_long_periods)
                     split_freq_format, split_last_date, split_start_offset, split_end_offset, split_freq = \
                         get_split_info(svar, table, enddate, year, debug)
+                    split_freq_dict[svar.label][table] = split_freq
                     for grid in svar.grids:
                         grid_label, grid_description, grid_resolution, target_hgrid_id, zgrid_id, source_grid = \
                             get_grid_info(svar, grid, table)
@@ -673,6 +677,11 @@ def determine_files_list(svars_per_table, enddate, year, debug):
                 else:
                     logger.warning("Duplicate variable %s,%s in table %s and region %s is skipped, preferred is %s" %
                                    (svar.official_label, svar.mipVarLabel, table, region, count[svar.official_label].official_label))
+    if write_split_freq:
+        with open(write_split_freq, "a") as fic:
+            fic.write(os.linesep.join(sorted(["{: <25} {: <25} {}".format(var, table, freq)
+                                              for var in split_freq_dict
+                                              for (table, freq) in split_freq_dict[var].items()])))
     files_list = list()
     for elts in sorted(list(files_dict), key=lambda x: str(x)):
         vars_list = files_dict[elts]

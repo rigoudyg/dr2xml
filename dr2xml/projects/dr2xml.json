@@ -2283,6 +2283,18 @@
         }
       ]
     },
+    "write_split_freq": {
+      "help": "Should a split_freq file be generated with values computed by dr2xml?",
+      "values": [
+        {
+          "type": "value",
+          "origin": "laboratory",
+          "keys": ["write_split_freq"]
+        },
+        false
+      ],
+      "forbidden_values": [null, "None", ""]
+    },
     "xios_version": {
       "help": "Version of XIOS used.",
       "values": [
