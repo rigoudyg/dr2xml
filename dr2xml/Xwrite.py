@@ -681,7 +681,7 @@ def determine_files_list(svars_per_table, enddate, year, debug):
         with open(write_split_freq, "a") as fic:
             fic.write(os.linesep.join(sorted(["{: <25} {: <25} {}".format(var, table, freq)
                                               for var in split_freq_dict
-                                              for (table, freq) in split_freq_dict[var].items()])))
+                                              for (table, freq) in split_freq_dict[var].items()] + [""])))
     files_list = list()
     for elts in sorted(list(files_dict), key=lambda x: str(x)):
         vars_list = files_dict[elts]
