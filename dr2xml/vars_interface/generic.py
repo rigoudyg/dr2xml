@@ -26,7 +26,7 @@ tcmName2tcmValue = {"time-mean": "time: mean", "time-intv": "time: mean", "time-
 
 # SS : le jeu plev7c est un jeu de couches du simulateur ISCCP - pas d'interpolation
 # multi_plev_suffixes=set(["10","19","23","27","39","3","3h","4","7c","7h","8","12"])
-multi_plev_suffixes = set(["10", "19", "23", "27", "39", "3", "3h", "4", "7h", "8", "12"])
+multi_plev_suffixes = set(["10", "19", "23", "27", "39", "3", "3h", "4", "7h", "8", "12", "6"])
 
 # SS : les niveaux 220, 560 et 840 sont des couches du simulateur ISCCP - pas d'interpolation
 # single_plev_suffixes=set(["1000","200","220","500","560","700","840","850","100"])
