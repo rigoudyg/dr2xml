@@ -294,6 +294,10 @@ class SimpleCMORVar(SimpleCMORVarBasic):
         product_of_other_dims = 1
         dimensions = str(input_var.dimensions).split(", ")
         dimensions = [dim for dim in dimensions if "time" not in dim]
+        if "site" in dimensions:
+            grids = ["cfsites", ]
+        else:
+            grids = ["", ]
         for sdim in dimensions:
             sdim = SimpleDim.get_from_dr(data_request.data_request.find_element("coordinates_and_dimensions", sdim), **kwargs)
             sdims[sdim.name] = sdim
@@ -334,7 +338,8 @@ class SimpleCMORVar(SimpleCMORVarBasic):
                    id=input_var.id,
                    cmvar=input_var,
                    Priority=data_request.data_request.find_priority_per_variable(input_var),
-                   region=input_var.region
+                   region=input_var.region,
+                   grids=grids
                    )
 
 
