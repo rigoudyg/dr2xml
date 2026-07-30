@@ -390,6 +390,7 @@ def highest_rank(svar):
 
 def find_alias(sv, skipped_vars_per_table, debug=list()):
     internal_dict = get_settings_values("internal")
+    pingvars = get_config_variable("pingvars")
     logger = get_logger()
     # We use a simple convention for variable names in ping files :
     if sv.type in ['perso', 'dev']:
@@ -412,7 +413,7 @@ def find_alias(sv, skipped_vars_per_table, debug=list()):
         alias = split_alias[0]
         alias_ping, missed = ping_alias(sv)
 
-    if alias_ping not in get_config_variable("pingvars") and sv.type not in ["dev", "perso"]:
+    if alias_ping not in pingvars and sv.type not in ["dev", "perso"]:
         table = sv.mipTable
         realm = " ".join(sv.modeling_realm)
         if realm not in skipped_vars_per_table:
