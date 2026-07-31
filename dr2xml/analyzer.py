@@ -512,19 +512,9 @@ def cellmethod2area(method):
             return None
 
 
-DR_grid_to_grid_atts_dict = {
-    "cfsites": ("gn", "100 km", "data sampled in model native grid by nearest neighbour method "),
-    "1deg": ("gr1", "1x1 degree", "data regridded to a CMIP6 standard 1x1 degree latxlon grid from the native grid"),
-    "2deg": ("gr2", "2x2 degree", "data regridded to a CMIP6 standard 2x2 degree latxlon grid from the native grid"),
-    "100km": ("gr3", "100 km", "data regridded to a CMIP6 standard 100 km resol grid from the native grid"),
-    "50km": ("gr4", "50 km", "data regridded to a CMIP6 standard 50 km resol grid from the native grid"),
-    "25km": ("gr5", "25 km", "data regridded to a CMIP6 standard 25 km resol grid from the native grid"),
-    "default": ["grx", "?x? degree", "grid has no description - please fix DR_grid_to_grid_atts for grid %s"]
-}
-
-
 def DR_grid_to_grid_atts(grid):
     """ Returns label, resolution, description for a DR grid name"""
+    DR_grid_to_grid_atts_dict = get_settings_values("internal")["grids_default_DR"]
     if grid in DR_grid_to_grid_atts_dict:
         return DR_grid_to_grid_atts_dict[grid]
     else:

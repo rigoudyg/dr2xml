@@ -1,6 +1,28 @@
 {
   "parent_project_settings": "dr2xml",
   "functions_file": "basics_func.py",
+  "internal": {
+    "grids_default_DR": {
+      "help":"DR default grids",
+      "fatal": true,
+      "values": [
+        {
+          "type": "value",
+          "origin": "internal",
+          "keys": ["grids_default_DR"]
+        },
+        {
+          "cfsites": ["gn", "100 km", "data sampled in model native grid by nearest neighbour method "],
+          "1deg": ["gr1", "1x1 degree", "data regridded to a CMIP6 standard 1x1 degree latxlon grid from the native grid"],
+          "2deg": ["gr2", "2x2 degree", "data regridded to a CMIP6 standard 2x2 degree latxlon grid from the native grid"],
+          "100km": ["gr3", "100 km", "data regridded to a CMIP6 standard 100 km resol grid from the native grid"],
+          "50km": ["gr4", "50 km", "data regridded to a CMIP6 standard 50 km resol grid from the native grid"],
+          "25km": ["gr5", "25 km", "data regridded to a CMIP6 standard 25 km resol grid from the native grid"],
+          "default": ["grx", "?x? degree", "grid has no description - please fix DR_grid_to_grid_atts for grid %s"]
+        }
+      ]
+    }
+  },
   "common": {
     "activity_id": {
       "help": "MIP(s) name(s).",

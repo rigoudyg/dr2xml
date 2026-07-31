@@ -754,6 +754,17 @@
       ],
       "target_type": "dict"
     },
+    "grids_default_DR": {
+      "help":"DR default grids",
+      "fatal": true,
+      "values": [
+        {
+          "type": "value",
+          "origin": "internal",
+          "keys": ["grids_default_DR"]
+        }
+      ]
+    },
     "grids": {
       "help": "Grids : per model resolution and per context :\\n- CMIP6 qualifier (i.e. 'gn' or 'gr') for the main grid chosen (because you  may choose has main production grid a regular one, when the native grid is e.g. unstructured)\\n- Xios id for the production grid (if it is not the native grid)\\n- Xios id for the latitude axis used for zonal means (mist match latitudes for grid above)\\n- resolution of the production grid (using CMIP6 conventions)\\n- grid description",
       "fatal": true,
