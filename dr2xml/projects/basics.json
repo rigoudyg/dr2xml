@@ -8,7 +8,7 @@
       "values": [
         {
           "type": "value",
-          "origin": "internal",
+          "origin": "laboratory",
           "keys": ["grids_default_DR"]
         },
         {
