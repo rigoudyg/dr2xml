@@ -36,18 +36,26 @@ def setup_esgvoc_config(config_name, project, config_file="vocabulary.json"):
 
         def _install_and_activate(fetcher, state, project_id, version):
             """Télécharge si nécessaire, puis active la version."""
-            snapshot = fetcher.get_snapshot(project_id, version=version)
-            target = UserState.db_path(project_id, snapshot.version)
+            try:
+                snapshot = fetcher.get_snapshot(project_id, version=version)
+                version = snapshot.version
+            except Exception:
+                snapshot = None
+            target = UserState.db_path(project_id, version)
 
             if not target.exists():
                 target.parent.mkdir(parents=True, exist_ok=True)
                 fetcher.download_db(snapshot, target)
 
+            dict_activate = dict(
+                source="registry"
+            )
+            if snapshot is not None:
+                dict_activate["checksum"] = snapshot.checksum_sha256
             state.set_active(
                 project_id,
-                snapshot.version,
-                source="registry",
-                checksum=snapshot.checksum_sha256,
+                version,
+                **dict_activate
             )
 
         _install_and_activate(fetcher, state, "universe", config_data.get("universe_version", "latest"))
