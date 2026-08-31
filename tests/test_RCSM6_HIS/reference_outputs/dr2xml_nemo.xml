@@ -729,200 +729,6 @@
 				<variable name="cell_measures" type="string"> area: areacello </variable>
 			</field>
 		</file>
-		<file id="uo_Noneday_gn" name="IOXDIRuo_MED-06_CNRM-ESM2-1_historical_r1i1p1f2_CNRM-RCSM6_V1_day_%start_date%-%end_date%" output_freq="1d" append="true" output_level="10" compression_level="0" split_freq="1mo" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="1949-09-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14103/%uuid%" convention_str="CF-1.7 CMIP-6.2">
-			<variable name="activity_id" type="string"> CORDEX </variable>
-			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
-			<variable name="dr2xml_version" type="string"> current_version </variable>
-			<variable name="experiment_id" type="string"> historical </variable>
-			<variable name="frequency" type="string"> day </variable>
-			<variable name="grid" type="string"> native ocean tri-polar grid </variable>
-			<variable name="grid_label" type="string"> gn </variable>
-			<variable name="nominal_resolution" type="string"> 8 km </variable>
-			<variable name="history" type="string"> none </variable>
-			<variable name="institute_id" type="string"> CNRM </variable>
-			<variable name="CORDEX_domain" type="string"> MED-06 </variable>
-			<variable name="driving_model_id" type="string"> CNRM-ESM2-1 </variable>
-			<variable name="driving_model_ensemble_member" type="string"> r1i1p1f2 </variable>
-			<variable name="driving_experiment_name" type="string"> historical </variable>
-			<variable name="driving_experiment" type="string"> CNRM-ESM2-1, historical, r1i1p1f2 </variable>
-			<variable name="institution" type="string"> CNRM (Centre National de Recherches Meteorologiques, Toulouse 31057, France) </variable>
-			<variable name="product" type="string"> output </variable>
-			<variable name="realization_index" type="int"> 1 </variable>
-			<variable name="realm" type="string"> ocean </variable>
-			<variable name="references" type="string"> http://www.umr-cnrm.fr/ </variable>
-			<variable name="project_id" type="string"> CORDEX </variable>
-			<variable name="model_id" type="string"> CNRM-RCSM6 </variable>
-			<variable name="table_id" type="string"> Noneday </variable>
-			<variable name="title" type="string"> CNRM-RCSM6 model output prepared for CMIP6 and CORDEX / historical simulation </variable>
-			<variable name="variable_id" type="string"> uo </variable>
-			<variable name="EXPID" type="string"> RCSM6.1_HIS_SP0 </variable>
-			<variable name="xios_commit" type="string"> 1442-shuffle </variable>
-			<field field_ref="CMIP6_uo_average" name="uo" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="time: mean" cell_methods_mode="overwrite" operation="average" freq_op="1d">
-				<variable name="standard_name" type="string"> sea_water_x_velocity </variable>
-				<variable name="description" type="string"> Prognostic x-ward velocity component resolved by the model. </variable>
-				<variable name="long_name" type="string"> Sea Water X Velocity </variable>
-				<variable name="history" type="string"> none </variable>
-				<variable name="units" type="string"> m s-1 </variable>
-				<variable name="cell_methods" type="string"> time: mean </variable>
-			</field>
-		</file>
-		<file id="vo_Noneday_gn" name="IOXDIRvo_MED-06_CNRM-ESM2-1_historical_r1i1p1f2_CNRM-RCSM6_V1_day_%start_date%-%end_date%" output_freq="1d" append="true" output_level="10" compression_level="0" split_freq="1mo" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="1949-09-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14103/%uuid%" convention_str="CF-1.7 CMIP-6.2">
-			<variable name="activity_id" type="string"> CORDEX </variable>
-			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
-			<variable name="dr2xml_version" type="string"> current_version </variable>
-			<variable name="experiment_id" type="string"> historical </variable>
-			<variable name="frequency" type="string"> day </variable>
-			<variable name="grid" type="string"> native ocean tri-polar grid </variable>
-			<variable name="grid_label" type="string"> gn </variable>
-			<variable name="nominal_resolution" type="string"> 8 km </variable>
-			<variable name="history" type="string"> none </variable>
-			<variable name="institute_id" type="string"> CNRM </variable>
-			<variable name="CORDEX_domain" type="string"> MED-06 </variable>
-			<variable name="driving_model_id" type="string"> CNRM-ESM2-1 </variable>
-			<variable name="driving_model_ensemble_member" type="string"> r1i1p1f2 </variable>
-			<variable name="driving_experiment_name" type="string"> historical </variable>
-			<variable name="driving_experiment" type="string"> CNRM-ESM2-1, historical, r1i1p1f2 </variable>
-			<variable name="institution" type="string"> CNRM (Centre National de Recherches Meteorologiques, Toulouse 31057, France) </variable>
-			<variable name="product" type="string"> output </variable>
-			<variable name="realization_index" type="int"> 1 </variable>
-			<variable name="realm" type="string"> ocean </variable>
-			<variable name="references" type="string"> http://www.umr-cnrm.fr/ </variable>
-			<variable name="project_id" type="string"> CORDEX </variable>
-			<variable name="model_id" type="string"> CNRM-RCSM6 </variable>
-			<variable name="table_id" type="string"> Noneday </variable>
-			<variable name="title" type="string"> CNRM-RCSM6 model output prepared for CMIP6 and CORDEX / historical simulation </variable>
-			<variable name="variable_id" type="string"> vo </variable>
-			<variable name="EXPID" type="string"> RCSM6.1_HIS_SP0 </variable>
-			<variable name="xios_commit" type="string"> 1442-shuffle </variable>
-			<field field_ref="CMIP6_vo_average" name="vo" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="time: mean" cell_methods_mode="overwrite" operation="average" freq_op="1d">
-				<variable name="standard_name" type="string"> sea_water_y_velocity </variable>
-				<variable name="description" type="string"> Prognostic y-ward velocity component resolved by the model. </variable>
-				<variable name="long_name" type="string"> Sea Water Y Velocity </variable>
-				<variable name="history" type="string"> none </variable>
-				<variable name="units" type="string"> m s-1 </variable>
-				<variable name="cell_methods" type="string"> time: mean </variable>
-			</field>
-		</file>
-		<file id="wo_Noneday_gn" name="IOXDIRwo_MED-06_CNRM-ESM2-1_historical_r1i1p1f2_CNRM-RCSM6_V1_day_%start_date%-%end_date%" output_freq="1d" append="true" output_level="10" compression_level="0" split_freq="1mo" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="1949-09-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14103/%uuid%" convention_str="CF-1.7 CMIP-6.2">
-			<variable name="activity_id" type="string"> CORDEX </variable>
-			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
-			<variable name="dr2xml_version" type="string"> current_version </variable>
-			<variable name="experiment_id" type="string"> historical </variable>
-			<variable name="frequency" type="string"> day </variable>
-			<variable name="grid" type="string"> native ocean tri-polar grid </variable>
-			<variable name="grid_label" type="string"> gn </variable>
-			<variable name="nominal_resolution" type="string"> 8 km </variable>
-			<variable name="history" type="string"> none </variable>
-			<variable name="institute_id" type="string"> CNRM </variable>
-			<variable name="CORDEX_domain" type="string"> MED-06 </variable>
-			<variable name="driving_model_id" type="string"> CNRM-ESM2-1 </variable>
-			<variable name="driving_model_ensemble_member" type="string"> r1i1p1f2 </variable>
-			<variable name="driving_experiment_name" type="string"> historical </variable>
-			<variable name="driving_experiment" type="string"> CNRM-ESM2-1, historical, r1i1p1f2 </variable>
-			<variable name="institution" type="string"> CNRM (Centre National de Recherches Meteorologiques, Toulouse 31057, France) </variable>
-			<variable name="product" type="string"> output </variable>
-			<variable name="realization_index" type="int"> 1 </variable>
-			<variable name="realm" type="string"> ocean </variable>
-			<variable name="references" type="string"> http://www.umr-cnrm.fr/ </variable>
-			<variable name="project_id" type="string"> CORDEX </variable>
-			<variable name="model_id" type="string"> CNRM-RCSM6 </variable>
-			<variable name="table_id" type="string"> Noneday </variable>
-			<variable name="title" type="string"> CNRM-RCSM6 model output prepared for CMIP6 and CORDEX / historical simulation </variable>
-			<variable name="variable_id" type="string"> wo </variable>
-			<variable name="EXPID" type="string"> RCSM6.1_HIS_SP0 </variable>
-			<variable name="xios_commit" type="string"> 1442-shuffle </variable>
-			<field field_ref="CMIP6_wo_average" name="wo" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="time: mean" cell_methods_mode="overwrite" operation="average">
-				<variable name="standard_name" type="string"> upward_sea_water_velocity </variable>
-				<variable name="description" type="string"> Prognostic z-ward velocity component resolved by the model. </variable>
-				<variable name="long_name" type="string"> Sea Water Z Velocity </variable>
-				<variable name="history" type="string"> none </variable>
-				<variable name="units" type="string"> m s-1 </variable>
-				<variable name="cell_methods" type="string"> time: mean </variable>
-			</field>
-		</file>
-		<file id="so_Noneday_gn" name="IOXDIRso_MED-06_CNRM-ESM2-1_historical_r1i1p1f2_CNRM-RCSM6_V1_day_%start_date%-%end_date%" output_freq="1d" append="true" output_level="10" compression_level="0" split_freq="1mo" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="1949-09-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14103/%uuid%" convention_str="CF-1.7 CMIP-6.2">
-			<variable name="activity_id" type="string"> CORDEX </variable>
-			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
-			<variable name="dr2xml_version" type="string"> current_version </variable>
-			<variable name="experiment_id" type="string"> historical </variable>
-			<variable name="external_variables" type="string"> areacello volcello </variable>
-			<variable name="frequency" type="string"> day </variable>
-			<variable name="grid" type="string"> native ocean tri-polar grid </variable>
-			<variable name="grid_label" type="string"> gn </variable>
-			<variable name="nominal_resolution" type="string"> 8 km </variable>
-			<variable name="history" type="string"> none </variable>
-			<variable name="institute_id" type="string"> CNRM </variable>
-			<variable name="CORDEX_domain" type="string"> MED-06 </variable>
-			<variable name="driving_model_id" type="string"> CNRM-ESM2-1 </variable>
-			<variable name="driving_model_ensemble_member" type="string"> r1i1p1f2 </variable>
-			<variable name="driving_experiment_name" type="string"> historical </variable>
-			<variable name="driving_experiment" type="string"> CNRM-ESM2-1, historical, r1i1p1f2 </variable>
-			<variable name="institution" type="string"> CNRM (Centre National de Recherches Meteorologiques, Toulouse 31057, France) </variable>
-			<variable name="product" type="string"> output </variable>
-			<variable name="realization_index" type="int"> 1 </variable>
-			<variable name="realm" type="string"> ocean </variable>
-			<variable name="references" type="string"> http://www.umr-cnrm.fr/ </variable>
-			<variable name="project_id" type="string"> CORDEX </variable>
-			<variable name="model_id" type="string"> CNRM-RCSM6 </variable>
-			<variable name="table_id" type="string"> Noneday </variable>
-			<variable name="title" type="string"> CNRM-RCSM6 model output prepared for CMIP6 and CORDEX / historical simulation </variable>
-			<variable name="variable_id" type="string"> so </variable>
-			<variable name="EXPID" type="string"> RCSM6.1_HIS_SP0 </variable>
-			<variable name="xios_commit" type="string"> 1442-shuffle </variable>
-			<field field_ref="CMIP6_so_average" name="so" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="area: mean where sea time: mean" cell_methods_mode="overwrite" operation="average" freq_op="1d">
-				<variable name="standard_name" type="string"> sea_water_salinity </variable>
-				<variable name="description" type="string"> Sea Water Salinity </variable>
-				<variable name="long_name" type="string"> Sea Water Salinity </variable>
-				<variable name="history" type="string"> none </variable>
-				<variable name="units" type="string"> 0.001 </variable>
-				<variable name="cell_methods" type="string"> area: mean where sea time: mean </variable>
-				<variable name="cell_measures" type="string"> area: areacello volume: volcello </variable>
-			</field>
-		</file>
-		<file id="thetao_Noneday_gn" name="IOXDIRthetao_MED-06_CNRM-ESM2-1_historical_r1i1p1f2_CNRM-RCSM6_V1_day_%start_date%-%end_date%" output_freq="1d" append="true" output_level="10" compression_level="0" split_freq="1mo" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="1949-09-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14103/%uuid%" convention_str="CF-1.7 CMIP-6.2">
-			<variable name="activity_id" type="string"> CORDEX </variable>
-			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
-			<variable name="dr2xml_version" type="string"> current_version </variable>
-			<variable name="experiment_id" type="string"> historical </variable>
-			<variable name="external_variables" type="string"> areacello volcello </variable>
-			<variable name="frequency" type="string"> day </variable>
-			<variable name="grid" type="string"> native ocean tri-polar grid </variable>
-			<variable name="grid_label" type="string"> gn </variable>
-			<variable name="nominal_resolution" type="string"> 8 km </variable>
-			<variable name="history" type="string"> none </variable>
-			<variable name="institute_id" type="string"> CNRM </variable>
-			<variable name="CORDEX_domain" type="string"> MED-06 </variable>
-			<variable name="driving_model_id" type="string"> CNRM-ESM2-1 </variable>
-			<variable name="driving_model_ensemble_member" type="string"> r1i1p1f2 </variable>
-			<variable name="driving_experiment_name" type="string"> historical </variable>
-			<variable name="driving_experiment" type="string"> CNRM-ESM2-1, historical, r1i1p1f2 </variable>
-			<variable name="institution" type="string"> CNRM (Centre National de Recherches Meteorologiques, Toulouse 31057, France) </variable>
-			<variable name="product" type="string"> output </variable>
-			<variable name="realization_index" type="int"> 1 </variable>
-			<variable name="realm" type="string"> ocean </variable>
-			<variable name="references" type="string"> http://www.umr-cnrm.fr/ </variable>
-			<variable name="project_id" type="string"> CORDEX </variable>
-			<variable name="model_id" type="string"> CNRM-RCSM6 </variable>
-			<variable name="table_id" type="string"> Noneday </variable>
-			<variable name="title" type="string"> CNRM-RCSM6 model output prepared for CMIP6 and CORDEX / historical simulation </variable>
-			<variable name="variable_id" type="string"> thetao </variable>
-			<variable name="EXPID" type="string"> RCSM6.1_HIS_SP0 </variable>
-			<variable name="xios_commit" type="string"> 1442-shuffle </variable>
-			<field field_ref="CMIP6_thetao_average" name="thetao" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="area: mean where sea time: mean" cell_methods_mode="overwrite" operation="average" freq_op="1d">
-				<variable name="standard_name" type="string"> sea_water_potential_temperature </variable>
-				<variable name="description" type="string"> Diagnostic should be contributed even for models using conservative temperature as prognostic field. </variable>
-				<variable name="long_name" type="string"> Sea Water Potential Temperature </variable>
-				<variable name="history" type="string"> none </variable>
-				<variable name="units" type="string"> degC </variable>
-				<variable name="cell_methods" type="string"> area: mean where sea time: mean </variable>
-				<variable name="cell_measures" type="string"> area: areacello volume: volcello </variable>
-			</field>
-		</file>
 		<file id="friver_Noneday_gn" name="IOXDIRfriver_MED-06_CNRM-ESM2-1_historical_r1i1p1f2_CNRM-RCSM6_V1_day_%start_date%-%end_date%" output_freq="1d" append="true" output_level="10" compression_level="0" split_freq="1mo" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="1949-09-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14103/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
@@ -1083,6 +889,46 @@
 				<variable name="cell_measures" type="string"> area: areacello </variable>
 			</field>
 		</file>
+		<file id="so_Noneday_gn" name="IOXDIRso_MED-06_CNRM-ESM2-1_historical_r1i1p1f2_CNRM-RCSM6_V1_day_%start_date%-%end_date%" output_freq="1d" append="true" output_level="10" compression_level="0" split_freq="1mo" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="1949-09-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14103/%uuid%" convention_str="CF-1.7 CMIP-6.2">
+			<variable name="activity_id" type="string"> CORDEX </variable>
+			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
+			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
+			<variable name="experiment_id" type="string"> historical </variable>
+			<variable name="external_variables" type="string"> areacello volcello </variable>
+			<variable name="frequency" type="string"> day </variable>
+			<variable name="grid" type="string"> native ocean tri-polar grid </variable>
+			<variable name="grid_label" type="string"> gn </variable>
+			<variable name="nominal_resolution" type="string"> 8 km </variable>
+			<variable name="history" type="string"> none </variable>
+			<variable name="institute_id" type="string"> CNRM </variable>
+			<variable name="CORDEX_domain" type="string"> MED-06 </variable>
+			<variable name="driving_model_id" type="string"> CNRM-ESM2-1 </variable>
+			<variable name="driving_model_ensemble_member" type="string"> r1i1p1f2 </variable>
+			<variable name="driving_experiment_name" type="string"> historical </variable>
+			<variable name="driving_experiment" type="string"> CNRM-ESM2-1, historical, r1i1p1f2 </variable>
+			<variable name="institution" type="string"> CNRM (Centre National de Recherches Meteorologiques, Toulouse 31057, France) </variable>
+			<variable name="product" type="string"> output </variable>
+			<variable name="realization_index" type="int"> 1 </variable>
+			<variable name="realm" type="string"> ocean </variable>
+			<variable name="references" type="string"> http://www.umr-cnrm.fr/ </variable>
+			<variable name="project_id" type="string"> CORDEX </variable>
+			<variable name="model_id" type="string"> CNRM-RCSM6 </variable>
+			<variable name="table_id" type="string"> Noneday </variable>
+			<variable name="title" type="string"> CNRM-RCSM6 model output prepared for CMIP6 and CORDEX / historical simulation </variable>
+			<variable name="variable_id" type="string"> so </variable>
+			<variable name="EXPID" type="string"> RCSM6.1_HIS_SP0 </variable>
+			<variable name="xios_commit" type="string"> 1442-shuffle </variable>
+			<field field_ref="CMIP6_so_average" name="so" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="area: mean where sea time: mean" cell_methods_mode="overwrite" operation="average" freq_op="1d">
+				<variable name="standard_name" type="string"> sea_water_salinity </variable>
+				<variable name="description" type="string"> Sea Water Salinity </variable>
+				<variable name="long_name" type="string"> Sea Water Salinity </variable>
+				<variable name="history" type="string"> none </variable>
+				<variable name="units" type="string"> 0.001 </variable>
+				<variable name="cell_methods" type="string"> area: mean where sea time: mean </variable>
+				<variable name="cell_measures" type="string"> area: areacello volume: volcello </variable>
+			</field>
+		</file>
 		<file id="sos_Noneday_gn" name="IOXDIRsos_MED-06_CNRM-ESM2-1_historical_r1i1p1f2_CNRM-RCSM6_V1_day_%start_date%-%end_date%" output_freq="1d" append="true" output_level="10" compression_level="0" split_freq="1mo" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="1949-09-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14103/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
@@ -1123,6 +969,46 @@
 				<variable name="cell_measures" type="string"> area: areacello </variable>
 			</field>
 		</file>
+		<file id="thetao_Noneday_gn" name="IOXDIRthetao_MED-06_CNRM-ESM2-1_historical_r1i1p1f2_CNRM-RCSM6_V1_day_%start_date%-%end_date%" output_freq="1d" append="true" output_level="10" compression_level="0" split_freq="1mo" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="1949-09-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14103/%uuid%" convention_str="CF-1.7 CMIP-6.2">
+			<variable name="activity_id" type="string"> CORDEX </variable>
+			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
+			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
+			<variable name="experiment_id" type="string"> historical </variable>
+			<variable name="external_variables" type="string"> areacello volcello </variable>
+			<variable name="frequency" type="string"> day </variable>
+			<variable name="grid" type="string"> native ocean tri-polar grid </variable>
+			<variable name="grid_label" type="string"> gn </variable>
+			<variable name="nominal_resolution" type="string"> 8 km </variable>
+			<variable name="history" type="string"> none </variable>
+			<variable name="institute_id" type="string"> CNRM </variable>
+			<variable name="CORDEX_domain" type="string"> MED-06 </variable>
+			<variable name="driving_model_id" type="string"> CNRM-ESM2-1 </variable>
+			<variable name="driving_model_ensemble_member" type="string"> r1i1p1f2 </variable>
+			<variable name="driving_experiment_name" type="string"> historical </variable>
+			<variable name="driving_experiment" type="string"> CNRM-ESM2-1, historical, r1i1p1f2 </variable>
+			<variable name="institution" type="string"> CNRM (Centre National de Recherches Meteorologiques, Toulouse 31057, France) </variable>
+			<variable name="product" type="string"> output </variable>
+			<variable name="realization_index" type="int"> 1 </variable>
+			<variable name="realm" type="string"> ocean </variable>
+			<variable name="references" type="string"> http://www.umr-cnrm.fr/ </variable>
+			<variable name="project_id" type="string"> CORDEX </variable>
+			<variable name="model_id" type="string"> CNRM-RCSM6 </variable>
+			<variable name="table_id" type="string"> Noneday </variable>
+			<variable name="title" type="string"> CNRM-RCSM6 model output prepared for CMIP6 and CORDEX / historical simulation </variable>
+			<variable name="variable_id" type="string"> thetao </variable>
+			<variable name="EXPID" type="string"> RCSM6.1_HIS_SP0 </variable>
+			<variable name="xios_commit" type="string"> 1442-shuffle </variable>
+			<field field_ref="CMIP6_thetao_average" name="thetao" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="area: mean where sea time: mean" cell_methods_mode="overwrite" operation="average" freq_op="1d">
+				<variable name="standard_name" type="string"> sea_water_potential_temperature </variable>
+				<variable name="description" type="string"> Diagnostic should be contributed even for models using conservative temperature as prognostic field. </variable>
+				<variable name="long_name" type="string"> Sea Water Potential Temperature </variable>
+				<variable name="history" type="string"> none </variable>
+				<variable name="units" type="string"> degC </variable>
+				<variable name="cell_methods" type="string"> area: mean where sea time: mean </variable>
+				<variable name="cell_measures" type="string"> area: areacello volume: volcello </variable>
+			</field>
+		</file>
 		<file id="tos_Noneday_gn" name="IOXDIRtos_MED-06_CNRM-ESM2-1_historical_r1i1p1f2_CNRM-RCSM6_V1_day_%start_date%-%end_date%" output_freq="1d" append="true" output_level="10" compression_level="0" split_freq="1mo" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="1949-09-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14103/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
@@ -1161,6 +1047,82 @@
 				<variable name="units" type="string"> degC </variable>
 				<variable name="cell_methods" type="string"> area: mean where sea time: mean </variable>
 				<variable name="cell_measures" type="string"> area: areacello </variable>
+			</field>
+		</file>
+		<file id="uo_Noneday_gn" name="IOXDIRuo_MED-06_CNRM-ESM2-1_historical_r1i1p1f2_CNRM-RCSM6_V1_day_%start_date%-%end_date%" output_freq="1d" append="true" output_level="10" compression_level="0" split_freq="1mo" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="1949-09-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14103/%uuid%" convention_str="CF-1.7 CMIP-6.2">
+			<variable name="activity_id" type="string"> CORDEX </variable>
+			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
+			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
+			<variable name="experiment_id" type="string"> historical </variable>
+			<variable name="frequency" type="string"> day </variable>
+			<variable name="grid" type="string"> native ocean tri-polar grid </variable>
+			<variable name="grid_label" type="string"> gn </variable>
+			<variable name="nominal_resolution" type="string"> 8 km </variable>
+			<variable name="history" type="string"> none </variable>
+			<variable name="institute_id" type="string"> CNRM </variable>
+			<variable name="CORDEX_domain" type="string"> MED-06 </variable>
+			<variable name="driving_model_id" type="string"> CNRM-ESM2-1 </variable>
+			<variable name="driving_model_ensemble_member" type="string"> r1i1p1f2 </variable>
+			<variable name="driving_experiment_name" type="string"> historical </variable>
+			<variable name="driving_experiment" type="string"> CNRM-ESM2-1, historical, r1i1p1f2 </variable>
+			<variable name="institution" type="string"> CNRM (Centre National de Recherches Meteorologiques, Toulouse 31057, France) </variable>
+			<variable name="product" type="string"> output </variable>
+			<variable name="realization_index" type="int"> 1 </variable>
+			<variable name="realm" type="string"> ocean </variable>
+			<variable name="references" type="string"> http://www.umr-cnrm.fr/ </variable>
+			<variable name="project_id" type="string"> CORDEX </variable>
+			<variable name="model_id" type="string"> CNRM-RCSM6 </variable>
+			<variable name="table_id" type="string"> Noneday </variable>
+			<variable name="title" type="string"> CNRM-RCSM6 model output prepared for CMIP6 and CORDEX / historical simulation </variable>
+			<variable name="variable_id" type="string"> uo </variable>
+			<variable name="EXPID" type="string"> RCSM6.1_HIS_SP0 </variable>
+			<variable name="xios_commit" type="string"> 1442-shuffle </variable>
+			<field field_ref="CMIP6_uo_average" name="uo" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="time: mean" cell_methods_mode="overwrite" operation="average" freq_op="1d">
+				<variable name="standard_name" type="string"> sea_water_x_velocity </variable>
+				<variable name="description" type="string"> Prognostic x-ward velocity component resolved by the model. </variable>
+				<variable name="long_name" type="string"> Sea Water X Velocity </variable>
+				<variable name="history" type="string"> none </variable>
+				<variable name="units" type="string"> m s-1 </variable>
+				<variable name="cell_methods" type="string"> time: mean </variable>
+			</field>
+		</file>
+		<file id="vo_Noneday_gn" name="IOXDIRvo_MED-06_CNRM-ESM2-1_historical_r1i1p1f2_CNRM-RCSM6_V1_day_%start_date%-%end_date%" output_freq="1d" append="true" output_level="10" compression_level="0" split_freq="1mo" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="1949-09-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14103/%uuid%" convention_str="CF-1.7 CMIP-6.2">
+			<variable name="activity_id" type="string"> CORDEX </variable>
+			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
+			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
+			<variable name="experiment_id" type="string"> historical </variable>
+			<variable name="frequency" type="string"> day </variable>
+			<variable name="grid" type="string"> native ocean tri-polar grid </variable>
+			<variable name="grid_label" type="string"> gn </variable>
+			<variable name="nominal_resolution" type="string"> 8 km </variable>
+			<variable name="history" type="string"> none </variable>
+			<variable name="institute_id" type="string"> CNRM </variable>
+			<variable name="CORDEX_domain" type="string"> MED-06 </variable>
+			<variable name="driving_model_id" type="string"> CNRM-ESM2-1 </variable>
+			<variable name="driving_model_ensemble_member" type="string"> r1i1p1f2 </variable>
+			<variable name="driving_experiment_name" type="string"> historical </variable>
+			<variable name="driving_experiment" type="string"> CNRM-ESM2-1, historical, r1i1p1f2 </variable>
+			<variable name="institution" type="string"> CNRM (Centre National de Recherches Meteorologiques, Toulouse 31057, France) </variable>
+			<variable name="product" type="string"> output </variable>
+			<variable name="realization_index" type="int"> 1 </variable>
+			<variable name="realm" type="string"> ocean </variable>
+			<variable name="references" type="string"> http://www.umr-cnrm.fr/ </variable>
+			<variable name="project_id" type="string"> CORDEX </variable>
+			<variable name="model_id" type="string"> CNRM-RCSM6 </variable>
+			<variable name="table_id" type="string"> Noneday </variable>
+			<variable name="title" type="string"> CNRM-RCSM6 model output prepared for CMIP6 and CORDEX / historical simulation </variable>
+			<variable name="variable_id" type="string"> vo </variable>
+			<variable name="EXPID" type="string"> RCSM6.1_HIS_SP0 </variable>
+			<variable name="xios_commit" type="string"> 1442-shuffle </variable>
+			<field field_ref="CMIP6_vo_average" name="vo" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="time: mean" cell_methods_mode="overwrite" operation="average" freq_op="1d">
+				<variable name="standard_name" type="string"> sea_water_y_velocity </variable>
+				<variable name="description" type="string"> Prognostic y-ward velocity component resolved by the model. </variable>
+				<variable name="long_name" type="string"> Sea Water Y Velocity </variable>
+				<variable name="history" type="string"> none </variable>
+				<variable name="units" type="string"> m s-1 </variable>
+				<variable name="cell_methods" type="string"> time: mean </variable>
 			</field>
 		</file>
 		<file id="wfo_Noneday_gn" name="IOXDIRwfo_MED-06_CNRM-ESM2-1_historical_r1i1p1f2_CNRM-RCSM6_V1_day_%start_date%-%end_date%" output_freq="1d" append="true" output_level="10" compression_level="0" split_freq="1mo" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="1949-09-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14103/%uuid%" convention_str="CF-1.7 CMIP-6.2">
@@ -1241,6 +1203,44 @@
 				<variable name="units" type="string"> kg m-2 s-1 </variable>
 				<variable name="cell_methods" type="string"> area: mean where sea time: mean </variable>
 				<variable name="cell_measures" type="string"> area: areacello </variable>
+			</field>
+		</file>
+		<file id="wo_Noneday_gn" name="IOXDIRwo_MED-06_CNRM-ESM2-1_historical_r1i1p1f2_CNRM-RCSM6_V1_day_%start_date%-%end_date%" output_freq="1d" append="true" output_level="10" compression_level="0" split_freq="1mo" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="1949-09-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14103/%uuid%" convention_str="CF-1.7 CMIP-6.2">
+			<variable name="activity_id" type="string"> CORDEX </variable>
+			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
+			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
+			<variable name="experiment_id" type="string"> historical </variable>
+			<variable name="frequency" type="string"> day </variable>
+			<variable name="grid" type="string"> native ocean tri-polar grid </variable>
+			<variable name="grid_label" type="string"> gn </variable>
+			<variable name="nominal_resolution" type="string"> 8 km </variable>
+			<variable name="history" type="string"> none </variable>
+			<variable name="institute_id" type="string"> CNRM </variable>
+			<variable name="CORDEX_domain" type="string"> MED-06 </variable>
+			<variable name="driving_model_id" type="string"> CNRM-ESM2-1 </variable>
+			<variable name="driving_model_ensemble_member" type="string"> r1i1p1f2 </variable>
+			<variable name="driving_experiment_name" type="string"> historical </variable>
+			<variable name="driving_experiment" type="string"> CNRM-ESM2-1, historical, r1i1p1f2 </variable>
+			<variable name="institution" type="string"> CNRM (Centre National de Recherches Meteorologiques, Toulouse 31057, France) </variable>
+			<variable name="product" type="string"> output </variable>
+			<variable name="realization_index" type="int"> 1 </variable>
+			<variable name="realm" type="string"> ocean </variable>
+			<variable name="references" type="string"> http://www.umr-cnrm.fr/ </variable>
+			<variable name="project_id" type="string"> CORDEX </variable>
+			<variable name="model_id" type="string"> CNRM-RCSM6 </variable>
+			<variable name="table_id" type="string"> Noneday </variable>
+			<variable name="title" type="string"> CNRM-RCSM6 model output prepared for CMIP6 and CORDEX / historical simulation </variable>
+			<variable name="variable_id" type="string"> wo </variable>
+			<variable name="EXPID" type="string"> RCSM6.1_HIS_SP0 </variable>
+			<variable name="xios_commit" type="string"> 1442-shuffle </variable>
+			<field field_ref="CMIP6_wo_average" name="wo" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="time: mean" cell_methods_mode="overwrite" operation="average">
+				<variable name="standard_name" type="string"> upward_sea_water_velocity </variable>
+				<variable name="description" type="string"> Prognostic z-ward velocity component resolved by the model. </variable>
+				<variable name="long_name" type="string"> Sea Water Z Velocity </variable>
+				<variable name="history" type="string"> none </variable>
+				<variable name="units" type="string"> m s-1 </variable>
+				<variable name="cell_methods" type="string"> time: mean </variable>
 			</field>
 		</file>
 		<file id="zos_Noneday_gn" name="IOXDIRzos_MED-06_CNRM-ESM2-1_historical_r1i1p1f2_CNRM-RCSM6_V1_day_%start_date%-%end_date%" output_freq="1d" append="true" output_level="10" compression_level="0" split_freq="1mo" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="1949-09-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14103/%uuid%" convention_str="CF-1.7 CMIP-6.2">
@@ -3002,200 +3002,6 @@
 				<variable name="cell_measures" type="string"> area: areacello </variable>
 			</field>
 		</file>
-		<file id="uo_Nonemon_gn" name="IOXDIRuo_MED-06_CNRM-ESM2-1_historical_r1i1p1f2_CNRM-RCSM6_V1_mon_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="0" split_freq="1mo" split_freq_format="%y%mo" split_last_date="1949-09-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14103/%uuid%" convention_str="CF-1.7 CMIP-6.2">
-			<variable name="activity_id" type="string"> CORDEX </variable>
-			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
-			<variable name="dr2xml_version" type="string"> current_version </variable>
-			<variable name="experiment_id" type="string"> historical </variable>
-			<variable name="frequency" type="string"> mon </variable>
-			<variable name="grid" type="string"> native ocean tri-polar grid </variable>
-			<variable name="grid_label" type="string"> gn </variable>
-			<variable name="nominal_resolution" type="string"> 8 km </variable>
-			<variable name="history" type="string"> none </variable>
-			<variable name="institute_id" type="string"> CNRM </variable>
-			<variable name="CORDEX_domain" type="string"> MED-06 </variable>
-			<variable name="driving_model_id" type="string"> CNRM-ESM2-1 </variable>
-			<variable name="driving_model_ensemble_member" type="string"> r1i1p1f2 </variable>
-			<variable name="driving_experiment_name" type="string"> historical </variable>
-			<variable name="driving_experiment" type="string"> CNRM-ESM2-1, historical, r1i1p1f2 </variable>
-			<variable name="institution" type="string"> CNRM (Centre National de Recherches Meteorologiques, Toulouse 31057, France) </variable>
-			<variable name="product" type="string"> output </variable>
-			<variable name="realization_index" type="int"> 1 </variable>
-			<variable name="realm" type="string"> ocean </variable>
-			<variable name="references" type="string"> http://www.umr-cnrm.fr/ </variable>
-			<variable name="project_id" type="string"> CORDEX </variable>
-			<variable name="model_id" type="string"> CNRM-RCSM6 </variable>
-			<variable name="table_id" type="string"> Nonemon </variable>
-			<variable name="title" type="string"> CNRM-RCSM6 model output prepared for CMIP6 and CORDEX / historical simulation </variable>
-			<variable name="variable_id" type="string"> uo </variable>
-			<variable name="EXPID" type="string"> RCSM6.1_HIS_SP0 </variable>
-			<variable name="xios_commit" type="string"> 1442-shuffle </variable>
-			<field field_ref="CMIP6_uo_average" name="uo" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="time: mean" cell_methods_mode="overwrite" operation="average" freq_op="1mo">
-				<variable name="standard_name" type="string"> sea_water_x_velocity </variable>
-				<variable name="description" type="string"> Prognostic x-ward velocity component resolved by the model. </variable>
-				<variable name="long_name" type="string"> Sea Water X Velocity </variable>
-				<variable name="history" type="string"> none </variable>
-				<variable name="units" type="string"> m s-1 </variable>
-				<variable name="cell_methods" type="string"> time: mean </variable>
-			</field>
-		</file>
-		<file id="vo_Nonemon_gn" name="IOXDIRvo_MED-06_CNRM-ESM2-1_historical_r1i1p1f2_CNRM-RCSM6_V1_mon_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="0" split_freq="1mo" split_freq_format="%y%mo" split_last_date="1949-09-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14103/%uuid%" convention_str="CF-1.7 CMIP-6.2">
-			<variable name="activity_id" type="string"> CORDEX </variable>
-			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
-			<variable name="dr2xml_version" type="string"> current_version </variable>
-			<variable name="experiment_id" type="string"> historical </variable>
-			<variable name="frequency" type="string"> mon </variable>
-			<variable name="grid" type="string"> native ocean tri-polar grid </variable>
-			<variable name="grid_label" type="string"> gn </variable>
-			<variable name="nominal_resolution" type="string"> 8 km </variable>
-			<variable name="history" type="string"> none </variable>
-			<variable name="institute_id" type="string"> CNRM </variable>
-			<variable name="CORDEX_domain" type="string"> MED-06 </variable>
-			<variable name="driving_model_id" type="string"> CNRM-ESM2-1 </variable>
-			<variable name="driving_model_ensemble_member" type="string"> r1i1p1f2 </variable>
-			<variable name="driving_experiment_name" type="string"> historical </variable>
-			<variable name="driving_experiment" type="string"> CNRM-ESM2-1, historical, r1i1p1f2 </variable>
-			<variable name="institution" type="string"> CNRM (Centre National de Recherches Meteorologiques, Toulouse 31057, France) </variable>
-			<variable name="product" type="string"> output </variable>
-			<variable name="realization_index" type="int"> 1 </variable>
-			<variable name="realm" type="string"> ocean </variable>
-			<variable name="references" type="string"> http://www.umr-cnrm.fr/ </variable>
-			<variable name="project_id" type="string"> CORDEX </variable>
-			<variable name="model_id" type="string"> CNRM-RCSM6 </variable>
-			<variable name="table_id" type="string"> Nonemon </variable>
-			<variable name="title" type="string"> CNRM-RCSM6 model output prepared for CMIP6 and CORDEX / historical simulation </variable>
-			<variable name="variable_id" type="string"> vo </variable>
-			<variable name="EXPID" type="string"> RCSM6.1_HIS_SP0 </variable>
-			<variable name="xios_commit" type="string"> 1442-shuffle </variable>
-			<field field_ref="CMIP6_vo_average" name="vo" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="time: mean" cell_methods_mode="overwrite" operation="average" freq_op="1mo">
-				<variable name="standard_name" type="string"> sea_water_y_velocity </variable>
-				<variable name="description" type="string"> Prognostic y-ward velocity component resolved by the model. </variable>
-				<variable name="long_name" type="string"> Sea Water Y Velocity </variable>
-				<variable name="history" type="string"> none </variable>
-				<variable name="units" type="string"> m s-1 </variable>
-				<variable name="cell_methods" type="string"> time: mean </variable>
-			</field>
-		</file>
-		<file id="wo_Nonemon_gn" name="IOXDIRwo_MED-06_CNRM-ESM2-1_historical_r1i1p1f2_CNRM-RCSM6_V1_mon_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="0" split_freq="1mo" split_freq_format="%y%mo" split_last_date="1949-09-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14103/%uuid%" convention_str="CF-1.7 CMIP-6.2">
-			<variable name="activity_id" type="string"> CORDEX </variable>
-			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
-			<variable name="dr2xml_version" type="string"> current_version </variable>
-			<variable name="experiment_id" type="string"> historical </variable>
-			<variable name="frequency" type="string"> mon </variable>
-			<variable name="grid" type="string"> native ocean tri-polar grid </variable>
-			<variable name="grid_label" type="string"> gn </variable>
-			<variable name="nominal_resolution" type="string"> 8 km </variable>
-			<variable name="history" type="string"> none </variable>
-			<variable name="institute_id" type="string"> CNRM </variable>
-			<variable name="CORDEX_domain" type="string"> MED-06 </variable>
-			<variable name="driving_model_id" type="string"> CNRM-ESM2-1 </variable>
-			<variable name="driving_model_ensemble_member" type="string"> r1i1p1f2 </variable>
-			<variable name="driving_experiment_name" type="string"> historical </variable>
-			<variable name="driving_experiment" type="string"> CNRM-ESM2-1, historical, r1i1p1f2 </variable>
-			<variable name="institution" type="string"> CNRM (Centre National de Recherches Meteorologiques, Toulouse 31057, France) </variable>
-			<variable name="product" type="string"> output </variable>
-			<variable name="realization_index" type="int"> 1 </variable>
-			<variable name="realm" type="string"> ocean </variable>
-			<variable name="references" type="string"> http://www.umr-cnrm.fr/ </variable>
-			<variable name="project_id" type="string"> CORDEX </variable>
-			<variable name="model_id" type="string"> CNRM-RCSM6 </variable>
-			<variable name="table_id" type="string"> Nonemon </variable>
-			<variable name="title" type="string"> CNRM-RCSM6 model output prepared for CMIP6 and CORDEX / historical simulation </variable>
-			<variable name="variable_id" type="string"> wo </variable>
-			<variable name="EXPID" type="string"> RCSM6.1_HIS_SP0 </variable>
-			<variable name="xios_commit" type="string"> 1442-shuffle </variable>
-			<field field_ref="CMIP6_wo_average" name="wo" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="time: mean" cell_methods_mode="overwrite" operation="average">
-				<variable name="standard_name" type="string"> upward_sea_water_velocity </variable>
-				<variable name="description" type="string"> Prognostic z-ward velocity component resolved by the model. </variable>
-				<variable name="long_name" type="string"> Sea Water Z Velocity </variable>
-				<variable name="history" type="string"> none </variable>
-				<variable name="units" type="string"> m s-1 </variable>
-				<variable name="cell_methods" type="string"> time: mean </variable>
-			</field>
-		</file>
-		<file id="so_Nonemon_gn" name="IOXDIRso_MED-06_CNRM-ESM2-1_historical_r1i1p1f2_CNRM-RCSM6_V1_mon_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="0" split_freq="1mo" split_freq_format="%y%mo" split_last_date="1949-09-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14103/%uuid%" convention_str="CF-1.7 CMIP-6.2">
-			<variable name="activity_id" type="string"> CORDEX </variable>
-			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
-			<variable name="dr2xml_version" type="string"> current_version </variable>
-			<variable name="experiment_id" type="string"> historical </variable>
-			<variable name="external_variables" type="string"> areacello volcello </variable>
-			<variable name="frequency" type="string"> mon </variable>
-			<variable name="grid" type="string"> native ocean tri-polar grid </variable>
-			<variable name="grid_label" type="string"> gn </variable>
-			<variable name="nominal_resolution" type="string"> 8 km </variable>
-			<variable name="history" type="string"> none </variable>
-			<variable name="institute_id" type="string"> CNRM </variable>
-			<variable name="CORDEX_domain" type="string"> MED-06 </variable>
-			<variable name="driving_model_id" type="string"> CNRM-ESM2-1 </variable>
-			<variable name="driving_model_ensemble_member" type="string"> r1i1p1f2 </variable>
-			<variable name="driving_experiment_name" type="string"> historical </variable>
-			<variable name="driving_experiment" type="string"> CNRM-ESM2-1, historical, r1i1p1f2 </variable>
-			<variable name="institution" type="string"> CNRM (Centre National de Recherches Meteorologiques, Toulouse 31057, France) </variable>
-			<variable name="product" type="string"> output </variable>
-			<variable name="realization_index" type="int"> 1 </variable>
-			<variable name="realm" type="string"> ocean </variable>
-			<variable name="references" type="string"> http://www.umr-cnrm.fr/ </variable>
-			<variable name="project_id" type="string"> CORDEX </variable>
-			<variable name="model_id" type="string"> CNRM-RCSM6 </variable>
-			<variable name="table_id" type="string"> Nonemon </variable>
-			<variable name="title" type="string"> CNRM-RCSM6 model output prepared for CMIP6 and CORDEX / historical simulation </variable>
-			<variable name="variable_id" type="string"> so </variable>
-			<variable name="EXPID" type="string"> RCSM6.1_HIS_SP0 </variable>
-			<variable name="xios_commit" type="string"> 1442-shuffle </variable>
-			<field field_ref="CMIP6_so_average" name="so" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="area: mean where sea time: mean" cell_methods_mode="overwrite" operation="average" freq_op="1mo">
-				<variable name="standard_name" type="string"> sea_water_salinity </variable>
-				<variable name="description" type="string"> Sea Water Salinity </variable>
-				<variable name="long_name" type="string"> Sea Water Salinity </variable>
-				<variable name="history" type="string"> none </variable>
-				<variable name="units" type="string"> 0.001 </variable>
-				<variable name="cell_methods" type="string"> area: mean where sea time: mean </variable>
-				<variable name="cell_measures" type="string"> area: areacello volume: volcello </variable>
-			</field>
-		</file>
-		<file id="thetao_Nonemon_gn" name="IOXDIRthetao_MED-06_CNRM-ESM2-1_historical_r1i1p1f2_CNRM-RCSM6_V1_mon_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="0" split_freq="1mo" split_freq_format="%y%mo" split_last_date="1949-09-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14103/%uuid%" convention_str="CF-1.7 CMIP-6.2">
-			<variable name="activity_id" type="string"> CORDEX </variable>
-			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
-			<variable name="dr2xml_version" type="string"> current_version </variable>
-			<variable name="experiment_id" type="string"> historical </variable>
-			<variable name="external_variables" type="string"> areacello volcello </variable>
-			<variable name="frequency" type="string"> mon </variable>
-			<variable name="grid" type="string"> native ocean tri-polar grid </variable>
-			<variable name="grid_label" type="string"> gn </variable>
-			<variable name="nominal_resolution" type="string"> 8 km </variable>
-			<variable name="history" type="string"> none </variable>
-			<variable name="institute_id" type="string"> CNRM </variable>
-			<variable name="CORDEX_domain" type="string"> MED-06 </variable>
-			<variable name="driving_model_id" type="string"> CNRM-ESM2-1 </variable>
-			<variable name="driving_model_ensemble_member" type="string"> r1i1p1f2 </variable>
-			<variable name="driving_experiment_name" type="string"> historical </variable>
-			<variable name="driving_experiment" type="string"> CNRM-ESM2-1, historical, r1i1p1f2 </variable>
-			<variable name="institution" type="string"> CNRM (Centre National de Recherches Meteorologiques, Toulouse 31057, France) </variable>
-			<variable name="product" type="string"> output </variable>
-			<variable name="realization_index" type="int"> 1 </variable>
-			<variable name="realm" type="string"> ocean </variable>
-			<variable name="references" type="string"> http://www.umr-cnrm.fr/ </variable>
-			<variable name="project_id" type="string"> CORDEX </variable>
-			<variable name="model_id" type="string"> CNRM-RCSM6 </variable>
-			<variable name="table_id" type="string"> Nonemon </variable>
-			<variable name="title" type="string"> CNRM-RCSM6 model output prepared for CMIP6 and CORDEX / historical simulation </variable>
-			<variable name="variable_id" type="string"> thetao </variable>
-			<variable name="EXPID" type="string"> RCSM6.1_HIS_SP0 </variable>
-			<variable name="xios_commit" type="string"> 1442-shuffle </variable>
-			<field field_ref="CMIP6_thetao_average" name="thetao" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="area: mean where sea time: mean" cell_methods_mode="overwrite" operation="average" freq_op="1mo">
-				<variable name="standard_name" type="string"> sea_water_potential_temperature </variable>
-				<variable name="description" type="string"> Diagnostic should be contributed even for models using conservative temperature as prognostic field. </variable>
-				<variable name="long_name" type="string"> Sea Water Potential Temperature </variable>
-				<variable name="history" type="string"> none </variable>
-				<variable name="units" type="string"> degC </variable>
-				<variable name="cell_methods" type="string"> area: mean where sea time: mean </variable>
-				<variable name="cell_measures" type="string"> area: areacello volume: volcello </variable>
-			</field>
-		</file>
 		<file id="friver_Nonemon_gn" name="IOXDIRfriver_MED-06_CNRM-ESM2-1_historical_r1i1p1f2_CNRM-RCSM6_V1_mon_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="0" split_freq="1mo" split_freq_format="%y%mo" split_last_date="1949-09-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14103/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
@@ -3356,6 +3162,46 @@
 				<variable name="cell_measures" type="string"> area: areacello </variable>
 			</field>
 		</file>
+		<file id="so_Nonemon_gn" name="IOXDIRso_MED-06_CNRM-ESM2-1_historical_r1i1p1f2_CNRM-RCSM6_V1_mon_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="0" split_freq="1mo" split_freq_format="%y%mo" split_last_date="1949-09-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14103/%uuid%" convention_str="CF-1.7 CMIP-6.2">
+			<variable name="activity_id" type="string"> CORDEX </variable>
+			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
+			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
+			<variable name="experiment_id" type="string"> historical </variable>
+			<variable name="external_variables" type="string"> areacello volcello </variable>
+			<variable name="frequency" type="string"> mon </variable>
+			<variable name="grid" type="string"> native ocean tri-polar grid </variable>
+			<variable name="grid_label" type="string"> gn </variable>
+			<variable name="nominal_resolution" type="string"> 8 km </variable>
+			<variable name="history" type="string"> none </variable>
+			<variable name="institute_id" type="string"> CNRM </variable>
+			<variable name="CORDEX_domain" type="string"> MED-06 </variable>
+			<variable name="driving_model_id" type="string"> CNRM-ESM2-1 </variable>
+			<variable name="driving_model_ensemble_member" type="string"> r1i1p1f2 </variable>
+			<variable name="driving_experiment_name" type="string"> historical </variable>
+			<variable name="driving_experiment" type="string"> CNRM-ESM2-1, historical, r1i1p1f2 </variable>
+			<variable name="institution" type="string"> CNRM (Centre National de Recherches Meteorologiques, Toulouse 31057, France) </variable>
+			<variable name="product" type="string"> output </variable>
+			<variable name="realization_index" type="int"> 1 </variable>
+			<variable name="realm" type="string"> ocean </variable>
+			<variable name="references" type="string"> http://www.umr-cnrm.fr/ </variable>
+			<variable name="project_id" type="string"> CORDEX </variable>
+			<variable name="model_id" type="string"> CNRM-RCSM6 </variable>
+			<variable name="table_id" type="string"> Nonemon </variable>
+			<variable name="title" type="string"> CNRM-RCSM6 model output prepared for CMIP6 and CORDEX / historical simulation </variable>
+			<variable name="variable_id" type="string"> so </variable>
+			<variable name="EXPID" type="string"> RCSM6.1_HIS_SP0 </variable>
+			<variable name="xios_commit" type="string"> 1442-shuffle </variable>
+			<field field_ref="CMIP6_so_average" name="so" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="area: mean where sea time: mean" cell_methods_mode="overwrite" operation="average" freq_op="1mo">
+				<variable name="standard_name" type="string"> sea_water_salinity </variable>
+				<variable name="description" type="string"> Sea Water Salinity </variable>
+				<variable name="long_name" type="string"> Sea Water Salinity </variable>
+				<variable name="history" type="string"> none </variable>
+				<variable name="units" type="string"> 0.001 </variable>
+				<variable name="cell_methods" type="string"> area: mean where sea time: mean </variable>
+				<variable name="cell_measures" type="string"> area: areacello volume: volcello </variable>
+			</field>
+		</file>
 		<file id="sos_Nonemon_gn" name="IOXDIRsos_MED-06_CNRM-ESM2-1_historical_r1i1p1f2_CNRM-RCSM6_V1_mon_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="0" split_freq="1mo" split_freq_format="%y%mo" split_last_date="1949-09-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14103/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
@@ -3396,6 +3242,46 @@
 				<variable name="cell_measures" type="string"> area: areacello </variable>
 			</field>
 		</file>
+		<file id="thetao_Nonemon_gn" name="IOXDIRthetao_MED-06_CNRM-ESM2-1_historical_r1i1p1f2_CNRM-RCSM6_V1_mon_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="0" split_freq="1mo" split_freq_format="%y%mo" split_last_date="1949-09-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14103/%uuid%" convention_str="CF-1.7 CMIP-6.2">
+			<variable name="activity_id" type="string"> CORDEX </variable>
+			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
+			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
+			<variable name="experiment_id" type="string"> historical </variable>
+			<variable name="external_variables" type="string"> areacello volcello </variable>
+			<variable name="frequency" type="string"> mon </variable>
+			<variable name="grid" type="string"> native ocean tri-polar grid </variable>
+			<variable name="grid_label" type="string"> gn </variable>
+			<variable name="nominal_resolution" type="string"> 8 km </variable>
+			<variable name="history" type="string"> none </variable>
+			<variable name="institute_id" type="string"> CNRM </variable>
+			<variable name="CORDEX_domain" type="string"> MED-06 </variable>
+			<variable name="driving_model_id" type="string"> CNRM-ESM2-1 </variable>
+			<variable name="driving_model_ensemble_member" type="string"> r1i1p1f2 </variable>
+			<variable name="driving_experiment_name" type="string"> historical </variable>
+			<variable name="driving_experiment" type="string"> CNRM-ESM2-1, historical, r1i1p1f2 </variable>
+			<variable name="institution" type="string"> CNRM (Centre National de Recherches Meteorologiques, Toulouse 31057, France) </variable>
+			<variable name="product" type="string"> output </variable>
+			<variable name="realization_index" type="int"> 1 </variable>
+			<variable name="realm" type="string"> ocean </variable>
+			<variable name="references" type="string"> http://www.umr-cnrm.fr/ </variable>
+			<variable name="project_id" type="string"> CORDEX </variable>
+			<variable name="model_id" type="string"> CNRM-RCSM6 </variable>
+			<variable name="table_id" type="string"> Nonemon </variable>
+			<variable name="title" type="string"> CNRM-RCSM6 model output prepared for CMIP6 and CORDEX / historical simulation </variable>
+			<variable name="variable_id" type="string"> thetao </variable>
+			<variable name="EXPID" type="string"> RCSM6.1_HIS_SP0 </variable>
+			<variable name="xios_commit" type="string"> 1442-shuffle </variable>
+			<field field_ref="CMIP6_thetao_average" name="thetao" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="area: mean where sea time: mean" cell_methods_mode="overwrite" operation="average" freq_op="1mo">
+				<variable name="standard_name" type="string"> sea_water_potential_temperature </variable>
+				<variable name="description" type="string"> Diagnostic should be contributed even for models using conservative temperature as prognostic field. </variable>
+				<variable name="long_name" type="string"> Sea Water Potential Temperature </variable>
+				<variable name="history" type="string"> none </variable>
+				<variable name="units" type="string"> degC </variable>
+				<variable name="cell_methods" type="string"> area: mean where sea time: mean </variable>
+				<variable name="cell_measures" type="string"> area: areacello volume: volcello </variable>
+			</field>
+		</file>
 		<file id="tos_Nonemon_gn" name="IOXDIRtos_MED-06_CNRM-ESM2-1_historical_r1i1p1f2_CNRM-RCSM6_V1_mon_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="0" split_freq="1mo" split_freq_format="%y%mo" split_last_date="1949-09-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14103/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
@@ -3434,6 +3320,82 @@
 				<variable name="units" type="string"> degC </variable>
 				<variable name="cell_methods" type="string"> area: mean where sea time: mean </variable>
 				<variable name="cell_measures" type="string"> area: areacello </variable>
+			</field>
+		</file>
+		<file id="uo_Nonemon_gn" name="IOXDIRuo_MED-06_CNRM-ESM2-1_historical_r1i1p1f2_CNRM-RCSM6_V1_mon_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="0" split_freq="1mo" split_freq_format="%y%mo" split_last_date="1949-09-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14103/%uuid%" convention_str="CF-1.7 CMIP-6.2">
+			<variable name="activity_id" type="string"> CORDEX </variable>
+			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
+			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
+			<variable name="experiment_id" type="string"> historical </variable>
+			<variable name="frequency" type="string"> mon </variable>
+			<variable name="grid" type="string"> native ocean tri-polar grid </variable>
+			<variable name="grid_label" type="string"> gn </variable>
+			<variable name="nominal_resolution" type="string"> 8 km </variable>
+			<variable name="history" type="string"> none </variable>
+			<variable name="institute_id" type="string"> CNRM </variable>
+			<variable name="CORDEX_domain" type="string"> MED-06 </variable>
+			<variable name="driving_model_id" type="string"> CNRM-ESM2-1 </variable>
+			<variable name="driving_model_ensemble_member" type="string"> r1i1p1f2 </variable>
+			<variable name="driving_experiment_name" type="string"> historical </variable>
+			<variable name="driving_experiment" type="string"> CNRM-ESM2-1, historical, r1i1p1f2 </variable>
+			<variable name="institution" type="string"> CNRM (Centre National de Recherches Meteorologiques, Toulouse 31057, France) </variable>
+			<variable name="product" type="string"> output </variable>
+			<variable name="realization_index" type="int"> 1 </variable>
+			<variable name="realm" type="string"> ocean </variable>
+			<variable name="references" type="string"> http://www.umr-cnrm.fr/ </variable>
+			<variable name="project_id" type="string"> CORDEX </variable>
+			<variable name="model_id" type="string"> CNRM-RCSM6 </variable>
+			<variable name="table_id" type="string"> Nonemon </variable>
+			<variable name="title" type="string"> CNRM-RCSM6 model output prepared for CMIP6 and CORDEX / historical simulation </variable>
+			<variable name="variable_id" type="string"> uo </variable>
+			<variable name="EXPID" type="string"> RCSM6.1_HIS_SP0 </variable>
+			<variable name="xios_commit" type="string"> 1442-shuffle </variable>
+			<field field_ref="CMIP6_uo_average" name="uo" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="time: mean" cell_methods_mode="overwrite" operation="average" freq_op="1mo">
+				<variable name="standard_name" type="string"> sea_water_x_velocity </variable>
+				<variable name="description" type="string"> Prognostic x-ward velocity component resolved by the model. </variable>
+				<variable name="long_name" type="string"> Sea Water X Velocity </variable>
+				<variable name="history" type="string"> none </variable>
+				<variable name="units" type="string"> m s-1 </variable>
+				<variable name="cell_methods" type="string"> time: mean </variable>
+			</field>
+		</file>
+		<file id="vo_Nonemon_gn" name="IOXDIRvo_MED-06_CNRM-ESM2-1_historical_r1i1p1f2_CNRM-RCSM6_V1_mon_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="0" split_freq="1mo" split_freq_format="%y%mo" split_last_date="1949-09-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14103/%uuid%" convention_str="CF-1.7 CMIP-6.2">
+			<variable name="activity_id" type="string"> CORDEX </variable>
+			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
+			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
+			<variable name="experiment_id" type="string"> historical </variable>
+			<variable name="frequency" type="string"> mon </variable>
+			<variable name="grid" type="string"> native ocean tri-polar grid </variable>
+			<variable name="grid_label" type="string"> gn </variable>
+			<variable name="nominal_resolution" type="string"> 8 km </variable>
+			<variable name="history" type="string"> none </variable>
+			<variable name="institute_id" type="string"> CNRM </variable>
+			<variable name="CORDEX_domain" type="string"> MED-06 </variable>
+			<variable name="driving_model_id" type="string"> CNRM-ESM2-1 </variable>
+			<variable name="driving_model_ensemble_member" type="string"> r1i1p1f2 </variable>
+			<variable name="driving_experiment_name" type="string"> historical </variable>
+			<variable name="driving_experiment" type="string"> CNRM-ESM2-1, historical, r1i1p1f2 </variable>
+			<variable name="institution" type="string"> CNRM (Centre National de Recherches Meteorologiques, Toulouse 31057, France) </variable>
+			<variable name="product" type="string"> output </variable>
+			<variable name="realization_index" type="int"> 1 </variable>
+			<variable name="realm" type="string"> ocean </variable>
+			<variable name="references" type="string"> http://www.umr-cnrm.fr/ </variable>
+			<variable name="project_id" type="string"> CORDEX </variable>
+			<variable name="model_id" type="string"> CNRM-RCSM6 </variable>
+			<variable name="table_id" type="string"> Nonemon </variable>
+			<variable name="title" type="string"> CNRM-RCSM6 model output prepared for CMIP6 and CORDEX / historical simulation </variable>
+			<variable name="variable_id" type="string"> vo </variable>
+			<variable name="EXPID" type="string"> RCSM6.1_HIS_SP0 </variable>
+			<variable name="xios_commit" type="string"> 1442-shuffle </variable>
+			<field field_ref="CMIP6_vo_average" name="vo" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="time: mean" cell_methods_mode="overwrite" operation="average" freq_op="1mo">
+				<variable name="standard_name" type="string"> sea_water_y_velocity </variable>
+				<variable name="description" type="string"> Prognostic y-ward velocity component resolved by the model. </variable>
+				<variable name="long_name" type="string"> Sea Water Y Velocity </variable>
+				<variable name="history" type="string"> none </variable>
+				<variable name="units" type="string"> m s-1 </variable>
+				<variable name="cell_methods" type="string"> time: mean </variable>
 			</field>
 		</file>
 		<file id="wfo_Nonemon_gn" name="IOXDIRwfo_MED-06_CNRM-ESM2-1_historical_r1i1p1f2_CNRM-RCSM6_V1_mon_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="0" split_freq="1mo" split_freq_format="%y%mo" split_last_date="1949-09-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14103/%uuid%" convention_str="CF-1.7 CMIP-6.2">
@@ -3514,6 +3476,44 @@
 				<variable name="units" type="string"> kg m-2 s-1 </variable>
 				<variable name="cell_methods" type="string"> area: mean where sea time: mean </variable>
 				<variable name="cell_measures" type="string"> area: areacello </variable>
+			</field>
+		</file>
+		<file id="wo_Nonemon_gn" name="IOXDIRwo_MED-06_CNRM-ESM2-1_historical_r1i1p1f2_CNRM-RCSM6_V1_mon_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="0" split_freq="1mo" split_freq_format="%y%mo" split_last_date="1949-09-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14103/%uuid%" convention_str="CF-1.7 CMIP-6.2">
+			<variable name="activity_id" type="string"> CORDEX </variable>
+			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
+			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
+			<variable name="experiment_id" type="string"> historical </variable>
+			<variable name="frequency" type="string"> mon </variable>
+			<variable name="grid" type="string"> native ocean tri-polar grid </variable>
+			<variable name="grid_label" type="string"> gn </variable>
+			<variable name="nominal_resolution" type="string"> 8 km </variable>
+			<variable name="history" type="string"> none </variable>
+			<variable name="institute_id" type="string"> CNRM </variable>
+			<variable name="CORDEX_domain" type="string"> MED-06 </variable>
+			<variable name="driving_model_id" type="string"> CNRM-ESM2-1 </variable>
+			<variable name="driving_model_ensemble_member" type="string"> r1i1p1f2 </variable>
+			<variable name="driving_experiment_name" type="string"> historical </variable>
+			<variable name="driving_experiment" type="string"> CNRM-ESM2-1, historical, r1i1p1f2 </variable>
+			<variable name="institution" type="string"> CNRM (Centre National de Recherches Meteorologiques, Toulouse 31057, France) </variable>
+			<variable name="product" type="string"> output </variable>
+			<variable name="realization_index" type="int"> 1 </variable>
+			<variable name="realm" type="string"> ocean </variable>
+			<variable name="references" type="string"> http://www.umr-cnrm.fr/ </variable>
+			<variable name="project_id" type="string"> CORDEX </variable>
+			<variable name="model_id" type="string"> CNRM-RCSM6 </variable>
+			<variable name="table_id" type="string"> Nonemon </variable>
+			<variable name="title" type="string"> CNRM-RCSM6 model output prepared for CMIP6 and CORDEX / historical simulation </variable>
+			<variable name="variable_id" type="string"> wo </variable>
+			<variable name="EXPID" type="string"> RCSM6.1_HIS_SP0 </variable>
+			<variable name="xios_commit" type="string"> 1442-shuffle </variable>
+			<field field_ref="CMIP6_wo_average" name="wo" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="time: mean" cell_methods_mode="overwrite" operation="average">
+				<variable name="standard_name" type="string"> upward_sea_water_velocity </variable>
+				<variable name="description" type="string"> Prognostic z-ward velocity component resolved by the model. </variable>
+				<variable name="long_name" type="string"> Sea Water Z Velocity </variable>
+				<variable name="history" type="string"> none </variable>
+				<variable name="units" type="string"> m s-1 </variable>
+				<variable name="cell_methods" type="string"> time: mean </variable>
 			</field>
 		</file>
 		<file id="zos_Nonemon_gn" name="IOXDIRzos_MED-06_CNRM-ESM2-1_historical_r1i1p1f2_CNRM-RCSM6_V1_mon_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="0" split_freq="1mo" split_freq_format="%y%mo" split_last_date="1949-09-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14103/%uuid%" convention_str="CF-1.7 CMIP-6.2">

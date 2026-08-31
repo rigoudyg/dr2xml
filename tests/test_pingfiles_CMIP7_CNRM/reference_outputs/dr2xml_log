@@ -59,6 +59,7 @@ For parameter grid_choice, found value None
 For parameter grid_policy, found value None
 Could not find a proper value for grid_prefix
 For parameter grids, found value None
+For parameter grids_default_DR, found value {'cfsites': ['gn', '100 km', 'data sampled in model native grid by nearest neighbour method '], '1deg': ['gr1', '1x1 degree', 'data regridded to a CMIP6 standard 1x1 degree latxlon grid from the native grid'], '2deg': ['gr2', '2x2 degree', 'data regridded to a CMIP6 standard 2x2 degree latxlon grid from the native grid'], '100km': ['gr3', '100 km', 'data regridded to a CMIP6 standard 100 km resol grid from the native grid'], '50km': ['gr4', '50 km', 'data regridded to a CMIP6 standard 50 km resol grid from the native grid'], '25km': ['gr5', '25 km', 'data regridded to a CMIP6 standard 25 km resol grid from the native grid'], 'default': ['grx', '?x? degree', 'grid has no description - please fix DR_grid_to_grid_atts for grid %s']}
 For parameter grids_dev, found value {}
 For parameter grouped_vars_per_file, found value []
 Could not find a proper value for included_expgroups
@@ -139,6 +140,7 @@ For parameter use_union_zoom, found value False
 For parameter variables_per_grid_type, found value {}
 For parameter vertical_interpolation_operation, found value instant
 Could not find a proper value for vertical_interpolation_sample_freq
+For parameter write_split_freq, found value False
 For parameter xios_version, found value 2
 For parameter year, found value None
 For parameter zg_field_name, found value zg
@@ -2837,6 +2839,7 @@ For parameter grid_choice, found value None
 For parameter grid_policy, found value None
 Could not find a proper value for grid_prefix
 For parameter grids, found value None
+For parameter grids_default_DR, found value {'cfsites': ['gn', '100 km', 'data sampled in model native grid by nearest neighbour method '], '1deg': ['gr1', '1x1 degree', 'data regridded to a CMIP6 standard 1x1 degree latxlon grid from the native grid'], '2deg': ['gr2', '2x2 degree', 'data regridded to a CMIP6 standard 2x2 degree latxlon grid from the native grid'], '100km': ['gr3', '100 km', 'data regridded to a CMIP6 standard 100 km resol grid from the native grid'], '50km': ['gr4', '50 km', 'data regridded to a CMIP6 standard 50 km resol grid from the native grid'], '25km': ['gr5', '25 km', 'data regridded to a CMIP6 standard 25 km resol grid from the native grid'], 'default': ['grx', '?x? degree', 'grid has no description - please fix DR_grid_to_grid_atts for grid %s']}
 For parameter grids_dev, found value {}
 For parameter grouped_vars_per_file, found value []
 Could not find a proper value for included_expgroups
@@ -2917,6 +2920,7 @@ For parameter use_union_zoom, found value False
 For parameter variables_per_grid_type, found value {}
 For parameter vertical_interpolation_operation, found value instant
 Could not find a proper value for vertical_interpolation_sample_freq
+For parameter write_split_freq, found value False
 For parameter xios_version, found value 2
 For parameter year, found value None
 For parameter zg_field_name, found value zg
@@ -4102,22 +4106,9 @@ Found the following descriptions for label ta:
    Priority 1, Frequency day, Description Air Temperature
    Priority 1, Frequency mon, Description Air Temperature
    Priority 1, Frequency 6hr, Description Air Temperature
+   Priority 3, Frequency 3hr, Description Air temperature on 6 pressure levels in the lower troposphere
 For parameter id, found value CMIP7_ta
 For parameter field_ref, found value ?dummy_XY_plev19
-Could not find a proper value for name
-Could not find a proper value for freq_op
-Could not find a proper value for freq_offset
-Could not find a proper value for grid_ref
-Could not find a proper value for long_name
-Could not find a proper value for standard_name
-Could not find a proper value for unit
-Could not find a proper value for operation
-Could not find a proper value for detect_missing_value
-Could not find a proper value for prec
-Found the following descriptions for label ta6:
-   Priority 3, Frequency 3hr, Description Air temperature on 6 pressure levels in the lower troposphere
-For parameter id, found value CMIP7_ta6
-For parameter field_ref, found value ?dummy_XY_plev6
 Could not find a proper value for name
 Could not find a proper value for freq_op
 Could not find a proper value for freq_offset
@@ -4322,4 +4313,4 @@ Could not find a proper value for unit
 Could not find a proper value for operation
 Could not find a proper value for detect_missing_value
 Could not find a proper value for prec
- 40 variables written for current_directory/test_pingfiles_CMIP7_CNRM/test_outputs//ping_arpsfx.xml
+ 39 variables written for current_directory/test_pingfiles_CMIP7_CNRM/test_outputs//ping_arpsfx.xml

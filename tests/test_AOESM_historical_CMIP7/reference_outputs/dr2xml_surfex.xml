@@ -87,132 +87,6 @@ seaIce: Gelato 6.1',
 'variant_info' = ''}-->
 	<!--Year processed 1850-->
 	<file_definition type="one_file" enabled="true">
-		<file id="tas_tmax-h2m-hxy-u_day_glb_gr" name="IOXDIRtas_tmax-h2m-hxy-u_day_glb_gr_CNRM-ESM2-1e_historical_r1i1p1f2_%start_date%-%end_date%" output_freq="1d" append="true" output_level="10" compression_level="4" split_freq="100y" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14107/%uuid%" convention_str="CF-1.7 CMIP-6.2">
-			<variable name="activity_id" type="string"> CMIP </variable>
-			<variable name="area_label" type="string"> u </variable>
-			<variable name="branch_time_in_child" type="double"> 0.0D </variable>
-			<variable name="branch_time_in_parent" type="double"> 36524.0D </variable>
-			<variable name="branded_variable" type="string"> tas_tmax-h2m-hxy-u </variable>
-			<variable name="branding_suffix" type="string"> tmax-h2m-hxy-u </variable>
-			<variable name="Conventions" type="string"> CF-1.11 CF-1.12 CF-1.13 </variable>
-			<variable name="data_specs_version" type="string"> MIP-DS7.1.0.0 </variable>
-			<variable name="drs_specs" type="string"> MIP-DRS7 </variable>
-			<variable name="experiment" type="string"> Simulation of the climate of the recent past (typically meaning 1850 to present-day) with prescribed carbon dioxide concentrations (for prescribed carbon dioxide emissions, see `esm-hist`). </variable>
-			<variable name="experiment_id" type="string"> historical </variable>
-			<variable name="external_variables" type="string"> areacella </variable>
-			<variable name="forcing_index" type="string"> f2 </variable>
-			<variable name="frequency" type="string"> day </variable>
-			<variable name="grid_label" type="string"> gr </variable>
-			<variable name="history" type="string"> none </variable>
-			<variable name="horizontal_label" type="string"> hxy </variable>
-			<variable name="initialization_index" type="string"> i1 </variable>
-			<variable name="institution" type="string"> CNRM (Centre National de Recherches Meteorologiques, Toulouse 31057, France), CERFACS (Centre Europeen de Recherche et de Formation Avancee en Calcul Scientifique, Toulouse 31057, France) </variable>
-			<variable name="institution_id" type="string"> CNRM-CERFACS </variable>
-			<variable name="license_id" type="string"> CC-BY-4.0 </variable>
-			<variable name="mip_era" type="string"> CMIP7 </variable>
-			<variable name="nominal_resolution" type="string"> 250 km </variable>
-			<variable name="parent_activity_id" type="string"> CMIP </variable>
-			<variable name="parent_calendar" type="string"> standard </variable>
-			<variable name="parent_experiment_id" type="string"> piControl </variable>
-			<variable name="parent_mip_era" type="string"> CMIP7 </variable>
-			<variable name="parent_source_id" type="string"> CNRM-ESM2-1e </variable>
-			<variable name="parent_time_units" type="string"> days since 1850-01-01 00:00:00 </variable>
-			<variable name="parent_variant_label" type="string"> r1i1p1f2 </variable>
-			<variable name="physics_index" type="string"> p1 </variable>
-			<variable name="product" type="string"> model-output </variable>
-			<variable name="realization_index" type="string"> r1 </variable>
-			<variable name="realm" type="string"> atmos </variable>
-			<variable name="region" type="string"> glb </variable>
-			<variable name="source_id" type="string"> CNRM-ESM2-1e </variable>
-			<variable name="temporal_label" type="string"> tmax </variable>
-			<variable name="variable_id" type="string"> tas </variable>
-			<variable name="variant_label" type="string"> r1i1p1f2 </variable>
-			<variable name="vertical_label" type="string"> h2m </variable>
-			<variable name="dr2xml_version" type="string"> current_version </variable>
-			<variable name="physical_parameter" type="string"> tasmax </variable>
-			<variable name="dr_version" type="string"> Software current_cmip7_dr_software - Content test </variable>
-			<variable name="cv_version" type="string"> ESGVOC version 4.1.1 - CV content cmip7 1.1.0 </variable>
-			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
-			<variable name="CMIP6_CV_version" type="string"> cv=6.2.3.0-7-g2019642 </variable>
-			<variable name="EXPID" type="string"> CNRM-ESM2-1_historical_r1i1p1f2_v2 </variable>
-			<variable name="dr2xml_md5sum" type="string"> 7040f60f6bf3118dc6c58b9fb8727d87 </variable>
-			<variable name="arpege_minor_version" type="string"> 6.3.2 </variable>
-			<variable name="nemo_gelato_commit" type="string"> 49095b3accd5d4c_6524fe19b00467a </variable>
-			<variable name="xios_commit" type="string"> 1442-shuffle </variable>
-			<field field_ref="CMIP7_tasmax_Scalheight2m_maximum" name="tas" grid_ref="FULL_grid_Scalheight2m_complete" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="area: mean time: maximum" cell_methods_mode="overwrite" operation="maximum">
-				<variable name="standard_name" type="string"> air_temperature </variable>
-				<variable name="description" type="string"> maximum near-surface (usually, 2 meter) air temperature (add cell\_method attribute "time: max") </variable>
-				<variable name="long_name" type="string"> Daily Maximum Near-Surface Air Temperature </variable>
-				<variable name="history" type="string"> none </variable>
-				<variable name="units" type="string"> K </variable>
-				<variable name="cell_methods" type="string"> area: mean time: maximum </variable>
-				<variable name="cell_measures" type="string"> area: areacella </variable>
-				<variable name="interval_operation" type="string"> 900 s </variable>
-			</field>
-		</file>
-		<file id="tas_tmin-h2m-hxy-u_day_glb_gr" name="IOXDIRtas_tmin-h2m-hxy-u_day_glb_gr_CNRM-ESM2-1e_historical_r1i1p1f2_%start_date%-%end_date%" output_freq="1d" append="true" output_level="10" compression_level="4" split_freq="100y" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14107/%uuid%" convention_str="CF-1.7 CMIP-6.2">
-			<variable name="activity_id" type="string"> CMIP </variable>
-			<variable name="area_label" type="string"> u </variable>
-			<variable name="branch_time_in_child" type="double"> 0.0D </variable>
-			<variable name="branch_time_in_parent" type="double"> 36524.0D </variable>
-			<variable name="branded_variable" type="string"> tas_tmin-h2m-hxy-u </variable>
-			<variable name="branding_suffix" type="string"> tmin-h2m-hxy-u </variable>
-			<variable name="Conventions" type="string"> CF-1.11 CF-1.12 CF-1.13 </variable>
-			<variable name="data_specs_version" type="string"> MIP-DS7.1.0.0 </variable>
-			<variable name="drs_specs" type="string"> MIP-DRS7 </variable>
-			<variable name="experiment" type="string"> Simulation of the climate of the recent past (typically meaning 1850 to present-day) with prescribed carbon dioxide concentrations (for prescribed carbon dioxide emissions, see `esm-hist`). </variable>
-			<variable name="experiment_id" type="string"> historical </variable>
-			<variable name="external_variables" type="string"> areacella </variable>
-			<variable name="forcing_index" type="string"> f2 </variable>
-			<variable name="frequency" type="string"> day </variable>
-			<variable name="grid_label" type="string"> gr </variable>
-			<variable name="history" type="string"> none </variable>
-			<variable name="horizontal_label" type="string"> hxy </variable>
-			<variable name="initialization_index" type="string"> i1 </variable>
-			<variable name="institution" type="string"> CNRM (Centre National de Recherches Meteorologiques, Toulouse 31057, France), CERFACS (Centre Europeen de Recherche et de Formation Avancee en Calcul Scientifique, Toulouse 31057, France) </variable>
-			<variable name="institution_id" type="string"> CNRM-CERFACS </variable>
-			<variable name="license_id" type="string"> CC-BY-4.0 </variable>
-			<variable name="mip_era" type="string"> CMIP7 </variable>
-			<variable name="nominal_resolution" type="string"> 250 km </variable>
-			<variable name="parent_activity_id" type="string"> CMIP </variable>
-			<variable name="parent_calendar" type="string"> standard </variable>
-			<variable name="parent_experiment_id" type="string"> piControl </variable>
-			<variable name="parent_mip_era" type="string"> CMIP7 </variable>
-			<variable name="parent_source_id" type="string"> CNRM-ESM2-1e </variable>
-			<variable name="parent_time_units" type="string"> days since 1850-01-01 00:00:00 </variable>
-			<variable name="parent_variant_label" type="string"> r1i1p1f2 </variable>
-			<variable name="physics_index" type="string"> p1 </variable>
-			<variable name="product" type="string"> model-output </variable>
-			<variable name="realization_index" type="string"> r1 </variable>
-			<variable name="realm" type="string"> atmos </variable>
-			<variable name="region" type="string"> glb </variable>
-			<variable name="source_id" type="string"> CNRM-ESM2-1e </variable>
-			<variable name="temporal_label" type="string"> tmin </variable>
-			<variable name="variable_id" type="string"> tas </variable>
-			<variable name="variant_label" type="string"> r1i1p1f2 </variable>
-			<variable name="vertical_label" type="string"> h2m </variable>
-			<variable name="dr2xml_version" type="string"> current_version </variable>
-			<variable name="physical_parameter" type="string"> tasmin </variable>
-			<variable name="dr_version" type="string"> Software current_cmip7_dr_software - Content test </variable>
-			<variable name="cv_version" type="string"> ESGVOC version 4.1.1 - CV content cmip7 1.1.0 </variable>
-			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
-			<variable name="CMIP6_CV_version" type="string"> cv=6.2.3.0-7-g2019642 </variable>
-			<variable name="EXPID" type="string"> CNRM-ESM2-1_historical_r1i1p1f2_v2 </variable>
-			<variable name="dr2xml_md5sum" type="string"> 7040f60f6bf3118dc6c58b9fb8727d87 </variable>
-			<variable name="arpege_minor_version" type="string"> 6.3.2 </variable>
-			<variable name="nemo_gelato_commit" type="string"> 49095b3accd5d4c_6524fe19b00467a </variable>
-			<variable name="xios_commit" type="string"> 1442-shuffle </variable>
-			<field field_ref="CMIP7_tasmin_Scalheight2m_minimum" name="tas" grid_ref="FULL_grid_Scalheight2m_complete" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="area: mean time: minimum" cell_methods_mode="overwrite" operation="minimum">
-				<variable name="standard_name" type="string"> air_temperature </variable>
-				<variable name="description" type="string"> minimum near-surface (usually, 2 meter) air temperature (add cell\_method attribute "time: min") </variable>
-				<variable name="long_name" type="string"> Daily Minimum Near-Surface Air Temperature </variable>
-				<variable name="history" type="string"> none </variable>
-				<variable name="units" type="string"> K </variable>
-				<variable name="cell_methods" type="string"> area: mean time: minimum </variable>
-				<variable name="cell_measures" type="string"> area: areacella </variable>
-				<variable name="interval_operation" type="string"> 900 s </variable>
-			</field>
-		</file>
 		<file id="pr_tavg-u-hxy-u_day_glb_gr" name="IOXDIRpr_tavg-u-hxy-u_day_glb_gr_CNRM-ESM2-1e_historical_r1i1p1f2_%start_date%-%end_date%" output_freq="1d" append="true" output_level="10" compression_level="4" split_freq="100y" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14107/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="area_label" type="string"> u </variable>
@@ -465,6 +339,132 @@ seaIce: Gelato 6.1',
 				<variable name="interval_operation" type="string"> 900 s </variable>
 			</field>
 		</file>
+		<file id="tas_tmax-h2m-hxy-u_day_glb_gr" name="IOXDIRtas_tmax-h2m-hxy-u_day_glb_gr_CNRM-ESM2-1e_historical_r1i1p1f2_%start_date%-%end_date%" output_freq="1d" append="true" output_level="10" compression_level="4" split_freq="100y" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14107/%uuid%" convention_str="CF-1.7 CMIP-6.2">
+			<variable name="activity_id" type="string"> CMIP </variable>
+			<variable name="area_label" type="string"> u </variable>
+			<variable name="branch_time_in_child" type="double"> 0.0D </variable>
+			<variable name="branch_time_in_parent" type="double"> 36524.0D </variable>
+			<variable name="branded_variable" type="string"> tas_tmax-h2m-hxy-u </variable>
+			<variable name="branding_suffix" type="string"> tmax-h2m-hxy-u </variable>
+			<variable name="Conventions" type="string"> CF-1.11 CF-1.12 CF-1.13 </variable>
+			<variable name="data_specs_version" type="string"> MIP-DS7.1.0.0 </variable>
+			<variable name="drs_specs" type="string"> MIP-DRS7 </variable>
+			<variable name="experiment" type="string"> Simulation of the climate of the recent past (typically meaning 1850 to present-day) with prescribed carbon dioxide concentrations (for prescribed carbon dioxide emissions, see `esm-hist`). </variable>
+			<variable name="experiment_id" type="string"> historical </variable>
+			<variable name="external_variables" type="string"> areacella </variable>
+			<variable name="forcing_index" type="string"> f2 </variable>
+			<variable name="frequency" type="string"> day </variable>
+			<variable name="grid_label" type="string"> gr </variable>
+			<variable name="history" type="string"> none </variable>
+			<variable name="horizontal_label" type="string"> hxy </variable>
+			<variable name="initialization_index" type="string"> i1 </variable>
+			<variable name="institution" type="string"> CNRM (Centre National de Recherches Meteorologiques, Toulouse 31057, France), CERFACS (Centre Europeen de Recherche et de Formation Avancee en Calcul Scientifique, Toulouse 31057, France) </variable>
+			<variable name="institution_id" type="string"> CNRM-CERFACS </variable>
+			<variable name="license_id" type="string"> CC-BY-4.0 </variable>
+			<variable name="mip_era" type="string"> CMIP7 </variable>
+			<variable name="nominal_resolution" type="string"> 250 km </variable>
+			<variable name="parent_activity_id" type="string"> CMIP </variable>
+			<variable name="parent_calendar" type="string"> standard </variable>
+			<variable name="parent_experiment_id" type="string"> piControl </variable>
+			<variable name="parent_mip_era" type="string"> CMIP7 </variable>
+			<variable name="parent_source_id" type="string"> CNRM-ESM2-1e </variable>
+			<variable name="parent_time_units" type="string"> days since 1850-01-01 00:00:00 </variable>
+			<variable name="parent_variant_label" type="string"> r1i1p1f2 </variable>
+			<variable name="physics_index" type="string"> p1 </variable>
+			<variable name="product" type="string"> model-output </variable>
+			<variable name="realization_index" type="string"> r1 </variable>
+			<variable name="realm" type="string"> atmos </variable>
+			<variable name="region" type="string"> glb </variable>
+			<variable name="source_id" type="string"> CNRM-ESM2-1e </variable>
+			<variable name="temporal_label" type="string"> tmax </variable>
+			<variable name="variable_id" type="string"> tas </variable>
+			<variable name="variant_label" type="string"> r1i1p1f2 </variable>
+			<variable name="vertical_label" type="string"> h2m </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
+			<variable name="physical_parameter" type="string"> tasmax </variable>
+			<variable name="dr_version" type="string"> Software current_cmip7_dr_software - Content test </variable>
+			<variable name="cv_version" type="string"> ESGVOC version 4.1.1 - CV content cmip7 1.1.0 </variable>
+			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
+			<variable name="CMIP6_CV_version" type="string"> cv=6.2.3.0-7-g2019642 </variable>
+			<variable name="EXPID" type="string"> CNRM-ESM2-1_historical_r1i1p1f2_v2 </variable>
+			<variable name="dr2xml_md5sum" type="string"> 7040f60f6bf3118dc6c58b9fb8727d87 </variable>
+			<variable name="arpege_minor_version" type="string"> 6.3.2 </variable>
+			<variable name="nemo_gelato_commit" type="string"> 49095b3accd5d4c_6524fe19b00467a </variable>
+			<variable name="xios_commit" type="string"> 1442-shuffle </variable>
+			<field field_ref="CMIP7_tasmax_Scalheight2m_maximum" name="tas" grid_ref="FULL_grid_Scalheight2m_complete" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="area: mean time: maximum" cell_methods_mode="overwrite" operation="maximum">
+				<variable name="standard_name" type="string"> air_temperature </variable>
+				<variable name="description" type="string"> maximum near-surface (usually, 2 meter) air temperature (add cell\_method attribute "time: max") </variable>
+				<variable name="long_name" type="string"> Daily Maximum Near-Surface Air Temperature </variable>
+				<variable name="history" type="string"> none </variable>
+				<variable name="units" type="string"> K </variable>
+				<variable name="cell_methods" type="string"> area: mean time: maximum </variable>
+				<variable name="cell_measures" type="string"> area: areacella </variable>
+				<variable name="interval_operation" type="string"> 900 s </variable>
+			</field>
+		</file>
+		<file id="tas_tmin-h2m-hxy-u_day_glb_gr" name="IOXDIRtas_tmin-h2m-hxy-u_day_glb_gr_CNRM-ESM2-1e_historical_r1i1p1f2_%start_date%-%end_date%" output_freq="1d" append="true" output_level="10" compression_level="4" split_freq="100y" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14107/%uuid%" convention_str="CF-1.7 CMIP-6.2">
+			<variable name="activity_id" type="string"> CMIP </variable>
+			<variable name="area_label" type="string"> u </variable>
+			<variable name="branch_time_in_child" type="double"> 0.0D </variable>
+			<variable name="branch_time_in_parent" type="double"> 36524.0D </variable>
+			<variable name="branded_variable" type="string"> tas_tmin-h2m-hxy-u </variable>
+			<variable name="branding_suffix" type="string"> tmin-h2m-hxy-u </variable>
+			<variable name="Conventions" type="string"> CF-1.11 CF-1.12 CF-1.13 </variable>
+			<variable name="data_specs_version" type="string"> MIP-DS7.1.0.0 </variable>
+			<variable name="drs_specs" type="string"> MIP-DRS7 </variable>
+			<variable name="experiment" type="string"> Simulation of the climate of the recent past (typically meaning 1850 to present-day) with prescribed carbon dioxide concentrations (for prescribed carbon dioxide emissions, see `esm-hist`). </variable>
+			<variable name="experiment_id" type="string"> historical </variable>
+			<variable name="external_variables" type="string"> areacella </variable>
+			<variable name="forcing_index" type="string"> f2 </variable>
+			<variable name="frequency" type="string"> day </variable>
+			<variable name="grid_label" type="string"> gr </variable>
+			<variable name="history" type="string"> none </variable>
+			<variable name="horizontal_label" type="string"> hxy </variable>
+			<variable name="initialization_index" type="string"> i1 </variable>
+			<variable name="institution" type="string"> CNRM (Centre National de Recherches Meteorologiques, Toulouse 31057, France), CERFACS (Centre Europeen de Recherche et de Formation Avancee en Calcul Scientifique, Toulouse 31057, France) </variable>
+			<variable name="institution_id" type="string"> CNRM-CERFACS </variable>
+			<variable name="license_id" type="string"> CC-BY-4.0 </variable>
+			<variable name="mip_era" type="string"> CMIP7 </variable>
+			<variable name="nominal_resolution" type="string"> 250 km </variable>
+			<variable name="parent_activity_id" type="string"> CMIP </variable>
+			<variable name="parent_calendar" type="string"> standard </variable>
+			<variable name="parent_experiment_id" type="string"> piControl </variable>
+			<variable name="parent_mip_era" type="string"> CMIP7 </variable>
+			<variable name="parent_source_id" type="string"> CNRM-ESM2-1e </variable>
+			<variable name="parent_time_units" type="string"> days since 1850-01-01 00:00:00 </variable>
+			<variable name="parent_variant_label" type="string"> r1i1p1f2 </variable>
+			<variable name="physics_index" type="string"> p1 </variable>
+			<variable name="product" type="string"> model-output </variable>
+			<variable name="realization_index" type="string"> r1 </variable>
+			<variable name="realm" type="string"> atmos </variable>
+			<variable name="region" type="string"> glb </variable>
+			<variable name="source_id" type="string"> CNRM-ESM2-1e </variable>
+			<variable name="temporal_label" type="string"> tmin </variable>
+			<variable name="variable_id" type="string"> tas </variable>
+			<variable name="variant_label" type="string"> r1i1p1f2 </variable>
+			<variable name="vertical_label" type="string"> h2m </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
+			<variable name="physical_parameter" type="string"> tasmin </variable>
+			<variable name="dr_version" type="string"> Software current_cmip7_dr_software - Content test </variable>
+			<variable name="cv_version" type="string"> ESGVOC version 4.1.1 - CV content cmip7 1.1.0 </variable>
+			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
+			<variable name="CMIP6_CV_version" type="string"> cv=6.2.3.0-7-g2019642 </variable>
+			<variable name="EXPID" type="string"> CNRM-ESM2-1_historical_r1i1p1f2_v2 </variable>
+			<variable name="dr2xml_md5sum" type="string"> 7040f60f6bf3118dc6c58b9fb8727d87 </variable>
+			<variable name="arpege_minor_version" type="string"> 6.3.2 </variable>
+			<variable name="nemo_gelato_commit" type="string"> 49095b3accd5d4c_6524fe19b00467a </variable>
+			<variable name="xios_commit" type="string"> 1442-shuffle </variable>
+			<field field_ref="CMIP7_tasmin_Scalheight2m_minimum" name="tas" grid_ref="FULL_grid_Scalheight2m_complete" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="area: mean time: minimum" cell_methods_mode="overwrite" operation="minimum">
+				<variable name="standard_name" type="string"> air_temperature </variable>
+				<variable name="description" type="string"> minimum near-surface (usually, 2 meter) air temperature (add cell\_method attribute "time: min") </variable>
+				<variable name="long_name" type="string"> Daily Minimum Near-Surface Air Temperature </variable>
+				<variable name="history" type="string"> none </variable>
+				<variable name="units" type="string"> K </variable>
+				<variable name="cell_methods" type="string"> area: mean time: minimum </variable>
+				<variable name="cell_measures" type="string"> area: areacella </variable>
+				<variable name="interval_operation" type="string"> 900 s </variable>
+			</field>
+		</file>
 		<file id="ta_tavg-p19-hxy-air_day_glb_gr" name="IOXDIRta_tavg-p19-hxy-air_day_glb_gr_CNRM-ESM2-1e_historical_r1i1p1f2_%start_date%-%end_date%" output_freq="1d" append="true" output_level="10" compression_level="4" split_freq="5y" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14107/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="area_label" type="string"> air </variable>
@@ -591,19 +591,18 @@ seaIce: Gelato 6.1',
 				<variable name="interval_operation" type="string"> 3h </variable>
 			</field>
 		</file>
-		<file id="rootd_ti-u-hxy-lnd_fx_glb_gr" name="IOXDIRrootd_ti-u-hxy-lnd_fx_glb_gr_CNRM-ESM2-1e_historical_r1i1p1f2" output_freq="1d" append="true" output_level="10" compression_level="4" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14107/%uuid%" convention_str="CF-1.7 CMIP-6.2">
+		<file id="areacella_ti-u-hxy-u_fx_glb_gr" name="IOXDIRareacella_ti-u-hxy-u_fx_glb_gr_CNRM-ESM2-1e_historical_r1i1p1f2" output_freq="1d" append="true" output_level="10" compression_level="4" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14107/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CMIP </variable>
-			<variable name="area_label" type="string"> lnd </variable>
+			<variable name="area_label" type="string"> u </variable>
 			<variable name="branch_time_in_child" type="double"> 0.0D </variable>
 			<variable name="branch_time_in_parent" type="double"> 36524.0D </variable>
-			<variable name="branded_variable" type="string"> rootd_ti-u-hxy-lnd </variable>
-			<variable name="branding_suffix" type="string"> ti-u-hxy-lnd </variable>
+			<variable name="branded_variable" type="string"> areacella_ti-u-hxy-u </variable>
+			<variable name="branding_suffix" type="string"> ti-u-hxy-u </variable>
 			<variable name="Conventions" type="string"> CF-1.11 CF-1.12 CF-1.13 </variable>
 			<variable name="data_specs_version" type="string"> MIP-DS7.1.0.0 </variable>
 			<variable name="drs_specs" type="string"> MIP-DRS7 </variable>
 			<variable name="experiment" type="string"> Simulation of the climate of the recent past (typically meaning 1850 to present-day) with prescribed carbon dioxide concentrations (for prescribed carbon dioxide emissions, see `esm-hist`). </variable>
 			<variable name="experiment_id" type="string"> historical </variable>
-			<variable name="external_variables" type="string"> areacella </variable>
 			<variable name="forcing_index" type="string"> f2 </variable>
 			<variable name="frequency" type="string"> fx </variable>
 			<variable name="grid_label" type="string"> gr </variable>
@@ -625,15 +624,15 @@ seaIce: Gelato 6.1',
 			<variable name="physics_index" type="string"> p1 </variable>
 			<variable name="product" type="string"> model-output </variable>
 			<variable name="realization_index" type="string"> r1 </variable>
-			<variable name="realm" type="string"> land </variable>
+			<variable name="realm" type="string"> atmos land </variable>
 			<variable name="region" type="string"> glb </variable>
 			<variable name="source_id" type="string"> CNRM-ESM2-1e </variable>
 			<variable name="temporal_label" type="string"> ti </variable>
-			<variable name="variable_id" type="string"> rootd </variable>
+			<variable name="variable_id" type="string"> areacella </variable>
 			<variable name="variant_label" type="string"> r1i1p1f2 </variable>
 			<variable name="vertical_label" type="string"> u </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
-			<variable name="physical_parameter" type="string"> rootd </variable>
+			<variable name="physical_parameter" type="string"> areacella </variable>
 			<variable name="dr_version" type="string"> Software current_cmip7_dr_software - Content test </variable>
 			<variable name="cv_version" type="string"> ESGVOC version 4.1.1 - CV content cmip7 1.1.0 </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
@@ -643,14 +642,13 @@ seaIce: Gelato 6.1',
 			<variable name="arpege_minor_version" type="string"> 6.3.2 </variable>
 			<variable name="nemo_gelato_commit" type="string"> 49095b3accd5d4c_6524fe19b00467a </variable>
 			<variable name="xios_commit" type="string"> 1442-shuffle </variable>
-			<field field_ref="CMIP7_rootd_once" name="rootd" grid_ref="NATURE_grid_complete" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="area: mean where land" cell_methods_mode="overwrite" operation="once">
-				<variable name="standard_name" type="string"> root_depth </variable>
-				<variable name="description" type="string"> report the maximum soil depth reachable by plant roots (if defined in model), i.e., the maximum soil depth from which they can extract moisture; report as "missing" where the land fraction is 0. </variable>
-				<variable name="long_name" type="string"> Maximum Root Depth </variable>
+			<field field_ref="CMIP7_areacella_once" name="areacella" grid_ref="FULL_grid_complete" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="area: sum" cell_methods_mode="overwrite" operation="once">
+				<variable name="standard_name" type="string"> cell_area </variable>
+				<variable name="description" type="string"> Cell areas for any grid used to report atmospheric variables and any other variable using that grid (e.g., soil moisture content). These cell areas should be defined to enable exact calculation of global integrals (e.g., of vertical fluxes of energy at the surface and top of the atmosphere). </variable>
+				<variable name="long_name" type="string"> Grid-Cell Area for Atmospheric Grid Variables </variable>
 				<variable name="history" type="string"> none </variable>
-				<variable name="units" type="string"> m </variable>
-				<variable name="cell_methods" type="string"> area: mean where land </variable>
-				<variable name="cell_measures" type="string"> area: areacella </variable>
+				<variable name="units" type="string"> m2 </variable>
+				<variable name="cell_methods" type="string"> area: sum </variable>
 			</field>
 		</file>
 		<file id="orog_ti-u-hxy-u_fx_glb_gr" name="IOXDIRorog_ti-u-hxy-u_fx_glb_gr_CNRM-ESM2-1e_historical_r1i1p1f2" output_freq="1d" append="true" output_level="10" compression_level="4" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14107/%uuid%" convention_str="CF-1.7 CMIP-6.2">
@@ -715,6 +713,68 @@ seaIce: Gelato 6.1',
 				<variable name="cell_measures" type="string"> area: areacella </variable>
 			</field>
 		</file>
+		<file id="rootd_ti-u-hxy-lnd_fx_glb_gr" name="IOXDIRrootd_ti-u-hxy-lnd_fx_glb_gr_CNRM-ESM2-1e_historical_r1i1p1f2" output_freq="1d" append="true" output_level="10" compression_level="4" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14107/%uuid%" convention_str="CF-1.7 CMIP-6.2">
+			<variable name="activity_id" type="string"> CMIP </variable>
+			<variable name="area_label" type="string"> lnd </variable>
+			<variable name="branch_time_in_child" type="double"> 0.0D </variable>
+			<variable name="branch_time_in_parent" type="double"> 36524.0D </variable>
+			<variable name="branded_variable" type="string"> rootd_ti-u-hxy-lnd </variable>
+			<variable name="branding_suffix" type="string"> ti-u-hxy-lnd </variable>
+			<variable name="Conventions" type="string"> CF-1.11 CF-1.12 CF-1.13 </variable>
+			<variable name="data_specs_version" type="string"> MIP-DS7.1.0.0 </variable>
+			<variable name="drs_specs" type="string"> MIP-DRS7 </variable>
+			<variable name="experiment" type="string"> Simulation of the climate of the recent past (typically meaning 1850 to present-day) with prescribed carbon dioxide concentrations (for prescribed carbon dioxide emissions, see `esm-hist`). </variable>
+			<variable name="experiment_id" type="string"> historical </variable>
+			<variable name="external_variables" type="string"> areacella </variable>
+			<variable name="forcing_index" type="string"> f2 </variable>
+			<variable name="frequency" type="string"> fx </variable>
+			<variable name="grid_label" type="string"> gr </variable>
+			<variable name="history" type="string"> none </variable>
+			<variable name="horizontal_label" type="string"> hxy </variable>
+			<variable name="initialization_index" type="string"> i1 </variable>
+			<variable name="institution" type="string"> CNRM (Centre National de Recherches Meteorologiques, Toulouse 31057, France), CERFACS (Centre Europeen de Recherche et de Formation Avancee en Calcul Scientifique, Toulouse 31057, France) </variable>
+			<variable name="institution_id" type="string"> CNRM-CERFACS </variable>
+			<variable name="license_id" type="string"> CC-BY-4.0 </variable>
+			<variable name="mip_era" type="string"> CMIP7 </variable>
+			<variable name="nominal_resolution" type="string"> 250 km </variable>
+			<variable name="parent_activity_id" type="string"> CMIP </variable>
+			<variable name="parent_calendar" type="string"> standard </variable>
+			<variable name="parent_experiment_id" type="string"> piControl </variable>
+			<variable name="parent_mip_era" type="string"> CMIP7 </variable>
+			<variable name="parent_source_id" type="string"> CNRM-ESM2-1e </variable>
+			<variable name="parent_time_units" type="string"> days since 1850-01-01 00:00:00 </variable>
+			<variable name="parent_variant_label" type="string"> r1i1p1f2 </variable>
+			<variable name="physics_index" type="string"> p1 </variable>
+			<variable name="product" type="string"> model-output </variable>
+			<variable name="realization_index" type="string"> r1 </variable>
+			<variable name="realm" type="string"> land </variable>
+			<variable name="region" type="string"> glb </variable>
+			<variable name="source_id" type="string"> CNRM-ESM2-1e </variable>
+			<variable name="temporal_label" type="string"> ti </variable>
+			<variable name="variable_id" type="string"> rootd </variable>
+			<variable name="variant_label" type="string"> r1i1p1f2 </variable>
+			<variable name="vertical_label" type="string"> u </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
+			<variable name="physical_parameter" type="string"> rootd </variable>
+			<variable name="dr_version" type="string"> Software current_cmip7_dr_software - Content test </variable>
+			<variable name="cv_version" type="string"> ESGVOC version 4.1.1 - CV content cmip7 1.1.0 </variable>
+			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
+			<variable name="CMIP6_CV_version" type="string"> cv=6.2.3.0-7-g2019642 </variable>
+			<variable name="EXPID" type="string"> CNRM-ESM2-1_historical_r1i1p1f2_v2 </variable>
+			<variable name="dr2xml_md5sum" type="string"> 7040f60f6bf3118dc6c58b9fb8727d87 </variable>
+			<variable name="arpege_minor_version" type="string"> 6.3.2 </variable>
+			<variable name="nemo_gelato_commit" type="string"> 49095b3accd5d4c_6524fe19b00467a </variable>
+			<variable name="xios_commit" type="string"> 1442-shuffle </variable>
+			<field field_ref="CMIP7_rootd_once" name="rootd" grid_ref="NATURE_grid_complete" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="area: mean where land" cell_methods_mode="overwrite" operation="once">
+				<variable name="standard_name" type="string"> root_depth </variable>
+				<variable name="description" type="string"> report the maximum soil depth reachable by plant roots (if defined in model), i.e., the maximum soil depth from which they can extract moisture; report as "missing" where the land fraction is 0. </variable>
+				<variable name="long_name" type="string"> Maximum Root Depth </variable>
+				<variable name="history" type="string"> none </variable>
+				<variable name="units" type="string"> m </variable>
+				<variable name="cell_methods" type="string"> area: mean where land </variable>
+				<variable name="cell_measures" type="string"> area: areacella </variable>
+			</field>
+		</file>
 		<file id="sftlf_ti-u-hxy-u_fx_glb_gr" name="IOXDIRsftlf_ti-u-hxy-u_fx_glb_gr_CNRM-ESM2-1e_historical_r1i1p1f2" output_freq="1d" append="true" output_level="10" compression_level="4" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14107/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="area_label" type="string"> u </variable>
@@ -775,66 +835,6 @@ seaIce: Gelato 6.1',
 				<variable name="units" type="string"> % </variable>
 				<variable name="cell_methods" type="string"> area: mean </variable>
 				<variable name="cell_measures" type="string"> area: areacella </variable>
-			</field>
-		</file>
-		<file id="areacella_ti-u-hxy-u_fx_glb_gr" name="IOXDIRareacella_ti-u-hxy-u_fx_glb_gr_CNRM-ESM2-1e_historical_r1i1p1f2" output_freq="1d" append="true" output_level="10" compression_level="4" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14107/%uuid%" convention_str="CF-1.7 CMIP-6.2">
-			<variable name="activity_id" type="string"> CMIP </variable>
-			<variable name="area_label" type="string"> u </variable>
-			<variable name="branch_time_in_child" type="double"> 0.0D </variable>
-			<variable name="branch_time_in_parent" type="double"> 36524.0D </variable>
-			<variable name="branded_variable" type="string"> areacella_ti-u-hxy-u </variable>
-			<variable name="branding_suffix" type="string"> ti-u-hxy-u </variable>
-			<variable name="Conventions" type="string"> CF-1.11 CF-1.12 CF-1.13 </variable>
-			<variable name="data_specs_version" type="string"> MIP-DS7.1.0.0 </variable>
-			<variable name="drs_specs" type="string"> MIP-DRS7 </variable>
-			<variable name="experiment" type="string"> Simulation of the climate of the recent past (typically meaning 1850 to present-day) with prescribed carbon dioxide concentrations (for prescribed carbon dioxide emissions, see `esm-hist`). </variable>
-			<variable name="experiment_id" type="string"> historical </variable>
-			<variable name="forcing_index" type="string"> f2 </variable>
-			<variable name="frequency" type="string"> fx </variable>
-			<variable name="grid_label" type="string"> gr </variable>
-			<variable name="history" type="string"> none </variable>
-			<variable name="horizontal_label" type="string"> hxy </variable>
-			<variable name="initialization_index" type="string"> i1 </variable>
-			<variable name="institution" type="string"> CNRM (Centre National de Recherches Meteorologiques, Toulouse 31057, France), CERFACS (Centre Europeen de Recherche et de Formation Avancee en Calcul Scientifique, Toulouse 31057, France) </variable>
-			<variable name="institution_id" type="string"> CNRM-CERFACS </variable>
-			<variable name="license_id" type="string"> CC-BY-4.0 </variable>
-			<variable name="mip_era" type="string"> CMIP7 </variable>
-			<variable name="nominal_resolution" type="string"> 250 km </variable>
-			<variable name="parent_activity_id" type="string"> CMIP </variable>
-			<variable name="parent_calendar" type="string"> standard </variable>
-			<variable name="parent_experiment_id" type="string"> piControl </variable>
-			<variable name="parent_mip_era" type="string"> CMIP7 </variable>
-			<variable name="parent_source_id" type="string"> CNRM-ESM2-1e </variable>
-			<variable name="parent_time_units" type="string"> days since 1850-01-01 00:00:00 </variable>
-			<variable name="parent_variant_label" type="string"> r1i1p1f2 </variable>
-			<variable name="physics_index" type="string"> p1 </variable>
-			<variable name="product" type="string"> model-output </variable>
-			<variable name="realization_index" type="string"> r1 </variable>
-			<variable name="realm" type="string"> atmos land </variable>
-			<variable name="region" type="string"> glb </variable>
-			<variable name="source_id" type="string"> CNRM-ESM2-1e </variable>
-			<variable name="temporal_label" type="string"> ti </variable>
-			<variable name="variable_id" type="string"> areacella </variable>
-			<variable name="variant_label" type="string"> r1i1p1f2 </variable>
-			<variable name="vertical_label" type="string"> u </variable>
-			<variable name="dr2xml_version" type="string"> current_version </variable>
-			<variable name="physical_parameter" type="string"> areacella </variable>
-			<variable name="dr_version" type="string"> Software current_cmip7_dr_software - Content test </variable>
-			<variable name="cv_version" type="string"> ESGVOC version 4.1.1 - CV content cmip7 1.1.0 </variable>
-			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
-			<variable name="CMIP6_CV_version" type="string"> cv=6.2.3.0-7-g2019642 </variable>
-			<variable name="EXPID" type="string"> CNRM-ESM2-1_historical_r1i1p1f2_v2 </variable>
-			<variable name="dr2xml_md5sum" type="string"> 7040f60f6bf3118dc6c58b9fb8727d87 </variable>
-			<variable name="arpege_minor_version" type="string"> 6.3.2 </variable>
-			<variable name="nemo_gelato_commit" type="string"> 49095b3accd5d4c_6524fe19b00467a </variable>
-			<variable name="xios_commit" type="string"> 1442-shuffle </variable>
-			<field field_ref="CMIP7_areacella_once" name="areacella" grid_ref="FULL_grid_complete" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="area: sum" cell_methods_mode="overwrite" operation="once">
-				<variable name="standard_name" type="string"> cell_area </variable>
-				<variable name="description" type="string"> Cell areas for any grid used to report atmospheric variables and any other variable using that grid (e.g., soil moisture content). These cell areas should be defined to enable exact calculation of global integrals (e.g., of vertical fluxes of energy at the surface and top of the atmosphere). </variable>
-				<variable name="long_name" type="string"> Grid-Cell Area for Atmospheric Grid Variables </variable>
-				<variable name="history" type="string"> none </variable>
-				<variable name="units" type="string"> m2 </variable>
-				<variable name="cell_methods" type="string"> area: sum </variable>
 			</field>
 		</file>
 		<file id="wilt_hr_1hr_default_gr" name="IOXDIRwilt_hr_1hr_default_gr_CNRM-ESM2-1e_historical_r1i1p1f2_%start_date%-%end_date%" output_freq="1h" append="true" output_level="10" compression_level="4" split_freq="5y" split_freq_format="%y%mo%d%h%mi" split_start_offset="30mi" split_end_offset="-30mi" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14107/%uuid%" convention_str="CF-1.7 CMIP-6.2">
@@ -1021,132 +1021,6 @@ seaIce: Gelato 6.1',
 				<variable name="cell_methods" type="string"> area: time: mean where air </variable>
 				<variable name="cell_measures" type="string"> area: areacella </variable>
 				<variable name="interval_operation" type="string"> 3h </variable>
-			</field>
-		</file>
-		<file id="tas_tmaxavg-h2m-hxy-u_mon_glb_gr" name="IOXDIRtas_tmaxavg-h2m-hxy-u_mon_glb_gr_CNRM-ESM2-1e_historical_r1i1p1f2_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="500y" split_freq_format="%y%mo" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14107/%uuid%" convention_str="CF-1.7 CMIP-6.2">
-			<variable name="activity_id" type="string"> CMIP </variable>
-			<variable name="area_label" type="string"> u </variable>
-			<variable name="branch_time_in_child" type="double"> 0.0D </variable>
-			<variable name="branch_time_in_parent" type="double"> 36524.0D </variable>
-			<variable name="branded_variable" type="string"> tas_tmaxavg-h2m-hxy-u </variable>
-			<variable name="branding_suffix" type="string"> tmaxavg-h2m-hxy-u </variable>
-			<variable name="Conventions" type="string"> CF-1.11 CF-1.12 CF-1.13 </variable>
-			<variable name="data_specs_version" type="string"> MIP-DS7.1.0.0 </variable>
-			<variable name="drs_specs" type="string"> MIP-DRS7 </variable>
-			<variable name="experiment" type="string"> Simulation of the climate of the recent past (typically meaning 1850 to present-day) with prescribed carbon dioxide concentrations (for prescribed carbon dioxide emissions, see `esm-hist`). </variable>
-			<variable name="experiment_id" type="string"> historical </variable>
-			<variable name="external_variables" type="string"> areacella </variable>
-			<variable name="forcing_index" type="string"> f2 </variable>
-			<variable name="frequency" type="string"> mon </variable>
-			<variable name="grid_label" type="string"> gr </variable>
-			<variable name="history" type="string"> none </variable>
-			<variable name="horizontal_label" type="string"> hxy </variable>
-			<variable name="initialization_index" type="string"> i1 </variable>
-			<variable name="institution" type="string"> CNRM (Centre National de Recherches Meteorologiques, Toulouse 31057, France), CERFACS (Centre Europeen de Recherche et de Formation Avancee en Calcul Scientifique, Toulouse 31057, France) </variable>
-			<variable name="institution_id" type="string"> CNRM-CERFACS </variable>
-			<variable name="license_id" type="string"> CC-BY-4.0 </variable>
-			<variable name="mip_era" type="string"> CMIP7 </variable>
-			<variable name="nominal_resolution" type="string"> 250 km </variable>
-			<variable name="parent_activity_id" type="string"> CMIP </variable>
-			<variable name="parent_calendar" type="string"> standard </variable>
-			<variable name="parent_experiment_id" type="string"> piControl </variable>
-			<variable name="parent_mip_era" type="string"> CMIP7 </variable>
-			<variable name="parent_source_id" type="string"> CNRM-ESM2-1e </variable>
-			<variable name="parent_time_units" type="string"> days since 1850-01-01 00:00:00 </variable>
-			<variable name="parent_variant_label" type="string"> r1i1p1f2 </variable>
-			<variable name="physics_index" type="string"> p1 </variable>
-			<variable name="product" type="string"> model-output </variable>
-			<variable name="realization_index" type="string"> r1 </variable>
-			<variable name="realm" type="string"> atmos </variable>
-			<variable name="region" type="string"> glb </variable>
-			<variable name="source_id" type="string"> CNRM-ESM2-1e </variable>
-			<variable name="temporal_label" type="string"> tmaxavg </variable>
-			<variable name="variable_id" type="string"> tas </variable>
-			<variable name="variant_label" type="string"> r1i1p1f2 </variable>
-			<variable name="vertical_label" type="string"> h2m </variable>
-			<variable name="dr2xml_version" type="string"> current_version </variable>
-			<variable name="physical_parameter" type="string"> tasmax </variable>
-			<variable name="dr_version" type="string"> Software current_cmip7_dr_software - Content test </variable>
-			<variable name="cv_version" type="string"> ESGVOC version 4.1.1 - CV content cmip7 1.1.0 </variable>
-			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
-			<variable name="CMIP6_CV_version" type="string"> cv=6.2.3.0-7-g2019642 </variable>
-			<variable name="EXPID" type="string"> CNRM-ESM2-1_historical_r1i1p1f2_v2 </variable>
-			<variable name="dr2xml_md5sum" type="string"> 7040f60f6bf3118dc6c58b9fb8727d87 </variable>
-			<variable name="arpege_minor_version" type="string"> 6.3.2 </variable>
-			<variable name="nemo_gelato_commit" type="string"> 49095b3accd5d4c_6524fe19b00467a </variable>
-			<variable name="xios_commit" type="string"> 1442-shuffle </variable>
-			<field field_ref="CMIP7_tasmax_Scalheight2m_average" name="tas" grid_ref="FULL_grid_Scalheight2m_complete" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="area: mean time: maximum within days time: mean over days" cell_methods_mode="overwrite" operation="average" freq_op="1mo">				@CMIP7_tasmax_Scalheight2m_average
-				<variable name="standard_name" type="string"> air_temperature </variable>
-				<variable name="description" type="string"> monthly mean of the daily-maximum near-surface air temperature. </variable>
-				<variable name="long_name" type="string"> Daily Maximum Near-Surface Air Temperature </variable>
-				<variable name="history" type="string"> none </variable>
-				<variable name="units" type="string"> K </variable>
-				<variable name="cell_methods" type="string"> area: mean time: maximum within days time: mean over days </variable>
-				<variable name="cell_measures" type="string"> area: areacella </variable>
-				<variable name="interval_operation" type="string"> 900 s </variable>
-			</field>
-		</file>
-		<file id="tas_tminavg-h2m-hxy-u_mon_glb_gr" name="IOXDIRtas_tminavg-h2m-hxy-u_mon_glb_gr_CNRM-ESM2-1e_historical_r1i1p1f2_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="500y" split_freq_format="%y%mo" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14107/%uuid%" convention_str="CF-1.7 CMIP-6.2">
-			<variable name="activity_id" type="string"> CMIP </variable>
-			<variable name="area_label" type="string"> u </variable>
-			<variable name="branch_time_in_child" type="double"> 0.0D </variable>
-			<variable name="branch_time_in_parent" type="double"> 36524.0D </variable>
-			<variable name="branded_variable" type="string"> tas_tminavg-h2m-hxy-u </variable>
-			<variable name="branding_suffix" type="string"> tminavg-h2m-hxy-u </variable>
-			<variable name="Conventions" type="string"> CF-1.11 CF-1.12 CF-1.13 </variable>
-			<variable name="data_specs_version" type="string"> MIP-DS7.1.0.0 </variable>
-			<variable name="drs_specs" type="string"> MIP-DRS7 </variable>
-			<variable name="experiment" type="string"> Simulation of the climate of the recent past (typically meaning 1850 to present-day) with prescribed carbon dioxide concentrations (for prescribed carbon dioxide emissions, see `esm-hist`). </variable>
-			<variable name="experiment_id" type="string"> historical </variable>
-			<variable name="external_variables" type="string"> areacella </variable>
-			<variable name="forcing_index" type="string"> f2 </variable>
-			<variable name="frequency" type="string"> mon </variable>
-			<variable name="grid_label" type="string"> gr </variable>
-			<variable name="history" type="string"> none </variable>
-			<variable name="horizontal_label" type="string"> hxy </variable>
-			<variable name="initialization_index" type="string"> i1 </variable>
-			<variable name="institution" type="string"> CNRM (Centre National de Recherches Meteorologiques, Toulouse 31057, France), CERFACS (Centre Europeen de Recherche et de Formation Avancee en Calcul Scientifique, Toulouse 31057, France) </variable>
-			<variable name="institution_id" type="string"> CNRM-CERFACS </variable>
-			<variable name="license_id" type="string"> CC-BY-4.0 </variable>
-			<variable name="mip_era" type="string"> CMIP7 </variable>
-			<variable name="nominal_resolution" type="string"> 250 km </variable>
-			<variable name="parent_activity_id" type="string"> CMIP </variable>
-			<variable name="parent_calendar" type="string"> standard </variable>
-			<variable name="parent_experiment_id" type="string"> piControl </variable>
-			<variable name="parent_mip_era" type="string"> CMIP7 </variable>
-			<variable name="parent_source_id" type="string"> CNRM-ESM2-1e </variable>
-			<variable name="parent_time_units" type="string"> days since 1850-01-01 00:00:00 </variable>
-			<variable name="parent_variant_label" type="string"> r1i1p1f2 </variable>
-			<variable name="physics_index" type="string"> p1 </variable>
-			<variable name="product" type="string"> model-output </variable>
-			<variable name="realization_index" type="string"> r1 </variable>
-			<variable name="realm" type="string"> atmos </variable>
-			<variable name="region" type="string"> glb </variable>
-			<variable name="source_id" type="string"> CNRM-ESM2-1e </variable>
-			<variable name="temporal_label" type="string"> tminavg </variable>
-			<variable name="variable_id" type="string"> tas </variable>
-			<variable name="variant_label" type="string"> r1i1p1f2 </variable>
-			<variable name="vertical_label" type="string"> h2m </variable>
-			<variable name="dr2xml_version" type="string"> current_version </variable>
-			<variable name="physical_parameter" type="string"> tasmin </variable>
-			<variable name="dr_version" type="string"> Software current_cmip7_dr_software - Content test </variable>
-			<variable name="cv_version" type="string"> ESGVOC version 4.1.1 - CV content cmip7 1.1.0 </variable>
-			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
-			<variable name="CMIP6_CV_version" type="string"> cv=6.2.3.0-7-g2019642 </variable>
-			<variable name="EXPID" type="string"> CNRM-ESM2-1_historical_r1i1p1f2_v2 </variable>
-			<variable name="dr2xml_md5sum" type="string"> 7040f60f6bf3118dc6c58b9fb8727d87 </variable>
-			<variable name="arpege_minor_version" type="string"> 6.3.2 </variable>
-			<variable name="nemo_gelato_commit" type="string"> 49095b3accd5d4c_6524fe19b00467a </variable>
-			<variable name="xios_commit" type="string"> 1442-shuffle </variable>
-			<field field_ref="CMIP7_tasmin_Scalheight2m_average" name="tas" grid_ref="FULL_grid_Scalheight2m_complete" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="area: mean time: minimum within days time: mean over days" cell_methods_mode="overwrite" operation="average" freq_op="1mo">				@CMIP7_tasmin_Scalheight2m_average
-				<variable name="standard_name" type="string"> air_temperature </variable>
-				<variable name="description" type="string"> monthly mean of the daily-minimum near-surface air temperature. </variable>
-				<variable name="long_name" type="string"> Daily Minimum Near-Surface Air Temperature </variable>
-				<variable name="history" type="string"> none </variable>
-				<variable name="units" type="string"> K </variable>
-				<variable name="cell_methods" type="string"> area: mean time: minimum within days time: mean over days </variable>
-				<variable name="cell_measures" type="string"> area: areacella </variable>
-				<variable name="interval_operation" type="string"> 900 s </variable>
 			</field>
 		</file>
 		<file id="pr_tavg-u-hxy-u_mon_glb_gr" name="IOXDIRpr_tavg-u-hxy-u_mon_glb_gr_CNRM-ESM2-1e_historical_r1i1p1f2_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="500y" split_freq_format="%y%mo" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14107/%uuid%" convention_str="CF-1.7 CMIP-6.2">
@@ -1397,6 +1271,132 @@ seaIce: Gelato 6.1',
 				<variable name="history" type="string"> none </variable>
 				<variable name="units" type="string"> K </variable>
 				<variable name="cell_methods" type="string"> area: time: mean </variable>
+				<variable name="cell_measures" type="string"> area: areacella </variable>
+				<variable name="interval_operation" type="string"> 900 s </variable>
+			</field>
+		</file>
+		<file id="tas_tmaxavg-h2m-hxy-u_mon_glb_gr" name="IOXDIRtas_tmaxavg-h2m-hxy-u_mon_glb_gr_CNRM-ESM2-1e_historical_r1i1p1f2_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="500y" split_freq_format="%y%mo" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14107/%uuid%" convention_str="CF-1.7 CMIP-6.2">
+			<variable name="activity_id" type="string"> CMIP </variable>
+			<variable name="area_label" type="string"> u </variable>
+			<variable name="branch_time_in_child" type="double"> 0.0D </variable>
+			<variable name="branch_time_in_parent" type="double"> 36524.0D </variable>
+			<variable name="branded_variable" type="string"> tas_tmaxavg-h2m-hxy-u </variable>
+			<variable name="branding_suffix" type="string"> tmaxavg-h2m-hxy-u </variable>
+			<variable name="Conventions" type="string"> CF-1.11 CF-1.12 CF-1.13 </variable>
+			<variable name="data_specs_version" type="string"> MIP-DS7.1.0.0 </variable>
+			<variable name="drs_specs" type="string"> MIP-DRS7 </variable>
+			<variable name="experiment" type="string"> Simulation of the climate of the recent past (typically meaning 1850 to present-day) with prescribed carbon dioxide concentrations (for prescribed carbon dioxide emissions, see `esm-hist`). </variable>
+			<variable name="experiment_id" type="string"> historical </variable>
+			<variable name="external_variables" type="string"> areacella </variable>
+			<variable name="forcing_index" type="string"> f2 </variable>
+			<variable name="frequency" type="string"> mon </variable>
+			<variable name="grid_label" type="string"> gr </variable>
+			<variable name="history" type="string"> none </variable>
+			<variable name="horizontal_label" type="string"> hxy </variable>
+			<variable name="initialization_index" type="string"> i1 </variable>
+			<variable name="institution" type="string"> CNRM (Centre National de Recherches Meteorologiques, Toulouse 31057, France), CERFACS (Centre Europeen de Recherche et de Formation Avancee en Calcul Scientifique, Toulouse 31057, France) </variable>
+			<variable name="institution_id" type="string"> CNRM-CERFACS </variable>
+			<variable name="license_id" type="string"> CC-BY-4.0 </variable>
+			<variable name="mip_era" type="string"> CMIP7 </variable>
+			<variable name="nominal_resolution" type="string"> 250 km </variable>
+			<variable name="parent_activity_id" type="string"> CMIP </variable>
+			<variable name="parent_calendar" type="string"> standard </variable>
+			<variable name="parent_experiment_id" type="string"> piControl </variable>
+			<variable name="parent_mip_era" type="string"> CMIP7 </variable>
+			<variable name="parent_source_id" type="string"> CNRM-ESM2-1e </variable>
+			<variable name="parent_time_units" type="string"> days since 1850-01-01 00:00:00 </variable>
+			<variable name="parent_variant_label" type="string"> r1i1p1f2 </variable>
+			<variable name="physics_index" type="string"> p1 </variable>
+			<variable name="product" type="string"> model-output </variable>
+			<variable name="realization_index" type="string"> r1 </variable>
+			<variable name="realm" type="string"> atmos </variable>
+			<variable name="region" type="string"> glb </variable>
+			<variable name="source_id" type="string"> CNRM-ESM2-1e </variable>
+			<variable name="temporal_label" type="string"> tmaxavg </variable>
+			<variable name="variable_id" type="string"> tas </variable>
+			<variable name="variant_label" type="string"> r1i1p1f2 </variable>
+			<variable name="vertical_label" type="string"> h2m </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
+			<variable name="physical_parameter" type="string"> tasmax </variable>
+			<variable name="dr_version" type="string"> Software current_cmip7_dr_software - Content test </variable>
+			<variable name="cv_version" type="string"> ESGVOC version 4.1.1 - CV content cmip7 1.1.0 </variable>
+			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
+			<variable name="CMIP6_CV_version" type="string"> cv=6.2.3.0-7-g2019642 </variable>
+			<variable name="EXPID" type="string"> CNRM-ESM2-1_historical_r1i1p1f2_v2 </variable>
+			<variable name="dr2xml_md5sum" type="string"> 7040f60f6bf3118dc6c58b9fb8727d87 </variable>
+			<variable name="arpege_minor_version" type="string"> 6.3.2 </variable>
+			<variable name="nemo_gelato_commit" type="string"> 49095b3accd5d4c_6524fe19b00467a </variable>
+			<variable name="xios_commit" type="string"> 1442-shuffle </variable>
+			<field field_ref="CMIP7_tasmax_Scalheight2m_average" name="tas" grid_ref="FULL_grid_Scalheight2m_complete" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="area: mean time: maximum within days time: mean over days" cell_methods_mode="overwrite" operation="average" freq_op="1mo">				@CMIP7_tasmax_Scalheight2m_average
+				<variable name="standard_name" type="string"> air_temperature </variable>
+				<variable name="description" type="string"> monthly mean of the daily-maximum near-surface air temperature. </variable>
+				<variable name="long_name" type="string"> Daily Maximum Near-Surface Air Temperature </variable>
+				<variable name="history" type="string"> none </variable>
+				<variable name="units" type="string"> K </variable>
+				<variable name="cell_methods" type="string"> area: mean time: maximum within days time: mean over days </variable>
+				<variable name="cell_measures" type="string"> area: areacella </variable>
+				<variable name="interval_operation" type="string"> 900 s </variable>
+			</field>
+		</file>
+		<file id="tas_tminavg-h2m-hxy-u_mon_glb_gr" name="IOXDIRtas_tminavg-h2m-hxy-u_mon_glb_gr_CNRM-ESM2-1e_historical_r1i1p1f2_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="500y" split_freq_format="%y%mo" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14107/%uuid%" convention_str="CF-1.7 CMIP-6.2">
+			<variable name="activity_id" type="string"> CMIP </variable>
+			<variable name="area_label" type="string"> u </variable>
+			<variable name="branch_time_in_child" type="double"> 0.0D </variable>
+			<variable name="branch_time_in_parent" type="double"> 36524.0D </variable>
+			<variable name="branded_variable" type="string"> tas_tminavg-h2m-hxy-u </variable>
+			<variable name="branding_suffix" type="string"> tminavg-h2m-hxy-u </variable>
+			<variable name="Conventions" type="string"> CF-1.11 CF-1.12 CF-1.13 </variable>
+			<variable name="data_specs_version" type="string"> MIP-DS7.1.0.0 </variable>
+			<variable name="drs_specs" type="string"> MIP-DRS7 </variable>
+			<variable name="experiment" type="string"> Simulation of the climate of the recent past (typically meaning 1850 to present-day) with prescribed carbon dioxide concentrations (for prescribed carbon dioxide emissions, see `esm-hist`). </variable>
+			<variable name="experiment_id" type="string"> historical </variable>
+			<variable name="external_variables" type="string"> areacella </variable>
+			<variable name="forcing_index" type="string"> f2 </variable>
+			<variable name="frequency" type="string"> mon </variable>
+			<variable name="grid_label" type="string"> gr </variable>
+			<variable name="history" type="string"> none </variable>
+			<variable name="horizontal_label" type="string"> hxy </variable>
+			<variable name="initialization_index" type="string"> i1 </variable>
+			<variable name="institution" type="string"> CNRM (Centre National de Recherches Meteorologiques, Toulouse 31057, France), CERFACS (Centre Europeen de Recherche et de Formation Avancee en Calcul Scientifique, Toulouse 31057, France) </variable>
+			<variable name="institution_id" type="string"> CNRM-CERFACS </variable>
+			<variable name="license_id" type="string"> CC-BY-4.0 </variable>
+			<variable name="mip_era" type="string"> CMIP7 </variable>
+			<variable name="nominal_resolution" type="string"> 250 km </variable>
+			<variable name="parent_activity_id" type="string"> CMIP </variable>
+			<variable name="parent_calendar" type="string"> standard </variable>
+			<variable name="parent_experiment_id" type="string"> piControl </variable>
+			<variable name="parent_mip_era" type="string"> CMIP7 </variable>
+			<variable name="parent_source_id" type="string"> CNRM-ESM2-1e </variable>
+			<variable name="parent_time_units" type="string"> days since 1850-01-01 00:00:00 </variable>
+			<variable name="parent_variant_label" type="string"> r1i1p1f2 </variable>
+			<variable name="physics_index" type="string"> p1 </variable>
+			<variable name="product" type="string"> model-output </variable>
+			<variable name="realization_index" type="string"> r1 </variable>
+			<variable name="realm" type="string"> atmos </variable>
+			<variable name="region" type="string"> glb </variable>
+			<variable name="source_id" type="string"> CNRM-ESM2-1e </variable>
+			<variable name="temporal_label" type="string"> tminavg </variable>
+			<variable name="variable_id" type="string"> tas </variable>
+			<variable name="variant_label" type="string"> r1i1p1f2 </variable>
+			<variable name="vertical_label" type="string"> h2m </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
+			<variable name="physical_parameter" type="string"> tasmin </variable>
+			<variable name="dr_version" type="string"> Software current_cmip7_dr_software - Content test </variable>
+			<variable name="cv_version" type="string"> ESGVOC version 4.1.1 - CV content cmip7 1.1.0 </variable>
+			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
+			<variable name="CMIP6_CV_version" type="string"> cv=6.2.3.0-7-g2019642 </variable>
+			<variable name="EXPID" type="string"> CNRM-ESM2-1_historical_r1i1p1f2_v2 </variable>
+			<variable name="dr2xml_md5sum" type="string"> 7040f60f6bf3118dc6c58b9fb8727d87 </variable>
+			<variable name="arpege_minor_version" type="string"> 6.3.2 </variable>
+			<variable name="nemo_gelato_commit" type="string"> 49095b3accd5d4c_6524fe19b00467a </variable>
+			<variable name="xios_commit" type="string"> 1442-shuffle </variable>
+			<field field_ref="CMIP7_tasmin_Scalheight2m_average" name="tas" grid_ref="FULL_grid_Scalheight2m_complete" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="area: mean time: minimum within days time: mean over days" cell_methods_mode="overwrite" operation="average" freq_op="1mo">				@CMIP7_tasmin_Scalheight2m_average
+				<variable name="standard_name" type="string"> air_temperature </variable>
+				<variable name="description" type="string"> monthly mean of the daily-minimum near-surface air temperature. </variable>
+				<variable name="long_name" type="string"> Daily Minimum Near-Surface Air Temperature </variable>
+				<variable name="history" type="string"> none </variable>
+				<variable name="units" type="string"> K </variable>
+				<variable name="cell_methods" type="string"> area: mean time: minimum within days time: mean over days </variable>
 				<variable name="cell_measures" type="string"> area: areacella </variable>
 				<variable name="interval_operation" type="string"> 900 s </variable>
 			</field>

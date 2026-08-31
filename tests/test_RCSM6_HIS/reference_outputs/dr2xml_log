@@ -98,6 +98,8 @@ OK current_directory/test_RCSM6_HIS/input/xml/ping_trip.xml
 Cannot normalize an axis in grid grid_T_3D: no axis_ref for axis 				<axis id="deptht"/>
 Cannot normalize an axis in grid grid_T_3D: no axis_ref for axis 				<axis id="deptht"/>
 Cannot normalize an axis in grid grid_W_3D: no axis_ref for axis 				<axis id="depthw"/>
+Cannot normalize an axis in grid grid_T_3D: no axis_ref for axis 				<axis id="deptht"/>
+Cannot normalize an axis in grid grid_T_3D: no axis_ref for axis 				<axis id="deptht"/>
 Cannot normalize an axis in grid grid_U_3D: no axis_ref for axis 				<axis id="depthu"/>
 Cannot normalize an axis in grid grid_V_3D: no axis_ref for axis 				<axis id="depthv"/>
 Cannot normalize an axis in grid grid_W_3D: no axis_ref for axis 				<axis id="depthw"/>
@@ -117,8 +119,6 @@ Cannot normalize an axis in grid grid_T_3D: no axis_ref for axis 				<axis id="d
 Cannot normalize an axis in grid grid_T_3D: no axis_ref for axis 				<axis id="deptht"/>
 Cannot normalize an axis in grid grid_T_3D: no axis_ref for axis 				<axis id="deptht"/>
 Cannot normalize an axis in grid grid_T_3D: no axis_ref for axis 				<axis id="deptht"/>
-Cannot normalize an axis in grid grid_T_3D: no axis_ref for axis 				<axis id="deptht"/>
-Cannot normalize an axis in grid grid_T_3D: no axis_ref for axis 				<axis id="deptht"/>
 Cannot normalize an axis in grid grid_U_3D: no axis_ref for axis 				<axis id="depthu"/>
 Cannot normalize an axis in grid grid_U_3D: no axis_ref for axis 				<axis id="depthu"/>
 Cannot normalize an axis in grid grid_U_3D: no axis_ref for axis 				<axis id="depthu"/>
@@ -140,11 +140,11 @@ Cannot normalize an axis in grid grid_V_3D: no axis_ref for axis 				<axis id="d
 Cannot normalize an axis in grid grid_V_3D: no axis_ref for axis 				<axis id="depthv"/>
 Cannot normalize an axis in grid grid_V_3D: no axis_ref for axis 				<axis id="depthv"/>
 Cannot normalize an axis in grid grid_V_3D: no axis_ref for axis 				<axis id="depthv"/>
+Cannot normalize an axis in grid grid_T_3D: no axis_ref for axis 				<axis id="deptht"/>
+Cannot normalize an axis in grid grid_T_3D: no axis_ref for axis 				<axis id="deptht"/>
 Cannot normalize an axis in grid grid_U_3D: no axis_ref for axis 				<axis id="depthu"/>
 Cannot normalize an axis in grid grid_V_3D: no axis_ref for axis 				<axis id="depthv"/>
 Cannot normalize an axis in grid grid_W_3D: no axis_ref for axis 				<axis id="depthw"/>
-Cannot normalize an axis in grid grid_T_3D: no axis_ref for axis 				<axis id="deptht"/>
-Cannot normalize an axis in grid grid_T_3D: no axis_ref for axis 				<axis id="deptht"/>
 Cannot normalize an axis in grid grid_W_3D: no axis_ref for axis 				<axis id="depthw"/>
 
 file_def written as current_directory/test_RCSM6_HIS/test_outputs/dr2xml_nemo.xml

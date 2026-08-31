@@ -56,8 +56,6 @@
 		<!--P2 (m) sea_surface_wave_significant_height : Average height of the highest one-third of waves present in the sea state, incorporating both wind-sea and swell waves. This is a key parameter for describing wave energy and is derived from the wave spectrum using spectral moments. Specifically, this parameter is four times the square root of the integral over all directions and all frequencies of the two-dimensional wave spectrum.-->
 		<field id="CMIP7_ta" field_ref="?dummy_XY_plev19"/>
 		<!--P1 (K) air_temperature : Air Temperature-->
-		<field id="CMIP7_ta6" field_ref="?dummy_XY_plev6"/>
-		<!--P3 (K) air_temperature : Air temperature on 6 pressure levels in the lower troposphere-->
 		<field id="CMIP7_tas" field_ref="?dummy_XY_height2m"/>
 		<!--P1 (K) air_temperature : This is sampled synoptically.-->
 		<field id="CMIP7_tasmax" field_ref="?dummy_XY_height2m"/>
