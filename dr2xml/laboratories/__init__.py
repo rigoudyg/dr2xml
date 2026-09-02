@@ -8,7 +8,7 @@ Tools specific to a laboratory, interface
 from __future__ import print_function, division, absolute_import, unicode_literals
 
 import os
-from importlib.machinery import SourceFileLoader
+from importlib.util import spec_from_file_location, module_from_spec
 
 
 laboratory_source = None
@@ -18,8 +18,8 @@ def initialize_laboratory_settings():
     global laboratory_source
     if laboratory_source is None:
         from dr2xml.settings_interface import get_settings_values
-        internal_dict = get_settings_values("internal")
-        institution_id = internal_dict["institution_id"]
+        init_dict = get_settings_values("init")
+        institution_id = init_dict["institution_id"]
         if institution_id in ["CNRM-CERFACS", "CNRM", "lfpw"]:
             from . import CNRM_CERFACS
             laboratory_source = CNRM_CERFACS
@@ -27,11 +27,12 @@ def initialize_laboratory_settings():
             from . import IPSL
             laboratory_source = IPSL
         else:
-            laboratory_used = internal_dict["laboratory_used"]
+            laboratory_used = init_dict["laboratory_used"]
             if laboratory_used is not None:
                 if os.path.isfile(laboratory_used):
-                    laboratory_source = SourceFileLoader(os.path.basename(laboratory_used),
-                                                         laboratory_used).load_module(os.path.basename(laboratory_used))
+                    spec = spec_from_file_location(os.path.basename(laboratory_used), laboratory_used)
+                    laboratory_source = module_from_spec(spec)
+                    spec.loader.exec_module(laboratory_source)
             if laboratory_source is None:
                 raise ValueError("Could not find the laboratory source module for %s" % institution_id)
 

@@ -12526,38 +12526,25 @@ seaIce: Gelato 6.1 </variable>
 		</file>
 	</file_definition>
 	<field_definition>
-		<field id="CMIP6_areacello_once" field_ref="CMIP6_areacello" operation="once"/>
-		<field id="CMIP6_siconc_Scaltypesi" grid_ref="grid_T_2D_Scaltypesi" operation="instant" detect_missing_value="true"> CMIP6_siconc </field>
-		<field id="CMIP6_siconc_Scaltypesi_average" field_ref="CMIP6_siconc_Scaltypesi" operation="average"/>
-		<field id="CMIP6_sisnthick_average" field_ref="CMIP6_sisnthick" operation="average"/>
-		<field id="CMIP6_sispeed_average" field_ref="CMIP6_sispeed" operation="average"/>
-		<field id="CMIP6_sitemptop_average" field_ref="CMIP6_sitemptop" operation="average"/>
-		<field id="CMIP6_sithick_average" field_ref="CMIP6_sithick" operation="average"/>
-		<field id="CMIP6_sitimefrac_average" field_ref="CMIP6_sitimefrac" operation="average"/>
-		<field id="CMIP6_siu_average" field_ref="CMIP6_siu" operation="average"/>
-		<field id="CMIP6_siv_average" field_ref="CMIP6_siv" operation="average"/>
-		<field id="CMIP6_hcont300_Scaldepth300m" grid_ref="grid_T_2D_Scaldepth300m" operation="instant" detect_missing_value="true"> CMIP6_hcont300 </field>
-		<field id="CMIP6_hcont300_Scaldepth300m_average" field_ref="CMIP6_hcont300_Scaldepth300m" operation="average"/>
-		<field id="CMIP6_t20d_average" field_ref="CMIP6_t20d" operation="average"/>
 		<field id="CMIP6_Biron_average" field_ref="CMIP6_Biron" operation="average"/>
+		<field id="CMIP6_Dpn2o_average" field_ref="CMIP6_Dpn2o" operation="average"/>
 		<field id="CMIP6_FeP_average" field_ref="CMIP6_FeP" operation="average"/>
 		<field id="CMIP6_GRAZ1_average" field_ref="CMIP6_GRAZ1" operation="average"/>
 		<field id="CMIP6_GRAZ2_average" field_ref="CMIP6_GRAZ2" operation="average"/>
+		<field id="CMIP6_Heup_average" field_ref="CMIP6_Heup" operation="average"/>
 		<field id="CMIP6_LBDMS_average" field_ref="CMIP6_LBDMS" operation="average"/>
 		<field id="CMIP6_MuD_average" field_ref="CMIP6_MuD" operation="average"/>
 		<field id="CMIP6_MuN_average" field_ref="CMIP6_MuN" operation="average"/>
 		<field id="CMIP6_N2O_average" field_ref="CMIP6_N2O" operation="average"/>
+		<field id="CMIP6_N2Oflx_average" field_ref="CMIP6_N2Oflx" operation="average"/>
 		<field id="CMIP6_Nfix_average" field_ref="CMIP6_Nfix" operation="average"/>
 		<field id="CMIP6_SCquotad_average" field_ref="CMIP6_SCquotad" operation="average"/>
 		<field id="CMIP6_SCquotan_average" field_ref="CMIP6_SCquotan" operation="average"/>
 		<field id="CMIP6_Totlig_average" field_ref="CMIP6_Totlig" operation="average"/>
 		<field id="CMIP6_Yield_average" field_ref="CMIP6_Yield" operation="average"/>
-		<field id="CMIP6_pdust_average" field_ref="CMIP6_pdust" operation="average"/>
-		<field id="CMIP6_rhop_average" field_ref="CMIP6_rhop" operation="average"/>
-		<field id="CMIP6_xfracal_average" field_ref="CMIP6_xfracal" operation="average"/>
-		<field id="CMIP6_Dpn2o_average" field_ref="CMIP6_Dpn2o" operation="average"/>
-		<field id="CMIP6_Heup_average" field_ref="CMIP6_Heup" operation="average"/>
-		<field id="CMIP6_N2Oflx_average" field_ref="CMIP6_N2Oflx" operation="average"/>
+		<field id="CMIP6_areacello_once" field_ref="CMIP6_areacello" operation="once"/>
+		<field id="CMIP6_bigthetao_average" field_ref="CMIP6_bigthetao" operation="average"/>
+		<field id="CMIP6_bigthetaoga_average" field_ref="CMIP6_bigthetaoga" operation="average"/>
 		<field id="CMIP6_dfwnt_average" field_ref="CMIP6_dfwnt" operation="average"/>
 		<field id="CMIP6_dhcicea_average" field_ref="CMIP6_dhcicea" operation="average"/>
 		<field id="CMIP6_dhciced_average" field_ref="CMIP6_dhciced" operation="average"/>
@@ -12566,95 +12553,52 @@ seaIce: Gelato 6.1 </variable>
 		<field id="CMIP6_dmsalt_average" field_ref="CMIP6_dmsalt" operation="average"/>
 		<field id="CMIP6_efhfso_average" field_ref="CMIP6_efhfso" operation="average"/>
 		<field id="CMIP6_evapice_average" field_ref="CMIP6_evapice" operation="average"/>
+		<field id="CMIP6_ficeberg2d_average" field_ref="CMIP6_ficeberg2d" operation="average"/>
 		<field id="CMIP6_flnsduo_average" field_ref="CMIP6_flnsduo" operation="average"/>
 		<field id="CMIP6_flnsdusi_average" field_ref="CMIP6_flnsdusi" operation="average"/>
 		<field id="CMIP6_flswdso_average" field_ref="CMIP6_flswdso" operation="average"/>
 		<field id="CMIP6_flswdssi_average" field_ref="CMIP6_flswdssi" operation="average"/>
 		<field id="CMIP6_flswduo_average" field_ref="CMIP6_flswduo" operation="average"/>
 		<field id="CMIP6_flswdusi_average" field_ref="CMIP6_flswdusi" operation="average"/>
+		<field id="CMIP6_friver_average" field_ref="CMIP6_friver" operation="average"/>
 		<field id="CMIP6_hc2000_average" field_ref="CMIP6_hc2000" operation="average"/>
 		<field id="CMIP6_hc700_average" field_ref="CMIP6_hc700" operation="average"/>
+		<field id="CMIP6_hcont300_Scaldepth300m" grid_ref="grid_T_2D_Scaldepth300m" operation="instant" detect_missing_value="true"> CMIP6_hcont300 </field>
+		<field id="CMIP6_hcont300_Scaldepth300m_average" field_ref="CMIP6_hcont300_Scaldepth300m" operation="average"/>
 		<field id="CMIP6_heatc_average" field_ref="CMIP6_heatc" operation="average"/>
+		<field id="CMIP6_hfds_average" field_ref="CMIP6_hfds" operation="average"/>
 		<field id="CMIP6_hfdssi_average" field_ref="CMIP6_hfdssi" operation="average"/>
 		<field id="CMIP6_hfoi_average" field_ref="CMIP6_hfoi" operation="average"/>
-		<field id="CMIP6_ialb_average" field_ref="CMIP6_ialb" operation="average"/>
-		<field id="CMIP6_nsftdso_average" field_ref="CMIP6_nsftdso" operation="average"/>
-		<field id="CMIP6_nsftdssi_average" field_ref="CMIP6_nsftdssi" operation="average"/>
-		<field id="CMIP6_rfhfso_average" field_ref="CMIP6_rfhfso" operation="average"/>
-		<field id="CMIP6_rfhfssi_average" field_ref="CMIP6_rfhfssi" operation="average"/>
-		<field id="CMIP6_rhosn_average" field_ref="CMIP6_rhosn" operation="average"/>
-		<field id="CMIP6_sfhfso_average" field_ref="CMIP6_sfhfso" operation="average"/>
-		<field id="CMIP6_sfhfssi_average" field_ref="CMIP6_sfhfssi" operation="average"/>
-		<field id="CMIP6_sialb_average" field_ref="CMIP6_sialb" operation="average"/>
-		<field id="CMIP6_sidhci_average" field_ref="CMIP6_sidhci" operation="average"/>
-		<field id="CMIP6_sidmassr_average" field_ref="CMIP6_sidmassr" operation="average"/>
-		<field id="CMIP6_sifliendbot_average" field_ref="CMIP6_sifliendbot" operation="average"/>
-		<field id="CMIP6_siflnsntop_average" field_ref="CMIP6_siflnsntop" operation="average"/>
-		<field id="CMIP6_siflrentop_average" field_ref="CMIP6_siflrentop" operation="average"/>
-		<field id="CMIP6_siflsaltbot_average" field_ref="CMIP6_siflsaltbot" operation="average"/>
-		<field id="CMIP6_siflsentop_average" field_ref="CMIP6_siflsentop" operation="average"/>
-		<field id="CMIP6_sipro_average" field_ref="CMIP6_sipro" operation="average"/>
-		<field id="CMIP6_sisnalb_average" field_ref="CMIP6_sisnalb" operation="average"/>
-		<field id="CMIP6_sisnvol_average" field_ref="CMIP6_sisnvol" operation="average"/>
-		<field id="CMIP6_sitimefrac15_average" field_ref="CMIP6_sitimefrac15" operation="average"/>
-		<field id="CMIP6_sits_average" field_ref="CMIP6_sits" operation="average"/>
-		<field id="CMIP6_sndmasslat_average" field_ref="CMIP6_sndmasslat" operation="average"/>
-		<field id="CMIP6_sndmassr_average" field_ref="CMIP6_sndmassr" operation="average"/>
-		<field id="CMIP6_sndmassth_average" field_ref="CMIP6_sndmassth" operation="average"/>
-		<field id="CMIP6_snovoln_average" field_ref="CMIP6_snovoln" operation="average"/>
-		<field id="CMIP6_snovols_average" field_ref="CMIP6_snovols" operation="average"/>
-		<field id="CMIP6_somematr_average" field_ref="CMIP6_somematr" operation="average"/>
-		<field id="CMIP6_sozomatr_average" field_ref="CMIP6_sozomatr" operation="average"/>
-		<field id="CMIP6_ssh_average" field_ref="CMIP6_ssh" operation="average"/>
-		<field id="CMIP6_subL_average" field_ref="CMIP6_subL" operation="average"/>
-		<field id="CMIP6_subO_average" field_ref="CMIP6_subO" operation="average"/>
-		<field id="CMIP6_subTot_average" field_ref="CMIP6_subTot" operation="average"/>
-		<field id="CMIP6_vsfhsi_average" field_ref="CMIP6_vsfhsi" operation="average"/>
-		<field id="CMIP6_vsflml_average" field_ref="CMIP6_vsflml" operation="average"/>
-		<field id="CMIP6_vsfsal_average" field_ref="CMIP6_vsfsal" operation="average"/>
-		<field id="CMIP6_vsfsni_average" field_ref="CMIP6_vsfsni" operation="average"/>
-		<field id="CMIP6_vsfsub_average" field_ref="CMIP6_vsfsub" operation="average"/>
-		<field id="CMIP6_wai_average" field_ref="CMIP6_wai" operation="average"/>
-		<field id="CMIP6_wao_average" field_ref="CMIP6_wao" operation="average"/>
-		<field id="CMIP6_wiov_average" field_ref="CMIP6_wiov" operation="average"/>
-		<field id="CMIP6_bigthetao_average" field_ref="CMIP6_bigthetao" operation="average"/>
-		<field id="CMIP6_so_average" field_ref="CMIP6_so" operation="average"/>
-		<field id="CMIP6_thkcello_average" field_ref="CMIP6_thkcello" operation="average"/>
-		<field id="CMIP6_umo_average" field_ref="CMIP6_umo" operation="average"/>
-		<field id="CMIP6_uo_average" field_ref="CMIP6_uo" operation="average"/>
-		<field id="CMIP6_vmo_average" field_ref="CMIP6_vmo" operation="average"/>
-		<field id="CMIP6_vo_average" field_ref="CMIP6_vo" operation="average"/>
-		<field id="CMIP6_wmo_average" field_ref="CMIP6_wmo" operation="average"/>
-		<field id="CMIP6_wo_average" field_ref="CMIP6_wo" operation="average"/>
-		<field id="CMIP6_bigthetaoga_average" field_ref="CMIP6_bigthetaoga" operation="average"/>
-		<field id="CMIP6_ficeberg2d_average" field_ref="CMIP6_ficeberg2d" operation="average"/>
-		<field id="CMIP6_friver_average" field_ref="CMIP6_friver" operation="average"/>
-		<field id="CMIP6_hfds_average" field_ref="CMIP6_hfds" operation="average"/>
 		<field id="CMIP6_hfx_average" field_ref="CMIP6_hfx" operation="average"/>
 		<field id="CMIP6_hfy_average" field_ref="CMIP6_hfy" operation="average"/>
 		<field id="CMIP6_htovgyre_average" field_ref="CMIP6_htovgyre" operation="average"/>
 		<field id="CMIP6_htovovrt_average" field_ref="CMIP6_htovovrt" operation="average"/>
+		<field id="CMIP6_ialb_average" field_ref="CMIP6_ialb" operation="average"/>
 		<field id="CMIP6_mfo_average" field_ref="CMIP6_mfo" operation="average"/>
 		<field id="CMIP6_mlotst_average" field_ref="CMIP6_mlotst" operation="average"/>
 		<field id="CMIP6_mlotstmin_minimum" field_ref="CMIP6_mlotstmin" operation="minimum"/>
 		<field id="CMIP6_msftyz_average" field_ref="CMIP6_msftyz" operation="average"/>
+		<field id="CMIP6_nsftdso_average" field_ref="CMIP6_nsftdso" operation="average"/>
+		<field id="CMIP6_nsftdssi_average" field_ref="CMIP6_nsftdssi" operation="average"/>
+		<field id="CMIP6_pdust_average" field_ref="CMIP6_pdust" operation="average"/>
+		<field id="CMIP6_rfhfso_average" field_ref="CMIP6_rfhfso" operation="average"/>
+		<field id="CMIP6_rfhfssi_average" field_ref="CMIP6_rfhfssi" operation="average"/>
+		<field id="CMIP6_rhop_average" field_ref="CMIP6_rhop" operation="average"/>
+		<field id="CMIP6_rhosn_average" field_ref="CMIP6_rhosn" operation="average"/>
 		<field id="CMIP6_rsntds_average" field_ref="CMIP6_rsntds" operation="average"/>
-		<field id="CMIP6_soga_average" field_ref="CMIP6_soga" operation="average"/>
-		<field id="CMIP6_sos_average" field_ref="CMIP6_sos" operation="average"/>
-		<field id="CMIP6_sosga_average" field_ref="CMIP6_sosga" operation="average"/>
-		<field id="CMIP6_tauuo_average" field_ref="CMIP6_tauuo" operation="average"/>
-		<field id="CMIP6_tauvo_average" field_ref="CMIP6_tauvo" operation="average"/>
-		<field id="CMIP6_tos_average" field_ref="CMIP6_tos" operation="average"/>
-		<field id="CMIP6_wfo_average" field_ref="CMIP6_wfo" operation="average"/>
-		<field id="CMIP6_zos_average" field_ref="CMIP6_zos" operation="average"/>
-		<field id="CMIP6_zostoga_average" field_ref="CMIP6_zostoga" operation="average"/>
+		<field id="CMIP6_sfhfso_average" field_ref="CMIP6_sfhfso" operation="average"/>
+		<field id="CMIP6_sfhfssi_average" field_ref="CMIP6_sfhfssi" operation="average"/>
 		<field id="CMIP6_siage_average" field_ref="CMIP6_siage" operation="average"/>
+		<field id="CMIP6_sialb_average" field_ref="CMIP6_sialb" operation="average"/>
 		<field id="CMIP6_siareaacrossline_average" field_ref="CMIP6_siareaacrossline" operation="average"/>
 		<field id="CMIP6_siarean_average" field_ref="CMIP6_siarean" operation="average"/>
 		<field id="CMIP6_siareas_average" field_ref="CMIP6_siareas" operation="average"/>
 		<field id="CMIP6_sicompstren_average" field_ref="CMIP6_sicompstren" operation="average"/>
+		<field id="CMIP6_siconc_Scaltypesi" grid_ref="grid_T_2D_Scaltypesi" operation="instant" detect_missing_value="true"> CMIP6_siconc </field>
+		<field id="CMIP6_siconc_Scaltypesi_average" field_ref="CMIP6_siconc_Scaltypesi" operation="average"/>
 		<field id="CMIP6_sidconcdyn_average" field_ref="CMIP6_sidconcdyn" operation="average"/>
 		<field id="CMIP6_sidconcth_average" field_ref="CMIP6_sidconcth" operation="average"/>
+		<field id="CMIP6_sidhci_average" field_ref="CMIP6_sidhci" operation="average"/>
 		<field id="CMIP6_sidmassdyn_average" field_ref="CMIP6_sidmassdyn" operation="average"/>
 		<field id="CMIP6_sidmassevapsubl_average" field_ref="CMIP6_sidmassevapsubl" operation="average"/>
 		<field id="CMIP6_sidmassgrowthbot_average" field_ref="CMIP6_sidmassgrowthbot" operation="average"/>
@@ -12662,6 +12606,7 @@ seaIce: Gelato 6.1 </variable>
 		<field id="CMIP6_sidmasslat_average" field_ref="CMIP6_sidmasslat" operation="average"/>
 		<field id="CMIP6_sidmassmeltbot_average" field_ref="CMIP6_sidmassmeltbot" operation="average"/>
 		<field id="CMIP6_sidmassmelttop_average" field_ref="CMIP6_sidmassmelttop" operation="average"/>
+		<field id="CMIP6_sidmassr_average" field_ref="CMIP6_sidmassr" operation="average"/>
 		<field id="CMIP6_sidmasssi_average" field_ref="CMIP6_sidmasssi" operation="average"/>
 		<field id="CMIP6_sidmassth_average" field_ref="CMIP6_sidmassth" operation="average"/>
 		<field id="CMIP6_sidmasstranx_average" field_ref="CMIP6_sidmasstranx" operation="average"/>
@@ -12674,52 +12619,99 @@ seaIce: Gelato 6.1 </variable>
 		<field id="CMIP6_siflcondtop_average" field_ref="CMIP6_siflcondtop" operation="average"/>
 		<field id="CMIP6_siflfwbot_average" field_ref="CMIP6_siflfwbot" operation="average"/>
 		<field id="CMIP6_siflfwdrain_average" field_ref="CMIP6_siflfwdrain" operation="average"/>
+		<field id="CMIP6_sifliendbot_average" field_ref="CMIP6_sifliendbot" operation="average"/>
 		<field id="CMIP6_sifllatstop_average" field_ref="CMIP6_sifllatstop" operation="average"/>
 		<field id="CMIP6_sifllwutop_average" field_ref="CMIP6_sifllwutop" operation="average"/>
+		<field id="CMIP6_siflnsntop_average" field_ref="CMIP6_siflnsntop" operation="average"/>
+		<field id="CMIP6_siflrentop_average" field_ref="CMIP6_siflrentop" operation="average"/>
+		<field id="CMIP6_siflsaltbot_average" field_ref="CMIP6_siflsaltbot" operation="average"/>
 		<field id="CMIP6_siflsensupbot_average" field_ref="CMIP6_siflsensupbot" operation="average"/>
+		<field id="CMIP6_siflsentop_average" field_ref="CMIP6_siflsentop" operation="average"/>
 		<field id="CMIP6_siflswdbot_average" field_ref="CMIP6_siflswdbot" operation="average"/>
 		<field id="CMIP6_siflswutop_average" field_ref="CMIP6_siflswutop" operation="average"/>
 		<field id="CMIP6_sihc_average" field_ref="CMIP6_sihc" operation="average"/>
 		<field id="CMIP6_simass_average" field_ref="CMIP6_simass" operation="average"/>
 		<field id="CMIP6_simassacrossline_average" field_ref="CMIP6_simassacrossline" operation="average"/>
 		<field id="CMIP6_sipr_average" field_ref="CMIP6_sipr" operation="average"/>
+		<field id="CMIP6_sipro_average" field_ref="CMIP6_sipro" operation="average"/>
 		<field id="CMIP6_sisaltmass_average" field_ref="CMIP6_sisaltmass" operation="average"/>
+		<field id="CMIP6_sisnalb_average" field_ref="CMIP6_sisnalb" operation="average"/>
 		<field id="CMIP6_sisnconc_average" field_ref="CMIP6_sisnconc" operation="average"/>
 		<field id="CMIP6_sisnhc_average" field_ref="CMIP6_sisnhc" operation="average"/>
 		<field id="CMIP6_sisnmass_average" field_ref="CMIP6_sisnmass" operation="average"/>
+		<field id="CMIP6_sisnthick_average" field_ref="CMIP6_sisnthick" operation="average"/>
+		<field id="CMIP6_sisnvol_average" field_ref="CMIP6_sisnvol" operation="average"/>
+		<field id="CMIP6_sispeed_average" field_ref="CMIP6_sispeed" operation="average"/>
 		<field id="CMIP6_sistrxdtop_average" field_ref="CMIP6_sistrxdtop" operation="average"/>
 		<field id="CMIP6_sistrxubot_average" field_ref="CMIP6_sistrxubot" operation="average"/>
 		<field id="CMIP6_sistrydtop_average" field_ref="CMIP6_sistrydtop" operation="average"/>
 		<field id="CMIP6_sistryubot_average" field_ref="CMIP6_sistryubot" operation="average"/>
 		<field id="CMIP6_sitempbot_average" field_ref="CMIP6_sitempbot" operation="average"/>
 		<field id="CMIP6_sitempsnic_average" field_ref="CMIP6_sitempsnic" operation="average"/>
+		<field id="CMIP6_sitemptop_average" field_ref="CMIP6_sitemptop" operation="average"/>
+		<field id="CMIP6_sithick_average" field_ref="CMIP6_sithick" operation="average"/>
+		<field id="CMIP6_sitimefrac15_average" field_ref="CMIP6_sitimefrac15" operation="average"/>
+		<field id="CMIP6_sitimefrac_average" field_ref="CMIP6_sitimefrac" operation="average"/>
+		<field id="CMIP6_sits_average" field_ref="CMIP6_sits" operation="average"/>
+		<field id="CMIP6_siu_average" field_ref="CMIP6_siu" operation="average"/>
+		<field id="CMIP6_siv_average" field_ref="CMIP6_siv" operation="average"/>
 		<field id="CMIP6_sivol_average" field_ref="CMIP6_sivol" operation="average"/>
 		<field id="CMIP6_sivoln_average" field_ref="CMIP6_sivoln" operation="average"/>
 		<field id="CMIP6_sivols_average" field_ref="CMIP6_sivols" operation="average"/>
 		<field id="CMIP6_sndmassdyn_average" field_ref="CMIP6_sndmassdyn" operation="average"/>
+		<field id="CMIP6_sndmasslat_average" field_ref="CMIP6_sndmasslat" operation="average"/>
 		<field id="CMIP6_sndmassmelt_average" field_ref="CMIP6_sndmassmelt" operation="average"/>
+		<field id="CMIP6_sndmassr_average" field_ref="CMIP6_sndmassr" operation="average"/>
 		<field id="CMIP6_sndmasssi_average" field_ref="CMIP6_sndmasssi" operation="average"/>
 		<field id="CMIP6_sndmasssnf_average" field_ref="CMIP6_sndmasssnf" operation="average"/>
 		<field id="CMIP6_sndmasssubl_average" field_ref="CMIP6_sndmasssubl" operation="average"/>
+		<field id="CMIP6_sndmassth_average" field_ref="CMIP6_sndmassth" operation="average"/>
 		<field id="CMIP6_snmassacrossline_average" field_ref="CMIP6_snmassacrossline" operation="average"/>
+		<field id="CMIP6_snovoln_average" field_ref="CMIP6_snovoln" operation="average"/>
+		<field id="CMIP6_snovols_average" field_ref="CMIP6_snovols" operation="average"/>
+		<field id="CMIP6_so_average" field_ref="CMIP6_so" operation="average"/>
+		<field id="CMIP6_soga_average" field_ref="CMIP6_soga" operation="average"/>
+		<field id="CMIP6_somematr_average" field_ref="CMIP6_somematr" operation="average"/>
+		<field id="CMIP6_sos_average" field_ref="CMIP6_sos" operation="average"/>
+		<field id="CMIP6_sosga_average" field_ref="CMIP6_sosga" operation="average"/>
+		<field id="CMIP6_sozomatr_average" field_ref="CMIP6_sozomatr" operation="average"/>
+		<field id="CMIP6_ssh_average" field_ref="CMIP6_ssh" operation="average"/>
+		<field id="CMIP6_subL_average" field_ref="CMIP6_subL" operation="average"/>
+		<field id="CMIP6_subO_average" field_ref="CMIP6_subO" operation="average"/>
+		<field id="CMIP6_subTot_average" field_ref="CMIP6_subTot" operation="average"/>
+		<field id="CMIP6_t20d_average" field_ref="CMIP6_t20d" operation="average"/>
+		<field id="CMIP6_tauuo_average" field_ref="CMIP6_tauuo" operation="average"/>
+		<field id="CMIP6_tauvo_average" field_ref="CMIP6_tauvo" operation="average"/>
+		<field id="CMIP6_thkcello_average" field_ref="CMIP6_thkcello" operation="average"/>
+		<field id="CMIP6_tos_average" field_ref="CMIP6_tos" operation="average"/>
+		<field id="CMIP6_umo_average" field_ref="CMIP6_umo" operation="average"/>
+		<field id="CMIP6_uo_average" field_ref="CMIP6_uo" operation="average"/>
+		<field id="CMIP6_vmo_average" field_ref="CMIP6_vmo" operation="average"/>
+		<field id="CMIP6_vo_average" field_ref="CMIP6_vo" operation="average"/>
+		<field id="CMIP6_vsfhsi_average" field_ref="CMIP6_vsfhsi" operation="average"/>
+		<field id="CMIP6_vsflml_average" field_ref="CMIP6_vsflml" operation="average"/>
+		<field id="CMIP6_vsfsal_average" field_ref="CMIP6_vsfsal" operation="average"/>
+		<field id="CMIP6_vsfsni_average" field_ref="CMIP6_vsfsni" operation="average"/>
+		<field id="CMIP6_vsfsub_average" field_ref="CMIP6_vsfsub" operation="average"/>
+		<field id="CMIP6_wai_average" field_ref="CMIP6_wai" operation="average"/>
+		<field id="CMIP6_wao_average" field_ref="CMIP6_wao" operation="average"/>
+		<field id="CMIP6_wfo_average" field_ref="CMIP6_wfo" operation="average"/>
+		<field id="CMIP6_wiov_average" field_ref="CMIP6_wiov" operation="average"/>
+		<field id="CMIP6_wmo_average" field_ref="CMIP6_wmo" operation="average"/>
+		<field id="CMIP6_wo_average" field_ref="CMIP6_wo" operation="average"/>
+		<field id="CMIP6_xfracal_average" field_ref="CMIP6_xfracal" operation="average"/>
+		<field id="CMIP6_zos_average" field_ref="CMIP6_zos" operation="average"/>
+		<field id="CMIP6_zostoga_average" field_ref="CMIP6_zostoga" operation="average"/>
 	</field_definition>
 	<axis_definition>
 		<axis_group prec="8">
-			<axis id="DR_basin_basin" axis_ref="basin" name="sector" standard_name="region" long_name="ocean basin" dim_name="basin" label="(0,4)[  global_ocean atlantic_arctic_ocean indian_pacific_ocean dummy dummy  ]"/>
-			<axis id="DR_oline_oline" axis_ref="oline" name="sector" standard_name="region" long_name="ocean passage" dim_name="line" label="(0,14)[  barents_opening bering_strait canadian_archipelago denmark_strait drake_passage english_channel pacific_equatorial_undercurrent faroe_scotland_channel florida_bahamas_strait fram_strait iceland_faroe_channel indonesian_throughflow mozambique_channel taiwan_luzon_straits windward_passage  ]"/>
-			<axis id="DR_siline_siline" axis_ref="siline" name="sector" standard_name="region" long_name="ocean passage" dim_name="line" label="(0,3)[  fram_strait canadian_archipelego barents_opening bering_strait  ]"/>
+			<axis id="DR_basin_basin" axis_ref="basin" name="basin" standard_name="region" long_name="ocean basin" dim_name="basin" label="(0,4)[  global_ocean atlantic_arctic_ocean indian_pacific_ocean dummy dummy  ]"/>
+			<axis id="DR_oline_oline" axis_ref="oline" name="line" standard_name="region" long_name="ocean passage" dim_name="line" label="(0,14)[  barents_opening bering_strait canadian_archipelago denmark_strait drake_passage english_channel pacific_equatorial_undercurrent faroe_scotland_channel florida_bahamas_strait fram_strait iceland_faroe_channel indonesian_throughflow mozambique_channel taiwan_luzon_straits windward_passage  ]"/>
+			<axis id="DR_siline_siline" axis_ref="siline" name="line" standard_name="region" long_name="ocean passage" dim_name="line" label="(0,3)[  fram_strait canadian_archipelego barents_opening bering_strait  ]"/>
 		</axis_group>
 	</axis_definition>
 	<domain_definition>
 		<domain_group prec="8">
-			<domain id="CMIP6_25km" ni_glo="1440" nj_glo="720" type="rectilinear" prec="8">
-				<generate_rectilinear_domain/>
-				<interpolate_domain order="1" renormalize="true" mode="read_or_compute" write_weight="true"/>
-			</domain>
-			<domain id="CMIP6_50km" ni_glo="720" nj_glo="360" type="rectilinear" prec="8">
-				<generate_rectilinear_domain/>
-				<interpolate_domain order="1" renormalize="true" mode="read_or_compute" write_weight="true"/>
-			</domain>
 			<domain id="CMIP6_100km" ni_glo="360" nj_glo="180" type="rectilinear" prec="8">
 				<generate_rectilinear_domain/>
 				<interpolate_domain order="1" renormalize="true" mode="read_or_compute" write_weight="true"/>
@@ -12728,39 +12720,47 @@ seaIce: Gelato 6.1 </variable>
 				<generate_rectilinear_domain/>
 				<interpolate_domain order="1" renormalize="true" mode="read_or_compute" write_weight="true"/>
 			</domain>
+			<domain id="CMIP6_25km" ni_glo="1440" nj_glo="720" type="rectilinear" prec="8">
+				<generate_rectilinear_domain/>
+				<interpolate_domain order="1" renormalize="true" mode="read_or_compute" write_weight="true"/>
+			</domain>
 			<domain id="CMIP6_2deg" ni_glo="180" nj_glo="90" type="rectilinear" prec="8">
+				<generate_rectilinear_domain/>
+				<interpolate_domain order="1" renormalize="true" mode="read_or_compute" write_weight="true"/>
+			</domain>
+			<domain id="CMIP6_50km" ni_glo="720" nj_glo="360" type="rectilinear" prec="8">
 				<generate_rectilinear_domain/>
 				<interpolate_domain order="1" renormalize="true" mode="read_or_compute" write_weight="true"/>
 			</domain>
 		</domain_group>
 	</domain_definition>
 	<grid_definition>
-		<grid id="grid_T_2D_Scaltypesi">
-			<domain domain_ref="grid_T"/>
-			<scalar scalar_ref="Scaltypesi" name="type"/>
+		<grid id="grid_TRI_siline">
+			<axis axis_ref="DR_siline_siline" name="line" id="ref_to_DR_siline_siline_7"/>
+		</grid>
+		<grid id="grid_TRO_oline">
+			<axis axis_ref="DR_oline_oline" name="line" id="ref_to_DR_oline_oline_3"/>
 		</grid>
 		<grid id="grid_T_2D_Scaldepth300m">
 			<domain domain_ref="grid_T"/>
 			<scalar scalar_ref="Scaldepth300m" name="depth"/>
 		</grid>
-		<grid id="grid_znl_3basin_basin">
-			<axis axis_ref="j-mean"/>
-			<axis axis_ref="DR_basin_basin" name="sector" id="ref_to_DR_basin_basin_2"/>
-		</grid>
-		<grid id="grid_TRO_oline">
-			<axis axis_ref="DR_oline_oline" name="sector" id="ref_to_DR_oline_oline_3"/>
+		<grid id="grid_T_2D_Scaltypesi">
+			<domain domain_ref="grid_T"/>
+			<scalar scalar_ref="Scaltypesi" name="type"/>
 		</grid>
 		<grid id="grid_znl_3basin_2D_basin">
 			<axis axis_ref="j-mean"/>
 			<axis axis_ref="depthw" name="lev"/>
-			<axis axis_ref="DR_basin_basin" name="sector" id="ref_to_DR_basin_basin_4"/>
+			<axis axis_ref="DR_basin_basin" name="basin" id="ref_to_DR_basin_basin_4"/>
 		</grid>
-		<grid id="grid_TRI_siline">
-			<axis axis_ref="DR_siline_siline" name="sector" id="ref_to_DR_siline_siline_7"/>
+		<grid id="grid_znl_3basin_basin">
+			<axis axis_ref="j-mean"/>
+			<axis axis_ref="DR_basin_basin" name="basin" id="ref_to_DR_basin_basin_2"/>
 		</grid>
 	</grid_definition>
 	<scalar_definition>
-		<scalar id="Scaltypesi" name="type" standard_name="area_type" long_name="Sea Ice area type" label="typesi"/>
 		<scalar id="Scaldepth300m" name="depth" standard_name="depth" long_name="depth" prec="8" value="300" axis_type="Z" positive="down" unit="m"/>
+		<scalar id="Scaltypesi" name="type" standard_name="area_type" long_name="Sea Ice area type" label="typesi"/>
 	</scalar_definition>
 </context>

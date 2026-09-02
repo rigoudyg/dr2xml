@@ -1,6 +1,144 @@
 Parameters available for project dr2xml
 =======================================
 
+Init values
+---------------
+.. glossary::
+   :sorted:
+   
+   data_request_config
+      
+      Configuration file of the data request content to be used.
+      
+      values:
+         
+         - laboratory[data_request_config]
+         - '__package-root__/dr_interface/CMIP7_config'
+      
+      num type: 'string'
+      
+   data_request_content_version
+      
+      Version of the data request content to be used.
+      
+      values:
+         
+         - laboratory[data_request_content_version]
+         - 'latest_stable'
+      
+      num type: 'string'
+      
+   data_request_path
+      
+      Path where the data request API used is placed.
+      
+      values:
+         
+         - laboratory[data_request_path]
+         - None
+      
+      num type: 'string'
+      
+   data_request_used
+      
+      The Data Request infrastructure type which should be used.
+      
+      values:
+         
+         - laboratory[data_request_used]
+         - 'CMIP6'
+      
+      num type: 'string'
+      
+   institution_id
+      
+      Institution identifier.
+      
+      fatal: True
+      
+      values:
+         
+         - laboratory[institution_id]
+      
+      num type: 'string'
+      
+   laboratory_used
+      
+      File which contains the settings to be used for a specific laboratory which is not present by default in dr2xml. Must contains at least the `lab_grid_policy` function.
+      
+      values:
+         
+         - laboratory[laboratory_used]
+         - None
+      
+      num type: 'string'
+      
+   project
+      
+      Project associated with the simulation.
+      
+      values:
+         
+         - laboratory[project]
+         - 'CMIP6'
+      
+      num type: 'string'
+      
+   project_settings
+      
+      Project settings definition file to be used.
+      
+      values:
+         
+         - laboratory[project_settings]
+         - init[project]
+      
+      num type: 'string'
+      
+   save_project_settings
+      
+      The path of the file where the complete project settings will be written, if needed.
+      
+      values:
+         
+         - laboratory[save_project_settings]
+         - None
+      
+      num type: 'string'
+      
+   vocabulary_config
+      
+      Configuration file of the vocabulary to be used.
+      
+      values:
+         
+         - laboratory[vocabulary_config]
+         - '__package-root__/vocabulary/vocabulary.json'
+      
+      num type: 'string'
+      
+   vocabulary_project
+      
+      The vocabulary project which should be used.
+      
+      values:
+         
+         - laboratory[vocabulary_project] formatted with function from self named lower({})
+         - init[project] formatted with function from self named lower({})
+      
+      num type: 'string'
+      
+   vocabulary_used
+      
+      The vocabulary infrastructure type which should be used.
+      
+      values:
+         
+         - laboratory[vocabulary_used]
+         - None
+      
+      num type: 'string'
+      
 Internal values
 ---------------
 .. glossary::
@@ -10,9 +148,7 @@ Internal values
       
       CFMIP has an elaborated requirement for defining subhr frequency; by default, dr2xml uses 1 time step.
       
-      fatal: False
-      
-      default values:
+      values:
          
          - laboratory[CFsubhr_frequency]
          - '1ts'
@@ -23,9 +159,7 @@ Internal values
       
       DR01.00.21 does not include Gibraltar strait, which is requested by OMIP. Can include it, if model provides it as last value of array.
       
-      fatal: False
-      
-      default values:
+      values:
          
          - laboratory[add_Gibraltar]
          - False
@@ -38,9 +172,9 @@ Internal values
       
       fatal: True
       
-      default values:
+      values:
          
-         - laboratory[additional_allowed_model_components][internal[source_id]]
+         - laboratory[additional_allowed_components][internal[source_id]]
          - []
       
       num type: 'string'
@@ -49,9 +183,7 @@ Internal values
       
       Some scenario experiment in DR 01.00.21 do not request tos on 1 degree grid, while other do. If you use grid_policy=adhoc and had not changed the mapping of function. grids.lab_adhoc_grid_policy to grids.CNRM_grid_policy, next setting can force any tos request to also produce tos on a 1 degree grid.
       
-      fatal: False
-      
-      default values:
+      values:
          
          - laboratory[adhoc_policy_do_add_1deg_grid_for_tos]
          - False
@@ -62,9 +194,7 @@ Internal values
       
       Should we allow for duplicate vars: two vars with same frequency, shape and realm, which differ only by the table. In DR01.00.21, this actually applies to very few fields (ps-Aermon, tas-ImonAnt, areacellg-IfxAnt).
       
-      fatal: False
-      
-      default values:
+      values:
          
          - laboratory[allow_duplicates]
          - True
@@ -77,7 +207,7 @@ Internal values
       
       fatal: True
       
-      default values:
+      values:
          
          - laboratory[allow_duplicates_in_same_table]
          - False
@@ -88,9 +218,7 @@ Internal values
       
       DR has sn attributes for MIP variables. They can be real,CF-compliant, standard_names or pseudo_standard_names, i.e. not yet approved labels. Default is to use only CF ones.
       
-      fatal: False
-      
-      default values:
+      values:
          
          - laboratory[allow_pseudo_standard_names]
          - False
@@ -101,9 +229,7 @@ Internal values
       
       When using select='no', Xios may enter an endless loop, which is solved if next setting is False.
       
-      fatal: False
-      
-      default values:
+      values:
          
          - laboratory[allow_tos_3hr_1deg]
          - True
@@ -114,19 +240,17 @@ Internal values
       
       In some instances, the experiment start year is not explicit or is doubtful in DR. See file doc/some_experiments_starty_in_DR01.00.21. You should then specify it, using next setting in order that requestItems analysis work in all cases. In some other cases, DR requestItems which apply to the experiment form its start does not cover its whole duration and have a wrong duration (computed based on a wrong start year); They necessitate to fix the start year.
       
-      fatal: False
-      
-      default values: simulation[branch_year_in_child]
+      values:
+         
+         - simulation[branch_year_in_child]
       
       num type: 'string'
       
    branching
       
-       Describe the branching scheme for experiments involved in some 'branchedYears type' tslice (for details, see: http://clipc-services.ceda.ac.uk/dreq/index/Slice.html ). Just put the as key the common start year in child and as value the list of start years in parent for all members.A dictionary with models name as key and dictionary containing experiment,(branch year in child, list of branch year in parent) key values.
+      Describe the branching scheme for experiments involved in some 'branchedYears type' tslice (for details, see: http://clipc-services.ceda.ac.uk/dreq/index/Slice.html ). Just put the as key the common start year in child and as value the list of start years in parent for all members.A dictionary with models name as key and dictionary containing experiment,(branch year in child, list of branch year in parent) key values.
       
-      fatal: False
-      
-      default values:
+      values:
          
          - laboratory[branching][internal[source_id]]
          - {}
@@ -137,9 +261,7 @@ Internal values
       
       If the CMIP6 Controlled Vocabulary doesn't allow all the components you activate, you can set next toggle to True
       
-      fatal: False
-      
-      default values:
+      values:
          
          - laboratory[bypass_CV_components]
          - False
@@ -150,9 +272,7 @@ Internal values
       
       Estimate of number of bytes per floating value, given the chosen :term:`compression_level`.
       
-      fatal: False
-      
-      default values:
+      values:
          
          - laboratory[bytes_per_float]
          - 2
@@ -165,7 +285,9 @@ Internal values
       
       fatal: True
       
-      default values: simulation[configuration]
+      values:
+         
+         - simulation[configuration]
       
       num type: 'string'
       
@@ -175,59 +297,20 @@ Internal values
       
       fatal: True
       
-      default values: dict[context]
+      values:
+         
+         - dict[context]
       
       num type: 'string'
       
-   data_request_config
+   create_csv_file
       
-      Configuration file of the data request content to be used
+      Pattern containing context if a csv file should be produced, else False.
       
-      fatal: False
-      
-      default values:
+      values:
          
-         - laboratory[data_request_config]
-         - '/home/rigoudyg/dev/DR2XML/dr2xml_source/dr2xml/dr_interface/CMIP7_config'
-      
-      num type: 'string'
-      
-   data_request_content_version
-      
-      Version of the data request content to be used
-      
-      fatal: False
-      
-      default values:
-         
-         - laboratory[data_request_content_version]
-         - 'latest_stable'
-      
-      num type: 'string'
-      
-   data_request_path
-      
-      Path where the data request API used is placed.
-      
-      fatal: False
-      
-      default values:
-         
-         - laboratory[data_request_path]
-         - None
-      
-      num type: 'string'
-      
-   data_request_used
-      
-      The Data Request infrastructure type which should be used.
-      
-      fatal: False
-      
-      default values:
-         
-         - laboratory[data_request_used]
-         - 'CMIP6'
+         - laboratory[create_csv_file]
+         - False
       
       num type: 'string'
       
@@ -235,12 +318,21 @@ Internal values
       
       In order to identify which xml files generates a problem, you can use this flag.
       
-      fatal: False
-      
-      default values:
+      values:
          
          - laboratory[debug_parsing]
          - False
+      
+      num type: 'string'
+      
+   default_region
+      
+      Default region to be used
+      
+      values:
+         
+         - laboratory[default_region]
+         - 'default'
       
       num type: 'string'
       
@@ -248,9 +340,7 @@ Internal values
       
       A smart workflow will allow you to extend a simulation during it course and to complement the output files accordingly, by managing the 'end date' part in filenames. You can then set next setting to False.
       
-      fatal: True
-      
-      default values:
+      values:
          
          - laboratory[dr2xml_manages_enddate]
          - True
@@ -261,12 +351,49 @@ Internal values
       
       If you want to carry on the experiment beyond the duration set in DR, and that all requestItems that apply to DR end year also apply later on, set 'end_year' You can also set it if you don't know if DR has a wrong value
       
-      fatal: False
-      
-      default values:
+      values:
          
          - simulation[end_year]
          - False
+      
+      num type: 'string'
+      
+   excluded_dimensions
+      
+      List of dimensions to be excluded.
+      
+      values:
+         
+         - laboratory[excluded_dimensions]
+         - []
+      
+      target type: 'list'
+      
+      num type: 'string'
+      
+   excluded_expgroups_lset
+      
+      List of the experiments groups that will be excluded from outputs from laboratory settings.
+      
+      values:
+         
+         - laboratory[excluded_expgroups]
+         - []
+      
+      target type: 'list'
+      
+      num type: 'string'
+      
+   excluded_expgroups_sset
+      
+      List of the experiments groups that will be excluded from outputs from simulation settings.
+      
+      values:
+         
+         - simulation[excluded_expgroups]
+         - []
+      
+      target type: 'list'
       
       num type: 'string'
       
@@ -274,12 +401,12 @@ Internal values
       
       List of the opportunities that will be excluded from outputs from laboratory settings.
       
-      fatal: False
-      
-      default values:
+      values:
          
          - laboratory[excluded_opportunities]
          - []
+      
+      target type: 'list'
       
       num type: 'string'
       
@@ -287,12 +414,12 @@ Internal values
       
       List of the opportunities that will be excluded from outputs from simulation settings.
       
-      fatal: False
-      
-      default values:
+      values:
          
          - simulation[excluded_opportunities]
          - []
+      
+      target type: 'list'
       
       num type: 'string'
       
@@ -300,12 +427,12 @@ Internal values
       
       You can exclude some (variable, table) pairs from outputs. A list of tuple (variable, table) to be excluded from laboratory settings.
       
-      fatal: False
-      
-      default values:
+      values:
          
          - laboratory[excluded_pairs]
          - []
+      
+      target type: 'list'
       
       num type: 'string'
       
@@ -313,12 +440,25 @@ Internal values
       
       You can exclude some (variable, table) pairs from outputs. A list of tuple (variable, table) to be excluded from simulation settings.
       
-      fatal: False
-      
-      default values:
+      values:
          
          - simulation[excluded_pairs]
          - []
+      
+      target type: 'list'
+      
+      num type: 'string'
+      
+   excluded_regions
+      
+      List of regions to be excluded.
+      
+      values:
+         
+         - laboratory[excluded_regions]
+         - []
+      
+      target type: 'list'
       
       num type: 'string'
       
@@ -326,12 +466,12 @@ Internal values
       
       List of links un data request that should not been followed (those request are not taken into account).
       
-      fatal: False
-      
-      default values:
+      values:
          
          - laboratory[excluded_request_links]
          - []
+      
+      target type: 'list'
       
       num type: 'string'
       
@@ -339,12 +479,12 @@ Internal values
       
       The list of shapes that should be excluded (all variables in those shapes will be excluded from outputs).
       
-      fatal: False
-      
-      default values:
+      values:
          
          - laboratory[excluded_spshapes]
          - []
+      
+      target type: 'list'
       
       num type: 'string'
       
@@ -352,12 +492,12 @@ Internal values
       
       List of the tables that will be excluded from outputs from laboratory settings.
       
-      fatal: False
-      
-      default values:
+      values:
          
          - laboratory[excluded_tables]
          - []
+      
+      target type: 'list'
       
       num type: 'string'
       
@@ -365,12 +505,25 @@ Internal values
       
       List of the tables that will be excluded from outputs from simulation settings.
       
-      fatal: False
-      
-      default values:
+      values:
          
          - simulation[excluded_tables]
          - []
+      
+      target type: 'list'
+      
+      num type: 'string'
+      
+   excluded_tpshapes_lset
+      
+      The list of shapes that should be excluded (all variables in those shapes will be excluded from outputs).
+      
+      values:
+         
+         - laboratory[excluded_tpshapes]
+         - []
+      
+      target type: 'list'
       
       num type: 'string'
       
@@ -378,12 +531,12 @@ Internal values
       
       List of the variables groups that will be excluded from outputs from laboratory settings.
       
-      fatal: False
-      
-      default values:
+      values:
          
          - laboratory[excluded_vargroups]
          - []
+      
+      target type: 'list'
       
       num type: 'string'
       
@@ -391,12 +544,12 @@ Internal values
       
       List of the variables groups that will be excluded from outputs from simulation settings.
       
-      fatal: False
-      
-      default values:
+      values:
          
          - simulation[excluded_vargroups]
          - []
+      
+      target type: 'list'
       
       num type: 'string'
       
@@ -404,12 +557,12 @@ Internal values
       
       List of CMOR variables to exclude from the result based on previous Data Request extraction from laboratory settings.
       
-      fatal: False
-      
-      default values:
+      values:
          
          - laboratory[excluded_vars]
          - []
+      
+      target type: 'list'
       
       num type: 'string'
       
@@ -417,12 +570,38 @@ Internal values
       
       A dictionary which keys are configurations and values the list of variables that must be excluded for each configuration.
       
-      fatal: False
-      
-      default values:
+      values:
          
          - laboratory[excluded_vars_per_config][internal[configuration]]
          - []
+      
+      target type: 'list'
+      
+      num type: 'string'
+      
+   excluded_vars_per_frequency
+      
+      A dictionary which keys are frequencies and values the list of variables that must be excluded for each frequency.
+      
+      values:
+         
+         - laboratory[excluded_vars_per_frequency]
+         - {}
+      
+      target type: 'dict'
+      
+      num type: 'string'
+      
+   excluded_vars_per_shape
+      
+      A dictionary which keys are shapes and values the list of variables that must be excluded for each shape.
+      
+      values:
+         
+         - laboratory[excluded_vars_per_shape]
+         - {}
+      
+      target type: 'dict'
       
       num type: 'string'
       
@@ -430,12 +609,12 @@ Internal values
       
       List of CMOR variables to exclude from the result based on previous Data Request extraction from simulation settings.
       
-      fatal: False
-      
-      default values:
+      values:
          
          - simulation[excluded_vars]
          - []
+      
+      target type: 'list'
       
       num type: 'string'
       
@@ -445,7 +624,7 @@ Internal values
       
       fatal: True
       
-      default values:
+      values:
          
          - simulation[experiment_for_requests]
          - internal[experiment_id]
@@ -454,11 +633,27 @@ Internal values
       
    experiment_id
       
-      Root experiment identifier.
+      Root experiment identifier
       
       fatal: True
       
-      default values: simulation[experiment_id]
+      values:
+         
+         - simulation[experiment_id]
+      
+      num type: 'string'
+      
+   extravar_regions
+      
+      Dictionnary containing the default values for region for each variables
+      
+      values:
+         
+         - laboratory[extravar_regions]
+         -    
+         -    - 'default': 'default'
+      
+      target type: 'dict'
       
       num type: 'string'
       
@@ -466,9 +661,7 @@ Internal values
       
       If you want to produce the same variables set for all members, set this parameter to False.
       
-      fatal: False
-      
-      default values:
+      values:
          
          - simulation[filter_on_realization]
          - laboratory[filter_on_realization]
@@ -480,9 +673,7 @@ Internal values
       
       You may provide some variables already horizontally remapped to some grid (i.e. Xios domain) in external files. The varname in file must match the referenced id in pingfile. Tested only for fixed fields. A dictionary with variable id as key and a dictionary as value: the key must be the grid id, the value a dictionary with the file for each resolution.
       
-      fatal: False
-      
-      default values:
+      values:
          
          - laboratory[fx_from_file]
          - []
@@ -495,7 +686,9 @@ Internal values
       
       fatal: True
       
-      default values: laboratory[grid_choice][internal[source_id]]
+      values:
+         
+         - laboratory[grid_choice][internal[source_id]]
       
       num type: 'string'
       
@@ -505,7 +698,7 @@ Internal values
       
       fatal: True
       
-      default values:
+      values:
          
          - laboratory[grid_policy]
          - False
@@ -518,7 +711,7 @@ Internal values
       
       fatal: True
       
-      default values:
+      values:
          
          - laboratory[grid_prefix]
          - internal[ping_variables_prefix]
@@ -527,11 +720,25 @@ Internal values
       
    grids
       
-      Grids : per model resolution and per context :- CMIP6 qualifier (i.e. 'gn' or 'gr') for the main grid chosen (because you  may choose has main production grid a regular one, when the native grid is e.g. unstructured)- Xios id for the production grid (if it is not the native grid),- Xios id for the latitude axis used for zonal means (mist match latitudes for grid above)- resolution of the production grid (using CMIP6 conventions),- grid description
+      Grids : per model resolution and per context :\n- CMIP6 qualifier (i.e. 'gn' or 'gr') for the main grid chosen (because you  may choose has main production grid a regular one, when the native grid is e.g. unstructured)\n- Xios id for the production grid (if it is not the native grid)\n- Xios id for the latitude axis used for zonal means (mist match latitudes for grid above)\n- resolution of the production grid (using CMIP6 conventions)\n- grid description
       
       fatal: True
       
-      default values: laboratory[grids]
+      values:
+         
+         - function from functions_file named format_grids('grids'= laboratory[grids], 'variables_per_grid_type'= internal[variables_per_grid_type])
+      
+      num type: 'string'
+      
+   grids_default_DR
+      
+      DR default grids
+      
+      fatal: True
+      
+      values:
+         
+         - laboratory[grids_default_DR]
       
       num type: 'string'
       
@@ -541,7 +748,7 @@ Internal values
       
       fatal: True
       
-      default values:
+      values:
          
          - laboratory[grids_dev]
          - {}
@@ -552,9 +759,7 @@ Internal values
       
       Variables to be grouped in the same output file (provided additional conditions are filled).
       
-      fatal: False
-      
-      default values:
+      values:
          
          - simulation[grouped_vars_per_file]
          - laboratory[grouped_vars_per_file]
@@ -562,16 +767,42 @@ Internal values
       
       num type: 'string'
       
+   included_expgroups
+      
+      List of experiments groups that will be processed (all others will not).
+      
+      values:
+         
+         - simulation[included_expgroups]
+         - internal[included_expgroups_lset]
+      
+      target type: 'list'
+      
+      num type: 'string'
+      
+   included_expgroups_lset
+      
+      List of experiments groups that will be processed (all others will not) from laboratory settings.
+      
+      values:
+         
+         - laboratory[included_expgroups]
+         - []
+      
+      target type: 'list'
+      
+      num type: 'string'
+      
    included_opportunities
       
       List of opportunities that will be processed (all others will not).
       
-      fatal: False
-      
-      default values:
+      values:
          
          - simulation[included_opportunities]
          - internal[included_opportunities_lset]
+      
+      target type: 'list'
       
       num type: 'string'
       
@@ -579,12 +810,12 @@ Internal values
       
       List of opportunities that will be processed (all others will not) from laboratory settings.
       
-      fatal: False
-      
-      default values:
+      values:
          
          - laboratory[included_opportunities]
          - []
+      
+      target type: 'list'
       
       num type: 'string'
       
@@ -592,12 +823,12 @@ Internal values
       
       List of the request links that will be processed (all others will not).
       
-      fatal: False
-      
-      default values:
+      values:
          
          - laboratory[included_request_links]
          - []
+      
+      target type: 'list'
       
       num type: 'string'
       
@@ -605,12 +836,12 @@ Internal values
       
       List of tables that will be processed (all others will not).
       
-      fatal: False
-      
-      default values:
+      values:
          
          - simulation[included_tables]
          - internal[included_tables_lset]
+      
+      target type: 'list'
       
       num type: 'string'
       
@@ -618,12 +849,12 @@ Internal values
       
       List of tables that will be processed (all others will not) from laboratory settings.
       
-      fatal: False
-      
-      default values:
+      values:
          
          - laboratory[included_tables]
          - []
+      
+      target type: 'list'
       
       num type: 'string'
       
@@ -631,12 +862,12 @@ Internal values
       
       List of variables groups that will be processed (all others will not).
       
-      fatal: False
-      
-      default values:
+      values:
          
          - simulation[included_vargroups]
          - internal[included_vargroups_lset]
+      
+      target type: 'list'
       
       num type: 'string'
       
@@ -644,12 +875,12 @@ Internal values
       
       List of variables groups that will be processed (all others will not) from laboratory settings.
       
-      fatal: False
-      
-      default values:
+      values:
          
          - laboratory[included_vargroups]
          - []
+      
+      target type: 'list'
       
       num type: 'string'
       
@@ -657,12 +888,12 @@ Internal values
       
       Variables to be considered from the Data Request (all others will not)
       
-      fatal: False
-      
-      default values:
+      values:
          
          - simulation[included_vars]
          - internal[included_vars_lset]
+      
+      target type: 'list'
       
       num type: 'string'
       
@@ -670,35 +901,12 @@ Internal values
       
       Variables to be considered from the Data Request (all others will not) from laboratory settings.
       
-      fatal: False
-      
-      default values:
+      values:
          
          - laboratory[included_vars]
          - []
       
-      num type: 'string'
-      
-   institution_id
-      
-      Institution identifier.
-      
-      fatal: True
-      
-      default values: laboratory[institution_id]
-      
-      num type: 'string'
-      
-   laboratory_used
-      
-      File which contains the settings to be used for a specific laboratory which is not present by default in dr2xml. Must contains at least the `lab_grid_policy` function.
-      
-      fatal: False
-      
-      default values:
-         
-         - laboratory[laboratory_used]
-         - None
+      target type: 'list'
       
       num type: 'string'
       
@@ -706,9 +914,7 @@ Internal values
       
       Full path to the file which contains the list of home variables to be taken into account, in addition to the Data Request.
       
-      fatal: False
-      
-      default values:
+      values:
          
          - simulation[listof_home_vars]
          - laboratory[listof_home_vars]
@@ -720,9 +926,7 @@ Internal values
       
       The maximum size of generated files in number of floating values.
       
-      fatal: False
-      
-      default values:
+      values:
          
          - laboratory[max_file_size_in_floats]
          - 500000000.0
@@ -735,7 +939,7 @@ Internal values
       
       fatal: True
       
-      default values:
+      values:
          
          - simulation[max_priority]
          - internal[max_priority_lset]
@@ -748,7 +952,25 @@ Internal values
       
       fatal: True
       
-      default values: laboratory[max_priority]
+      values:
+         
+         - laboratory[max_priority]
+      
+      num type: 'string'
+      
+   max_priority_per_frequency
+      
+      Max variable priority level per frequency to be output from lab settings.
+      
+      fatal: True
+      
+      values:
+         
+         - simulation[max_priority_per_frequency]
+         - laboratory[max_priority_per_frequency]
+         - {}
+      
+      target type: 'dict'
       
       num type: 'string'
       
@@ -756,9 +978,7 @@ Internal values
       
       The maximum number of years that should be putted in a single file.
       
-      fatal: True
-      
-      default values:
+      values:
          
          - simulation[max_split_freq]
          - laboratory[max_split_freq]
@@ -772,7 +992,9 @@ Internal values
       
       fatal: True
       
-      default values: laboratory[mips]
+      values:
+         
+         - laboratory[mips]
       
       num type: 'string'
       
@@ -782,7 +1004,7 @@ Internal values
       
       fatal: True
       
-      default values:
+      values:
          
          - laboratory[nemo_sources_management_policy_master_of_the_world]
          - False
@@ -791,11 +1013,9 @@ Internal values
       
    non_standard_attributes
       
-      You may add a series of NetCDF attributes in all files for this simulation
+      You may add a series of NetCDF attributes in all files for this simulation.
       
-      fatal: False
-      
-      default values:
+      values:
          
          - laboratory[non_standard_attributes]
          - {}
@@ -806,9 +1026,7 @@ Internal values
       
       If your model has some axis which does not have all its attributes as in DR, and you want dr2xml to fix that it, give here the correspondence from model axis id to DR dim/grid id. For label dimensions you should provide the  list of labels, ordered as in your model, as second element of a pair. Label-type axes will be processed even if not quoted. Scalar dimensions are not concerned by this feature. A dictionary with (axis_id, axis_correct_id) or (axis_id, tuple of labels) as key, values.
       
-      fatal: False
-      
-      default values:
+      values:
          
          - laboratory[non_standard_axes]
          - {}
@@ -819,9 +1037,7 @@ Internal values
       
       Name of the orography field name to be used to compute height over orog fields.
       
-      fatal: False
-      
-      default values:
+      values:
          
          - laboratory[orography_field_name]
          - 'orog'
@@ -830,11 +1046,13 @@ Internal values
       
    orphan_variables
       
-      A dictionary with (context name, list of variables) as (key,value) pairs, where the list indicates the variables to be re-affected to the key-context (initially affected to a realm falling in another context)
+      A dictionary with (context name, list of variables) as (key,value) pairs, where the list indicates the variables to be re-affected to the key-context (initially affected to a realm falling in another context).
       
       fatal: True
       
-      default values: laboratory[orphan_variables]
+      values:
+         
+         - laboratory[orphan_variables]
       
       num type: 'string'
       
@@ -842,9 +1060,7 @@ Internal values
       
       Full path of the directory which contains extra tables.
       
-      fatal: False
-      
-      default values:
+      values:
          
          - simulation[path_extra_tables]
          - laboratory[path_extra_tables]
@@ -856,9 +1072,7 @@ Internal values
       
       The path of the directory which, at run time, contains the root XML file (iodef.xml).
       
-      fatal: False
-      
-      default values:
+      values:
          
          - laboratory[path_to_parse]
          - './'
@@ -869,9 +1083,7 @@ Internal values
       
       A dictionary containing, for each perso or dev variables with a XY-perso shape, and for each vertical coordinate associated, the main attributes of the dimension.
       
-      fatal: False
-      
-      default values:
+      values:
          
          - simulation[perso_sdims_description]
          - {}
@@ -884,7 +1096,9 @@ Internal values
       
       fatal: True
       
-      default values: laboratory[ping_variables_prefix]
+      values:
+         
+         - laboratory[ping_variables_prefix]
       
       num type: 'string'
       
@@ -892,9 +1106,9 @@ Internal values
       
       Name of the orography field name to be used to compute height over orog fields prefixed with :term:`ping_variable_prefix`.
       
-      fatal: False
-      
-      default values: '{}{}'.format(internal[ping_variables_prefix], internal[orography_field_name])
+      values:
+         
+         - function from self named format('prefix'= internal[ping_variables_prefix], 'variable'= internal[orography_field_name])
       
       num type: 'string'
       
@@ -902,9 +1116,7 @@ Internal values
       
       For an extended printout of selected CMOR variables, grouped by variable label.
       
-      fatal: False
-      
-      default values:
+      values:
          
          - laboratory[print_stats_per_var_label]
          - False
@@ -915,38 +1127,10 @@ Internal values
       
       If the value is a list, only the file/field variables listed here will be put in output files. If boolean, tell if the file/field variables should be put in output files.
       
-      fatal: False
-      
-      default values:
+      values:
          
          - laboratory[print_variables]
          - True
-      
-      num type: 'string'
-      
-   project
-      
-      Project associated with the simulation.
-      
-      fatal: False
-      
-      default values:
-         
-         - laboratory[project]
-         - 'CMIP6'
-      
-      num type: 'string'
-      
-   project_settings
-      
-      Project settings definition file to be used.
-      
-      fatal: False
-      
-      default values:
-         
-         - laboratory[project_settings]
-         - internal[project]
       
       num type: 'string'
       
@@ -954,9 +1138,7 @@ Internal values
       
       Realization number.
       
-      fatal: False
-      
-      default values:
+      values:
          
          - simulation[realization_index]
          - '1'
@@ -965,11 +1147,13 @@ Internal values
       
    realms_per_context
       
-      A dictionary which keys are context names and values the lists of realms associated with each context
+      A dictionary which keys are context names and values the lists of realms associated with each context.
       
       fatal: True
       
-      default values: laboratory[realms_per_context][internal[context]]
+      values:
+         
+         - laboratory[realms_per_context][internal[context]]
       
       num type: 'string'
       
@@ -979,7 +1163,7 @@ Internal values
       
       fatal: True
       
-      default values:
+      values:
          
          - laboratory[required_model_components][internal[source_id]]
          - []
@@ -992,20 +1176,10 @@ Internal values
       
       fatal: True
       
-      default values: laboratory[sampling_timestep]
-      
-      num type: 'string'
-      
-   save_project_settings
-      
-      The path of the file where the complete project settings will be written, if needed.
-      
-      fatal: False
-      
-      default values:
+      values:
          
-         - laboratory[save_project_settings]
-         - None
+         - laboratory[sampling_timestep]
+         - 2
       
       num type: 'string'
       
@@ -1013,9 +1187,9 @@ Internal values
       
       List of the sectors to be considered.
       
-      fatal: False
-      
-      default values: laboratory[sectors]
+      values:
+         
+         - laboratory[sectors]
       
       num type: 'string'
       
@@ -1025,13 +1199,64 @@ Internal values
       
       fatal: True
       
-      default values: dict[select]
+      values:
+         
+         - dict[select]
+      
+      corrections:
+         
+         - '': 'on_expt_and_year'
       
       authorized values:
          
          - 'on_expt_and_year'
          - 'on_expt'
+         - 'on_inc_and_exc'
          - 'no'
+      
+      num type: 'string'
+      
+   select_excluded_dimensions
+      
+      Excluded dimensions for variable selection.
+      
+      fatal: True
+      
+      values:
+         
+         -    Condition:
+         -    
+         -       value to check: internal[select_on_inc_and_exc]
+         -       
+         -       check to perform: 'eq'
+         -       
+         -       reference values: True
+         -       
+         -       values: internal[excluded_dimensions]
+         -       
+      
+      target type: 'list'
+      
+      num type: 'string'
+      
+   select_excluded_expgroups
+      
+      Excluded experiments groups for variable selection.
+      
+      fatal: True
+      
+      values:
+         
+         -    Condition:
+         -    
+         -       value to check: internal[select_on_inc_and_exc]
+         -       
+         -       check to perform: 'eq'
+         -       
+         -       reference values: True
+         -       
+         -       values: merge_lists()
+         -       
       
       num type: 'string'
       
@@ -1041,37 +1266,18 @@ Internal values
       
       fatal: True
       
-      default values: []
-      
-      cases:
-         Case:
+      values:
          
-            conditions:
-                  Condition:
-                  
-                     check value: internal[select_on_expt]
-                     
-                     check to do: 'eq'
-                     
-                     reference values: True
-                     
-            
-            value: ['internal[excluded_opportunities_lset]', 'internal[excluded_opportunities_sset]']
-            
-         Case:
-         
-            conditions:
-                  Condition:
-                  
-                     check value: internal[select_on_expt]
-                     
-                     check to do: 'eq'
-                     
-                     reference values: False
-                     
-            
-            value: internal[excluded_opportunities_lset]
-            
+         -    Condition:
+         -    
+         -       value to check: internal[select_on_inc_and_exc]
+         -       
+         -       check to perform: 'eq'
+         -       
+         -       reference values: True
+         -       
+         -       values: merge_lists()
+         -       
       
       num type: 'string'
       
@@ -1081,37 +1287,39 @@ Internal values
       
       fatal: True
       
-      default values: []
+      values:
+         
+         -    Condition:
+         -    
+         -       value to check: internal[select_on_inc_and_exc]
+         -       
+         -       check to perform: 'eq'
+         -       
+         -       reference values: True
+         -       
+         -       values: merge_lists()
+         -       
       
-      cases:
-         Case:
+      num type: 'string'
+      
+   select_excluded_regions
+      
+      Excluded regions for variable selection.
+      
+      fatal: True
+      
+      values:
          
-            conditions:
-                  Condition:
-                  
-                     check value: internal[select_on_expt]
-                     
-                     check to do: 'eq'
-                     
-                     reference values: True
-                     
-            
-            value: ['internal[excluded_pairs_lset]', 'internal[excluded_pairs_sset]']
-            
-         Case:
-         
-            conditions:
-                  Condition:
-                  
-                     check value: internal[select_on_expt]
-                     
-                     check to do: 'eq'
-                     
-                     reference values: False
-                     
-            
-            value: internal[excluded_pairs_lset]
-            
+         -    Condition:
+         -    
+         -       value to check: internal[select_on_inc_and_exc]
+         -       
+         -       check to perform: 'eq'
+         -       
+         -       reference values: True
+         -       
+         -       values: internal[excluded_regions]
+         -       
       
       num type: 'string'
       
@@ -1121,37 +1329,18 @@ Internal values
       
       fatal: True
       
-      default values: []
-      
-      cases:
-         Case:
+      values:
          
-            conditions:
-                  Condition:
-                  
-                     check value: internal[select_on_expt]
-                     
-                     check to do: 'eq'
-                     
-                     reference values: True
-                     
-            
-            value: internal[excluded_request_links]
-            
-         Case:
-         
-            conditions:
-                  Condition:
-                  
-                     check value: internal[select_on_expt]
-                     
-                     check to do: 'eq'
-                     
-                     reference values: False
-                     
-            
-            value: None
-            
+         -    Condition:
+         -    
+         -       value to check: internal[select_on_inc_and_exc]
+         -       
+         -       check to perform: 'eq'
+         -       
+         -       reference values: True
+         -       
+         -       values: internal[excluded_request_links]
+         -       
       
       num type: 'string'
       
@@ -1161,37 +1350,18 @@ Internal values
       
       fatal: True
       
-      default values: []
-      
-      cases:
-         Case:
+      values:
          
-            conditions:
-                  Condition:
-                  
-                     check value: internal[select_on_expt]
-                     
-                     check to do: 'eq'
-                     
-                     reference values: True
-                     
-            
-            value: ['internal[excluded_tables_lset]', 'internal[excluded_tables_sset]']
-            
-         Case:
-         
-            conditions:
-                  Condition:
-                  
-                     check value: internal[select_on_expt]
-                     
-                     check to do: 'eq'
-                     
-                     reference values: False
-                     
-            
-            value: internal[excluded_tables_lset]
-            
+         -    Condition:
+         -    
+         -       value to check: internal[select_on_inc_and_exc]
+         -       
+         -       check to perform: 'eq'
+         -       
+         -       reference values: True
+         -       
+         -       values: merge_lists()
+         -       
       
       num type: 'string'
       
@@ -1201,37 +1371,18 @@ Internal values
       
       fatal: True
       
-      default values: []
-      
-      cases:
-         Case:
+      values:
          
-            conditions:
-                  Condition:
-                  
-                     check value: internal[select_on_expt]
-                     
-                     check to do: 'eq'
-                     
-                     reference values: True
-                     
-            
-            value: ['internal[excluded_vargroups_lset]', 'internal[excluded_vargroups_sset]']
-            
-         Case:
-         
-            conditions:
-                  Condition:
-                  
-                     check value: internal[select_on_expt]
-                     
-                     check to do: 'eq'
-                     
-                     reference values: False
-                     
-            
-            value: internal[excluded_vargroups_lset]
-            
+         -    Condition:
+         -    
+         -       value to check: internal[select_on_inc_and_exc]
+         -       
+         -       check to perform: 'eq'
+         -       
+         -       reference values: True
+         -       
+         -       values: merge_lists()
+         -       
       
       num type: 'string'
       
@@ -1241,37 +1392,18 @@ Internal values
       
       fatal: True
       
-      default values: []
-      
-      cases:
-         Case:
+      values:
          
-            conditions:
-                  Condition:
-                  
-                     check value: internal[select_on_expt]
-                     
-                     check to do: 'eq'
-                     
-                     reference values: True
-                     
-            
-            value: ['internal[excluded_vars_lset]', 'internal[excluded_vars_sset]', 'internal[excluded_vars_per_config]']
-            
-         Case:
-         
-            conditions:
-                  Condition:
-                  
-                     check value: internal[select_on_expt]
-                     
-                     check to do: 'eq'
-                     
-                     reference values: False
-                     
-            
-            value: internal[excluded_vars_lset]
-            
+         -    Condition:
+         -    
+         -       value to check: internal[select_on_inc_and_exc]
+         -       
+         -       check to perform: 'eq'
+         -       
+         -       reference values: True
+         -       
+         -       values: merge_lists()
+         -       
       
       num type: 'string'
       
@@ -1281,37 +1413,39 @@ Internal values
       
       fatal: True
       
-      default values: []
+      values:
+         
+         -    Condition:
+         -    
+         -       value to check: internal[select_on_expt]
+         -       
+         -       check to perform: 'eq'
+         -       
+         -       reference values: True
+         -       
+         -       values: internal[grid_choice]
+         -       
       
-      cases:
-         Case:
+      num type: 'string'
+      
+   select_included_expgroups
+      
+      Included experiments groups for variable selection.
+      
+      fatal: True
+      
+      values:
          
-            conditions:
-                  Condition:
-                  
-                     check value: internal[select_on_expt]
-                     
-                     check to do: 'eq'
-                     
-                     reference values: True
-                     
-            
-            value: internal[grid_choice]
-            
-         Case:
-         
-            conditions:
-                  Condition:
-                  
-                     check value: internal[select_on_expt]
-                     
-                     check to do: 'eq'
-                     
-                     reference values: False
-                     
-            
-            value: 'LR'
-            
+         -    Condition:
+         -    
+         -       value to check: internal[select_on_inc_and_exc]
+         -       
+         -       check to perform: 'eq'
+         -       
+         -       reference values: True
+         -       
+         -       values: internal[included_expgroups]
+         -       
       
       num type: 'string'
       
@@ -1321,37 +1455,18 @@ Internal values
       
       fatal: True
       
-      default values: []
-      
-      cases:
-         Case:
+      values:
          
-            conditions:
-                  Condition:
-                  
-                     check value: internal[select_on_expt]
-                     
-                     check to do: 'eq'
-                     
-                     reference values: True
-                     
-            
-            value: internal[included_opportunities]
-            
-         Case:
-         
-            conditions:
-                  Condition:
-                  
-                     check value: internal[select_on_expt]
-                     
-                     check to do: 'eq'
-                     
-                     reference values: False
-                     
-            
-            value: internal[included_opportunities_lset]
-            
+         -    Condition:
+         -    
+         -       value to check: internal[select_on_inc_and_exc]
+         -       
+         -       check to perform: 'eq'
+         -       
+         -       reference values: True
+         -       
+         -       values: internal[included_opportunities]
+         -       
       
       num type: 'string'
       
@@ -1361,37 +1476,18 @@ Internal values
       
       fatal: True
       
-      default values: []
-      
-      cases:
-         Case:
+      values:
          
-            conditions:
-                  Condition:
-                  
-                     check value: internal[select_on_expt]
-                     
-                     check to do: 'eq'
-                     
-                     reference values: True
-                     
-            
-            value: internal[included_request_links]
-            
-         Case:
-         
-            conditions:
-                  Condition:
-                  
-                     check value: internal[select_on_expt]
-                     
-                     check to do: 'eq'
-                     
-                     reference values: False
-                     
-            
-            value: None
-            
+         -    Condition:
+         -    
+         -       value to check: internal[select_on_inc_and_exc]
+         -       
+         -       check to perform: 'eq'
+         -       
+         -       reference values: True
+         -       
+         -       values: internal[included_request_links]
+         -       
       
       num type: 'string'
       
@@ -1401,77 +1497,39 @@ Internal values
       
       fatal: True
       
-      default values: []
-      
-      cases:
-         Case:
+      values:
          
-            conditions:
-                  Condition:
-                  
-                     check value: internal[select_on_expt]
-                     
-                     check to do: 'eq'
-                     
-                     reference values: True
-                     
-            
-            value: internal[included_tables]
-            
-         Case:
-         
-            conditions:
-                  Condition:
-                  
-                     check value: internal[select_on_expt]
-                     
-                     check to do: 'eq'
-                     
-                     reference values: False
-                     
-            
-            value: internal[included_tables_lset]
-            
+         -    Condition:
+         -    
+         -       value to check: internal[select_on_inc_and_exc]
+         -       
+         -       check to perform: 'eq'
+         -       
+         -       reference values: True
+         -       
+         -       values: internal[included_tables]
+         -       
       
       num type: 'string'
       
    select_included_vargroups
       
-      Included variables groups for variable selection.
+      Included variable groups for variable selection.
       
       fatal: True
       
-      default values: []
-      
-      cases:
-         Case:
+      values:
          
-            conditions:
-                  Condition:
-                  
-                     check value: internal[select_on_expt]
-                     
-                     check to do: 'eq'
-                     
-                     reference values: True
-                     
-            
-            value: internal[included_vargroups]
-            
-         Case:
-         
-            conditions:
-                  Condition:
-                  
-                     check value: internal[select_on_expt]
-                     
-                     check to do: 'eq'
-                     
-                     reference values: False
-                     
-            
-            value: internal[included_vargroups_lset]
-            
+         -    Condition:
+         -    
+         -       value to check: internal[select_on_inc_and_exc]
+         -       
+         -       check to perform: 'eq'
+         -       
+         -       reference values: True
+         -       
+         -       values: internal[included_vargroups]
+         -       
       
       num type: 'string'
       
@@ -1481,37 +1539,18 @@ Internal values
       
       fatal: True
       
-      default values: []
-      
-      cases:
-         Case:
+      values:
          
-            conditions:
-                  Condition:
-                  
-                     check value: internal[select_on_expt]
-                     
-                     check to do: 'eq'
-                     
-                     reference values: True
-                     
-            
-            value: internal[included_vars]
-            
-         Case:
-         
-            conditions:
-                  Condition:
-                  
-                     check value: internal[select_on_expt]
-                     
-                     check to do: 'eq'
-                     
-                     reference values: False
-                     
-            
-            value: internal[included_vars_lset]
-            
+         -    Condition:
+         -    
+         -       value to check: internal[select_on_inc_and_exc]
+         -       
+         -       check to perform: 'eq'
+         -       
+         -       reference values: True
+         -       
+         -       values: internal[included_vars]
+         -       
       
       num type: 'string'
       
@@ -1521,37 +1560,41 @@ Internal values
       
       fatal: True
       
-      default values: []
+      values:
+         
+         -    Condition:
+         -    
+         -       value to check: internal[select_on_expt]
+         -       
+         -       check to perform: 'eq'
+         -       
+         -       reference values: True
+         -       
+         -       values: internal[max_priority]
+         -       
       
-      cases:
-         Case:
+      num type: 'string'
+      
+   select_max_priority_per_frequency
+      
+      Max priority per frequency for variable selection.
+      
+      fatal: True
+      
+      values:
          
-            conditions:
-                  Condition:
-                  
-                     check value: internal[select_on_expt]
-                     
-                     check to do: 'eq'
-                     
-                     reference values: True
-                     
-            
-            value: internal[max_priority]
-            
-         Case:
-         
-            conditions:
-                  Condition:
-                  
-                     check value: internal[select_on_expt]
-                     
-                     check to do: 'eq'
-                     
-                     reference values: False
-                     
-            
-            value: internal[max_priority_lset]
-            
+         -    Condition:
+         -    
+         -       value to check: internal[select_on_inc_and_exc]
+         -       
+         -       check to perform: 'eq'
+         -       
+         -       reference values: True
+         -       
+         -       values: internal[max_priority_per_frequency]
+         -       
+      
+      target type: 'dict'
       
       num type: 'string'
       
@@ -1561,37 +1604,18 @@ Internal values
       
       fatal: True
       
-      default values: []
-      
-      cases:
-         Case:
+      values:
          
-            conditions:
-                  Condition:
-                  
-                     check value: internal[select_on_expt]
-                     
-                     check to do: 'eq'
-                     
-                     reference values: True
-                     
-            
-            value: internal[mips][internal[select_grid_choice]]sort_mips()
-            
-         Case:
-         
-            conditions:
-                  Condition:
-                  
-                     check value: internal[select_on_expt]
-                     
-                     check to do: 'eq'
-                     
-                     reference values: False
-                     
-            
-            value: internal[mips]sort_mips()
-            
+         -    Condition:
+         -    
+         -       value to check: internal[select_on_inc_and_exc]
+         -       
+         -       check to perform: 'eq'
+         -       
+         -       reference values: True
+         -       
+         -       values: function from functions_file named sort_mips('mips'= internal[mips][internal[select_grid_choice]])
+         -       
       
       num type: 'string'
       
@@ -1601,40 +1625,46 @@ Internal values
       
       fatal: True
       
-      default values: []
+      values:
+         
+         -    Condition:
+         -    
+         -       value to check: internal[select]
+         -       
+         -       check to perform: 'eq'
+         -       
+         -       reference values:
+         -             
+         -             - 'on_expt_and_year'
+         -             - 'on_expt'
+         -       
+         -       values: True
+         -       
       
-      cases:
-         Case:
+      num type: 'string'
+      
+   select_on_inc_and_exc
+      
+      Should data be selected on inclusions and exclusions?
+      
+      fatal: True
+      
+      values:
          
-            conditions:
-                  Condition:
-                  
-                     check value: internal[select]
-                     
-                     check to do: 'eq'
-                     
-                     reference values:
-                           
-                           - 'on_expt_and_year'
-                           - 'on_expt'
-                     
-            
-            value: True
-            
-         Case:
-         
-            conditions:
-                  Condition:
-                  
-                     check value: internal[select]
-                     
-                     check to do: 'eq'
-                     
-                     reference values: 'no'
-                     
-            
-            value: False
-            
+         -    Condition:
+         -    
+         -       value to check: internal[select]
+         -       
+         -       check to perform: 'eq'
+         -       
+         -       reference values:
+         -             
+         -             - 'on_expt_and_year'
+         -             - 'on_expt'
+         -             - 'on_inc_and_exc'
+         -       
+         -       values: True
+         -       
       
       num type: 'string'
       
@@ -1644,40 +1674,18 @@ Internal values
       
       fatal: True
       
-      default values: []
-      
-      cases:
-         Case:
+      values:
          
-            conditions:
-                  Condition:
-                  
-                     check value: internal[select]
-                     
-                     check to do: 'eq'
-                     
-                     reference values: 'on_expt_and_year'
-                     
-            
-            value: internal[year]
-            
-         Case:
-         
-            conditions:
-                  Condition:
-                  
-                     check value: internal[select]
-                     
-                     check to do: 'eq'
-                     
-                     reference values:
-                           
-                           - 'no'
-                           - 'on_expt'
-                     
-            
-            value: None
-            
+         -    Condition:
+         -    
+         -       value to check: internal[select]
+         -       
+         -       check to perform: 'eq'
+         -       
+         -       reference values: 'on_expt_and_year'
+         -       
+         -       values: True
+         -       
       
       num type: 'string'
       
@@ -1687,37 +1695,20 @@ Internal values
       
       fatal: True
       
-      default values: []
+      values:
+         
+         -    Condition:
+         -    
+         -       value to check: internal[select_on_expt]
+         -       
+         -       check to perform: 'eq'
+         -       
+         -       reference values: True
+         -       
+         -       values: internal[sizes]
+         -       
       
-      cases:
-         Case:
-         
-            conditions:
-                  Condition:
-                  
-                     check value: internal[select_on_expt]
-                     
-                     check to do: 'eq'
-                     
-                     reference values: True
-                     
-            
-            value: internal[sizes]
-            
-         Case:
-         
-            conditions:
-                  Condition:
-                  
-                     check value: internal[select_on_expt]
-                     
-                     check to do: 'eq'
-                     
-                     reference values: False
-                     
-            
-            value: None
-            
+      target type: 'dict'
       
       num type: 'string'
       
@@ -1727,47 +1718,28 @@ Internal values
       
       fatal: True
       
-      default values: []
-      
-      cases:
-         Case:
+      values:
          
-            conditions:
-                  Condition:
-                  
-                     check value: internal[select_on_expt]
-                     
-                     check to do: 'eq'
-                     
-                     reference values: True
-                     
-            
-            value: internal[tierMax]
-            
-         Case:
-         
-            conditions:
-                  Condition:
-                  
-                     check value: internal[select_on_expt]
-                     
-                     check to do: 'eq'
-                     
-                     reference values: False
-                     
-            
-            value: internal[tierMax_lset]
-            
+         -    Condition:
+         -    
+         -       value to check: internal[select_on_expt]
+         -       
+         -       check to perform: 'eq'
+         -       
+         -       reference values: True
+         -       
+         -       values: internal[tierMax]
+         -       
       
       num type: 'string'
       
    simple_domain_grid_regexp
       
-      If some grid is not defined in xml but by API, and is referenced by a field which is considered by the DR as having a singleton dimension, then: 1) it must be a grid which has only a domain 2) the domain name must be extractable from the grid_id using a regexp and a group number Example: using a pattern that returns full id except for a '_grid' suffix
+      If some grid is not defined in xml but by API, and is referenced by a field which is considered by the DR as having a singleton dimension, then: \n1) it must be a grid which has only a domain \n2) the domain name must be extractable from the grid_id using a regexp and a group number \nExample: using a pattern that returns full id except for a '_grid' suffix
       
-      fatal: False
-      
-      default values: laboratory[simple_domain_grid_regexp]
+      values:
+         
+         - laboratory[simple_domain_grid_regexp]
       
       num type: 'string'
       
@@ -1777,7 +1749,9 @@ Internal values
       
       fatal: True
       
-      default values: laboratory[sizes][internal[grid_choice]]format_sizes()
+      values:
+         
+         - function from functions_file named format_sizes('sizes'= laboratory[sizes][internal[grid_choice]])
       
       num type: 'string'
       
@@ -1787,7 +1761,7 @@ Internal values
       
       fatal: True
       
-      default values:
+      values:
          
          - laboratory[configurations][internal[configuration]][0]
          - simulation[source_id]
@@ -1796,11 +1770,11 @@ Internal values
       
    source_type
       
-      If the default source-type value for your source (:term:`source_types` from :term:`lab_and_model_settings`) does not fit, you may change it here. This should describe the model most directly responsible for the output. Sometimes it is appropriate to list two (or more) model types here, among AER, AGCM, AOGCM, BGC, CHEM, ISM, LAND, OGCM, RAD, SLAB e.g. amip , run with CNRM-CM6-1, should quote "AGCM AER". Also see note 14 of https://docs.google.com/document/d/1h0r8RZr_f3-8egBMMh7aqLwy3snpD6_MrDz1q8n5XUk/edit
+      If the default source-type value for your source (:term:`source_types` from :term:`lab_and_model_settings`) does not fit, you may change it here. This should describe the model most directly responsible for the output. Sometimes it is appropriate to list two (or more) model types here, among AER, AGCM, AOGCM, BGC, CHEM, ISM, LAND, OGCM, RAD, SLAB e.g. amip , run with CNRM-CM6-1, should quote \"AGCM AER\". Also see note 14 of https://docs.google.com/document/d/1h0r8RZr_f3-8egBMMh7aqLwy3snpD6_MrDz1q8n5XUk/edit
       
       fatal: True
       
-      default values:
+      values:
          
          - laboratory[configurations][internal[configuration]][1]
          - simulation[source_type]
@@ -1812,9 +1786,7 @@ Internal values
       
       This variable is used when some variables are computed with a period which is not the basic timestep. A dictionary which keys are non standard timestep and values the list of variables which are computed at this timestep.
       
-      fatal: False
-      
-      default values:
+      values:
          
          - laboratory[special_timestep_vars]
          - []
@@ -1825,9 +1797,7 @@ Internal values
       
       Path to the split frequencies file to be used.
       
-      fatal: False
-      
-      default values:
+      values:
          
          - simulation[split_frequencies]
          - laboratory[split_frequencies]
@@ -1837,11 +1807,13 @@ Internal values
       
    synchronisation_frequency
       
-      Frequency at which the synchornisation between buffer and filesystem is done.
+      Frequency at which the synchronisation between buffer and filesystem is done.
       
-      fatal: False
-      
-      default values: []
+      values:
+         
+         - simulation[synchronisation_frequency]
+         - laboratory[synchronisation_frequency]
+         - None
       
       num type: 'string'
       
@@ -1851,7 +1823,7 @@ Internal values
       
       fatal: True
       
-      default values:
+      values:
          
          - simulation[tierMax]
          - internal[tierMax_lset]
@@ -1864,7 +1836,9 @@ Internal values
       
       fatal: True
       
-      default values: laboratory[tierMax]
+      values:
+         
+         - laboratory[tierMax]
       
       num type: 'string'
       
@@ -1874,10 +1848,21 @@ Internal values
       
       fatal: True
       
-      default values:
+      values:
          
          - laboratory[too_long_periods]
          - []
+      
+      num type: 'string'
+      
+   update_grid_label
+      
+      Should grid label be updated according to table?
+      
+      values:
+         
+         - laboratory[update_grid_label]
+         - True
       
       num type: 'string'
       
@@ -1885,9 +1870,7 @@ Internal values
       
       Should xml output files use the `@` symbol for definitions for instant variables?
       
-      fatal: False
-      
-      default values:
+      values:
          
          - laboratory[useAtForInstant]
          - False
@@ -1900,7 +1883,7 @@ Internal values
       
       fatal: True
       
-      default values:
+      values:
          
          - laboratory[use_cmorvar_label_in_filename]
          - False
@@ -1911,12 +1894,23 @@ Internal values
       
       Say if you want to use XIOS union/zoom axis to optimize vertical interpolation requested by the DR.
       
-      fatal: False
-      
-      default values:
+      values:
          
          - laboratory[use_union_zoom]
          - False
+      
+      num type: 'string'
+      
+   variables_per_grid_type
+      
+      List of variables associated with a grid type
+      
+      values:
+         
+         - laboratory[variables_per_grid_type]
+         - {}
+      
+      target type: 'dict'
       
       num type: 'string'
       
@@ -1924,9 +1918,7 @@ Internal values
       
       Operation done for vertical interpolation.
       
-      fatal: False
-      
-      default values:
+      values:
          
          - laboratory[vertical_interpolation_operation]
          - 'instant'
@@ -1937,9 +1929,26 @@ Internal values
       
       Time frequency of vertical interpolation.
       
-      fatal: False
+      values:
+         
+         - laboratory[vertical_interpolation_sample_freq]
       
-      default values: laboratory[vertical_interpolation_sample_freq]
+      num type: 'string'
+      
+   write_split_freq
+      
+      Should a split_freq file be generated with values computed by dr2xml?
+      
+      values:
+         
+         - laboratory[write_split_freq]
+         - False
+      
+      forbidden values:
+         
+         - None
+         - 'None'
+         - ''
       
       num type: 'string'
       
@@ -1947,9 +1956,7 @@ Internal values
       
       Version of XIOS used.
       
-      fatal: False
-      
-      default values:
+      values:
          
          - laboratory[xios_version]
          - 2
@@ -1962,7 +1969,9 @@ Internal values
       
       fatal: True
       
-      default values: dict[year]
+      values:
+         
+         - dict[year]
       
       num type: 'string'
       
@@ -1970,9 +1979,7 @@ Internal values
       
       Name of the geopotential height field name to be used to compute height over orog fields.
       
-      fatal: False
-      
-      default values:
+      values:
          
          - laboratory[zg_field_name]
          - 'zg'
@@ -1990,7 +1997,9 @@ Common values
       
       fatal: True
       
-      default values: dict[prefix]
+      values:
+         
+         - dict[prefix]
       
       num type: 'string'
       
@@ -2055,7 +2064,7 @@ Project settings
       XIOS grid_definition beacon
    interpolate_axis
       
-      XIOS interpolate_axis beacon
+      TODO
    interpolate_domain
       
       XIOS interpolate_domain beacon
@@ -2077,9 +2086,11 @@ Project settings
             
             Content of the variable
             
-            fatal: False
+            fatal: True
             
-            default values: []
+            values:
+               
+               - attrs[name]
             
             num type: 'string'
             
@@ -2087,9 +2098,11 @@ Project settings
             
             Encoding type of the variable's content.
             
-            fatal: False
+            fatal: True
             
-            default values: []
+            values:
+               
+               - attrs[type]
             
             num type: 'string'
             

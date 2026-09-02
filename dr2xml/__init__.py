@@ -652,6 +652,7 @@ on
 
     from .settings_interface import get_settings_values
 
+    init_settings = get_settings_values("init")
     internal_settings = get_settings_values("internal")
 
     print("\n {}\n*".format(50 * "*"))
@@ -663,7 +664,7 @@ on
     # TBS# from os import path as os_path
     # TBS# prog_path=os_path.abspath(os_path.split(__file__)[0])
 
-    print("* %29s" % "{} Data Request version: ".format(internal_settings["data_request_used"]), get_dr_object("get_data_request").get_version())
+    print("* %29s" % "{} Data Request version: ".format(init_settings["data_request_used"]), get_dr_object("get_data_request").get_version())
     print("\n*\n {}".format(50 * "*"))
 
     logger = get_logger()
@@ -698,6 +699,7 @@ on
     # --------------------------------------------------------------------
     skipped_vars_per_table = OrderedDict()
     actually_written_vars = list()
+    csv_file_content = list()
     svars_per_table = select_variables_to_be_processed()
     #
     # --------------------------------------------------------------------
@@ -710,8 +712,9 @@ on
     # --------------------------------------------------------------------
     if internal_settings["use_union_zoom"]:
         svars_full_list = list()
-        for svl in svars_per_table.values():
-            svars_full_list.extend(svl)
+        for table in svars_per_table:
+            for svl in svars_per_table[table].values():
+                svars_full_list.extend(svl)
         create_xios_axis_and_grids_for_plevs_unions(svars_full_list, multi_plev_suffixes.union(single_plev_suffixes),
                                                     dummies)
     #
@@ -722,7 +725,7 @@ on
     os.chdir(dirname)
     filename = dirname + "dr2xml_%s.xml" % context
     write_xios_file_def(filename, svars_per_table, year, dummies, skipped_vars_per_table, actually_written_vars,
-                        context, enddate, attributes)
+                        csv_file_content, context, enddate, attributes)
     logger.info("\nfile_def written as %s" % filename)
 
     #
@@ -732,7 +735,8 @@ on
     # mpmoine_petitplus:generate_file_defs: pour sortir des stats sur ce que l'on sort reelement
     # SS - non : gros plus
     print_some_stats(context, svars_per_table, skipped_vars_per_table,
-                     actually_written_vars, internal_settings["print_stats_per_var_label"])
+                     actually_written_vars, csv_file_content, extended=internal_settings["print_stats_per_var_label"],
+                     csv_file=internal_settings["create_csv_file"])
 
     warn = OrderedDict()
     for warning, label, table in get_config_variable("cell_method_warnings", to_change=True):

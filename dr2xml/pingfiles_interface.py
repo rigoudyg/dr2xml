@@ -13,6 +13,7 @@ import os
 import sys
 import six
 
+from . import get_config_variable
 # Utilities
 from .settings_interface import get_settings_values
 from .utils import Dr2xmlError
@@ -23,6 +24,7 @@ from utilities.logger import get_logger
 # Global variables and configuration tools
 from .config import get_config_variable, add_value_in_dict_config_variable, set_config_variable, \
     add_value_in_list_config_variable
+from .vars_interface.cmor import ping_alias
 
 # Interface to xml tools
 from .xml_interface import get_root_of_xml_file, DR2XMLElement, DR2XMLComment, parse_xml_file, create_pretty_xml_doc
@@ -216,15 +218,16 @@ def ping_file_for_realms_list(context, svars, lrealms, path_special, dummy="fiel
         name += "_" + r.replace(" ", "%")
     lvars = []
     for table in svars:
-        for v in svars[table]:
-            added = False
-            if len(set(v.modeling_realm) & set(lrealms)) > 0 or \
-                    (not(exact) and len(set(lrealms) & v.set_modeling_realms) > 0):
-                lvars.append(v)
-                added = True
-            if not added and context in internal_values['orphan_variables'] and \
-                    v.label in internal_values['orphan_variables'][context]:
-                lvars.append(v)
+        for region in svars[table]:
+            for v in svars[table][region]:
+                added = False
+                if len(set(v.modeling_realm) & set(lrealms)) > 0 or \
+                        (not(exact) and len(set(lrealms) & v.set_modeling_realms) > 0):
+                    lvars.append(v)
+                    added = True
+                if not added and context in internal_values['orphan_variables'] and \
+                        v.label in internal_values['orphan_variables'][context]:
+                    lvars.append(v)
     lvars.sort(key=lambda x: x.label_without_psuffix)
 
     # Remove duplicates : want to get one single entry for all variables having
@@ -258,6 +261,9 @@ def ping_file_for_realms_list(context, svars, lrealms, path_special, dummy="fiel
             label = v.label_non_ambiguous
         else:
             label = v.label_without_psuffix
+        logger.info("Found the following descriptions for label %s:" % label)
+        for elt in sorted(best_prio[label], key=lambda x: x.Priority):
+            logger.info("   Priority %s, Frequency %s, Description %s" % (elt.Priority, elt.frequency, elt.description))
         if v.label in debug:
             logger.debug("pingFile ... processing %s in table %s, label=%s" % (v.label, v.mipTable, label))
 
@@ -380,3 +386,44 @@ def highest_rank(svar):
         shape += "_" + d
     #
     return shape
+
+
+def find_alias(sv, skipped_vars_per_table, debug=list()):
+    internal_dict = get_settings_values("internal")
+    pingvars = get_config_variable("pingvars")
+    logger = get_logger()
+    # We use a simple convention for variable names in ping files :
+    if sv.type in ['perso', 'dev']:
+        alias = sv.label
+        alias_ping = sv.ref_var
+    else:
+        # MPM : si on a defini un label non ambigu alors on l'utilise comme alias (i.e. le field_ref)
+        # et pour l'alias seulement (le nom de variable dans le nom de fichier restant svar.label)
+        if sv.label_non_ambiguous:
+            alias = internal_dict["ping_variables_prefix"] + sv.label_non_ambiguous
+        else:
+            alias = internal_dict["ping_variables_prefix"] + sv.ref_var
+        if sv.label in debug:
+            logger.debug("write_xios_file_def_for_svar ... processing %s, alias=%s" % (sv.label, alias))
+
+        # suppression des terminaisons en "Clim" pour l'alias : elles concernent uniquement les cas
+        # d'absence de variation inter-annuelle sur les GHG. Peut-etre genant pour IPSL ?
+        # Du coup, les simus avec constance des GHG (picontrol) sont traitees comme celles avec variation
+        split_alias = alias.split("Clim")
+        alias = split_alias[0]
+        alias_ping, missed = ping_alias(sv)
+
+    if alias_ping not in pingvars and sv.type not in ["dev", "perso"]:
+        table = sv.mipTable
+        realm = " ".join(sv.modeling_realm)
+        if realm not in skipped_vars_per_table:
+            skipped_vars_per_table[realm] = dict()
+        if table not in skipped_vars_per_table[realm]:
+            skipped_vars_per_table[realm][table] = dict()
+        region = sv.region
+        if region not in skipped_vars_per_table[realm][table]:
+            skipped_vars_per_table[realm][table][region] = list()
+        skipped_vars_per_table[realm][table][region].append(sv.official_label + "(" + str(sv.Priority) + ", " + str(missed) + ")")
+        return
+    else:
+        return alias, alias_ping

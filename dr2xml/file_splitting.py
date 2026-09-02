@@ -38,7 +38,7 @@ def read_splitfreqs():
             with open(splitfile, "r") as freq:
                 print("Reading split_freqs from file %s" % splitfile)
                 lines = freq.readlines()
-            splitfreqs = defaultdict(lambda: OrderedDict)
+            splitfreqs = defaultdict(lambda: OrderedDict())
             for line in [l for l in lines if not l.startswith("#")]:
                 (varlabel, table, freq) = line.split()[0:3]
                 # Keep smallest factor for each variable label
@@ -255,7 +255,7 @@ def field_size(svar):
                 siz = oce_grid_size
             else:
                 siz = atm_grid_size
-        elif s_hdim in ["na", "TR", "TRS"]:
+        elif s_hdim in ["na", "TR", "TRS", "TR2"]:
             siz = 1
         elif s_hdim in ["S", ]:
             siz = nb_cosp_sites

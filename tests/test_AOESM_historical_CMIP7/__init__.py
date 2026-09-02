@@ -30,7 +30,8 @@ class TestHistoricalCMIP7(unittest.TestCase, TestSimulation):
             pingfiles="{path_xml}/ping_surfex.xml {path_xml}/ping_trip.xml {path_xml}/ping_nemo.xml",
             attributes=[('EXPID', 'CNRM-ESM2-1_historical_r1i1p1f2_v2'),
                         ('CMIP6_CV_version', 'cv=6.2.3.0-7-g2019642'),
-                        ('dr2xml_md5sum', '7040f60f6bf3118dc6c58b9fb8727d87')]
+                        ('dr2xml_md5sum', '7040f60f6bf3118dc6c58b9fb8727d87')],
+            debug=True
         )
         for elt in config:
             setattr(self, elt, copy.deepcopy(config[elt]))

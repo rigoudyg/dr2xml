@@ -21,15 +21,15 @@ from .definition import DataRequest as DataRequestBasic
 from .definition import SimpleObject
 from .definition import SimpleDim as SimpleDimBasic
 from .definition import SimpleCMORVar as SimpleCMORVarBasic
-from ..projects.dr2xml import format_sizes
-from ..utils import Dr2xmlError, print_struct, is_elt_applicable, convert_string_to_year
+from dr2xml.projects.dr2xml_func import format_sizes
+from dr2xml.utils import Dr2xmlError, print_struct, is_elt_applicable, convert_string_to_year
 from dr2xml.settings_interface import get_settings_values, get_values_from_internal_settings
 
-data_request_path = get_settings_values("internal", "data_request_path")
+data_request_path = get_settings_values("init", "data_request_path")
 if data_request_path is not None:
     sys.path.insert(0, data_request_path)
 
-data_request_content_version = get_settings_values("internal", "data_request_content_version")
+data_request_content_version = get_settings_values("init", "data_request_content_version")
 if data_request_content_version not in ["latest_stable", "stable", "latest"]:
     reset_manifest = True
     os.environ["DRQ_CONFIG_DIR"] = data_request_content_version
@@ -177,7 +177,7 @@ class DataRequest(DataRequestBasic):
 
         if ri_applies_to_experiment:
             logger.debug("Year considered: %s %s" % (year, type(year)))
-            if year is None:
+            if year is False:
                 rep = True
                 endyear = None
                 logger.debug(" ..applies because arg year is None")
@@ -514,6 +514,25 @@ class DataRequest(DataRequestBasic):
             request_link = [request_link, ]
         return self.scope.varsByRql(request_link, pmax)
 
+    def get_ps_data(self, reference_var):
+        rep = None
+        table = reference_var.mipTable
+        freq = reference_var.frequency
+        if freq in ["3h", "3hr", "3hrPt"]:
+            rep = dict(label='ps', mipTable='E3hrPt')
+        elif freq in ["6h", "6hr"]:
+             rep = dict(label='ps', mipTable='6hrLev')
+        elif freq in ["day", ]:
+            rep = dict(label='ps', mipTable='CFday')
+        elif freq in ["mon", "1mo"]:
+            rep = dict(label='ps', mipTable='Emon')
+        elif freq in ["subhr", ]:
+            if table in ["CFsubhr", ]:
+                rep = dict(label='ps', mipTable='CFsubhr')
+            else:
+                rep = dict(label='ps', mipTable='Esubhr')
+        return rep
+
 
 data_request = None
 
@@ -734,6 +753,7 @@ class SimpleCMORVar(SimpleCMORVarBasic):
         input_var_dict["struct"] = struct
         input_var_dict["cell_measures"] = measures
         input_var_dict["id"] = id
+        input_var_dict["official_label"] = "_".join([input_var.label, table.label])
         if input_var.description:
             input_var_dict["description"] = input_var.description.rstrip(' ')
         else:

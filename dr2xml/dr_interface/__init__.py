@@ -35,9 +35,9 @@ def get_dr_object(key):
     elif key in ["normalize_grid", ]:
         return normalize_grid
     elif key in ["SimpleCMORVar", ]:
-        return SimpleCMORVar()
+        return SimpleCMORVar
     elif key in ["SimpleDim", ]:
-        return SimpleDim()
+        return SimpleDim
     else:
         raise ValueError("Unknown data request object %s from interface" % key)
 
@@ -46,7 +46,7 @@ def load_correct_dr():
     global data_request, DataRequest, initialize_data_request, get_data_request, \
         normalize_grid, SimpleDim, SimpleObject, SimpleCMORVar
 
-    data_request_version = get_settings_values("internal", "data_request_used")
+    data_request_version = get_settings_values("init", "data_request_used")
 
     if data_request_version in ["CMIP6", ]:
         from .CMIP6 import data_request, DataRequest, initialize_data_request, get_data_request, \

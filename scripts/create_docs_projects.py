@@ -28,13 +28,13 @@ args = parser.parse_args()
 
 def write_documentation(output_directory, package_directory):
 	projects_list = os.listdir(os.sep.join([package_directory, "dr2xml", "projects"]))
-	projects_list = [elt.replace(".py", "") for elt in projects_list if elt.endswith(".py")]
+	projects_list = [elt.replace(".json", "") for elt in projects_list if elt.endswith(".json")]
 	projects_list = sorted(projects_list)
 	projects_list.remove("dr2xml")
 	projects_list.insert(0, "dr2xml")
 	projects_list.remove("basics")
 	projects_list.insert(1, "basics")
-	projects_list.remove("projects_interface_definitions")
+	projects_list.remove("projects_default_settings")
 
 
 	project_target_dir = os.sep.join([output_directory, "projects"])

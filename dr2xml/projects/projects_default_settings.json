@@ -1,0 +1,91 @@
+{
+  "parent_project_settings": {
+    "help": "If needed, the name of the parent file which is modified by the current one. Can be a complete path or the name of the file which will be taken from the default directory. All files should be created (through parents) from dr2xml.",
+    "default": null
+  },
+  "functions_file": {
+    "help": "If needed, the file which contains all the functions needed by a project.",
+    "default": null
+  },
+  "init": {
+    "help": "All variables which are needed to begin configuring dr2xml.",
+    "default": {},
+    "default_config": {
+      "help": "TODO",
+      "fatal": false,
+      "corrections": false,
+      "authorized_values": true,
+      "authorized_types": true,
+      "authorized_patterns": true,
+      "forbidden_patterns": true,
+      "forbidden_values": true,
+      "forbidden_types": true,
+      "target_type": false,
+      "values": []
+    }
+  },
+  "internal": {
+    "help": "All variables which are needed to go on configuring dr2xml.",
+    "default": {},
+    "default_config": {
+      "help": "TODO",
+      "fatal": false,
+      "corrections": false,
+      "authorized_values": true,
+      "authorized_types": true,
+      "authorized_patterns": true,
+      "forbidden_patterns": true,
+      "forbidden_values": true,
+      "forbidden_types": true,
+      "target_type": false,
+      "values": []
+    }
+  },
+  "common": {
+    "help": "All variables which are needed for projects.",
+    "default": {},
+    "default_config": {
+      "help": "TODO",
+      "fatal": false,
+      "corrections": false,
+      "authorized_values": true,
+      "authorized_types": true,
+      "authorized_patterns": true,
+      "forbidden_patterns": true,
+      "forbidden_values": true,
+      "forbidden_types": true,
+      "target_type": false,
+      "values": []
+    }
+  },
+  "project_settings": {
+    "help": "All elements used to configure xml beacons created by dr2xml.",
+    "default": {},
+    "default_config": {
+      "common_list": [],
+      "common_constraints": {},
+      "attrs_list": [],
+      "attrs_constraints": {},
+      "comments_list": [],
+      "comments_constraints": {},
+      "vars_list": [],
+      "vars_constraints": {}
+    },
+    "default_constraint": {
+      "help": "TODO",
+      "fatal": false,
+      "corrections": false,
+      "authorized_values": true,
+      "authorized_types": true,
+      "authorized_patterns": true,
+      "forbidden_values": true,
+      "forbidden_types": true,
+      "forbidden_patterns": true,
+      "target_type": false,
+      "values": [],
+      "output_key": false,
+      "num_type": "string",
+      "conditions": true
+    }
+  }
+}

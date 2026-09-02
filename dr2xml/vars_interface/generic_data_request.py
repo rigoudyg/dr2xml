@@ -73,10 +73,11 @@ def select_data_request_CMORvars_for_lab():
     allow_pseudo = internal_settings['allow_pseudo_standard_names']
     sn_issues = get_settings_values("internal_values", "sn_issues")
     for v in d:
-        svar = get_dr_object("SimpleCMORVar")
+        svar = get_dr_object("SimpleCMORVar")()
         cmvar = data_request.get_element_uid(v, elt_type="variable", sn_issues=sn_issues, allow_pseudo=allow_pseudo,
                                              mip_list=mips_list)
         complement_svar_using_cmorvar(svar, cmvar, [])
+        svar.type = "cmor"
         svar.Priority = cmvar.Priority
         svar.grids = d[v]
         simplified_vars.append(svar)

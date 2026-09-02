@@ -136,6 +136,9 @@ class DataRequest(object):
     def get_cmorvars_list(self, **kwargs):
         return dict()
 
+    def get_ps_data(self, reference_var):
+        raise NotImplementedError()
+
 
 class ListWithItems(list):
 
@@ -198,7 +201,7 @@ class SimpleCMORVar(SimpleObject):
                  cell_methods=None, cell_measures=None, spatial_shp=None, temporal_shp=None, experiment=None,
                  Priority=1, mip_era=False, prec="float", missing=1.e+20, cmvar=None, ref_var=None, mip=None,
                  sdims=dict(), comments=None, coordinates=None, cm=False, id=None, flag_meanings=None, flag_values=None,
-                 **kwargs):
+                 region=None, official_label=None, extravar=None, extra_name=None, home=False, **kwargs):
         self.type = type
         self.modeling_realm = modeling_realm
         self.set_modeling_realms = set()
@@ -231,12 +234,19 @@ class SimpleCMORVar(SimpleObject):
         self.prec = prec
         self.missing = missing
         self.cmvar = cmvar  # corresponding CMORvar, if any
+        self.extravar = extravar  # corresponding CMORvar, if any
         self.ref_var = ref_var
         self.comments = comments
         self.coordinates = coordinates
         self.id = id
         self.flag_meanings = flag_meanings
         self.flag_values = flag_values
+        if region is None:
+            region = get_settings_values("internal", "default_region")
+        self.region = region
+        self.official_label = official_label
+        self.extra_name = extra_name
+        self.home = home
         super(SimpleCMORVar, self).__init__(**kwargs)
     
     def set_attributes(self, **kwargs):
@@ -256,7 +266,8 @@ class SimpleCMORVar(SimpleObject):
     def __eq__(self, other):
         return self.label == other.label and self.modeling_realm == other.modeling_realm and \
                self.frequency == other.frequency and self.mipTable == other.mipTable and \
-               self.temporal_shp == other.temporal_shp and self.spatial_shp == other.spatial_shp
+               self.temporal_shp == other.temporal_shp and self.spatial_shp == other.spatial_shp and \
+               self.region == other.region and self.official_label == other.official_label
 
     def __lt__(self, other):
         return self.label < other.label
@@ -265,8 +276,8 @@ class SimpleCMORVar(SimpleObject):
         return self.label > other.label
 
     def __str__(self):
-        return (f"SimpleCMORVar {self.label} of priority {self.Priority} "
-                f"(with standard name {self.stdname} and units {self.units})")
+        return (f"SimpleCMORVar {self.label} of type {self.type} and priority {self.Priority} "
+                f"(with standard name {self.stdname}, units {self.units} and official label {self.official_label})")
 
     def __repr__(self):
         return str(self)
@@ -279,7 +290,17 @@ class SimpleCMORVar(SimpleObject):
         raise NotImplementedError()
 
     @classmethod
-    def get_from_extra(cls, input_var, mip_era=None, freq=None, table=None, **kwargs):
+    def get_from_extra(cls, input_var, label, mip_era=None, freq=None, table=None, **kwargs):
+        default_regions = get_settings_values("internal", "extravar_regions")
+        default_regions = default_regions.get(input_var["out_name"],
+                                              default_regions.get("default",
+                                                                  get_settings_values("internal",
+                                                                                      "default_region")))
+        temporal_shp = None
+        if "time: point" in input_var["cell_methods"]:
+            temporal_shp = "time-point"
+        elif "time: mean" in input_var["cell_methods"]:
+            temporal_shp = "time-mean"
         input_var_dict = dict(type="extra", mip_era=mip_era, label=input_var["out_name"],
                               mipVarLabel=input_var["out_name"], stdname=input_var.get("standard_name", ""),
                               long_name=input_var["long_name"], units=input_var["units"],
@@ -287,7 +308,9 @@ class SimpleCMORVar(SimpleObject):
                               cell_methods=input_var["cell_methods"], cell_measures=input_var["cell_measures"],
                               positive=input_var["positive"], Priority=float(input_var[mip_era.lower() + "_priority"]),
                               label_without_psuffix=input_var["out_name"],
-                              coordinates=input_var.get("dimensions", None))
+                              coordinates=input_var.get("dimensions", None),
+                              extravar=input_var, region=default_regions, official_label=input_var.get("branded_name"),
+                              extra_name=label, temporal_shp=temporal_shp)
         return cls(**input_var_dict)
 
 
@@ -308,6 +331,8 @@ class SimpleDim(SimpleObject):
         self.stdname = stdname
         self.long_name = long_name
         self.positive = positive
+        if requested in ["undef", ]:
+            requested = ""
         self.requested = requested
         self.value = value
         self.out_name = out_name
@@ -323,6 +348,13 @@ class SimpleDim(SimpleObject):
         self.is_union_for = is_union_for
         self.name = name
         super(SimpleDim, self).__init__(**kwargs)
+
+    def __str__(self):
+        return (f"SimpleCMORDim {self.label} of type {self.type}, axis {self.axis}, name {self.name}, value {self.value}, requested {self.requested}")
+
+    def __repr__(self):
+        return str(self)
+
 
     def correct_data_request(self):
         if self.requested and len(self.requested) > 0:
@@ -342,6 +374,6 @@ class SimpleDim(SimpleObject):
                               units=input_dim["units"], long_name=input_dim["long_name"],
                               out_name=input_dim["out_name"], positive=input_dim["positive"],
                               title=input_dim.get("title", input_dim["long_name"]),
-                              requested=" ".join([ilev for ilev in input_dim["requested"]]).rstrip(),
+                              requested=" ".join([ilev for ilev in input_dim["requested"] if ilev not in ["undef", ]]).rstrip(),
                               value=input_dim["value"], type=input_dim["type"])
         return cls(**input_dim_dict)

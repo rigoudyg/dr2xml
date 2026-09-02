@@ -26,7 +26,7 @@ tcmName2tcmValue = {"time-mean": "time: mean", "time-intv": "time: mean", "time-
 
 # SS : le jeu plev7c est un jeu de couches du simulateur ISCCP - pas d'interpolation
 # multi_plev_suffixes=set(["10","19","23","27","39","3","3h","4","7c","7h","8","12"])
-multi_plev_suffixes = set(["10", "19", "23", "27", "39", "3", "3h", "4", "7h", "8", "12"])
+multi_plev_suffixes = set(["10", "19", "23", "27", "39", "3", "3h", "4", "7h", "8", "12", "6"])
 
 # SS : les niveaux 220, 560 et 840 sont des couches du simulateur ISCCP - pas d'interpolation
 # single_plev_suffixes=set(["1000","200","220","500","560","700","840","850","100"])
@@ -41,7 +41,7 @@ sn_issues_home = OrderedDict()
 def read_home_var(line_split, list_attrs):
     logger = get_logger()
     # Initialize the home variable
-    home_var = get_dr_object("SimpleCMORVar")
+    home_var = get_dr_object("SimpleCMORVar")()
     # Set values to the different attributes
     home_var.set_attributes(**{key: value for (key, value) in zip(list_attrs, line_split)})
     # Update table
@@ -60,6 +60,7 @@ def read_home_var(line_split, list_attrs):
         home_var.set_attributes(label=label, ref_var=label_ref)
     else:
         home_var.set_attributes(ref_var=home_var.label)
+    home_var.set_attributes(official_label="_".join([home_var.label, table]))
     return home_var
 
 
@@ -70,7 +71,7 @@ def fill_homevar(home_var):
         if home_var.label in home_var_sdims_info:
             home_var_sdims = OrderedDict()
             for home_var_dim in home_var_sdims_info[home_var.label]:
-                home_var_sdim = get_dr_object("SimpleDim")
+                home_var_sdim = get_dr_object("SimpleDim")()
                 home_var_sdim.label = home_var_dim
                 for sdim_key in ["zoom_label", "stdname", "long_name", "positive", "requested", "value",
                                  "out_name", "units", "is_zoom_of", "bounds", "boundsValue", "axis", "type",
@@ -86,6 +87,8 @@ def fill_homevar(home_var):
     actual_mip = home_var.mip
     if actual_mip.startswith(r"[") and actual_mip.endswith(r"]"):
         home_var.mip = actual_mip.lstrip("[").rstrip("]").split(",")
+    region = get_settings_values("internal", "extravar_regions")
+    home_var.set_attributes(region=region.get(home_var.label, region["default"]))
     return home_var
 
 
@@ -93,7 +96,7 @@ def check_homevar(home_var, mips, expid):
     add = False
     if (isinstance(home_var.mip, six.string_types) and (home_var.mip == "ANY" or home_var.mip in mips)) or \
             (isinstance(home_var.mip, list) and mips.issuperset(home_var.mip)):
-        if home_var.experiment not in ["ANY", ]:
+        if get_settings_values("internal", "select_on_expt") and home_var.experiment not in ["ANY", ]:
             if expid in home_var.experiment:
                 add = True
         else:
@@ -209,7 +212,10 @@ def complement_svar_using_cmorvar(svar, cmvar, debug=[]):
                         cm=cmvar.cm, cell_methods=cmvar.cell_methods, cell_measures=cmvar.cell_measures,
                         sdims=cmvar.sdims, other_dims_size=cmvar.other_dims_size, mip_era=cmvar.mip_era,
                         flag_meanings=cmvar.flag_meanings, flag_values=cmvar.flag_values,
-                        modeling_realm=cmvar.modeling_realm, set_modeling_realms=cmvar.set_modeling_realms)
+                        modeling_realm=cmvar.modeling_realm, set_modeling_realms=cmvar.set_modeling_realms,
+                        official_label=cmvar.official_label)
+    if svar.region in ["default", ]:
+        svar.set_attributes(region=cmvar.region)
     area = cellmethod2area(svar.cell_methods)
     if svar.label in debug:
         logger.debug("complement_svar ... processing %s, area=%s" % (svar.label, str(area)))
@@ -228,7 +234,8 @@ def complement_svar_using_cmorvar(svar, cmvar, debug=[]):
     # removing pressure suffix must occur after resolving ambiguities (add of area suffix)
     # because this 2 processes cannot be cumulate at this stage.
     # this is acceptable since none of the variables requested on pressure levels have ambiguous names.
-    svar.set_attributes(ref_var=svar.label, label_without_psuffix=remove_p_suffix(svar, multi_plev_suffixes,
+    if svar.label_without_psuffix is None:
+        svar.set_attributes(label_without_psuffix=remove_p_suffix(svar, multi_plev_suffixes,
                                                                                   single_plev_suffixes,
                                                                                   realms=["atmos", "aerosol",
                                                                                           "atmosChem"]))

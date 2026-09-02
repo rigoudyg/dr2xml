@@ -1,0 +1,58 @@
+<?xml version="1.0" ?>
+<main
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:noNamespaceSchemaLocation="out/dreqSchema.xsd"
+xmlns="uri:w3id.org:cmip6.dreq.dreq:a">
+<experiment uid="SECTION:experiment" class="vocab" title="Experiments" id="cmip.drv.001">
+<!-- <info srcType="dummy" srcRef="ptxt.py">Dummy entries</info> -->
+<item id="001.001.001" label="example-01" title="dummy title string" uuid="58916e02-62d4-11e5-af18-5404a60d96b5" description="dummyAt" egid="dummyAt" mip="dummyAt" mcfg="dummyAt" tier="dummyAt" nstart="25" starty="dummyAt" endy="dummyAt" yps="25" ensz="25" ntot="25" comment="dummyAt"/>
+</experiment>
+<exptgroup uid="SECTION:exptgroup" class="vocab" title="Experiment Group" id="cmip.drv.002">
+<!-- <info srcType="dummy" srcRef="ptxt.py">Dummy entries</info> -->
+<item id="001.002.001" label="example-01" title="dummy title string" uuid="5891ac96-62d4-11e5-af18-5404a60d96b5" tierMin="25" ntot="25"/>
+</exptgroup>
+<objective uid="SECTION:objective" class="vocab" title="Scientific objectives" id="cmip.drv.003">
+<!-- <info srcType="dummy" srcRef="ptxt.py">Dummy entries</info> -->
+<item id="001.003.001" label="example-01" title="dummy title string" uuid="5891e6fc-62d4-11e5-af18-5404a60d96b5" description="dummyAt" mip="dummyAt"/>
+</objective>
+<objectiveLink uid="SECTION:objectiveLink" class="vocab" title="Link between scientific objectives and requests" id="cmip.drv.004">
+<!-- <info srcType="dummy" srcRef="ptxt.py">Dummy entries</info> -->
+<item id="001.004.001" label="example-01" title="dummy title string" uuid="5892214e-62d4-11e5-af18-5404a60d96b5" oid="dummyAt" rid="dummyAt"/>
+</objectiveLink>
+<var uid="SECTION:var" class="vocab" title="MIP Variable" id="cmip.drv.005">
+<!-- <info srcType="dummy" srcRef="ptxt.py">Dummy entries</info> -->
+<item id="001.005.001" label="example-01" title="dummy title string" sn="dummyAt" units="dummyAt" description="dummyAt" procnote="dummyAt" procComment="dummyAt" prov="dummyAt" uuid="58925ede-62d4-11e5-af18-5404a60d96b5"/>
+</var>
+<ovar uid="SECTION:ovar" class="vocab" title="MIP Output Variable" id="cmip.drv.006">
+<!-- <info srcType="dummy" srcRef="ptxt.py">Dummy entries</info> -->
+<item id="001.006.001" label="example-01" title="dummy title string" uuid="5892746e-62d4-11e5-af18-5404a60d96b5" comment="dummyAt" deflate_level="dummyAt" shuffle="dummyAt" ok_max_mean_abs="dummyAt" flag_meanings="dummyAt" type="dummyAt" ok_min_mean_abs="dummyAt" sn="dummyAt" deflate="dummyAt" valid_min="dummyAt" cell_methods="dummyAt" flag_values="dummyAt" cell_measures="dummyAt" out_name="dummyAt" modeling_realm="dummyAt" units="dummyAt" cell_methods_xx="dummyAt" valid_max="dummyAt" positive="dummyAt" mipTable="dummyAt" dimensions="dummyAt" vid="dummyAt" frequency="dummyAt" gpid="dummyAt" rowIndex="25" priority="25"/>
+</ovar>
+<groupItem uid="SECTION:groupItem" class="vocab" title="Output Group Item" id="cmip.drv.007">
+<!-- <info srcType="dummy" srcRef="ptxt.py">Dummy entries</info> -->
+<item id="001.007.001" label="example-01" title="dummy title string" group="dummyAt" table="dummyAt" freq="dummyAt" descriptionEx="dummyAt" shape="dummyAt" levels="dummyAt" tstyle="dummyAt" mask="dummyAt" priority="25" mip="dummyAt" uuid="58928008-62d4-11e5-af18-5404a60d96b5" new="dummyAt" gpid="dummyAt" vkey="dummyAt" vid="dummyAt"/>
+</groupItem>
+<revisedTabItem uid="SECTION:revisedTabItem" class="vocab" title="Revised Table Item" id="cmip.drv.008">
+<!-- <info srcType="dummy" srcRef="ptxt.py">Dummy entries</info> -->
+<item id="001.008.001" label="example-01" title="dummy title string" table="dummyAt" mip="dummyAt" uuid="58928670-62d4-11e5-af18-5404a60d96b5" priority="25" vid="dummyAt" vgid="dummyAt"/>
+</revisedTabItem>
+<tableSection uid="SECTION:tableSection" class="vocab" title="CMOR Table Sections" id="cmip.drv.009">
+<!-- <info srcType="dummy" srcRef="ptxt.py">Dummy entries</info> -->
+<item id="001.009.001" label="example-01" title="dummy title string" uuid="58928be8-62d4-11e5-af18-5404a60d96b5" gpid="dummyAt" mip="dummyAt" ref="dummyAt" refNote="dummyAt"/>
+</tableSection>
+<requestVarGroup uid="SECTION:requestVarGroup" class="vocab" title="Request link: linking a set of variables" id="cmip.drv.010">
+<!-- <info srcType="dummy" srcRef="ptxt.py">Dummy entries</info> -->
+<item id="001.010.001" label="example-01" title="dummy title string" uuid="5892907a-62d4-11e5-af18-5404a60d96b5" mip="dummyAt" ref="dummyAt" refNote="dummyAt"/>
+</requestVarGroup>
+<requestLink uid="SECTION:requestLink" class="vocab" title="Request link: linking a set of variables and a set of experiments." id="cmip.drv.011">
+<!-- <info srcType="dummy" srcRef="ptxt.py">Dummy entries</info> -->
+<item id="001.011.001" label="example-01" title="dummy title string" uuid="589298f4-62d4-11e5-af18-5404a60d96b5" mip="dummyAt" tab="dummyAt" objective="dummyAt" grid="dummyAt" gridreq="dummyAt" comment="dummyAt" ref="dummyAt" refNote="dummyAt" refid="dummyAt" opt="dummyAt" opar="dummyAt"/>
+</requestLink>
+<requestItem uid="SECTION:requestItem" class="vocab" title="Request Item: specifying the number of years for an experiment" id="cmip.drv.012">
+<!-- <info srcType="dummy" srcRef="ptxt.py">Dummy entries</info> -->
+<item id="001.012.001" label="example-01" title="dummy title string" uuid="58929ea8-62d4-11e5-af18-5404a60d96b5" mip="dummyAt" tab="dummyAt" expt="dummyAt" rlid="dummyAt" ny="25"/>
+</requestItem>
+<remarks uid="SECTION:remarks" class="vocab" title="Remarks about other items" id="cmip.drv.013">
+<!-- <info srcType="dummy" srcRef="ptxt.py">Dummy entries</info> -->
+<item id="001.013.001" label="example-01" title="dummy title string" uuid="5892a74a-62d4-11e5-af18-5404a60d96b5" tid="dummyAt" tattr="dummyAt" description="dummyAt" class="dummyAt" qid="dummyAt" techNote="dummyAt" prov="dummyAt"/>
+</remarks>
+</main>

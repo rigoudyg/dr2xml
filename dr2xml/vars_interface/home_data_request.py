@@ -35,6 +35,7 @@ def read_home_vars_list(hmv_file, expid, mips, path_extra_tables=None):
     Returns:
       A list of 'simplified CMOR variables'
     """
+    # TODO Check that variables are read if lower/upper cases used
     logger = get_logger()
     #
     homevars_list = get_config_variable("homevars_list")
@@ -109,7 +110,7 @@ def process_home_vars(mip_vars_list, mips, expid="False"):
     #
     for hv in home_vars_list:
         hv_info = {"varname": hv.label, "realm": ",".join(hv.modeling_realm), "freq": hv.frequency,
-                   "table": hv.mipTable}
+                   "table": hv.mipTable, "region": hv.region}
         logger.debug(hv_info)
         if hv.type in ["cmor", ]:
             new_hv = check_cmor_variable(hv, mip_vars_list, hv_info)

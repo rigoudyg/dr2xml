@@ -31396,333 +31396,617 @@ seaIce: Gelato 6.1 </variable>
 		</file>
 	</file_definition>
 	<field_definition>
-		<field id="CMIP6_zg_with_instant" field_ref="CMIP6_zg" operation="instant"/>
-		<field id="CMIP6_pfull_instant" field_ref="CMIP6_pfull" operation="instant" detect_missing_value="true"/>
-		<field id="CMIP6_pfull_instant_sampled_3h" field_ref="CMIP6_pfull_instant" freq_op="3h" detect_missing_value="true"> @CMIP6_pfull </field>
-		<field id="CMIP6_zg_sampled_3h" field_ref="CMIP6_zg_with_instant" freq_op="3h" detect_missing_value="true"> @CMIP6_zg_with_instant </field>
-		<field id="CMIP6_zg500_p500" field_ref="CMIP6_zg_sampled_3h" grid_ref="FULL_klev_p500"/>
-		<field id="CMIP6_zg500_p500_Scalp500" grid_ref="FULL_klev_Scalp500" operation="instant" detect_missing_value="true"> CMIP6_zg500_p500 </field>
-		<field id="CMIP6_zg500_p500_Scalp500_average" field_ref="CMIP6_zg500_p500_Scalp500" operation="average"/>
-		<field id="CMIP6_clivic_average" field_ref="CMIP6_clivic" operation="average"/>
-		<field id="CMIP6_clwvic_average" field_ref="CMIP6_clwvic" operation="average"/>
-		<field id="CMIP6_hus_with_instant" field_ref="CMIP6_hus" operation="instant"/>
-		<field id="CMIP6_hus_sampled_3h" field_ref="CMIP6_hus_with_instant" freq_op="3h" detect_missing_value="true"> @CMIP6_hus_with_instant </field>
-		<field id="CMIP6_hus850_p850" field_ref="CMIP6_hus_sampled_3h" grid_ref="FULL_klev_p850"/>
-		<field id="CMIP6_hus850_p850_Scalp850" grid_ref="FULL_klev_Scalp850" operation="instant" detect_missing_value="true"> CMIP6_hus850_p850 </field>
-		<field id="CMIP6_hus850_p850_Scalp850_average" field_ref="CMIP6_hus850_p850_Scalp850" operation="average"/>
-		<field id="CMIP6_lai_average" field_ref="CMIP6_lai" operation="average"/>
-		<field id="CMIP6_loadbc_average" field_ref="CMIP6_loadbc" operation="average"/>
-		<field id="CMIP6_loaddust_average" field_ref="CMIP6_loaddust" operation="average"/>
-		<field id="CMIP6_loadoa_average" field_ref="CMIP6_loadoa" operation="average"/>
-		<field id="CMIP6_loadso4_average" field_ref="CMIP6_loadso4" operation="average"/>
-		<field id="CMIP6_loadss_average" field_ref="CMIP6_loadss" operation="average"/>
-		<field id="CMIP6_prw_average" field_ref="CMIP6_prw" operation="average"/>
-		<field id="CMIP6_rsdsdiff_average" field_ref="CMIP6_rsdsdiff" operation="average"/>
-		<field id="CMIP6_ta_with_instant" field_ref="CMIP6_ta" operation="instant"/>
-		<field id="CMIP6_ta_sampled_3h" field_ref="CMIP6_ta_with_instant" freq_op="3h" detect_missing_value="true"> @CMIP6_ta_with_instant </field>
-		<field id="CMIP6_ta500_p500" field_ref="CMIP6_ta_sampled_3h" grid_ref="FULL_klev_p500"/>
-		<field id="CMIP6_ta500_p500_Scalp500" grid_ref="FULL_klev_Scalp500" operation="instant" detect_missing_value="true"> CMIP6_ta500_p500 </field>
-		<field id="CMIP6_ta500_p500_Scalp500_average" field_ref="CMIP6_ta500_p500_Scalp500" operation="average"/>
-		<field id="CMIP6_ta850_p850" field_ref="CMIP6_ta_sampled_3h" grid_ref="FULL_klev_p850"/>
-		<field id="CMIP6_ta850_p850_Scalp850" grid_ref="FULL_klev_Scalp850" operation="instant" detect_missing_value="true"> CMIP6_ta850_p850 </field>
-		<field id="CMIP6_ta850_p850_Scalp850_average" field_ref="CMIP6_ta850_p850_Scalp850" operation="average"/>
-		<field id="CMIP6_tauu_average" field_ref="CMIP6_tauu" operation="average"/>
-		<field id="CMIP6_tauv_average" field_ref="CMIP6_tauv" operation="average"/>
-		<field id="CMIP6_ts_average" field_ref="CMIP6_ts" operation="average"/>
-		<field id="CMIP6_mrsfl_average" field_ref="CMIP6_mrsfl" operation="average"/>
-		<field id="CMIP6_mrsll_average" field_ref="CMIP6_mrsll" operation="average"/>
-		<field id="CMIP6_mrsol_average" field_ref="CMIP6_mrsol" operation="average"/>
-		<field id="CMIP6_ua_with_instant" field_ref="CMIP6_ua" operation="instant"/>
-		<field id="CMIP6_ua_sampled_3h" field_ref="CMIP6_ua_with_instant" freq_op="3h" detect_missing_value="true"> @CMIP6_ua_with_instant </field>
-		<field id="CMIP6_ua_plev19" field_ref="CMIP6_ua_sampled_3h" grid_ref="FULL_klev_plev19"/>
-		<field id="CMIP6_ua_plev19_average" field_ref="CMIP6_ua_plev19" operation="average"/>
-		<field id="CMIP6_va_with_instant" field_ref="CMIP6_va" operation="instant"/>
-		<field id="CMIP6_va_sampled_3h" field_ref="CMIP6_va_with_instant" freq_op="3h" detect_missing_value="true"> @CMIP6_va_with_instant </field>
-		<field id="CMIP6_va_plev19" field_ref="CMIP6_va_sampled_3h" grid_ref="FULL_klev_plev19"/>
-		<field id="CMIP6_va_plev19_average" field_ref="CMIP6_va_plev19" operation="average"/>
-		<field id="CMIP6_zg_plev19" field_ref="CMIP6_zg_sampled_3h" grid_ref="FULL_klev_plev19"/>
-		<field id="CMIP6_zg_plev19_average" field_ref="CMIP6_zg_plev19" operation="average"/>
-		<field id="CMIP6_hus_plev19" field_ref="CMIP6_hus_sampled_3h" grid_ref="FULL_klev_plev19"/>
-		<field id="CMIP6_hus_plev19_average" field_ref="CMIP6_hus_plev19" operation="average"/>
-		<field id="CMIP6_hus_plev19_average_1d" field_ref="CMIP6_hus_plev19_average" freq_op="1d"> @CMIP6_hus_plev19_average </field>
-		<field id="CMIP6_hus_plev19_average_1d_complete" field_ref="CMIP6_hus_plev19_average_1d" grid_ref="FULL_klev_plev19_complete"/>
-		<field id="CMIP6_hus_plev19_average_1d_glat" field_ref="CMIP6_hus_plev19_average_1d_complete" grid_ref="FULL_klev_plev19_complete_glat"/>
-		<field id="CMIP6_hus_plev19_average_1d_glat_average" field_ref="CMIP6_hus_plev19_average_1d_glat" operation="average"/>
-		<field id="CMIP6_ta_plev19" field_ref="CMIP6_ta_sampled_3h" grid_ref="FULL_klev_plev19"/>
-		<field id="CMIP6_ta_plev19_average" field_ref="CMIP6_ta_plev19" operation="average"/>
-		<field id="CMIP6_ta_plev19_average_1d" field_ref="CMIP6_ta_plev19_average" freq_op="1d"> @CMIP6_ta_plev19_average </field>
-		<field id="CMIP6_ta_plev19_average_1d_complete" field_ref="CMIP6_ta_plev19_average_1d" grid_ref="FULL_klev_plev19_complete"/>
-		<field id="CMIP6_ta_plev19_average_1d_glat" field_ref="CMIP6_ta_plev19_average_1d_complete" grid_ref="FULL_klev_plev19_complete_glat"/>
-		<field id="CMIP6_ta_plev19_average_1d_glat_average" field_ref="CMIP6_ta_plev19_average_1d_glat" operation="average"/>
-		<field id="CMIP6_ua_plev39" field_ref="CMIP6_ua_sampled_3h" grid_ref="FULL_klev_plev39"/>
-		<field id="CMIP6_ua_plev39_average" field_ref="CMIP6_ua_plev39" operation="average"/>
-		<field id="CMIP6_ua_plev39_average_1d" field_ref="CMIP6_ua_plev39_average" freq_op="1d"> @CMIP6_ua_plev39_average </field>
-		<field id="CMIP6_ua_plev39_average_1d_complete" field_ref="CMIP6_ua_plev39_average_1d" grid_ref="FULL_klev_plev39_complete"/>
-		<field id="CMIP6_ua_plev39_average_1d_glat" field_ref="CMIP6_ua_plev39_average_1d_complete" grid_ref="FULL_klev_plev39_complete_glat"/>
-		<field id="CMIP6_ua_plev39_average_1d_glat_average" field_ref="CMIP6_ua_plev39_average_1d_glat" operation="average"/>
-		<field id="CMIP6_va_plev19_average_1d" field_ref="CMIP6_va_plev19_average" freq_op="1d"> @CMIP6_va_plev19_average </field>
-		<field id="CMIP6_va_plev19_average_1d_complete" field_ref="CMIP6_va_plev19_average_1d" grid_ref="FULL_klev_plev19_complete"/>
-		<field id="CMIP6_va_plev19_average_1d_glat" field_ref="CMIP6_va_plev19_average_1d_complete" grid_ref="FULL_klev_plev19_complete_glat"/>
-		<field id="CMIP6_va_plev19_average_1d_glat_average" field_ref="CMIP6_va_plev19_average_1d_glat" operation="average"/>
-		<field id="CMIP6_zg_plev19_average_1d" field_ref="CMIP6_zg_plev19_average" freq_op="1d"> @CMIP6_zg_plev19_average </field>
-		<field id="CMIP6_zg_plev19_average_1d_complete" field_ref="CMIP6_zg_plev19_average_1d" grid_ref="FULL_klev_plev19_complete"/>
-		<field id="CMIP6_zg_plev19_average_1d_glat" field_ref="CMIP6_zg_plev19_average_1d_complete" grid_ref="FULL_klev_plev19_complete_glat"/>
-		<field id="CMIP6_zg_plev19_average_1d_glat_average" field_ref="CMIP6_zg_plev19_average_1d_glat" operation="average"/>
-		<field id="CMIP6_sftgrf_Scaltypegis" grid_ref="NATURE_grid_Scaltypegis" operation="instant" detect_missing_value="true"> CMIP6_sftgrf </field>
-		<field id="CMIP6_sftgrf_Scaltypegis_once" field_ref="CMIP6_sftgrf_Scaltypegis" operation="once"/>
-		<field id="CMIP6_siconca_Scaltypesi" grid_ref="SEA_grid_Scaltypesi" operation="instant" detect_missing_value="true"> CMIP6_siconca </field>
-		<field id="CMIP6_siconca_Scaltypesi_average" field_ref="CMIP6_siconca_Scaltypesi" operation="average"/>
-		<field id="CMIP6_clt_average" field_ref="CMIP6_clt" operation="average"/>
-		<field id="CMIP6_hfls_average" field_ref="CMIP6_hfls" operation="average"/>
-		<field id="CMIP6_hfss_average" field_ref="CMIP6_hfss" operation="average"/>
-		<field id="CMIP6_hurs_Scalheight2m" grid_ref="FULL_grid_Scalheight2m" operation="instant" detect_missing_value="true"> CMIP6_hurs </field>
-		<field id="CMIP6_hurs_Scalheight2m_average" field_ref="CMIP6_hurs_Scalheight2m" operation="average"/>
-		<field id="CMIP6_hursmax_Scalheight2m" grid_ref="FULL_grid_Scalheight2m" operation="instant" detect_missing_value="true"> CMIP6_hursmax </field>
-		<field id="CMIP6_hursmax_Scalheight2m_maximum" field_ref="CMIP6_hursmax_Scalheight2m" operation="maximum"/>
-		<field id="CMIP6_hursmin_Scalheight2m" grid_ref="FULL_grid_Scalheight2m" operation="instant" detect_missing_value="true"> CMIP6_hursmin </field>
-		<field id="CMIP6_hursmin_Scalheight2m_minimum" field_ref="CMIP6_hursmin_Scalheight2m" operation="minimum"/>
-		<field id="CMIP6_huss_Scalheight2m" grid_ref="FULL_grid_Scalheight2m" operation="instant" detect_missing_value="true"> CMIP6_huss </field>
-		<field id="CMIP6_huss_Scalheight2m_average" field_ref="CMIP6_huss_Scalheight2m" operation="average"/>
-		<field id="CMIP6_mrro_average" field_ref="CMIP6_mrro" operation="average"/>
-		<field id="CMIP6_mrso_average" field_ref="CMIP6_mrso" operation="average"/>
-		<field id="CMIP6_mrsos_Scalsdepth1" grid_ref="NATURE_grid_Scalsdepth1" operation="instant" detect_missing_value="true"> CMIP6_mrsos </field>
-		<field id="CMIP6_mrsos_Scalsdepth1_average" field_ref="CMIP6_mrsos_Scalsdepth1" operation="average"/>
-		<field id="CMIP6_pr_average" field_ref="CMIP6_pr" operation="average"/>
-		<field id="CMIP6_prc_average" field_ref="CMIP6_prc" operation="average"/>
-		<field id="CMIP6_prsn_average" field_ref="CMIP6_prsn" operation="average"/>
-		<field id="CMIP6_psl_average" field_ref="CMIP6_psl" operation="average"/>
-		<field id="CMIP6_rlds_average" field_ref="CMIP6_rlds" operation="average"/>
-		<field id="CMIP6_rlus_average" field_ref="CMIP6_rlus" operation="average"/>
-		<field id="CMIP6_rlut_average" field_ref="CMIP6_rlut" operation="average"/>
-		<field id="CMIP6_rsds_average" field_ref="CMIP6_rsds" operation="average"/>
-		<field id="CMIP6_rsus_average" field_ref="CMIP6_rsus" operation="average"/>
-		<field id="CMIP6_sfcWind_Scalheight10m" grid_ref="FULL_grid_Scalheight10m" operation="instant" detect_missing_value="true"> CMIP6_sfcWind </field>
-		<field id="CMIP6_sfcWind_Scalheight10m_average" field_ref="CMIP6_sfcWind_Scalheight10m" operation="average"/>
-		<field id="CMIP6_sfcWindmax_Scalheight10m" grid_ref="FULL_grid_Scalheight10m" operation="instant" detect_missing_value="true"> CMIP6_sfcWindmax </field>
-		<field id="CMIP6_sfcWindmax_Scalheight10m_maximum" field_ref="CMIP6_sfcWindmax_Scalheight10m" operation="maximum"/>
-		<field id="CMIP6_snc_average" field_ref="CMIP6_snc" operation="average"/>
-		<field id="CMIP6_snw_land_average" field_ref="CMIP6_snw_land" operation="average"/>
-		<field id="CMIP6_tas_Scalheight2m" grid_ref="FULL_grid_Scalheight2m" operation="instant" detect_missing_value="true"> CMIP6_tas </field>
-		<field id="CMIP6_tas_Scalheight2m_average" field_ref="CMIP6_tas_Scalheight2m" operation="average"/>
-		<field id="CMIP6_tasmax_Scalheight2m" grid_ref="FULL_grid_Scalheight2m" operation="instant" detect_missing_value="true"> CMIP6_tasmax </field>
-		<field id="CMIP6_tasmax_Scalheight2m_maximum" field_ref="CMIP6_tasmax_Scalheight2m" operation="maximum"/>
-		<field id="CMIP6_tasmin_Scalheight2m" grid_ref="FULL_grid_Scalheight2m" operation="instant" detect_missing_value="true"> CMIP6_tasmin </field>
-		<field id="CMIP6_tasmin_Scalheight2m_minimum" field_ref="CMIP6_tasmin_Scalheight2m" operation="minimum"/>
-		<field id="CMIP6_tslsi_average" field_ref="CMIP6_tslsi" operation="average"/>
-		<field id="CMIP6_uas_Scalheight10m" grid_ref="FULL_grid_Scalheight10m" operation="instant" detect_missing_value="true"> CMIP6_uas </field>
-		<field id="CMIP6_uas_Scalheight10m_average" field_ref="CMIP6_uas_Scalheight10m" operation="average"/>
-		<field id="CMIP6_vas_Scalheight10m" grid_ref="FULL_grid_Scalheight10m" operation="instant" detect_missing_value="true"> CMIP6_vas </field>
-		<field id="CMIP6_vas_Scalheight10m_average" field_ref="CMIP6_vas_Scalheight10m" operation="average"/>
-		<field id="CMIP6_hur_with_instant" field_ref="CMIP6_hur" operation="instant"/>
-		<field id="CMIP6_hur_sampled_3h" field_ref="CMIP6_hur_with_instant" freq_op="3h" detect_missing_value="true"> @CMIP6_hur_with_instant </field>
-		<field id="CMIP6_hur_plev8" field_ref="CMIP6_hur_sampled_3h" grid_ref="FULL_klev_plev8"/>
-		<field id="CMIP6_hur_plev8_average" field_ref="CMIP6_hur_plev8" operation="average"/>
-		<field id="CMIP6_hus_plev8" field_ref="CMIP6_hus_sampled_3h" grid_ref="FULL_klev_plev8"/>
-		<field id="CMIP6_hus_plev8_average" field_ref="CMIP6_hus_plev8" operation="average"/>
-		<field id="CMIP6_ta_plev8" field_ref="CMIP6_ta_sampled_3h" grid_ref="FULL_klev_plev8"/>
-		<field id="CMIP6_ta_plev8_average" field_ref="CMIP6_ta_plev8" operation="average"/>
-		<field id="CMIP6_ua_plev8" field_ref="CMIP6_ua_sampled_3h" grid_ref="FULL_klev_plev8"/>
-		<field id="CMIP6_ua_plev8_average" field_ref="CMIP6_ua_plev8" operation="average"/>
-		<field id="CMIP6_va_plev8" field_ref="CMIP6_va_sampled_3h" grid_ref="FULL_klev_plev8"/>
-		<field id="CMIP6_va_plev8_average" field_ref="CMIP6_va_plev8" operation="average"/>
-		<field id="CMIP6_wap_with_instant" field_ref="CMIP6_wap" operation="instant"/>
-		<field id="CMIP6_wap_sampled_3h" field_ref="CMIP6_wap_with_instant" freq_op="3h" detect_missing_value="true"> @CMIP6_wap_with_instant </field>
-		<field id="CMIP6_wap_plev8" field_ref="CMIP6_wap_sampled_3h" grid_ref="FULL_klev_plev8"/>
-		<field id="CMIP6_wap_plev8_average" field_ref="CMIP6_wap_plev8" operation="average"/>
-		<field id="CMIP6_zg_plev8" field_ref="CMIP6_zg_sampled_3h" grid_ref="FULL_klev_plev8"/>
-		<field id="CMIP6_zg_plev8_average" field_ref="CMIP6_zg_plev8" operation="average"/>
-		<field id="CMIP6_areacella" field_ref="areacella_complete" freq_op="1ts" freq_offset="0ts" grid_ref="grid_complete" operation="instant"/>
-		<field id="CMIP6_areacella_once" field_ref="CMIP6_areacella" operation="once"/>
-		<field id="CMIP6_mrsofc_once" field_ref="CMIP6_mrsofc" operation="once"/>
-		<field id="CMIP6_orog_once" field_ref="CMIP6_orog" operation="once"/>
-		<field id="CMIP6_rootd_once" field_ref="CMIP6_rootd" operation="once"/>
-		<field id="CMIP6_sftgif_Scaltypeli" grid_ref="NATURE_grid_Scaltypeli" operation="instant" detect_missing_value="true"> CMIP6_sftgif </field>
-		<field id="CMIP6_sftgif_Scaltypeli_once" field_ref="CMIP6_sftgif_Scaltypeli" operation="once"/>
-		<field id="CMIP6_sftlf_Scaltypeland" grid_ref="FULL_grid_Scaltypeland" operation="instant" detect_missing_value="true"> CMIP6_sftlf </field>
-		<field id="CMIP6_sftlf_Scaltypeland_once" field_ref="CMIP6_sftlf_Scaltypeland" operation="once"/>
-		<field id="CMIP6_airmass_average" field_ref="CMIP6_airmass" operation="average"/>
-		<field id="CMIP6_ps_average" field_ref="CMIP6_ps" operation="average"/>
-		<field id="CMIP6_cdnc_average" field_ref="CMIP6_cdnc" operation="average"/>
-		<field id="CMIP6_ch4_average" field_ref="CMIP6_ch4" operation="average"/>
-		<field id="CMIP6_co2_average" field_ref="CMIP6_co2" operation="average"/>
-		<field id="CMIP6_co_average" field_ref="CMIP6_co" operation="average"/>
-		<field id="CMIP6_h2o_average" field_ref="CMIP6_h2o" operation="average"/>
-		<field id="CMIP6_hcho_average" field_ref="CMIP6_hcho" operation="average"/>
-		<field id="CMIP6_hcl_average" field_ref="CMIP6_hcl" operation="average"/>
-		<field id="CMIP6_hno3_average" field_ref="CMIP6_hno3" operation="average"/>
-		<field id="CMIP6_mmrbc_average" field_ref="CMIP6_mmrbc" operation="average"/>
-		<field id="CMIP6_mmrdust_average" field_ref="CMIP6_mmrdust" operation="average"/>
-		<field id="CMIP6_mmroa_average" field_ref="CMIP6_mmroa" operation="average"/>
-		<field id="CMIP6_mmrpm1_average" field_ref="CMIP6_mmrpm1" operation="average"/>
-		<field id="CMIP6_mmrso4_average" field_ref="CMIP6_mmrso4" operation="average"/>
-		<field id="CMIP6_mmrss_average" field_ref="CMIP6_mmrss" operation="average"/>
-		<field id="CMIP6_n2o_average" field_ref="CMIP6_n2o" operation="average"/>
-		<field id="CMIP6_no2_average" field_ref="CMIP6_no2" operation="average"/>
-		<field id="CMIP6_no_average" field_ref="CMIP6_no" operation="average"/>
-		<field id="CMIP6_o3_average" field_ref="CMIP6_o3" operation="average"/>
-		<field id="CMIP6_o3loss_average" field_ref="CMIP6_o3loss" operation="average"/>
-		<field id="CMIP6_o3prod_average" field_ref="CMIP6_o3prod" operation="average"/>
-		<field id="CMIP6_oh_average" field_ref="CMIP6_oh" operation="average"/>
-		<field id="CMIP6_so2_average" field_ref="CMIP6_so2" operation="average"/>
-		<field id="CMIP6_tntrl_average" field_ref="CMIP6_tntrl" operation="average"/>
-		<field id="CMIP6_tntrs_average" field_ref="CMIP6_tntrs" operation="average"/>
-		<field id="CMIP6_ua_average" field_ref="CMIP6_ua" operation="average"/>
-		<field id="CMIP6_va_average" field_ref="CMIP6_va" operation="average"/>
-		<field id="CMIP6_wa_average" field_ref="CMIP6_wa" operation="average"/>
-		<field id="CMIP6_zg_average" field_ref="CMIP6_zg" operation="average"/>
+		<field id="CMIP6_RADabs550aer_average" field_ref="CMIP6_RADabs550aer" operation="average"/>
+		<field id="CMIP6_RADasy550aer_average" field_ref="CMIP6_RADasy550aer" operation="average"/>
+		<field id="CMIP6_RADod550aer_average" field_ref="CMIP6_RADod550aer" operation="average"/>
+		<field id="CMIP6_RADssa550aer_average" field_ref="CMIP6_RADssa550aer" operation="average"/>
+		<field id="CMIP6_TACabs550aer_average" field_ref="CMIP6_TACabs550aer" operation="average"/>
 		<field id="CMIP6_abs550aer_average" field_ref="CMIP6_abs550aer" operation="average"/>
-		<field id="CMIP6_cltc_average" field_ref="CMIP6_cltc" operation="average"/>
-		<field id="CMIP6_cod_average" field_ref="CMIP6_cod" operation="average"/>
-		<field id="CMIP6_drybc_average" field_ref="CMIP6_drybc" operation="average"/>
-		<field id="CMIP6_drydust_average" field_ref="CMIP6_drydust" operation="average"/>
-		<field id="CMIP6_dryoa_average" field_ref="CMIP6_dryoa" operation="average"/>
-		<field id="CMIP6_dryso2_average" field_ref="CMIP6_dryso2" operation="average"/>
-		<field id="CMIP6_dryso4_average" field_ref="CMIP6_dryso4" operation="average"/>
-		<field id="CMIP6_dryss_average" field_ref="CMIP6_dryss" operation="average"/>
-		<field id="CMIP6_emibc_average" field_ref="CMIP6_emibc" operation="average"/>
-		<field id="CMIP6_emidust_average" field_ref="CMIP6_emidust" operation="average"/>
-		<field id="CMIP6_emioa_average" field_ref="CMIP6_emioa" operation="average"/>
-		<field id="CMIP6_emiso2_average" field_ref="CMIP6_emiso2" operation="average"/>
-		<field id="CMIP6_emiso4_average" field_ref="CMIP6_emiso4" operation="average"/>
-		<field id="CMIP6_emiss_average" field_ref="CMIP6_emiss" operation="average"/>
-		<field id="CMIP6_lwp_average" field_ref="CMIP6_lwp" operation="average"/>
-		<field id="CMIP6_od440aer_average" field_ref="CMIP6_od440aer" operation="average"/>
-		<field id="CMIP6_od550aer_average" field_ref="CMIP6_od550aer" operation="average"/>
-		<field id="CMIP6_od550bc_average" field_ref="CMIP6_od550bc" operation="average"/>
-		<field id="CMIP6_od550dust_average" field_ref="CMIP6_od550dust" operation="average"/>
-		<field id="CMIP6_od550lt1aer_average" field_ref="CMIP6_od550lt1aer" operation="average"/>
-		<field id="CMIP6_od550oa_average" field_ref="CMIP6_od550oa" operation="average"/>
-		<field id="CMIP6_od550so4_average" field_ref="CMIP6_od550so4" operation="average"/>
-		<field id="CMIP6_od550ss_average" field_ref="CMIP6_od550ss" operation="average"/>
-		<field id="CMIP6_od870aer_average" field_ref="CMIP6_od870aer" operation="average"/>
-		<field id="CMIP6_ptp_average" field_ref="CMIP6_ptp" operation="average"/>
-		<field id="CMIP6_rlutaf_average" field_ref="CMIP6_rlutaf" operation="average"/>
-		<field id="CMIP6_rlutcsaf_average" field_ref="CMIP6_rlutcsaf" operation="average"/>
-		<field id="CMIP6_rsutaf_average" field_ref="CMIP6_rsutaf" operation="average"/>
-		<field id="CMIP6_rsutcsaf_average" field_ref="CMIP6_rsutcsaf" operation="average"/>
-		<field id="CMIP6_tatp_average" field_ref="CMIP6_tatp" operation="average"/>
-		<field id="CMIP6_toz_average" field_ref="CMIP6_toz" operation="average"/>
-		<field id="CMIP6_ttop_average" field_ref="CMIP6_ttop" operation="average"/>
-		<field id="CMIP6_wetbc_average" field_ref="CMIP6_wetbc" operation="average"/>
-		<field id="CMIP6_wetdust_average" field_ref="CMIP6_wetdust" operation="average"/>
-		<field id="CMIP6_wetoa_average" field_ref="CMIP6_wetoa" operation="average"/>
-		<field id="CMIP6_wetso4_average" field_ref="CMIP6_wetso4" operation="average"/>
-		<field id="CMIP6_wetss_average" field_ref="CMIP6_wetss" operation="average"/>
-		<field id="CMIP6_ztp_average" field_ref="CMIP6_ztp" operation="average"/>
-		<field id="CMIP6_bry_with_instant" field_ref="CMIP6_bry" operation="instant"/>
-		<field id="CMIP6_bry_sampled_3h" field_ref="CMIP6_bry_with_instant" freq_op="3h" detect_missing_value="true"> @CMIP6_bry_with_instant </field>
+		<field id="CMIP6_agesno_average" field_ref="CMIP6_agesno" operation="average"/>
+		<field id="CMIP6_airmass_average" field_ref="CMIP6_airmass" operation="average"/>
+		<field id="CMIP6_albsn_average" field_ref="CMIP6_albsn" operation="average"/>
+		<field id="CMIP6_albsrfcLa_average" field_ref="CMIP6_albsrfcLa" operation="average"/>
+		<field id="CMIP6_albsrfc_average" field_ref="CMIP6_albsrfc" operation="average"/>
+		<field id="CMIP6_areacella_once" field_ref="CMIP6_areacella" operation="once"/>
+		<field id="CMIP6_asy550aer_average" field_ref="CMIP6_asy550aer" operation="average"/>
+		<field id="CMIP6_baresoilFrac_Scaltypebare" grid_ref="NATURE_grid_Scaltypebare" operation="instant" detect_missing_value="true"> CMIP6_baresoilFrac </field>
+		<field id="CMIP6_baresoilFrac_Scaltypebare_average" field_ref="CMIP6_baresoilFrac_Scaltypebare" operation="average"/>
 		<field id="CMIP6_bry_plev39" field_ref="CMIP6_bry_sampled_3h" grid_ref="FULL_klev_plev39"/>
 		<field id="CMIP6_bry_plev39_average" field_ref="CMIP6_bry_plev39" operation="average"/>
 		<field id="CMIP6_bry_plev39_average_1mo" field_ref="CMIP6_bry_plev39_average" freq_op="1mo"> @CMIP6_bry_plev39_average </field>
 		<field id="CMIP6_bry_plev39_average_1mo_complete" field_ref="CMIP6_bry_plev39_average_1mo" grid_ref="FULL_klev_plev39_complete"/>
 		<field id="CMIP6_bry_plev39_average_1mo_glat" field_ref="CMIP6_bry_plev39_average_1mo_complete" grid_ref="FULL_klev_plev39_complete_glat"/>
 		<field id="CMIP6_bry_plev39_average_1mo_glat_average" field_ref="CMIP6_bry_plev39_average_1mo_glat" operation="average"/>
-		<field id="CMIP6_ch4_with_instant" field_ref="CMIP6_ch4" operation="instant"/>
-		<field id="CMIP6_ch4_sampled_3h" field_ref="CMIP6_ch4_with_instant" freq_op="3h" detect_missing_value="true"> @CMIP6_ch4_with_instant </field>
+		<field id="CMIP6_bry_sampled_3h" field_ref="CMIP6_bry_with_instant" freq_op="3h" detect_missing_value="true"> @CMIP6_bry_with_instant </field>
+		<field id="CMIP6_bry_with_instant" field_ref="CMIP6_bry" operation="instant"/>
+		<field id="CMIP6_burntArea_average" field_ref="CMIP6_burntArea" operation="average"/>
+		<field id="CMIP6_burntFractionAll_Scaltypeburnt" grid_ref="NATURE_grid_Scaltypeburnt" operation="instant" detect_missing_value="true"> CMIP6_burntFractionAll </field>
+		<field id="CMIP6_burntFractionAll_Scaltypeburnt_average" field_ref="CMIP6_burntFractionAll_Scaltypeburnt" operation="average"/>
+		<field id="CMIP6_c3PftFrac_Scaltypec3pft" grid_ref="NATURE_grid_Scaltypec3pft" operation="instant" detect_missing_value="true"> CMIP6_c3PftFrac </field>
+		<field id="CMIP6_c3PftFrac_Scaltypec3pft_average" field_ref="CMIP6_c3PftFrac_Scaltypec3pft" operation="average"/>
+		<field id="CMIP6_c4PftFrac_Scaltypec4pft" grid_ref="NATURE_grid_Scaltypec4pft" operation="instant" detect_missing_value="true"> CMIP6_c4PftFrac </field>
+		<field id="CMIP6_c4PftFrac_Scaltypec4pft_average" field_ref="CMIP6_c4PftFrac_Scaltypec4pft" operation="average"/>
+		<field id="CMIP6_cLand_average" field_ref="CMIP6_cLand" operation="average"/>
+		<field id="CMIP6_cLeaf_average" field_ref="CMIP6_cLeaf" operation="average"/>
+		<field id="CMIP6_cLitterBelow_average" field_ref="CMIP6_cLitterBelow" operation="average"/>
+		<field id="CMIP6_cLitterGrass_average" field_ref="CMIP6_cLitterGrass" operation="average"/>
+		<field id="CMIP6_cLitterSubSurf_average" field_ref="CMIP6_cLitterSubSurf" operation="average"/>
+		<field id="CMIP6_cLitterSurf_average" field_ref="CMIP6_cLitterSurf" operation="average"/>
+		<field id="CMIP6_cLitterTree_average" field_ref="CMIP6_cLitterTree" operation="average"/>
+		<field id="CMIP6_cLitter_average" field_ref="CMIP6_cLitter" operation="average"/>
+		<field id="CMIP6_cProduct_average" field_ref="CMIP6_cProduct" operation="average"/>
+		<field id="CMIP6_cRoot_average" field_ref="CMIP6_cRoot" operation="average"/>
+		<field id="CMIP6_cSoilFast_average" field_ref="CMIP6_cSoilFast" operation="average"/>
+		<field id="CMIP6_cSoilGrass_average" field_ref="CMIP6_cSoilGrass" operation="average"/>
+		<field id="CMIP6_cSoilMedium_average" field_ref="CMIP6_cSoilMedium" operation="average"/>
+		<field id="CMIP6_cSoilPools_average" field_ref="CMIP6_cSoilPools" operation="average"/>
+		<field id="CMIP6_cSoilSlow_average" field_ref="CMIP6_cSoilSlow" operation="average"/>
+		<field id="CMIP6_cSoilTree_average" field_ref="CMIP6_cSoilTree" operation="average"/>
+		<field id="CMIP6_cSoil_average" field_ref="CMIP6_cSoil" operation="average"/>
+		<field id="CMIP6_cStem_average" field_ref="CMIP6_cStem" operation="average"/>
+		<field id="CMIP6_cVegGrass_average" field_ref="CMIP6_cVegGrass" operation="average"/>
+		<field id="CMIP6_cVegTree_average" field_ref="CMIP6_cVegTree" operation="average"/>
+		<field id="CMIP6_cVeg_average" field_ref="CMIP6_cVeg" operation="average"/>
+		<field id="CMIP6_cWood_average" field_ref="CMIP6_cWood" operation="average"/>
+		<field id="CMIP6_ccb_average" field_ref="CMIP6_ccb" operation="average"/>
+		<field id="CMIP6_cct_average" field_ref="CMIP6_cct" operation="average"/>
+		<field id="CMIP6_cdnc_average" field_ref="CMIP6_cdnc" operation="average"/>
+		<field id="CMIP6_cdnctop_average" field_ref="CMIP6_cdnctop" operation="average"/>
+		<field id="CMIP6_ch4_average" field_ref="CMIP6_ch4" operation="average"/>
+		<field id="CMIP6_ch4_plev19" field_ref="CMIP6_ch4_sampled_3h" grid_ref="FULL_klev_plev19"/>
+		<field id="CMIP6_ch4_plev19_average" field_ref="CMIP6_ch4_plev19" operation="average"/>
 		<field id="CMIP6_ch4_plev39" field_ref="CMIP6_ch4_sampled_3h" grid_ref="FULL_klev_plev39"/>
 		<field id="CMIP6_ch4_plev39_average" field_ref="CMIP6_ch4_plev39" operation="average"/>
 		<field id="CMIP6_ch4_plev39_average_1mo" field_ref="CMIP6_ch4_plev39_average" freq_op="1mo"> @CMIP6_ch4_plev39_average </field>
 		<field id="CMIP6_ch4_plev39_average_1mo_complete" field_ref="CMIP6_ch4_plev39_average_1mo" grid_ref="FULL_klev_plev39_complete"/>
 		<field id="CMIP6_ch4_plev39_average_1mo_glat" field_ref="CMIP6_ch4_plev39_average_1mo_complete" grid_ref="FULL_klev_plev39_complete_glat"/>
 		<field id="CMIP6_ch4_plev39_average_1mo_glat_average" field_ref="CMIP6_ch4_plev39_average_1mo_glat" operation="average"/>
-		<field id="CMIP6_cly_with_instant" field_ref="CMIP6_cly" operation="instant"/>
-		<field id="CMIP6_cly_sampled_3h" field_ref="CMIP6_cly_with_instant" freq_op="3h" detect_missing_value="true"> @CMIP6_cly_with_instant </field>
+		<field id="CMIP6_ch4_sampled_3h" field_ref="CMIP6_ch4_with_instant" freq_op="3h" detect_missing_value="true"> @CMIP6_ch4_with_instant </field>
+		<field id="CMIP6_ch4_with_instant" field_ref="CMIP6_ch4" operation="instant"/>
+		<field id="CMIP6_ci_average" field_ref="CMIP6_ci" operation="average"/>
+		<field id="CMIP6_cl_average" field_ref="CMIP6_cl" operation="average"/>
+		<field id="CMIP6_clc_average" field_ref="CMIP6_clc" operation="average"/>
+		<field id="CMIP6_cli_average" field_ref="CMIP6_cli" operation="average"/>
+		<field id="CMIP6_clivi_average" field_ref="CMIP6_clivi" operation="average"/>
+		<field id="CMIP6_clivic_average" field_ref="CMIP6_clivic" operation="average"/>
+		<field id="CMIP6_cls_average" field_ref="CMIP6_cls" operation="average"/>
+		<field id="CMIP6_clt_average" field_ref="CMIP6_clt" operation="average"/>
+		<field id="CMIP6_cltc_average" field_ref="CMIP6_cltc" operation="average"/>
+		<field id="CMIP6_clth_average" field_ref="CMIP6_clth" operation="average"/>
+		<field id="CMIP6_cltl_average" field_ref="CMIP6_cltl" operation="average"/>
+		<field id="CMIP6_cltm_average" field_ref="CMIP6_cltm" operation="average"/>
+		<field id="CMIP6_clw_average" field_ref="CMIP6_clw" operation="average"/>
+		<field id="CMIP6_clwvi_average" field_ref="CMIP6_clwvi" operation="average"/>
+		<field id="CMIP6_clwvic_average" field_ref="CMIP6_clwvic" operation="average"/>
 		<field id="CMIP6_cly_plev39" field_ref="CMIP6_cly_sampled_3h" grid_ref="FULL_klev_plev39"/>
 		<field id="CMIP6_cly_plev39_average" field_ref="CMIP6_cly_plev39" operation="average"/>
 		<field id="CMIP6_cly_plev39_average_1mo" field_ref="CMIP6_cly_plev39_average" freq_op="1mo"> @CMIP6_cly_plev39_average </field>
 		<field id="CMIP6_cly_plev39_average_1mo_complete" field_ref="CMIP6_cly_plev39_average_1mo" grid_ref="FULL_klev_plev39_complete"/>
 		<field id="CMIP6_cly_plev39_average_1mo_glat" field_ref="CMIP6_cly_plev39_average_1mo_complete" grid_ref="FULL_klev_plev39_complete_glat"/>
 		<field id="CMIP6_cly_plev39_average_1mo_glat_average" field_ref="CMIP6_cly_plev39_average_1mo_glat" operation="average"/>
-		<field id="CMIP6_h2o_with_instant" field_ref="CMIP6_h2o" operation="instant"/>
-		<field id="CMIP6_h2o_sampled_3h" field_ref="CMIP6_h2o_with_instant" freq_op="3h" detect_missing_value="true"> @CMIP6_h2o_with_instant </field>
+		<field id="CMIP6_cly_sampled_3h" field_ref="CMIP6_cly_with_instant" freq_op="3h" detect_missing_value="true"> @CMIP6_cly_with_instant </field>
+		<field id="CMIP6_cly_with_instant" field_ref="CMIP6_cly" operation="instant"/>
+		<field id="CMIP6_co23D_average" field_ref="CMIP6_co23D" operation="average"/>
+		<field id="CMIP6_co2_average" field_ref="CMIP6_co2" operation="average"/>
+		<field id="CMIP6_co2_plev19" field_ref="CMIP6_co2_sampled_3h" grid_ref="FULL_klev_plev19"/>
+		<field id="CMIP6_co2_plev19_average" field_ref="CMIP6_co2_plev19" operation="average"/>
+		<field id="CMIP6_co2_sampled_3h" field_ref="CMIP6_co2_with_instant" freq_op="3h" detect_missing_value="true"> @CMIP6_co2_with_instant </field>
+		<field id="CMIP6_co2_with_instant" field_ref="CMIP6_co2" operation="instant"/>
+		<field id="CMIP6_co2s_average" field_ref="CMIP6_co2s" operation="average"/>
+		<field id="CMIP6_co_Plev39hm" field_ref="CMIP6_co_sampled_3h" grid_ref="FULL_klev_Plev39hm"/>
+		<field id="CMIP6_co_Plev39hm_average" field_ref="CMIP6_co_Plev39hm" operation="average"/>
+		<field id="CMIP6_co_average" field_ref="CMIP6_co" operation="average"/>
+		<field id="CMIP6_co_sampled_3h" field_ref="CMIP6_co_with_instant" freq_op="3h" detect_missing_value="true"> @CMIP6_co_with_instant </field>
+		<field id="CMIP6_co_with_instant" field_ref="CMIP6_co" operation="instant"/>
+		<field id="CMIP6_cod_average" field_ref="CMIP6_cod" operation="average"/>
+		<field id="CMIP6_concdust_average" field_ref="CMIP6_concdust" operation="average"/>
+		<field id="CMIP6_cropFracC3_Scaltypec3pft_Scaltypecrop" grid_ref="NATURE_grid_Scaltypec3pft_Scaltypecrop" operation="instant" detect_missing_value="true"> CMIP6_cropFracC3 </field>
+		<field id="CMIP6_cropFracC3_Scaltypec3pft_Scaltypecrop_average" field_ref="CMIP6_cropFracC3_Scaltypec3pft_Scaltypecrop" operation="average"/>
+		<field id="CMIP6_cropFracC4_Scaltypec4pft_Scaltypecrop" grid_ref="NATURE_grid_Scaltypec4pft_Scaltypecrop" operation="instant" detect_missing_value="true"> CMIP6_cropFracC4 </field>
+		<field id="CMIP6_cropFracC4_Scaltypec4pft_Scaltypecrop_average" field_ref="CMIP6_cropFracC4_Scaltypec4pft_Scaltypecrop" operation="average"/>
+		<field id="CMIP6_cropFrac_Scaltypecrop" grid_ref="NATURE_grid_Scaltypecrop" operation="instant" detect_missing_value="true"> CMIP6_cropFrac </field>
+		<field id="CMIP6_cropFrac_Scaltypecrop_average" field_ref="CMIP6_cropFrac_Scaltypecrop" operation="average"/>
+		<field id="CMIP6_cw_average" field_ref="CMIP6_cw" operation="average"/>
+		<field id="CMIP6_dmlt_average" field_ref="CMIP6_dmlt" operation="average"/>
+		<field id="CMIP6_drybc_average" field_ref="CMIP6_drybc" operation="average"/>
+		<field id="CMIP6_drydust_average" field_ref="CMIP6_drydust" operation="average"/>
+		<field id="CMIP6_dryoa_average" field_ref="CMIP6_dryoa" operation="average"/>
+		<field id="CMIP6_dryso2_average" field_ref="CMIP6_dryso2" operation="average"/>
+		<field id="CMIP6_dryso4_average" field_ref="CMIP6_dryso4" operation="average"/>
+		<field id="CMIP6_dryss_average" field_ref="CMIP6_dryss" operation="average"/>
+		<field id="CMIP6_ec550aer_average" field_ref="CMIP6_ec550aer" operation="average"/>
+		<field id="CMIP6_emibc_average" field_ref="CMIP6_emibc" operation="average"/>
+		<field id="CMIP6_emidust_average" field_ref="CMIP6_emidust" operation="average"/>
+		<field id="CMIP6_emioa_average" field_ref="CMIP6_emioa" operation="average"/>
+		<field id="CMIP6_emiso2_average" field_ref="CMIP6_emiso2" operation="average"/>
+		<field id="CMIP6_emiso4_average" field_ref="CMIP6_emiso4" operation="average"/>
+		<field id="CMIP6_emiss_average" field_ref="CMIP6_emiss" operation="average"/>
+		<field id="CMIP6_et_average" field_ref="CMIP6_et" operation="average"/>
+		<field id="CMIP6_evspsbl_average" field_ref="CMIP6_evspsbl" operation="average"/>
+		<field id="CMIP6_evspsblpot_average" field_ref="CMIP6_evspsblpot" operation="average"/>
+		<field id="CMIP6_evspsblsoi_average" field_ref="CMIP6_evspsblsoi" operation="average"/>
+		<field id="CMIP6_evspsblveg_average" field_ref="CMIP6_evspsblveg" operation="average"/>
+		<field id="CMIP6_ext550bc_plev19" field_ref="CMIP6_ext550bc_sampled_3h" grid_ref="FULL_klev_plev19"/>
+		<field id="CMIP6_ext550bc_plev19_average" field_ref="CMIP6_ext550bc_plev19" operation="average"/>
+		<field id="CMIP6_ext550bc_sampled_3h" field_ref="CMIP6_ext550bc_with_instant" freq_op="3h" detect_missing_value="true"> @CMIP6_ext550bc_with_instant </field>
+		<field id="CMIP6_ext550bc_with_instant" field_ref="CMIP6_ext550bc" operation="instant"/>
+		<field id="CMIP6_ext550dust_plev19" field_ref="CMIP6_ext550dust_sampled_3h" grid_ref="FULL_klev_plev19"/>
+		<field id="CMIP6_ext550dust_plev19_average" field_ref="CMIP6_ext550dust_plev19" operation="average"/>
+		<field id="CMIP6_ext550dust_sampled_3h" field_ref="CMIP6_ext550dust_with_instant" freq_op="3h" detect_missing_value="true"> @CMIP6_ext550dust_with_instant </field>
+		<field id="CMIP6_ext550dust_with_instant" field_ref="CMIP6_ext550dust" operation="instant"/>
+		<field id="CMIP6_ext550oa_plev19" field_ref="CMIP6_ext550oa_sampled_3h" grid_ref="FULL_klev_plev19"/>
+		<field id="CMIP6_ext550oa_plev19_average" field_ref="CMIP6_ext550oa_plev19" operation="average"/>
+		<field id="CMIP6_ext550oa_sampled_3h" field_ref="CMIP6_ext550oa_with_instant" freq_op="3h" detect_missing_value="true"> @CMIP6_ext550oa_with_instant </field>
+		<field id="CMIP6_ext550oa_with_instant" field_ref="CMIP6_ext550oa" operation="instant"/>
+		<field id="CMIP6_ext550so4_plev19" field_ref="CMIP6_ext550so4_sampled_3h" grid_ref="FULL_klev_plev19"/>
+		<field id="CMIP6_ext550so4_plev19_average" field_ref="CMIP6_ext550so4_plev19" operation="average"/>
+		<field id="CMIP6_ext550so4_sampled_3h" field_ref="CMIP6_ext550so4_with_instant" freq_op="3h" detect_missing_value="true"> @CMIP6_ext550so4_with_instant </field>
+		<field id="CMIP6_ext550so4_with_instant" field_ref="CMIP6_ext550so4" operation="instant"/>
+		<field id="CMIP6_ext550ss_plev19" field_ref="CMIP6_ext550ss_sampled_3h" grid_ref="FULL_klev_plev19"/>
+		<field id="CMIP6_ext550ss_plev19_average" field_ref="CMIP6_ext550ss_plev19" operation="average"/>
+		<field id="CMIP6_ext550ss_sampled_3h" field_ref="CMIP6_ext550ss_with_instant" freq_op="3h" detect_missing_value="true"> @CMIP6_ext550ss_with_instant </field>
+		<field id="CMIP6_ext550ss_with_instant" field_ref="CMIP6_ext550ss" operation="instant"/>
+		<field id="CMIP6_fAnthDisturb_average" field_ref="CMIP6_fAnthDisturb" operation="average"/>
+		<field id="CMIP6_fDeforestToAtmos_average" field_ref="CMIP6_fDeforestToAtmos" operation="average"/>
+		<field id="CMIP6_fDeforestToL_average" field_ref="CMIP6_fDeforestToL" operation="average"/>
+		<field id="CMIP6_fDeforestToProduct_average" field_ref="CMIP6_fDeforestToProduct" operation="average"/>
+		<field id="CMIP6_fFireAll_average" field_ref="CMIP6_fFireAll" operation="average"/>
+		<field id="CMIP6_fFireBCarb_average" field_ref="CMIP6_fFireBCarb" operation="average"/>
+		<field id="CMIP6_fFireNat_average" field_ref="CMIP6_fFireNat" operation="average"/>
+		<field id="CMIP6_fFire_average" field_ref="CMIP6_fFire" operation="average"/>
+		<field id="CMIP6_fLitterSoil_average" field_ref="CMIP6_fLitterSoil" operation="average"/>
+		<field id="CMIP6_fLuc_average" field_ref="CMIP6_fLuc" operation="average"/>
+		<field id="CMIP6_fProductDecomp_average" field_ref="CMIP6_fProductDecomp" operation="average"/>
+		<field id="CMIP6_fRegrowth_average" field_ref="CMIP6_fRegrowth" operation="average"/>
+		<field id="CMIP6_fVegFire_average" field_ref="CMIP6_fVegFire" operation="average"/>
+		<field id="CMIP6_fVegLitter_average" field_ref="CMIP6_fVegLitter" operation="average"/>
+		<field id="CMIP6_fco2antt_average" field_ref="CMIP6_fco2antt" operation="average"/>
+		<field id="CMIP6_fco2fos_average" field_ref="CMIP6_fco2fos" operation="average"/>
+		<field id="CMIP6_fco2nat_average" field_ref="CMIP6_fco2nat" operation="average"/>
+		<field id="CMIP6_fsat_average" field_ref="CMIP6_fsat" operation="average"/>
+		<field id="CMIP6_gppGrass_average" field_ref="CMIP6_gppGrass" operation="average"/>
+		<field id="CMIP6_gppTree_average" field_ref="CMIP6_gppTree" operation="average"/>
+		<field id="CMIP6_gpp_average" field_ref="CMIP6_gpp" operation="average"/>
+		<field id="CMIP6_grassFracC3_Scaltypec3pft_Scaltypenatgr" grid_ref="NATURE_grid_Scaltypec3pft_Scaltypenatgr" operation="instant" detect_missing_value="true"> CMIP6_grassFracC3 </field>
+		<field id="CMIP6_grassFracC3_Scaltypec3pft_Scaltypenatgr_average" field_ref="CMIP6_grassFracC3_Scaltypec3pft_Scaltypenatgr" operation="average"/>
+		<field id="CMIP6_grassFracC4_Scaltypec4pft_Scaltypenatgr" grid_ref="NATURE_grid_Scaltypec4pft_Scaltypenatgr" operation="instant" detect_missing_value="true"> CMIP6_grassFracC4 </field>
+		<field id="CMIP6_grassFracC4_Scaltypec4pft_Scaltypenatgr_average" field_ref="CMIP6_grassFracC4_Scaltypec4pft_Scaltypenatgr" operation="average"/>
+		<field id="CMIP6_grassFrac_Scaltypenatgr" grid_ref="NATURE_grid_Scaltypenatgr" operation="instant" detect_missing_value="true"> CMIP6_grassFrac </field>
+		<field id="CMIP6_grassFrac_Scaltypenatgr_average" field_ref="CMIP6_grassFrac_Scaltypenatgr" operation="average"/>
+		<field id="CMIP6_h2o_average" field_ref="CMIP6_h2o" operation="average"/>
 		<field id="CMIP6_h2o_plev39" field_ref="CMIP6_h2o_sampled_3h" grid_ref="FULL_klev_plev39"/>
 		<field id="CMIP6_h2o_plev39_average" field_ref="CMIP6_h2o_plev39" operation="average"/>
 		<field id="CMIP6_h2o_plev39_average_1mo" field_ref="CMIP6_h2o_plev39_average" freq_op="1mo"> @CMIP6_h2o_plev39_average </field>
 		<field id="CMIP6_h2o_plev39_average_1mo_complete" field_ref="CMIP6_h2o_plev39_average_1mo" grid_ref="FULL_klev_plev39_complete"/>
 		<field id="CMIP6_h2o_plev39_average_1mo_glat" field_ref="CMIP6_h2o_plev39_average_1mo_complete" grid_ref="FULL_klev_plev39_complete_glat"/>
 		<field id="CMIP6_h2o_plev39_average_1mo_glat_average" field_ref="CMIP6_h2o_plev39_average_1mo_glat" operation="average"/>
-		<field id="CMIP6_hcl_with_instant" field_ref="CMIP6_hcl" operation="instant"/>
-		<field id="CMIP6_hcl_sampled_3h" field_ref="CMIP6_hcl_with_instant" freq_op="3h" detect_missing_value="true"> @CMIP6_hcl_with_instant </field>
+		<field id="CMIP6_h2o_sampled_3h" field_ref="CMIP6_h2o_with_instant" freq_op="3h" detect_missing_value="true"> @CMIP6_h2o_with_instant </field>
+		<field id="CMIP6_h2o_with_instant" field_ref="CMIP6_h2o" operation="instant"/>
+		<field id="CMIP6_hcho_average" field_ref="CMIP6_hcho" operation="average"/>
+		<field id="CMIP6_hcl_average" field_ref="CMIP6_hcl" operation="average"/>
 		<field id="CMIP6_hcl_plev39" field_ref="CMIP6_hcl_sampled_3h" grid_ref="FULL_klev_plev39"/>
 		<field id="CMIP6_hcl_plev39_average" field_ref="CMIP6_hcl_plev39" operation="average"/>
 		<field id="CMIP6_hcl_plev39_average_1mo" field_ref="CMIP6_hcl_plev39_average" freq_op="1mo"> @CMIP6_hcl_plev39_average </field>
 		<field id="CMIP6_hcl_plev39_average_1mo_complete" field_ref="CMIP6_hcl_plev39_average_1mo" grid_ref="FULL_klev_plev39_complete"/>
 		<field id="CMIP6_hcl_plev39_average_1mo_glat" field_ref="CMIP6_hcl_plev39_average_1mo_complete" grid_ref="FULL_klev_plev39_complete_glat"/>
 		<field id="CMIP6_hcl_plev39_average_1mo_glat_average" field_ref="CMIP6_hcl_plev39_average_1mo_glat" operation="average"/>
-		<field id="CMIP6_hno3_with_instant" field_ref="CMIP6_hno3" operation="instant"/>
-		<field id="CMIP6_hno3_sampled_3h" field_ref="CMIP6_hno3_with_instant" freq_op="3h" detect_missing_value="true"> @CMIP6_hno3_with_instant </field>
+		<field id="CMIP6_hcl_sampled_3h" field_ref="CMIP6_hcl_with_instant" freq_op="3h" detect_missing_value="true"> @CMIP6_hcl_with_instant </field>
+		<field id="CMIP6_hcl_with_instant" field_ref="CMIP6_hcl" operation="instant"/>
+		<field id="CMIP6_hfdsl_average" field_ref="CMIP6_hfdsl" operation="average"/>
+		<field id="CMIP6_hfdsn_average" field_ref="CMIP6_hfdsn" operation="average"/>
+		<field id="CMIP6_hfls_average" field_ref="CMIP6_hfls" operation="average"/>
+		<field id="CMIP6_hfss_average" field_ref="CMIP6_hfss" operation="average"/>
+		<field id="CMIP6_hno3_average" field_ref="CMIP6_hno3" operation="average"/>
 		<field id="CMIP6_hno3_plev39" field_ref="CMIP6_hno3_sampled_3h" grid_ref="FULL_klev_plev39"/>
 		<field id="CMIP6_hno3_plev39_average" field_ref="CMIP6_hno3_plev39" operation="average"/>
 		<field id="CMIP6_hno3_plev39_average_1mo" field_ref="CMIP6_hno3_plev39_average" freq_op="1mo"> @CMIP6_hno3_plev39_average </field>
 		<field id="CMIP6_hno3_plev39_average_1mo_complete" field_ref="CMIP6_hno3_plev39_average_1mo" grid_ref="FULL_klev_plev39_complete"/>
 		<field id="CMIP6_hno3_plev39_average_1mo_glat" field_ref="CMIP6_hno3_plev39_average_1mo_complete" grid_ref="FULL_klev_plev39_complete_glat"/>
 		<field id="CMIP6_hno3_plev39_average_1mo_glat_average" field_ref="CMIP6_hno3_plev39_average_1mo_glat" operation="average"/>
-		<field id="CMIP6_ho2_with_instant" field_ref="CMIP6_ho2" operation="instant"/>
-		<field id="CMIP6_ho2_sampled_3h" field_ref="CMIP6_ho2_with_instant" freq_op="3h" detect_missing_value="true"> @CMIP6_ho2_with_instant </field>
+		<field id="CMIP6_hno3_sampled_3h" field_ref="CMIP6_hno3_with_instant" freq_op="3h" detect_missing_value="true"> @CMIP6_hno3_with_instant </field>
+		<field id="CMIP6_hno3_with_instant" field_ref="CMIP6_hno3" operation="instant"/>
 		<field id="CMIP6_ho2_plev39" field_ref="CMIP6_ho2_sampled_3h" grid_ref="FULL_klev_plev39"/>
 		<field id="CMIP6_ho2_plev39_average" field_ref="CMIP6_ho2_plev39" operation="average"/>
 		<field id="CMIP6_ho2_plev39_average_1mo" field_ref="CMIP6_ho2_plev39_average" freq_op="1mo"> @CMIP6_ho2_plev39_average </field>
 		<field id="CMIP6_ho2_plev39_average_1mo_complete" field_ref="CMIP6_ho2_plev39_average_1mo" grid_ref="FULL_klev_plev39_complete"/>
 		<field id="CMIP6_ho2_plev39_average_1mo_glat" field_ref="CMIP6_ho2_plev39_average_1mo_complete" grid_ref="FULL_klev_plev39_complete_glat"/>
 		<field id="CMIP6_ho2_plev39_average_1mo_glat_average" field_ref="CMIP6_ho2_plev39_average_1mo_glat" operation="average"/>
-		<field id="CMIP6_meanage_with_instant" field_ref="CMIP6_meanage" operation="instant"/>
-		<field id="CMIP6_meanage_sampled_3h" field_ref="CMIP6_meanage_with_instant" freq_op="3h" detect_missing_value="true"> @CMIP6_meanage_with_instant </field>
+		<field id="CMIP6_ho2_sampled_3h" field_ref="CMIP6_ho2_with_instant" freq_op="3h" detect_missing_value="true"> @CMIP6_ho2_with_instant </field>
+		<field id="CMIP6_ho2_with_instant" field_ref="CMIP6_ho2" operation="instant"/>
+		<field id="CMIP6_hur_average" field_ref="CMIP6_hur" operation="average"/>
+		<field id="CMIP6_hur_plev19" field_ref="CMIP6_hur_sampled_3h" grid_ref="FULL_klev_plev19"/>
+		<field id="CMIP6_hur_plev19_average" field_ref="CMIP6_hur_plev19" operation="average"/>
+		<field id="CMIP6_hur_plev8" field_ref="CMIP6_hur_sampled_3h" grid_ref="FULL_klev_plev8"/>
+		<field id="CMIP6_hur_plev8_average" field_ref="CMIP6_hur_plev8" operation="average"/>
+		<field id="CMIP6_hur_sampled_3h" field_ref="CMIP6_hur_with_instant" freq_op="3h" detect_missing_value="true"> @CMIP6_hur_with_instant </field>
+		<field id="CMIP6_hur_with_instant" field_ref="CMIP6_hur" operation="instant"/>
+		<field id="CMIP6_hurs_Scalheight2m" grid_ref="FULL_grid_Scalheight2m" operation="instant" detect_missing_value="true"> CMIP6_hurs </field>
+		<field id="CMIP6_hurs_Scalheight2m_average" field_ref="CMIP6_hurs_Scalheight2m" operation="average"/>
+		<field id="CMIP6_hursmax_Scalheight2m" grid_ref="FULL_grid_Scalheight2m" operation="instant" detect_missing_value="true"> CMIP6_hursmax </field>
+		<field id="CMIP6_hursmax_Scalheight2m_maximum" field_ref="CMIP6_hursmax_Scalheight2m" operation="maximum"/>
+		<field id="CMIP6_hursmin_Scalheight2m" grid_ref="FULL_grid_Scalheight2m" operation="instant" detect_missing_value="true"> CMIP6_hursmin </field>
+		<field id="CMIP6_hursmin_Scalheight2m_minimum" field_ref="CMIP6_hursmin_Scalheight2m" operation="minimum"/>
+		<field id="CMIP6_hus850_p850" field_ref="CMIP6_hus_sampled_3h" grid_ref="FULL_klev_p850"/>
+		<field id="CMIP6_hus850_p850_Scalp850" grid_ref="FULL_klev_Scalp850" operation="instant" detect_missing_value="true"> CMIP6_hus850_p850 </field>
+		<field id="CMIP6_hus850_p850_Scalp850_average" field_ref="CMIP6_hus850_p850_Scalp850" operation="average"/>
+		<field id="CMIP6_hus_average" field_ref="CMIP6_hus" operation="average"/>
+		<field id="CMIP6_hus_plev19" field_ref="CMIP6_hus_sampled_3h" grid_ref="FULL_klev_plev19"/>
+		<field id="CMIP6_hus_plev19_average" field_ref="CMIP6_hus_plev19" operation="average"/>
+		<field id="CMIP6_hus_plev19_average_1d" field_ref="CMIP6_hus_plev19_average" freq_op="1d"> @CMIP6_hus_plev19_average </field>
+		<field id="CMIP6_hus_plev19_average_1d_complete" field_ref="CMIP6_hus_plev19_average_1d" grid_ref="FULL_klev_plev19_complete"/>
+		<field id="CMIP6_hus_plev19_average_1d_glat" field_ref="CMIP6_hus_plev19_average_1d_complete" grid_ref="FULL_klev_plev19_complete_glat"/>
+		<field id="CMIP6_hus_plev19_average_1d_glat_average" field_ref="CMIP6_hus_plev19_average_1d_glat" operation="average"/>
+		<field id="CMIP6_hus_plev7h" field_ref="CMIP6_hus_sampled_3h" grid_ref="FULL_klev_plev7h"/>
+		<field id="CMIP6_hus_plev7h_average" field_ref="CMIP6_hus_plev7h" operation="average"/>
+		<field id="CMIP6_hus_plev7hm" field_ref="CMIP6_hus_sampled_3h" grid_ref="FULL_klev_plev7hm"/>
+		<field id="CMIP6_hus_plev7hm_average" field_ref="CMIP6_hus_plev7hm" operation="average"/>
+		<field id="CMIP6_hus_plev8" field_ref="CMIP6_hus_sampled_3h" grid_ref="FULL_klev_plev8"/>
+		<field id="CMIP6_hus_plev8_average" field_ref="CMIP6_hus_plev8" operation="average"/>
+		<field id="CMIP6_hus_sampled_3h" field_ref="CMIP6_hus_with_instant" freq_op="3h" detect_missing_value="true"> @CMIP6_hus_with_instant </field>
+		<field id="CMIP6_hus_with_instant" field_ref="CMIP6_hus" operation="instant"/>
+		<field id="CMIP6_huss_Scalheight2m" grid_ref="FULL_grid_Scalheight2m" operation="instant" detect_missing_value="true"> CMIP6_huss </field>
+		<field id="CMIP6_huss_Scalheight2m_average" field_ref="CMIP6_huss_Scalheight2m" operation="average"/>
+		<field id="CMIP6_icedLa_average" field_ref="CMIP6_icedLa" operation="average"/>
+		<field id="CMIP6_icod_average" field_ref="CMIP6_icod" operation="average"/>
+		<field id="CMIP6_intuadse_average" field_ref="CMIP6_intuadse" operation="average"/>
+		<field id="CMIP6_intuaw_average" field_ref="CMIP6_intuaw" operation="average"/>
+		<field id="CMIP6_intvadse_average" field_ref="CMIP6_intvadse" operation="average"/>
+		<field id="CMIP6_intvaw_average" field_ref="CMIP6_intvaw" operation="average"/>
+		<field id="CMIP6_lai_average" field_ref="CMIP6_lai" operation="average"/>
+		<field id="CMIP6_landCoverFrac_average" field_ref="CMIP6_landCoverFrac" operation="average"/>
+		<field id="CMIP6_lcod_average" field_ref="CMIP6_lcod" operation="average"/>
+		<field id="CMIP6_loadbc_average" field_ref="CMIP6_loadbc" operation="average"/>
+		<field id="CMIP6_loaddust_average" field_ref="CMIP6_loaddust" operation="average"/>
+		<field id="CMIP6_loadoa_average" field_ref="CMIP6_loadoa" operation="average"/>
+		<field id="CMIP6_loadso4_average" field_ref="CMIP6_loadso4" operation="average"/>
+		<field id="CMIP6_loadss_average" field_ref="CMIP6_loadss" operation="average"/>
+		<field id="CMIP6_lwp_average" field_ref="CMIP6_lwp" operation="average"/>
+		<field id="CMIP6_lwsnl_average" field_ref="CMIP6_lwsnl" operation="average"/>
+		<field id="CMIP6_mc_average" field_ref="CMIP6_mc" operation="average"/>
+		<field id="CMIP6_mcu_average" field_ref="CMIP6_mcu" operation="average"/>
 		<field id="CMIP6_meanage_plev39" field_ref="CMIP6_meanage_sampled_3h" grid_ref="FULL_klev_plev39"/>
 		<field id="CMIP6_meanage_plev39_average" field_ref="CMIP6_meanage_plev39" operation="average"/>
 		<field id="CMIP6_meanage_plev39_average_1mo" field_ref="CMIP6_meanage_plev39_average" freq_op="1mo"> @CMIP6_meanage_plev39_average </field>
 		<field id="CMIP6_meanage_plev39_average_1mo_complete" field_ref="CMIP6_meanage_plev39_average_1mo" grid_ref="FULL_klev_plev39_complete"/>
 		<field id="CMIP6_meanage_plev39_average_1mo_glat" field_ref="CMIP6_meanage_plev39_average_1mo_complete" grid_ref="FULL_klev_plev39_complete_glat"/>
 		<field id="CMIP6_meanage_plev39_average_1mo_glat_average" field_ref="CMIP6_meanage_plev39_average_1mo_glat" operation="average"/>
-		<field id="CMIP6_n2o_with_instant" field_ref="CMIP6_n2o" operation="instant"/>
-		<field id="CMIP6_n2o_sampled_3h" field_ref="CMIP6_n2o_with_instant" freq_op="3h" detect_missing_value="true"> @CMIP6_n2o_with_instant </field>
+		<field id="CMIP6_meanage_sampled_3h" field_ref="CMIP6_meanage_with_instant" freq_op="3h" detect_missing_value="true"> @CMIP6_meanage_with_instant </field>
+		<field id="CMIP6_meanage_with_instant" field_ref="CMIP6_meanage" operation="instant"/>
+		<field id="CMIP6_mmrbc_average" field_ref="CMIP6_mmrbc" operation="average"/>
+		<field id="CMIP6_mmrdust_average" field_ref="CMIP6_mmrdust" operation="average"/>
+		<field id="CMIP6_mmroa_average" field_ref="CMIP6_mmroa" operation="average"/>
+		<field id="CMIP6_mmrpm1_average" field_ref="CMIP6_mmrpm1" operation="average"/>
+		<field id="CMIP6_mmrso4_average" field_ref="CMIP6_mmrso4" operation="average"/>
+		<field id="CMIP6_mmrss_average" field_ref="CMIP6_mmrss" operation="average"/>
+		<field id="CMIP6_mrfso_average" field_ref="CMIP6_mrfso" operation="average"/>
+		<field id="CMIP6_mrlso_average" field_ref="CMIP6_mrlso" operation="average"/>
+		<field id="CMIP6_mrro_average" field_ref="CMIP6_mrro" operation="average"/>
+		<field id="CMIP6_mrros_average" field_ref="CMIP6_mrros" operation="average"/>
+		<field id="CMIP6_mrsfl_average" field_ref="CMIP6_mrsfl" operation="average"/>
+		<field id="CMIP6_mrsll_average" field_ref="CMIP6_mrsll" operation="average"/>
+		<field id="CMIP6_mrso_average" field_ref="CMIP6_mrso" operation="average"/>
+		<field id="CMIP6_mrsofc_once" field_ref="CMIP6_mrsofc" operation="once"/>
+		<field id="CMIP6_mrsol_average" field_ref="CMIP6_mrsol" operation="average"/>
+		<field id="CMIP6_mrsos_Scalsdepth1" grid_ref="NATURE_grid_Scalsdepth1" operation="instant" detect_missing_value="true"> CMIP6_mrsos </field>
+		<field id="CMIP6_mrsos_Scalsdepth1_average" field_ref="CMIP6_mrsos_Scalsdepth1" operation="average"/>
+		<field id="CMIP6_mrsow_average" field_ref="CMIP6_mrsow" operation="average"/>
+		<field id="CMIP6_mrtws_average" field_ref="CMIP6_mrtws" operation="average"/>
+		<field id="CMIP6_n2o_average" field_ref="CMIP6_n2o" operation="average"/>
+		<field id="CMIP6_n2o_plev19" field_ref="CMIP6_n2o_sampled_3h" grid_ref="FULL_klev_plev19"/>
+		<field id="CMIP6_n2o_plev19_average" field_ref="CMIP6_n2o_plev19" operation="average"/>
 		<field id="CMIP6_n2o_plev39" field_ref="CMIP6_n2o_sampled_3h" grid_ref="FULL_klev_plev39"/>
 		<field id="CMIP6_n2o_plev39_average" field_ref="CMIP6_n2o_plev39" operation="average"/>
 		<field id="CMIP6_n2o_plev39_average_1mo" field_ref="CMIP6_n2o_plev39_average" freq_op="1mo"> @CMIP6_n2o_plev39_average </field>
 		<field id="CMIP6_n2o_plev39_average_1mo_complete" field_ref="CMIP6_n2o_plev39_average_1mo" grid_ref="FULL_klev_plev39_complete"/>
 		<field id="CMIP6_n2o_plev39_average_1mo_glat" field_ref="CMIP6_n2o_plev39_average_1mo_complete" grid_ref="FULL_klev_plev39_complete_glat"/>
 		<field id="CMIP6_n2o_plev39_average_1mo_glat_average" field_ref="CMIP6_n2o_plev39_average_1mo_glat" operation="average"/>
-		<field id="CMIP6_noy_with_instant" field_ref="CMIP6_noy" operation="instant"/>
-		<field id="CMIP6_noy_sampled_3h" field_ref="CMIP6_noy_with_instant" freq_op="3h" detect_missing_value="true"> @CMIP6_noy_with_instant </field>
+		<field id="CMIP6_n2o_sampled_3h" field_ref="CMIP6_n2o_with_instant" freq_op="3h" detect_missing_value="true"> @CMIP6_n2o_with_instant </field>
+		<field id="CMIP6_n2o_with_instant" field_ref="CMIP6_n2o" operation="instant"/>
+		<field id="CMIP6_nbp_average" field_ref="CMIP6_nbp" operation="average"/>
+		<field id="CMIP6_necb_average" field_ref="CMIP6_necb" operation="average"/>
+		<field id="CMIP6_nep_average" field_ref="CMIP6_nep" operation="average"/>
+		<field id="CMIP6_netAtmosLandCO2Flux_average" field_ref="CMIP6_netAtmosLandCO2Flux" operation="average"/>
+		<field id="CMIP6_no2_Plev39hm" field_ref="CMIP6_no2_sampled_3h" grid_ref="FULL_klev_Plev39hm"/>
+		<field id="CMIP6_no2_Plev39hm_average" field_ref="CMIP6_no2_Plev39hm" operation="average"/>
+		<field id="CMIP6_no2_average" field_ref="CMIP6_no2" operation="average"/>
+		<field id="CMIP6_no2_sampled_3h" field_ref="CMIP6_no2_with_instant" freq_op="3h" detect_missing_value="true"> @CMIP6_no2_with_instant </field>
+		<field id="CMIP6_no2_with_instant" field_ref="CMIP6_no2" operation="instant"/>
+		<field id="CMIP6_no_average" field_ref="CMIP6_no" operation="average"/>
 		<field id="CMIP6_noy_plev39" field_ref="CMIP6_noy_sampled_3h" grid_ref="FULL_klev_plev39"/>
 		<field id="CMIP6_noy_plev39_average" field_ref="CMIP6_noy_plev39" operation="average"/>
 		<field id="CMIP6_noy_plev39_average_1mo" field_ref="CMIP6_noy_plev39_average" freq_op="1mo"> @CMIP6_noy_plev39_average </field>
 		<field id="CMIP6_noy_plev39_average_1mo_complete" field_ref="CMIP6_noy_plev39_average_1mo" grid_ref="FULL_klev_plev39_complete"/>
 		<field id="CMIP6_noy_plev39_average_1mo_glat" field_ref="CMIP6_noy_plev39_average_1mo_complete" grid_ref="FULL_klev_plev39_complete_glat"/>
 		<field id="CMIP6_noy_plev39_average_1mo_glat_average" field_ref="CMIP6_noy_plev39_average_1mo_glat" operation="average"/>
-		<field id="CMIP6_o3_with_instant" field_ref="CMIP6_o3" operation="instant"/>
-		<field id="CMIP6_o3_sampled_3h" field_ref="CMIP6_o3_with_instant" freq_op="3h" detect_missing_value="true"> @CMIP6_o3_with_instant </field>
+		<field id="CMIP6_noy_sampled_3h" field_ref="CMIP6_noy_with_instant" freq_op="3h" detect_missing_value="true"> @CMIP6_noy_with_instant </field>
+		<field id="CMIP6_noy_with_instant" field_ref="CMIP6_noy" operation="instant"/>
+		<field id="CMIP6_nppGrass_average" field_ref="CMIP6_nppGrass" operation="average"/>
+		<field id="CMIP6_nppTree_average" field_ref="CMIP6_nppTree" operation="average"/>
+		<field id="CMIP6_npp_average" field_ref="CMIP6_npp" operation="average"/>
+		<field id="CMIP6_o3_Plev39hm" field_ref="CMIP6_o3_sampled_3h" grid_ref="FULL_klev_Plev39hm"/>
+		<field id="CMIP6_o3_Plev39hm_average" field_ref="CMIP6_o3_Plev39hm" operation="average"/>
+		<field id="CMIP6_o3_average" field_ref="CMIP6_o3" operation="average"/>
+		<field id="CMIP6_o3_plev19" field_ref="CMIP6_o3_sampled_3h" grid_ref="FULL_klev_plev19"/>
+		<field id="CMIP6_o3_plev19_average" field_ref="CMIP6_o3_plev19" operation="average"/>
 		<field id="CMIP6_o3_plev39" field_ref="CMIP6_o3_sampled_3h" grid_ref="FULL_klev_plev39"/>
 		<field id="CMIP6_o3_plev39_average" field_ref="CMIP6_o3_plev39" operation="average"/>
 		<field id="CMIP6_o3_plev39_average_1mo" field_ref="CMIP6_o3_plev39_average" freq_op="1mo"> @CMIP6_o3_plev39_average </field>
 		<field id="CMIP6_o3_plev39_average_1mo_complete" field_ref="CMIP6_o3_plev39_average_1mo" grid_ref="FULL_klev_plev39_complete"/>
 		<field id="CMIP6_o3_plev39_average_1mo_glat" field_ref="CMIP6_o3_plev39_average_1mo_complete" grid_ref="FULL_klev_plev39_complete_glat"/>
 		<field id="CMIP6_o3_plev39_average_1mo_glat_average" field_ref="CMIP6_o3_plev39_average_1mo_glat" operation="average"/>
-		<field id="CMIP6_oh_with_instant" field_ref="CMIP6_oh" operation="instant"/>
-		<field id="CMIP6_oh_sampled_3h" field_ref="CMIP6_oh_with_instant" freq_op="3h" detect_missing_value="true"> @CMIP6_oh_with_instant </field>
+		<field id="CMIP6_o3_sampled_3h" field_ref="CMIP6_o3_with_instant" freq_op="3h" detect_missing_value="true"> @CMIP6_o3_with_instant </field>
+		<field id="CMIP6_o3_with_instant" field_ref="CMIP6_o3" operation="instant"/>
+		<field id="CMIP6_o3loss_average" field_ref="CMIP6_o3loss" operation="average"/>
+		<field id="CMIP6_o3prod_average" field_ref="CMIP6_o3prod" operation="average"/>
+		<field id="CMIP6_od440aer_average" field_ref="CMIP6_od440aer" operation="average"/>
+		<field id="CMIP6_od443dust_average" field_ref="CMIP6_od443dust" operation="average"/>
+		<field id="CMIP6_od550acldaer_average" field_ref="CMIP6_od550acldaer" operation="average"/>
+		<field id="CMIP6_od550aer_average" field_ref="CMIP6_od550aer" operation="average"/>
+		<field id="CMIP6_od550bc_average" field_ref="CMIP6_od550bc" operation="average"/>
+		<field id="CMIP6_od550dust_average" field_ref="CMIP6_od550dust" operation="average"/>
+		<field id="CMIP6_od550dustbin1_average" field_ref="CMIP6_od550dustbin1" operation="average"/>
+		<field id="CMIP6_od550dustbin2_average" field_ref="CMIP6_od550dustbin2" operation="average"/>
+		<field id="CMIP6_od550lt1aer_average" field_ref="CMIP6_od550lt1aer" operation="average"/>
+		<field id="CMIP6_od550oa_average" field_ref="CMIP6_od550oa" operation="average"/>
+		<field id="CMIP6_od550so4_average" field_ref="CMIP6_od550so4" operation="average"/>
+		<field id="CMIP6_od550ss_average" field_ref="CMIP6_od550ss" operation="average"/>
+		<field id="CMIP6_od550ssbin1_average" field_ref="CMIP6_od550ssbin1" operation="average"/>
+		<field id="CMIP6_od550ssbin2_average" field_ref="CMIP6_od550ssbin2" operation="average"/>
+		<field id="CMIP6_od865dust_average" field_ref="CMIP6_od865dust" operation="average"/>
+		<field id="CMIP6_od870aer_average" field_ref="CMIP6_od870aer" operation="average"/>
+		<field id="CMIP6_oh_average" field_ref="CMIP6_oh" operation="average"/>
 		<field id="CMIP6_oh_plev39" field_ref="CMIP6_oh_sampled_3h" grid_ref="FULL_klev_plev39"/>
 		<field id="CMIP6_oh_plev39_average" field_ref="CMIP6_oh_plev39" operation="average"/>
 		<field id="CMIP6_oh_plev39_average_1mo" field_ref="CMIP6_oh_plev39_average" freq_op="1mo"> @CMIP6_oh_plev39_average </field>
 		<field id="CMIP6_oh_plev39_average_1mo_complete" field_ref="CMIP6_oh_plev39_average_1mo" grid_ref="FULL_klev_plev39_complete"/>
 		<field id="CMIP6_oh_plev39_average_1mo_glat" field_ref="CMIP6_oh_plev39_average_1mo_complete" grid_ref="FULL_klev_plev39_complete_glat"/>
 		<field id="CMIP6_oh_plev39_average_1mo_glat_average" field_ref="CMIP6_oh_plev39_average_1mo_glat" operation="average"/>
+		<field id="CMIP6_oh_sampled_3h" field_ref="CMIP6_oh_with_instant" freq_op="3h" detect_missing_value="true"> @CMIP6_oh_with_instant </field>
+		<field id="CMIP6_oh_with_instant" field_ref="CMIP6_oh" operation="instant"/>
+		<field id="CMIP6_orog_average" field_ref="CMIP6_orog" operation="average"/>
+		<field id="CMIP6_orog_once" field_ref="CMIP6_orog" operation="once"/>
+		<field id="CMIP6_oxloss_plev39" field_ref="CMIP6_oxloss_sampled_3h" grid_ref="FULL_klev_plev39"/>
+		<field id="CMIP6_oxloss_plev39_average" field_ref="CMIP6_oxloss_plev39" operation="average"/>
+		<field id="CMIP6_oxloss_plev39_average_1mo" field_ref="CMIP6_oxloss_plev39_average" freq_op="1mo"> @CMIP6_oxloss_plev39_average </field>
+		<field id="CMIP6_oxloss_plev39_average_1mo_complete" field_ref="CMIP6_oxloss_plev39_average_1mo" grid_ref="FULL_klev_plev39_complete"/>
+		<field id="CMIP6_oxloss_plev39_average_1mo_glat" field_ref="CMIP6_oxloss_plev39_average_1mo_complete" grid_ref="FULL_klev_plev39_complete_glat"/>
+		<field id="CMIP6_oxloss_plev39_average_1mo_glat_average" field_ref="CMIP6_oxloss_plev39_average_1mo_glat" operation="average"/>
+		<field id="CMIP6_oxloss_sampled_3h" field_ref="CMIP6_oxloss_with_instant" freq_op="3h" detect_missing_value="true"> @CMIP6_oxloss_with_instant </field>
+		<field id="CMIP6_oxloss_with_instant" field_ref="CMIP6_oxloss" operation="instant"/>
+		<field id="CMIP6_oxprod_plev39" field_ref="CMIP6_oxprod_sampled_3h" grid_ref="FULL_klev_plev39"/>
+		<field id="CMIP6_oxprod_plev39_average" field_ref="CMIP6_oxprod_plev39" operation="average"/>
+		<field id="CMIP6_oxprod_plev39_average_1mo" field_ref="CMIP6_oxprod_plev39_average" freq_op="1mo"> @CMIP6_oxprod_plev39_average </field>
+		<field id="CMIP6_oxprod_plev39_average_1mo_complete" field_ref="CMIP6_oxprod_plev39_average_1mo" grid_ref="FULL_klev_plev39_complete"/>
+		<field id="CMIP6_oxprod_plev39_average_1mo_glat" field_ref="CMIP6_oxprod_plev39_average_1mo_complete" grid_ref="FULL_klev_plev39_complete_glat"/>
+		<field id="CMIP6_oxprod_plev39_average_1mo_glat_average" field_ref="CMIP6_oxprod_plev39_average_1mo_glat" operation="average"/>
+		<field id="CMIP6_oxprod_sampled_3h" field_ref="CMIP6_oxprod_with_instant" freq_op="3h" detect_missing_value="true"> @CMIP6_oxprod_with_instant </field>
+		<field id="CMIP6_oxprod_with_instant" field_ref="CMIP6_oxprod" operation="instant"/>
+		<field id="CMIP6_pfull_instant" field_ref="CMIP6_pfull" operation="instant" detect_missing_value="true"/>
+		<field id="CMIP6_pfull_instant_sampled_3h" field_ref="CMIP6_pfull_instant" freq_op="3h" detect_missing_value="true"> @CMIP6_pfull </field>
+		<field id="CMIP6_pr_average" field_ref="CMIP6_pr" operation="average"/>
+		<field id="CMIP6_prc_average" field_ref="CMIP6_prc" operation="average"/>
+		<field id="CMIP6_prsn_average" field_ref="CMIP6_prsn" operation="average"/>
+		<field id="CMIP6_prveg_average" field_ref="CMIP6_prveg" operation="average"/>
+		<field id="CMIP6_prw_average" field_ref="CMIP6_prw" operation="average"/>
+		<field id="CMIP6_ps_average" field_ref="CMIP6_ps" operation="average"/>
+		<field id="CMIP6_psl_average" field_ref="CMIP6_psl" operation="average"/>
+		<field id="CMIP6_ptp_average" field_ref="CMIP6_ptp" operation="average"/>
+		<field id="CMIP6_raGrass_average" field_ref="CMIP6_raGrass" operation="average"/>
+		<field id="CMIP6_raTree_average" field_ref="CMIP6_raTree" operation="average"/>
+		<field id="CMIP6_ra_average" field_ref="CMIP6_ra" operation="average"/>
+		<field id="CMIP6_reffclitop_average" field_ref="CMIP6_reffclitop" operation="average"/>
+		<field id="CMIP6_reffclwtopcnrm_average" field_ref="CMIP6_reffclwtopcnrm" operation="average"/>
+		<field id="CMIP6_residualFrac_Scaltyperesidual" grid_ref="NATURE_grid_Scaltyperesidual" operation="instant" detect_missing_value="true"> CMIP6_residualFrac </field>
+		<field id="CMIP6_residualFrac_Scaltyperesidual_average" field_ref="CMIP6_residualFrac_Scaltyperesidual" operation="average"/>
+		<field id="CMIP6_rhGrass_average" field_ref="CMIP6_rhGrass" operation="average"/>
+		<field id="CMIP6_rhLitter_average" field_ref="CMIP6_rhLitter" operation="average"/>
+		<field id="CMIP6_rhSoil_average" field_ref="CMIP6_rhSoil" operation="average"/>
+		<field id="CMIP6_rhTree_average" field_ref="CMIP6_rhTree" operation="average"/>
+		<field id="CMIP6_rh_average" field_ref="CMIP6_rh" operation="average"/>
+		<field id="CMIP6_rld_average" field_ref="CMIP6_rld" operation="average"/>
+		<field id="CMIP6_rldcs_average" field_ref="CMIP6_rldcs" operation="average"/>
+		<field id="CMIP6_rlds_average" field_ref="CMIP6_rlds" operation="average"/>
+		<field id="CMIP6_rldsaf_average" field_ref="CMIP6_rldsaf" operation="average"/>
+		<field id="CMIP6_rldscs_average" field_ref="CMIP6_rldscs" operation="average"/>
+		<field id="CMIP6_rldscsaf_average" field_ref="CMIP6_rldscsaf" operation="average"/>
+		<field id="CMIP6_rls_average" field_ref="CMIP6_rls" operation="average"/>
+		<field id="CMIP6_rlu_average" field_ref="CMIP6_rlu" operation="average"/>
+		<field id="CMIP6_rlucs_average" field_ref="CMIP6_rlucs" operation="average"/>
+		<field id="CMIP6_rlus_average" field_ref="CMIP6_rlus" operation="average"/>
+		<field id="CMIP6_rlusaf_average" field_ref="CMIP6_rlusaf" operation="average"/>
+		<field id="CMIP6_rluscs_average" field_ref="CMIP6_rluscs" operation="average"/>
+		<field id="CMIP6_rluscsaf_average" field_ref="CMIP6_rluscsaf" operation="average"/>
+		<field id="CMIP6_rlut_average" field_ref="CMIP6_rlut" operation="average"/>
+		<field id="CMIP6_rlutaf_average" field_ref="CMIP6_rlutaf" operation="average"/>
+		<field id="CMIP6_rlutcs_average" field_ref="CMIP6_rlutcs" operation="average"/>
+		<field id="CMIP6_rlutcsaf_average" field_ref="CMIP6_rlutcsaf" operation="average"/>
+		<field id="CMIP6_rootd_once" field_ref="CMIP6_rootd" operation="once"/>
+		<field id="CMIP6_rsd_average" field_ref="CMIP6_rsd" operation="average"/>
+		<field id="CMIP6_rsdcs_average" field_ref="CMIP6_rsdcs" operation="average"/>
+		<field id="CMIP6_rsds_average" field_ref="CMIP6_rsds" operation="average"/>
+		<field id="CMIP6_rsdsaf_average" field_ref="CMIP6_rsdsaf" operation="average"/>
+		<field id="CMIP6_rsdscs_average" field_ref="CMIP6_rsdscs" operation="average"/>
+		<field id="CMIP6_rsdscsaf_average" field_ref="CMIP6_rsdscsaf" operation="average"/>
+		<field id="CMIP6_rsdsdiff_average" field_ref="CMIP6_rsdsdiff" operation="average"/>
+		<field id="CMIP6_rsdt_average" field_ref="CMIP6_rsdt" operation="average"/>
+		<field id="CMIP6_rss_average" field_ref="CMIP6_rss" operation="average"/>
+		<field id="CMIP6_rsu_average" field_ref="CMIP6_rsu" operation="average"/>
+		<field id="CMIP6_rsucs_average" field_ref="CMIP6_rsucs" operation="average"/>
+		<field id="CMIP6_rsus_average" field_ref="CMIP6_rsus" operation="average"/>
+		<field id="CMIP6_rsusaf_average" field_ref="CMIP6_rsusaf" operation="average"/>
+		<field id="CMIP6_rsuscs_average" field_ref="CMIP6_rsuscs" operation="average"/>
+		<field id="CMIP6_rsuscsaf_average" field_ref="CMIP6_rsuscsaf" operation="average"/>
+		<field id="CMIP6_rsut_average" field_ref="CMIP6_rsut" operation="average"/>
+		<field id="CMIP6_rsutaf_average" field_ref="CMIP6_rsutaf" operation="average"/>
+		<field id="CMIP6_rsutcs_average" field_ref="CMIP6_rsutcs" operation="average"/>
+		<field id="CMIP6_rsutcsaf_average" field_ref="CMIP6_rsutcsaf" operation="average"/>
+		<field id="CMIP6_rzwc_average" field_ref="CMIP6_rzwc" operation="average"/>
+		<field id="CMIP6_sbl_average" field_ref="CMIP6_sbl" operation="average"/>
+		<field id="CMIP6_sbl_land_average" field_ref="CMIP6_sbl_land" operation="average"/>
+		<field id="CMIP6_sconcbc_average" field_ref="CMIP6_sconcbc" operation="average"/>
+		<field id="CMIP6_sconcdust_average" field_ref="CMIP6_sconcdust" operation="average"/>
+		<field id="CMIP6_sconcoa_average" field_ref="CMIP6_sconcoa" operation="average"/>
+		<field id="CMIP6_sconcso4_average" field_ref="CMIP6_sconcso4" operation="average"/>
+		<field id="CMIP6_sconcss_average" field_ref="CMIP6_sconcss" operation="average"/>
+		<field id="CMIP6_sedustCI_average" field_ref="CMIP6_sedustCI" operation="average"/>
+		<field id="CMIP6_sfcWind_Scalheight10m" grid_ref="FULL_grid_Scalheight10m" operation="instant" detect_missing_value="true"> CMIP6_sfcWind </field>
+		<field id="CMIP6_sfcWind_Scalheight10m_average" field_ref="CMIP6_sfcWind_Scalheight10m" operation="average"/>
+		<field id="CMIP6_sfcWindmax_Scalheight10m" grid_ref="FULL_grid_Scalheight10m" operation="instant" detect_missing_value="true"> CMIP6_sfcWindmax </field>
+		<field id="CMIP6_sfcWindmax_Scalheight10m_average" field_ref="CMIP6_sfcWindmax_Scalheight10m" operation="average"/>
+		<field id="CMIP6_sfcWindmax_Scalheight10m_maximum" field_ref="CMIP6_sfcWindmax_Scalheight10m" operation="maximum"/>
+		<field id="CMIP6_sftgif_Scaltypeli" grid_ref="NATURE_grid_Scaltypeli" operation="instant" detect_missing_value="true"> CMIP6_sftgif </field>
+		<field id="CMIP6_sftgif_Scaltypeli_average" field_ref="CMIP6_sftgif_Scaltypeli" operation="average"/>
+		<field id="CMIP6_sftgif_Scaltypeli_once" field_ref="CMIP6_sftgif_Scaltypeli" operation="once"/>
+		<field id="CMIP6_sftgrf_Scaltypegis" grid_ref="NATURE_grid_Scaltypegis" operation="instant" detect_missing_value="true"> CMIP6_sftgrf </field>
+		<field id="CMIP6_sftgrf_Scaltypegis_average" field_ref="CMIP6_sftgrf_Scaltypegis" operation="average"/>
+		<field id="CMIP6_sftgrf_Scaltypegis_once" field_ref="CMIP6_sftgrf_Scaltypegis" operation="once"/>
+		<field id="CMIP6_sftlf_Scaltypeland" grid_ref="FULL_grid_Scaltypeland" operation="instant" detect_missing_value="true"> CMIP6_sftlf </field>
+		<field id="CMIP6_sftlf_Scaltypeland_once" field_ref="CMIP6_sftlf_Scaltypeland" operation="once"/>
+		<field id="CMIP6_siconca_Scaltypesi" grid_ref="SEA_grid_Scaltypesi" operation="instant" detect_missing_value="true"> CMIP6_siconca </field>
+		<field id="CMIP6_siconca_Scaltypesi_average" field_ref="CMIP6_siconca_Scaltypesi" operation="average"/>
+		<field id="CMIP6_snc_average" field_ref="CMIP6_snc" operation="average"/>
+		<field id="CMIP6_snct_average" field_ref="CMIP6_snct" operation="average"/>
+		<field id="CMIP6_sndLa_average" field_ref="CMIP6_sndLa" operation="average"/>
+		<field id="CMIP6_snd_average" field_ref="CMIP6_snd" operation="average"/>
+		<field id="CMIP6_snm_land_average" field_ref="CMIP6_snm_land" operation="average"/>
+		<field id="CMIP6_snw_land_average" field_ref="CMIP6_snw_land" operation="average"/>
+		<field id="CMIP6_so2_average" field_ref="CMIP6_so2" operation="average"/>
+		<field id="CMIP6_ssa550aer_average" field_ref="CMIP6_ssa550aer" operation="average"/>
+		<field id="CMIP6_tSoilPools_average" field_ref="CMIP6_tSoilPools" operation="average"/>
+		<field id="CMIP6_ta500_p500" field_ref="CMIP6_ta_sampled_3h" grid_ref="FULL_klev_p500"/>
+		<field id="CMIP6_ta500_p500_Scalp500" grid_ref="FULL_klev_Scalp500" operation="instant" detect_missing_value="true"> CMIP6_ta500_p500 </field>
+		<field id="CMIP6_ta500_p500_Scalp500_average" field_ref="CMIP6_ta500_p500_Scalp500" operation="average"/>
+		<field id="CMIP6_ta850_p850" field_ref="CMIP6_ta_sampled_3h" grid_ref="FULL_klev_p850"/>
+		<field id="CMIP6_ta850_p850_Scalp850" grid_ref="FULL_klev_Scalp850" operation="instant" detect_missing_value="true"> CMIP6_ta850_p850 </field>
+		<field id="CMIP6_ta850_p850_Scalp850_average" field_ref="CMIP6_ta850_p850_Scalp850" operation="average"/>
+		<field id="CMIP6_ta_average" field_ref="CMIP6_ta" operation="average"/>
+		<field id="CMIP6_ta_plev19" field_ref="CMIP6_ta_sampled_3h" grid_ref="FULL_klev_plev19"/>
+		<field id="CMIP6_ta_plev19_average" field_ref="CMIP6_ta_plev19" operation="average"/>
+		<field id="CMIP6_ta_plev19_average_1d" field_ref="CMIP6_ta_plev19_average" freq_op="1d"> @CMIP6_ta_plev19_average </field>
+		<field id="CMIP6_ta_plev19_average_1d_complete" field_ref="CMIP6_ta_plev19_average_1d" grid_ref="FULL_klev_plev19_complete"/>
+		<field id="CMIP6_ta_plev19_average_1d_glat" field_ref="CMIP6_ta_plev19_average_1d_complete" grid_ref="FULL_klev_plev19_complete_glat"/>
+		<field id="CMIP6_ta_plev19_average_1d_glat_average" field_ref="CMIP6_ta_plev19_average_1d_glat" operation="average"/>
 		<field id="CMIP6_ta_plev39" field_ref="CMIP6_ta_sampled_3h" grid_ref="FULL_klev_plev39"/>
 		<field id="CMIP6_ta_plev39_average" field_ref="CMIP6_ta_plev39" operation="average"/>
 		<field id="CMIP6_ta_plev39_average_1mo" field_ref="CMIP6_ta_plev39_average" freq_op="1mo"> @CMIP6_ta_plev39_average </field>
 		<field id="CMIP6_ta_plev39_average_1mo_complete" field_ref="CMIP6_ta_plev39_average_1mo" grid_ref="FULL_klev_plev39_complete"/>
 		<field id="CMIP6_ta_plev39_average_1mo_glat" field_ref="CMIP6_ta_plev39_average_1mo_complete" grid_ref="FULL_klev_plev39_complete_glat"/>
 		<field id="CMIP6_ta_plev39_average_1mo_glat_average" field_ref="CMIP6_ta_plev39_average_1mo_glat" operation="average"/>
+		<field id="CMIP6_ta_plev7hm" field_ref="CMIP6_ta_sampled_3h" grid_ref="FULL_klev_plev7hm"/>
+		<field id="CMIP6_ta_plev7hm_average" field_ref="CMIP6_ta_plev7hm" operation="average"/>
+		<field id="CMIP6_ta_plev8" field_ref="CMIP6_ta_sampled_3h" grid_ref="FULL_klev_plev8"/>
+		<field id="CMIP6_ta_plev8_average" field_ref="CMIP6_ta_plev8" operation="average"/>
+		<field id="CMIP6_ta_sampled_3h" field_ref="CMIP6_ta_with_instant" freq_op="3h" detect_missing_value="true"> @CMIP6_ta_with_instant </field>
+		<field id="CMIP6_ta_with_instant" field_ref="CMIP6_ta" operation="instant"/>
+		<field id="CMIP6_tas_Scalheight2m" grid_ref="FULL_grid_Scalheight2m" operation="instant" detect_missing_value="true"> CMIP6_tas </field>
+		<field id="CMIP6_tas_Scalheight2m_average" field_ref="CMIP6_tas_Scalheight2m" operation="average"/>
+		<field id="CMIP6_tasmax_Scalheight2m" grid_ref="FULL_grid_Scalheight2m" operation="instant" detect_missing_value="true"> CMIP6_tasmax </field>
+		<field id="CMIP6_tasmax_Scalheight2m_average" field_ref="CMIP6_tasmax_Scalheight2m" operation="average"/>
+		<field id="CMIP6_tasmax_Scalheight2m_maximum" field_ref="CMIP6_tasmax_Scalheight2m" operation="maximum"/>
+		<field id="CMIP6_tasmin_Scalheight2m" grid_ref="FULL_grid_Scalheight2m" operation="instant" detect_missing_value="true"> CMIP6_tasmin </field>
+		<field id="CMIP6_tasmin_Scalheight2m_average" field_ref="CMIP6_tasmin_Scalheight2m" operation="average"/>
+		<field id="CMIP6_tasmin_Scalheight2m_minimum" field_ref="CMIP6_tasmin_Scalheight2m" operation="minimum"/>
+		<field id="CMIP6_tatp_average" field_ref="CMIP6_tatp" operation="average"/>
+		<field id="CMIP6_tauu_average" field_ref="CMIP6_tauu" operation="average"/>
+		<field id="CMIP6_tauv_average" field_ref="CMIP6_tauv" operation="average"/>
+		<field id="CMIP6_tmxlLa_average" field_ref="CMIP6_tmxlLa" operation="average"/>
+		<field id="CMIP6_tnhus_average" field_ref="CMIP6_tnhus" operation="average"/>
+		<field id="CMIP6_tnhusa_average" field_ref="CMIP6_tnhusa" operation="average"/>
+		<field id="CMIP6_tnhusc_average" field_ref="CMIP6_tnhusc" operation="average"/>
+		<field id="CMIP6_tnhusmp_average" field_ref="CMIP6_tnhusmp" operation="average"/>
+		<field id="CMIP6_tnhuspbl_average" field_ref="CMIP6_tnhuspbl" operation="average"/>
+		<field id="CMIP6_tnhusscp_average" field_ref="CMIP6_tnhusscp" operation="average"/>
+		<field id="CMIP6_tnhusscpbl_average" field_ref="CMIP6_tnhusscpbl" operation="average"/>
+		<field id="CMIP6_tnt_average" field_ref="CMIP6_tnt" operation="average"/>
+		<field id="CMIP6_tnta_average" field_ref="CMIP6_tnta" operation="average"/>
+		<field id="CMIP6_tntc_average" field_ref="CMIP6_tntc" operation="average"/>
+		<field id="CMIP6_tntmp_average" field_ref="CMIP6_tntmp" operation="average"/>
+		<field id="CMIP6_tntpbl_average" field_ref="CMIP6_tntpbl" operation="average"/>
+		<field id="CMIP6_tntr_average" field_ref="CMIP6_tntr" operation="average"/>
+		<field id="CMIP6_tntrl_average" field_ref="CMIP6_tntrl" operation="average"/>
+		<field id="CMIP6_tntrlcs_average" field_ref="CMIP6_tntrlcs" operation="average"/>
+		<field id="CMIP6_tntrs_average" field_ref="CMIP6_tntrs" operation="average"/>
+		<field id="CMIP6_tntrscs_average" field_ref="CMIP6_tntrscs" operation="average"/>
+		<field id="CMIP6_tntscp_average" field_ref="CMIP6_tntscp" operation="average"/>
+		<field id="CMIP6_tntscpbl_average" field_ref="CMIP6_tntscpbl" operation="average"/>
+		<field id="CMIP6_toz_average" field_ref="CMIP6_toz" operation="average"/>
+		<field id="CMIP6_tpf_average" field_ref="CMIP6_tpf" operation="average"/>
+		<field id="CMIP6_tran_average" field_ref="CMIP6_tran" operation="average"/>
+		<field id="CMIP6_treeFrac_Scaltypetree" grid_ref="NATURE_grid_Scaltypetree" operation="instant" detect_missing_value="true"> CMIP6_treeFrac </field>
+		<field id="CMIP6_treeFrac_Scaltypetree_average" field_ref="CMIP6_treeFrac_Scaltypetree" operation="average"/>
+		<field id="CMIP6_tsLa_average" field_ref="CMIP6_tsLa" operation="average"/>
+		<field id="CMIP6_ts_average" field_ref="CMIP6_ts" operation="average"/>
+		<field id="CMIP6_tsl_average" field_ref="CMIP6_tsl" operation="average"/>
+		<field id="CMIP6_tslsi_average" field_ref="CMIP6_tslsi" operation="average"/>
+		<field id="CMIP6_tsn_land_average" field_ref="CMIP6_tsn_land" operation="average"/>
+		<field id="CMIP6_ttop_average" field_ref="CMIP6_ttop" operation="average"/>
+		<field id="CMIP6_ua_average" field_ref="CMIP6_ua" operation="average"/>
+		<field id="CMIP6_ua_plev19" field_ref="CMIP6_ua_sampled_3h" grid_ref="FULL_klev_plev19"/>
+		<field id="CMIP6_ua_plev19_average" field_ref="CMIP6_ua_plev19" operation="average"/>
+		<field id="CMIP6_ua_plev39" field_ref="CMIP6_ua_sampled_3h" grid_ref="FULL_klev_plev39"/>
+		<field id="CMIP6_ua_plev39_average" field_ref="CMIP6_ua_plev39" operation="average"/>
+		<field id="CMIP6_ua_plev39_average_1d" field_ref="CMIP6_ua_plev39_average" freq_op="1d"> @CMIP6_ua_plev39_average </field>
+		<field id="CMIP6_ua_plev39_average_1d_complete" field_ref="CMIP6_ua_plev39_average_1d" grid_ref="FULL_klev_plev39_complete"/>
+		<field id="CMIP6_ua_plev39_average_1d_glat" field_ref="CMIP6_ua_plev39_average_1d_complete" grid_ref="FULL_klev_plev39_complete_glat"/>
+		<field id="CMIP6_ua_plev39_average_1d_glat_average" field_ref="CMIP6_ua_plev39_average_1d_glat" operation="average"/>
 		<field id="CMIP6_ua_plev39_average_1mo" field_ref="CMIP6_ua_plev39_average" freq_op="1mo"> @CMIP6_ua_plev39_average </field>
 		<field id="CMIP6_ua_plev39_average_1mo_complete" field_ref="CMIP6_ua_plev39_average_1mo" grid_ref="FULL_klev_plev39_complete"/>
 		<field id="CMIP6_ua_plev39_average_1mo_glat" field_ref="CMIP6_ua_plev39_average_1mo_complete" grid_ref="FULL_klev_plev39_complete_glat"/>
 		<field id="CMIP6_ua_plev39_average_1mo_glat_average" field_ref="CMIP6_ua_plev39_average_1mo_glat" operation="average"/>
+		<field id="CMIP6_ua_plev7h" field_ref="CMIP6_ua_sampled_3h" grid_ref="FULL_klev_plev7h"/>
+		<field id="CMIP6_ua_plev7h_average" field_ref="CMIP6_ua_plev7h" operation="average"/>
+		<field id="CMIP6_ua_plev7hm" field_ref="CMIP6_ua_sampled_3h" grid_ref="FULL_klev_plev7hm"/>
+		<field id="CMIP6_ua_plev7hm_average" field_ref="CMIP6_ua_plev7hm" operation="average"/>
+		<field id="CMIP6_ua_plev8" field_ref="CMIP6_ua_sampled_3h" grid_ref="FULL_klev_plev8"/>
+		<field id="CMIP6_ua_plev8_average" field_ref="CMIP6_ua_plev8" operation="average"/>
+		<field id="CMIP6_ua_sampled_3h" field_ref="CMIP6_ua_with_instant" freq_op="3h" detect_missing_value="true"> @CMIP6_ua_with_instant </field>
+		<field id="CMIP6_ua_with_instant" field_ref="CMIP6_ua" operation="instant"/>
+		<field id="CMIP6_uas_Scalheight10m" grid_ref="FULL_grid_Scalheight10m" operation="instant" detect_missing_value="true"> CMIP6_uas </field>
+		<field id="CMIP6_uas_Scalheight10m_average" field_ref="CMIP6_uas_Scalheight10m" operation="average"/>
+		<field id="CMIP6_uqint_average" field_ref="CMIP6_uqint" operation="average"/>
+		<field id="CMIP6_utendnogw_plev19" field_ref="CMIP6_utendnogw_sampled_3h" grid_ref="FULL_klev_plev19"/>
+		<field id="CMIP6_utendnogw_plev19_average" field_ref="CMIP6_utendnogw_plev19" operation="average"/>
+		<field id="CMIP6_utendnogw_sampled_3h" field_ref="CMIP6_utendnogw_with_instant" freq_op="3h" detect_missing_value="true"> @CMIP6_utendnogw_with_instant </field>
+		<field id="CMIP6_utendnogw_with_instant" field_ref="CMIP6_utendnogw" operation="instant"/>
+		<field id="CMIP6_utendogw_plev19" field_ref="CMIP6_utendogw_sampled_3h" grid_ref="FULL_klev_plev19"/>
+		<field id="CMIP6_utendogw_plev19_average" field_ref="CMIP6_utendogw_plev19" operation="average"/>
+		<field id="CMIP6_utendogw_sampled_3h" field_ref="CMIP6_utendogw_with_instant" freq_op="3h" detect_missing_value="true"> @CMIP6_utendogw_with_instant </field>
+		<field id="CMIP6_utendogw_with_instant" field_ref="CMIP6_utendogw" operation="instant"/>
+		<field id="CMIP6_va_average" field_ref="CMIP6_va" operation="average"/>
+		<field id="CMIP6_va_plev19" field_ref="CMIP6_va_sampled_3h" grid_ref="FULL_klev_plev19"/>
+		<field id="CMIP6_va_plev19_average" field_ref="CMIP6_va_plev19" operation="average"/>
+		<field id="CMIP6_va_plev19_average_1d" field_ref="CMIP6_va_plev19_average" freq_op="1d"> @CMIP6_va_plev19_average </field>
+		<field id="CMIP6_va_plev19_average_1d_complete" field_ref="CMIP6_va_plev19_average_1d" grid_ref="FULL_klev_plev19_complete"/>
+		<field id="CMIP6_va_plev19_average_1d_glat" field_ref="CMIP6_va_plev19_average_1d_complete" grid_ref="FULL_klev_plev19_complete_glat"/>
+		<field id="CMIP6_va_plev19_average_1d_glat_average" field_ref="CMIP6_va_plev19_average_1d_glat" operation="average"/>
 		<field id="CMIP6_va_plev39" field_ref="CMIP6_va_sampled_3h" grid_ref="FULL_klev_plev39"/>
 		<field id="CMIP6_va_plev39_average" field_ref="CMIP6_va_plev39" operation="average"/>
 		<field id="CMIP6_va_plev39_average_1mo" field_ref="CMIP6_va_plev39_average" freq_op="1mo"> @CMIP6_va_plev39_average </field>
 		<field id="CMIP6_va_plev39_average_1mo_complete" field_ref="CMIP6_va_plev39_average_1mo" grid_ref="FULL_klev_plev39_complete"/>
 		<field id="CMIP6_va_plev39_average_1mo_glat" field_ref="CMIP6_va_plev39_average_1mo_complete" grid_ref="FULL_klev_plev39_complete_glat"/>
 		<field id="CMIP6_va_plev39_average_1mo_glat_average" field_ref="CMIP6_va_plev39_average_1mo_glat" operation="average"/>
-		<field id="CMIP6_vt_with_instant" field_ref="CMIP6_vt" operation="instant"/>
-		<field id="CMIP6_vt_sampled_3h" field_ref="CMIP6_vt_with_instant" freq_op="3h" detect_missing_value="true"> @CMIP6_vt_with_instant </field>
+		<field id="CMIP6_va_plev7h" field_ref="CMIP6_va_sampled_3h" grid_ref="FULL_klev_plev7h"/>
+		<field id="CMIP6_va_plev7h_average" field_ref="CMIP6_va_plev7h" operation="average"/>
+		<field id="CMIP6_va_plev7hm" field_ref="CMIP6_va_sampled_3h" grid_ref="FULL_klev_plev7hm"/>
+		<field id="CMIP6_va_plev7hm_average" field_ref="CMIP6_va_plev7hm" operation="average"/>
+		<field id="CMIP6_va_plev8" field_ref="CMIP6_va_sampled_3h" grid_ref="FULL_klev_plev8"/>
+		<field id="CMIP6_va_plev8_average" field_ref="CMIP6_va_plev8" operation="average"/>
+		<field id="CMIP6_va_sampled_3h" field_ref="CMIP6_va_with_instant" freq_op="3h" detect_missing_value="true"> @CMIP6_va_with_instant </field>
+		<field id="CMIP6_va_with_instant" field_ref="CMIP6_va" operation="instant"/>
+		<field id="CMIP6_vas_Scalheight10m" grid_ref="FULL_grid_Scalheight10m" operation="instant" detect_missing_value="true"> CMIP6_vas </field>
+		<field id="CMIP6_vas_Scalheight10m_average" field_ref="CMIP6_vas_Scalheight10m" operation="average"/>
+		<field id="CMIP6_vegFrac_Scaltypeveg" grid_ref="NATURE_grid_Scaltypeveg" operation="instant" detect_missing_value="true"> CMIP6_vegFrac </field>
+		<field id="CMIP6_vegFrac_Scaltypeveg_average" field_ref="CMIP6_vegFrac_Scaltypeveg" operation="average"/>
+		<field id="CMIP6_vegstress_average" field_ref="CMIP6_vegstress" operation="average"/>
+		<field id="CMIP6_vmrox_plev39" field_ref="CMIP6_vmrox_sampled_3h" grid_ref="FULL_klev_plev39"/>
+		<field id="CMIP6_vmrox_plev39_average" field_ref="CMIP6_vmrox_plev39" operation="average"/>
+		<field id="CMIP6_vmrox_plev39_average_1mo" field_ref="CMIP6_vmrox_plev39_average" freq_op="1mo"> @CMIP6_vmrox_plev39_average </field>
+		<field id="CMIP6_vmrox_plev39_average_1mo_complete" field_ref="CMIP6_vmrox_plev39_average_1mo" grid_ref="FULL_klev_plev39_complete"/>
+		<field id="CMIP6_vmrox_plev39_average_1mo_glat" field_ref="CMIP6_vmrox_plev39_average_1mo_complete" grid_ref="FULL_klev_plev39_complete_glat"/>
+		<field id="CMIP6_vmrox_plev39_average_1mo_glat_average" field_ref="CMIP6_vmrox_plev39_average_1mo_glat" operation="average"/>
+		<field id="CMIP6_vmrox_sampled_3h" field_ref="CMIP6_vmrox_with_instant" freq_op="3h" detect_missing_value="true"> @CMIP6_vmrox_with_instant </field>
+		<field id="CMIP6_vmrox_with_instant" field_ref="CMIP6_vmrox" operation="instant"/>
+		<field id="CMIP6_vqint_average" field_ref="CMIP6_vqint" operation="average"/>
 		<field id="CMIP6_vt100_p100" field_ref="CMIP6_vt_sampled_3h" grid_ref="FULL_klev_p100"/>
 		<field id="CMIP6_vt100_p100_Scalp100" grid_ref="FULL_klev_Scalp100" operation="instant" detect_missing_value="true"> CMIP6_vt100_p100 </field>
 		<field id="CMIP6_vt100_p100_Scalp100_average" field_ref="CMIP6_vt100_p100_Scalp100" operation="average"/>
@@ -31730,341 +32014,67 @@ seaIce: Gelato 6.1 </variable>
 		<field id="CMIP6_vt100_p100_Scalp100_average_1mo_complete" field_ref="CMIP6_vt100_p100_Scalp100_average_1mo" grid_ref="FULL_klev_Scalp100_complete"/>
 		<field id="CMIP6_vt100_p100_Scalp100_average_1mo_glat" field_ref="CMIP6_vt100_p100_Scalp100_average_1mo_complete" grid_ref="FULL_klev_Scalp100_complete_glat"/>
 		<field id="CMIP6_vt100_p100_Scalp100_average_1mo_glat_average" field_ref="CMIP6_vt100_p100_Scalp100_average_1mo_glat" operation="average"/>
+		<field id="CMIP6_vt_sampled_3h" field_ref="CMIP6_vt_with_instant" freq_op="3h" detect_missing_value="true"> @CMIP6_vt_with_instant </field>
+		<field id="CMIP6_vt_with_instant" field_ref="CMIP6_vt" operation="instant"/>
+		<field id="CMIP6_wa_average" field_ref="CMIP6_wa" operation="average"/>
+		<field id="CMIP6_wap_plev19" field_ref="CMIP6_wap_sampled_3h" grid_ref="FULL_klev_plev19"/>
+		<field id="CMIP6_wap_plev19_average" field_ref="CMIP6_wap_plev19" operation="average"/>
+		<field id="CMIP6_wap_plev7hm" field_ref="CMIP6_wap_sampled_3h" grid_ref="FULL_klev_plev7hm"/>
+		<field id="CMIP6_wap_plev7hm_average" field_ref="CMIP6_wap_plev7hm" operation="average"/>
+		<field id="CMIP6_wap_plev8" field_ref="CMIP6_wap_sampled_3h" grid_ref="FULL_klev_plev8"/>
+		<field id="CMIP6_wap_plev8_average" field_ref="CMIP6_wap_plev8" operation="average"/>
+		<field id="CMIP6_wap_sampled_3h" field_ref="CMIP6_wap_with_instant" freq_op="3h" detect_missing_value="true"> @CMIP6_wap_with_instant </field>
+		<field id="CMIP6_wap_with_instant" field_ref="CMIP6_wap" operation="instant"/>
+		<field id="CMIP6_wetbc_average" field_ref="CMIP6_wetbc" operation="average"/>
+		<field id="CMIP6_wetdust_average" field_ref="CMIP6_wetdust" operation="average"/>
+		<field id="CMIP6_wetoa_average" field_ref="CMIP6_wetoa" operation="average"/>
+		<field id="CMIP6_wetso4_average" field_ref="CMIP6_wetso4" operation="average"/>
+		<field id="CMIP6_wetss_average" field_ref="CMIP6_wetss" operation="average"/>
+		<field id="CMIP6_zg500_p500" field_ref="CMIP6_zg_sampled_3h" grid_ref="FULL_klev_p500"/>
+		<field id="CMIP6_zg500_p500_Scalp500" grid_ref="FULL_klev_Scalp500" operation="instant" detect_missing_value="true"> CMIP6_zg500_p500 </field>
+		<field id="CMIP6_zg500_p500_Scalp500_average" field_ref="CMIP6_zg500_p500_Scalp500" operation="average"/>
+		<field id="CMIP6_zg_average" field_ref="CMIP6_zg" operation="average"/>
+		<field id="CMIP6_zg_plev19" field_ref="CMIP6_zg_sampled_3h" grid_ref="FULL_klev_plev19"/>
+		<field id="CMIP6_zg_plev19_average" field_ref="CMIP6_zg_plev19" operation="average"/>
+		<field id="CMIP6_zg_plev19_average_1d" field_ref="CMIP6_zg_plev19_average" freq_op="1d"> @CMIP6_zg_plev19_average </field>
+		<field id="CMIP6_zg_plev19_average_1d_complete" field_ref="CMIP6_zg_plev19_average_1d" grid_ref="FULL_klev_plev19_complete"/>
+		<field id="CMIP6_zg_plev19_average_1d_glat" field_ref="CMIP6_zg_plev19_average_1d_complete" grid_ref="FULL_klev_plev19_complete_glat"/>
+		<field id="CMIP6_zg_plev19_average_1d_glat_average" field_ref="CMIP6_zg_plev19_average_1d_glat" operation="average"/>
 		<field id="CMIP6_zg_plev39" field_ref="CMIP6_zg_sampled_3h" grid_ref="FULL_klev_plev39"/>
 		<field id="CMIP6_zg_plev39_average" field_ref="CMIP6_zg_plev39" operation="average"/>
 		<field id="CMIP6_zg_plev39_average_1mo" field_ref="CMIP6_zg_plev39_average" freq_op="1mo"> @CMIP6_zg_plev39_average </field>
 		<field id="CMIP6_zg_plev39_average_1mo_complete" field_ref="CMIP6_zg_plev39_average_1mo" grid_ref="FULL_klev_plev39_complete"/>
 		<field id="CMIP6_zg_plev39_average_1mo_glat" field_ref="CMIP6_zg_plev39_average_1mo_complete" grid_ref="FULL_klev_plev39_complete_glat"/>
 		<field id="CMIP6_zg_plev39_average_1mo_glat_average" field_ref="CMIP6_zg_plev39_average_1mo_glat" operation="average"/>
-		<field id="CMIP6_ch4_plev19" field_ref="CMIP6_ch4_sampled_3h" grid_ref="FULL_klev_plev19"/>
-		<field id="CMIP6_ch4_plev19_average" field_ref="CMIP6_ch4_plev19" operation="average"/>
-		<field id="CMIP6_co2_with_instant" field_ref="CMIP6_co2" operation="instant"/>
-		<field id="CMIP6_co2_sampled_3h" field_ref="CMIP6_co2_with_instant" freq_op="3h" detect_missing_value="true"> @CMIP6_co2_with_instant </field>
-		<field id="CMIP6_co2_plev19" field_ref="CMIP6_co2_sampled_3h" grid_ref="FULL_klev_plev19"/>
-		<field id="CMIP6_co2_plev19_average" field_ref="CMIP6_co2_plev19" operation="average"/>
-		<field id="CMIP6_hur_plev19" field_ref="CMIP6_hur_sampled_3h" grid_ref="FULL_klev_plev19"/>
-		<field id="CMIP6_hur_plev19_average" field_ref="CMIP6_hur_plev19" operation="average"/>
-		<field id="CMIP6_n2o_plev19" field_ref="CMIP6_n2o_sampled_3h" grid_ref="FULL_klev_plev19"/>
-		<field id="CMIP6_n2o_plev19_average" field_ref="CMIP6_n2o_plev19" operation="average"/>
-		<field id="CMIP6_o3_plev19" field_ref="CMIP6_o3_sampled_3h" grid_ref="FULL_klev_plev19"/>
-		<field id="CMIP6_o3_plev19_average" field_ref="CMIP6_o3_plev19" operation="average"/>
-		<field id="CMIP6_wap_plev19" field_ref="CMIP6_wap_sampled_3h" grid_ref="FULL_klev_plev19"/>
-		<field id="CMIP6_wap_plev19_average" field_ref="CMIP6_wap_plev19" operation="average"/>
-		<field id="CMIP6_cl_average" field_ref="CMIP6_cl" operation="average"/>
-		<field id="CMIP6_cli_average" field_ref="CMIP6_cli" operation="average"/>
-		<field id="CMIP6_clw_average" field_ref="CMIP6_clw" operation="average"/>
-		<field id="CMIP6_mc_average" field_ref="CMIP6_mc" operation="average"/>
-		<field id="CMIP6_ccb_average" field_ref="CMIP6_ccb" operation="average"/>
-		<field id="CMIP6_cct_average" field_ref="CMIP6_cct" operation="average"/>
-		<field id="CMIP6_ci_average" field_ref="CMIP6_ci" operation="average"/>
-		<field id="CMIP6_clivi_average" field_ref="CMIP6_clivi" operation="average"/>
-		<field id="CMIP6_clwvi_average" field_ref="CMIP6_clwvi" operation="average"/>
-		<field id="CMIP6_evspsbl_average" field_ref="CMIP6_evspsbl" operation="average"/>
-		<field id="CMIP6_fco2antt_average" field_ref="CMIP6_fco2antt" operation="average"/>
-		<field id="CMIP6_fco2fos_average" field_ref="CMIP6_fco2fos" operation="average"/>
-		<field id="CMIP6_fco2nat_average" field_ref="CMIP6_fco2nat" operation="average"/>
-		<field id="CMIP6_rldscs_average" field_ref="CMIP6_rldscs" operation="average"/>
-		<field id="CMIP6_rlutcs_average" field_ref="CMIP6_rlutcs" operation="average"/>
-		<field id="CMIP6_rsdscs_average" field_ref="CMIP6_rsdscs" operation="average"/>
-		<field id="CMIP6_rsdt_average" field_ref="CMIP6_rsdt" operation="average"/>
-		<field id="CMIP6_rsuscs_average" field_ref="CMIP6_rsuscs" operation="average"/>
-		<field id="CMIP6_rsut_average" field_ref="CMIP6_rsut" operation="average"/>
-		<field id="CMIP6_rsutcs_average" field_ref="CMIP6_rsutcs" operation="average"/>
-		<field id="CMIP6_sbl_average" field_ref="CMIP6_sbl" operation="average"/>
-		<field id="CMIP6_tasmax_Scalheight2m_average" field_ref="CMIP6_tasmax_Scalheight2m" operation="average"/>
-		<field id="CMIP6_tasmin_Scalheight2m_average" field_ref="CMIP6_tasmin_Scalheight2m" operation="average"/>
-		<field id="CMIP6_clc_average" field_ref="CMIP6_clc" operation="average"/>
-		<field id="CMIP6_cls_average" field_ref="CMIP6_cls" operation="average"/>
-		<field id="CMIP6_hur_average" field_ref="CMIP6_hur" operation="average"/>
-		<field id="CMIP6_hus_average" field_ref="CMIP6_hus" operation="average"/>
-		<field id="CMIP6_mcu_average" field_ref="CMIP6_mcu" operation="average"/>
-		<field id="CMIP6_rld_average" field_ref="CMIP6_rld" operation="average"/>
-		<field id="CMIP6_rldcs_average" field_ref="CMIP6_rldcs" operation="average"/>
-		<field id="CMIP6_rlu_average" field_ref="CMIP6_rlu" operation="average"/>
-		<field id="CMIP6_rlucs_average" field_ref="CMIP6_rlucs" operation="average"/>
-		<field id="CMIP6_rsd_average" field_ref="CMIP6_rsd" operation="average"/>
-		<field id="CMIP6_rsdcs_average" field_ref="CMIP6_rsdcs" operation="average"/>
-		<field id="CMIP6_rsu_average" field_ref="CMIP6_rsu" operation="average"/>
-		<field id="CMIP6_rsucs_average" field_ref="CMIP6_rsucs" operation="average"/>
-		<field id="CMIP6_ta_average" field_ref="CMIP6_ta" operation="average"/>
-		<field id="CMIP6_tnhus_average" field_ref="CMIP6_tnhus" operation="average"/>
-		<field id="CMIP6_tnhusa_average" field_ref="CMIP6_tnhusa" operation="average"/>
-		<field id="CMIP6_tnhusc_average" field_ref="CMIP6_tnhusc" operation="average"/>
-		<field id="CMIP6_tnhusmp_average" field_ref="CMIP6_tnhusmp" operation="average"/>
-		<field id="CMIP6_tnhusscpbl_average" field_ref="CMIP6_tnhusscpbl" operation="average"/>
-		<field id="CMIP6_tnt_average" field_ref="CMIP6_tnt" operation="average"/>
-		<field id="CMIP6_tnta_average" field_ref="CMIP6_tnta" operation="average"/>
-		<field id="CMIP6_tntc_average" field_ref="CMIP6_tntc" operation="average"/>
-		<field id="CMIP6_tntmp_average" field_ref="CMIP6_tntmp" operation="average"/>
-		<field id="CMIP6_tntr_average" field_ref="CMIP6_tntr" operation="average"/>
-		<field id="CMIP6_tntscpbl_average" field_ref="CMIP6_tntscpbl" operation="average"/>
-		<field id="CMIP6_utendnogw_with_instant" field_ref="CMIP6_utendnogw" operation="instant"/>
-		<field id="CMIP6_utendnogw_sampled_3h" field_ref="CMIP6_utendnogw_with_instant" freq_op="3h" detect_missing_value="true"> @CMIP6_utendnogw_with_instant </field>
-		<field id="CMIP6_utendnogw_plev19" field_ref="CMIP6_utendnogw_sampled_3h" grid_ref="FULL_klev_plev19"/>
-		<field id="CMIP6_utendnogw_plev19_average" field_ref="CMIP6_utendnogw_plev19" operation="average"/>
-		<field id="CMIP6_utendogw_with_instant" field_ref="CMIP6_utendogw" operation="instant"/>
-		<field id="CMIP6_utendogw_sampled_3h" field_ref="CMIP6_utendogw_with_instant" freq_op="3h" detect_missing_value="true"> @CMIP6_utendogw_with_instant </field>
-		<field id="CMIP6_utendogw_plev19" field_ref="CMIP6_utendogw_sampled_3h" grid_ref="FULL_klev_plev19"/>
-		<field id="CMIP6_utendogw_plev19_average" field_ref="CMIP6_utendogw_plev19" operation="average"/>
-		<field id="CMIP6_co23D_average" field_ref="CMIP6_co23D" operation="average"/>
-		<field id="CMIP6_concdust_average" field_ref="CMIP6_concdust" operation="average"/>
-		<field id="CMIP6_ec550aer_average" field_ref="CMIP6_ec550aer" operation="average"/>
-		<field id="CMIP6_tnhuspbl_average" field_ref="CMIP6_tnhuspbl" operation="average"/>
-		<field id="CMIP6_tnhusscp_average" field_ref="CMIP6_tnhusscp" operation="average"/>
-		<field id="CMIP6_tntpbl_average" field_ref="CMIP6_tntpbl" operation="average"/>
-		<field id="CMIP6_tntrlcs_average" field_ref="CMIP6_tntrlcs" operation="average"/>
-		<field id="CMIP6_tntrscs_average" field_ref="CMIP6_tntrscs" operation="average"/>
-		<field id="CMIP6_tntscp_average" field_ref="CMIP6_tntscp" operation="average"/>
-		<field id="CMIP6_cLand_average" field_ref="CMIP6_cLand" operation="average"/>
-		<field id="CMIP6_cLitterGrass_average" field_ref="CMIP6_cLitterGrass" operation="average"/>
-		<field id="CMIP6_cLitterSubSurf_average" field_ref="CMIP6_cLitterSubSurf" operation="average"/>
-		<field id="CMIP6_cLitterSurf_average" field_ref="CMIP6_cLitterSurf" operation="average"/>
-		<field id="CMIP6_cLitterTree_average" field_ref="CMIP6_cLitterTree" operation="average"/>
-		<field id="CMIP6_cSoilGrass_average" field_ref="CMIP6_cSoilGrass" operation="average"/>
-		<field id="CMIP6_cSoilPools_average" field_ref="CMIP6_cSoilPools" operation="average"/>
-		<field id="CMIP6_cSoilTree_average" field_ref="CMIP6_cSoilTree" operation="average"/>
-		<field id="CMIP6_cSoil_average" field_ref="CMIP6_cSoil" operation="average"/>
-		<field id="CMIP6_cStem_average" field_ref="CMIP6_cStem" operation="average"/>
-		<field id="CMIP6_cVegGrass_average" field_ref="CMIP6_cVegGrass" operation="average"/>
-		<field id="CMIP6_cVegTree_average" field_ref="CMIP6_cVegTree" operation="average"/>
-		<field id="CMIP6_cWood_average" field_ref="CMIP6_cWood" operation="average"/>
-		<field id="CMIP6_co2s_average" field_ref="CMIP6_co2s" operation="average"/>
-		<field id="CMIP6_cropFracC3_Scaltypec3pft_Scaltypecrop" grid_ref="NATURE_grid_Scaltypec3pft_Scaltypecrop" operation="instant" detect_missing_value="true"> CMIP6_cropFracC3 </field>
-		<field id="CMIP6_cropFracC3_Scaltypec3pft_Scaltypecrop_average" field_ref="CMIP6_cropFracC3_Scaltypec3pft_Scaltypecrop" operation="average"/>
-		<field id="CMIP6_cropFracC4_Scaltypec4pft_Scaltypecrop" grid_ref="NATURE_grid_Scaltypec4pft_Scaltypecrop" operation="instant" detect_missing_value="true"> CMIP6_cropFracC4 </field>
-		<field id="CMIP6_cropFracC4_Scaltypec4pft_Scaltypecrop_average" field_ref="CMIP6_cropFracC4_Scaltypec4pft_Scaltypecrop" operation="average"/>
-		<field id="CMIP6_evspsblpot_average" field_ref="CMIP6_evspsblpot" operation="average"/>
-		<field id="CMIP6_fAnthDisturb_average" field_ref="CMIP6_fAnthDisturb" operation="average"/>
-		<field id="CMIP6_fDeforestToAtmos_average" field_ref="CMIP6_fDeforestToAtmos" operation="average"/>
-		<field id="CMIP6_fDeforestToProduct_average" field_ref="CMIP6_fDeforestToProduct" operation="average"/>
-		<field id="CMIP6_fFireAll_average" field_ref="CMIP6_fFireAll" operation="average"/>
-		<field id="CMIP6_fFireNat_average" field_ref="CMIP6_fFireNat" operation="average"/>
-		<field id="CMIP6_fLuc_average" field_ref="CMIP6_fLuc" operation="average"/>
-		<field id="CMIP6_fProductDecomp_average" field_ref="CMIP6_fProductDecomp" operation="average"/>
-		<field id="CMIP6_fVegFire_average" field_ref="CMIP6_fVegFire" operation="average"/>
-		<field id="CMIP6_gppGrass_average" field_ref="CMIP6_gppGrass" operation="average"/>
-		<field id="CMIP6_gppTree_average" field_ref="CMIP6_gppTree" operation="average"/>
-		<field id="CMIP6_grassFracC3_Scaltypec3pft_Scaltypenatgr" grid_ref="NATURE_grid_Scaltypec3pft_Scaltypenatgr" operation="instant" detect_missing_value="true"> CMIP6_grassFracC3 </field>
-		<field id="CMIP6_grassFracC3_Scaltypec3pft_Scaltypenatgr_average" field_ref="CMIP6_grassFracC3_Scaltypec3pft_Scaltypenatgr" operation="average"/>
-		<field id="CMIP6_grassFracC4_Scaltypec4pft_Scaltypenatgr" grid_ref="NATURE_grid_Scaltypec4pft_Scaltypenatgr" operation="instant" detect_missing_value="true"> CMIP6_grassFracC4 </field>
-		<field id="CMIP6_grassFracC4_Scaltypec4pft_Scaltypenatgr_average" field_ref="CMIP6_grassFracC4_Scaltypec4pft_Scaltypenatgr" operation="average"/>
-		<field id="CMIP6_hus_plev7h" field_ref="CMIP6_hus_sampled_3h" grid_ref="FULL_klev_plev7h"/>
-		<field id="CMIP6_hus_plev7h_average" field_ref="CMIP6_hus_plev7h" operation="average"/>
-		<field id="CMIP6_intuadse_average" field_ref="CMIP6_intuadse" operation="average"/>
-		<field id="CMIP6_intuaw_average" field_ref="CMIP6_intuaw" operation="average"/>
-		<field id="CMIP6_intvadse_average" field_ref="CMIP6_intvadse" operation="average"/>
-		<field id="CMIP6_intvaw_average" field_ref="CMIP6_intvaw" operation="average"/>
-		<field id="CMIP6_mrlso_average" field_ref="CMIP6_mrlso" operation="average"/>
-		<field id="CMIP6_mrtws_average" field_ref="CMIP6_mrtws" operation="average"/>
-		<field id="CMIP6_nep_average" field_ref="CMIP6_nep" operation="average"/>
-		<field id="CMIP6_netAtmosLandCO2Flux_average" field_ref="CMIP6_netAtmosLandCO2Flux" operation="average"/>
-		<field id="CMIP6_nppGrass_average" field_ref="CMIP6_nppGrass" operation="average"/>
-		<field id="CMIP6_nppTree_average" field_ref="CMIP6_nppTree" operation="average"/>
-		<field id="CMIP6_od443dust_average" field_ref="CMIP6_od443dust" operation="average"/>
-		<field id="CMIP6_od865dust_average" field_ref="CMIP6_od865dust" operation="average"/>
-		<field id="CMIP6_orog_average" field_ref="CMIP6_orog" operation="average"/>
-		<field id="CMIP6_raGrass_average" field_ref="CMIP6_raGrass" operation="average"/>
-		<field id="CMIP6_raTree_average" field_ref="CMIP6_raTree" operation="average"/>
-		<field id="CMIP6_rhGrass_average" field_ref="CMIP6_rhGrass" operation="average"/>
-		<field id="CMIP6_rhLitter_average" field_ref="CMIP6_rhLitter" operation="average"/>
-		<field id="CMIP6_rhSoil_average" field_ref="CMIP6_rhSoil" operation="average"/>
-		<field id="CMIP6_rhTree_average" field_ref="CMIP6_rhTree" operation="average"/>
-		<field id="CMIP6_rls_average" field_ref="CMIP6_rls" operation="average"/>
-		<field id="CMIP6_rss_average" field_ref="CMIP6_rss" operation="average"/>
-		<field id="CMIP6_sconcdust_average" field_ref="CMIP6_sconcdust" operation="average"/>
-		<field id="CMIP6_sconcso4_average" field_ref="CMIP6_sconcso4" operation="average"/>
-		<field id="CMIP6_sconcss_average" field_ref="CMIP6_sconcss" operation="average"/>
-		<field id="CMIP6_sedustCI_average" field_ref="CMIP6_sedustCI" operation="average"/>
-		<field id="CMIP6_sfcWindmax_Scalheight10m_average" field_ref="CMIP6_sfcWindmax_Scalheight10m" operation="average"/>
-		<field id="CMIP6_tSoilPools_average" field_ref="CMIP6_tSoilPools" operation="average"/>
-		<field id="CMIP6_ua_plev7h" field_ref="CMIP6_ua_sampled_3h" grid_ref="FULL_klev_plev7h"/>
-		<field id="CMIP6_ua_plev7h_average" field_ref="CMIP6_ua_plev7h" operation="average"/>
-		<field id="CMIP6_uqint_average" field_ref="CMIP6_uqint" operation="average"/>
-		<field id="CMIP6_va_plev7h" field_ref="CMIP6_va_sampled_3h" grid_ref="FULL_klev_plev7h"/>
-		<field id="CMIP6_va_plev7h_average" field_ref="CMIP6_va_plev7h" operation="average"/>
-		<field id="CMIP6_vegFrac_Scaltypeveg" grid_ref="NATURE_grid_Scaltypeveg" operation="instant" detect_missing_value="true"> CMIP6_vegFrac </field>
-		<field id="CMIP6_vegFrac_Scaltypeveg_average" field_ref="CMIP6_vegFrac_Scaltypeveg" operation="average"/>
-		<field id="CMIP6_vqint_average" field_ref="CMIP6_vqint" operation="average"/>
-		<field id="CMIP6_oxloss_with_instant" field_ref="CMIP6_oxloss" operation="instant"/>
-		<field id="CMIP6_oxloss_sampled_3h" field_ref="CMIP6_oxloss_with_instant" freq_op="3h" detect_missing_value="true"> @CMIP6_oxloss_with_instant </field>
-		<field id="CMIP6_oxloss_plev39" field_ref="CMIP6_oxloss_sampled_3h" grid_ref="FULL_klev_plev39"/>
-		<field id="CMIP6_oxloss_plev39_average" field_ref="CMIP6_oxloss_plev39" operation="average"/>
-		<field id="CMIP6_oxloss_plev39_average_1mo" field_ref="CMIP6_oxloss_plev39_average" freq_op="1mo"> @CMIP6_oxloss_plev39_average </field>
-		<field id="CMIP6_oxloss_plev39_average_1mo_complete" field_ref="CMIP6_oxloss_plev39_average_1mo" grid_ref="FULL_klev_plev39_complete"/>
-		<field id="CMIP6_oxloss_plev39_average_1mo_glat" field_ref="CMIP6_oxloss_plev39_average_1mo_complete" grid_ref="FULL_klev_plev39_complete_glat"/>
-		<field id="CMIP6_oxloss_plev39_average_1mo_glat_average" field_ref="CMIP6_oxloss_plev39_average_1mo_glat" operation="average"/>
-		<field id="CMIP6_oxprod_with_instant" field_ref="CMIP6_oxprod" operation="instant"/>
-		<field id="CMIP6_oxprod_sampled_3h" field_ref="CMIP6_oxprod_with_instant" freq_op="3h" detect_missing_value="true"> @CMIP6_oxprod_with_instant </field>
-		<field id="CMIP6_oxprod_plev39" field_ref="CMIP6_oxprod_sampled_3h" grid_ref="FULL_klev_plev39"/>
-		<field id="CMIP6_oxprod_plev39_average" field_ref="CMIP6_oxprod_plev39" operation="average"/>
-		<field id="CMIP6_oxprod_plev39_average_1mo" field_ref="CMIP6_oxprod_plev39_average" freq_op="1mo"> @CMIP6_oxprod_plev39_average </field>
-		<field id="CMIP6_oxprod_plev39_average_1mo_complete" field_ref="CMIP6_oxprod_plev39_average_1mo" grid_ref="FULL_klev_plev39_complete"/>
-		<field id="CMIP6_oxprod_plev39_average_1mo_glat" field_ref="CMIP6_oxprod_plev39_average_1mo_complete" grid_ref="FULL_klev_plev39_complete_glat"/>
-		<field id="CMIP6_oxprod_plev39_average_1mo_glat_average" field_ref="CMIP6_oxprod_plev39_average_1mo_glat" operation="average"/>
-		<field id="CMIP6_vmrox_with_instant" field_ref="CMIP6_vmrox" operation="instant"/>
-		<field id="CMIP6_vmrox_sampled_3h" field_ref="CMIP6_vmrox_with_instant" freq_op="3h" detect_missing_value="true"> @CMIP6_vmrox_with_instant </field>
-		<field id="CMIP6_vmrox_plev39" field_ref="CMIP6_vmrox_sampled_3h" grid_ref="FULL_klev_plev39"/>
-		<field id="CMIP6_vmrox_plev39_average" field_ref="CMIP6_vmrox_plev39" operation="average"/>
-		<field id="CMIP6_vmrox_plev39_average_1mo" field_ref="CMIP6_vmrox_plev39_average" freq_op="1mo"> @CMIP6_vmrox_plev39_average </field>
-		<field id="CMIP6_vmrox_plev39_average_1mo_complete" field_ref="CMIP6_vmrox_plev39_average_1mo" grid_ref="FULL_klev_plev39_complete"/>
-		<field id="CMIP6_vmrox_plev39_average_1mo_glat" field_ref="CMIP6_vmrox_plev39_average_1mo_complete" grid_ref="FULL_klev_plev39_complete_glat"/>
-		<field id="CMIP6_vmrox_plev39_average_1mo_glat_average" field_ref="CMIP6_vmrox_plev39_average_1mo_glat" operation="average"/>
-		<field id="CMIP6_zmtnt_with_instant" field_ref="CMIP6_zmtnt" operation="instant"/>
-		<field id="CMIP6_zmtnt_sampled_3h" field_ref="CMIP6_zmtnt_with_instant" freq_op="3h" detect_missing_value="true"> @CMIP6_zmtnt_with_instant </field>
+		<field id="CMIP6_zg_plev7hm" field_ref="CMIP6_zg_sampled_3h" grid_ref="FULL_klev_plev7hm"/>
+		<field id="CMIP6_zg_plev7hm_average" field_ref="CMIP6_zg_plev7hm" operation="average"/>
+		<field id="CMIP6_zg_plev8" field_ref="CMIP6_zg_sampled_3h" grid_ref="FULL_klev_plev8"/>
+		<field id="CMIP6_zg_plev8_average" field_ref="CMIP6_zg_plev8" operation="average"/>
+		<field id="CMIP6_zg_sampled_3h" field_ref="CMIP6_zg_with_instant" freq_op="3h" detect_missing_value="true"> @CMIP6_zg_with_instant </field>
+		<field id="CMIP6_zg_with_instant" field_ref="CMIP6_zg" operation="instant"/>
 		<field id="CMIP6_zmtnt_plev39" field_ref="CMIP6_zmtnt_sampled_3h" grid_ref="FULL_klev_plev39"/>
 		<field id="CMIP6_zmtnt_plev39_average" field_ref="CMIP6_zmtnt_plev39" operation="average"/>
 		<field id="CMIP6_zmtnt_plev39_average_1mo" field_ref="CMIP6_zmtnt_plev39_average" freq_op="1mo"> @CMIP6_zmtnt_plev39_average </field>
 		<field id="CMIP6_zmtnt_plev39_average_1mo_complete" field_ref="CMIP6_zmtnt_plev39_average_1mo" grid_ref="FULL_klev_plev39_complete"/>
 		<field id="CMIP6_zmtnt_plev39_average_1mo_glat" field_ref="CMIP6_zmtnt_plev39_average_1mo_complete" grid_ref="FULL_klev_plev39_complete_glat"/>
 		<field id="CMIP6_zmtnt_plev39_average_1mo_glat_average" field_ref="CMIP6_zmtnt_plev39_average_1mo_glat" operation="average"/>
-		<field id="CMIP6_RADabs550aer_average" field_ref="CMIP6_RADabs550aer" operation="average"/>
-		<field id="CMIP6_RADasy550aer_average" field_ref="CMIP6_RADasy550aer" operation="average"/>
-		<field id="CMIP6_RADod550aer_average" field_ref="CMIP6_RADod550aer" operation="average"/>
-		<field id="CMIP6_RADssa550aer_average" field_ref="CMIP6_RADssa550aer" operation="average"/>
-		<field id="CMIP6_TACabs550aer_average" field_ref="CMIP6_TACabs550aer" operation="average"/>
-		<field id="CMIP6_albsrfcLa_average" field_ref="CMIP6_albsrfcLa" operation="average"/>
-		<field id="CMIP6_albsrfc_average" field_ref="CMIP6_albsrfc" operation="average"/>
-		<field id="CMIP6_asy550aer_average" field_ref="CMIP6_asy550aer" operation="average"/>
-		<field id="CMIP6_burntArea_average" field_ref="CMIP6_burntArea" operation="average"/>
-		<field id="CMIP6_cdnctop_average" field_ref="CMIP6_cdnctop" operation="average"/>
-		<field id="CMIP6_clth_average" field_ref="CMIP6_clth" operation="average"/>
-		<field id="CMIP6_cltl_average" field_ref="CMIP6_cltl" operation="average"/>
-		<field id="CMIP6_cltm_average" field_ref="CMIP6_cltm" operation="average"/>
-		<field id="CMIP6_ext550bc_with_instant" field_ref="CMIP6_ext550bc" operation="instant"/>
-		<field id="CMIP6_ext550bc_sampled_3h" field_ref="CMIP6_ext550bc_with_instant" freq_op="3h" detect_missing_value="true"> @CMIP6_ext550bc_with_instant </field>
-		<field id="CMIP6_ext550bc_plev19" field_ref="CMIP6_ext550bc_sampled_3h" grid_ref="FULL_klev_plev19"/>
-		<field id="CMIP6_ext550bc_plev19_average" field_ref="CMIP6_ext550bc_plev19" operation="average"/>
-		<field id="CMIP6_ext550dust_with_instant" field_ref="CMIP6_ext550dust" operation="instant"/>
-		<field id="CMIP6_ext550dust_sampled_3h" field_ref="CMIP6_ext550dust_with_instant" freq_op="3h" detect_missing_value="true"> @CMIP6_ext550dust_with_instant </field>
-		<field id="CMIP6_ext550dust_plev19" field_ref="CMIP6_ext550dust_sampled_3h" grid_ref="FULL_klev_plev19"/>
-		<field id="CMIP6_ext550dust_plev19_average" field_ref="CMIP6_ext550dust_plev19" operation="average"/>
-		<field id="CMIP6_ext550oa_with_instant" field_ref="CMIP6_ext550oa" operation="instant"/>
-		<field id="CMIP6_ext550oa_sampled_3h" field_ref="CMIP6_ext550oa_with_instant" freq_op="3h" detect_missing_value="true"> @CMIP6_ext550oa_with_instant </field>
-		<field id="CMIP6_ext550oa_plev19" field_ref="CMIP6_ext550oa_sampled_3h" grid_ref="FULL_klev_plev19"/>
-		<field id="CMIP6_ext550oa_plev19_average" field_ref="CMIP6_ext550oa_plev19" operation="average"/>
-		<field id="CMIP6_ext550so4_with_instant" field_ref="CMIP6_ext550so4" operation="instant"/>
-		<field id="CMIP6_ext550so4_sampled_3h" field_ref="CMIP6_ext550so4_with_instant" freq_op="3h" detect_missing_value="true"> @CMIP6_ext550so4_with_instant </field>
-		<field id="CMIP6_ext550so4_plev19" field_ref="CMIP6_ext550so4_sampled_3h" grid_ref="FULL_klev_plev19"/>
-		<field id="CMIP6_ext550so4_plev19_average" field_ref="CMIP6_ext550so4_plev19" operation="average"/>
-		<field id="CMIP6_ext550ss_with_instant" field_ref="CMIP6_ext550ss" operation="instant"/>
-		<field id="CMIP6_ext550ss_sampled_3h" field_ref="CMIP6_ext550ss_with_instant" freq_op="3h" detect_missing_value="true"> @CMIP6_ext550ss_with_instant </field>
-		<field id="CMIP6_ext550ss_plev19" field_ref="CMIP6_ext550ss_sampled_3h" grid_ref="FULL_klev_plev19"/>
-		<field id="CMIP6_ext550ss_plev19_average" field_ref="CMIP6_ext550ss_plev19" operation="average"/>
-		<field id="CMIP6_fDeforestToL_average" field_ref="CMIP6_fDeforestToL" operation="average"/>
-		<field id="CMIP6_fFireBCarb_average" field_ref="CMIP6_fFireBCarb" operation="average"/>
-		<field id="CMIP6_fRegrowth_average" field_ref="CMIP6_fRegrowth" operation="average"/>
-		<field id="CMIP6_fsat_average" field_ref="CMIP6_fsat" operation="average"/>
-		<field id="CMIP6_icedLa_average" field_ref="CMIP6_icedLa" operation="average"/>
-		<field id="CMIP6_icod_average" field_ref="CMIP6_icod" operation="average"/>
-		<field id="CMIP6_lcod_average" field_ref="CMIP6_lcod" operation="average"/>
-		<field id="CMIP6_necb_average" field_ref="CMIP6_necb" operation="average"/>
-		<field id="CMIP6_od550acldaer_average" field_ref="CMIP6_od550acldaer" operation="average"/>
-		<field id="CMIP6_od550dustbin1_average" field_ref="CMIP6_od550dustbin1" operation="average"/>
-		<field id="CMIP6_od550dustbin2_average" field_ref="CMIP6_od550dustbin2" operation="average"/>
-		<field id="CMIP6_od550ssbin1_average" field_ref="CMIP6_od550ssbin1" operation="average"/>
-		<field id="CMIP6_od550ssbin2_average" field_ref="CMIP6_od550ssbin2" operation="average"/>
-		<field id="CMIP6_reffclitop_average" field_ref="CMIP6_reffclitop" operation="average"/>
-		<field id="CMIP6_reffclwtopcnrm_average" field_ref="CMIP6_reffclwtopcnrm" operation="average"/>
-		<field id="CMIP6_rldsaf_average" field_ref="CMIP6_rldsaf" operation="average"/>
-		<field id="CMIP6_rldscsaf_average" field_ref="CMIP6_rldscsaf" operation="average"/>
-		<field id="CMIP6_rlusaf_average" field_ref="CMIP6_rlusaf" operation="average"/>
-		<field id="CMIP6_rluscs_average" field_ref="CMIP6_rluscs" operation="average"/>
-		<field id="CMIP6_rluscsaf_average" field_ref="CMIP6_rluscsaf" operation="average"/>
-		<field id="CMIP6_rsdsaf_average" field_ref="CMIP6_rsdsaf" operation="average"/>
-		<field id="CMIP6_rsdscsaf_average" field_ref="CMIP6_rsdscsaf" operation="average"/>
-		<field id="CMIP6_rsusaf_average" field_ref="CMIP6_rsusaf" operation="average"/>
-		<field id="CMIP6_rsuscsaf_average" field_ref="CMIP6_rsuscsaf" operation="average"/>
-		<field id="CMIP6_sconcbc_average" field_ref="CMIP6_sconcbc" operation="average"/>
-		<field id="CMIP6_sconcoa_average" field_ref="CMIP6_sconcoa" operation="average"/>
-		<field id="CMIP6_snct_average" field_ref="CMIP6_snct" operation="average"/>
-		<field id="CMIP6_sndLa_average" field_ref="CMIP6_sndLa" operation="average"/>
-		<field id="CMIP6_ssa550aer_average" field_ref="CMIP6_ssa550aer" operation="average"/>
-		<field id="CMIP6_tmxlLa_average" field_ref="CMIP6_tmxlLa" operation="average"/>
-		<field id="CMIP6_tsLa_average" field_ref="CMIP6_tsLa" operation="average"/>
-		<field id="CMIP6_vegstress_average" field_ref="CMIP6_vegstress" operation="average"/>
-		<field id="CMIP6_co_with_instant" field_ref="CMIP6_co" operation="instant"/>
-		<field id="CMIP6_co_sampled_3h" field_ref="CMIP6_co_with_instant" freq_op="3h" detect_missing_value="true"> @CMIP6_co_with_instant </field>
-		<field id="CMIP6_co_Plev39hm" field_ref="CMIP6_co_sampled_3h" grid_ref="FULL_klev_Plev39hm"/>
-		<field id="CMIP6_co_Plev39hm_average" field_ref="CMIP6_co_Plev39hm" operation="average"/>
-		<field id="CMIP6_hus_plev7hm" field_ref="CMIP6_hus_sampled_3h" grid_ref="FULL_klev_plev7hm"/>
-		<field id="CMIP6_hus_plev7hm_average" field_ref="CMIP6_hus_plev7hm" operation="average"/>
-		<field id="CMIP6_no2_with_instant" field_ref="CMIP6_no2" operation="instant"/>
-		<field id="CMIP6_no2_sampled_3h" field_ref="CMIP6_no2_with_instant" freq_op="3h" detect_missing_value="true"> @CMIP6_no2_with_instant </field>
-		<field id="CMIP6_no2_Plev39hm" field_ref="CMIP6_no2_sampled_3h" grid_ref="FULL_klev_Plev39hm"/>
-		<field id="CMIP6_no2_Plev39hm_average" field_ref="CMIP6_no2_Plev39hm" operation="average"/>
-		<field id="CMIP6_o3_Plev39hm" field_ref="CMIP6_o3_sampled_3h" grid_ref="FULL_klev_Plev39hm"/>
-		<field id="CMIP6_o3_Plev39hm_average" field_ref="CMIP6_o3_Plev39hm" operation="average"/>
-		<field id="CMIP6_ta_plev7hm" field_ref="CMIP6_ta_sampled_3h" grid_ref="FULL_klev_plev7hm"/>
-		<field id="CMIP6_ta_plev7hm_average" field_ref="CMIP6_ta_plev7hm" operation="average"/>
-		<field id="CMIP6_ua_plev7hm" field_ref="CMIP6_ua_sampled_3h" grid_ref="FULL_klev_plev7hm"/>
-		<field id="CMIP6_ua_plev7hm_average" field_ref="CMIP6_ua_plev7hm" operation="average"/>
-		<field id="CMIP6_va_plev7hm" field_ref="CMIP6_va_sampled_3h" grid_ref="FULL_klev_plev7hm"/>
-		<field id="CMIP6_va_plev7hm_average" field_ref="CMIP6_va_plev7hm" operation="average"/>
-		<field id="CMIP6_wap_plev7hm" field_ref="CMIP6_wap_sampled_3h" grid_ref="FULL_klev_plev7hm"/>
-		<field id="CMIP6_wap_plev7hm_average" field_ref="CMIP6_wap_plev7hm" operation="average"/>
-		<field id="CMIP6_zg_plev7hm" field_ref="CMIP6_zg_sampled_3h" grid_ref="FULL_klev_plev7hm"/>
-		<field id="CMIP6_zg_plev7hm_average" field_ref="CMIP6_zg_plev7hm" operation="average"/>
-		<field id="CMIP6_agesno_average" field_ref="CMIP6_agesno" operation="average"/>
-		<field id="CMIP6_hfdsn_average" field_ref="CMIP6_hfdsn" operation="average"/>
-		<field id="CMIP6_lwsnl_average" field_ref="CMIP6_lwsnl" operation="average"/>
-		<field id="CMIP6_sbl_land_average" field_ref="CMIP6_sbl_land" operation="average"/>
-		<field id="CMIP6_sftgif_Scaltypeli_average" field_ref="CMIP6_sftgif_Scaltypeli" operation="average"/>
-		<field id="CMIP6_sftgrf_Scaltypegis_average" field_ref="CMIP6_sftgrf_Scaltypegis" operation="average"/>
-		<field id="CMIP6_snd_average" field_ref="CMIP6_snd" operation="average"/>
-		<field id="CMIP6_snm_land_average" field_ref="CMIP6_snm_land" operation="average"/>
-		<field id="CMIP6_tpf_average" field_ref="CMIP6_tpf" operation="average"/>
-		<field id="CMIP6_tsn_land_average" field_ref="CMIP6_tsn_land" operation="average"/>
-		<field id="CMIP6_tsl_average" field_ref="CMIP6_tsl" operation="average"/>
-		<field id="CMIP6_baresoilFrac_Scaltypebare" grid_ref="NATURE_grid_Scaltypebare" operation="instant" detect_missing_value="true"> CMIP6_baresoilFrac </field>
-		<field id="CMIP6_baresoilFrac_Scaltypebare_average" field_ref="CMIP6_baresoilFrac_Scaltypebare" operation="average"/>
-		<field id="CMIP6_burntFractionAll_Scaltypeburnt" grid_ref="NATURE_grid_Scaltypeburnt" operation="instant" detect_missing_value="true"> CMIP6_burntFractionAll </field>
-		<field id="CMIP6_burntFractionAll_Scaltypeburnt_average" field_ref="CMIP6_burntFractionAll_Scaltypeburnt" operation="average"/>
-		<field id="CMIP6_c3PftFrac_Scaltypec3pft" grid_ref="NATURE_grid_Scaltypec3pft" operation="instant" detect_missing_value="true"> CMIP6_c3PftFrac </field>
-		<field id="CMIP6_c3PftFrac_Scaltypec3pft_average" field_ref="CMIP6_c3PftFrac_Scaltypec3pft" operation="average"/>
-		<field id="CMIP6_c4PftFrac_Scaltypec4pft" grid_ref="NATURE_grid_Scaltypec4pft" operation="instant" detect_missing_value="true"> CMIP6_c4PftFrac </field>
-		<field id="CMIP6_c4PftFrac_Scaltypec4pft_average" field_ref="CMIP6_c4PftFrac_Scaltypec4pft" operation="average"/>
-		<field id="CMIP6_cLeaf_average" field_ref="CMIP6_cLeaf" operation="average"/>
-		<field id="CMIP6_cLitterBelow_average" field_ref="CMIP6_cLitterBelow" operation="average"/>
-		<field id="CMIP6_cLitter_average" field_ref="CMIP6_cLitter" operation="average"/>
-		<field id="CMIP6_cProduct_average" field_ref="CMIP6_cProduct" operation="average"/>
-		<field id="CMIP6_cRoot_average" field_ref="CMIP6_cRoot" operation="average"/>
-		<field id="CMIP6_cSoilFast_average" field_ref="CMIP6_cSoilFast" operation="average"/>
-		<field id="CMIP6_cSoilMedium_average" field_ref="CMIP6_cSoilMedium" operation="average"/>
-		<field id="CMIP6_cSoilSlow_average" field_ref="CMIP6_cSoilSlow" operation="average"/>
-		<field id="CMIP6_cVeg_average" field_ref="CMIP6_cVeg" operation="average"/>
-		<field id="CMIP6_cropFrac_Scaltypecrop" grid_ref="NATURE_grid_Scaltypecrop" operation="instant" detect_missing_value="true"> CMIP6_cropFrac </field>
-		<field id="CMIP6_cropFrac_Scaltypecrop_average" field_ref="CMIP6_cropFrac_Scaltypecrop" operation="average"/>
-		<field id="CMIP6_evspsblsoi_average" field_ref="CMIP6_evspsblsoi" operation="average"/>
-		<field id="CMIP6_evspsblveg_average" field_ref="CMIP6_evspsblveg" operation="average"/>
-		<field id="CMIP6_fFire_average" field_ref="CMIP6_fFire" operation="average"/>
-		<field id="CMIP6_fLitterSoil_average" field_ref="CMIP6_fLitterSoil" operation="average"/>
-		<field id="CMIP6_fVegLitter_average" field_ref="CMIP6_fVegLitter" operation="average"/>
-		<field id="CMIP6_gpp_average" field_ref="CMIP6_gpp" operation="average"/>
-		<field id="CMIP6_grassFrac_Scaltypenatgr" grid_ref="NATURE_grid_Scaltypenatgr" operation="instant" detect_missing_value="true"> CMIP6_grassFrac </field>
-		<field id="CMIP6_grassFrac_Scaltypenatgr_average" field_ref="CMIP6_grassFrac_Scaltypenatgr" operation="average"/>
-		<field id="CMIP6_landCoverFrac_average" field_ref="CMIP6_landCoverFrac" operation="average"/>
-		<field id="CMIP6_mrfso_average" field_ref="CMIP6_mrfso" operation="average"/>
-		<field id="CMIP6_mrros_average" field_ref="CMIP6_mrros" operation="average"/>
-		<field id="CMIP6_nbp_average" field_ref="CMIP6_nbp" operation="average"/>
-		<field id="CMIP6_npp_average" field_ref="CMIP6_npp" operation="average"/>
-		<field id="CMIP6_prveg_average" field_ref="CMIP6_prveg" operation="average"/>
-		<field id="CMIP6_ra_average" field_ref="CMIP6_ra" operation="average"/>
-		<field id="CMIP6_residualFrac_Scaltyperesidual" grid_ref="NATURE_grid_Scaltyperesidual" operation="instant" detect_missing_value="true"> CMIP6_residualFrac </field>
-		<field id="CMIP6_residualFrac_Scaltyperesidual_average" field_ref="CMIP6_residualFrac_Scaltyperesidual" operation="average"/>
-		<field id="CMIP6_rh_average" field_ref="CMIP6_rh" operation="average"/>
-		<field id="CMIP6_tran_average" field_ref="CMIP6_tran" operation="average"/>
-		<field id="CMIP6_treeFrac_Scaltypetree" grid_ref="NATURE_grid_Scaltypetree" operation="instant" detect_missing_value="true"> CMIP6_treeFrac </field>
-		<field id="CMIP6_treeFrac_Scaltypetree_average" field_ref="CMIP6_treeFrac_Scaltypetree" operation="average"/>
-		<field id="CMIP6_albsn_average" field_ref="CMIP6_albsn" operation="average"/>
-		<field id="CMIP6_cw_average" field_ref="CMIP6_cw" operation="average"/>
-		<field id="CMIP6_dmlt_average" field_ref="CMIP6_dmlt" operation="average"/>
-		<field id="CMIP6_et_average" field_ref="CMIP6_et" operation="average"/>
-		<field id="CMIP6_hfdsl_average" field_ref="CMIP6_hfdsl" operation="average"/>
-		<field id="CMIP6_mrsow_average" field_ref="CMIP6_mrsow" operation="average"/>
-		<field id="CMIP6_rzwc_average" field_ref="CMIP6_rzwc" operation="average"/>
+		<field id="CMIP6_zmtnt_sampled_3h" field_ref="CMIP6_zmtnt_with_instant" freq_op="3h" detect_missing_value="true"> @CMIP6_zmtnt_with_instant </field>
+		<field id="CMIP6_zmtnt_with_instant" field_ref="CMIP6_zmtnt" operation="instant"/>
+		<field id="CMIP6_ztp_average" field_ref="CMIP6_ztp" operation="average"/>
+		<field id="CMIP6_areacella" field_ref="areacella_complete" freq_op="1ts" freq_offset="0ts" grid_ref="grid_complete" operation="instant"/>
 	</field_definition>
 	<axis_definition>
 		<axis_group prec="8">
+			<axis id="DR_alevel_klev" axis_ref="klev" name="lev" long_name="atmospheric model level" prec="8" axis_type="Z"/>
+			<axis id="DR_alevel_klev_half" axis_ref="klev_half" name="lev" long_name="atmospheric model level" prec="8" axis_type="Z"/>
+			<axis id="DR_soilpools_soil_carbon_pools" axis_ref="soil_carbon_pools" name="soilpools" long_name="Soil Pools" dim_name="soilpools" label="(0,2)[  fast medium slow  ]"/>
+			<axis id="DR_vegtype_vegtype" axis_ref="vegtype" name="type" long_name="plant functional type" dim_name="type" label="(0,18)[  Bare_soil Rock Permanent_snow Temperate_broad-leaved_decidus Boreal_needleaf_evergreen Tropical_broad-leaved_evergreen C3_crop C4_crop Irrigated_crop C3_grass C4_grass Wetland Tropical_broad-leaved_decidus Temperate_broad-leaved_evergreen Temperate_needleaf_evergreen Boreal_broad-leaved_decidus Boreal_needleaf_decidus Tundra_grass Shrub  ]"/>
+			<axis id="Plev39hm" positive="down" n_glo="39" value="(0,38)[ 100000. 92500. 85000. 70000. 60000. 50000. 40000. 30000. 25000. 20000. 17000. 15000. 13000. 11500. 10000. 9000. 8000. 7000. 5000. 3000. 2000. 1500. 1000. 700. 500. 300. 200. 150. 100. 70. 50. 40. 30. 20. 15. 10. 7. 5. 3. ]" name="plev" standard_name="air_pressure" long_name="pressure" unit="Pa" axis_type="Z">
+				<interpolate_axis type="polynomial" order="1" coordinate="CMIP6_pfull_instant_sampled_3h"/>
+			</axis>
+			<axis id="p100" positive="down" n_glo="1" value="(0,0)[ 10000. ]" name="plev" standard_name="air_pressure" long_name="pressure" unit="Pa" axis_type="Z">
+				<interpolate_axis type="polynomial" order="1" coordinate="CMIP6_pfull_instant_sampled_3h"/>
+			</axis>
 			<axis id="p500" positive="down" n_glo="1" value="(0,0)[ 50000. ]" name="plev" standard_name="air_pressure" long_name="pressure" unit="Pa" axis_type="Z">
 				<interpolate_axis type="polynomial" order="1" coordinate="CMIP6_pfull_instant_sampled_3h"/>
 			</axis>
@@ -32077,40 +32087,19 @@ seaIce: Gelato 6.1 </variable>
 			<axis id="plev39" positive="down" n_glo="39" value="(0,38)[ 100000. 92500. 85000. 70000. 60000. 50000. 40000. 30000. 25000. 20000. 17000. 15000. 13000. 11500. 10000. 9000. 8000. 7000. 5000. 3000. 2000. 1500. 1000. 700. 500. 300. 200. 150. 100. 70. 50. 40. 30. 20. 15. 10. 7. 5. 3. ]" name="plev" standard_name="air_pressure" long_name="pressure" unit="Pa" axis_type="Z">
 				<interpolate_axis type="polynomial" order="1" coordinate="CMIP6_pfull_instant_sampled_3h"/>
 			</axis>
-			<axis id="plev8" positive="down" n_glo="8" value="(0,7)[ 100000. 85000. 70000. 50000. 25000. 10000. 5000. 1000. ]" name="plev" standard_name="air_pressure" long_name="pressure" unit="Pa" axis_type="Z">
-				<interpolate_axis type="polynomial" order="1" coordinate="CMIP6_pfull_instant_sampled_3h"/>
-			</axis>
-			<axis id="DR_alevel_klev" axis_ref="klev" name="lev" long_name="atmospheric model level" prec="8" axis_type="Z"/>
-			<axis id="p100" positive="down" n_glo="1" value="(0,0)[ 10000. ]" name="plev" standard_name="air_pressure" long_name="pressure" unit="Pa" axis_type="Z">
-				<interpolate_axis type="polynomial" order="1" coordinate="CMIP6_pfull_instant_sampled_3h"/>
-			</axis>
-			<axis id="DR_alevel_klev_half" axis_ref="klev_half" name="lev" long_name="atmospheric model level" prec="8" axis_type="Z"/>
-			<axis id="DR_soilpools_soil_carbon_pools" axis_ref="soil_carbon_pools" name="sector" long_name="Soil Pools" dim_name="soilpools" label="(0,2)[  fast medium slow  ]"/>
 			<axis id="plev7h" positive="down" n_glo="7" value="(0,6)[ 92500. 85000. 70000. 60000. 50000. 25000.  5000. ]" name="plev" standard_name="air_pressure" long_name="pressure" unit="Pa" axis_type="Z">
-				<interpolate_axis type="polynomial" order="1" coordinate="CMIP6_pfull_instant_sampled_3h"/>
-			</axis>
-			<axis id="Plev39hm" positive="down" n_glo="39" value="(0,38)[ 100000. 92500. 85000. 70000. 60000. 50000. 40000. 30000. 25000. 20000. 17000. 15000. 13000. 11500. 10000. 9000. 8000. 7000. 5000. 3000. 2000. 1500. 1000. 700. 500. 300. 200. 150. 100. 70. 50. 40. 30. 20. 15. 10. 7. 5. 3. ]" name="plev" standard_name="air_pressure" long_name="pressure" unit="Pa" axis_type="Z">
 				<interpolate_axis type="polynomial" order="1" coordinate="CMIP6_pfull_instant_sampled_3h"/>
 			</axis>
 			<axis id="plev7hm" positive="down" n_glo="7" value="(0,6)[ 700. 300. 200. 50. 10. 5. 1. ]" name="plev" standard_name="air_pressure" long_name="pressure" unit="Pa" axis_type="Z">
 				<interpolate_axis type="polynomial" order="1" coordinate="CMIP6_pfull_instant_sampled_3h"/>
 			</axis>
-			<axis id="DR_vegtype_vegtype" axis_ref="vegtype" name="sector" long_name="plant functional type" dim_name="type" label="(0,18)[  Bare_soil Rock Permanent_snow Temperate_broad-leaved_decidus Boreal_needleaf_evergreen Tropical_broad-leaved_evergreen C3_crop C4_crop Irrigated_crop C3_grass C4_grass Wetland Tropical_broad-leaved_decidus Temperate_broad-leaved_evergreen Temperate_needleaf_evergreen Boreal_broad-leaved_decidus Boreal_needleaf_decidus Tundra_grass Shrub  ]"/>
+			<axis id="plev8" positive="down" n_glo="8" value="(0,7)[ 100000. 85000. 70000. 50000. 25000. 10000. 5000. 1000. ]" name="plev" standard_name="air_pressure" long_name="pressure" unit="Pa" axis_type="Z">
+				<interpolate_axis type="polynomial" order="1" coordinate="CMIP6_pfull_instant_sampled_3h"/>
+			</axis>
 		</axis_group>
 	</axis_definition>
 	<domain_definition>
 		<domain_group prec="8">
-			<domain id="remapped_areacella_file_domain" type="rectilinear">
-				<generate_rectilinear_domain/>
-			</domain>
-			<domain id="CMIP6_25km" ni_glo="1440" nj_glo="720" type="rectilinear" prec="8">
-				<generate_rectilinear_domain/>
-				<interpolate_domain order="1" renormalize="true" mode="read_or_compute" write_weight="true"/>
-			</domain>
-			<domain id="CMIP6_50km" ni_glo="720" nj_glo="360" type="rectilinear" prec="8">
-				<generate_rectilinear_domain/>
-				<interpolate_domain order="1" renormalize="true" mode="read_or_compute" write_weight="true"/>
-			</domain>
 			<domain id="CMIP6_100km" ni_glo="360" nj_glo="180" type="rectilinear" prec="8">
 				<generate_rectilinear_domain/>
 				<interpolate_domain order="1" renormalize="true" mode="read_or_compute" write_weight="true"/>
@@ -32119,18 +32108,74 @@ seaIce: Gelato 6.1 </variable>
 				<generate_rectilinear_domain/>
 				<interpolate_domain order="1" renormalize="true" mode="read_or_compute" write_weight="true"/>
 			</domain>
+			<domain id="CMIP6_25km" ni_glo="1440" nj_glo="720" type="rectilinear" prec="8">
+				<generate_rectilinear_domain/>
+				<interpolate_domain order="1" renormalize="true" mode="read_or_compute" write_weight="true"/>
+			</domain>
 			<domain id="CMIP6_2deg" ni_glo="180" nj_glo="90" type="rectilinear" prec="8">
 				<generate_rectilinear_domain/>
 				<interpolate_domain order="1" renormalize="true" mode="read_or_compute" write_weight="true"/>
 			</domain>
+			<domain id="CMIP6_50km" ni_glo="720" nj_glo="360" type="rectilinear" prec="8">
+				<generate_rectilinear_domain/>
+				<interpolate_domain order="1" renormalize="true" mode="read_or_compute" write_weight="true"/>
+			</domain>
+			<domain id="remapped_areacella_file_domain" type="rectilinear">
+				<generate_rectilinear_domain/>
+			</domain>
 		</domain_group>
 	</domain_definition>
 	<grid_definition>
-		<grid id="FULL_klev_p500">
+		<grid id="FULL_grid_Scalheight10m">
 			<domain domain_ref="FULL"/>
-			<axis positive="down" n_glo="1" value="(0,0)[ 50000. ]" name="plev" standard_name="air_pressure" long_name="pressure" unit="Pa" axis_type="Z">
+			<scalar scalar_ref="Scalheight10m" name="height"/>
+		</grid>
+		<grid id="FULL_grid_Scalheight10m_complete">
+			<domain domain_ref="complete"/>
+			<scalar scalar_ref="Scalheight10m" name="height"/>
+		</grid>
+		<grid id="FULL_grid_Scalheight2m">
+			<domain domain_ref="FULL"/>
+			<scalar scalar_ref="Scalheight2m" name="height"/>
+		</grid>
+		<grid id="FULL_grid_Scalheight2m_complete">
+			<domain domain_ref="complete"/>
+			<scalar scalar_ref="Scalheight2m" name="height"/>
+		</grid>
+		<grid id="FULL_grid_Scaltypeland">
+			<domain domain_ref="FULL"/>
+			<scalar scalar_ref="Scaltypeland" name="type"/>
+		</grid>
+		<grid id="FULL_grid_Scaltypeland_complete">
+			<domain domain_ref="complete"/>
+			<scalar scalar_ref="Scaltypeland" name="type"/>
+		</grid>
+		<grid id="FULL_grid_complete">
+			<domain domain_ref="complete"/>
+		</grid>
+		<grid id="FULL_klev_Plev39hm">
+			<domain domain_ref="FULL"/>
+			<axis positive="down" n_glo="39" value="(0,38)[ 100000. 92500. 85000. 70000. 60000. 50000. 40000. 30000. 25000. 20000. 17000. 15000. 13000. 11500. 10000. 9000. 8000. 7000. 5000. 3000. 2000. 1500. 1000. 700. 500. 300. 200. 150. 100. 70. 50. 40. 30. 20. 15. 10. 7. 5. 3. ]" name="plev" standard_name="air_pressure" long_name="pressure" unit="Pa" axis_type="Z">
 				<interpolate_axis type="polynomial" order="1" coordinate="CMIP6_pfull_instant_sampled_3h"/>
 			</axis>
+		</grid>
+		<grid id="FULL_klev_Plev39hm_complete">
+			<domain domain_ref="complete"/>
+			<axis positive="down" n_glo="39" value="(0,38)[ 100000. 92500. 85000. 70000. 60000. 50000. 40000. 30000. 25000. 20000. 17000. 15000. 13000. 11500. 10000. 9000. 8000. 7000. 5000. 3000. 2000. 1500. 1000. 700. 500. 300. 200. 150. 100. 70. 50. 40. 30. 20. 15. 10. 7. 5. 3. ]" name="plev" standard_name="air_pressure" long_name="pressure" unit="Pa" axis_type="Z">
+				<interpolate_axis type="polynomial" order="1" coordinate="CMIP6_pfull_instant_sampled_3h"/>
+			</axis>
+		</grid>
+		<grid id="FULL_klev_Scalp100">
+			<domain domain_ref="FULL"/>
+			<scalar scalar_ref="Scalp100" name="plev"/>
+		</grid>
+		<grid id="FULL_klev_Scalp100_complete">
+			<domain domain_ref="complete"/>
+			<scalar scalar_ref="Scalp100" name="plev"/>
+		</grid>
+		<grid id="FULL_klev_Scalp100_complete_glat">
+			<axis axis_ref="glat" name="lat"/>
+			<scalar scalar_ref="Scalp100" name="plev"/>
 		</grid>
 		<grid id="FULL_klev_Scalp500">
 			<domain domain_ref="FULL"/>
@@ -32140,15 +32185,6 @@ seaIce: Gelato 6.1 </variable>
 			<domain domain_ref="complete"/>
 			<scalar scalar_ref="Scalp500" name="plev"/>
 		</grid>
-		<grid id="FULL_grid_complete">
-			<domain domain_ref="complete"/>
-		</grid>
-		<grid id="FULL_klev_p850">
-			<domain domain_ref="FULL"/>
-			<axis positive="down" n_glo="1" value="(0,0)[ 85000. ]" name="plev" standard_name="air_pressure" long_name="pressure" unit="Pa" axis_type="Z">
-				<interpolate_axis type="polynomial" order="1" coordinate="CMIP6_pfull_instant_sampled_3h"/>
-			</axis>
-		</grid>
 		<grid id="FULL_klev_Scalp850">
 			<domain domain_ref="FULL"/>
 			<scalar scalar_ref="Scalp850" name="plev"/>
@@ -32157,12 +32193,39 @@ seaIce: Gelato 6.1 </variable>
 			<domain domain_ref="complete"/>
 			<scalar scalar_ref="Scalp850" name="plev"/>
 		</grid>
-		<grid id="NATURE_grid_complete">
+		<grid id="FULL_klev_complete">
 			<domain domain_ref="complete"/>
+			<axis axis_ref="klev" name="lev"/>
 		</grid>
-		<grid id="NATURE_glayers_complete">
+		<grid id="FULL_klev_complete_alevel">
 			<domain domain_ref="complete"/>
-			<axis axis_ref="ground_layer" name="sdepth"/>
+			<axis axis_ref="DR_alevel_klev" name="lev" id="ref_to_DR_alevel_klev_74"/>
+		</grid>
+		<grid id="FULL_klev_half_complete">
+			<domain domain_ref="complete"/>
+			<axis axis_ref="klev_half" name="lev"/>
+		</grid>
+		<grid id="FULL_klev_half_complete_alevel">
+			<domain domain_ref="complete"/>
+			<axis axis_ref="DR_alevel_klev_half" name="lev" id="ref_to_DR_alevel_klev_half_53"/>
+		</grid>
+		<grid id="FULL_klev_p100">
+			<domain domain_ref="FULL"/>
+			<axis positive="down" n_glo="1" value="(0,0)[ 10000. ]" name="plev" standard_name="air_pressure" long_name="pressure" unit="Pa" axis_type="Z">
+				<interpolate_axis type="polynomial" order="1" coordinate="CMIP6_pfull_instant_sampled_3h"/>
+			</axis>
+		</grid>
+		<grid id="FULL_klev_p500">
+			<domain domain_ref="FULL"/>
+			<axis positive="down" n_glo="1" value="(0,0)[ 50000. ]" name="plev" standard_name="air_pressure" long_name="pressure" unit="Pa" axis_type="Z">
+				<interpolate_axis type="polynomial" order="1" coordinate="CMIP6_pfull_instant_sampled_3h"/>
+			</axis>
+		</grid>
+		<grid id="FULL_klev_p850">
+			<domain domain_ref="FULL"/>
+			<axis positive="down" n_glo="1" value="(0,0)[ 85000. ]" name="plev" standard_name="air_pressure" long_name="pressure" unit="Pa" axis_type="Z">
+				<interpolate_axis type="polynomial" order="1" coordinate="CMIP6_pfull_instant_sampled_3h"/>
+			</axis>
 		</grid>
 		<grid id="FULL_klev_plev19">
 			<domain domain_ref="FULL"/>
@@ -32200,167 +32263,6 @@ seaIce: Gelato 6.1 </variable>
 				<interpolate_axis type="polynomial" order="1" coordinate="CMIP6_pfull_instant_sampled_3h"/>
 			</axis>
 		</grid>
-		<grid id="NATURE_grid_Scaltypegis">
-			<domain domain_ref="NATURE"/>
-			<scalar scalar_ref="Scaltypegis" name="type"/>
-		</grid>
-		<grid id="NATURE_grid_Scaltypegis_complete">
-			<domain domain_ref="complete"/>
-			<scalar scalar_ref="Scaltypegis" name="type"/>
-		</grid>
-		<grid id="SEA_grid_Scaltypesi">
-			<domain domain_ref="SEA"/>
-			<scalar scalar_ref="Scaltypesi" name="type"/>
-		</grid>
-		<grid id="SEA_grid_Scaltypesi_complete">
-			<domain domain_ref="complete"/>
-			<scalar scalar_ref="Scaltypesi" name="type"/>
-		</grid>
-		<grid id="FULL_grid_Scalheight2m">
-			<domain domain_ref="FULL"/>
-			<scalar scalar_ref="Scalheight2m" name="height"/>
-		</grid>
-		<grid id="FULL_grid_Scalheight2m_complete">
-			<domain domain_ref="complete"/>
-			<scalar scalar_ref="Scalheight2m" name="height"/>
-		</grid>
-		<grid id="NATURE_grid_Scalsdepth1">
-			<domain domain_ref="NATURE"/>
-			<scalar scalar_ref="Scalsdepth1" name="depth"/>
-		</grid>
-		<grid id="NATURE_grid_Scalsdepth1_complete">
-			<domain domain_ref="complete"/>
-			<scalar scalar_ref="Scalsdepth1" name="depth"/>
-		</grid>
-		<grid id="FULL_grid_Scalheight10m">
-			<domain domain_ref="FULL"/>
-			<scalar scalar_ref="Scalheight10m" name="height"/>
-		</grid>
-		<grid id="FULL_grid_Scalheight10m_complete">
-			<domain domain_ref="complete"/>
-			<scalar scalar_ref="Scalheight10m" name="height"/>
-		</grid>
-		<grid id="FULL_klev_plev8">
-			<domain domain_ref="FULL"/>
-			<axis positive="down" n_glo="8" value="(0,7)[ 100000. 85000. 70000. 50000. 25000. 10000. 5000. 1000. ]" name="plev" standard_name="air_pressure" long_name="pressure" unit="Pa" axis_type="Z">
-				<interpolate_axis type="polynomial" order="1" coordinate="CMIP6_pfull_instant_sampled_3h"/>
-			</axis>
-		</grid>
-		<grid id="FULL_klev_plev8_complete">
-			<domain domain_ref="complete"/>
-			<axis positive="down" n_glo="8" value="(0,7)[ 100000. 85000. 70000. 50000. 25000. 10000. 5000. 1000. ]" name="plev" standard_name="air_pressure" long_name="pressure" unit="Pa" axis_type="Z">
-				<interpolate_axis type="polynomial" order="1" coordinate="CMIP6_pfull_instant_sampled_3h"/>
-			</axis>
-		</grid>
-		<grid id="remapped_areacella_file_grid">
-			<domain domain_ref="remapped_areacella_file_domain"/>
-		</grid>
-		<grid id="NATURE_grid_Scaltypeli">
-			<domain domain_ref="NATURE"/>
-			<scalar scalar_ref="Scaltypeli" name="type"/>
-		</grid>
-		<grid id="NATURE_grid_Scaltypeli_complete">
-			<domain domain_ref="complete"/>
-			<scalar scalar_ref="Scaltypeli" name="type"/>
-		</grid>
-		<grid id="FULL_grid_Scaltypeland">
-			<domain domain_ref="FULL"/>
-			<scalar scalar_ref="Scaltypeland" name="type"/>
-		</grid>
-		<grid id="FULL_grid_Scaltypeland_complete">
-			<domain domain_ref="complete"/>
-			<scalar scalar_ref="Scaltypeland" name="type"/>
-		</grid>
-		<grid id="FULL_klev_complete">
-			<domain domain_ref="complete"/>
-			<axis axis_ref="klev" name="lev"/>
-		</grid>
-		<grid id="FULL_klev_complete_alevel">
-			<domain domain_ref="complete"/>
-			<axis axis_ref="DR_alevel_klev" name="lev" id="ref_to_DR_alevel_klev_74"/>
-		</grid>
-		<grid id="FULL_klev_p100">
-			<domain domain_ref="FULL"/>
-			<axis positive="down" n_glo="1" value="(0,0)[ 10000. ]" name="plev" standard_name="air_pressure" long_name="pressure" unit="Pa" axis_type="Z">
-				<interpolate_axis type="polynomial" order="1" coordinate="CMIP6_pfull_instant_sampled_3h"/>
-			</axis>
-		</grid>
-		<grid id="FULL_klev_Scalp100">
-			<domain domain_ref="FULL"/>
-			<scalar scalar_ref="Scalp100" name="plev"/>
-		</grid>
-		<grid id="FULL_klev_Scalp100_complete">
-			<domain domain_ref="complete"/>
-			<scalar scalar_ref="Scalp100" name="plev"/>
-		</grid>
-		<grid id="FULL_klev_Scalp100_complete_glat">
-			<axis axis_ref="glat" name="lat"/>
-			<scalar scalar_ref="Scalp100" name="plev"/>
-		</grid>
-		<grid id="FULL_klev_half_complete">
-			<domain domain_ref="complete"/>
-			<axis axis_ref="klev_half" name="lev"/>
-		</grid>
-		<grid id="FULL_klev_half_complete_alevel">
-			<domain domain_ref="complete"/>
-			<axis axis_ref="DR_alevel_klev_half" name="lev" id="ref_to_DR_alevel_klev_half_53"/>
-		</grid>
-		<grid id="NATURE_soilcpools_complete">
-			<domain domain_ref="complete"/>
-			<axis axis_ref="soil_carbon_pools"/>
-		</grid>
-		<grid id="NATURE_soilcpools_complete_soilpools">
-			<domain domain_ref="complete"/>
-			<axis axis_ref="DR_soilpools_soil_carbon_pools" name="sector" id="ref_to_DR_soilpools_soil_carbon_pools_76"/>
-		</grid>
-		<grid id="NATURE_grid_Scaltypec3pft">
-			<domain domain_ref="NATURE"/>
-			<scalar scalar_ref="Scaltypec3pft" name="pfttype"/>
-		</grid>
-		<grid id="NATURE_grid_Scaltypec3pft_Scaltypecrop">
-			<domain domain_ref="NATURE"/>
-			<scalar scalar_ref="Scaltypec3pft" name="pfttype"/>
-			<scalar scalar_ref="Scaltypecrop" name="type"/>
-		</grid>
-		<grid id="NATURE_grid_Scaltypec3pft_Scaltypecrop_complete">
-			<domain domain_ref="complete"/>
-			<scalar scalar_ref="Scaltypec3pft" name="pfttype"/>
-			<scalar scalar_ref="Scaltypecrop" name="type"/>
-		</grid>
-		<grid id="NATURE_grid_Scaltypec4pft">
-			<domain domain_ref="NATURE"/>
-			<scalar scalar_ref="Scaltypec4pft" name="pfttype"/>
-		</grid>
-		<grid id="NATURE_grid_Scaltypec4pft_Scaltypecrop">
-			<domain domain_ref="NATURE"/>
-			<scalar scalar_ref="Scaltypec4pft" name="pfttype"/>
-			<scalar scalar_ref="Scaltypecrop" name="type"/>
-		</grid>
-		<grid id="NATURE_grid_Scaltypec4pft_Scaltypecrop_complete">
-			<domain domain_ref="complete"/>
-			<scalar scalar_ref="Scaltypec4pft" name="pfttype"/>
-			<scalar scalar_ref="Scaltypecrop" name="type"/>
-		</grid>
-		<grid id="NATURE_grid_Scaltypec3pft_Scaltypenatgr">
-			<domain domain_ref="NATURE"/>
-			<scalar scalar_ref="Scaltypec3pft" name="pfttype"/>
-			<scalar scalar_ref="Scaltypenatgr" name="type"/>
-		</grid>
-		<grid id="NATURE_grid_Scaltypec3pft_Scaltypenatgr_complete">
-			<domain domain_ref="complete"/>
-			<scalar scalar_ref="Scaltypec3pft" name="pfttype"/>
-			<scalar scalar_ref="Scaltypenatgr" name="type"/>
-		</grid>
-		<grid id="NATURE_grid_Scaltypec4pft_Scaltypenatgr">
-			<domain domain_ref="NATURE"/>
-			<scalar scalar_ref="Scaltypec4pft" name="pfttype"/>
-			<scalar scalar_ref="Scaltypenatgr" name="type"/>
-		</grid>
-		<grid id="NATURE_grid_Scaltypec4pft_Scaltypenatgr_complete">
-			<domain domain_ref="complete"/>
-			<scalar scalar_ref="Scaltypec4pft" name="pfttype"/>
-			<scalar scalar_ref="Scaltypenatgr" name="type"/>
-		</grid>
 		<grid id="FULL_klev_plev7h">
 			<domain domain_ref="FULL"/>
 			<axis positive="down" n_glo="7" value="(0,6)[ 92500. 85000. 70000. 60000. 50000. 25000.  5000. ]" name="plev" standard_name="air_pressure" long_name="pressure" unit="Pa" axis_type="Z">
@@ -32370,29 +32272,6 @@ seaIce: Gelato 6.1 </variable>
 		<grid id="FULL_klev_plev7h_complete">
 			<domain domain_ref="complete"/>
 			<axis positive="down" n_glo="7" value="(0,6)[ 92500. 85000. 70000. 60000. 50000. 25000.  5000. ]" name="plev" standard_name="air_pressure" long_name="pressure" unit="Pa" axis_type="Z">
-				<interpolate_axis type="polynomial" order="1" coordinate="CMIP6_pfull_instant_sampled_3h"/>
-			</axis>
-		</grid>
-		<grid id="NATURE_grid_Scaltypeveg">
-			<domain domain_ref="NATURE"/>
-			<scalar scalar_ref="Scaltypeveg" name="type"/>
-		</grid>
-		<grid id="NATURE_grid_Scaltypeveg_complete">
-			<domain domain_ref="complete"/>
-			<scalar scalar_ref="Scaltypeveg" name="type"/>
-		</grid>
-		<grid id="WATER_grid_complete">
-			<domain domain_ref="complete"/>
-		</grid>
-		<grid id="FULL_klev_Plev39hm">
-			<domain domain_ref="FULL"/>
-			<axis positive="down" n_glo="39" value="(0,38)[ 100000. 92500. 85000. 70000. 60000. 50000. 40000. 30000. 25000. 20000. 17000. 15000. 13000. 11500. 10000. 9000. 8000. 7000. 5000. 3000. 2000. 1500. 1000. 700. 500. 300. 200. 150. 100. 70. 50. 40. 30. 20. 15. 10. 7. 5. 3. ]" name="plev" standard_name="air_pressure" long_name="pressure" unit="Pa" axis_type="Z">
-				<interpolate_axis type="polynomial" order="1" coordinate="CMIP6_pfull_instant_sampled_3h"/>
-			</axis>
-		</grid>
-		<grid id="FULL_klev_Plev39hm_complete">
-			<domain domain_ref="complete"/>
-			<axis positive="down" n_glo="39" value="(0,38)[ 100000. 92500. 85000. 70000. 60000. 50000. 40000. 30000. 25000. 20000. 17000. 15000. 13000. 11500. 10000. 9000. 8000. 7000. 5000. 3000. 2000. 1500. 1000. 700. 500. 300. 200. 150. 100. 70. 50. 40. 30. 20. 15. 10. 7. 5. 3. ]" name="plev" standard_name="air_pressure" long_name="pressure" unit="Pa" axis_type="Z">
 				<interpolate_axis type="polynomial" order="1" coordinate="CMIP6_pfull_instant_sampled_3h"/>
 			</axis>
 		</grid>
@@ -32408,9 +32287,29 @@ seaIce: Gelato 6.1 </variable>
 				<interpolate_axis type="polynomial" order="1" coordinate="CMIP6_pfull_instant_sampled_3h"/>
 			</axis>
 		</grid>
-		<grid id="NATURE_tlayers_complete">
+		<grid id="FULL_klev_plev8">
+			<domain domain_ref="FULL"/>
+			<axis positive="down" n_glo="8" value="(0,7)[ 100000. 85000. 70000. 50000. 25000. 10000. 5000. 1000. ]" name="plev" standard_name="air_pressure" long_name="pressure" unit="Pa" axis_type="Z">
+				<interpolate_axis type="polynomial" order="1" coordinate="CMIP6_pfull_instant_sampled_3h"/>
+			</axis>
+		</grid>
+		<grid id="FULL_klev_plev8_complete">
 			<domain domain_ref="complete"/>
-			<axis axis_ref="ground_layer_for_temperature" name="sdepth"/>
+			<axis positive="down" n_glo="8" value="(0,7)[ 100000. 85000. 70000. 50000. 25000. 10000. 5000. 1000. ]" name="plev" standard_name="air_pressure" long_name="pressure" unit="Pa" axis_type="Z">
+				<interpolate_axis type="polynomial" order="1" coordinate="CMIP6_pfull_instant_sampled_3h"/>
+			</axis>
+		</grid>
+		<grid id="NATURE_glayers_complete">
+			<domain domain_ref="complete"/>
+			<axis axis_ref="ground_layer" name="sdepth"/>
+		</grid>
+		<grid id="NATURE_grid_Scalsdepth1">
+			<domain domain_ref="NATURE"/>
+			<scalar scalar_ref="Scalsdepth1" name="depth"/>
+		</grid>
+		<grid id="NATURE_grid_Scalsdepth1_complete">
+			<domain domain_ref="complete"/>
+			<scalar scalar_ref="Scalsdepth1" name="depth"/>
 		</grid>
 		<grid id="NATURE_grid_Scaltypebare">
 			<domain domain_ref="NATURE"/>
@@ -32428,9 +32327,57 @@ seaIce: Gelato 6.1 </variable>
 			<domain domain_ref="complete"/>
 			<scalar scalar_ref="Scaltypeburnt" name="type"/>
 		</grid>
+		<grid id="NATURE_grid_Scaltypec3pft">
+			<domain domain_ref="NATURE"/>
+			<scalar scalar_ref="Scaltypec3pft" name="pfttype"/>
+		</grid>
+		<grid id="NATURE_grid_Scaltypec3pft_Scaltypecrop">
+			<domain domain_ref="NATURE"/>
+			<scalar scalar_ref="Scaltypec3pft" name="pfttype"/>
+			<scalar scalar_ref="Scaltypecrop" name="type"/>
+		</grid>
+		<grid id="NATURE_grid_Scaltypec3pft_Scaltypecrop_complete">
+			<domain domain_ref="complete"/>
+			<scalar scalar_ref="Scaltypec3pft" name="pfttype"/>
+			<scalar scalar_ref="Scaltypecrop" name="type"/>
+		</grid>
+		<grid id="NATURE_grid_Scaltypec3pft_Scaltypenatgr">
+			<domain domain_ref="NATURE"/>
+			<scalar scalar_ref="Scaltypec3pft" name="pfttype"/>
+			<scalar scalar_ref="Scaltypenatgr" name="type"/>
+		</grid>
+		<grid id="NATURE_grid_Scaltypec3pft_Scaltypenatgr_complete">
+			<domain domain_ref="complete"/>
+			<scalar scalar_ref="Scaltypec3pft" name="pfttype"/>
+			<scalar scalar_ref="Scaltypenatgr" name="type"/>
+		</grid>
 		<grid id="NATURE_grid_Scaltypec3pft_complete">
 			<domain domain_ref="complete"/>
 			<scalar scalar_ref="Scaltypec3pft" name="pfttype"/>
+		</grid>
+		<grid id="NATURE_grid_Scaltypec4pft">
+			<domain domain_ref="NATURE"/>
+			<scalar scalar_ref="Scaltypec4pft" name="pfttype"/>
+		</grid>
+		<grid id="NATURE_grid_Scaltypec4pft_Scaltypecrop">
+			<domain domain_ref="NATURE"/>
+			<scalar scalar_ref="Scaltypec4pft" name="pfttype"/>
+			<scalar scalar_ref="Scaltypecrop" name="type"/>
+		</grid>
+		<grid id="NATURE_grid_Scaltypec4pft_Scaltypecrop_complete">
+			<domain domain_ref="complete"/>
+			<scalar scalar_ref="Scaltypec4pft" name="pfttype"/>
+			<scalar scalar_ref="Scaltypecrop" name="type"/>
+		</grid>
+		<grid id="NATURE_grid_Scaltypec4pft_Scaltypenatgr">
+			<domain domain_ref="NATURE"/>
+			<scalar scalar_ref="Scaltypec4pft" name="pfttype"/>
+			<scalar scalar_ref="Scaltypenatgr" name="type"/>
+		</grid>
+		<grid id="NATURE_grid_Scaltypec4pft_Scaltypenatgr_complete">
+			<domain domain_ref="complete"/>
+			<scalar scalar_ref="Scaltypec4pft" name="pfttype"/>
+			<scalar scalar_ref="Scaltypenatgr" name="type"/>
 		</grid>
 		<grid id="NATURE_grid_Scaltypec4pft_complete">
 			<domain domain_ref="complete"/>
@@ -32444,6 +32391,22 @@ seaIce: Gelato 6.1 </variable>
 			<domain domain_ref="complete"/>
 			<scalar scalar_ref="Scaltypecrop" name="type"/>
 		</grid>
+		<grid id="NATURE_grid_Scaltypegis">
+			<domain domain_ref="NATURE"/>
+			<scalar scalar_ref="Scaltypegis" name="type"/>
+		</grid>
+		<grid id="NATURE_grid_Scaltypegis_complete">
+			<domain domain_ref="complete"/>
+			<scalar scalar_ref="Scaltypegis" name="type"/>
+		</grid>
+		<grid id="NATURE_grid_Scaltypeli">
+			<domain domain_ref="NATURE"/>
+			<scalar scalar_ref="Scaltypeli" name="type"/>
+		</grid>
+		<grid id="NATURE_grid_Scaltypeli_complete">
+			<domain domain_ref="complete"/>
+			<scalar scalar_ref="Scaltypeli" name="type"/>
+		</grid>
 		<grid id="NATURE_grid_Scaltypenatgr">
 			<domain domain_ref="NATURE"/>
 			<scalar scalar_ref="Scaltypenatgr" name="type"/>
@@ -32451,14 +32414,6 @@ seaIce: Gelato 6.1 </variable>
 		<grid id="NATURE_grid_Scaltypenatgr_complete">
 			<domain domain_ref="complete"/>
 			<scalar scalar_ref="Scaltypenatgr" name="type"/>
-		</grid>
-		<grid id="NATURE_vegtype_complete">
-			<domain domain_ref="complete"/>
-			<axis axis_ref="vegtype"/>
-		</grid>
-		<grid id="NATURE_vegtype_complete_vegtype">
-			<domain domain_ref="complete"/>
-			<axis axis_ref="DR_vegtype_vegtype" name="sector" id="ref_to_DR_vegtype_vegtype_77"/>
 		</grid>
 		<grid id="NATURE_grid_Scaltyperesidual">
 			<domain domain_ref="NATURE"/>
@@ -32476,26 +32431,71 @@ seaIce: Gelato 6.1 </variable>
 			<domain domain_ref="complete"/>
 			<scalar scalar_ref="Scaltypetree" name="type"/>
 		</grid>
+		<grid id="NATURE_grid_Scaltypeveg">
+			<domain domain_ref="NATURE"/>
+			<scalar scalar_ref="Scaltypeveg" name="type"/>
+		</grid>
+		<grid id="NATURE_grid_Scaltypeveg_complete">
+			<domain domain_ref="complete"/>
+			<scalar scalar_ref="Scaltypeveg" name="type"/>
+		</grid>
+		<grid id="NATURE_grid_complete">
+			<domain domain_ref="complete"/>
+		</grid>
+		<grid id="NATURE_soilcpools_complete">
+			<domain domain_ref="complete"/>
+			<axis axis_ref="soil_carbon_pools"/>
+		</grid>
+		<grid id="NATURE_soilcpools_complete_soilpools">
+			<domain domain_ref="complete"/>
+			<axis axis_ref="DR_soilpools_soil_carbon_pools" name="soilpools" id="ref_to_DR_soilpools_soil_carbon_pools_76"/>
+		</grid>
+		<grid id="NATURE_tlayers_complete">
+			<domain domain_ref="complete"/>
+			<axis axis_ref="ground_layer_for_temperature" name="sdepth"/>
+		</grid>
+		<grid id="NATURE_vegtype_complete">
+			<domain domain_ref="complete"/>
+			<axis axis_ref="vegtype"/>
+		</grid>
+		<grid id="NATURE_vegtype_complete_vegtype">
+			<domain domain_ref="complete"/>
+			<axis axis_ref="DR_vegtype_vegtype" name="type" id="ref_to_DR_vegtype_vegtype_77"/>
+		</grid>
+		<grid id="SEA_grid_Scaltypesi">
+			<domain domain_ref="SEA"/>
+			<scalar scalar_ref="Scaltypesi" name="type"/>
+		</grid>
+		<grid id="SEA_grid_Scaltypesi_complete">
+			<domain domain_ref="complete"/>
+			<scalar scalar_ref="Scaltypesi" name="type"/>
+		</grid>
+		<grid id="WATER_grid_complete">
+			<domain domain_ref="complete"/>
+		</grid>
+		<grid id="remapped_areacella_file_grid">
+			<domain domain_ref="remapped_areacella_file_domain"/>
+		</grid>
 	</grid_definition>
 	<scalar_definition>
+		<scalar id="Scalheight10m" name="height" standard_name="height" long_name="height" prec="8" value="10." axis_type="Z" positive="up" unit="m"/>
+		<scalar id="Scalheight2m" name="height" standard_name="height" long_name="height" prec="8" value="2." axis_type="Z" positive="up" unit="m"/>
+		<scalar id="Scalp100" name="plev" standard_name="air_pressure" long_name="pressure" prec="8" value="10000." axis_type="Z" positive="down" unit="Pa"/>
 		<scalar id="Scalp500" name="plev" standard_name="air_pressure" long_name="pressure" prec="8" value="50000." axis_type="Z" positive="down" unit="Pa"/>
 		<scalar id="Scalp850" name="plev" standard_name="air_pressure" long_name="pressure" prec="8" value="85000." axis_type="Z" positive="down" unit="Pa"/>
-		<scalar id="Scaltypegis" name="type" standard_name="area_type" long_name="Grounded Ice Sheet area type" label="typegis"/>
-		<scalar id="Scaltypesi" name="type" standard_name="area_type" long_name="Sea Ice area type" label="typesi"/>
-		<scalar id="Scalheight2m" name="height" standard_name="height" long_name="height" prec="8" value="2." axis_type="Z" positive="up" unit="m"/>
 		<scalar id="Scalsdepth1" name="depth" standard_name="depth" long_name="depth" prec="8" value="0.05" bounds="(0,1)[ 0.0 0.1 ]" bounds_name="depth_bounds" axis_type="Z" positive="down" unit="m"/>
-		<scalar id="Scalheight10m" name="height" standard_name="height" long_name="height" prec="8" value="10." axis_type="Z" positive="up" unit="m"/>
-		<scalar id="Scaltypeli" name="type" standard_name="area_type" long_name="Land Ice area type" label="typeli"/>
-		<scalar id="Scaltypeland" name="type" standard_name="area_type" long_name="Land area type" label="typeland"/>
-		<scalar id="Scalp100" name="plev" standard_name="air_pressure" long_name="pressure" prec="8" value="10000." axis_type="Z" positive="down" unit="Pa"/>
-		<scalar id="Scaltypec3pft" name="pfttype" standard_name="area_type" long_name="surface type" label="typec3pft"/>
-		<scalar id="Scaltypecrop" name="type" standard_name="area_type" long_name="Crop area type" label="typecrop"/>
-		<scalar id="Scaltypec4pft" name="pfttype" standard_name="area_type" long_name="surface type" label="typec4pft"/>
-		<scalar id="Scaltypenatgr" name="type" standard_name="area_type" long_name="Natural grass area type" label="typenatgr"/>
-		<scalar id="Scaltypeveg" name="type" standard_name="area_type" long_name="Vegetation area type" label="typeveg"/>
 		<scalar id="Scaltypebare" name="type" standard_name="area_type" long_name="surface type" label="typebare"/>
 		<scalar id="Scaltypeburnt" name="type" standard_name="area_type" long_name="Burnt vegetation area type" label="typeburnt"/>
+		<scalar id="Scaltypec3pft" name="pfttype" standard_name="area_type" long_name="surface type" label="typec3pft"/>
+		<scalar id="Scaltypec4pft" name="pfttype" standard_name="area_type" long_name="surface type" label="typec4pft"/>
+		<scalar id="Scaltypecrop" name="type" standard_name="area_type" long_name="Crop area type" label="typecrop"/>
+		<scalar id="Scaltypegis" name="type" standard_name="area_type" long_name="Grounded Ice Sheet area type" label="typegis"/>
+		<scalar id="Scaltypeland" name="type" standard_name="area_type" long_name="Land area type" label="typeland"/>
+		<scalar id="Scaltypeli" name="type" standard_name="area_type" long_name="Land Ice area type" label="typeli"/>
+		<scalar id="Scaltypenatgr" name="type" standard_name="area_type" long_name="Natural grass area type" label="typenatgr"/>
 		<scalar id="Scaltyperesidual" name="type" long_name="Residual area" label="typeresidual"/>
+		<scalar id="Scaltypesi" name="type" standard_name="area_type" long_name="Sea Ice area type" label="typesi"/>
 		<scalar id="Scaltypetree" name="type" standard_name="area_type" long_name="Tree area type" label="typetree"/>
+		<scalar id="Scaltypeveg" name="type" standard_name="area_type" long_name="Vegetation area type" label="typeveg"/>
 	</scalar_definition>
 </context>

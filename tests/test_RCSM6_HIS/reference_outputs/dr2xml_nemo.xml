@@ -3600,34 +3600,16 @@
 	<field_definition>
 		<field id="CMIP6_diftrblo2d_average" field_ref="CMIP6_diftrblo2d" operation="average"/>
 		<field id="CMIP6_diftrxylo2d_average" field_ref="CMIP6_diftrxylo2d" operation="average"/>
-		<field id="CMIP6_mxldepth_average" field_ref="CMIP6_mxldepth" operation="average"/>
-		<field id="CMIP6_rhop_average" field_ref="CMIP6_rhop" operation="average"/>
-		<field id="CMIP6_somixhgt_average" field_ref="CMIP6_somixhgt" operation="average"/>
-		<field id="CMIP6_tml_average" field_ref="CMIP6_tml" operation="average"/>
-		<field id="CMIP6_tmlatf_average" field_ref="CMIP6_tmlatf" operation="average"/>
-		<field id="CMIP6_tmlfor_average" field_ref="CMIP6_tmlfor" operation="average"/>
-		<field id="CMIP6_tmlldf_average" field_ref="CMIP6_tmlldf" operation="average"/>
-		<field id="CMIP6_tmlres_average" field_ref="CMIP6_tmlres" operation="average"/>
-		<field id="CMIP6_tmltot_average" field_ref="CMIP6_tmltot" operation="average"/>
-		<field id="CMIP6_tmlyad_average" field_ref="CMIP6_tmlyad" operation="average"/>
-		<field id="CMIP6_tmlzad_average" field_ref="CMIP6_tmlzad" operation="average"/>
-		<field id="CMIP6_tmlzdf_average" field_ref="CMIP6_tmlzdf" operation="average"/>
-		<field id="CMIP6_votke_average" field_ref="CMIP6_votke" operation="average"/>
-		<field id="CMIP6_votkeavt_average" field_ref="CMIP6_votkeavt" operation="average"/>
 		<field id="CMIP6_friver_average" field_ref="CMIP6_friver" operation="average"/>
 		<field id="CMIP6_hfds_average" field_ref="CMIP6_hfds" operation="average"/>
+		<field id="CMIP6_mxldepth_average" field_ref="CMIP6_mxldepth" operation="average"/>
+		<field id="CMIP6_obvfsq_average" field_ref="CMIP6_obvfsq" operation="average"/>
+		<field id="CMIP6_rhop_average" field_ref="CMIP6_rhop" operation="average"/>
 		<field id="CMIP6_rsntds_average" field_ref="CMIP6_rsntds" operation="average"/>
 		<field id="CMIP6_sfdsi_average" field_ref="CMIP6_sfdsi" operation="average"/>
 		<field id="CMIP6_so_average" field_ref="CMIP6_so" operation="average"/>
+		<field id="CMIP6_somixhgt_average" field_ref="CMIP6_somixhgt" operation="average"/>
 		<field id="CMIP6_sos_average" field_ref="CMIP6_sos" operation="average"/>
-		<field id="CMIP6_thetao_average" field_ref="CMIP6_thetao" operation="average"/>
-		<field id="CMIP6_tos_average" field_ref="CMIP6_tos" operation="average"/>
-		<field id="CMIP6_uo_average" field_ref="CMIP6_uo" operation="average"/>
-		<field id="CMIP6_vo_average" field_ref="CMIP6_vo" operation="average"/>
-		<field id="CMIP6_wfo_average" field_ref="CMIP6_wfo" operation="average"/>
-		<field id="CMIP6_wfonocorr_average" field_ref="CMIP6_wfonocorr" operation="average"/>
-		<field id="CMIP6_wo_average" field_ref="CMIP6_wo" operation="average"/>
-		<field id="CMIP6_zos_average" field_ref="CMIP6_zos" operation="average"/>
 		<field id="CMIP6_strdatf_average" field_ref="CMIP6_strdatf" operation="average"/>
 		<field id="CMIP6_strdcdt_average" field_ref="CMIP6_strdcdt" operation="average"/>
 		<field id="CMIP6_strdldf_average" field_ref="CMIP6_strdldf" operation="average"/>
@@ -3637,6 +3619,17 @@
 		<field id="CMIP6_strdyad_average" field_ref="CMIP6_strdyad" operation="average"/>
 		<field id="CMIP6_strdzad_average" field_ref="CMIP6_strdzad" operation="average"/>
 		<field id="CMIP6_strdzdf_average" field_ref="CMIP6_strdzdf" operation="average"/>
+		<field id="CMIP6_thetao_average" field_ref="CMIP6_thetao" operation="average"/>
+		<field id="CMIP6_tml_average" field_ref="CMIP6_tml" operation="average"/>
+		<field id="CMIP6_tmlatf_average" field_ref="CMIP6_tmlatf" operation="average"/>
+		<field id="CMIP6_tmlfor_average" field_ref="CMIP6_tmlfor" operation="average"/>
+		<field id="CMIP6_tmlldf_average" field_ref="CMIP6_tmlldf" operation="average"/>
+		<field id="CMIP6_tmlres_average" field_ref="CMIP6_tmlres" operation="average"/>
+		<field id="CMIP6_tmltot_average" field_ref="CMIP6_tmltot" operation="average"/>
+		<field id="CMIP6_tmlyad_average" field_ref="CMIP6_tmlyad" operation="average"/>
+		<field id="CMIP6_tmlzad_average" field_ref="CMIP6_tmlzad" operation="average"/>
+		<field id="CMIP6_tmlzdf_average" field_ref="CMIP6_tmlzdf" operation="average"/>
+		<field id="CMIP6_tos_average" field_ref="CMIP6_tos" operation="average"/>
 		<field id="CMIP6_ttrdatf_average" field_ref="CMIP6_ttrdatf" operation="average"/>
 		<field id="CMIP6_ttrdldf_average" field_ref="CMIP6_ttrdldf" operation="average"/>
 		<field id="CMIP6_ttrdqns_average" field_ref="CMIP6_ttrdqns" operation="average"/>
@@ -3647,6 +3640,7 @@
 		<field id="CMIP6_ttrdyad_average" field_ref="CMIP6_ttrdyad" operation="average"/>
 		<field id="CMIP6_ttrdzad_average" field_ref="CMIP6_ttrdzad" operation="average"/>
 		<field id="CMIP6_ttrdzdf_average" field_ref="CMIP6_ttrdzdf" operation="average"/>
+		<field id="CMIP6_uo_average" field_ref="CMIP6_uo" operation="average"/>
 		<field id="CMIP6_utrdbfr_average" field_ref="CMIP6_utrdbfr" operation="average"/>
 		<field id="CMIP6_utrdhpg_average" field_ref="CMIP6_utrdhpg" operation="average"/>
 		<field id="CMIP6_utrdkeg_average" field_ref="CMIP6_utrdkeg" operation="average"/>
@@ -3658,7 +3652,10 @@
 		<field id="CMIP6_utrdtot_average" field_ref="CMIP6_utrdtot" operation="average"/>
 		<field id="CMIP6_utrdzad_average" field_ref="CMIP6_utrdzad" operation="average"/>
 		<field id="CMIP6_utrdzdf_average" field_ref="CMIP6_utrdzdf" operation="average"/>
+		<field id="CMIP6_vo_average" field_ref="CMIP6_vo" operation="average"/>
 		<field id="CMIP6_voavtbn2_average" field_ref="CMIP6_voavtbn2" operation="average"/>
+		<field id="CMIP6_votke_average" field_ref="CMIP6_votke" operation="average"/>
+		<field id="CMIP6_votkeavt_average" field_ref="CMIP6_votkeavt" operation="average"/>
 		<field id="CMIP6_vtrdbfr_average" field_ref="CMIP6_vtrdbfr" operation="average"/>
 		<field id="CMIP6_vtrdhpg_average" field_ref="CMIP6_vtrdhpg" operation="average"/>
 		<field id="CMIP6_vtrdkeg_average" field_ref="CMIP6_vtrdkeg" operation="average"/>
@@ -3670,21 +3667,16 @@
 		<field id="CMIP6_vtrdtot_average" field_ref="CMIP6_vtrdtot" operation="average"/>
 		<field id="CMIP6_vtrdzad_average" field_ref="CMIP6_vtrdzad" operation="average"/>
 		<field id="CMIP6_vtrdzdf_average" field_ref="CMIP6_vtrdzdf" operation="average"/>
-		<field id="CMIP6_obvfsq_average" field_ref="CMIP6_obvfsq" operation="average"/>
+		<field id="CMIP6_wfo_average" field_ref="CMIP6_wfo" operation="average"/>
+		<field id="CMIP6_wfonocorr_average" field_ref="CMIP6_wfonocorr" operation="average"/>
+		<field id="CMIP6_wo_average" field_ref="CMIP6_wo" operation="average"/>
+		<field id="CMIP6_zos_average" field_ref="CMIP6_zos" operation="average"/>
 	</field_definition>
 	<axis_definition>
 		<axis_group prec="8"/>
 	</axis_definition>
 	<domain_definition>
 		<domain_group prec="8">
-			<domain id="CMIP6_25km" ni_glo="1440" nj_glo="720" type="rectilinear" prec="8">
-				<generate_rectilinear_domain/>
-				<interpolate_domain order="1" renormalize="true" mode="read_or_compute" write_weight="true"/>
-			</domain>
-			<domain id="CMIP6_50km" ni_glo="720" nj_glo="360" type="rectilinear" prec="8">
-				<generate_rectilinear_domain/>
-				<interpolate_domain order="1" renormalize="true" mode="read_or_compute" write_weight="true"/>
-			</domain>
 			<domain id="CMIP6_100km" ni_glo="360" nj_glo="180" type="rectilinear" prec="8">
 				<generate_rectilinear_domain/>
 				<interpolate_domain order="1" renormalize="true" mode="read_or_compute" write_weight="true"/>
@@ -3693,7 +3685,15 @@
 				<generate_rectilinear_domain/>
 				<interpolate_domain order="1" renormalize="true" mode="read_or_compute" write_weight="true"/>
 			</domain>
+			<domain id="CMIP6_25km" ni_glo="1440" nj_glo="720" type="rectilinear" prec="8">
+				<generate_rectilinear_domain/>
+				<interpolate_domain order="1" renormalize="true" mode="read_or_compute" write_weight="true"/>
+			</domain>
 			<domain id="CMIP6_2deg" ni_glo="180" nj_glo="90" type="rectilinear" prec="8">
+				<generate_rectilinear_domain/>
+				<interpolate_domain order="1" renormalize="true" mode="read_or_compute" write_weight="true"/>
+			</domain>
+			<domain id="CMIP6_50km" ni_glo="720" nj_glo="360" type="rectilinear" prec="8">
 				<generate_rectilinear_domain/>
 				<interpolate_domain order="1" renormalize="true" mode="read_or_compute" write_weight="true"/>
 			</domain>

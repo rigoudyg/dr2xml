@@ -3,6 +3,7 @@
 
 
 lab_and_model_settings = {
+    "vocabulary_used": "dr2xml_test",
     'data_request_used': 'CMIP7',
     'data_request_content_version': 'test',
     'project': 'CMIP7',
@@ -25,7 +26,7 @@ lab_and_model_settings = {
         }
     },
     'grid_choice': {
-        'CNRM-ESM2-1': 'LR',
+        'CNRM-ESM2-1e': 'LR',
         'CNRM-ESM2-1-HR': 'HR',
         'CNRM-CM6-1': 'LR',
         'CNRM-CM6-1-HR': 'HR'
@@ -60,24 +61,32 @@ lab_and_model_settings = {
         'HR': [1514100, 75, 259200, 91, 30, 14, 128],
         'LR': [106428, 75, 32768, 91, 30, 14, 128]
     },
+    'source': """CNRM-ESM2-1e (2017):
+aerosol: TACTIC_v2
+atmos: Arpege 6.3 (T127; Gaussian Reduced with 24572 grid points in total distributed over 128 latitude circles (with 256 grid points per latitude circle between 30degN and 30degS reducing to 20 grid points per latitude circle at 88.9degN and 88.9degS); 91 levels; top level 78.4 km)
+atmosChem: REPROBUS-C_v2
+land: Surfex 8.0c
+ocean: Nemo 3.6 (eORCA1, tripolar primarily 1deg; 362 x 294 longitude/latitude; 75 levels; top grid cell 0-1 m)
+ocnBgchem: Pisces 2.s
+seaIce: Gelato 6.1""",
     'source_types': {
-        'CNRM-ESM2-1': 'AOGCM BGC AER CHEM',
+        'CNRM-ESM2-1e': 'AOGCM BGC AER CHEM',
         'CNRM-ESM2-1-HR': 'AOGCM BGC AER',
         'CNRM-CM6-1': 'AOGCM',
         'CNRM-CM6-1-HR': 'AOGCM'
     },
     'configurations': {
         'AOESMHR': ('CNRM-ESM2-1-HR', 'AOGCM BGC AER', []),
-        'AESM': ('CNRM-ESM2-1', 'AGCM BGC AER CHEM', ['nemo']),
+        'AESM': ('CNRM-ESM2-1e', 'AGCM BGC AER CHEM', ['nemo']),
         'OESMHR': ('CNRM-ESM2-1-HR', 'OGCM BGC', ['surfex', 'trip']),
-        'AOESM': ('CNRM-ESM2-1', 'AOGCM BGC AER CHEM', []),
-        'LESM': ('CNRM-ESM2-1', 'LAND BGC', ['nemo']),
+        'AOESM': ('CNRM-ESM2-1e', 'AOGCM BGC AER CHEM', []),
+        'LESM': ('CNRM-ESM2-1e', 'LAND BGC', ['nemo']),
         'AGCM': ('CNRM-CM6-1', 'AGCM', ['nemo']),
         'OGCMHR': ('CNRM-CM6-1-HR', 'OGCM', ['surfex', 'trip']),
         'AOGCMHR': ('CNRM-CM6-1-HR', 'AOGCM', []),
         'AGCMHR': ('CNRM-CM6-1-HR', 'AGCM', ['nemo']),
-        'OESM': ('CNRM-ESM2-1', 'OGCM BGC', ['surfex', 'trip']),
-        'AESMHR': ('CNRM-ESM2-1', 'AGCM BGC AER', []),
+        'OESM': ('CNRM-ESM2-1e', 'OGCM BGC', ['surfex', 'trip']),
+        'AESMHR': ('CNRM-ESM2-1e', 'AGCM BGC AER', []),
         'AOGCM': ('CNRM-CM6-1', 'AOGCM', []),
         'LGCM': ('CNRM-CM6-1', 'LAND', ['nemo']),
         'OGCM': ('CNRM-CM6-1', 'OGCM', ['surfex', 'trip'])
@@ -156,6 +165,7 @@ lab_and_model_settings = {
                  'jpdftaureicemodis', 'clmisr']
     },
     'institution_id': 'CNRM-CERFACS',
+    'institution': 'CNRM (Centre National de Recherches Meteorologiques, Toulouse 31057, France), CERFACS (Centre Europeen de Recherche et de Formation Avancee en Calcul Scientifique, Toulouse 31057, France)',
     'excluded_spshapes': ['XYA-na', 'XYG-na', 'na-A'],
     'mips': {
         'HR': {},
@@ -175,7 +185,7 @@ lab_and_model_settings = {
         'klev_half': 'alevel'
     },
     'branching': {
-        'CNRM-ESM2-1': {
+        'CNRM-ESM2-1e': {
             'historical': (1850, [1850, 1883, 1941])
         },
         'CNRM-CM6-1': {
@@ -217,5 +227,6 @@ lab_and_model_settings = {
     'contact': 'contact.cmip@meteo.fr',
     'compression_level': 4,
     'grid_policy': 'adhoc',
-    'bytes_per_float': 2.4
+    'bytes_per_float': 2.4,
+    'parent_activity_id':"CMIP"
 }

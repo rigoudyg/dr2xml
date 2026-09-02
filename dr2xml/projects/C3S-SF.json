@@ -1,0 +1,359 @@
+{
+  "parent_project_settings": "basics",
+  "functions_file": "C3S-SF_func.py",
+  "common": {
+    "grid_mapping": {
+      "help": "Grid mapping name.",
+      "values": [
+        {
+          "type": "value",
+          "origin": "simulation",
+          "keys": ["grid_mapping"]
+        }
+      ]
+    },
+    "forecast_reference_time": {
+      "help": "Reference time for the forecast done in the simulation.",
+      "values": [
+        {
+          "type": "value",
+          "origin": "simulation",
+          "keys": ["forecast_reference_time"]
+        }
+      ]
+    },
+    "forecast_type": {
+      "help": "Type of forecast done.",
+      "values": [
+        {
+          "type": "value",
+          "origin": "simulation",
+          "keys": ["forecast_type"]
+        }
+      ]
+    },
+    "convention_str": {
+      "values": [
+        {
+          "type": "value",
+          "origin": "laboratory",
+          "keys": ["convention_str"]
+        }
+      ]
+    },
+    "commit": {
+      "help": "Id of the commits associated with the model.",
+      "values": [
+        {
+          "type": "value",
+          "origin": "simulation",
+          "keys": ["commit"]
+        },
+        {
+          "type": "value",
+          "origin": "laboratory",
+          "keys": ["commit"]
+        }
+      ]
+    },
+    "summary": {
+      "help": "Short explanation about the simulation.",
+      "values": [
+        {
+          "type": "value",
+          "origin": "simulation",
+          "keys": ["summary"]
+        },
+        {
+          "type": "value",
+          "origin": "laboratory",
+          "keys": ["summary"]
+        }
+      ]
+    },
+    "keywords": {
+      "help": "Keywords associated with the simulation.",
+      "values": [
+        {
+          "type": "value",
+          "origin": "simulation",
+          "keys": ["keywords"],
+          "format": {
+            "type": "func",
+            "origin": "self",
+            "keys": ["join"],
+            "template": ", "
+          }
+        },
+        {
+          "type": "value",
+          "origin": "laboratory",
+          "keys": ["keywords"],
+          "format": {
+            "type": "func",
+            "origin": "self",
+            "keys": ["join"],
+            "template": ", "
+          }
+        }
+      ]
+    }
+  },
+  "project_settings": {
+    "file_output": {
+      "attrs_constraints": {
+        "name": {
+          "values": [
+            {
+              "type": "func",
+              "origin": "functions_file",
+              "keys": ["build_filename"],
+              "options": {
+                "frequency": {
+                  "type": "func",
+                  "origin": "functions_file",
+                  "keys": ["convert_frequency"],
+                  "options": {
+                    "freq": {
+                      "type": "value",
+                      "origin": "variable",
+                      "keys": ["frequency"]
+                    }
+                  }
+                },
+                "expid_in_filename": {
+                  "type": "value",
+                  "origin": "common",
+                  "keys": ["expid_in_filename"]
+                },
+                "date_range": {
+                  "type": "value",
+                  "origin": "common",
+                  "keys": ["date_range"]
+                },
+                "list_perso_dev_file": {
+                  "type": "value",
+                  "origin": "common",
+                  "keys": ["list_perso_dev_file"]
+                },
+                "var_type": {
+                  "type": "value",
+                  "origin": "variable",
+                  "keys": ["type"]
+                },
+                "label": {
+                  "type": "value",
+                  "origin": "variable",
+                  "keys": ["label"]
+                },
+                "realm": {
+                  "type": "func",
+                  "origin": "functions_file",
+                  "keys": ["convert_realm"],
+                  "options": {
+                    "realm": {
+                      "type": "value",
+                      "origin": "variable",
+                      "keys": ["modeling_realm"]
+                    }
+                  }
+                }
+              }
+            }
+          ]
+        },
+        "uuid_name": {
+          "values": [
+            {
+              "type": "value",
+              "origin": "attrs",
+              "keys": ["uuid_name"]
+            },
+            "uuid"
+          ]
+        },
+        "uuid_format": {
+          "values": [
+            {
+              "type": "value",
+              "origin": "attrs",
+              "keys": ["uuid_format"]
+            },
+            "%uuid%"
+          ]
+        }
+      },
+      "vars_list": ["description", "title", "source", "institution_id", "institution", "contact", "project", "comment",
+                   "forecast_type", "realm", "frequency", "level_type", "history", "references", "commit", "summary",
+                   "keywords", "forecast_reference_time"],
+      "vars_constraints": {
+        "institution_id": {
+          "output_key": "institute_id"
+        },
+        "project": {
+          "help": "Project associated with the file.",
+          "values": [
+            {
+              "type": "value",
+              "origin": "attrs",
+              "keys": ["project"]
+            }
+          ]
+        },
+        "keywords": {
+          "help": "Keywords associated with the file.",
+          "values": [
+            {
+              "type": "value",
+              "origin": "attrs",
+              "keys": ["keywords"]
+            }
+          ]
+        },
+        "forecast_type": {
+          "help": "Forecast type associated with the file.",
+          "values": [
+            {
+              "type": "value",
+              "origin": "attrs",
+              "keys": ["forecast_type"]
+            },
+            {
+              "type": "value",
+              "origin": "common",
+              "keys": ["forecast_type"]
+            }
+          ]
+        },
+        "realm": {
+          "output_key": "modeling_realm",
+          "values": [
+            {
+              "type": "func",
+              "origin": "functions_file",
+              "keys": [
+                "convert_realm"
+              ],
+              "options": {
+                "realm": {
+                  "type": "value",
+                  "origin": "attrs",
+                  "keys": ["realm"]
+                }
+              }
+            },
+            {
+              "type": "func",
+              "origin": "functions_file",
+              "keys": [
+                "convert_realm"
+              ],
+              "options": {
+                "realm": {
+                  "type": "value",
+                  "origin": "variable",
+                  "keys": ["modeling_realm"]
+                }
+              }
+            }
+          ]
+        },
+        "level_type": {
+          "help": "Level type associated with the file.",
+          "values": [
+            {
+              "type": "value",
+              "origin": "attrs",
+              "keys": ["level_type"]
+            },
+            {
+              "type": "value",
+              "origin": "variable",
+              "keys": ["level_type"]
+            }
+          ]
+        },
+        "commit": {
+          "help": "Commit associated with the file.",
+          "values": [
+            {
+              "type": "value",
+              "origin": "attrs",
+              "keys": ["commit"]
+            },
+            {
+              "type": "value",
+              "origin": "common",
+              "keys": ["commit"]
+            }
+          ]
+        },
+        "summary": {
+          "help": "Summary associated with the file.",
+          "values": [
+            {
+              "type": "value",
+              "origin": "attrs",
+              "keys": ["summary"]
+            },
+            {
+              "type": "value",
+              "origin": "common",
+              "keys": ["summary"]
+            }
+          ]
+        },
+        "forecast_reference_time": {
+          "help": "Forecast reference time associated with the file.",
+          "values": [
+            {
+              "type": "value",
+              "origin": "attrs",
+              "keys": ["forecast_reference_time"]
+            },
+            {
+              "type": "value",
+              "origin": "common",
+              "keys": ["forecast_reference_time"]
+            }
+          ]
+        }
+      }
+    },
+    "field_output": {
+      "vars_list": ["standard_name", "long_name", "coordinates", "grid_mapping", "units"],
+      "vars_constraints": {
+        "grid_mapping": {
+          "help": "Grid mapping associated with the file.",
+          "values": [
+            {
+              "type": "value",
+              "origin": "attrs",
+              "keys": ["grid_mapping"]
+            },
+            {
+              "type": "value",
+              "origin": "common",
+              "keys": ["grid_mapping"]
+            }
+          ]
+        },
+        "coordinates": {
+          "help": "Coordinates of the output field.",
+          "values": [
+            {
+              "type": "value",
+              "origin": "attrs",
+              "keys": ["coordinates"]
+            },
+            {
+              "type": "value",
+              "origin": "variable",
+              "keys": ["coordinates"]
+            }
+          ]
+        }
+      }
+    }
+  }
+}

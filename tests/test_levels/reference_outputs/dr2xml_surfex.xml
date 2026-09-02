@@ -217,22 +217,22 @@ seaIce: Gelato 6.1 </variable>
 	<field_definition>
 		<field id="CMIP6_orog_scalar" grid_ref="FULL_grid_scalar"> CMIP6_orog </field>
 		<field id="CMIP6_orog_scalar_duplicate" field_ref="CMIP6_orog_scalar" grid_ref="FULL_klev_hlev"/>
-		<field id="height_over_orog" grid_ref="FULL_klev"> zg - CMIP6_orog_scalar_duplicate </field>
-		<field id="zg50_HG50" field_ref="CMIP6_zg" grid_ref="FULL_klev_HG50_hglev5-0"/>
-		<field id="zg50_HG50_average" field_ref="zg50_HG50" operation="average"/>
-		<field id="CMIP6_zg_with_instant" field_ref="CMIP6_zg" operation="instant"/>
 		<field id="CMIP6_pfull_instant" field_ref="CMIP6_pfull" operation="instant" detect_missing_value="true"/>
 		<field id="CMIP6_pfull_instant_sampled_3h" field_ref="CMIP6_pfull_instant" freq_op="3h" detect_missing_value="true"> @CMIP6_pfull </field>
-		<field id="CMIP6_zg_sampled_3h" field_ref="CMIP6_zg_with_instant" freq_op="3h" detect_missing_value="true"> @CMIP6_zg_with_instant </field>
 		<field id="CMIP6_zg_plev19" field_ref="CMIP6_zg_sampled_3h" grid_ref="FULL_klev_plev19"/>
 		<field id="CMIP6_zg_plev19_average" field_ref="CMIP6_zg_plev19" operation="average"/>
+		<field id="CMIP6_zg_sampled_3h" field_ref="CMIP6_zg_with_instant" freq_op="3h" detect_missing_value="true"> @CMIP6_zg_with_instant </field>
+		<field id="CMIP6_zg_with_instant" field_ref="CMIP6_zg" operation="instant"/>
+		<field id="height_over_orog" grid_ref="FULL_klev"> zg - CMIP6_orog_scalar_duplicate </field>
+		<field id="zg50_HG50" field_ref="zg" grid_ref="FULL_klev_HG50_hglev5-0"/>
+		<field id="zg50_HG50_average" field_ref="zg50_HG50" operation="average"/>
 	</field_definition>
 	<axis_definition>
 		<axis_group prec="8">
+			<axis id="HG50_hglev5-0" n_glo="1" value="(0,0)[ 50 ]" axis_ref="height_over_orog_axis"/>
 			<axis id="height_over_orog_axis" positive="up" name="z" standard_name="height_over_orog" unit="m">
 				<interpolate_axis type="polynomial" order="2" coordinate="height_over_orog"/>
 			</axis>
-			<axis id="HG50_hglev5-0" n_glo="1" value="(0,0)[ 50 ]" axis_ref="height_over_orog_axis"/>
 			<axis id="plev19" positive="down" n_glo="19" value="(0,18)[ 100000. 92500. 85000. 70000. 60000. 50000. 40000. 30000. 25000. 20000. 15000. 10000. 7000. 5000. 3000. 2000. 1000. 500. 100. ]" name="plev" standard_name="air_pressure" long_name="pressure" unit="Pa" axis_type="Z">
 				<interpolate_axis type="polynomial" order="1" coordinate="CMIP6_pfull_instant_sampled_3h"/>
 			</axis>
@@ -240,14 +240,6 @@ seaIce: Gelato 6.1 </variable>
 	</axis_definition>
 	<domain_definition>
 		<domain_group prec="8">
-			<domain id="CMIP6_25km" ni_glo="1440" nj_glo="720" type="rectilinear" prec="8">
-				<generate_rectilinear_domain/>
-				<interpolate_domain order="1" renormalize="true" mode="read_or_compute" write_weight="true"/>
-			</domain>
-			<domain id="CMIP6_50km" ni_glo="720" nj_glo="360" type="rectilinear" prec="8">
-				<generate_rectilinear_domain/>
-				<interpolate_domain order="1" renormalize="true" mode="read_or_compute" write_weight="true"/>
-			</domain>
 			<domain id="CMIP6_100km" ni_glo="360" nj_glo="180" type="rectilinear" prec="8">
 				<generate_rectilinear_domain/>
 				<interpolate_domain order="1" renormalize="true" mode="read_or_compute" write_weight="true"/>
@@ -256,7 +248,15 @@ seaIce: Gelato 6.1 </variable>
 				<generate_rectilinear_domain/>
 				<interpolate_domain order="1" renormalize="true" mode="read_or_compute" write_weight="true"/>
 			</domain>
+			<domain id="CMIP6_25km" ni_glo="1440" nj_glo="720" type="rectilinear" prec="8">
+				<generate_rectilinear_domain/>
+				<interpolate_domain order="1" renormalize="true" mode="read_or_compute" write_weight="true"/>
+			</domain>
 			<domain id="CMIP6_2deg" ni_glo="180" nj_glo="90" type="rectilinear" prec="8">
+				<generate_rectilinear_domain/>
+				<interpolate_domain order="1" renormalize="true" mode="read_or_compute" write_weight="true"/>
+			</domain>
+			<domain id="CMIP6_50km" ni_glo="720" nj_glo="360" type="rectilinear" prec="8">
 				<generate_rectilinear_domain/>
 				<interpolate_domain order="1" renormalize="true" mode="read_or_compute" write_weight="true"/>
 			</domain>
@@ -267,12 +267,6 @@ seaIce: Gelato 6.1 </variable>
 			<domain domain_ref="FULL"/>
 			<scalar scalar_ref="orog_level" name="orog_level"/>
 		</grid>
-		<grid id="FULL_klev_hlev">
-			<domain domain_ref="FULL"/>
-			<axis axis_ref="klev">
-				<duplicate_scalar/>
-			</axis>
-		</grid>
 		<grid id="FULL_klev_HG50_hglev5-0">
 			<domain domain_ref="FULL"/>
 			<axis n_glo="1" value="(0,0)[ 50 ]" axis_ref="height_over_orog_axis"/>
@@ -280,6 +274,12 @@ seaIce: Gelato 6.1 </variable>
 		<grid id="FULL_klev_HG50_hglev5-0_complete">
 			<domain domain_ref="complete"/>
 			<axis n_glo="1" value="(0,0)[ 50 ]" axis_ref="height_over_orog_axis"/>
+		</grid>
+		<grid id="FULL_klev_hlev">
+			<domain domain_ref="FULL"/>
+			<axis axis_ref="klev">
+				<duplicate_scalar/>
+			</axis>
 		</grid>
 		<grid id="FULL_klev_plev19">
 			<domain domain_ref="FULL"/>

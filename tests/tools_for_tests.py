@@ -58,27 +58,28 @@ def test_reference_init(func):
 			time_stats = dict()
 			with codecs.open(log, 'w', encoding="utf-8") as logfile:
 				with codecs.open(stats, "w", encoding="utf-8") as statfile:
+					if add_profile:
+						pr = cProfile.Profile()
+						pr.enable()
 					for context in contexts:
 						print("Execute context %s" % context)
 						sys.stdout = logfile
-						if add_profile:
-							pr = cProfile.Profile()
-							pr.enable()
 						start_time = time.time()
 						rep = func.__call__(context=context, force_reset=context == contexts[0], **config_dict, **kwargs)
 						end_time = time.time()
-						if add_profile:
-							pr.disable()
 						sys.stdout = statfile
 						total_time = end_time - start_time
 						print("It took %d s to execute context %s" % (total_time, context))
-						if add_profile:
-							s = io.StringIO()
-							sortby = 'cumulative'
-							ps = pstats.Stats(pr, stream=s).sort_stats(sortby)
-							ps.print_stats()
-							print(s.getvalue())
 						time_stats[context] = total_time
+						sys.stdout = old_stdout
+					if add_profile:
+						pr.disable()
+						sys.stdout = statfile
+						s = io.StringIO()
+						sortby = 'cumulative'
+						ps = pstats.Stats(pr, stream=s).sort_stats(sortby)
+						ps.print_stats()
+						print(s.getvalue())
 						sys.stdout = old_stdout
 
 			if check_time_file is not None:
@@ -136,7 +137,6 @@ def create_config_elements(simulation="my_simulation", contexts=list(), add_prof
                            year="1980", enddate="19800131", pingfiles="", printout="1", debug=False, is_ping=False,
                            filename="ping_{content}.xml", by_realm=False):
 	current_dir = os.path.dirname(os.path.abspath(__file__))
-	data_request_directory = os.sep.join([os.path.dirname(os.path.dirname(os.path.dirname(current_dir))), "data_request", "CMIP7_DReq_Software", "data_request_api"])
 	simulation_dir = os.path.sep.join([current_dir, "test_{}".format(simulation)])
 	inputs_dir = os.path.sep.join([simulation_dir, "input"])
 	kwargs = dict(
@@ -155,8 +155,7 @@ def create_config_elements(simulation="my_simulation", contexts=list(), add_prof
 		lab_and_model_settings=read_element_from_python_file(element="lab_and_model_settings", simulation=simulation,
 		                                                     current_dir=current_dir),
 		reference_directory=os.path.sep.join([simulation_dir, "reference_outputs"]),
-		current_directory=current_dir,
-		current_data_request=data_request_directory
+		current_directory=current_dir
 	)
 	dirname = os.path.sep.join([simulation_dir, "test_outputs", ""])
 	if is_ping:
@@ -207,7 +206,6 @@ class TestRun(object):
 	simulation_settings = dict()
 	reference_directory = None
 	current_directory = None
-	current_data_request = None
 	launch_function = None
 
 	def test_simulation(self):
@@ -215,7 +213,6 @@ class TestRun(object):
 			shutil.rmtree(self.config["dirname"])
 		os.makedirs(self.config["dirname"])
 		current_directory = self.current_directory
-		data_request_directory = self.current_data_request
 		self.launch_function(simulation=self.simulation, config_dict=self.config,
 		                     contexts=self.contexts, lset=self.lab_and_model_settings,
 		                     sset=self.simulation_settings, add_profile=self.add_profile,
@@ -224,12 +221,14 @@ class TestRun(object):
 
 		from dr2xml.config import version
 		anonymize_dict = dict(current_directory=current_directory, current_version=version,
-		                      current_data_request=data_request_directory)
+		                      current_dr2xml=os.path.dirname(current_directory))
 
 		data_request_used = self.lab_and_model_settings.get("data_request_used", "CMIP6")
 		if data_request_used in ["CMIP7", ]:
 			from data_request_api import version as cmip7_dr_software_version
 			anonymize_dict["current_cmip7_dr_software"] = cmip7_dr_software_version
+			from data_request_api.command_line.config import dreqcfg
+			anonymize_dict["data_request_directory"] = dreqcfg.load_config()["cache_dir"]
 		elif data_request_used in ["CMIP6", ]:
 			data_request_content_version = self.lab_and_model_settings.get("data_request_content_version", "latest_stable")
 			if data_request_content_version not in ["latest_stable", "stable", "latest"]:

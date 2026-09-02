@@ -7,6 +7,7 @@ Several tools used in dr2xml.
 
 from __future__ import print_function, division, absolute_import, unicode_literals
 
+import os
 from collections import OrderedDict
 from functools import reduce
 
@@ -88,10 +89,11 @@ def print_struct(struct, skip_sep=False, sort=False, back_line=False):
 
 
 def reduce_and_strip(elt):
-    if isinstance(elt, list):
-        elt = reduce(lambda x, y: x + " " + y, elt)
+    if isinstance(elt, list) and len(elt) > 0:
+        elt = reduce(lambda x, y: str(x) + " " + str(y), elt)
     if isinstance(elt, six.string_types):
         elt = elt.strip()
+        elt = elt.replace(" " + os.linesep, os.linesep)
     return elt
 
 
@@ -104,6 +106,10 @@ def is_elt_applicable(elt, attribute=None, included=None, excluded=None):
     else:
         attr = elt
     test = True
+    if included is not None and not isinstance(included, list):
+        included = [included, ]
+    if excluded is not None and not isinstance(excluded, list):
+        excluded = [excluded, ]
     if test and excluded is not None and len(excluded) > 0 and attr in excluded:
         test = False
     if test and included is not None and len(included) > 0 and attr not in included:

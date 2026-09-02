@@ -147,7 +147,7 @@ def freq2datefmt(in_freq, operation, table):
     return datefmt, offset, offset_end
 
 
-def analyze_cell_time_method(cm, label, table):
+def analyze_cell_time_method(sv, table):
     """
     Depending on cell method string CM, tells / returns
     - which time operation should be done
@@ -158,13 +158,16 @@ def analyze_cell_time_method(cm, label, table):
     "where sea-ice", "where cloud" since we suppose fields required in this way
     are physically undefined except on "where something".
     """
+    cm = sv.cell_methods
+    label = sv.ref_var
+    freq = sv.frequency
     logger = get_logger()
     operation = None
     detect_missing = False
     clim = False
     #
     if cm is None:
-        if "fx" in table:
+        if "fx" in table or "fx" in freq:
             # Case of fixed fields required by home data request
             operation = "once"
         else:
@@ -256,6 +259,15 @@ def analyze_cell_time_method(cm, label, table):
                     " for %15s in table %s is well handled by 'detect_missing'" % (label, table))
         operation = "average"
         detect_missing = True
+        # ----------------------------------------------------------------------------------------------------------------
+    elif "time: mean where land" in cm:
+        # Weighted Time Mean on Land Tiles
+        add_value_in_list_config_variable("cell_method_warnings",
+                                          ('time: mean where land', label, table))
+        logger.info("Note: assuming that 'time: mean where land' "
+                    " for %15s in table %s is well handled by 'detect_missing'" % (label, table))
+        operation = "average"
+        detect_missing = True
     # ----------------------------------------------------------------------------------------------------------------
     elif "time: mean where crops" in cm:
         # [amc-twm]: Weighted Time Mean on Crops (uniquement des
@@ -308,7 +320,7 @@ def analyze_cell_time_method(cm, label, table):
     # ----------------------------------------------------------------------------------------------------------------
     elif "time: maximum within days time: mean over days" in cm:
         # [dmax]: Daily Maximum : tasmax Amon seulement
-        if label != 'tasmax' and label != 'sfcWindmax':
+        if label not in ['tasmax', 'sfcWindmax', "hursmax"]:
             logger.error("Error: issue with variable %s in table %s "
                          "and cell method time: maximum within days time: mean over days" % (label, table))
         # we assume that pingfile provides a reference field which already implements "max within days"
@@ -316,7 +328,7 @@ def analyze_cell_time_method(cm, label, table):
     # ----------------------------------------------------------------------------------------------------------------
     elif "time: minimum within days time: mean over days" in cm:
         # [dmin]: Daily Minimum : tasmin Amon seulement
-        if label != 'tasmin':
+        if label not in ['tasmin', "hursmin"]:
             logger.error("Error: issue with variable %s in table %s  "
                          "and cell method time: minimum within days time: mean over days" % (label, table))
         # we assume that pingfile provides a reference field which already implements "min within days"
@@ -364,7 +376,7 @@ def analyze_cell_time_method(cm, label, table):
     # ----------------------------------------------------------------------------------------------------------------
     elif "time: point" in cm:
         operation = "instant"
-    elif table == 'fx' or table == 'Efx' or table == 'Ofx':
+    elif table == 'fx' or table == 'Efx' or table == 'Ofx' or freq in ["fx", ]:
         operation = "once"
     # ----------------------------------------------------------------------------------------------------------------
     else:
@@ -500,19 +512,9 @@ def cellmethod2area(method):
             return None
 
 
-DR_grid_to_grid_atts_dict = {
-    "cfsites": ("gn", "100 km", "data sampled in model native grid by nearest neighbour method "),
-    "1deg": ("gr1", "1x1 degree", "data regridded to a CMIP6 standard 1x1 degree latxlon grid from the native grid"),
-    "2deg": ("gr2", "2x2 degree", "data regridded to a CMIP6 standard 2x2 degree latxlon grid from the native grid"),
-    "100km": ("gr3", "100 km", "data regridded to a CMIP6 standard 100 km resol grid from the native grid"),
-    "50km": ("gr4", "50 km", "data regridded to a CMIP6 standard 50 km resol grid from the native grid"),
-    "25km": ("gr5", "25 km", "data regridded to a CMIP6 standard 25 km resol grid from the native grid"),
-    "default": ["grx", "?x? degree", "grid has no description - please fix DR_grid_to_grid_atts for grid %s"]
-}
-
-
 def DR_grid_to_grid_atts(grid):
     """ Returns label, resolution, description for a DR grid name"""
+    DR_grid_to_grid_atts_dict = get_settings_values("internal")["grids_default_DR"]
     if grid in DR_grid_to_grid_atts_dict:
         return DR_grid_to_grid_atts_dict[grid]
     else:

@@ -554,27 +554,19 @@ seaIce: Gelato 6.1 </variable>
 		</file>
 	</file_definition>
 	<field_definition>
-		<field id="CMIP6_rivo_average" field_ref="CMIP6_rivo" operation="average"/>
-		<field id="CMIP6_wtd_average" field_ref="CMIP6_wtd" operation="average"/>
 		<field id="CMIP6_carbdis_average" field_ref="CMIP6_carbdis" operation="average"/>
 		<field id="CMIP6_carbin_average" field_ref="CMIP6_carbin" operation="average"/>
 		<field id="CMIP6_carbw_average" field_ref="CMIP6_carbw" operation="average"/>
 		<field id="CMIP6_fldf_average" field_ref="CMIP6_fldf" operation="average"/>
 		<field id="CMIP6_fwtd_average" field_ref="CMIP6_fwtd" operation="average"/>
+		<field id="CMIP6_rivo_average" field_ref="CMIP6_rivo" operation="average"/>
+		<field id="CMIP6_wtd_average" field_ref="CMIP6_wtd" operation="average"/>
 	</field_definition>
 	<axis_definition>
 		<axis_group prec="8"/>
 	</axis_definition>
 	<domain_definition>
 		<domain_group prec="8">
-			<domain id="CMIP6_25km" ni_glo="1440" nj_glo="720" type="rectilinear" prec="8">
-				<generate_rectilinear_domain/>
-				<interpolate_domain order="1" renormalize="true" mode="read_or_compute" write_weight="true"/>
-			</domain>
-			<domain id="CMIP6_50km" ni_glo="720" nj_glo="360" type="rectilinear" prec="8">
-				<generate_rectilinear_domain/>
-				<interpolate_domain order="1" renormalize="true" mode="read_or_compute" write_weight="true"/>
-			</domain>
 			<domain id="CMIP6_100km" ni_glo="360" nj_glo="180" type="rectilinear" prec="8">
 				<generate_rectilinear_domain/>
 				<interpolate_domain order="1" renormalize="true" mode="read_or_compute" write_weight="true"/>
@@ -583,7 +575,15 @@ seaIce: Gelato 6.1 </variable>
 				<generate_rectilinear_domain/>
 				<interpolate_domain order="1" renormalize="true" mode="read_or_compute" write_weight="true"/>
 			</domain>
+			<domain id="CMIP6_25km" ni_glo="1440" nj_glo="720" type="rectilinear" prec="8">
+				<generate_rectilinear_domain/>
+				<interpolate_domain order="1" renormalize="true" mode="read_or_compute" write_weight="true"/>
+			</domain>
 			<domain id="CMIP6_2deg" ni_glo="180" nj_glo="90" type="rectilinear" prec="8">
+				<generate_rectilinear_domain/>
+				<interpolate_domain order="1" renormalize="true" mode="read_or_compute" write_weight="true"/>
+			</domain>
+			<domain id="CMIP6_50km" ni_glo="720" nj_glo="360" type="rectilinear" prec="8">
 				<generate_rectilinear_domain/>
 				<interpolate_domain order="1" renormalize="true" mode="read_or_compute" write_weight="true"/>
 			</domain>

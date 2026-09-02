@@ -318,7 +318,7 @@ def create_axis_from_dim(dim, labels, axis_ref):
     constructs generating CMIP6 requested attributes
     """
     axis_id = "DR_" + dim.label + "_" + axis_ref
-    axis_name = dim.name
+    axis_name = dim.out_name
     if axis_id in get_config_variable("axis_defs"):
         return axis_id, axis_name
     #
@@ -327,9 +327,9 @@ def create_axis_from_dim(dim, labels, axis_ref):
     dim_name = None
     label = None
     if dim.type not in ["character", ]:
-        if dim.requested not in ['', ]:
+        if dim.requested not in ['', 'undef']:
             nb = len(dim.requested.split())
-            value = "(0,{})[ {} ]".format(nb, dim.requested.strip())
+            value = "(0,{})[ {} ]".format(nb -1, dim.requested.strip())
             if isinstance(dim.boundsRequested, list):
                 vals = " ".join([str(v) for v in dim.boundsRequested])
                 valsr = reduce(lambda x, y: x + y, vals)

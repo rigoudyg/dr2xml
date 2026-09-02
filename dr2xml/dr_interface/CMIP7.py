@@ -18,11 +18,11 @@ from .definition import SimpleObject
 from .definition import SimpleCMORVar as SimpleCMORVarBasic
 from .definition import SimpleDim as SimpleDimBasic
 from dr2xml.settings_interface import get_settings_values
-from ..utils import Dr2xmlError, is_elt_applicable
+from dr2xml.utils import Dr2xmlError, is_elt_applicable
 
-data_request_path = get_settings_values("internal", "data_request_path")
+data_request_path = get_settings_values("init", "data_request_path")
 sys.path.append(data_request_path)
-os.environ["CMIP7_DR_API_CONFIGFILE"] = get_settings_values("internal", "data_request_config")
+os.environ["CMIP7_DR_API_CONFIGFILE"] = get_settings_values("init", "data_request_config")
 from data_request_api.query.vocabulary_server import ConstantValueObj
 from data_request_api.query.data_request import DataRequest as CMIP7DataRequest
 from data_request_api.content.dump_transformation import get_transformed_content
@@ -33,7 +33,7 @@ data_request = None
 
 def get_value_from_constant(value):
     if isinstance(value, ConstantValueObj):
-        return value.value
+        return str(value)
     elif isinstance(value, list):
         return [get_value_from_constant(val) for val in value]
     elif isinstance(value, set):
@@ -100,7 +100,12 @@ class DataRequest(DataRequestBasic):
         if elt_type is None:
             raise ValueError("Unable to find out uid with elt_type None")
         if id is None:
-            return self.data_request.get_elements_per_kind(elt_type)
+            rep = self.data_request.get_elements_per_kind(elt_type)
+            if elt_type in ["variable", ]:
+                rep = [SimpleCMORVar.get_from_dr(elt, id=elt.id, **kwargs) for elt in rep]
+            elif elt_type in ["dimension", ]:
+                rep = [SimpleDim.get_from_dr(elt, id=elt.id) for elt in rep]
+            return rep
         else:
             if elt_type in ["dim", ]:
                 elt_type = "dimension"
@@ -137,38 +142,47 @@ class DataRequest(DataRequestBasic):
     def get_grids_dict(self):
         rep = OrderedDict()
         dims = self.get_list_by_id("coordinates_and_dimensions")
-        for dim in dims.items:
+        for dim in dims:
             rep[dim.name] = dim.id
         return rep
 
     def get_dimensions_dict(self):
         rep = OrderedDict()
-        for spshp in self.get_list_by_id("spatial_shape").items:
-            dims = [elt.name for elt in spshp.dimensions]
-            new_dims = list()
-            for key in ["longitude", "latitude"]:
-                if key in dims:
-                    dims.remove(key)
-                    new_dims.append(key)
-            new_dims.extend(sorted(dims))
-            new_dims = "|".join([str(dim) for dim in new_dims])
-            rep[new_dims] = str(spshp.name)
+        excluded_spshapes = get_settings_values("internal", "excluded_spshapes_lset")
+        for spshp in self.get_list_by_id("spatial_shape"):
+            shape_name = str(spshp.name)
+            if shape_name not in excluded_spshapes:
+                dims = [elt.name for elt in spshp.dimensions]
+                new_dims = list()
+                for key in ["longitude", "latitude"]:
+                    if key in dims:
+                        dims.remove(key)
+                        new_dims.append(key)
+                new_dims.extend(sorted(dims))
+                new_dims = "|".join([str(dim) for dim in new_dims])
+                rep[new_dims] = str(shape_name)
         return rep
 
     def _is_timesubset_applicable(self, year, select_on_year, time_subset):
-        if year is None or select_on_year is None:
+        if year is False or select_on_year is False:
             return None, None
-        else:
+        elif time_subset.type in ["simpleRange", "void"]:
             return ((time_subset.start is None or (time_subset.start <= int(year))) and
                     (time_subset.end is None or (time_subset.end >= int(year))), time_subset.end)
+        else:
+            logger = get_logger()
+            logger.error("Could not yet deal with time subset of type %s" % time_subset.type)
+            raise ValueError("Could not yet deal with time subset of type %s" % time_subset.type)
 
     def _get_filtering_elements(self, experiment=None, variable=None):
         internal_dict = get_settings_values("internal")
         request_dict_all_of_any = dict(opportunities=internal_dict["select_included_opportunities"],
                                        variable_groups=internal_dict["select_included_vargroups"],
+                                       experiment_groups=internal_dict["select_included_expgroups"],
                                        max_priority_level=internal_dict["select_max_priority"])
         not_request_dict_any = dict(opportunity=internal_dict["select_excluded_opportunities"],
-                                    variable_groups=internal_dict["select_excluded_vargroups"])
+                                    variable_groups=internal_dict["select_excluded_vargroups"],
+                                    experiment_groups=internal_dict["select_excluded_expgroups"])
         select_mips = internal_dict["select_mips"]
         if len(select_mips) > 0:
             request_dict_all_of_any["mip"] = select_mips
@@ -182,7 +196,8 @@ class DataRequest(DataRequestBasic):
     def get_cmorvars_list(self, select_mips, select_max_priority, select_included_vars, select_excluded_vars,
                           select_included_tables, select_excluded_tables, select_excluded_pairs,
                           select_included_opportunities, select_excluded_opportunities, select_included_vargroups,
-                          select_excluded_vargroups, select_on_year, experiment_filter=False, **kwargs):
+                          select_excluded_vargroups, select_excluded_regions, select_max_priority_per_frequency,
+                          select_on_year, select_excluded_dimensions, experiment_filter=False, **kwargs):
         rep = defaultdict(set)
         # Filter var list per priority and experiment
         if experiment_filter:
@@ -196,11 +211,22 @@ class DataRequest(DataRequestBasic):
         # Apply other filters
         for var in var_list:
             dr_var = SimpleCMORVar.get_from_dr(var, **kwargs)
-            if is_elt_applicable(dr_var.mipTable, excluded=select_excluded_tables, included=select_included_tables) and \
+            current_max_priority_per_frequency = select_max_priority_per_frequency.get(dr_var.frequency, select_max_priority)
+            if isinstance(current_max_priority_per_frequency, dict):
+                default_current_max_priority_per_frequency = current_max_priority_per_frequency.get("default", select_max_priority)
+                current_max_priority_per_frequency = [val for (key, val) in current_max_priority_per_frequency.items() if key in dr_var.modeling_realm]
+                if len(current_max_priority_per_frequency) > 0:
+                    current_max_priority_per_frequency = min(current_max_priority_per_frequency)
+                else:
+                    current_max_priority_per_frequency = default_current_max_priority_per_frequency
+            if (dr_var.Priority <= current_max_priority_per_frequency) and \
+                    is_elt_applicable(dr_var.mipTable, excluded=select_excluded_tables, included=select_included_tables) and \
                     is_elt_applicable(dr_var.mipVarLabel, excluded=select_excluded_vars, included=select_included_vars) \
                     and is_elt_applicable((dr_var.mipVarLabel, dr_var.mipTable), excluded=select_excluded_pairs) \
+                    and is_elt_applicable(dr_var.region, excluded=select_excluded_regions) \
                     and self.get_endyear_for_cmorvar(cmorvar=dr_var, experiment=experiment, year=select_on_year,
-                                                     internal_dict=get_settings_values("internal")) is not False:
+                                                     internal_dict=get_settings_values("internal")) is not False \
+                    and len(set(list(dr_var.sdims)) & set(select_excluded_dimensions)) == 0:
                 rep[dr_var.id] = rep[dr_var.id] | set(dr_var.grids)
         return rep
 
@@ -218,12 +244,16 @@ class DataRequest(DataRequestBasic):
         else:
             return max(time_subsets)
 
+    def get_ps_data(self, reference_var):
+        rep = dict(label="ps", frequency=reference_var.frequency, temporal_shp=reference_var.temporal_shp)
+        return rep
+
 
 def initialize_data_request():
     global data_request
     if data_request is None:
-        internal_dict = get_settings_values("internal")
-        data_request_content_version = internal_dict["data_request_content_version"]
+        init_dict = get_settings_values("init")
+        data_request_content_version = init_dict["data_request_content_version"]
         content = get_transformed_content(version=data_request_content_version,
                                           force_retrieve=False)
         data_request = DataRequest(CMIP7DataRequest.from_separated_inputs(**content), print_DR_errors=True,
@@ -248,6 +278,15 @@ class SimpleCMORVar(SimpleCMORVarBasic):
             kwargs[key] = get_value_from_constant(value)
         super().__init__(**kwargs)
 
+    def correct_data_request(self):
+        if self.cell_measures in ['--MODEL', ]:
+            self.cell_measures = ''
+        elif self.cell_measures in ['--OPT', ]:
+            self.cell_measures = ''
+        if self.temporal_shp in ["time-mean", ]:
+            self.temporal_shp = "time-intv"
+        if self.official_label in ["rsus_tavg-u-hxy-lnd", ] and self.frequency in ["mon", ]:
+            self.cell_methods = "area: mean where land time: mean"
 
     @classmethod
     def get_from_dr(cls, input_var, **kwargs):
@@ -255,6 +294,10 @@ class SimpleCMORVar(SimpleCMORVarBasic):
         product_of_other_dims = 1
         dimensions = str(input_var.dimensions).split(", ")
         dimensions = [dim for dim in dimensions if "time" not in dim]
+        if "site" in dimensions:
+            grids = ["cfsites", ]
+        else:
+            grids = ["", ]
         for sdim in dimensions:
             sdim = SimpleDim.get_from_dr(data_request.data_request.find_element("coordinates_and_dimensions", sdim), **kwargs)
             sdims[sdim.name] = sdim
@@ -266,22 +309,25 @@ class SimpleCMORVar(SimpleCMORVarBasic):
             cell_measures = [cell_measures, ]
         else:
             cell_measures = [cell_measures.name, ]
+        cell_measures = " ".join([str(elt) for elt in cell_measures])
         cell_methods = input_var.cell_methods.cell_methods
+        official_label = str(input_var.branded_variable_name)
         logger = get_logger()
-        logger.debug(f"Variable considered: {input_var.name}")
+        logger.debug(f"Variable considered: {input_var.name} (branded name {input_var.branded_variable_name}, official label {official_label})")
         return cls(from_dr=True,
-                   type=input_var.type,
+                   type="cmor",
                    modeling_realm=[realm.id for realm in input_var.modelling_realm],
                    label=input_var.physical_parameter.name,
                    mipVarLabel=input_var.physical_parameter.name,
-                   label_without_psuffix=input_var.physical_parameter.name,
+                   official_label=official_label,
+                   label_without_psuffix=input_var.physical_parameter.variablerootdd,
                    label_non_ambiguous=input_var.name,
                    frequency=input_var.cmip7_frequency.name,
                    mipTable=input_var.cmip6_tables_identifier.name,
                    description=input_var.description,
                    stdname=input_var.physical_parameter.cf_standard_name.name,
                    units=input_var.physical_parameter.units,
-                   long_name=input_var.physical_parameter.title,
+                   long_name=input_var.title,
                    sdims=sdims,
                    other_dims_size=product_of_other_dims,
                    cell_methods=cell_methods,
@@ -291,7 +337,9 @@ class SimpleCMORVar(SimpleCMORVarBasic):
                    temporal_shp=input_var.temporal_shape.name,
                    id=input_var.id,
                    cmvar=input_var,
-                   Priority=data_request.data_request.find_priority_per_variable(input_var)
+                   Priority=data_request.data_request.find_priority_per_variable(input_var),
+                   region=input_var.region,
+                   grids=grids
                    )
 
 

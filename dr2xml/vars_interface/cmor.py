@@ -7,6 +7,8 @@ CMOR variables
 
 from __future__ import print_function, division, absolute_import, unicode_literals
 
+import copy
+
 from dr2xml.dr_interface import get_dr_object
 from utilities.logger import get_logger
 from dr2xml.settings_interface import get_settings_values
@@ -21,7 +23,7 @@ home_attrs = ['type', 'label', 'modeling_realm', 'frequency', 'mipTable', 'tempo
 
 def read_home_var_cmor(line_split, mips, expid):
     home_var = read_home_var(line_split, home_attrs)
-    home_var.set_attributes(label_with_area=home_var.label)
+    home_var.set_attributes(label_with_area=home_var.label, home=True)
     home_var = fill_homevar(home_var)
     if check_homevar(home_var, mips, expid):
         return home_var
@@ -47,16 +49,26 @@ def check_cmor_variable(home_var, mip_vars_list, hv_info):
         return None
 
 
-def get_cmor_var(label, table):
+def get_cmor_var(**kwargs):
     """
     Returns CMOR variable for a given label in a given table
     (could be optimized using inverse index)
     """
     data_request = get_dr_object("get_data_request")
     cmvar = [cmvar for cmvar in data_request.get_list_by_id("CMORvar", elt_type="variable")
-             if cmvar.mipTable == table and cmvar.label == label]
+             if all([cmvar.__getattribute__(key) == val for key, val in kwargs.items()])]
     if len(cmvar) > 0:
         return cmvar[0]
+    elif kwargs["label"] in ["ps", "psol"] and "frequency" in kwargs:
+        frequency = kwargs.pop("frequency")
+        cmvar = [cmvar for cmvar in data_request.get_list_by_id("CMORvar", elt_type="variable")
+                 if all([cmvar.__getattribute__(key) == val for key, val in kwargs.items()])]
+        if len(cmvar) > 0:
+            rep = copy.deepcopy(cmvar[0])
+            rep.set_attributes(frequency=frequency)
+            return rep
+        else:
+            return None
     else:
         return None
 
@@ -73,48 +85,49 @@ def ping_alias(svar, error_on_fail=False):
     """
     pingvars = get_config_variable("pingvars")
     pref = get_settings_values("internal", "ping_variables_prefix")
+    list_checked = list()
     if svar.label_non_ambiguous:
         # print "+++ non ambiguous", svar.label,svar.label_non_ambiguous
         alias_ping = pref + svar.label_non_ambiguous  # e.g. 'CMIP6_tsn_land' and not 'CMIP6_tsn'
+        list_checked.append(alias_ping)
     else:
         # print "+++ ambiguous", svar.label
         # Ping file may provide the variable on the relevant pressure level - e.g. CMIP6_rv850
         alias_ping = pref + svar.ref_var
+        list_checked.append(alias_ping)
         if alias_ping not in pingvars:
             # if not, ping_alias is supposed to be without a pressure level suffix
             alias_ping = pref + svar.label_without_psuffix  # e.g. 'CMIP6_hus' and not 'CMIP6_hus7h'
+            if alias_ping not in list_checked:
+                list_checked.append(alias_ping)
         # print "+++ alias_ping = ", pref, svar.label_without_psuffix, alias_ping
     if alias_ping not in pingvars:
         if error_on_fail:
             raise Dr2xmlError("Cannot find an alias in ping for variable %s" % svar.label)
         else:
-            return None
-    return alias_ping
+            return None, list_checked
+    return alias_ping, None
 
 
-def get_simplevar(label, table, freq=None):
+def get_simplevar(label, reference_var):
     """
     Returns 'simplified variable' for a given CMORvar label and table
     """
-    svar = get_dr_object("SimpleCMORVar")
-    psvar = get_cmor_var(label, table)
+    logger = get_logger()
+    svar = get_dr_object("SimpleCMORVar")()
+    psvar = get_cmor_var(label=label, mipTable=reference_var.mipTable)
     #
     # Try to get a var for 'ps' when table is only in Home DR
-    if psvar is None and label in ["ps", ] and freq is not None:
+    if psvar is None and label in ["ps", ] and reference_var.frequency is not None:
         # print "\tSearching for alternate ps "
-        if freq in ["3h", "3hr", "3hrPt"]:
-            psvar = get_cmor_var('ps', 'E3hrPt')
-        elif freq in ["6h", "6hr"]:
-            psvar = get_cmor_var('ps', '6hrLev')
-        elif freq in ["day", ]:
-            psvar = get_cmor_var('ps', 'CFday')
-        elif freq in ["mon", "1mo"]:
-            psvar = get_cmor_var('ps', 'Emon')
-        elif freq in ["subhr", ]:
-            if table in ["CFsubhr", ]:
-                psvar = get_cmor_var('ps', 'CFsubhr')
-            else:
-                psvar = get_cmor_var('ps', 'Esubhr')
+        dr = get_dr_object("get_data_request")
+        psvar_dict = dr.get_ps_data(reference_var)
+        if psvar_dict is not None:
+            psvar = get_cmor_var(**psvar_dict)
+            if psvar is None:
+                logger.warning("Cannot find psvar for %s" % psvar_dict)
+        else:
+            logger.warning("Cannot find psvar dict for %s" % reference_var)
     if psvar:
         complement_svar_using_cmorvar(svar, psvar, [])
         return svar

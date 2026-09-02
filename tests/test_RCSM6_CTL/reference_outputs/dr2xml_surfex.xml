@@ -3373,7 +3373,7 @@
 				<variable name="cell_measures" type="string"> area: areacella </variable>
 			</field>
 		</file>
-		<file id="clt_day_gn" name="IOXDIRclt_day_CNRM-RCSM6_historical_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="1d" append="true" output_level="10" compression_level="4" split_freq="100y" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="2015-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
+		<file id="clt_day_gn" name="IOXDIRclt_day_CNRM-RCSM6_historical_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="1d" append="true" output_level="10" compression_level="4" split_freq="10y" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="2015-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
@@ -3410,7 +3410,7 @@
 				<variable name="cell_measures" type="string"> area: areacella </variable>
 			</field>
 		</file>
-		<file id="hurs_day_gn" name="IOXDIRhurs_day_CNRM-RCSM6_historical_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="1d" append="true" output_level="10" compression_level="4" split_freq="100y" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="2015-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
+		<file id="hurs_day_gn" name="IOXDIRhurs_day_CNRM-RCSM6_historical_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="1d" append="true" output_level="10" compression_level="4" split_freq="10y" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="2015-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
@@ -3447,7 +3447,7 @@
 				<variable name="cell_measures" type="string"> area: areacella </variable>
 			</field>
 		</file>
-		<file id="huss_day_gn" name="IOXDIRhuss_day_CNRM-RCSM6_historical_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="1d" append="true" output_level="10" compression_level="4" split_freq="100y" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="2015-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
+		<file id="huss_day_gn" name="IOXDIRhuss_day_CNRM-RCSM6_historical_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="1d" append="true" output_level="10" compression_level="4" split_freq="10y" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="2015-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
@@ -3484,7 +3484,7 @@
 				<variable name="cell_measures" type="string"> area: areacella </variable>
 			</field>
 		</file>
-		<file id="pr_day_gn" name="IOXDIRpr_day_CNRM-RCSM6_historical_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="1d" append="true" output_level="10" compression_level="4" split_freq="100y" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="2015-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
+		<file id="pr_day_gn" name="IOXDIRpr_day_CNRM-RCSM6_historical_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="1d" append="true" output_level="10" compression_level="4" split_freq="10y" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="2015-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
@@ -3521,7 +3521,7 @@
 				<variable name="cell_measures" type="string"> area: areacella </variable>
 			</field>
 		</file>
-		<file id="psl_day_gn" name="IOXDIRpsl_day_CNRM-RCSM6_historical_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="1d" append="true" output_level="10" compression_level="4" split_freq="100y" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="2015-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
+		<file id="psl_day_gn" name="IOXDIRpsl_day_CNRM-RCSM6_historical_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="1d" append="true" output_level="10" compression_level="4" split_freq="10y" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="2015-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
@@ -3558,7 +3558,7 @@
 				<variable name="cell_measures" type="string"> area: areacella </variable>
 			</field>
 		</file>
-		<file id="tas_day_gn" name="IOXDIRtas_day_CNRM-RCSM6_historical_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="1d" append="true" output_level="10" compression_level="4" split_freq="100y" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="2015-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
+		<file id="tas_day_gn" name="IOXDIRtas_day_CNRM-RCSM6_historical_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="1d" append="true" output_level="10" compression_level="4" split_freq="10y" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="2015-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
@@ -3595,7 +3595,7 @@
 				<variable name="cell_measures" type="string"> area: areacella </variable>
 			</field>
 		</file>
-		<file id="tasmax_day_gn" name="IOXDIRtasmax_day_CNRM-RCSM6_historical_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="1d" append="true" output_level="10" compression_level="4" split_freq="100y" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="2015-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
+		<file id="tasmax_day_gn" name="IOXDIRtasmax_day_CNRM-RCSM6_historical_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="1d" append="true" output_level="10" compression_level="4" split_freq="10y" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="2015-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
@@ -3632,7 +3632,7 @@
 				<variable name="cell_measures" type="string"> area: areacella </variable>
 			</field>
 		</file>
-		<file id="tasmin_day_gn" name="IOXDIRtasmin_day_CNRM-RCSM6_historical_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="1d" append="true" output_level="10" compression_level="4" split_freq="100y" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="2015-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
+		<file id="tasmin_day_gn" name="IOXDIRtasmin_day_CNRM-RCSM6_historical_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="1d" append="true" output_level="10" compression_level="4" split_freq="10y" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="2015-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
@@ -3669,7 +3669,7 @@
 				<variable name="cell_measures" type="string"> area: areacella </variable>
 			</field>
 		</file>
-		<file id="uas_day_gn" name="IOXDIRuas_day_CNRM-RCSM6_historical_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="1d" append="true" output_level="10" compression_level="4" split_freq="100y" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="2015-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
+		<file id="uas_day_gn" name="IOXDIRuas_day_CNRM-RCSM6_historical_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="1d" append="true" output_level="10" compression_level="4" split_freq="10y" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="2015-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
@@ -3706,7 +3706,7 @@
 				<variable name="cell_measures" type="string"> area: areacella </variable>
 			</field>
 		</file>
-		<file id="vas_day_gn" name="IOXDIRvas_day_CNRM-RCSM6_historical_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="1d" append="true" output_level="10" compression_level="4" split_freq="100y" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="2015-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
+		<file id="vas_day_gn" name="IOXDIRvas_day_CNRM-RCSM6_historical_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="1d" append="true" output_level="10" compression_level="4" split_freq="10y" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="2015-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
@@ -3743,7 +3743,7 @@
 				<variable name="cell_measures" type="string"> area: areacella </variable>
 			</field>
 		</file>
-		<file id="hfls_day_gn" name="IOXDIRhfls_day_CNRM-RCSM6_historical_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="1d" append="true" output_level="10" compression_level="4" split_freq="100y" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="2021-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
+		<file id="hfls_day_gn" name="IOXDIRhfls_day_CNRM-RCSM6_historical_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="1d" append="true" output_level="10" compression_level="4" split_freq="10y" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="2021-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
@@ -3780,7 +3780,7 @@
 				<variable name="cell_measures" type="string"> area: areacella </variable>
 			</field>
 		</file>
-		<file id="hfss_day_gn" name="IOXDIRhfss_day_CNRM-RCSM6_historical_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="1d" append="true" output_level="10" compression_level="4" split_freq="100y" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="2021-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
+		<file id="hfss_day_gn" name="IOXDIRhfss_day_CNRM-RCSM6_historical_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="1d" append="true" output_level="10" compression_level="4" split_freq="10y" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="2021-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
@@ -3817,7 +3817,7 @@
 				<variable name="cell_measures" type="string"> area: areacella </variable>
 			</field>
 		</file>
-		<file id="mrro_day_gn" name="IOXDIRmrro_day_CNRM-RCSM6_historical_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="1d" append="true" output_level="10" compression_level="4" split_freq="100y" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="2021-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
+		<file id="mrro_day_gn" name="IOXDIRmrro_day_CNRM-RCSM6_historical_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="1d" append="true" output_level="10" compression_level="4" split_freq="10y" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="2021-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
@@ -3854,7 +3854,7 @@
 				<variable name="cell_measures" type="string"> area: areacella </variable>
 			</field>
 		</file>
-		<file id="mrso_day_gn" name="IOXDIRmrso_day_CNRM-RCSM6_historical_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="1d" append="true" output_level="10" compression_level="4" split_freq="100y" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="2021-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
+		<file id="mrso_day_gn" name="IOXDIRmrso_day_CNRM-RCSM6_historical_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="1d" append="true" output_level="10" compression_level="4" split_freq="10y" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="2021-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
@@ -3891,7 +3891,7 @@
 				<variable name="cell_measures" type="string"> area: areacella </variable>
 			</field>
 		</file>
-		<file id="prc_day_gn" name="IOXDIRprc_day_CNRM-RCSM6_historical_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="1d" append="true" output_level="10" compression_level="4" split_freq="100y" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="2021-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
+		<file id="prc_day_gn" name="IOXDIRprc_day_CNRM-RCSM6_historical_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="1d" append="true" output_level="10" compression_level="4" split_freq="10y" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="2021-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
@@ -3928,7 +3928,7 @@
 				<variable name="cell_measures" type="string"> area: areacella </variable>
 			</field>
 		</file>
-		<file id="prsn_day_gn" name="IOXDIRprsn_day_CNRM-RCSM6_historical_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="1d" append="true" output_level="10" compression_level="4" split_freq="100y" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="2021-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
+		<file id="prsn_day_gn" name="IOXDIRprsn_day_CNRM-RCSM6_historical_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="1d" append="true" output_level="10" compression_level="4" split_freq="10y" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="2021-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
@@ -3965,7 +3965,7 @@
 				<variable name="cell_measures" type="string"> area: areacella </variable>
 			</field>
 		</file>
-		<file id="rlds_day_gn" name="IOXDIRrlds_day_CNRM-RCSM6_historical_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="1d" append="true" output_level="10" compression_level="4" split_freq="100y" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="2021-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
+		<file id="rlds_day_gn" name="IOXDIRrlds_day_CNRM-RCSM6_historical_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="1d" append="true" output_level="10" compression_level="4" split_freq="10y" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="2021-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
@@ -4002,7 +4002,7 @@
 				<variable name="cell_measures" type="string"> area: areacella </variable>
 			</field>
 		</file>
-		<file id="rlus_day_gn" name="IOXDIRrlus_day_CNRM-RCSM6_historical_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="1d" append="true" output_level="10" compression_level="4" split_freq="100y" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="2021-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
+		<file id="rlus_day_gn" name="IOXDIRrlus_day_CNRM-RCSM6_historical_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="1d" append="true" output_level="10" compression_level="4" split_freq="10y" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="2021-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
@@ -4039,7 +4039,7 @@
 				<variable name="cell_measures" type="string"> area: areacella </variable>
 			</field>
 		</file>
-		<file id="rlut_day_gn" name="IOXDIRrlut_day_CNRM-RCSM6_historical_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="1d" append="true" output_level="10" compression_level="4" split_freq="100y" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="2021-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
+		<file id="rlut_day_gn" name="IOXDIRrlut_day_CNRM-RCSM6_historical_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="1d" append="true" output_level="10" compression_level="4" split_freq="10y" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="2021-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
@@ -4076,7 +4076,7 @@
 				<variable name="cell_measures" type="string"> area: areacella </variable>
 			</field>
 		</file>
-		<file id="rsds_day_gn" name="IOXDIRrsds_day_CNRM-RCSM6_historical_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="1d" append="true" output_level="10" compression_level="4" split_freq="100y" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="2021-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
+		<file id="rsds_day_gn" name="IOXDIRrsds_day_CNRM-RCSM6_historical_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="1d" append="true" output_level="10" compression_level="4" split_freq="10y" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="2021-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
@@ -4113,7 +4113,7 @@
 				<variable name="cell_measures" type="string"> area: areacella </variable>
 			</field>
 		</file>
-		<file id="rsus_day_gn" name="IOXDIRrsus_day_CNRM-RCSM6_historical_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="1d" append="true" output_level="10" compression_level="4" split_freq="100y" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="2021-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
+		<file id="rsus_day_gn" name="IOXDIRrsus_day_CNRM-RCSM6_historical_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="1d" append="true" output_level="10" compression_level="4" split_freq="10y" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="2021-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
@@ -4150,7 +4150,7 @@
 				<variable name="cell_measures" type="string"> area: areacella </variable>
 			</field>
 		</file>
-		<file id="sfcWind_day_gn" name="IOXDIRsfcWind_day_CNRM-RCSM6_historical_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="1d" append="true" output_level="10" compression_level="4" split_freq="100y" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="2021-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
+		<file id="sfcWind_day_gn" name="IOXDIRsfcWind_day_CNRM-RCSM6_historical_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="1d" append="true" output_level="10" compression_level="4" split_freq="10y" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="2021-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
@@ -4187,7 +4187,7 @@
 				<variable name="cell_measures" type="string"> area: areacella </variable>
 			</field>
 		</file>
-		<file id="sfcWindmax_day_gn" name="IOXDIRsfcWindmax_day_CNRM-RCSM6_historical_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="1d" append="true" output_level="10" compression_level="4" split_freq="100y" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="2021-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
+		<file id="sfcWindmax_day_gn" name="IOXDIRsfcWindmax_day_CNRM-RCSM6_historical_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="1d" append="true" output_level="10" compression_level="4" split_freq="10y" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="2021-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
@@ -4224,7 +4224,7 @@
 				<variable name="cell_measures" type="string"> area: areacella </variable>
 			</field>
 		</file>
-		<file id="snc_day_gn" name="IOXDIRsnc_day_CNRM-RCSM6_historical_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="1d" append="true" output_level="10" compression_level="4" split_freq="100y" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="2021-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
+		<file id="snc_day_gn" name="IOXDIRsnc_day_CNRM-RCSM6_historical_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="1d" append="true" output_level="10" compression_level="4" split_freq="10y" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="2021-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
@@ -4262,7 +4262,7 @@
 				<variable name="cell_measures" type="string"> area: areacella </variable>
 			</field>
 		</file>
-		<file id="snw_day_gn" name="IOXDIRsnw_day_CNRM-RCSM6_historical_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="1d" append="true" output_level="10" compression_level="4" split_freq="100y" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="2021-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
+		<file id="snw_day_gn" name="IOXDIRsnw_day_CNRM-RCSM6_historical_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="1d" append="true" output_level="10" compression_level="4" split_freq="10y" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="2021-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
@@ -4299,7 +4299,7 @@
 				<variable name="cell_measures" type="string"> area: areacella </variable>
 			</field>
 		</file>
-		<file id="hus_day_gn" name="IOXDIRhus_day_CNRM-RCSM6_historical_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="1d" append="true" output_level="10" compression_level="4" split_freq="10y" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="2015-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
+		<file id="hus_day_gn" name="IOXDIRhus_day_CNRM-RCSM6_historical_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="1d" append="true" output_level="10" compression_level="4" split_freq="1y" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="2015-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
@@ -4336,7 +4336,7 @@
 				<variable name="cell_measures" type="string"> area: areacella </variable>
 			</field>
 		</file>
-		<file id="ta_day_gn" name="IOXDIRta_day_CNRM-RCSM6_historical_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="1d" append="true" output_level="10" compression_level="4" split_freq="10y" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="2015-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
+		<file id="ta_day_gn" name="IOXDIRta_day_CNRM-RCSM6_historical_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="1d" append="true" output_level="10" compression_level="4" split_freq="1y" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="2015-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
@@ -4373,7 +4373,7 @@
 				<variable name="cell_measures" type="string"> area: areacella </variable>
 			</field>
 		</file>
-		<file id="ua_day_gn" name="IOXDIRua_day_CNRM-RCSM6_historical_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="1d" append="true" output_level="10" compression_level="4" split_freq="10y" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="2015-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
+		<file id="ua_day_gn" name="IOXDIRua_day_CNRM-RCSM6_historical_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="1d" append="true" output_level="10" compression_level="4" split_freq="1y" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="2015-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
@@ -4410,7 +4410,7 @@
 				<variable name="cell_measures" type="string"> area: areacella </variable>
 			</field>
 		</file>
-		<file id="va_day_gn" name="IOXDIRva_day_CNRM-RCSM6_historical_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="1d" append="true" output_level="10" compression_level="4" split_freq="10y" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="2015-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
+		<file id="va_day_gn" name="IOXDIRva_day_CNRM-RCSM6_historical_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="1d" append="true" output_level="10" compression_level="4" split_freq="1y" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="2015-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
@@ -4447,7 +4447,7 @@
 				<variable name="cell_measures" type="string"> area: areacella </variable>
 			</field>
 		</file>
-		<file id="zg_day_gn" name="IOXDIRzg_day_CNRM-RCSM6_historical_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="1d" append="true" output_level="10" compression_level="4" split_freq="10y" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="2015-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
+		<file id="zg_day_gn" name="IOXDIRzg_day_CNRM-RCSM6_historical_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="1d" append="true" output_level="10" compression_level="4" split_freq="1y" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="2015-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
@@ -4484,7 +4484,7 @@
 				<variable name="cell_measures" type="string"> area: areacella </variable>
 			</field>
 		</file>
-		<file id="hur_day_gn" name="IOXDIRhur_day_CNRM-RCSM6_historical_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="1d" append="true" output_level="10" compression_level="4" split_freq="10y" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="2021-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
+		<file id="hur_day_gn" name="IOXDIRhur_day_CNRM-RCSM6_historical_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="1d" append="true" output_level="10" compression_level="4" split_freq="1y" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="2021-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
@@ -4521,7 +4521,7 @@
 				<variable name="cell_measures" type="string"> area: areacella </variable>
 			</field>
 		</file>
-		<file id="wap_day_gn" name="IOXDIRwap_day_CNRM-RCSM6_historical_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="1d" append="true" output_level="10" compression_level="4" split_freq="10y" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="2021-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
+		<file id="wap_day_gn" name="IOXDIRwap_day_CNRM-RCSM6_historical_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="1d" append="true" output_level="10" compression_level="4" split_freq="1y" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="2021-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
@@ -12848,7 +12848,7 @@
 				<variable name="cell_measures" type="string"> area: areacella </variable>
 			</field>
 		</file>
-		<file id="clt_3hr_gn" name="IOXDIRclt_3hr_CNRM-RCSM6_historical_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="3h" append="true" output_level="10" compression_level="4" split_freq="10y" split_freq_format="%y%mo%d%h%mi" split_start_offset="90mi" split_end_offset="-90mi" split_last_date="2021-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
+		<file id="clt_3hr_gn" name="IOXDIRclt_3hr_CNRM-RCSM6_historical_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="3h" append="true" output_level="10" compression_level="4" split_freq="2y" split_freq_format="%y%mo%d%h%mi" split_start_offset="90mi" split_end_offset="-90mi" split_last_date="2021-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
@@ -12885,7 +12885,7 @@
 				<variable name="cell_measures" type="string"> area: areacella </variable>
 			</field>
 		</file>
-		<file id="hfls_3hr_gn" name="IOXDIRhfls_3hr_CNRM-RCSM6_historical_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="3h" append="true" output_level="10" compression_level="4" split_freq="10y" split_freq_format="%y%mo%d%h%mi" split_start_offset="90mi" split_end_offset="-90mi" split_last_date="2021-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
+		<file id="hfls_3hr_gn" name="IOXDIRhfls_3hr_CNRM-RCSM6_historical_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="3h" append="true" output_level="10" compression_level="4" split_freq="2y" split_freq_format="%y%mo%d%h%mi" split_start_offset="90mi" split_end_offset="-90mi" split_last_date="2021-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
@@ -12922,7 +12922,7 @@
 				<variable name="cell_measures" type="string"> area: areacella </variable>
 			</field>
 		</file>
-		<file id="hfss_3hr_gn" name="IOXDIRhfss_3hr_CNRM-RCSM6_historical_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="3h" append="true" output_level="10" compression_level="4" split_freq="10y" split_freq_format="%y%mo%d%h%mi" split_start_offset="90mi" split_end_offset="-90mi" split_last_date="2021-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
+		<file id="hfss_3hr_gn" name="IOXDIRhfss_3hr_CNRM-RCSM6_historical_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="3h" append="true" output_level="10" compression_level="4" split_freq="2y" split_freq_format="%y%mo%d%h%mi" split_start_offset="90mi" split_end_offset="-90mi" split_last_date="2021-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
@@ -12959,7 +12959,7 @@
 				<variable name="cell_measures" type="string"> area: areacella </variable>
 			</field>
 		</file>
-		<file id="pr_3hr_gn" name="IOXDIRpr_3hr_CNRM-RCSM6_historical_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="3h" append="true" output_level="10" compression_level="4" split_freq="10y" split_freq_format="%y%mo%d%h%mi" split_start_offset="90mi" split_end_offset="-90mi" split_last_date="2021-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
+		<file id="pr_3hr_gn" name="IOXDIRpr_3hr_CNRM-RCSM6_historical_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="3h" append="true" output_level="10" compression_level="4" split_freq="2y" split_freq_format="%y%mo%d%h%mi" split_start_offset="90mi" split_end_offset="-90mi" split_last_date="2021-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
@@ -12996,7 +12996,7 @@
 				<variable name="cell_measures" type="string"> area: areacella </variable>
 			</field>
 		</file>
-		<file id="prc_3hr_gn" name="IOXDIRprc_3hr_CNRM-RCSM6_historical_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="3h" append="true" output_level="10" compression_level="4" split_freq="10y" split_freq_format="%y%mo%d%h%mi" split_start_offset="90mi" split_end_offset="-90mi" split_last_date="2021-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
+		<file id="prc_3hr_gn" name="IOXDIRprc_3hr_CNRM-RCSM6_historical_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="3h" append="true" output_level="10" compression_level="4" split_freq="2y" split_freq_format="%y%mo%d%h%mi" split_start_offset="90mi" split_end_offset="-90mi" split_last_date="2021-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
@@ -13033,7 +13033,7 @@
 				<variable name="cell_measures" type="string"> area: areacella </variable>
 			</field>
 		</file>
-		<file id="prsn_3hr_gn" name="IOXDIRprsn_3hr_CNRM-RCSM6_historical_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="3h" append="true" output_level="10" compression_level="4" split_freq="10y" split_freq_format="%y%mo%d%h%mi" split_start_offset="90mi" split_end_offset="-90mi" split_last_date="2021-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
+		<file id="prsn_3hr_gn" name="IOXDIRprsn_3hr_CNRM-RCSM6_historical_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="3h" append="true" output_level="10" compression_level="4" split_freq="2y" split_freq_format="%y%mo%d%h%mi" split_start_offset="90mi" split_end_offset="-90mi" split_last_date="2021-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
@@ -13070,7 +13070,7 @@
 				<variable name="cell_measures" type="string"> area: areacella </variable>
 			</field>
 		</file>
-		<file id="rlds_3hr_gn" name="IOXDIRrlds_3hr_CNRM-RCSM6_historical_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="3h" append="true" output_level="10" compression_level="4" split_freq="10y" split_freq_format="%y%mo%d%h%mi" split_start_offset="90mi" split_end_offset="-90mi" split_last_date="2021-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
+		<file id="rlds_3hr_gn" name="IOXDIRrlds_3hr_CNRM-RCSM6_historical_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="3h" append="true" output_level="10" compression_level="4" split_freq="2y" split_freq_format="%y%mo%d%h%mi" split_start_offset="90mi" split_end_offset="-90mi" split_last_date="2021-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
@@ -13107,7 +13107,7 @@
 				<variable name="cell_measures" type="string"> area: areacella </variable>
 			</field>
 		</file>
-		<file id="rlus_3hr_gn" name="IOXDIRrlus_3hr_CNRM-RCSM6_historical_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="3h" append="true" output_level="10" compression_level="4" split_freq="10y" split_freq_format="%y%mo%d%h%mi" split_start_offset="90mi" split_end_offset="-90mi" split_last_date="2021-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
+		<file id="rlus_3hr_gn" name="IOXDIRrlus_3hr_CNRM-RCSM6_historical_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="3h" append="true" output_level="10" compression_level="4" split_freq="2y" split_freq_format="%y%mo%d%h%mi" split_start_offset="90mi" split_end_offset="-90mi" split_last_date="2021-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
@@ -13144,7 +13144,7 @@
 				<variable name="cell_measures" type="string"> area: areacella </variable>
 			</field>
 		</file>
-		<file id="rsds_3hr_gn" name="IOXDIRrsds_3hr_CNRM-RCSM6_historical_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="3h" append="true" output_level="10" compression_level="4" split_freq="10y" split_freq_format="%y%mo%d%h%mi" split_start_offset="90mi" split_end_offset="-90mi" split_last_date="2021-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
+		<file id="rsds_3hr_gn" name="IOXDIRrsds_3hr_CNRM-RCSM6_historical_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="3h" append="true" output_level="10" compression_level="4" split_freq="2y" split_freq_format="%y%mo%d%h%mi" split_start_offset="90mi" split_end_offset="-90mi" split_last_date="2021-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
@@ -13181,7 +13181,7 @@
 				<variable name="cell_measures" type="string"> area: areacella </variable>
 			</field>
 		</file>
-		<file id="rsus_3hr_gn" name="IOXDIRrsus_3hr_CNRM-RCSM6_historical_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="3h" append="true" output_level="10" compression_level="4" split_freq="10y" split_freq_format="%y%mo%d%h%mi" split_start_offset="90mi" split_end_offset="-90mi" split_last_date="2021-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
+		<file id="rsus_3hr_gn" name="IOXDIRrsus_3hr_CNRM-RCSM6_historical_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="3h" append="true" output_level="10" compression_level="4" split_freq="2y" split_freq_format="%y%mo%d%h%mi" split_start_offset="90mi" split_end_offset="-90mi" split_last_date="2021-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
@@ -15068,378 +15068,452 @@
 		</file>
 	</file_definition>
 	<field_definition>
-		<field id="CMIP6_od550aer_average" field_ref="CMIP6_od550aer" operation="average"/>
-		<field id="CMIP6_prw_average" field_ref="CMIP6_prw" operation="average"/>
-		<field id="CMIP6_mrros_average" field_ref="CMIP6_mrros" operation="average"/>
-		<field id="CMIP6_prhmax_average" field_ref="CMIP6_prhmax" operation="average"/>
-		<field id="CMIP6_snd_average" field_ref="CMIP6_snd" operation="average"/>
-		<field id="CMIP6_snm_land_average" field_ref="CMIP6_snm_land" operation="average"/>
-		<field id="CMIP6_ts_average" field_ref="CMIP6_ts" operation="average"/>
-		<field id="CMIP6_tsland_average" field_ref="CMIP6_tsland" operation="average"/>
+		<field id="CMIP6_RADabs550aer_average" field_ref="CMIP6_RADabs550aer" operation="average"/>
+		<field id="CMIP6_RADasy550aer_average" field_ref="CMIP6_RADasy550aer" operation="average"/>
+		<field id="CMIP6_RADod550aer_average" field_ref="CMIP6_RADod550aer" operation="average"/>
+		<field id="CMIP6_RADssa550aer_average" field_ref="CMIP6_RADssa550aer" operation="average"/>
+		<field id="CMIP6_TACabs550aer_average" field_ref="CMIP6_TACabs550aer" operation="average"/>
+		<field id="CMIP6_abs550aer_average" field_ref="CMIP6_abs550aer" operation="average"/>
+		<field id="CMIP6_areacella_once" field_ref="CMIP6_areacella" operation="once"/>
 		<field id="CMIP6_asy550aer_average" field_ref="CMIP6_asy550aer" operation="average"/>
+		<field id="CMIP6_cdnc_average" field_ref="CMIP6_cdnc" operation="average"/>
+		<field id="CMIP6_cdnctop_average" field_ref="CMIP6_cdnctop" operation="average"/>
+		<field id="CMIP6_clivi_average" field_ref="CMIP6_clivi" operation="average"/>
+		<field id="CMIP6_clivi_instant" field_ref="CMIP6_clivi" operation="instant"/>
+		<field id="CMIP6_clt_average" field_ref="CMIP6_clt" operation="average"/>
+		<field id="CMIP6_cltc_average" field_ref="CMIP6_cltc" operation="average"/>
 		<field id="CMIP6_clth_average" field_ref="CMIP6_clth" operation="average"/>
 		<field id="CMIP6_cltl_average" field_ref="CMIP6_cltl" operation="average"/>
 		<field id="CMIP6_cltm_average" field_ref="CMIP6_cltm" operation="average"/>
-		<field id="CMIP6_husll_average" field_ref="CMIP6_husll" operation="average"/>
-		<field id="CMIP6_od550nh4_average" field_ref="CMIP6_od550nh4" operation="average"/>
-		<field id="CMIP6_rldsaf_average" field_ref="CMIP6_rldsaf" operation="average"/>
-		<field id="CMIP6_rldscsaf_average" field_ref="CMIP6_rldscsaf" operation="average"/>
-		<field id="CMIP6_rlusaf_average" field_ref="CMIP6_rlusaf" operation="average"/>
-		<field id="CMIP6_rluscs_average" field_ref="CMIP6_rluscs" operation="average"/>
-		<field id="CMIP6_rluscsaf_average" field_ref="CMIP6_rluscsaf" operation="average"/>
-		<field id="CMIP6_rsdsaf_average" field_ref="CMIP6_rsdsaf" operation="average"/>
-		<field id="CMIP6_rsdscsaf_average" field_ref="CMIP6_rsdscsaf" operation="average"/>
-		<field id="CMIP6_rsusaf_average" field_ref="CMIP6_rsusaf" operation="average"/>
-		<field id="CMIP6_rsuscsaf_average" field_ref="CMIP6_rsuscsaf" operation="average"/>
-		<field id="CMIP6_sconcbc_average" field_ref="CMIP6_sconcbc" operation="average"/>
-		<field id="CMIP6_sconcnh4_average" field_ref="CMIP6_sconcnh4" operation="average"/>
-		<field id="CMIP6_sconcno3_average" field_ref="CMIP6_sconcno3" operation="average"/>
-		<field id="CMIP6_sconcoa_average" field_ref="CMIP6_sconcoa" operation="average"/>
-		<field id="CMIP6_ssa550aer_average" field_ref="CMIP6_ssa550aer" operation="average"/>
-		<field id="CMIP6_tall_average" field_ref="CMIP6_tall" operation="average"/>
-		<field id="CMIP6_tssea_average" field_ref="CMIP6_tssea" operation="average"/>
-		<field id="CMIP6_uall_average" field_ref="CMIP6_uall" operation="average"/>
-		<field id="CMIP6_vall_average" field_ref="CMIP6_vall" operation="average"/>
-		<field id="CMIP6_hus_with_instant" field_ref="CMIP6_hus" operation="instant"/>
-		<field id="CMIP6_pfull_instant" field_ref="CMIP6_pfull" operation="instant" detect_missing_value="true"/>
-		<field id="CMIP6_pfull_instant_sampled_1h" field_ref="CMIP6_pfull_instant" freq_op="1h" detect_missing_value="true"> @CMIP6_pfull </field>
-		<field id="CMIP6_hus_sampled_1h" field_ref="CMIP6_hus_with_instant" freq_op="1h" detect_missing_value="true"> @CMIP6_hus_with_instant </field>
-		<field id="CMIP6_hus200_plev200" field_ref="CMIP6_hus_sampled_1h" grid_ref="FULL_klev_plev200"/>
-		<field id="CMIP6_hus200_plev200_Scalplev200" grid_ref="FULL_klev_Scalplev200" operation="instant" detect_missing_value="true"> CMIP6_hus200_plev200 </field>
-		<field id="CMIP6_hus200_plev200_Scalplev200_average" field_ref="CMIP6_hus200_plev200_Scalplev200" operation="average"/>
-		<field id="CMIP6_hus500_plev500" field_ref="CMIP6_hus_sampled_1h" grid_ref="FULL_klev_plev500"/>
-		<field id="CMIP6_hus500_plev500_Scalplev500" grid_ref="FULL_klev_Scalplev500" operation="instant" detect_missing_value="true"> CMIP6_hus500_plev500 </field>
-		<field id="CMIP6_hus500_plev500_Scalplev500_average" field_ref="CMIP6_hus500_plev500_Scalplev500" operation="average"/>
-		<field id="CMIP6_hus700_plev700" field_ref="CMIP6_hus_sampled_1h" grid_ref="FULL_klev_plev700"/>
-		<field id="CMIP6_hus700_plev700_Scalplev700" grid_ref="FULL_klev_Scalplev700" operation="instant" detect_missing_value="true"> CMIP6_hus700_plev700 </field>
-		<field id="CMIP6_hus700_plev700_Scalplev700_average" field_ref="CMIP6_hus700_plev700_Scalplev700" operation="average"/>
-		<field id="CMIP6_hus850_plev850" field_ref="CMIP6_hus_sampled_1h" grid_ref="FULL_klev_plev850"/>
-		<field id="CMIP6_hus850_plev850_Scalplev850" grid_ref="FULL_klev_Scalplev850" operation="instant" detect_missing_value="true"> CMIP6_hus850_plev850 </field>
-		<field id="CMIP6_hus850_plev850_Scalplev850_average" field_ref="CMIP6_hus850_plev850_Scalplev850" operation="average"/>
-		<field id="CMIP6_hus925_plev925" field_ref="CMIP6_hus_sampled_1h" grid_ref="FULL_klev_plev925"/>
-		<field id="CMIP6_hus925_plev925_Scalplev925" grid_ref="FULL_klev_Scalplev925" operation="instant" detect_missing_value="true"> CMIP6_hus925_plev925 </field>
-		<field id="CMIP6_hus925_plev925_Scalplev925_average" field_ref="CMIP6_hus925_plev925_Scalplev925" operation="average"/>
-		<field id="CMIP6_ta_with_instant" field_ref="CMIP6_ta" operation="instant"/>
-		<field id="CMIP6_ta_sampled_1h" field_ref="CMIP6_ta_with_instant" freq_op="1h" detect_missing_value="true"> @CMIP6_ta_with_instant </field>
-		<field id="CMIP6_ta200_plev200" field_ref="CMIP6_ta_sampled_1h" grid_ref="FULL_klev_plev200"/>
-		<field id="CMIP6_ta200_plev200_Scalplev200" grid_ref="FULL_klev_Scalplev200" operation="instant" detect_missing_value="true"> CMIP6_ta200_plev200 </field>
-		<field id="CMIP6_ta200_plev200_Scalplev200_average" field_ref="CMIP6_ta200_plev200_Scalplev200" operation="average"/>
-		<field id="CMIP6_ta500_plev500" field_ref="CMIP6_ta_sampled_1h" grid_ref="FULL_klev_plev500"/>
-		<field id="CMIP6_ta500_plev500_Scalplev500" grid_ref="FULL_klev_Scalplev500" operation="instant" detect_missing_value="true"> CMIP6_ta500_plev500 </field>
-		<field id="CMIP6_ta500_plev500_Scalplev500_average" field_ref="CMIP6_ta500_plev500_Scalplev500" operation="average"/>
-		<field id="CMIP6_ta700_plev700" field_ref="CMIP6_ta_sampled_1h" grid_ref="FULL_klev_plev700"/>
-		<field id="CMIP6_ta700_plev700_Scalplev700" grid_ref="FULL_klev_Scalplev700" operation="instant" detect_missing_value="true"> CMIP6_ta700_plev700 </field>
-		<field id="CMIP6_ta700_plev700_Scalplev700_average" field_ref="CMIP6_ta700_plev700_Scalplev700" operation="average"/>
-		<field id="CMIP6_ta850_plev850" field_ref="CMIP6_ta_sampled_1h" grid_ref="FULL_klev_plev850"/>
-		<field id="CMIP6_ta850_plev850_Scalplev850" grid_ref="FULL_klev_Scalplev850" operation="instant" detect_missing_value="true"> CMIP6_ta850_plev850 </field>
-		<field id="CMIP6_ta850_plev850_Scalplev850_average" field_ref="CMIP6_ta850_plev850_Scalplev850" operation="average"/>
-		<field id="CMIP6_ta925_plev925" field_ref="CMIP6_ta_sampled_1h" grid_ref="FULL_klev_plev925"/>
-		<field id="CMIP6_ta925_plev925_Scalplev925" grid_ref="FULL_klev_Scalplev925" operation="instant" detect_missing_value="true"> CMIP6_ta925_plev925 </field>
-		<field id="CMIP6_ta925_plev925_Scalplev925_average" field_ref="CMIP6_ta925_plev925_Scalplev925" operation="average"/>
-		<field id="CMIP6_ua_with_instant" field_ref="CMIP6_ua" operation="instant"/>
-		<field id="CMIP6_ua_sampled_1h" field_ref="CMIP6_ua_with_instant" freq_op="1h" detect_missing_value="true"> @CMIP6_ua_with_instant </field>
-		<field id="CMIP6_ua200_plev200" field_ref="CMIP6_ua_sampled_1h" grid_ref="FULL_klev_plev200"/>
-		<field id="CMIP6_ua200_plev200_Scalplev200" grid_ref="FULL_klev_Scalplev200" operation="instant" detect_missing_value="true"> CMIP6_ua200_plev200 </field>
-		<field id="CMIP6_ua200_plev200_Scalplev200_average" field_ref="CMIP6_ua200_plev200_Scalplev200" operation="average"/>
-		<field id="CMIP6_ua500_plev500" field_ref="CMIP6_ua_sampled_1h" grid_ref="FULL_klev_plev500"/>
-		<field id="CMIP6_ua500_plev500_Scalplev500" grid_ref="FULL_klev_Scalplev500" operation="instant" detect_missing_value="true"> CMIP6_ua500_plev500 </field>
-		<field id="CMIP6_ua500_plev500_Scalplev500_average" field_ref="CMIP6_ua500_plev500_Scalplev500" operation="average"/>
-		<field id="CMIP6_ua700_plev700" field_ref="CMIP6_ua_sampled_1h" grid_ref="FULL_klev_plev700"/>
-		<field id="CMIP6_ua700_plev700_Scalplev700" grid_ref="FULL_klev_Scalplev700" operation="instant" detect_missing_value="true"> CMIP6_ua700_plev700 </field>
-		<field id="CMIP6_ua700_plev700_Scalplev700_average" field_ref="CMIP6_ua700_plev700_Scalplev700" operation="average"/>
-		<field id="CMIP6_ua850_plev850" field_ref="CMIP6_ua_sampled_1h" grid_ref="FULL_klev_plev850"/>
-		<field id="CMIP6_ua850_plev850_Scalplev850" grid_ref="FULL_klev_Scalplev850" operation="instant" detect_missing_value="true"> CMIP6_ua850_plev850 </field>
-		<field id="CMIP6_ua850_plev850_Scalplev850_average" field_ref="CMIP6_ua850_plev850_Scalplev850" operation="average"/>
-		<field id="CMIP6_ua925_plev925" field_ref="CMIP6_ua_sampled_1h" grid_ref="FULL_klev_plev925"/>
-		<field id="CMIP6_ua925_plev925_Scalplev925" grid_ref="FULL_klev_Scalplev925" operation="instant" detect_missing_value="true"> CMIP6_ua925_plev925 </field>
-		<field id="CMIP6_ua925_plev925_Scalplev925_average" field_ref="CMIP6_ua925_plev925_Scalplev925" operation="average"/>
-		<field id="CMIP6_va_with_instant" field_ref="CMIP6_va" operation="instant"/>
-		<field id="CMIP6_va_sampled_1h" field_ref="CMIP6_va_with_instant" freq_op="1h" detect_missing_value="true"> @CMIP6_va_with_instant </field>
-		<field id="CMIP6_va200_plev200" field_ref="CMIP6_va_sampled_1h" grid_ref="FULL_klev_plev200"/>
-		<field id="CMIP6_va200_plev200_Scalplev200" grid_ref="FULL_klev_Scalplev200" operation="instant" detect_missing_value="true"> CMIP6_va200_plev200 </field>
-		<field id="CMIP6_va200_plev200_Scalplev200_average" field_ref="CMIP6_va200_plev200_Scalplev200" operation="average"/>
-		<field id="CMIP6_va500_plev500" field_ref="CMIP6_va_sampled_1h" grid_ref="FULL_klev_plev500"/>
-		<field id="CMIP6_va500_plev500_Scalplev500" grid_ref="FULL_klev_Scalplev500" operation="instant" detect_missing_value="true"> CMIP6_va500_plev500 </field>
-		<field id="CMIP6_va500_plev500_Scalplev500_average" field_ref="CMIP6_va500_plev500_Scalplev500" operation="average"/>
-		<field id="CMIP6_va700_plev700" field_ref="CMIP6_va_sampled_1h" grid_ref="FULL_klev_plev700"/>
-		<field id="CMIP6_va700_plev700_Scalplev700" grid_ref="FULL_klev_Scalplev700" operation="instant" detect_missing_value="true"> CMIP6_va700_plev700 </field>
-		<field id="CMIP6_va700_plev700_Scalplev700_average" field_ref="CMIP6_va700_plev700_Scalplev700" operation="average"/>
-		<field id="CMIP6_va850_plev850" field_ref="CMIP6_va_sampled_1h" grid_ref="FULL_klev_plev850"/>
-		<field id="CMIP6_va850_plev850_Scalplev850" grid_ref="FULL_klev_Scalplev850" operation="instant" detect_missing_value="true"> CMIP6_va850_plev850 </field>
-		<field id="CMIP6_va850_plev850_Scalplev850_average" field_ref="CMIP6_va850_plev850_Scalplev850" operation="average"/>
-		<field id="CMIP6_va925_plev925" field_ref="CMIP6_va_sampled_1h" grid_ref="FULL_klev_plev925"/>
-		<field id="CMIP6_va925_plev925_Scalplev925" grid_ref="FULL_klev_Scalplev925" operation="instant" detect_missing_value="true"> CMIP6_va925_plev925 </field>
-		<field id="CMIP6_va925_plev925_Scalplev925_average" field_ref="CMIP6_va925_plev925_Scalplev925" operation="average"/>
-		<field id="CMIP6_zg_with_instant" field_ref="CMIP6_zg" operation="instant"/>
-		<field id="CMIP6_zg_sampled_1h" field_ref="CMIP6_zg_with_instant" freq_op="1h" detect_missing_value="true"> @CMIP6_zg_with_instant </field>
-		<field id="CMIP6_zg200_plev200" field_ref="CMIP6_zg_sampled_1h" grid_ref="FULL_klev_plev200"/>
-		<field id="CMIP6_zg200_plev200_Scalplev200" grid_ref="FULL_klev_Scalplev200" operation="instant" detect_missing_value="true"> CMIP6_zg200_plev200 </field>
-		<field id="CMIP6_zg200_plev200_Scalplev200_average" field_ref="CMIP6_zg200_plev200_Scalplev200" operation="average"/>
-		<field id="CMIP6_zg500_plev500" field_ref="CMIP6_zg_sampled_1h" grid_ref="FULL_klev_plev500"/>
-		<field id="CMIP6_zg500_plev500_Scalplev500" grid_ref="FULL_klev_Scalplev500" operation="instant" detect_missing_value="true"> CMIP6_zg500_plev500 </field>
-		<field id="CMIP6_zg500_plev500_Scalplev500_average" field_ref="CMIP6_zg500_plev500_Scalplev500" operation="average"/>
-		<field id="CMIP6_zg700_plev700" field_ref="CMIP6_zg_sampled_1h" grid_ref="FULL_klev_plev700"/>
-		<field id="CMIP6_zg700_plev700_Scalplev700" grid_ref="FULL_klev_Scalplev700" operation="instant" detect_missing_value="true"> CMIP6_zg700_plev700 </field>
-		<field id="CMIP6_zg700_plev700_Scalplev700_average" field_ref="CMIP6_zg700_plev700_Scalplev700" operation="average"/>
-		<field id="CMIP6_zg850_plev850" field_ref="CMIP6_zg_sampled_1h" grid_ref="FULL_klev_plev850"/>
-		<field id="CMIP6_zg850_plev850_Scalplev850" grid_ref="FULL_klev_Scalplev850" operation="instant" detect_missing_value="true"> CMIP6_zg850_plev850 </field>
-		<field id="CMIP6_zg850_plev850_Scalplev850_average" field_ref="CMIP6_zg850_plev850_Scalplev850" operation="average"/>
-		<field id="CMIP6_zg925_plev925" field_ref="CMIP6_zg_sampled_1h" grid_ref="FULL_klev_plev925"/>
-		<field id="CMIP6_zg925_plev925_Scalplev925" grid_ref="FULL_klev_Scalplev925" operation="instant" detect_missing_value="true"> CMIP6_zg925_plev925 </field>
-		<field id="CMIP6_zg925_plev925_Scalplev925_average" field_ref="CMIP6_zg925_plev925_Scalplev925" operation="average"/>
-		<field id="CMIP6_abs550aer_average" field_ref="CMIP6_abs550aer" operation="average"/>
-		<field id="CMIP6_clivi_average" field_ref="CMIP6_clivi" operation="average"/>
 		<field id="CMIP6_clwvi_average" field_ref="CMIP6_clwvi" operation="average"/>
+		<field id="CMIP6_clwvi_instant" field_ref="CMIP6_clwvi" operation="instant"/>
+		<field id="CMIP6_drybc_average" field_ref="CMIP6_drybc" operation="average"/>
+		<field id="CMIP6_drydust_average" field_ref="CMIP6_drydust" operation="average"/>
+		<field id="CMIP6_drynh3_average" field_ref="CMIP6_drynh3" operation="average"/>
+		<field id="CMIP6_drynh4_average" field_ref="CMIP6_drynh4" operation="average"/>
+		<field id="CMIP6_dryno3_average" field_ref="CMIP6_dryno3" operation="average"/>
+		<field id="CMIP6_dryoa_average" field_ref="CMIP6_dryoa" operation="average"/>
+		<field id="CMIP6_dryso2_average" field_ref="CMIP6_dryso2" operation="average"/>
+		<field id="CMIP6_dryso4_average" field_ref="CMIP6_dryso4" operation="average"/>
+		<field id="CMIP6_dryss_average" field_ref="CMIP6_dryss" operation="average"/>
+		<field id="CMIP6_emibc_average" field_ref="CMIP6_emibc" operation="average"/>
 		<field id="CMIP6_emidust_average" field_ref="CMIP6_emidust" operation="average"/>
+		<field id="CMIP6_eminh3_average" field_ref="CMIP6_eminh3" operation="average"/>
+		<field id="CMIP6_eminh4_average" field_ref="CMIP6_eminh4" operation="average"/>
+		<field id="CMIP6_emino3_average" field_ref="CMIP6_emino3" operation="average"/>
+		<field id="CMIP6_emioa_average" field_ref="CMIP6_emioa" operation="average"/>
+		<field id="CMIP6_emiso2_average" field_ref="CMIP6_emiso2" operation="average"/>
+		<field id="CMIP6_emiso4_average" field_ref="CMIP6_emiso4" operation="average"/>
 		<field id="CMIP6_emiss_average" field_ref="CMIP6_emiss" operation="average"/>
 		<field id="CMIP6_evspsbl_average" field_ref="CMIP6_evspsbl" operation="average"/>
+		<field id="CMIP6_ext550bc_plev19" field_ref="CMIP6_ext550bc_sampled_1h" grid_ref="FULL_klev_plev19"/>
+		<field id="CMIP6_ext550bc_plev19_average" field_ref="CMIP6_ext550bc_plev19" operation="average"/>
+		<field id="CMIP6_ext550bc_sampled_1h" field_ref="CMIP6_ext550bc_with_instant" freq_op="1h" detect_missing_value="true"> @CMIP6_ext550bc_with_instant </field>
+		<field id="CMIP6_ext550bc_with_instant" field_ref="CMIP6_ext550bc" operation="instant"/>
+		<field id="CMIP6_ext550dust_plev19" field_ref="CMIP6_ext550dust_sampled_1h" grid_ref="FULL_klev_plev19"/>
+		<field id="CMIP6_ext550dust_plev19_average" field_ref="CMIP6_ext550dust_plev19" operation="average"/>
+		<field id="CMIP6_ext550dust_sampled_1h" field_ref="CMIP6_ext550dust_with_instant" freq_op="1h" detect_missing_value="true"> @CMIP6_ext550dust_with_instant </field>
+		<field id="CMIP6_ext550dust_with_instant" field_ref="CMIP6_ext550dust" operation="instant"/>
+		<field id="CMIP6_ext550nh4_plev19" field_ref="CMIP6_ext550nh4_sampled_1h" grid_ref="FULL_klev_plev19"/>
+		<field id="CMIP6_ext550nh4_plev19_average" field_ref="CMIP6_ext550nh4_plev19" operation="average"/>
+		<field id="CMIP6_ext550nh4_sampled_1h" field_ref="CMIP6_ext550nh4_with_instant" freq_op="1h" detect_missing_value="true"> @CMIP6_ext550nh4_with_instant </field>
+		<field id="CMIP6_ext550nh4_with_instant" field_ref="CMIP6_ext550nh4" operation="instant"/>
+		<field id="CMIP6_ext550no3_plev19" field_ref="CMIP6_ext550no3_sampled_1h" grid_ref="FULL_klev_plev19"/>
+		<field id="CMIP6_ext550no3_plev19_average" field_ref="CMIP6_ext550no3_plev19" operation="average"/>
+		<field id="CMIP6_ext550no3_sampled_1h" field_ref="CMIP6_ext550no3_with_instant" freq_op="1h" detect_missing_value="true"> @CMIP6_ext550no3_with_instant </field>
+		<field id="CMIP6_ext550no3_with_instant" field_ref="CMIP6_ext550no3" operation="instant"/>
+		<field id="CMIP6_ext550oa_plev19" field_ref="CMIP6_ext550oa_sampled_1h" grid_ref="FULL_klev_plev19"/>
+		<field id="CMIP6_ext550oa_plev19_average" field_ref="CMIP6_ext550oa_plev19" operation="average"/>
+		<field id="CMIP6_ext550oa_sampled_1h" field_ref="CMIP6_ext550oa_with_instant" freq_op="1h" detect_missing_value="true"> @CMIP6_ext550oa_with_instant </field>
+		<field id="CMIP6_ext550oa_with_instant" field_ref="CMIP6_ext550oa" operation="instant"/>
+		<field id="CMIP6_ext550so4_plev19" field_ref="CMIP6_ext550so4_sampled_1h" grid_ref="FULL_klev_plev19"/>
+		<field id="CMIP6_ext550so4_plev19_average" field_ref="CMIP6_ext550so4_plev19" operation="average"/>
+		<field id="CMIP6_ext550so4_sampled_1h" field_ref="CMIP6_ext550so4_with_instant" freq_op="1h" detect_missing_value="true"> @CMIP6_ext550so4_with_instant </field>
+		<field id="CMIP6_ext550so4_with_instant" field_ref="CMIP6_ext550so4" operation="instant"/>
+		<field id="CMIP6_ext550ss_plev19" field_ref="CMIP6_ext550ss_sampled_1h" grid_ref="FULL_klev_plev19"/>
+		<field id="CMIP6_ext550ss_plev19_average" field_ref="CMIP6_ext550ss_plev19" operation="average"/>
+		<field id="CMIP6_ext550ss_sampled_1h" field_ref="CMIP6_ext550ss_with_instant" freq_op="1h" detect_missing_value="true"> @CMIP6_ext550ss_with_instant </field>
+		<field id="CMIP6_ext550ss_with_instant" field_ref="CMIP6_ext550ss" operation="instant"/>
+		<field id="CMIP6_hfls_average" field_ref="CMIP6_hfls" operation="average"/>
+		<field id="CMIP6_hfss_average" field_ref="CMIP6_hfss" operation="average"/>
+		<field id="CMIP6_hur200_plev200" field_ref="CMIP6_hur200_sampled_1h" grid_ref="FULL_klev_plev200"/>
+		<field id="CMIP6_hur200_plev200_Scalplev200" grid_ref="FULL_klev_Scalplev200" operation="instant" detect_missing_value="true"> CMIP6_hur200_plev200 </field>
+		<field id="CMIP6_hur200_plev200_Scalplev200_average" field_ref="CMIP6_hur200_plev200_Scalplev200" operation="average"/>
+		<field id="CMIP6_hur200_sampled_1h" field_ref="CMIP6_hur200_with_instant" freq_op="1h" detect_missing_value="true"> @CMIP6_hur200_with_instant </field>
+		<field id="CMIP6_hur200_with_instant" field_ref="CMIP6_hur200" operation="instant"/>
+		<field id="CMIP6_hur500_plev500" field_ref="CMIP6_hur500_sampled_1h" grid_ref="FULL_klev_plev500"/>
+		<field id="CMIP6_hur500_plev500_Scalplev500" grid_ref="FULL_klev_Scalplev500" operation="instant" detect_missing_value="true"> CMIP6_hur500_plev500 </field>
+		<field id="CMIP6_hur500_plev500_Scalplev500_average" field_ref="CMIP6_hur500_plev500_Scalplev500" operation="average"/>
+		<field id="CMIP6_hur500_sampled_1h" field_ref="CMIP6_hur500_with_instant" freq_op="1h" detect_missing_value="true"> @CMIP6_hur500_with_instant </field>
+		<field id="CMIP6_hur500_with_instant" field_ref="CMIP6_hur500" operation="instant"/>
+		<field id="CMIP6_hur700_plev700" field_ref="CMIP6_hur700_sampled_1h" grid_ref="FULL_klev_plev700"/>
+		<field id="CMIP6_hur700_plev700_Scalplev700" grid_ref="FULL_klev_Scalplev700" operation="instant" detect_missing_value="true"> CMIP6_hur700_plev700 </field>
+		<field id="CMIP6_hur700_plev700_Scalplev700_average" field_ref="CMIP6_hur700_plev700_Scalplev700" operation="average"/>
+		<field id="CMIP6_hur700_sampled_1h" field_ref="CMIP6_hur700_with_instant" freq_op="1h" detect_missing_value="true"> @CMIP6_hur700_with_instant </field>
+		<field id="CMIP6_hur700_with_instant" field_ref="CMIP6_hur700" operation="instant"/>
+		<field id="CMIP6_hur850_plev850" field_ref="CMIP6_hur850_sampled_1h" grid_ref="FULL_klev_plev850"/>
+		<field id="CMIP6_hur850_plev850_Scalplev850" grid_ref="FULL_klev_Scalplev850" operation="instant" detect_missing_value="true"> CMIP6_hur850_plev850 </field>
+		<field id="CMIP6_hur850_plev850_Scalplev850_average" field_ref="CMIP6_hur850_plev850_Scalplev850" operation="average"/>
+		<field id="CMIP6_hur850_sampled_1h" field_ref="CMIP6_hur850_with_instant" freq_op="1h" detect_missing_value="true"> @CMIP6_hur850_with_instant </field>
+		<field id="CMIP6_hur850_with_instant" field_ref="CMIP6_hur850" operation="instant"/>
+		<field id="CMIP6_hur925_plev925" field_ref="CMIP6_hur925_sampled_1h" grid_ref="FULL_klev_plev925"/>
+		<field id="CMIP6_hur925_plev925_Scalplev925" grid_ref="FULL_klev_Scalplev925" operation="instant" detect_missing_value="true"> CMIP6_hur925_plev925 </field>
+		<field id="CMIP6_hur925_plev925_Scalplev925_average" field_ref="CMIP6_hur925_plev925_Scalplev925" operation="average"/>
+		<field id="CMIP6_hur925_sampled_1h" field_ref="CMIP6_hur925_with_instant" freq_op="1h" detect_missing_value="true"> @CMIP6_hur925_with_instant </field>
+		<field id="CMIP6_hur925_with_instant" field_ref="CMIP6_hur925" operation="instant"/>
+		<field id="CMIP6_hur_plev19" field_ref="CMIP6_hur_sampled_1h" grid_ref="FULL_klev_plev19"/>
+		<field id="CMIP6_hur_plev19_average" field_ref="CMIP6_hur_plev19" operation="average"/>
+		<field id="CMIP6_hur_plev8" field_ref="CMIP6_hur_sampled_1h" grid_ref="FULL_klev_plev8"/>
+		<field id="CMIP6_hur_plev8_average" field_ref="CMIP6_hur_plev8" operation="average"/>
+		<field id="CMIP6_hur_sampled_1h" field_ref="CMIP6_hur_with_instant" freq_op="1h" detect_missing_value="true"> @CMIP6_hur_with_instant </field>
+		<field id="CMIP6_hur_with_instant" field_ref="CMIP6_hur" operation="instant"/>
+		<field id="CMIP6_hurs_Scalheight2m" grid_ref="FULL_grid_Scalheight2m" operation="instant" detect_missing_value="true"> CMIP6_hurs </field>
+		<field id="CMIP6_hurs_Scalheight2m_average" field_ref="CMIP6_hurs_Scalheight2m" operation="average"/>
+		<field id="CMIP6_hurs_Scalheight2m_instant" field_ref="CMIP6_hurs_Scalheight2m" operation="instant"/>
+		<field id="CMIP6_hus200_plev200" field_ref="CMIP6_hus200_sampled_1h" grid_ref="FULL_klev_plev200"/>
+		<field id="CMIP6_hus200_plev200_Scalplev200" grid_ref="FULL_klev_Scalplev200" operation="instant" detect_missing_value="true"> CMIP6_hus200_plev200 </field>
+		<field id="CMIP6_hus200_plev200_Scalplev200_average" field_ref="CMIP6_hus200_plev200_Scalplev200" operation="average"/>
+		<field id="CMIP6_hus200_plev200_Scalplev200_instant" field_ref="CMIP6_hus200_plev200_Scalplev200" operation="instant"/>
+		<field id="CMIP6_hus200_sampled_1h" field_ref="CMIP6_hus200_with_instant" freq_op="1h" detect_missing_value="true"> @CMIP6_hus200_with_instant </field>
+		<field id="CMIP6_hus200_with_instant" field_ref="CMIP6_hus200" operation="instant"/>
+		<field id="CMIP6_hus500_plev500" field_ref="CMIP6_hus500_sampled_1h" grid_ref="FULL_klev_plev500"/>
+		<field id="CMIP6_hus500_plev500_Scalplev500" grid_ref="FULL_klev_Scalplev500" operation="instant" detect_missing_value="true"> CMIP6_hus500_plev500 </field>
+		<field id="CMIP6_hus500_plev500_Scalplev500_average" field_ref="CMIP6_hus500_plev500_Scalplev500" operation="average"/>
+		<field id="CMIP6_hus500_plev500_Scalplev500_instant" field_ref="CMIP6_hus500_plev500_Scalplev500" operation="instant"/>
+		<field id="CMIP6_hus500_sampled_1h" field_ref="CMIP6_hus500_with_instant" freq_op="1h" detect_missing_value="true"> @CMIP6_hus500_with_instant </field>
+		<field id="CMIP6_hus500_with_instant" field_ref="CMIP6_hus500" operation="instant"/>
+		<field id="CMIP6_hus700_plev700" field_ref="CMIP6_hus700_sampled_1h" grid_ref="FULL_klev_plev700"/>
+		<field id="CMIP6_hus700_plev700_Scalplev700" grid_ref="FULL_klev_Scalplev700" operation="instant" detect_missing_value="true"> CMIP6_hus700_plev700 </field>
+		<field id="CMIP6_hus700_plev700_Scalplev700_average" field_ref="CMIP6_hus700_plev700_Scalplev700" operation="average"/>
+		<field id="CMIP6_hus700_plev700_Scalplev700_instant" field_ref="CMIP6_hus700_plev700_Scalplev700" operation="instant"/>
+		<field id="CMIP6_hus700_sampled_1h" field_ref="CMIP6_hus700_with_instant" freq_op="1h" detect_missing_value="true"> @CMIP6_hus700_with_instant </field>
+		<field id="CMIP6_hus700_with_instant" field_ref="CMIP6_hus700" operation="instant"/>
+		<field id="CMIP6_hus850_plev850" field_ref="CMIP6_hus850_sampled_1h" grid_ref="FULL_klev_plev850"/>
+		<field id="CMIP6_hus850_plev850_Scalplev850" grid_ref="FULL_klev_Scalplev850" operation="instant" detect_missing_value="true"> CMIP6_hus850_plev850 </field>
+		<field id="CMIP6_hus850_plev850_Scalplev850_average" field_ref="CMIP6_hus850_plev850_Scalplev850" operation="average"/>
+		<field id="CMIP6_hus850_plev850_Scalplev850_instant" field_ref="CMIP6_hus850_plev850_Scalplev850" operation="instant"/>
+		<field id="CMIP6_hus850_sampled_1h" field_ref="CMIP6_hus850_with_instant" freq_op="1h" detect_missing_value="true"> @CMIP6_hus850_with_instant </field>
+		<field id="CMIP6_hus850_with_instant" field_ref="CMIP6_hus850" operation="instant"/>
+		<field id="CMIP6_hus925_plev925" field_ref="CMIP6_hus925_sampled_1h" grid_ref="FULL_klev_plev925"/>
+		<field id="CMIP6_hus925_plev925_Scalplev925" grid_ref="FULL_klev_Scalplev925" operation="instant" detect_missing_value="true"> CMIP6_hus925_plev925 </field>
+		<field id="CMIP6_hus925_plev925_Scalplev925_average" field_ref="CMIP6_hus925_plev925_Scalplev925" operation="average"/>
+		<field id="CMIP6_hus925_plev925_Scalplev925_instant" field_ref="CMIP6_hus925_plev925_Scalplev925" operation="instant"/>
+		<field id="CMIP6_hus925_sampled_1h" field_ref="CMIP6_hus925_with_instant" freq_op="1h" detect_missing_value="true"> @CMIP6_hus925_with_instant </field>
+		<field id="CMIP6_hus925_with_instant" field_ref="CMIP6_hus925" operation="instant"/>
+		<field id="CMIP6_hus_plev19" field_ref="CMIP6_hus_sampled_1h" grid_ref="FULL_klev_plev19"/>
+		<field id="CMIP6_hus_plev19_average" field_ref="CMIP6_hus_plev19" operation="average"/>
+		<field id="CMIP6_hus_plev8" field_ref="CMIP6_hus_sampled_1h" grid_ref="FULL_klev_plev8"/>
+		<field id="CMIP6_hus_plev8_average" field_ref="CMIP6_hus_plev8" operation="average"/>
+		<field id="CMIP6_hus_sampled_1h" field_ref="CMIP6_hus_with_instant" freq_op="1h" detect_missing_value="true"> @CMIP6_hus_with_instant </field>
+		<field id="CMIP6_hus_with_instant" field_ref="CMIP6_hus" operation="instant"/>
+		<field id="CMIP6_husll_average" field_ref="CMIP6_husll" operation="average"/>
+		<field id="CMIP6_huss_Scalheight2m" grid_ref="FULL_grid_Scalheight2m" operation="instant" detect_missing_value="true"> CMIP6_huss </field>
+		<field id="CMIP6_huss_Scalheight2m_average" field_ref="CMIP6_huss_Scalheight2m" operation="average"/>
+		<field id="CMIP6_huss_Scalheight2m_instant" field_ref="CMIP6_huss_Scalheight2m" operation="instant"/>
 		<field id="CMIP6_lwp_average" field_ref="CMIP6_lwp" operation="average"/>
 		<field id="CMIP6_mrfso_average" field_ref="CMIP6_mrfso" operation="average"/>
+		<field id="CMIP6_mrfso_instant" field_ref="CMIP6_mrfso" operation="instant"/>
+		<field id="CMIP6_mrro_average" field_ref="CMIP6_mrro" operation="average"/>
+		<field id="CMIP6_mrros_average" field_ref="CMIP6_mrros" operation="average"/>
+		<field id="CMIP6_mrso_average" field_ref="CMIP6_mrso" operation="average"/>
+		<field id="CMIP6_mrso_instant" field_ref="CMIP6_mrso" operation="instant"/>
+		<field id="CMIP6_mrsofc_once" field_ref="CMIP6_mrsofc" operation="once"/>
+		<field id="CMIP6_od440aer_average" field_ref="CMIP6_od440aer" operation="average"/>
+		<field id="CMIP6_od550aer_average" field_ref="CMIP6_od550aer" operation="average"/>
 		<field id="CMIP6_od550bc_average" field_ref="CMIP6_od550bc" operation="average"/>
 		<field id="CMIP6_od550dust_average" field_ref="CMIP6_od550dust" operation="average"/>
+		<field id="CMIP6_od550dustbin1_average" field_ref="CMIP6_od550dustbin1" operation="average"/>
+		<field id="CMIP6_od550dustbin2_average" field_ref="CMIP6_od550dustbin2" operation="average"/>
+		<field id="CMIP6_od550nh4_average" field_ref="CMIP6_od550nh4" operation="average"/>
 		<field id="CMIP6_od550no3_average" field_ref="CMIP6_od550no3" operation="average"/>
+		<field id="CMIP6_od550no3bin1_average" field_ref="CMIP6_od550no3bin1" operation="average"/>
 		<field id="CMIP6_od550oa_average" field_ref="CMIP6_od550oa" operation="average"/>
 		<field id="CMIP6_od550so4_average" field_ref="CMIP6_od550so4" operation="average"/>
 		<field id="CMIP6_od550ss_average" field_ref="CMIP6_od550ss" operation="average"/>
+		<field id="CMIP6_od550ssbin1_average" field_ref="CMIP6_od550ssbin1" operation="average"/>
+		<field id="CMIP6_od550ssbin2_average" field_ref="CMIP6_od550ssbin2" operation="average"/>
+		<field id="CMIP6_od870aer_average" field_ref="CMIP6_od870aer" operation="average"/>
+		<field id="CMIP6_orog_once" field_ref="CMIP6_orog" operation="once"/>
+		<field id="CMIP6_pfull_instant" field_ref="CMIP6_pfull" operation="instant" detect_missing_value="true"/>
+		<field id="CMIP6_pfull_instant_sampled_1h" field_ref="CMIP6_pfull_instant" freq_op="1h" detect_missing_value="true"> @CMIP6_pfull </field>
+		<field id="CMIP6_pr_average" field_ref="CMIP6_pr" operation="average"/>
+		<field id="CMIP6_prc_average" field_ref="CMIP6_prc" operation="average"/>
+		<field id="CMIP6_prhmax_average" field_ref="CMIP6_prhmax" operation="average"/>
+		<field id="CMIP6_prsn_average" field_ref="CMIP6_prsn" operation="average"/>
+		<field id="CMIP6_prw_average" field_ref="CMIP6_prw" operation="average"/>
 		<field id="CMIP6_ps_average" field_ref="CMIP6_ps" operation="average"/>
+		<field id="CMIP6_ps_instant" field_ref="CMIP6_ps" operation="instant"/>
+		<field id="CMIP6_psl_average" field_ref="CMIP6_psl" operation="average"/>
+		<field id="CMIP6_psl_instant" field_ref="CMIP6_psl" operation="instant"/>
+		<field id="CMIP6_reffclitop_average" field_ref="CMIP6_reffclitop" operation="average"/>
+		<field id="CMIP6_reffclwtopcnrm_average" field_ref="CMIP6_reffclwtopcnrm" operation="average"/>
+		<field id="CMIP6_rlds_average" field_ref="CMIP6_rlds" operation="average"/>
+		<field id="CMIP6_rldsaf_average" field_ref="CMIP6_rldsaf" operation="average"/>
 		<field id="CMIP6_rldscs_average" field_ref="CMIP6_rldscs" operation="average"/>
+		<field id="CMIP6_rldscsaf_average" field_ref="CMIP6_rldscsaf" operation="average"/>
+		<field id="CMIP6_rlus_average" field_ref="CMIP6_rlus" operation="average"/>
+		<field id="CMIP6_rlusaf_average" field_ref="CMIP6_rlusaf" operation="average"/>
+		<field id="CMIP6_rluscs_average" field_ref="CMIP6_rluscs" operation="average"/>
+		<field id="CMIP6_rluscsaf_average" field_ref="CMIP6_rluscsaf" operation="average"/>
+		<field id="CMIP6_rlut_average" field_ref="CMIP6_rlut" operation="average"/>
 		<field id="CMIP6_rlutaf_average" field_ref="CMIP6_rlutaf" operation="average"/>
 		<field id="CMIP6_rlutcs_average" field_ref="CMIP6_rlutcs" operation="average"/>
 		<field id="CMIP6_rlutcsaf_average" field_ref="CMIP6_rlutcsaf" operation="average"/>
+		<field id="CMIP6_rootd_once" field_ref="CMIP6_rootd" operation="once"/>
+		<field id="CMIP6_rsds_average" field_ref="CMIP6_rsds" operation="average"/>
+		<field id="CMIP6_rsdsaf_average" field_ref="CMIP6_rsdsaf" operation="average"/>
 		<field id="CMIP6_rsdscs_average" field_ref="CMIP6_rsdscs" operation="average"/>
+		<field id="CMIP6_rsdscsaf_average" field_ref="CMIP6_rsdscsaf" operation="average"/>
 		<field id="CMIP6_rsdt_average" field_ref="CMIP6_rsdt" operation="average"/>
+		<field id="CMIP6_rsus_average" field_ref="CMIP6_rsus" operation="average"/>
+		<field id="CMIP6_rsusaf_average" field_ref="CMIP6_rsusaf" operation="average"/>
 		<field id="CMIP6_rsuscs_average" field_ref="CMIP6_rsuscs" operation="average"/>
+		<field id="CMIP6_rsuscsaf_average" field_ref="CMIP6_rsuscsaf" operation="average"/>
 		<field id="CMIP6_rsut_average" field_ref="CMIP6_rsut" operation="average"/>
 		<field id="CMIP6_rsutaf_average" field_ref="CMIP6_rsutaf" operation="average"/>
 		<field id="CMIP6_rsutcs_average" field_ref="CMIP6_rsutcs" operation="average"/>
 		<field id="CMIP6_rsutcsaf_average" field_ref="CMIP6_rsutcsaf" operation="average"/>
+		<field id="CMIP6_sconcbc_average" field_ref="CMIP6_sconcbc" operation="average"/>
 		<field id="CMIP6_sconcdust_average" field_ref="CMIP6_sconcdust" operation="average"/>
+		<field id="CMIP6_sconcnh4_average" field_ref="CMIP6_sconcnh4" operation="average"/>
+		<field id="CMIP6_sconcno3_average" field_ref="CMIP6_sconcno3" operation="average"/>
+		<field id="CMIP6_sconcoa_average" field_ref="CMIP6_sconcoa" operation="average"/>
 		<field id="CMIP6_sconcso4_average" field_ref="CMIP6_sconcso4" operation="average"/>
 		<field id="CMIP6_sconcss_average" field_ref="CMIP6_sconcss" operation="average"/>
-		<field id="CMIP6_tauu_average" field_ref="CMIP6_tauu" operation="average"/>
-		<field id="CMIP6_tauv_average" field_ref="CMIP6_tauv" operation="average"/>
-		<field id="CMIP6_siconca_Scaltypesi" grid_ref="SEA_grid_Scaltypesi" operation="instant" detect_missing_value="true"> CMIP6_siconca </field>
-		<field id="CMIP6_siconca_Scaltypesi_average" field_ref="CMIP6_siconca_Scaltypesi" operation="average"/>
-		<field id="CMIP6_clt_average" field_ref="CMIP6_clt" operation="average"/>
-		<field id="CMIP6_hurs_Scalheight2m" grid_ref="FULL_grid_Scalheight2m" operation="instant" detect_missing_value="true"> CMIP6_hurs </field>
-		<field id="CMIP6_hurs_Scalheight2m_average" field_ref="CMIP6_hurs_Scalheight2m" operation="average"/>
-		<field id="CMIP6_huss_Scalheight2m" grid_ref="FULL_grid_Scalheight2m" operation="instant" detect_missing_value="true"> CMIP6_huss </field>
-		<field id="CMIP6_huss_Scalheight2m_average" field_ref="CMIP6_huss_Scalheight2m" operation="average"/>
-		<field id="CMIP6_pr_average" field_ref="CMIP6_pr" operation="average"/>
-		<field id="CMIP6_psl_average" field_ref="CMIP6_psl" operation="average"/>
-		<field id="CMIP6_tas_Scalheight2m" grid_ref="FULL_grid_Scalheight2m" operation="instant" detect_missing_value="true"> CMIP6_tas </field>
-		<field id="CMIP6_tas_Scalheight2m_average" field_ref="CMIP6_tas_Scalheight2m" operation="average"/>
-		<field id="CMIP6_tasmax_Scalheight2m" grid_ref="FULL_grid_Scalheight2m" operation="instant" detect_missing_value="true"> CMIP6_tasmax </field>
-		<field id="CMIP6_tasmax_Scalheight2m_maximum" field_ref="CMIP6_tasmax_Scalheight2m" operation="maximum"/>
-		<field id="CMIP6_tasmin_Scalheight2m" grid_ref="FULL_grid_Scalheight2m" operation="instant" detect_missing_value="true"> CMIP6_tasmin </field>
-		<field id="CMIP6_tasmin_Scalheight2m_minimum" field_ref="CMIP6_tasmin_Scalheight2m" operation="minimum"/>
-		<field id="CMIP6_uas_Scalheight10m" grid_ref="FULL_grid_Scalheight10m" operation="instant" detect_missing_value="true"> CMIP6_uas </field>
-		<field id="CMIP6_uas_Scalheight10m_average" field_ref="CMIP6_uas_Scalheight10m" operation="average"/>
-		<field id="CMIP6_vas_Scalheight10m" grid_ref="FULL_grid_Scalheight10m" operation="instant" detect_missing_value="true"> CMIP6_vas </field>
-		<field id="CMIP6_vas_Scalheight10m_average" field_ref="CMIP6_vas_Scalheight10m" operation="average"/>
-		<field id="CMIP6_hfls_average" field_ref="CMIP6_hfls" operation="average"/>
-		<field id="CMIP6_hfss_average" field_ref="CMIP6_hfss" operation="average"/>
-		<field id="CMIP6_mrro_average" field_ref="CMIP6_mrro" operation="average"/>
-		<field id="CMIP6_mrso_average" field_ref="CMIP6_mrso" operation="average"/>
-		<field id="CMIP6_prc_average" field_ref="CMIP6_prc" operation="average"/>
-		<field id="CMIP6_prsn_average" field_ref="CMIP6_prsn" operation="average"/>
-		<field id="CMIP6_rlds_average" field_ref="CMIP6_rlds" operation="average"/>
-		<field id="CMIP6_rlus_average" field_ref="CMIP6_rlus" operation="average"/>
-		<field id="CMIP6_rlut_average" field_ref="CMIP6_rlut" operation="average"/>
-		<field id="CMIP6_rsds_average" field_ref="CMIP6_rsds" operation="average"/>
-		<field id="CMIP6_rsus_average" field_ref="CMIP6_rsus" operation="average"/>
+		<field id="CMIP6_seddust_average" field_ref="CMIP6_seddust" operation="average"/>
+		<field id="CMIP6_sedno3_average" field_ref="CMIP6_sedno3" operation="average"/>
+		<field id="CMIP6_sedss_average" field_ref="CMIP6_sedss" operation="average"/>
 		<field id="CMIP6_sfcWind_Scalheight10m" grid_ref="FULL_grid_Scalheight10m" operation="instant" detect_missing_value="true"> CMIP6_sfcWind </field>
 		<field id="CMIP6_sfcWind_Scalheight10m_average" field_ref="CMIP6_sfcWind_Scalheight10m" operation="average"/>
+		<field id="CMIP6_sfcWind_Scalheight10m_instant" field_ref="CMIP6_sfcWind_Scalheight10m" operation="instant"/>
 		<field id="CMIP6_sfcWindmax_Scalheight10m" grid_ref="FULL_grid_Scalheight10m" operation="instant" detect_missing_value="true"> CMIP6_sfcWindmax </field>
+		<field id="CMIP6_sfcWindmax_Scalheight10m_average" field_ref="CMIP6_sfcWindmax_Scalheight10m" operation="average"/>
 		<field id="CMIP6_sfcWindmax_Scalheight10m_maximum" field_ref="CMIP6_sfcWindmax_Scalheight10m" operation="maximum"/>
-		<field id="CMIP6_snc_average" field_ref="CMIP6_snc" operation="average"/>
-		<field id="CMIP6_snw_land_average" field_ref="CMIP6_snw_land" operation="average"/>
-		<field id="CMIP6_hus_plev8" field_ref="CMIP6_hus_sampled_1h" grid_ref="FULL_klev_plev8"/>
-		<field id="CMIP6_hus_plev8_average" field_ref="CMIP6_hus_plev8" operation="average"/>
-		<field id="CMIP6_ta_plev8" field_ref="CMIP6_ta_sampled_1h" grid_ref="FULL_klev_plev8"/>
-		<field id="CMIP6_ta_plev8_average" field_ref="CMIP6_ta_plev8" operation="average"/>
-		<field id="CMIP6_ua_plev8" field_ref="CMIP6_ua_sampled_1h" grid_ref="FULL_klev_plev8"/>
-		<field id="CMIP6_ua_plev8_average" field_ref="CMIP6_ua_plev8" operation="average"/>
-		<field id="CMIP6_va_plev8" field_ref="CMIP6_va_sampled_1h" grid_ref="FULL_klev_plev8"/>
-		<field id="CMIP6_va_plev8_average" field_ref="CMIP6_va_plev8" operation="average"/>
-		<field id="CMIP6_zg_plev8" field_ref="CMIP6_zg_sampled_1h" grid_ref="FULL_klev_plev8"/>
-		<field id="CMIP6_zg_plev8_average" field_ref="CMIP6_zg_plev8" operation="average"/>
-		<field id="CMIP6_hur_with_instant" field_ref="CMIP6_hur" operation="instant"/>
-		<field id="CMIP6_hur_sampled_1h" field_ref="CMIP6_hur_with_instant" freq_op="1h" detect_missing_value="true"> @CMIP6_hur_with_instant </field>
-		<field id="CMIP6_hur_plev8" field_ref="CMIP6_hur_sampled_1h" grid_ref="FULL_klev_plev8"/>
-		<field id="CMIP6_hur_plev8_average" field_ref="CMIP6_hur_plev8" operation="average"/>
-		<field id="CMIP6_wap_with_instant" field_ref="CMIP6_wap" operation="instant"/>
-		<field id="CMIP6_wap_sampled_1h" field_ref="CMIP6_wap_with_instant" freq_op="1h" detect_missing_value="true"> @CMIP6_wap_with_instant </field>
-		<field id="CMIP6_wap_plev8" field_ref="CMIP6_wap_sampled_1h" grid_ref="FULL_klev_plev8"/>
-		<field id="CMIP6_wap_plev8_average" field_ref="CMIP6_wap_plev8" operation="average"/>
-		<field id="CMIP6_areacella_once" field_ref="CMIP6_areacella" operation="once"/>
-		<field id="CMIP6_mrsofc_once" field_ref="CMIP6_mrsofc" operation="once"/>
-		<field id="CMIP6_orog_once" field_ref="CMIP6_orog" operation="once"/>
-		<field id="CMIP6_rootd_once" field_ref="CMIP6_rootd" operation="once"/>
 		<field id="CMIP6_sftgif_Scaltypeli" grid_ref="NATURE_grid_Scaltypeli" operation="instant" detect_missing_value="true"> CMIP6_sftgif </field>
 		<field id="CMIP6_sftgif_Scaltypeli_once" field_ref="CMIP6_sftgif_Scaltypeli" operation="once"/>
 		<field id="CMIP6_sftlf_Scaltypeland" grid_ref="FULL_grid_Scaltypeland" operation="instant" detect_missing_value="true"> CMIP6_sftlf </field>
 		<field id="CMIP6_sftlf_Scaltypeland_once" field_ref="CMIP6_sftlf_Scaltypeland" operation="once"/>
-		<field id="CMIP6_psl_instant" field_ref="CMIP6_psl" operation="instant"/>
-		<field id="CMIP6_dryno3_average" field_ref="CMIP6_dryno3" operation="average"/>
-		<field id="CMIP6_seddust_average" field_ref="CMIP6_seddust" operation="average"/>
-		<field id="CMIP6_sedno3_average" field_ref="CMIP6_sedno3" operation="average"/>
-		<field id="CMIP6_sedss_average" field_ref="CMIP6_sedss" operation="average"/>
+		<field id="CMIP6_siconca_Scaltypesi" grid_ref="SEA_grid_Scaltypesi" operation="instant" detect_missing_value="true"> CMIP6_siconca </field>
+		<field id="CMIP6_siconca_Scaltypesi_average" field_ref="CMIP6_siconca_Scaltypesi" operation="average"/>
+		<field id="CMIP6_snc_average" field_ref="CMIP6_snc" operation="average"/>
+		<field id="CMIP6_snd_average" field_ref="CMIP6_snd" operation="average"/>
+		<field id="CMIP6_snm_land_average" field_ref="CMIP6_snm_land" operation="average"/>
+		<field id="CMIP6_snw_land_average" field_ref="CMIP6_snw_land" operation="average"/>
+		<field id="CMIP6_ssa550aer_average" field_ref="CMIP6_ssa550aer" operation="average"/>
+		<field id="CMIP6_ta200_plev200" field_ref="CMIP6_ta200_sampled_1h" grid_ref="FULL_klev_plev200"/>
+		<field id="CMIP6_ta200_plev200_Scalplev200" grid_ref="FULL_klev_Scalplev200" operation="instant" detect_missing_value="true"> CMIP6_ta200_plev200 </field>
+		<field id="CMIP6_ta200_plev200_Scalplev200_average" field_ref="CMIP6_ta200_plev200_Scalplev200" operation="average"/>
+		<field id="CMIP6_ta200_plev200_Scalplev200_instant" field_ref="CMIP6_ta200_plev200_Scalplev200" operation="instant"/>
+		<field id="CMIP6_ta200_sampled_1h" field_ref="CMIP6_ta200_with_instant" freq_op="1h" detect_missing_value="true"> @CMIP6_ta200_with_instant </field>
+		<field id="CMIP6_ta200_with_instant" field_ref="CMIP6_ta200" operation="instant"/>
+		<field id="CMIP6_ta500_plev500" field_ref="CMIP6_ta500_sampled_1h" grid_ref="FULL_klev_plev500"/>
+		<field id="CMIP6_ta500_plev500_Scalplev500" grid_ref="FULL_klev_Scalplev500" operation="instant" detect_missing_value="true"> CMIP6_ta500_plev500 </field>
+		<field id="CMIP6_ta500_plev500_Scalplev500_average" field_ref="CMIP6_ta500_plev500_Scalplev500" operation="average"/>
+		<field id="CMIP6_ta500_plev500_Scalplev500_instant" field_ref="CMIP6_ta500_plev500_Scalplev500" operation="instant"/>
+		<field id="CMIP6_ta500_sampled_1h" field_ref="CMIP6_ta500_with_instant" freq_op="1h" detect_missing_value="true"> @CMIP6_ta500_with_instant </field>
+		<field id="CMIP6_ta500_with_instant" field_ref="CMIP6_ta500" operation="instant"/>
+		<field id="CMIP6_ta700_plev700" field_ref="CMIP6_ta700_sampled_1h" grid_ref="FULL_klev_plev700"/>
+		<field id="CMIP6_ta700_plev700_Scalplev700" grid_ref="FULL_klev_Scalplev700" operation="instant" detect_missing_value="true"> CMIP6_ta700_plev700 </field>
+		<field id="CMIP6_ta700_plev700_Scalplev700_average" field_ref="CMIP6_ta700_plev700_Scalplev700" operation="average"/>
+		<field id="CMIP6_ta700_plev700_Scalplev700_instant" field_ref="CMIP6_ta700_plev700_Scalplev700" operation="instant"/>
+		<field id="CMIP6_ta700_sampled_1h" field_ref="CMIP6_ta700_with_instant" freq_op="1h" detect_missing_value="true"> @CMIP6_ta700_with_instant </field>
+		<field id="CMIP6_ta700_with_instant" field_ref="CMIP6_ta700" operation="instant"/>
+		<field id="CMIP6_ta850_plev850" field_ref="CMIP6_ta850_sampled_1h" grid_ref="FULL_klev_plev850"/>
+		<field id="CMIP6_ta850_plev850_Scalplev850" grid_ref="FULL_klev_Scalplev850" operation="instant" detect_missing_value="true"> CMIP6_ta850_plev850 </field>
+		<field id="CMIP6_ta850_plev850_Scalplev850_average" field_ref="CMIP6_ta850_plev850_Scalplev850" operation="average"/>
+		<field id="CMIP6_ta850_plev850_Scalplev850_instant" field_ref="CMIP6_ta850_plev850_Scalplev850" operation="instant"/>
+		<field id="CMIP6_ta850_sampled_1h" field_ref="CMIP6_ta850_with_instant" freq_op="1h" detect_missing_value="true"> @CMIP6_ta850_with_instant </field>
+		<field id="CMIP6_ta850_with_instant" field_ref="CMIP6_ta850" operation="instant"/>
+		<field id="CMIP6_ta925_plev925" field_ref="CMIP6_ta925_sampled_1h" grid_ref="FULL_klev_plev925"/>
+		<field id="CMIP6_ta925_plev925_Scalplev925" grid_ref="FULL_klev_Scalplev925" operation="instant" detect_missing_value="true"> CMIP6_ta925_plev925 </field>
+		<field id="CMIP6_ta925_plev925_Scalplev925_average" field_ref="CMIP6_ta925_plev925_Scalplev925" operation="average"/>
+		<field id="CMIP6_ta925_plev925_Scalplev925_instant" field_ref="CMIP6_ta925_plev925_Scalplev925" operation="instant"/>
+		<field id="CMIP6_ta925_sampled_1h" field_ref="CMIP6_ta925_with_instant" freq_op="1h" detect_missing_value="true"> @CMIP6_ta925_with_instant </field>
+		<field id="CMIP6_ta925_with_instant" field_ref="CMIP6_ta925" operation="instant"/>
+		<field id="CMIP6_ta_plev19" field_ref="CMIP6_ta_sampled_1h" grid_ref="FULL_klev_plev19"/>
+		<field id="CMIP6_ta_plev19_average" field_ref="CMIP6_ta_plev19" operation="average"/>
+		<field id="CMIP6_ta_plev8" field_ref="CMIP6_ta_sampled_1h" grid_ref="FULL_klev_plev8"/>
+		<field id="CMIP6_ta_plev8_average" field_ref="CMIP6_ta_plev8" operation="average"/>
+		<field id="CMIP6_ta_sampled_1h" field_ref="CMIP6_ta_with_instant" freq_op="1h" detect_missing_value="true"> @CMIP6_ta_with_instant </field>
+		<field id="CMIP6_ta_with_instant" field_ref="CMIP6_ta" operation="instant"/>
+		<field id="CMIP6_tall_average" field_ref="CMIP6_tall" operation="average"/>
+		<field id="CMIP6_tas_Scalheight2m" grid_ref="FULL_grid_Scalheight2m" operation="instant" detect_missing_value="true"> CMIP6_tas </field>
+		<field id="CMIP6_tas_Scalheight2m_average" field_ref="CMIP6_tas_Scalheight2m" operation="average"/>
+		<field id="CMIP6_tas_Scalheight2m_instant" field_ref="CMIP6_tas_Scalheight2m" operation="instant"/>
+		<field id="CMIP6_tasmax_Scalheight2m" grid_ref="FULL_grid_Scalheight2m" operation="instant" detect_missing_value="true"> CMIP6_tasmax </field>
+		<field id="CMIP6_tasmax_Scalheight2m_average" field_ref="CMIP6_tasmax_Scalheight2m" operation="average"/>
+		<field id="CMIP6_tasmax_Scalheight2m_maximum" field_ref="CMIP6_tasmax_Scalheight2m" operation="maximum"/>
+		<field id="CMIP6_tasmin_Scalheight2m" grid_ref="FULL_grid_Scalheight2m" operation="instant" detect_missing_value="true"> CMIP6_tasmin </field>
+		<field id="CMIP6_tasmin_Scalheight2m_average" field_ref="CMIP6_tasmin_Scalheight2m" operation="average"/>
+		<field id="CMIP6_tasmin_Scalheight2m_minimum" field_ref="CMIP6_tasmin_Scalheight2m" operation="minimum"/>
+		<field id="CMIP6_tauu_average" field_ref="CMIP6_tauu" operation="average"/>
+		<field id="CMIP6_tauv_average" field_ref="CMIP6_tauv" operation="average"/>
+		<field id="CMIP6_toz_average" field_ref="CMIP6_toz" operation="average"/>
+		<field id="CMIP6_ts_average" field_ref="CMIP6_ts" operation="average"/>
+		<field id="CMIP6_ts_instant" field_ref="CMIP6_ts" operation="instant"/>
+		<field id="CMIP6_tsland_average" field_ref="CMIP6_tsland" operation="average"/>
+		<field id="CMIP6_tssea_average" field_ref="CMIP6_tssea" operation="average"/>
 		<field id="CMIP6_tssea_instant" field_ref="CMIP6_tssea" operation="instant"/>
-		<field id="CMIP6_drybc_average" field_ref="CMIP6_drybc" operation="average"/>
-		<field id="CMIP6_drydust_average" field_ref="CMIP6_drydust" operation="average"/>
-		<field id="CMIP6_drynh4_average" field_ref="CMIP6_drynh4" operation="average"/>
-		<field id="CMIP6_dryoa_average" field_ref="CMIP6_dryoa" operation="average"/>
-		<field id="CMIP6_dryso4_average" field_ref="CMIP6_dryso4" operation="average"/>
-		<field id="CMIP6_dryss_average" field_ref="CMIP6_dryss" operation="average"/>
+		<field id="CMIP6_ua200_plev200" field_ref="CMIP6_ua200_sampled_1h" grid_ref="FULL_klev_plev200"/>
+		<field id="CMIP6_ua200_plev200_Scalplev200" grid_ref="FULL_klev_Scalplev200" operation="instant" detect_missing_value="true"> CMIP6_ua200_plev200 </field>
+		<field id="CMIP6_ua200_plev200_Scalplev200_average" field_ref="CMIP6_ua200_plev200_Scalplev200" operation="average"/>
+		<field id="CMIP6_ua200_plev200_Scalplev200_instant" field_ref="CMIP6_ua200_plev200_Scalplev200" operation="instant"/>
+		<field id="CMIP6_ua200_sampled_1h" field_ref="CMIP6_ua200_with_instant" freq_op="1h" detect_missing_value="true"> @CMIP6_ua200_with_instant </field>
+		<field id="CMIP6_ua200_with_instant" field_ref="CMIP6_ua200" operation="instant"/>
+		<field id="CMIP6_ua500_plev500" field_ref="CMIP6_ua500_sampled_1h" grid_ref="FULL_klev_plev500"/>
+		<field id="CMIP6_ua500_plev500_Scalplev500" grid_ref="FULL_klev_Scalplev500" operation="instant" detect_missing_value="true"> CMIP6_ua500_plev500 </field>
+		<field id="CMIP6_ua500_plev500_Scalplev500_average" field_ref="CMIP6_ua500_plev500_Scalplev500" operation="average"/>
+		<field id="CMIP6_ua500_plev500_Scalplev500_instant" field_ref="CMIP6_ua500_plev500_Scalplev500" operation="instant"/>
+		<field id="CMIP6_ua500_sampled_1h" field_ref="CMIP6_ua500_with_instant" freq_op="1h" detect_missing_value="true"> @CMIP6_ua500_with_instant </field>
+		<field id="CMIP6_ua500_with_instant" field_ref="CMIP6_ua500" operation="instant"/>
+		<field id="CMIP6_ua700_plev700" field_ref="CMIP6_ua700_sampled_1h" grid_ref="FULL_klev_plev700"/>
+		<field id="CMIP6_ua700_plev700_Scalplev700" grid_ref="FULL_klev_Scalplev700" operation="instant" detect_missing_value="true"> CMIP6_ua700_plev700 </field>
+		<field id="CMIP6_ua700_plev700_Scalplev700_average" field_ref="CMIP6_ua700_plev700_Scalplev700" operation="average"/>
+		<field id="CMIP6_ua700_plev700_Scalplev700_instant" field_ref="CMIP6_ua700_plev700_Scalplev700" operation="instant"/>
+		<field id="CMIP6_ua700_sampled_1h" field_ref="CMIP6_ua700_with_instant" freq_op="1h" detect_missing_value="true"> @CMIP6_ua700_with_instant </field>
+		<field id="CMIP6_ua700_with_instant" field_ref="CMIP6_ua700" operation="instant"/>
+		<field id="CMIP6_ua850_plev850" field_ref="CMIP6_ua850_sampled_1h" grid_ref="FULL_klev_plev850"/>
+		<field id="CMIP6_ua850_plev850_Scalplev850" grid_ref="FULL_klev_Scalplev850" operation="instant" detect_missing_value="true"> CMIP6_ua850_plev850 </field>
+		<field id="CMIP6_ua850_plev850_Scalplev850_average" field_ref="CMIP6_ua850_plev850_Scalplev850" operation="average"/>
+		<field id="CMIP6_ua850_plev850_Scalplev850_instant" field_ref="CMIP6_ua850_plev850_Scalplev850" operation="instant"/>
+		<field id="CMIP6_ua850_sampled_1h" field_ref="CMIP6_ua850_with_instant" freq_op="1h" detect_missing_value="true"> @CMIP6_ua850_with_instant </field>
+		<field id="CMIP6_ua850_with_instant" field_ref="CMIP6_ua850" operation="instant"/>
+		<field id="CMIP6_ua925_plev925" field_ref="CMIP6_ua925_sampled_1h" grid_ref="FULL_klev_plev925"/>
+		<field id="CMIP6_ua925_plev925_Scalplev925" grid_ref="FULL_klev_Scalplev925" operation="instant" detect_missing_value="true"> CMIP6_ua925_plev925 </field>
+		<field id="CMIP6_ua925_plev925_Scalplev925_average" field_ref="CMIP6_ua925_plev925_Scalplev925" operation="average"/>
+		<field id="CMIP6_ua925_plev925_Scalplev925_instant" field_ref="CMIP6_ua925_plev925_Scalplev925" operation="instant"/>
+		<field id="CMIP6_ua925_sampled_1h" field_ref="CMIP6_ua925_with_instant" freq_op="1h" detect_missing_value="true"> @CMIP6_ua925_with_instant </field>
+		<field id="CMIP6_ua925_with_instant" field_ref="CMIP6_ua925" operation="instant"/>
+		<field id="CMIP6_ua_plev19" field_ref="CMIP6_ua_sampled_1h" grid_ref="FULL_klev_plev19"/>
+		<field id="CMIP6_ua_plev19_average" field_ref="CMIP6_ua_plev19" operation="average"/>
+		<field id="CMIP6_ua_plev8" field_ref="CMIP6_ua_sampled_1h" grid_ref="FULL_klev_plev8"/>
+		<field id="CMIP6_ua_plev8_average" field_ref="CMIP6_ua_plev8" operation="average"/>
+		<field id="CMIP6_ua_sampled_1h" field_ref="CMIP6_ua_with_instant" freq_op="1h" detect_missing_value="true"> @CMIP6_ua_with_instant </field>
+		<field id="CMIP6_ua_with_instant" field_ref="CMIP6_ua" operation="instant"/>
+		<field id="CMIP6_uall_average" field_ref="CMIP6_uall" operation="average"/>
+		<field id="CMIP6_uas_Scalheight10m" grid_ref="FULL_grid_Scalheight10m" operation="instant" detect_missing_value="true"> CMIP6_uas </field>
+		<field id="CMIP6_uas_Scalheight10m_average" field_ref="CMIP6_uas_Scalheight10m" operation="average"/>
+		<field id="CMIP6_uas_Scalheight10m_instant" field_ref="CMIP6_uas_Scalheight10m" operation="instant"/>
+		<field id="CMIP6_va200_plev200" field_ref="CMIP6_va200_sampled_1h" grid_ref="FULL_klev_plev200"/>
+		<field id="CMIP6_va200_plev200_Scalplev200" grid_ref="FULL_klev_Scalplev200" operation="instant" detect_missing_value="true"> CMIP6_va200_plev200 </field>
+		<field id="CMIP6_va200_plev200_Scalplev200_average" field_ref="CMIP6_va200_plev200_Scalplev200" operation="average"/>
+		<field id="CMIP6_va200_plev200_Scalplev200_instant" field_ref="CMIP6_va200_plev200_Scalplev200" operation="instant"/>
+		<field id="CMIP6_va200_sampled_1h" field_ref="CMIP6_va200_with_instant" freq_op="1h" detect_missing_value="true"> @CMIP6_va200_with_instant </field>
+		<field id="CMIP6_va200_with_instant" field_ref="CMIP6_va200" operation="instant"/>
+		<field id="CMIP6_va500_plev500" field_ref="CMIP6_va500_sampled_1h" grid_ref="FULL_klev_plev500"/>
+		<field id="CMIP6_va500_plev500_Scalplev500" grid_ref="FULL_klev_Scalplev500" operation="instant" detect_missing_value="true"> CMIP6_va500_plev500 </field>
+		<field id="CMIP6_va500_plev500_Scalplev500_average" field_ref="CMIP6_va500_plev500_Scalplev500" operation="average"/>
+		<field id="CMIP6_va500_plev500_Scalplev500_instant" field_ref="CMIP6_va500_plev500_Scalplev500" operation="instant"/>
+		<field id="CMIP6_va500_sampled_1h" field_ref="CMIP6_va500_with_instant" freq_op="1h" detect_missing_value="true"> @CMIP6_va500_with_instant </field>
+		<field id="CMIP6_va500_with_instant" field_ref="CMIP6_va500" operation="instant"/>
+		<field id="CMIP6_va700_plev700" field_ref="CMIP6_va700_sampled_1h" grid_ref="FULL_klev_plev700"/>
+		<field id="CMIP6_va700_plev700_Scalplev700" grid_ref="FULL_klev_Scalplev700" operation="instant" detect_missing_value="true"> CMIP6_va700_plev700 </field>
+		<field id="CMIP6_va700_plev700_Scalplev700_average" field_ref="CMIP6_va700_plev700_Scalplev700" operation="average"/>
+		<field id="CMIP6_va700_plev700_Scalplev700_instant" field_ref="CMIP6_va700_plev700_Scalplev700" operation="instant"/>
+		<field id="CMIP6_va700_sampled_1h" field_ref="CMIP6_va700_with_instant" freq_op="1h" detect_missing_value="true"> @CMIP6_va700_with_instant </field>
+		<field id="CMIP6_va700_with_instant" field_ref="CMIP6_va700" operation="instant"/>
+		<field id="CMIP6_va850_plev850" field_ref="CMIP6_va850_sampled_1h" grid_ref="FULL_klev_plev850"/>
+		<field id="CMIP6_va850_plev850_Scalplev850" grid_ref="FULL_klev_Scalplev850" operation="instant" detect_missing_value="true"> CMIP6_va850_plev850 </field>
+		<field id="CMIP6_va850_plev850_Scalplev850_average" field_ref="CMIP6_va850_plev850_Scalplev850" operation="average"/>
+		<field id="CMIP6_va850_plev850_Scalplev850_instant" field_ref="CMIP6_va850_plev850_Scalplev850" operation="instant"/>
+		<field id="CMIP6_va850_sampled_1h" field_ref="CMIP6_va850_with_instant" freq_op="1h" detect_missing_value="true"> @CMIP6_va850_with_instant </field>
+		<field id="CMIP6_va850_with_instant" field_ref="CMIP6_va850" operation="instant"/>
+		<field id="CMIP6_va925_plev925" field_ref="CMIP6_va925_sampled_1h" grid_ref="FULL_klev_plev925"/>
+		<field id="CMIP6_va925_plev925_Scalplev925" grid_ref="FULL_klev_Scalplev925" operation="instant" detect_missing_value="true"> CMIP6_va925_plev925 </field>
+		<field id="CMIP6_va925_plev925_Scalplev925_average" field_ref="CMIP6_va925_plev925_Scalplev925" operation="average"/>
+		<field id="CMIP6_va925_plev925_Scalplev925_instant" field_ref="CMIP6_va925_plev925_Scalplev925" operation="instant"/>
+		<field id="CMIP6_va925_sampled_1h" field_ref="CMIP6_va925_with_instant" freq_op="1h" detect_missing_value="true"> @CMIP6_va925_with_instant </field>
+		<field id="CMIP6_va925_with_instant" field_ref="CMIP6_va925" operation="instant"/>
+		<field id="CMIP6_va_plev19" field_ref="CMIP6_va_sampled_1h" grid_ref="FULL_klev_plev19"/>
+		<field id="CMIP6_va_plev19_average" field_ref="CMIP6_va_plev19" operation="average"/>
+		<field id="CMIP6_va_plev8" field_ref="CMIP6_va_sampled_1h" grid_ref="FULL_klev_plev8"/>
+		<field id="CMIP6_va_plev8_average" field_ref="CMIP6_va_plev8" operation="average"/>
+		<field id="CMIP6_va_sampled_1h" field_ref="CMIP6_va_with_instant" freq_op="1h" detect_missing_value="true"> @CMIP6_va_with_instant </field>
+		<field id="CMIP6_va_with_instant" field_ref="CMIP6_va" operation="instant"/>
+		<field id="CMIP6_vall_average" field_ref="CMIP6_vall" operation="average"/>
+		<field id="CMIP6_vas_Scalheight10m" grid_ref="FULL_grid_Scalheight10m" operation="instant" detect_missing_value="true"> CMIP6_vas </field>
+		<field id="CMIP6_vas_Scalheight10m_average" field_ref="CMIP6_vas_Scalheight10m" operation="average"/>
+		<field id="CMIP6_vas_Scalheight10m_instant" field_ref="CMIP6_vas_Scalheight10m" operation="instant"/>
+		<field id="CMIP6_wap200_plev200" field_ref="CMIP6_wap200_sampled_1h" grid_ref="FULL_klev_plev200"/>
+		<field id="CMIP6_wap200_plev200_Scalplev200" grid_ref="FULL_klev_Scalplev200" operation="instant" detect_missing_value="true"> CMIP6_wap200_plev200 </field>
+		<field id="CMIP6_wap200_plev200_Scalplev200_average" field_ref="CMIP6_wap200_plev200_Scalplev200" operation="average"/>
+		<field id="CMIP6_wap200_sampled_1h" field_ref="CMIP6_wap200_with_instant" freq_op="1h" detect_missing_value="true"> @CMIP6_wap200_with_instant </field>
+		<field id="CMIP6_wap200_with_instant" field_ref="CMIP6_wap200" operation="instant"/>
+		<field id="CMIP6_wap500_plev500" field_ref="CMIP6_wap500_sampled_1h" grid_ref="FULL_klev_plev500"/>
+		<field id="CMIP6_wap500_plev500_Scalplev500" grid_ref="FULL_klev_Scalplev500" operation="instant" detect_missing_value="true"> CMIP6_wap500_plev500 </field>
+		<field id="CMIP6_wap500_plev500_Scalplev500_average" field_ref="CMIP6_wap500_plev500_Scalplev500" operation="average"/>
+		<field id="CMIP6_wap500_sampled_1h" field_ref="CMIP6_wap500_with_instant" freq_op="1h" detect_missing_value="true"> @CMIP6_wap500_with_instant </field>
+		<field id="CMIP6_wap500_with_instant" field_ref="CMIP6_wap500" operation="instant"/>
+		<field id="CMIP6_wap700_plev700" field_ref="CMIP6_wap700_sampled_1h" grid_ref="FULL_klev_plev700"/>
+		<field id="CMIP6_wap700_plev700_Scalplev700" grid_ref="FULL_klev_Scalplev700" operation="instant" detect_missing_value="true"> CMIP6_wap700_plev700 </field>
+		<field id="CMIP6_wap700_plev700_Scalplev700_average" field_ref="CMIP6_wap700_plev700_Scalplev700" operation="average"/>
+		<field id="CMIP6_wap700_sampled_1h" field_ref="CMIP6_wap700_with_instant" freq_op="1h" detect_missing_value="true"> @CMIP6_wap700_with_instant </field>
+		<field id="CMIP6_wap700_with_instant" field_ref="CMIP6_wap700" operation="instant"/>
+		<field id="CMIP6_wap850_plev850" field_ref="CMIP6_wap850_sampled_1h" grid_ref="FULL_klev_plev850"/>
+		<field id="CMIP6_wap850_plev850_Scalplev850" grid_ref="FULL_klev_Scalplev850" operation="instant" detect_missing_value="true"> CMIP6_wap850_plev850 </field>
+		<field id="CMIP6_wap850_plev850_Scalplev850_average" field_ref="CMIP6_wap850_plev850_Scalplev850" operation="average"/>
+		<field id="CMIP6_wap850_sampled_1h" field_ref="CMIP6_wap850_with_instant" freq_op="1h" detect_missing_value="true"> @CMIP6_wap850_with_instant </field>
+		<field id="CMIP6_wap850_with_instant" field_ref="CMIP6_wap850" operation="instant"/>
+		<field id="CMIP6_wap925_plev925" field_ref="CMIP6_wap925_sampled_1h" grid_ref="FULL_klev_plev925"/>
+		<field id="CMIP6_wap925_plev925_Scalplev925" grid_ref="FULL_klev_Scalplev925" operation="instant" detect_missing_value="true"> CMIP6_wap925_plev925 </field>
+		<field id="CMIP6_wap925_plev925_Scalplev925_average" field_ref="CMIP6_wap925_plev925_Scalplev925" operation="average"/>
+		<field id="CMIP6_wap925_sampled_1h" field_ref="CMIP6_wap925_with_instant" freq_op="1h" detect_missing_value="true"> @CMIP6_wap925_with_instant </field>
+		<field id="CMIP6_wap925_with_instant" field_ref="CMIP6_wap925" operation="instant"/>
+		<field id="CMIP6_wap_plev19" field_ref="CMIP6_wap_sampled_1h" grid_ref="FULL_klev_plev19"/>
+		<field id="CMIP6_wap_plev19_average" field_ref="CMIP6_wap_plev19" operation="average"/>
+		<field id="CMIP6_wap_plev8" field_ref="CMIP6_wap_sampled_1h" grid_ref="FULL_klev_plev8"/>
+		<field id="CMIP6_wap_plev8_average" field_ref="CMIP6_wap_plev8" operation="average"/>
+		<field id="CMIP6_wap_sampled_1h" field_ref="CMIP6_wap_with_instant" freq_op="1h" detect_missing_value="true"> @CMIP6_wap_with_instant </field>
+		<field id="CMIP6_wap_with_instant" field_ref="CMIP6_wap" operation="instant"/>
 		<field id="CMIP6_wetbc_average" field_ref="CMIP6_wetbc" operation="average"/>
 		<field id="CMIP6_wetdust_average" field_ref="CMIP6_wetdust" operation="average"/>
 		<field id="CMIP6_wetnh4_average" field_ref="CMIP6_wetnh4" operation="average"/>
 		<field id="CMIP6_wetoa_average" field_ref="CMIP6_wetoa" operation="average"/>
 		<field id="CMIP6_wetso4_average" field_ref="CMIP6_wetso4" operation="average"/>
 		<field id="CMIP6_wetss_average" field_ref="CMIP6_wetss" operation="average"/>
-		<field id="CMIP6_hurs_Scalheight2m_instant" field_ref="CMIP6_hurs_Scalheight2m" operation="instant"/>
-		<field id="CMIP6_huss_Scalheight2m_instant" field_ref="CMIP6_huss_Scalheight2m" operation="instant"/>
-		<field id="CMIP6_sfcWind_Scalheight10m_instant" field_ref="CMIP6_sfcWind_Scalheight10m" operation="instant"/>
-		<field id="CMIP6_tas_Scalheight2m_instant" field_ref="CMIP6_tas_Scalheight2m" operation="instant"/>
-		<field id="CMIP6_uas_Scalheight10m_instant" field_ref="CMIP6_uas_Scalheight10m" operation="instant"/>
-		<field id="CMIP6_vas_Scalheight10m_instant" field_ref="CMIP6_vas_Scalheight10m" operation="instant"/>
-		<field id="CMIP6_cltc_average" field_ref="CMIP6_cltc" operation="average"/>
-		<field id="CMIP6_drynh3_average" field_ref="CMIP6_drynh3" operation="average"/>
-		<field id="CMIP6_dryso2_average" field_ref="CMIP6_dryso2" operation="average"/>
-		<field id="CMIP6_emibc_average" field_ref="CMIP6_emibc" operation="average"/>
-		<field id="CMIP6_eminh3_average" field_ref="CMIP6_eminh3" operation="average"/>
-		<field id="CMIP6_emioa_average" field_ref="CMIP6_emioa" operation="average"/>
-		<field id="CMIP6_emiso2_average" field_ref="CMIP6_emiso2" operation="average"/>
-		<field id="CMIP6_emiso4_average" field_ref="CMIP6_emiso4" operation="average"/>
-		<field id="CMIP6_od440aer_average" field_ref="CMIP6_od440aer" operation="average"/>
-		<field id="CMIP6_od870aer_average" field_ref="CMIP6_od870aer" operation="average"/>
-		<field id="CMIP6_toz_average" field_ref="CMIP6_toz" operation="average"/>
-		<field id="CMIP6_cdnc_average" field_ref="CMIP6_cdnc" operation="average"/>
-		<field id="CMIP6_hur_plev19" field_ref="CMIP6_hur_sampled_1h" grid_ref="FULL_klev_plev19"/>
-		<field id="CMIP6_hur_plev19_average" field_ref="CMIP6_hur_plev19" operation="average"/>
-		<field id="CMIP6_hus_plev19" field_ref="CMIP6_hus_sampled_1h" grid_ref="FULL_klev_plev19"/>
-		<field id="CMIP6_hus_plev19_average" field_ref="CMIP6_hus_plev19" operation="average"/>
-		<field id="CMIP6_ta_plev19" field_ref="CMIP6_ta_sampled_1h" grid_ref="FULL_klev_plev19"/>
-		<field id="CMIP6_ta_plev19_average" field_ref="CMIP6_ta_plev19" operation="average"/>
-		<field id="CMIP6_ua_plev19" field_ref="CMIP6_ua_sampled_1h" grid_ref="FULL_klev_plev19"/>
-		<field id="CMIP6_ua_plev19_average" field_ref="CMIP6_ua_plev19" operation="average"/>
-		<field id="CMIP6_va_plev19" field_ref="CMIP6_va_sampled_1h" grid_ref="FULL_klev_plev19"/>
-		<field id="CMIP6_va_plev19_average" field_ref="CMIP6_va_plev19" operation="average"/>
-		<field id="CMIP6_wap_plev19" field_ref="CMIP6_wap_sampled_1h" grid_ref="FULL_klev_plev19"/>
-		<field id="CMIP6_wap_plev19_average" field_ref="CMIP6_wap_plev19" operation="average"/>
+		<field id="CMIP6_zg200_plev200" field_ref="CMIP6_zg200_sampled_1h" grid_ref="FULL_klev_plev200"/>
+		<field id="CMIP6_zg200_plev200_Scalplev200" grid_ref="FULL_klev_Scalplev200" operation="instant" detect_missing_value="true"> CMIP6_zg200_plev200 </field>
+		<field id="CMIP6_zg200_plev200_Scalplev200_average" field_ref="CMIP6_zg200_plev200_Scalplev200" operation="average"/>
+		<field id="CMIP6_zg200_plev200_Scalplev200_instant" field_ref="CMIP6_zg200_plev200_Scalplev200" operation="instant"/>
+		<field id="CMIP6_zg200_sampled_1h" field_ref="CMIP6_zg200_with_instant" freq_op="1h" detect_missing_value="true"> @CMIP6_zg200_with_instant </field>
+		<field id="CMIP6_zg200_with_instant" field_ref="CMIP6_zg200" operation="instant"/>
+		<field id="CMIP6_zg500_plev500" field_ref="CMIP6_zg500_sampled_1h" grid_ref="FULL_klev_plev500"/>
+		<field id="CMIP6_zg500_plev500_Scalplev500" grid_ref="FULL_klev_Scalplev500" operation="instant" detect_missing_value="true"> CMIP6_zg500_plev500 </field>
+		<field id="CMIP6_zg500_plev500_Scalplev500_average" field_ref="CMIP6_zg500_plev500_Scalplev500" operation="average"/>
+		<field id="CMIP6_zg500_plev500_Scalplev500_instant" field_ref="CMIP6_zg500_plev500_Scalplev500" operation="instant"/>
+		<field id="CMIP6_zg500_sampled_1h" field_ref="CMIP6_zg500_with_instant" freq_op="1h" detect_missing_value="true"> @CMIP6_zg500_with_instant </field>
+		<field id="CMIP6_zg500_with_instant" field_ref="CMIP6_zg500" operation="instant"/>
+		<field id="CMIP6_zg700_plev700" field_ref="CMIP6_zg700_sampled_1h" grid_ref="FULL_klev_plev700"/>
+		<field id="CMIP6_zg700_plev700_Scalplev700" grid_ref="FULL_klev_Scalplev700" operation="instant" detect_missing_value="true"> CMIP6_zg700_plev700 </field>
+		<field id="CMIP6_zg700_plev700_Scalplev700_average" field_ref="CMIP6_zg700_plev700_Scalplev700" operation="average"/>
+		<field id="CMIP6_zg700_plev700_Scalplev700_instant" field_ref="CMIP6_zg700_plev700_Scalplev700" operation="instant"/>
+		<field id="CMIP6_zg700_sampled_1h" field_ref="CMIP6_zg700_with_instant" freq_op="1h" detect_missing_value="true"> @CMIP6_zg700_with_instant </field>
+		<field id="CMIP6_zg700_with_instant" field_ref="CMIP6_zg700" operation="instant"/>
+		<field id="CMIP6_zg850_plev850" field_ref="CMIP6_zg850_sampled_1h" grid_ref="FULL_klev_plev850"/>
+		<field id="CMIP6_zg850_plev850_Scalplev850" grid_ref="FULL_klev_Scalplev850" operation="instant" detect_missing_value="true"> CMIP6_zg850_plev850 </field>
+		<field id="CMIP6_zg850_plev850_Scalplev850_average" field_ref="CMIP6_zg850_plev850_Scalplev850" operation="average"/>
+		<field id="CMIP6_zg850_plev850_Scalplev850_instant" field_ref="CMIP6_zg850_plev850_Scalplev850" operation="instant"/>
+		<field id="CMIP6_zg850_sampled_1h" field_ref="CMIP6_zg850_with_instant" freq_op="1h" detect_missing_value="true"> @CMIP6_zg850_with_instant </field>
+		<field id="CMIP6_zg850_with_instant" field_ref="CMIP6_zg850" operation="instant"/>
+		<field id="CMIP6_zg925_plev925" field_ref="CMIP6_zg925_sampled_1h" grid_ref="FULL_klev_plev925"/>
+		<field id="CMIP6_zg925_plev925_Scalplev925" grid_ref="FULL_klev_Scalplev925" operation="instant" detect_missing_value="true"> CMIP6_zg925_plev925 </field>
+		<field id="CMIP6_zg925_plev925_Scalplev925_average" field_ref="CMIP6_zg925_plev925_Scalplev925" operation="average"/>
+		<field id="CMIP6_zg925_plev925_Scalplev925_instant" field_ref="CMIP6_zg925_plev925_Scalplev925" operation="instant"/>
+		<field id="CMIP6_zg925_sampled_1h" field_ref="CMIP6_zg925_with_instant" freq_op="1h" detect_missing_value="true"> @CMIP6_zg925_with_instant </field>
+		<field id="CMIP6_zg925_with_instant" field_ref="CMIP6_zg925" operation="instant"/>
 		<field id="CMIP6_zg_plev19" field_ref="CMIP6_zg_sampled_1h" grid_ref="FULL_klev_plev19"/>
 		<field id="CMIP6_zg_plev19_average" field_ref="CMIP6_zg_plev19" operation="average"/>
-		<field id="CMIP6_tasmax_Scalheight2m_average" field_ref="CMIP6_tasmax_Scalheight2m" operation="average"/>
-		<field id="CMIP6_tasmin_Scalheight2m_average" field_ref="CMIP6_tasmin_Scalheight2m" operation="average"/>
-		<field id="CMIP6_sfcWindmax_Scalheight10m_average" field_ref="CMIP6_sfcWindmax_Scalheight10m" operation="average"/>
-		<field id="CMIP6_RADabs550aer_average" field_ref="CMIP6_RADabs550aer" operation="average"/>
-		<field id="CMIP6_RADasy550aer_average" field_ref="CMIP6_RADasy550aer" operation="average"/>
-		<field id="CMIP6_RADod550aer_average" field_ref="CMIP6_RADod550aer" operation="average"/>
-		<field id="CMIP6_RADssa550aer_average" field_ref="CMIP6_RADssa550aer" operation="average"/>
-		<field id="CMIP6_TACabs550aer_average" field_ref="CMIP6_TACabs550aer" operation="average"/>
-		<field id="CMIP6_cdnctop_average" field_ref="CMIP6_cdnctop" operation="average"/>
-		<field id="CMIP6_eminh4_average" field_ref="CMIP6_eminh4" operation="average"/>
-		<field id="CMIP6_emino3_average" field_ref="CMIP6_emino3" operation="average"/>
-		<field id="CMIP6_ext550bc_with_instant" field_ref="CMIP6_ext550bc" operation="instant"/>
-		<field id="CMIP6_ext550bc_sampled_1h" field_ref="CMIP6_ext550bc_with_instant" freq_op="1h" detect_missing_value="true"> @CMIP6_ext550bc_with_instant </field>
-		<field id="CMIP6_ext550bc_plev19" field_ref="CMIP6_ext550bc_sampled_1h" grid_ref="FULL_klev_plev19"/>
-		<field id="CMIP6_ext550bc_plev19_average" field_ref="CMIP6_ext550bc_plev19" operation="average"/>
-		<field id="CMIP6_ext550dust_with_instant" field_ref="CMIP6_ext550dust" operation="instant"/>
-		<field id="CMIP6_ext550dust_sampled_1h" field_ref="CMIP6_ext550dust_with_instant" freq_op="1h" detect_missing_value="true"> @CMIP6_ext550dust_with_instant </field>
-		<field id="CMIP6_ext550dust_plev19" field_ref="CMIP6_ext550dust_sampled_1h" grid_ref="FULL_klev_plev19"/>
-		<field id="CMIP6_ext550dust_plev19_average" field_ref="CMIP6_ext550dust_plev19" operation="average"/>
-		<field id="CMIP6_ext550nh4_with_instant" field_ref="CMIP6_ext550nh4" operation="instant"/>
-		<field id="CMIP6_ext550nh4_sampled_1h" field_ref="CMIP6_ext550nh4_with_instant" freq_op="1h" detect_missing_value="true"> @CMIP6_ext550nh4_with_instant </field>
-		<field id="CMIP6_ext550nh4_plev19" field_ref="CMIP6_ext550nh4_sampled_1h" grid_ref="FULL_klev_plev19"/>
-		<field id="CMIP6_ext550nh4_plev19_average" field_ref="CMIP6_ext550nh4_plev19" operation="average"/>
-		<field id="CMIP6_ext550no3_with_instant" field_ref="CMIP6_ext550no3" operation="instant"/>
-		<field id="CMIP6_ext550no3_sampled_1h" field_ref="CMIP6_ext550no3_with_instant" freq_op="1h" detect_missing_value="true"> @CMIP6_ext550no3_with_instant </field>
-		<field id="CMIP6_ext550no3_plev19" field_ref="CMIP6_ext550no3_sampled_1h" grid_ref="FULL_klev_plev19"/>
-		<field id="CMIP6_ext550no3_plev19_average" field_ref="CMIP6_ext550no3_plev19" operation="average"/>
-		<field id="CMIP6_ext550oa_with_instant" field_ref="CMIP6_ext550oa" operation="instant"/>
-		<field id="CMIP6_ext550oa_sampled_1h" field_ref="CMIP6_ext550oa_with_instant" freq_op="1h" detect_missing_value="true"> @CMIP6_ext550oa_with_instant </field>
-		<field id="CMIP6_ext550oa_plev19" field_ref="CMIP6_ext550oa_sampled_1h" grid_ref="FULL_klev_plev19"/>
-		<field id="CMIP6_ext550oa_plev19_average" field_ref="CMIP6_ext550oa_plev19" operation="average"/>
-		<field id="CMIP6_ext550so4_with_instant" field_ref="CMIP6_ext550so4" operation="instant"/>
-		<field id="CMIP6_ext550so4_sampled_1h" field_ref="CMIP6_ext550so4_with_instant" freq_op="1h" detect_missing_value="true"> @CMIP6_ext550so4_with_instant </field>
-		<field id="CMIP6_ext550so4_plev19" field_ref="CMIP6_ext550so4_sampled_1h" grid_ref="FULL_klev_plev19"/>
-		<field id="CMIP6_ext550so4_plev19_average" field_ref="CMIP6_ext550so4_plev19" operation="average"/>
-		<field id="CMIP6_ext550ss_with_instant" field_ref="CMIP6_ext550ss" operation="instant"/>
-		<field id="CMIP6_ext550ss_sampled_1h" field_ref="CMIP6_ext550ss_with_instant" freq_op="1h" detect_missing_value="true"> @CMIP6_ext550ss_with_instant </field>
-		<field id="CMIP6_ext550ss_plev19" field_ref="CMIP6_ext550ss_sampled_1h" grid_ref="FULL_klev_plev19"/>
-		<field id="CMIP6_ext550ss_plev19_average" field_ref="CMIP6_ext550ss_plev19" operation="average"/>
-		<field id="CMIP6_od550dustbin1_average" field_ref="CMIP6_od550dustbin1" operation="average"/>
-		<field id="CMIP6_od550dustbin2_average" field_ref="CMIP6_od550dustbin2" operation="average"/>
-		<field id="CMIP6_od550no3bin1_average" field_ref="CMIP6_od550no3bin1" operation="average"/>
-		<field id="CMIP6_od550ssbin1_average" field_ref="CMIP6_od550ssbin1" operation="average"/>
-		<field id="CMIP6_od550ssbin2_average" field_ref="CMIP6_od550ssbin2" operation="average"/>
-		<field id="CMIP6_reffclitop_average" field_ref="CMIP6_reffclitop" operation="average"/>
-		<field id="CMIP6_reffclwtopcnrm_average" field_ref="CMIP6_reffclwtopcnrm" operation="average"/>
-		<field id="CMIP6_hur200_plev200" field_ref="CMIP6_hur_sampled_1h" grid_ref="FULL_klev_plev200"/>
-		<field id="CMIP6_hur200_plev200_Scalplev200" grid_ref="FULL_klev_Scalplev200" operation="instant" detect_missing_value="true"> CMIP6_hur200_plev200 </field>
-		<field id="CMIP6_hur200_plev200_Scalplev200_average" field_ref="CMIP6_hur200_plev200_Scalplev200" operation="average"/>
-		<field id="CMIP6_hur500_plev500" field_ref="CMIP6_hur_sampled_1h" grid_ref="FULL_klev_plev500"/>
-		<field id="CMIP6_hur500_plev500_Scalplev500" grid_ref="FULL_klev_Scalplev500" operation="instant" detect_missing_value="true"> CMIP6_hur500_plev500 </field>
-		<field id="CMIP6_hur500_plev500_Scalplev500_average" field_ref="CMIP6_hur500_plev500_Scalplev500" operation="average"/>
-		<field id="CMIP6_hur700_plev700" field_ref="CMIP6_hur_sampled_1h" grid_ref="FULL_klev_plev700"/>
-		<field id="CMIP6_hur700_plev700_Scalplev700" grid_ref="FULL_klev_Scalplev700" operation="instant" detect_missing_value="true"> CMIP6_hur700_plev700 </field>
-		<field id="CMIP6_hur700_plev700_Scalplev700_average" field_ref="CMIP6_hur700_plev700_Scalplev700" operation="average"/>
-		<field id="CMIP6_hur850_plev850" field_ref="CMIP6_hur_sampled_1h" grid_ref="FULL_klev_plev850"/>
-		<field id="CMIP6_hur850_plev850_Scalplev850" grid_ref="FULL_klev_Scalplev850" operation="instant" detect_missing_value="true"> CMIP6_hur850_plev850 </field>
-		<field id="CMIP6_hur850_plev850_Scalplev850_average" field_ref="CMIP6_hur850_plev850_Scalplev850" operation="average"/>
-		<field id="CMIP6_hur925_plev925" field_ref="CMIP6_hur_sampled_1h" grid_ref="FULL_klev_plev925"/>
-		<field id="CMIP6_hur925_plev925_Scalplev925" grid_ref="FULL_klev_Scalplev925" operation="instant" detect_missing_value="true"> CMIP6_hur925_plev925 </field>
-		<field id="CMIP6_hur925_plev925_Scalplev925_average" field_ref="CMIP6_hur925_plev925_Scalplev925" operation="average"/>
-		<field id="CMIP6_wap200_plev200" field_ref="CMIP6_wap_sampled_1h" grid_ref="FULL_klev_plev200"/>
-		<field id="CMIP6_wap200_plev200_Scalplev200" grid_ref="FULL_klev_Scalplev200" operation="instant" detect_missing_value="true"> CMIP6_wap200_plev200 </field>
-		<field id="CMIP6_wap200_plev200_Scalplev200_average" field_ref="CMIP6_wap200_plev200_Scalplev200" operation="average"/>
-		<field id="CMIP6_wap500_plev500" field_ref="CMIP6_wap_sampled_1h" grid_ref="FULL_klev_plev500"/>
-		<field id="CMIP6_wap500_plev500_Scalplev500" grid_ref="FULL_klev_Scalplev500" operation="instant" detect_missing_value="true"> CMIP6_wap500_plev500 </field>
-		<field id="CMIP6_wap500_plev500_Scalplev500_average" field_ref="CMIP6_wap500_plev500_Scalplev500" operation="average"/>
-		<field id="CMIP6_wap700_plev700" field_ref="CMIP6_wap_sampled_1h" grid_ref="FULL_klev_plev700"/>
-		<field id="CMIP6_wap700_plev700_Scalplev700" grid_ref="FULL_klev_Scalplev700" operation="instant" detect_missing_value="true"> CMIP6_wap700_plev700 </field>
-		<field id="CMIP6_wap700_plev700_Scalplev700_average" field_ref="CMIP6_wap700_plev700_Scalplev700" operation="average"/>
-		<field id="CMIP6_wap850_plev850" field_ref="CMIP6_wap_sampled_1h" grid_ref="FULL_klev_plev850"/>
-		<field id="CMIP6_wap850_plev850_Scalplev850" grid_ref="FULL_klev_Scalplev850" operation="instant" detect_missing_value="true"> CMIP6_wap850_plev850 </field>
-		<field id="CMIP6_wap850_plev850_Scalplev850_average" field_ref="CMIP6_wap850_plev850_Scalplev850" operation="average"/>
-		<field id="CMIP6_wap925_plev925" field_ref="CMIP6_wap_sampled_1h" grid_ref="FULL_klev_plev925"/>
-		<field id="CMIP6_wap925_plev925_Scalplev925" grid_ref="FULL_klev_Scalplev925" operation="instant" detect_missing_value="true"> CMIP6_wap925_plev925 </field>
-		<field id="CMIP6_wap925_plev925_Scalplev925_average" field_ref="CMIP6_wap925_plev925_Scalplev925" operation="average"/>
-		<field id="CMIP6_ps_instant" field_ref="CMIP6_ps" operation="instant"/>
-		<field id="CMIP6_ts_instant" field_ref="CMIP6_ts" operation="instant"/>
-		<field id="CMIP6_mrfso_instant" field_ref="CMIP6_mrfso" operation="instant"/>
-		<field id="CMIP6_mrso_instant" field_ref="CMIP6_mrso" operation="instant"/>
-		<field id="CMIP6_hus200_plev200_Scalplev200_instant" field_ref="CMIP6_hus200_plev200_Scalplev200" operation="instant"/>
-		<field id="CMIP6_hus500_plev500_Scalplev500_instant" field_ref="CMIP6_hus500_plev500_Scalplev500" operation="instant"/>
-		<field id="CMIP6_hus700_plev700_Scalplev700_instant" field_ref="CMIP6_hus700_plev700_Scalplev700" operation="instant"/>
-		<field id="CMIP6_hus850_plev850_Scalplev850_instant" field_ref="CMIP6_hus850_plev850_Scalplev850" operation="instant"/>
-		<field id="CMIP6_hus925_plev925_Scalplev925_instant" field_ref="CMIP6_hus925_plev925_Scalplev925" operation="instant"/>
-		<field id="CMIP6_ta200_plev200_Scalplev200_instant" field_ref="CMIP6_ta200_plev200_Scalplev200" operation="instant"/>
-		<field id="CMIP6_ta500_plev500_Scalplev500_instant" field_ref="CMIP6_ta500_plev500_Scalplev500" operation="instant"/>
-		<field id="CMIP6_ta700_plev700_Scalplev700_instant" field_ref="CMIP6_ta700_plev700_Scalplev700" operation="instant"/>
-		<field id="CMIP6_ta850_plev850_Scalplev850_instant" field_ref="CMIP6_ta850_plev850_Scalplev850" operation="instant"/>
-		<field id="CMIP6_ta925_plev925_Scalplev925_instant" field_ref="CMIP6_ta925_plev925_Scalplev925" operation="instant"/>
-		<field id="CMIP6_ua200_plev200_Scalplev200_instant" field_ref="CMIP6_ua200_plev200_Scalplev200" operation="instant"/>
-		<field id="CMIP6_ua500_plev500_Scalplev500_instant" field_ref="CMIP6_ua500_plev500_Scalplev500" operation="instant"/>
-		<field id="CMIP6_ua700_plev700_Scalplev700_instant" field_ref="CMIP6_ua700_plev700_Scalplev700" operation="instant"/>
-		<field id="CMIP6_ua850_plev850_Scalplev850_instant" field_ref="CMIP6_ua850_plev850_Scalplev850" operation="instant"/>
-		<field id="CMIP6_ua925_plev925_Scalplev925_instant" field_ref="CMIP6_ua925_plev925_Scalplev925" operation="instant"/>
-		<field id="CMIP6_va200_plev200_Scalplev200_instant" field_ref="CMIP6_va200_plev200_Scalplev200" operation="instant"/>
-		<field id="CMIP6_va500_plev500_Scalplev500_instant" field_ref="CMIP6_va500_plev500_Scalplev500" operation="instant"/>
-		<field id="CMIP6_va700_plev700_Scalplev700_instant" field_ref="CMIP6_va700_plev700_Scalplev700" operation="instant"/>
-		<field id="CMIP6_va850_plev850_Scalplev850_instant" field_ref="CMIP6_va850_plev850_Scalplev850" operation="instant"/>
-		<field id="CMIP6_va925_plev925_Scalplev925_instant" field_ref="CMIP6_va925_plev925_Scalplev925" operation="instant"/>
-		<field id="CMIP6_zg200_plev200_Scalplev200_instant" field_ref="CMIP6_zg200_plev200_Scalplev200" operation="instant"/>
-		<field id="CMIP6_zg500_plev500_Scalplev500_instant" field_ref="CMIP6_zg500_plev500_Scalplev500" operation="instant"/>
-		<field id="CMIP6_zg700_plev700_Scalplev700_instant" field_ref="CMIP6_zg700_plev700_Scalplev700" operation="instant"/>
-		<field id="CMIP6_zg850_plev850_Scalplev850_instant" field_ref="CMIP6_zg850_plev850_Scalplev850" operation="instant"/>
-		<field id="CMIP6_zg925_plev925_Scalplev925_instant" field_ref="CMIP6_zg925_plev925_Scalplev925" operation="instant"/>
-		<field id="CMIP6_clivi_instant" field_ref="CMIP6_clivi" operation="instant"/>
-		<field id="CMIP6_clwvi_instant" field_ref="CMIP6_clwvi" operation="instant"/>
+		<field id="CMIP6_zg_plev8" field_ref="CMIP6_zg_sampled_1h" grid_ref="FULL_klev_plev8"/>
+		<field id="CMIP6_zg_plev8_average" field_ref="CMIP6_zg_plev8" operation="average"/>
+		<field id="CMIP6_zg_sampled_1h" field_ref="CMIP6_zg_with_instant" freq_op="1h" detect_missing_value="true"> @CMIP6_zg_with_instant </field>
+		<field id="CMIP6_zg_with_instant" field_ref="CMIP6_zg" operation="instant"/>
 	</field_definition>
 	<axis_definition>
 		<axis_group prec="8">
+			<axis id="DR_alevel_klev" axis_ref="klev" name="lev" long_name="atmospheric model level" prec="8" axis_type="Z"/>
+			<axis id="plev19" positive="down" n_glo="19" value="(0,18)[ 100000. 92500. 85000. 70000. 60000. 50000. 40000. 30000. 25000. 20000. 15000. 10000. 7000. 5000. 3000. 2000. 1000. 500. 100. ]" name="plev" standard_name="air_pressure" long_name="pressure" unit="Pa" axis_type="Z">
+				<interpolate_axis type="polynomial" order="1" coordinate="CMIP6_pfull_instant_sampled_1h"/>
+			</axis>
 			<axis id="plev200" positive="down" n_glo="1" value="(0,0)[ 20000. ]" name="plev" standard_name="air_pressure" long_name="pressure" unit="Pa" axis_type="Z">
 				<interpolate_axis type="polynomial" order="1" coordinate="CMIP6_pfull_instant_sampled_1h"/>
 			</axis>
@@ -15449,31 +15523,19 @@
 			<axis id="plev700" positive="down" n_glo="1" value="(0,0)[ 70000. ]" name="plev" standard_name="air_pressure" long_name="pressure" unit="Pa" axis_type="Z">
 				<interpolate_axis type="polynomial" order="1" coordinate="CMIP6_pfull_instant_sampled_1h"/>
 			</axis>
+			<axis id="plev8" positive="down" n_glo="8" value="(0,7)[ 100000. 85000. 70000. 50000. 25000. 10000. 5000. 1000. ]" name="plev" standard_name="air_pressure" long_name="pressure" unit="Pa" axis_type="Z">
+				<interpolate_axis type="polynomial" order="1" coordinate="CMIP6_pfull_instant_sampled_1h"/>
+			</axis>
 			<axis id="plev850" positive="down" n_glo="1" value="(0,0)[ 85000. ]" name="plev" standard_name="air_pressure" long_name="pressure" unit="Pa" axis_type="Z">
 				<interpolate_axis type="polynomial" order="1" coordinate="CMIP6_pfull_instant_sampled_1h"/>
 			</axis>
 			<axis id="plev925" positive="down" n_glo="1" value="(0,0)[ 92500. ]" name="plev" standard_name="air_pressure" long_name="pressure" unit="Pa" axis_type="Z">
 				<interpolate_axis type="polynomial" order="1" coordinate="CMIP6_pfull_instant_sampled_1h"/>
 			</axis>
-			<axis id="plev8" positive="down" n_glo="8" value="(0,7)[ 100000. 85000. 70000. 50000. 25000. 10000. 5000. 1000. ]" name="plev" standard_name="air_pressure" long_name="pressure" unit="Pa" axis_type="Z">
-				<interpolate_axis type="polynomial" order="1" coordinate="CMIP6_pfull_instant_sampled_1h"/>
-			</axis>
-			<axis id="DR_alevel_klev" axis_ref="klev" name="lev" long_name="atmospheric model level" prec="8" axis_type="Z"/>
-			<axis id="plev19" positive="down" n_glo="19" value="(0,18)[ 100000. 92500. 85000. 70000. 60000. 50000. 40000. 30000. 25000. 20000. 15000. 10000. 7000. 5000. 3000. 2000. 1000. 500. 100. ]" name="plev" standard_name="air_pressure" long_name="pressure" unit="Pa" axis_type="Z">
-				<interpolate_axis type="polynomial" order="1" coordinate="CMIP6_pfull_instant_sampled_1h"/>
-			</axis>
 		</axis_group>
 	</axis_definition>
 	<domain_definition>
 		<domain_group prec="8">
-			<domain id="CMIP6_25km" ni_glo="1440" nj_glo="720" type="rectilinear" prec="8">
-				<generate_rectilinear_domain/>
-				<interpolate_domain order="1" renormalize="true" mode="read_or_compute" write_weight="true"/>
-			</domain>
-			<domain id="CMIP6_50km" ni_glo="720" nj_glo="360" type="rectilinear" prec="8">
-				<generate_rectilinear_domain/>
-				<interpolate_domain order="1" renormalize="true" mode="read_or_compute" write_weight="true"/>
-			</domain>
 			<domain id="CMIP6_100km" ni_glo="360" nj_glo="180" type="rectilinear" prec="8">
 				<generate_rectilinear_domain/>
 				<interpolate_domain order="1" renormalize="true" mode="read_or_compute" write_weight="true"/>
@@ -15482,7 +15544,15 @@
 				<generate_rectilinear_domain/>
 				<interpolate_domain order="1" renormalize="true" mode="read_or_compute" write_weight="true"/>
 			</domain>
+			<domain id="CMIP6_25km" ni_glo="1440" nj_glo="720" type="rectilinear" prec="8">
+				<generate_rectilinear_domain/>
+				<interpolate_domain order="1" renormalize="true" mode="read_or_compute" write_weight="true"/>
+			</domain>
 			<domain id="CMIP6_2deg" ni_glo="180" nj_glo="90" type="rectilinear" prec="8">
+				<generate_rectilinear_domain/>
+				<interpolate_domain order="1" renormalize="true" mode="read_or_compute" write_weight="true"/>
+			</domain>
+			<domain id="CMIP6_50km" ni_glo="720" nj_glo="360" type="rectilinear" prec="8">
 				<generate_rectilinear_domain/>
 				<interpolate_domain order="1" renormalize="true" mode="read_or_compute" write_weight="true"/>
 			</domain>
@@ -15492,102 +15562,6 @@
 		<grid id="FULL_grid_C">
 			<domain domain_ref="C"/>
 		</grid>
-		<grid id="NATURE_grid_C">
-			<domain domain_ref="C"/>
-		</grid>
-		<grid id="FULL_klev_ll_C">
-			<domain domain_ref="C"/>
-			<axis axis_ref="klev_ll"/>
-		</grid>
-		<grid id="SEA_grid_C">
-			<domain domain_ref="C"/>
-		</grid>
-		<grid id="FULL_klev_plev200">
-			<domain domain_ref="FULL"/>
-			<axis positive="down" n_glo="1" value="(0,0)[ 20000. ]" name="plev" standard_name="air_pressure" long_name="pressure" unit="Pa" axis_type="Z">
-				<interpolate_axis type="polynomial" order="1" coordinate="CMIP6_pfull_instant_sampled_1h"/>
-			</axis>
-		</grid>
-		<grid id="FULL_klev_Scalplev200">
-			<domain domain_ref="FULL"/>
-			<scalar scalar_ref="Scalplev200" name="plev"/>
-		</grid>
-		<grid id="FULL_klev_Scalplev200_C">
-			<domain domain_ref="C"/>
-			<scalar scalar_ref="Scalplev200" name="plev"/>
-		</grid>
-		<grid id="FULL_klev_plev500">
-			<domain domain_ref="FULL"/>
-			<axis positive="down" n_glo="1" value="(0,0)[ 50000. ]" name="plev" standard_name="air_pressure" long_name="pressure" unit="Pa" axis_type="Z">
-				<interpolate_axis type="polynomial" order="1" coordinate="CMIP6_pfull_instant_sampled_1h"/>
-			</axis>
-		</grid>
-		<grid id="FULL_klev_Scalplev500">
-			<domain domain_ref="FULL"/>
-			<scalar scalar_ref="Scalplev500" name="plev"/>
-		</grid>
-		<grid id="FULL_klev_Scalplev500_C">
-			<domain domain_ref="C"/>
-			<scalar scalar_ref="Scalplev500" name="plev"/>
-		</grid>
-		<grid id="FULL_klev_plev700">
-			<domain domain_ref="FULL"/>
-			<axis positive="down" n_glo="1" value="(0,0)[ 70000. ]" name="plev" standard_name="air_pressure" long_name="pressure" unit="Pa" axis_type="Z">
-				<interpolate_axis type="polynomial" order="1" coordinate="CMIP6_pfull_instant_sampled_1h"/>
-			</axis>
-		</grid>
-		<grid id="FULL_klev_Scalplev700">
-			<domain domain_ref="FULL"/>
-			<scalar scalar_ref="Scalplev700" name="plev"/>
-		</grid>
-		<grid id="FULL_klev_Scalplev700_C">
-			<domain domain_ref="C"/>
-			<scalar scalar_ref="Scalplev700" name="plev"/>
-		</grid>
-		<grid id="FULL_klev_plev850">
-			<domain domain_ref="FULL"/>
-			<axis positive="down" n_glo="1" value="(0,0)[ 85000. ]" name="plev" standard_name="air_pressure" long_name="pressure" unit="Pa" axis_type="Z">
-				<interpolate_axis type="polynomial" order="1" coordinate="CMIP6_pfull_instant_sampled_1h"/>
-			</axis>
-		</grid>
-		<grid id="FULL_klev_Scalplev850">
-			<domain domain_ref="FULL"/>
-			<scalar scalar_ref="Scalplev850" name="plev"/>
-		</grid>
-		<grid id="FULL_klev_Scalplev850_C">
-			<domain domain_ref="C"/>
-			<scalar scalar_ref="Scalplev850" name="plev"/>
-		</grid>
-		<grid id="FULL_klev_plev925">
-			<domain domain_ref="FULL"/>
-			<axis positive="down" n_glo="1" value="(0,0)[ 92500. ]" name="plev" standard_name="air_pressure" long_name="pressure" unit="Pa" axis_type="Z">
-				<interpolate_axis type="polynomial" order="1" coordinate="CMIP6_pfull_instant_sampled_1h"/>
-			</axis>
-		</grid>
-		<grid id="FULL_klev_Scalplev925">
-			<domain domain_ref="FULL"/>
-			<scalar scalar_ref="Scalplev925" name="plev"/>
-		</grid>
-		<grid id="FULL_klev_Scalplev925_C">
-			<domain domain_ref="C"/>
-			<scalar scalar_ref="Scalplev925" name="plev"/>
-		</grid>
-		<grid id="SEA_grid_Scaltypesi">
-			<domain domain_ref="SEA"/>
-			<scalar scalar_ref="Scaltypesi" name="type"/>
-		</grid>
-		<grid id="SEA_grid_Scaltypesi_C">
-			<domain domain_ref="C"/>
-			<scalar scalar_ref="Scaltypesi" name="type"/>
-		</grid>
-		<grid id="FULL_grid_Scalheight2m">
-			<domain domain_ref="FULL"/>
-			<scalar scalar_ref="Scalheight2m" name="height"/>
-		</grid>
-		<grid id="FULL_grid_Scalheight2m_C">
-			<domain domain_ref="C"/>
-			<scalar scalar_ref="Scalheight2m" name="height"/>
-		</grid>
 		<grid id="FULL_grid_Scalheight10m">
 			<domain domain_ref="FULL"/>
 			<scalar scalar_ref="Scalheight10m" name="height"/>
@@ -15596,25 +15570,13 @@
 			<domain domain_ref="C"/>
 			<scalar scalar_ref="Scalheight10m" name="height"/>
 		</grid>
-		<grid id="FULL_klev_plev8">
+		<grid id="FULL_grid_Scalheight2m">
 			<domain domain_ref="FULL"/>
-			<axis positive="down" n_glo="8" value="(0,7)[ 100000. 85000. 70000. 50000. 25000. 10000. 5000. 1000. ]" name="plev" standard_name="air_pressure" long_name="pressure" unit="Pa" axis_type="Z">
-				<interpolate_axis type="polynomial" order="1" coordinate="CMIP6_pfull_instant_sampled_1h"/>
-			</axis>
+			<scalar scalar_ref="Scalheight2m" name="height"/>
 		</grid>
-		<grid id="FULL_klev_plev8_C">
+		<grid id="FULL_grid_Scalheight2m_C">
 			<domain domain_ref="C"/>
-			<axis positive="down" n_glo="8" value="(0,7)[ 100000. 85000. 70000. 50000. 25000. 10000. 5000. 1000. ]" name="plev" standard_name="air_pressure" long_name="pressure" unit="Pa" axis_type="Z">
-				<interpolate_axis type="polynomial" order="1" coordinate="CMIP6_pfull_instant_sampled_1h"/>
-			</axis>
-		</grid>
-		<grid id="NATURE_grid_Scaltypeli">
-			<domain domain_ref="NATURE"/>
-			<scalar scalar_ref="Scaltypeli" name="type"/>
-		</grid>
-		<grid id="NATURE_grid_Scaltypeli_C">
-			<domain domain_ref="C"/>
-			<scalar scalar_ref="Scaltypeli" name="type"/>
+			<scalar scalar_ref="Scalheight2m" name="height"/>
 		</grid>
 		<grid id="FULL_grid_Scaltypeland">
 			<domain domain_ref="FULL"/>
@@ -15632,6 +15594,50 @@
 			<domain domain_ref="C"/>
 			<axis axis_ref="DR_alevel_klev" name="lev" id="ref_to_DR_alevel_klev_1"/>
 		</grid>
+		<grid id="FULL_klev_Scalplev200">
+			<domain domain_ref="FULL"/>
+			<scalar scalar_ref="Scalplev200" name="plev"/>
+		</grid>
+		<grid id="FULL_klev_Scalplev200_C">
+			<domain domain_ref="C"/>
+			<scalar scalar_ref="Scalplev200" name="plev"/>
+		</grid>
+		<grid id="FULL_klev_Scalplev500">
+			<domain domain_ref="FULL"/>
+			<scalar scalar_ref="Scalplev500" name="plev"/>
+		</grid>
+		<grid id="FULL_klev_Scalplev500_C">
+			<domain domain_ref="C"/>
+			<scalar scalar_ref="Scalplev500" name="plev"/>
+		</grid>
+		<grid id="FULL_klev_Scalplev700">
+			<domain domain_ref="FULL"/>
+			<scalar scalar_ref="Scalplev700" name="plev"/>
+		</grid>
+		<grid id="FULL_klev_Scalplev700_C">
+			<domain domain_ref="C"/>
+			<scalar scalar_ref="Scalplev700" name="plev"/>
+		</grid>
+		<grid id="FULL_klev_Scalplev850">
+			<domain domain_ref="FULL"/>
+			<scalar scalar_ref="Scalplev850" name="plev"/>
+		</grid>
+		<grid id="FULL_klev_Scalplev850_C">
+			<domain domain_ref="C"/>
+			<scalar scalar_ref="Scalplev850" name="plev"/>
+		</grid>
+		<grid id="FULL_klev_Scalplev925">
+			<domain domain_ref="FULL"/>
+			<scalar scalar_ref="Scalplev925" name="plev"/>
+		</grid>
+		<grid id="FULL_klev_Scalplev925_C">
+			<domain domain_ref="C"/>
+			<scalar scalar_ref="Scalplev925" name="plev"/>
+		</grid>
+		<grid id="FULL_klev_ll_C">
+			<domain domain_ref="C"/>
+			<axis axis_ref="klev_ll"/>
+		</grid>
 		<grid id="FULL_klev_plev19">
 			<domain domain_ref="FULL"/>
 			<axis positive="down" n_glo="19" value="(0,18)[ 100000. 92500. 85000. 70000. 60000. 50000. 40000. 30000. 25000. 20000. 15000. 10000. 7000. 5000. 3000. 2000. 1000. 500. 100. ]" name="plev" standard_name="air_pressure" long_name="pressure" unit="Pa" axis_type="Z">
@@ -15644,17 +15650,81 @@
 				<interpolate_axis type="polynomial" order="1" coordinate="CMIP6_pfull_instant_sampled_1h"/>
 			</axis>
 		</grid>
+		<grid id="FULL_klev_plev200">
+			<domain domain_ref="FULL"/>
+			<axis positive="down" n_glo="1" value="(0,0)[ 20000. ]" name="plev" standard_name="air_pressure" long_name="pressure" unit="Pa" axis_type="Z">
+				<interpolate_axis type="polynomial" order="1" coordinate="CMIP6_pfull_instant_sampled_1h"/>
+			</axis>
+		</grid>
+		<grid id="FULL_klev_plev500">
+			<domain domain_ref="FULL"/>
+			<axis positive="down" n_glo="1" value="(0,0)[ 50000. ]" name="plev" standard_name="air_pressure" long_name="pressure" unit="Pa" axis_type="Z">
+				<interpolate_axis type="polynomial" order="1" coordinate="CMIP6_pfull_instant_sampled_1h"/>
+			</axis>
+		</grid>
+		<grid id="FULL_klev_plev700">
+			<domain domain_ref="FULL"/>
+			<axis positive="down" n_glo="1" value="(0,0)[ 70000. ]" name="plev" standard_name="air_pressure" long_name="pressure" unit="Pa" axis_type="Z">
+				<interpolate_axis type="polynomial" order="1" coordinate="CMIP6_pfull_instant_sampled_1h"/>
+			</axis>
+		</grid>
+		<grid id="FULL_klev_plev8">
+			<domain domain_ref="FULL"/>
+			<axis positive="down" n_glo="8" value="(0,7)[ 100000. 85000. 70000. 50000. 25000. 10000. 5000. 1000. ]" name="plev" standard_name="air_pressure" long_name="pressure" unit="Pa" axis_type="Z">
+				<interpolate_axis type="polynomial" order="1" coordinate="CMIP6_pfull_instant_sampled_1h"/>
+			</axis>
+		</grid>
+		<grid id="FULL_klev_plev850">
+			<domain domain_ref="FULL"/>
+			<axis positive="down" n_glo="1" value="(0,0)[ 85000. ]" name="plev" standard_name="air_pressure" long_name="pressure" unit="Pa" axis_type="Z">
+				<interpolate_axis type="polynomial" order="1" coordinate="CMIP6_pfull_instant_sampled_1h"/>
+			</axis>
+		</grid>
+		<grid id="FULL_klev_plev8_C">
+			<domain domain_ref="C"/>
+			<axis positive="down" n_glo="8" value="(0,7)[ 100000. 85000. 70000. 50000. 25000. 10000. 5000. 1000. ]" name="plev" standard_name="air_pressure" long_name="pressure" unit="Pa" axis_type="Z">
+				<interpolate_axis type="polynomial" order="1" coordinate="CMIP6_pfull_instant_sampled_1h"/>
+			</axis>
+		</grid>
+		<grid id="FULL_klev_plev925">
+			<domain domain_ref="FULL"/>
+			<axis positive="down" n_glo="1" value="(0,0)[ 92500. ]" name="plev" standard_name="air_pressure" long_name="pressure" unit="Pa" axis_type="Z">
+				<interpolate_axis type="polynomial" order="1" coordinate="CMIP6_pfull_instant_sampled_1h"/>
+			</axis>
+		</grid>
+		<grid id="NATURE_grid_C">
+			<domain domain_ref="C"/>
+		</grid>
+		<grid id="NATURE_grid_Scaltypeli">
+			<domain domain_ref="NATURE"/>
+			<scalar scalar_ref="Scaltypeli" name="type"/>
+		</grid>
+		<grid id="NATURE_grid_Scaltypeli_C">
+			<domain domain_ref="C"/>
+			<scalar scalar_ref="Scaltypeli" name="type"/>
+		</grid>
+		<grid id="SEA_grid_C">
+			<domain domain_ref="C"/>
+		</grid>
+		<grid id="SEA_grid_Scaltypesi">
+			<domain domain_ref="SEA"/>
+			<scalar scalar_ref="Scaltypesi" name="type"/>
+		</grid>
+		<grid id="SEA_grid_Scaltypesi_C">
+			<domain domain_ref="C"/>
+			<scalar scalar_ref="Scaltypesi" name="type"/>
+		</grid>
 	</grid_definition>
 	<scalar_definition>
+		<scalar id="Scalheight10m" name="height" standard_name="height" long_name="height" prec="8" value="10." axis_type="Z" positive="up" unit="m"/>
+		<scalar id="Scalheight2m" name="height" standard_name="height" long_name="height" prec="8" value="2." axis_type="Z" positive="up" unit="m"/>
 		<scalar id="Scalplev200" name="plev" standard_name="air_pressure" long_name="pressure" prec="8" value="20000." axis_type="Z" positive="down" unit="Pa"/>
 		<scalar id="Scalplev500" name="plev" standard_name="air_pressure" long_name="pressure" prec="8" value="50000." axis_type="Z" positive="down" unit="Pa"/>
 		<scalar id="Scalplev700" name="plev" standard_name="air_pressure" long_name="pressure" prec="8" value="70000." axis_type="Z" positive="down" unit="Pa"/>
 		<scalar id="Scalplev850" name="plev" standard_name="air_pressure" long_name="pressure" prec="8" value="85000." axis_type="Z" positive="down" unit="Pa"/>
 		<scalar id="Scalplev925" name="plev" standard_name="air_pressure" long_name="pressure" prec="8" value="92500." axis_type="Z" positive="down" unit="Pa"/>
-		<scalar id="Scaltypesi" name="type" standard_name="area_type" long_name="Sea Ice area type" label="typesi"/>
-		<scalar id="Scalheight2m" name="height" standard_name="height" long_name="height" prec="8" value="2." axis_type="Z" positive="up" unit="m"/>
-		<scalar id="Scalheight10m" name="height" standard_name="height" long_name="height" prec="8" value="10." axis_type="Z" positive="up" unit="m"/>
-		<scalar id="Scaltypeli" name="type" standard_name="area_type" long_name="Land Ice area type" label="typeli"/>
 		<scalar id="Scaltypeland" name="type" standard_name="area_type" long_name="Land area type" label="typeland"/>
+		<scalar id="Scaltypeli" name="type" standard_name="area_type" long_name="Land Ice area type" label="typeli"/>
+		<scalar id="Scaltypesi" name="type" standard_name="area_type" long_name="Sea Ice area type" label="typesi"/>
 	</scalar_definition>
 </context>

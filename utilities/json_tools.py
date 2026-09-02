@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
 from __future__ import division, absolute_import, print_function, unicode_literals
 
 import copy
@@ -33,4 +35,4 @@ def format_json_before_writing(settings):
 
 def write_json_content(filename, settings):
     with open(filename, "w") as fp:
-        json.dump(format_json_before_writing(copy.deepcopy(settings)), fp)
+        json.dump(format_json_before_writing(copy.deepcopy(settings)), fp, indent=4, sort_keys=True)

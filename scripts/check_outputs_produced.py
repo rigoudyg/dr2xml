@@ -39,15 +39,22 @@ def find_netcdf_filenames_from_xml(xml_filename):
 	return filenames_list
 
 
-def find_netcdf_filenames_from_xmls(xml_files, start_date_pattern, end_date_pattern, ioxdir, ioxdir_pattern):
+def find_netcdf_filenames_from_xmls(xml_files, start_date_pattern, end_date_pattern, ioxdir, ioxdir_pattern, raise_on_duplicate=False):
 	netcdf_filenames_list = list()
 	for filename in xml_files:
 		netcdf_filenames_list.extend(find_netcdf_filenames_from_xml(filename))
 	netcdf_filenames_list = [
 		f.replace(start_date_pattern, "(?P<start_date>\d+)").replace(end_date_pattern, "(?P<end_date>\d+)").replace(
 			ioxdir_pattern, ioxdir) + ".nc" for f in netcdf_filenames_list]
-	netcdf_filenames_list = sorted(list(set(netcdf_filenames_list)))
-	return netcdf_filenames_list
+	netcdf_filenames_list_sorted = sorted(list(set(netcdf_filenames_list)))
+	duplicates = sorted([elt for elt in netcdf_filenames_list_sorted if netcdf_filenames_list.count(elt) > 1])
+	if len(duplicates) > 0:
+		print("Warning: Found several duplicated files:")
+		for d in duplicates:
+			print("    %s" % d)
+		if raise_on_duplicate:
+			raise ValueError("Several duplicates files to produce have been found.")
+	return netcdf_filenames_list_sorted
 
 
 def check_if_pattern_match(netcdf_list, dr2xml_pattern):
