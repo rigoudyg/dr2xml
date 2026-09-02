@@ -19,7 +19,6 @@ function test_function(){
   local out_code=$?
   echo "Output ${out_code}" >> ${log_file}
   if [ ${out_code} -ne 0 ]; then
-    cat ${log_out} >>${log_file}
     cat ${log_err} >>${log_file}
   fi
   rm -f ${log_out} ${log_err}
@@ -49,7 +48,7 @@ for f in $(cd tests; ls test*.py); do
   test_function $f
 done
 
-for f in $(cd tests; ls test_AOESM_historical_CMIP7/__init__.py); do
+for f in $(cd tests; ls test*/__init__.py); do
   test_function $f
 done
 
