@@ -163,7 +163,24 @@ Internal values
       
       values:
          
-         - function from vocabulary_server named get_term_in_collection('project_id'= init[vocabulary_project], 'collection_id'= 'experiment', 'term_id'= internal[experiment_id])
+         - function from vocabulary named get_term_in_collection('project_id'= init[vocabulary_project], 'collection_id'= 'experiment', 'term_id'= internal[experiment_id] formatted with function from self named lower({}))
+      
+      forbidden values:
+         
+         - None
+         - ''
+      
+      num type: 'string'
+      
+   CV_project
+      
+      Controlled vocabulary file containing project characteristics.
+      
+      fatal: True
+      
+      values:
+         
+         - function from vocabulary named get_project('project_id'= init[vocabulary_project])
       
       forbidden values:
          
@@ -191,7 +208,7 @@ Internal values
       
       values:
          
-         - internal[CV_experiment][additional_allowed_model_components]
+         - internal[CV_experiment][additional_allowed_model_components] formatted with function from functions_file named get_ids_from_list({})
       
       num type: 'string'
       
@@ -319,6 +336,17 @@ Internal values
       
       num type: 'string'
       
+   create_csv_file
+      
+      Pattern containing context if a csv file should be produced, else False.
+      
+      values:
+         
+         - laboratory[create_csv_file]
+         - False
+      
+      num type: 'string'
+      
    debug_parsing
       
       In order to identify which xml files generates a problem, you can use this flag.
@@ -327,6 +355,17 @@ Internal values
          
          - laboratory[debug_parsing]
          - False
+      
+      num type: 'string'
+      
+   default_region
+      
+      Default region to be used
+      
+      values:
+         
+         - laboratory[default_region]
+         - 'default'
       
       num type: 'string'
       
@@ -349,6 +388,19 @@ Internal values
          
          - simulation[end_year]
          - False
+      
+      num type: 'string'
+      
+   excluded_dimensions
+      
+      List of dimensions to be excluded.
+      
+      values:
+         
+         - laboratory[excluded_dimensions]
+         - []
+      
+      target type: 'list'
       
       num type: 'string'
       
@@ -430,6 +482,19 @@ Internal values
       
       num type: 'string'
       
+   excluded_regions
+      
+      List of regions to be excluded.
+      
+      values:
+         
+         - laboratory[excluded_regions]
+         - []
+      
+      target type: 'list'
+      
+      num type: 'string'
+      
    excluded_request_links
       
       List of links un data request that should not been followed (those request are not taken into account).
@@ -476,6 +541,19 @@ Internal values
       values:
          
          - simulation[excluded_tables]
+         - []
+      
+      target type: 'list'
+      
+      num type: 'string'
+      
+   excluded_tpshapes_lset
+      
+      The list of shapes that should be excluded (all variables in those shapes will be excluded from outputs).
+      
+      values:
+         
+         - laboratory[excluded_tpshapes]
          - []
       
       target type: 'list'
@@ -534,6 +612,32 @@ Internal values
       
       num type: 'string'
       
+   excluded_vars_per_frequency
+      
+      A dictionary which keys are frequencies and values the list of variables that must be excluded for each frequency.
+      
+      values:
+         
+         - laboratory[excluded_vars_per_frequency]
+         - {}
+      
+      target type: 'dict'
+      
+      num type: 'string'
+      
+   excluded_vars_per_shape
+      
+      A dictionary which keys are shapes and values the list of variables that must be excluded for each shape.
+      
+      values:
+         
+         - laboratory[excluded_vars_per_shape]
+         - {}
+      
+      target type: 'dict'
+      
+      num type: 'string'
+      
    excluded_vars_sset
       
       List of CMOR variables to exclude from the result based on previous Data Request extraction from simulation settings.
@@ -569,6 +673,20 @@ Internal values
       values:
          
          - simulation[experiment_id]
+      
+      num type: 'string'
+      
+   extravar_regions
+      
+      Dictionnary containing the default values for region for each variables
+      
+      values:
+         
+         - laboratory[extravar_regions]
+         -    
+         -    - 'default': 'default'
+      
+      target type: 'dict'
       
       num type: 'string'
       
@@ -641,7 +759,62 @@ Internal values
       
       values:
          
-         - laboratory[grids]
+         - function from functions_file named format_grids('grids'= laboratory[grids], 'variables_per_grid_type'= internal[variables_per_grid_type])
+      
+      num type: 'string'
+      
+   grids_default_DR
+      
+      DR default grids
+      
+      fatal: True
+      
+      values:
+         
+         - laboratory[grids_default_DR]
+         -    
+         -    - 'cfsites': 
+         -    
+         -          
+         -          - 'gn'
+         -          - '100 km'
+         -          - 'data sampled in model native grid by nearest neighbour method '
+         -    - '1deg': 
+         -    
+         -          
+         -          - 'gr1'
+         -          - '1x1 degree'
+         -          - 'data regridded to a CMIP6 standard 1x1 degree latxlon grid from the native grid'
+         -    - '2deg': 
+         -    
+         -          
+         -          - 'gr2'
+         -          - '2x2 degree'
+         -          - 'data regridded to a CMIP6 standard 2x2 degree latxlon grid from the native grid'
+         -    - '100km': 
+         -    
+         -          
+         -          - 'gr3'
+         -          - '100 km'
+         -          - 'data regridded to a CMIP6 standard 100 km resol grid from the native grid'
+         -    - '50km': 
+         -    
+         -          
+         -          - 'gr4'
+         -          - '50 km'
+         -          - 'data regridded to a CMIP6 standard 50 km resol grid from the native grid'
+         -    - '25km': 
+         -    
+         -          
+         -          - 'gr5'
+         -          - '25 km'
+         -          - 'data regridded to a CMIP6 standard 25 km resol grid from the native grid'
+         -    - 'default': 
+         -    
+         -          
+         -          - 'grx'
+         -          - '?x? degree'
+         -          - 'grid has no description - please fix DR_grid_to_grid_atts for grid %s'
       
       num type: 'string'
       
@@ -861,6 +1034,22 @@ Internal values
       
       num type: 'string'
       
+   max_priority_per_frequency
+      
+      Max variable priority level per frequency to be output from lab settings.
+      
+      fatal: True
+      
+      values:
+         
+         - simulation[max_priority_per_frequency]
+         - laboratory[max_priority_per_frequency]
+         - {}
+      
+      target type: 'dict'
+      
+      num type: 'string'
+      
    max_split_freq
       
       The maximum number of years that should be putted in a single file.
@@ -1027,8 +1216,8 @@ Internal values
       
       values:
          
-         - simulation[realization_index]
-         - '1'
+         - simulation[realization_index] formatted with function from self named format({})
+         - 'r1'
       
       num type: 'string'
       
@@ -1052,7 +1241,7 @@ Internal values
       
       values:
          
-         - internal[CV_experiment][required_model_components]
+         - internal[CV_experiment][required_model_components] formatted with function from functions_file named get_ids_from_list({})
       
       num type: 'string'
       
@@ -1089,11 +1278,39 @@ Internal values
          
          - dict[select]
       
+      corrections:
+         
+         - '': 'on_expt_and_year'
+      
       authorized values:
          
          - 'on_expt_and_year'
          - 'on_expt'
+         - 'on_inc_and_exc'
          - 'no'
+      
+      num type: 'string'
+      
+   select_excluded_dimensions
+      
+      Excluded dimensions for variable selection.
+      
+      fatal: True
+      
+      values:
+         
+         -    Condition:
+         -    
+         -       value to check: internal[select_on_inc_and_exc]
+         -       
+         -       check to perform: 'eq'
+         -       
+         -       reference values: True
+         -       
+         -       values: internal[excluded_dimensions]
+         -       
+      
+      target type: 'list'
       
       num type: 'string'
       
@@ -1107,23 +1324,13 @@ Internal values
          
          -    Condition:
          -    
-         -       value to check: internal[select_on_expt]
+         -       value to check: internal[select_on_inc_and_exc]
          -       
          -       check to perform: 'eq'
          -       
          -       reference values: True
          -       
          -       values: merge_lists()
-         -       
-         -    Condition:
-         -    
-         -       value to check: internal[select_on_expt]
-         -       
-         -       check to perform: 'eq'
-         -       
-         -       reference values: False
-         -       
-         -       values: internal[excluded_expgroups_lset]
          -       
       
       num type: 'string'
@@ -1138,23 +1345,13 @@ Internal values
          
          -    Condition:
          -    
-         -       value to check: internal[select_on_expt]
+         -       value to check: internal[select_on_inc_and_exc]
          -       
          -       check to perform: 'eq'
          -       
          -       reference values: True
          -       
          -       values: merge_lists()
-         -       
-         -    Condition:
-         -    
-         -       value to check: internal[select_on_expt]
-         -       
-         -       check to perform: 'eq'
-         -       
-         -       reference values: False
-         -       
-         -       values: internal[excluded_opportunities_lset]
          -       
       
       num type: 'string'
@@ -1169,7 +1366,7 @@ Internal values
          
          -    Condition:
          -    
-         -       value to check: internal[select_on_expt]
+         -       value to check: internal[select_on_inc_and_exc]
          -       
          -       check to perform: 'eq'
          -       
@@ -1177,15 +1374,26 @@ Internal values
          -       
          -       values: merge_lists()
          -       
+      
+      num type: 'string'
+      
+   select_excluded_regions
+      
+      Excluded regions for variable selection.
+      
+      fatal: True
+      
+      values:
+         
          -    Condition:
          -    
-         -       value to check: internal[select_on_expt]
+         -       value to check: internal[select_on_inc_and_exc]
          -       
          -       check to perform: 'eq'
          -       
-         -       reference values: False
+         -       reference values: True
          -       
-         -       values: internal[excluded_pairs_lset]
+         -       values: internal[excluded_regions]
          -       
       
       num type: 'string'
@@ -1200,23 +1408,13 @@ Internal values
          
          -    Condition:
          -    
-         -       value to check: internal[select_on_expt]
+         -       value to check: internal[select_on_inc_and_exc]
          -       
          -       check to perform: 'eq'
          -       
          -       reference values: True
          -       
          -       values: internal[excluded_request_links]
-         -       
-         -    Condition:
-         -    
-         -       value to check: internal[select_on_expt]
-         -       
-         -       check to perform: 'eq'
-         -       
-         -       reference values: False
-         -       
-         -       values: None
          -       
       
       num type: 'string'
@@ -1231,23 +1429,13 @@ Internal values
          
          -    Condition:
          -    
-         -       value to check: internal[select_on_expt]
+         -       value to check: internal[select_on_inc_and_exc]
          -       
          -       check to perform: 'eq'
          -       
          -       reference values: True
          -       
          -       values: merge_lists()
-         -       
-         -    Condition:
-         -    
-         -       value to check: internal[select_on_expt]
-         -       
-         -       check to perform: 'eq'
-         -       
-         -       reference values: False
-         -       
-         -       values: internal[excluded_tables_lset]
          -       
       
       num type: 'string'
@@ -1262,23 +1450,13 @@ Internal values
          
          -    Condition:
          -    
-         -       value to check: internal[select_on_expt]
+         -       value to check: internal[select_on_inc_and_exc]
          -       
          -       check to perform: 'eq'
          -       
          -       reference values: True
          -       
          -       values: merge_lists()
-         -       
-         -    Condition:
-         -    
-         -       value to check: internal[select_on_expt]
-         -       
-         -       check to perform: 'eq'
-         -       
-         -       reference values: False
-         -       
-         -       values: internal[excluded_vargroups_lset]
          -       
       
       num type: 'string'
@@ -1293,23 +1471,13 @@ Internal values
          
          -    Condition:
          -    
-         -       value to check: internal[select_on_expt]
+         -       value to check: internal[select_on_inc_and_exc]
          -       
          -       check to perform: 'eq'
          -       
          -       reference values: True
          -       
          -       values: merge_lists()
-         -       
-         -    Condition:
-         -    
-         -       value to check: internal[select_on_expt]
-         -       
-         -       check to perform: 'eq'
-         -       
-         -       reference values: False
-         -       
-         -       values: internal[excluded_vars_lset]
          -       
       
       num type: 'string'
@@ -1332,16 +1500,6 @@ Internal values
          -       
          -       values: internal[grid_choice]
          -       
-         -    Condition:
-         -    
-         -       value to check: internal[select_on_expt]
-         -       
-         -       check to perform: 'eq'
-         -       
-         -       reference values: False
-         -       
-         -       values: 'LR'
-         -       
       
       num type: 'string'
       
@@ -1355,23 +1513,13 @@ Internal values
          
          -    Condition:
          -    
-         -       value to check: internal[select_on_expt]
+         -       value to check: internal[select_on_inc_and_exc]
          -       
          -       check to perform: 'eq'
          -       
          -       reference values: True
          -       
          -       values: internal[included_expgroups]
-         -       
-         -    Condition:
-         -    
-         -       value to check: internal[select_on_expt]
-         -       
-         -       check to perform: 'eq'
-         -       
-         -       reference values: False
-         -       
-         -       values: internal[included_expgroups_lset]
          -       
       
       num type: 'string'
@@ -1386,23 +1534,13 @@ Internal values
          
          -    Condition:
          -    
-         -       value to check: internal[select_on_expt]
+         -       value to check: internal[select_on_inc_and_exc]
          -       
          -       check to perform: 'eq'
          -       
          -       reference values: True
          -       
          -       values: internal[included_opportunities]
-         -       
-         -    Condition:
-         -    
-         -       value to check: internal[select_on_expt]
-         -       
-         -       check to perform: 'eq'
-         -       
-         -       reference values: False
-         -       
-         -       values: internal[included_opportunities_lset]
          -       
       
       num type: 'string'
@@ -1417,23 +1555,13 @@ Internal values
          
          -    Condition:
          -    
-         -       value to check: internal[select_on_expt]
+         -       value to check: internal[select_on_inc_and_exc]
          -       
          -       check to perform: 'eq'
          -       
          -       reference values: True
          -       
          -       values: internal[included_request_links]
-         -       
-         -    Condition:
-         -    
-         -       value to check: internal[select_on_expt]
-         -       
-         -       check to perform: 'eq'
-         -       
-         -       reference values: False
-         -       
-         -       values: None
          -       
       
       num type: 'string'
@@ -1448,23 +1576,13 @@ Internal values
          
          -    Condition:
          -    
-         -       value to check: internal[select_on_expt]
+         -       value to check: internal[select_on_inc_and_exc]
          -       
          -       check to perform: 'eq'
          -       
          -       reference values: True
          -       
          -       values: internal[included_tables]
-         -       
-         -    Condition:
-         -    
-         -       value to check: internal[select_on_expt]
-         -       
-         -       check to perform: 'eq'
-         -       
-         -       reference values: False
-         -       
-         -       values: internal[included_tables_lset]
          -       
       
       num type: 'string'
@@ -1479,23 +1597,13 @@ Internal values
          
          -    Condition:
          -    
-         -       value to check: internal[select_on_expt]
+         -       value to check: internal[select_on_inc_and_exc]
          -       
          -       check to perform: 'eq'
          -       
          -       reference values: True
          -       
          -       values: internal[included_vargroups]
-         -       
-         -    Condition:
-         -    
-         -       value to check: internal[select_on_expt]
-         -       
-         -       check to perform: 'eq'
-         -       
-         -       reference values: False
-         -       
-         -       values: internal[included_vargroups_lset]
          -       
       
       num type: 'string'
@@ -1510,23 +1618,13 @@ Internal values
          
          -    Condition:
          -    
-         -       value to check: internal[select_on_expt]
+         -       value to check: internal[select_on_inc_and_exc]
          -       
          -       check to perform: 'eq'
          -       
          -       reference values: True
          -       
          -       values: internal[included_vars]
-         -       
-         -    Condition:
-         -    
-         -       value to check: internal[select_on_expt]
-         -       
-         -       check to perform: 'eq'
-         -       
-         -       reference values: False
-         -       
-         -       values: internal[included_vars_lset]
          -       
       
       num type: 'string'
@@ -1549,16 +1647,29 @@ Internal values
          -       
          -       values: internal[max_priority]
          -       
+      
+      num type: 'string'
+      
+   select_max_priority_per_frequency
+      
+      Max priority per frequency for variable selection.
+      
+      fatal: True
+      
+      values:
+         
          -    Condition:
          -    
-         -       value to check: internal[select_on_expt]
+         -       value to check: internal[select_on_inc_and_exc]
          -       
          -       check to perform: 'eq'
          -       
-         -       reference values: False
+         -       reference values: True
          -       
-         -       values: internal[max_priority_lset]
+         -       values: internal[max_priority_per_frequency]
          -       
+      
+      target type: 'dict'
       
       num type: 'string'
       
@@ -1572,23 +1683,13 @@ Internal values
          
          -    Condition:
          -    
-         -       value to check: internal[select_on_expt]
+         -       value to check: internal[select_on_inc_and_exc]
          -       
          -       check to perform: 'eq'
          -       
          -       reference values: True
          -       
          -       values: function from functions_file named sort_mips('mips'= internal[mips][internal[select_grid_choice]])
-         -       
-         -    Condition:
-         -    
-         -       value to check: internal[select_on_expt]
-         -       
-         -       check to perform: 'eq'
-         -       
-         -       reference values: False
-         -       
-         -       values: function from functions_file named sort_mips('mips'= internal[mips])
          -       
       
       num type: 'string'
@@ -1614,15 +1715,30 @@ Internal values
          -       
          -       values: True
          -       
+      
+      num type: 'string'
+      
+   select_on_inc_and_exc
+      
+      Should data be selected on inclusions and exclusions?
+      
+      fatal: True
+      
+      values:
+         
          -    Condition:
          -    
          -       value to check: internal[select]
          -       
          -       check to perform: 'eq'
          -       
-         -       reference values: 'no'
+         -       reference values:
+         -             
+         -             - 'on_expt_and_year'
+         -             - 'on_expt'
+         -             - 'on_inc_and_exc'
          -       
-         -       values: False
+         -       values: True
          -       
       
       num type: 'string'
@@ -1645,19 +1761,6 @@ Internal values
          -       
          -       values: True
          -       
-         -    Condition:
-         -    
-         -       value to check: internal[select]
-         -       
-         -       check to perform: 'eq'
-         -       
-         -       reference values:
-         -             
-         -             - 'on_expt'
-         -             - 'no'
-         -       
-         -       values: False
-         -       
       
       num type: 'string'
       
@@ -1679,16 +1782,8 @@ Internal values
          -       
          -       values: internal[sizes]
          -       
-         -    Condition:
-         -    
-         -       value to check: internal[select_on_expt]
-         -       
-         -       check to perform: 'eq'
-         -       
-         -       reference values: False
-         -       
-         -       values: None
-         -       
+      
+      target type: 'dict'
       
       num type: 'string'
       
@@ -1709,16 +1804,6 @@ Internal values
          -       reference values: True
          -       
          -       values: internal[tierMax]
-         -       
-         -    Condition:
-         -    
-         -       value to check: internal[select_on_expt]
-         -       
-         -       check to perform: 'eq'
-         -       
-         -       reference values: False
-         -       
-         -       values: internal[tierMax_lset]
          -       
       
       num type: 'string'
@@ -1845,6 +1930,17 @@ Internal values
       
       num type: 'string'
       
+   update_grid_label
+      
+      Should grid label be updated according to table?
+      
+      values:
+         
+         - laboratory[update_grid_label]
+         - False
+      
+      num type: 'string'
+      
    useAtForInstant
       
       Should xml output files use the `@` symbol for definitions for instant variables?
@@ -1880,6 +1976,19 @@ Internal values
       
       num type: 'string'
       
+   variables_per_grid_type
+      
+      List of variables associated with a grid type
+      
+      values:
+         
+         - laboratory[variables_per_grid_type]
+         - {}
+      
+      target type: 'dict'
+      
+      num type: 'string'
+      
    vertical_interpolation_operation
       
       Operation done for vertical interpolation.
@@ -1898,6 +2007,23 @@ Internal values
       values:
          
          - laboratory[vertical_interpolation_sample_freq]
+      
+      num type: 'string'
+      
+   write_split_freq
+      
+      Should a split_freq file be generated with values computed by dr2xml?
+      
+      values:
+         
+         - laboratory[write_split_freq]
+         - False
+      
+      forbidden values:
+         
+         - None
+         - 'None'
+         - ''
       
       num type: 'string'
       
@@ -1940,6 +2066,16 @@ Common values
 .. glossary::
    :sorted:
    
+   Conventions
+      
+      Version of the conventions used.
+      
+      values:
+         
+         - function from functions_file named get_attr_and_join('list_values'= common[conventions_version], 'attribute'= 'drs_name', 'separator'= ' ')
+      
+      num type: 'string'
+      
    HDL
       
       HDL associated with the project.
@@ -1948,7 +2084,7 @@ Common values
          
          - simulation[HDL]
          - laboratory[HDL]
-         - '21.14100'
+         - '21.14107'
       
       num type: 'string'
       
@@ -1960,7 +2096,7 @@ Common values
          
          - simulation[activity_id]
          - laboratory[activity_id]
-         - internal[CV_experiment][activity_id][0] formatted with function from self named upper({})
+         - internal[CV_experiment][activity] formatted with function from self named upper({})
       
       num type: 'string'
       
@@ -1972,6 +2108,12 @@ Common values
          
          - simulation[branch_method]
          - 'standard'
+      
+      forbidden values:
+         
+         - None
+         - 'None'
+         - ''
       
       num type: 'string'
       
@@ -2092,11 +2234,23 @@ Common values
       
    conventions_version
       
-      Version of the conventions used.
+      Versions of the conventions used.
       
       values:
          
-         - function from vocabulary_server named get_all_terms_in_collection('project_id'= init[vocabulary_project], 'collection_id'= 'dataConventions')
+         - function from vocabulary named get_all_terms_in_collection('project_id'= init[vocabulary_project], 'collection_id'= 'Conventions')
+      
+      num type: 'string'
+      
+   data_request_version_string
+      
+      Version of the data request used.
+      
+      fatal: True
+      
+      values:
+         
+         - function from data_request named get_version({})
       
       num type: 'string'
       
@@ -2108,7 +2262,7 @@ Common values
       
       values:
          
-         - function from vocabulary_server named get_all_terms_in_collection('project_id'= init[vocabulary_project], 'collection_id'= 'datasetSpecs')
+         - function from vocabulary named get_all_terms_in_collection('project_id'= init[vocabulary_project], 'collection_id'= 'data_specs_version')
       
       num type: 'string'
       
@@ -2149,7 +2303,7 @@ Common values
       
       values:
          
-         - function from vocabulary_server named get_all_terms_in_collection('project_id'= init[vocabulary_project], 'collection_id'= 'drsSpecs')
+         - function from vocabulary named get_all_terms_in_collection('project_id'= init[vocabulary_project], 'collection_id'= 'drs_specs')
       
       num type: 'string'
       
@@ -2183,8 +2337,8 @@ Common values
       
       values:
          
-         - simulation[forcing_index]
-         - '1'
+         - simulation[forcing_index] formatted with function from self named format({})
+         - 'f1'
       
       num type: 'string'
       
@@ -2215,14 +2369,16 @@ Common values
       
       values:
          
-         - simulation[initialization_index]
-         - '1'
+         - simulation[initialization_index] formatted with function from self named format({})
+         - 'i1'
       
       num type: 'string'
       
    institution
       
       Full name of the institution of the data producer.
+      
+      fatal: True
       
       values:
          
@@ -2235,11 +2391,9 @@ Common values
       
       Institution information from input
       
-      fatal: True
-      
       values:
          
-         - function from vocabulary_server named get_term_in_collection('project_id'= init[vocabulary_project], 'collection_id'= 'institution_id', 'term_id'= init[institution_id] formatted with function from self named lower({}))
+         - function from vocabulary named get_term_in_collection('project_id'= init[vocabulary_project], 'collection_id'= 'institution', 'term_id'= init[institution_id] formatted with function from self named lower({}))
       
       forbidden values:
          
@@ -2250,26 +2404,18 @@ Common values
       
    license
       
-      Text of the license which applies
+      License elements
       
       fatal: True
       
       values:
          
-         - common[license_file][0]
-         - common[license_file][license]
+         - function from vocabulary named get_term_in_collection('project_id'= init[vocabulary_project], 'collection_id'= 'license', 'term_id'= common[license_id] formatted with function from self named lower({}))
       
-      num type: 'string'
-      
-   license_file
-      
-      File where the license associated with the produced output files can be found.
-      
-      fatal: True
-      
-      values:
+      forbidden values:
          
-         - read_json_file(function from self named format('cvspath'= dict[cvspath], 'project'= init[project]))[license]
+         - None
+         - ''
       
       num type: 'string'
       
@@ -2281,9 +2427,8 @@ Common values
       
       values:
          
-         - common[license_file][license][laboratory[license_id]][license_id]
-         - common[license_file][license_options][CC BY-NC-SA 4.0][license_id]
-         - ''
+         - laboratory[license_id]
+         - 'cc-by-4-0'
       
       num type: 'string'
       
@@ -2295,9 +2440,10 @@ Common values
       
       values:
          
-         - common[license_file][license][laboratory[license_id]][license_url]
-         - common[license_file][license_options][CC BY-NC-SA 4.0][license_url]
+         - common[license][url]
          - 'https://creativecommons.org/licenses'
+      
+      target type: 'str'
       
       num type: 'string'
       
@@ -2330,9 +2476,19 @@ Common values
       
       values:
          
-         - function from vocabulary_server named get_all_terms_in_collection('project_id'= init[vocabulary_project], 'collection_id'= 'mipEra')
+         - common[mip_era_esgvoc][0][drs_name]
       
       forbidden values: None
+      
+      num type: 'string'
+      
+   mip_era_esgvoc
+      
+      label to indicate the CMIP phase when an experiment was designed
+      
+      values:
+         
+         - function from vocabulary named get_all_terms_in_collection('project_id'= init[vocabulary_project], 'collection_id'= 'mip_era')
       
       num type: 'string'
       
@@ -2379,7 +2535,30 @@ Common values
          - simulation[activity_id]
          - laboratory[parent_activity_id]
          - laboratory[activity_id]
-         - internal[CV_experiment][parent_activity_id]
+         - internal[CV_experiment][parent_activity][drs_name]
+      
+      forbidden values:
+         
+         - ''
+         - 'None'
+         - None
+      
+      num type: 'string'
+      
+   parent_calendar
+      
+      TODO
+      
+      values:
+         
+         - simulation[parent_calendar]
+         - 'standard'
+      
+      forbidden values:
+         
+         - ''
+         - 'None'
+         - None
       
       num type: 'string'
       
@@ -2391,7 +2570,7 @@ Common values
          
          - simulation[parent_experiment_id]
          - laboratory[parent_experiment_id]
-         - internal[CV_experiment][parent_experiment_id][0] formatted with function from self named upper({})
+         - internal[CV_experiment][parent_experiment][drs_name]
       
       num type: 'string'
       
@@ -2402,6 +2581,7 @@ Common values
       values:
          
          - simulation[parent_mip_era]
+         - internal[CV_experiment][parent_mip_era][drs_name]
       
       num type: 'string'
       
@@ -2452,8 +2632,8 @@ Common values
       
       values:
          
-         - simulation[physics_index]
-         - '1'
+         - simulation[physics_index] formatted with function from self named format({})
+         - 'p1'
       
       num type: 'string'
       
@@ -2494,11 +2674,9 @@ Common values
       
       Source information from input
       
-      fatal: True
-      
       values:
          
-         - function from vocabulary_server named get_term_in_collection('project_id'= init[vocabulary_project], 'collection_id'= 'source', 'term_id'= internal[source_id] formatted with function from self named lower({}))
+         - function from vocabulary named get_term_in_collection('project_id'= init[vocabulary_project], 'collection_id'= 'model', 'term_id'= internal[source_id] formatted with function from functions_file named format_id({}))
       
       forbidden values:
          
@@ -2537,7 +2715,7 @@ Common values
          
          - simulation[title]
          - laboratory[title]
-         - function from self named format('mip_era'= common[mip_era][0], 'experiment_id'= internal[experiment_id], 'source_id'= internal[source_id])
+         - function from self named format('mip_era'= common[mip_era], 'experiment_id'= internal[experiment_id], 'source_id'= internal[source_id])
       
       num type: 'string'
       
@@ -2585,7 +2763,7 @@ Project settings
             
          positive
             
-            Hox is the axis oriented?
+            How is the axis oriented?
             
             values:
                
@@ -2616,6 +2794,7 @@ Project settings
                - ''
                - 'None'
                - None
+               - 'undef'
             
             num type: 'string'
             
@@ -2652,6 +2831,7 @@ Project settings
                - ''
                - 'None'
                - None
+               - 'undef'
             
             num type: 'string'
             
@@ -2693,6 +2873,7 @@ Project settings
                - ''
                - 'None'
                - None
+               - 'undef'
             
             num type: 'string'
             
@@ -2709,6 +2890,7 @@ Project settings
                - ''
                - 'None'
                - None
+               - 'undef'
             
             num type: 'string'
             
@@ -2725,6 +2907,7 @@ Project settings
                - ''
                - 'None'
                - None
+               - 'undef'
             
             num type: 'string'
             
@@ -2741,6 +2924,7 @@ Project settings
                - ''
                - 'None'
                - None
+               - 'undef'
             
             num type: 'string'
             
@@ -2757,6 +2941,7 @@ Project settings
                - ''
                - 'None'
                - None
+               - 'undef'
             
             num type: 'string'
             
@@ -2773,6 +2958,7 @@ Project settings
                - ''
                - 'None'
                - None
+               - 'undef'
             
             num type: 'string'
             
@@ -2789,6 +2975,7 @@ Project settings
                - ''
                - 'None'
                - None
+               - 'undef'
             
             num type: 'string'
             
@@ -2837,7 +3024,7 @@ Project settings
             
             values:
                
-               - function from self named format('data_request_used'= init[data_request_used], 'data_specs_version'= common[data_specs_version])
+               - function from self named format('data_request_used'= init[data_request_used], 'data_request_version_string'= common[data_request_version_string])
             
             num type: 'string'
             
@@ -2857,7 +3044,7 @@ Project settings
             
             values:
                
-               - 'CMIP6_conventions_version {}'.format(common[conventions_version])
+               - 'CMIP7_conventions_version {}'.format(common[Conventions])
             
             num type: 'string'
             
@@ -3005,6 +3192,26 @@ Project settings
             values:
                
                - attrs[domain_ref]
+            
+            num type: 'string'
+            
+         bounds_lat_name
+            
+            Name of latitude bounds name
+            
+            values:
+               
+               - 'lat_bnds'
+            
+            num type: 'string'
+            
+         bounds_lon_name
+            
+            Name of longitude bounds name
+            
+            values:
+               
+               - 'lon_bnds'
             
             num type: 'string'
             
@@ -3215,6 +3422,28 @@ Project settings
             
             num type: 'string'
             
+         variable_label
+            
+            Variable label
+            
+            fatal: True
+            
+            values:
+               
+               - common_tag[variable][cmvar][cmvar][attributes][physical_parameter][attributes][variablerootdd]
+               - common_tag[variable][label]
+            
+            target type: 'str'
+            
+            forbidden values:
+               
+               - ''
+               - 'None'
+               - None
+               - 'undef'
+            
+            num type: 'string'
+            
       
       Attributes:
          field_ref
@@ -3234,7 +3463,7 @@ Project settings
             values:
                
                - attrs[name]
-               - common_tag[variable][mipVarLabel]
+               - common_tag[variable_label]
             
             num type: 'string'
             
@@ -3251,6 +3480,7 @@ Project settings
                - ''
                - 'None'
                - None
+               - 'undef'
             
             num type: 'string'
             
@@ -3267,6 +3497,7 @@ Project settings
                - ''
                - 'None'
                - None
+               - 'undef'
             
             num type: 'string'
             
@@ -3382,6 +3613,7 @@ Project settings
                - ''
                - 'None'
                - None
+               - 'undef'
             
             num type: 'string'
             
@@ -3398,6 +3630,7 @@ Project settings
                - ''
                - 'None'
                - None
+               - 'undef'
             
             num type: 'string'
             
@@ -3410,14 +3643,15 @@ Project settings
             values:
                
                - attrs[comment]
-               - simulation[comments][common_tag[variable][label]]
-               - laboratory[comments][common_tag[variable][label]]
+               - simulation[comments][common_tag[variable_label]]
+               - laboratory[comments][common_tag[variable_label]]
             
             forbidden values:
                
                - ''
                - 'None'
                - None
+               - 'undef'
             
             num type: 'string'
             
@@ -3435,6 +3669,7 @@ Project settings
                - ''
                - 'None'
                - None
+               - 'undef'
             
             num type: 'string'
             
@@ -3477,6 +3712,7 @@ Project settings
                - ''
                - 'None'
                - None
+               - 'undef'
             
             num type: 'string'
             
@@ -3505,6 +3741,7 @@ Project settings
                - ''
                - 'None'
                - None
+               - 'undef'
             
             num type: 'string'
             
@@ -3522,6 +3759,7 @@ Project settings
                - ''
                - 'None'
                - None
+               - 'undef'
             
             num type: 'string'
             
@@ -3539,6 +3777,7 @@ Project settings
                - ''
                - 'None'
                - None
+               - 'undef'
             
             num type: 'string'
             
@@ -3556,6 +3795,7 @@ Project settings
                - ''
                - 'None'
                - None
+               - 'undef'
             
             num type: 'string'
             
@@ -3573,6 +3813,7 @@ Project settings
                - ''
                - 'None'
                - None
+               - 'undef'
             
             num type: 'string'
             
@@ -3690,7 +3931,134 @@ Project settings
             
             values:
                
-               - variable
+               - attrs[variable][0]
+            
+            num type: 'string'
+            
+         variable_esgvoc
+            
+            Variable information from esgvoc
+            
+            values:
+               
+               - function from vocabulary named get_term_in_collection('project_id'= init[vocabulary_project], 'collection_id'= 'branded_variable', 'term_id'= common_tag[variable][official_label] formatted with function from self named lower({}))
+            
+            forbidden values:
+               
+               - ''
+               - 'None'
+               - None
+            
+            num type: 'string'
+            
+         branding_suffix
+            
+            Suffix in the branded variable name
+            
+            fatal: True
+            
+            values:
+               
+               - attrs[branding_suffix]
+               - common_tag[variable][cmvar][branding_suffix]
+               - common_tag[variable_esgvoc][branding_suffix_name]
+               -    Condition:
+               -    
+               -       value to check: common_tag[variable][type]
+               -       
+               -       check to perform: 'eq'
+               -       
+               -       reference values: 'extra'
+               -       
+               -       values: common_tag[variable][extravar][branding_suffix]
+               -       
+               -    Condition:
+               -    
+               -       value to check: common_tag[variable][type]
+               -       
+               -       check to perform: 'neq'
+               -       
+               -       reference values: 'cmor'
+               -       
+               -       values: common_tag[variable][mipTable]
+               -       
+               -    Condition:
+               -    
+               -       value to check: common_tag[variable][type]
+               -       
+               -       check to perform: 'neq'
+               -       
+               -       reference values: 'cmor'
+               -       
+               -       values: 'undef'
+               -       
+            
+            forbidden values:
+               
+               - ''
+               - 'None'
+               - None
+               - 'undef'
+            
+            num type: 'string'
+            
+         region
+            
+            Region contained by the file
+            
+            fatal: True
+            
+            values:
+               
+               - common_tag[variable][region]
+               -    Condition:
+               -    
+               -       value to check: common_tag[variable][type]
+               -       
+               -       check to perform: 'eq'
+               -       
+               -       reference values: 'extra'
+               -       
+               -       values: internal[extravar_regions][common_tag[variable_label]]
+               -       
+               -    Condition:
+               -    
+               -       value to check: common_tag[variable][type]
+               -       
+               -       check to perform: 'eq'
+               -       
+               -       reference values: 'extra'
+               -       
+               -       values: internal[internal[extravar_regions][default]]
+               -       
+            
+            forbidden values:
+               
+               - ''
+               - 'None'
+               - None
+            
+            num type: 'string'
+            
+         variable_label
+            
+            Variable label
+            
+            fatal: True
+            
+            values:
+               
+               - common_tag[variable][cmvar][cmvar][attributes][physical_parameter][attributes][variablerootdd]
+               - common_tag[variable][label]
+            
+            target type: 'str'
+            
+            forbidden values:
+               
+               - ''
+               - 'None'
+               - None
+               - 'undef'
             
             num type: 'string'
             
@@ -3705,7 +4073,7 @@ Project settings
             values:
                
                - attrs[id]
-               - function from self named format('grid'= attrs[grid_label], 'table'= attrs[table_id], 'variable'= common_tag[variable][label])
+               - function from self named format('branding_suffix'= common_tag[branding_suffix], 'frequency'= common_tag[variable][frequency], 'grid'= attrs[grid_label], 'region'= common_tag[region], 'variable'= common_tag[variable_label])
             
             num type: 'string'
             
@@ -3717,7 +4085,7 @@ Project settings
             
             values:
                
-               - function from functions_file named build_filename('frequency'= common_tag[variable][frequency], 'prefix'= common[prefix], 'table'= dict[table_id], 'source_id'= internal[source_id], 'expid_in_filename'= common[expid_in_filename], 'member_id'= common[member_id], 'grid_label'= dict[grid_label], 'date_range'= common[date_range], 'var_type'= common_tag[variable][type], 'list_perso_dev_file'= common[list_perso_dev_file], 'label'= common_tag[variable][label], 'mipVarLabel'= common_tag[variable][mipVarLabel], 'use_cmorvar'= internal[use_cmorvar_label_in_filename])
+               - function from functions_file named build_filename('variable_id'= common_tag[variable_label], 'branding_suffix'= common_tag[branding_suffix], 'frequency'= common_tag[variable][frequency], 'region'= common_tag[region], 'grid_label'= dict[grid_label], 'source_id'= internal[source_id], 'expid_in_filename'= common[expid_in_filename], 'variant_label'= common[variant_label], 'date_range'= common[date_range], 'var_type'= common_tag[variable][type], 'list_perso_dev_file'= common[list_perso_dev_file], 'prefix'= common[prefix])
             
             num type: 'string'
             
@@ -3756,6 +4124,7 @@ Project settings
                - 'None'
                - ''
                - None
+               - 'undef'
             
             num type: 'string'
             
@@ -3773,6 +4142,7 @@ Project settings
                - 'None'
                - ''
                - None
+               - 'undef'
             
             num type: 'string'
             
@@ -3798,6 +4168,7 @@ Project settings
                - ''
                - 'None'
                - None
+               - 'undef'
             
             num type: 'string'
             
@@ -3823,6 +4194,7 @@ Project settings
                - ''
                - 'None'
                - None
+               - 'undef'
             
             num type: 'string'
             
@@ -3850,6 +4222,7 @@ Project settings
                - None
                - 'False'
                - False
+               - 'undef'
             
             num type: 'string'
             
@@ -3877,6 +4250,7 @@ Project settings
                - None
                - 'False'
                - False
+               - 'undef'
             
             num type: 'string'
             
@@ -3902,6 +4276,7 @@ Project settings
                - ''
                - 'None'
                - None
+               - 'undef'
             
             num type: 'string'
             
@@ -3986,6 +4361,7 @@ Project settings
                - 'None'
                - ''
                - None
+               - 'undef'
             
             num type: 'string'
             
@@ -4014,6 +4390,25 @@ Project settings
                - 'None'
                - ''
                - None
+               - 'undef'
+            
+            num type: 'string'
+            
+         bounds_lon_name
+            
+            TODO
+            
+            num type: 'string'
+            
+         bounds_lat_name
+            
+            TODO
+            
+            num type: 'string'
+            
+         bounds_time_name
+            
+            TODO
             
             num type: 'string'
             
@@ -4042,7 +4437,43 @@ Project settings
                
                - attrs[area_label]
                - common_tag[variable][cmvar][area_label]
+               -    Condition:
+               -    
+               -       value to check: common_tag[variable][type]
+               -       
+               -       check to perform: 'eq'
+               -       
+               -       reference values: 'extra'
+               -       
+               -       values: common_tag[variable][extravar][area_label]
+               -       
                - common_tag[variable_esgvoc][area_label]
+               -    Condition:
+               -    
+               -       value to check: common_tag[variable][type]
+               -       
+               -       check to perform: 'eq'
+               -       
+               -       reference values: 'extra'
+               -       
+               -       values: common_tag[variable][extravar][area_label]
+               -       
+               -    Condition:
+               -    
+               -       value to check: common_tag[variable][type]
+               -       
+               -       check to perform: 'neq'
+               -       
+               -       reference values: 'cmor'
+               -       
+               -       values: 'undef'
+               -       
+            
+            forbidden values:
+               
+               - ''
+               - 'None'
+               - None
             
             num type: 'string'
             
@@ -4063,6 +4494,7 @@ Project settings
                -             - 'no parent'
                -             - ''
                -             - 'None'
+               -             - None
                -       
                -       values:
                -             
@@ -4096,6 +4528,7 @@ Project settings
                -             - 'no parent'
                -             - ''
                -             - 'None'
+               -             - None
                -       
                -       values:
                -             
@@ -4121,7 +4554,7 @@ Project settings
             values:
                
                - attrs[branded_variable]
-               - common_tag[variable][label_non_ambiguous]
+               - common_tag[variable][official_label]
             
             num type: 'string'
             
@@ -4133,9 +4566,13 @@ Project settings
             
             values:
                
-               - attrs[branding_suffix]
-               - common_tag[variable][cmvar][branding_suffix]
-               - common_tag[variable_esgvoc][branding_suffix]
+               - common_tag[branding_suffix]
+            
+            forbidden values:
+               
+               - ''
+               - 'None'
+               - None
             
             num type: 'string'
             
@@ -4148,7 +4585,13 @@ Project settings
             values:
                
                - attrs[Conventions]
-               - common[conventions_version][0][label]
+               - common[Conventions]
+            
+            forbidden values:
+               
+               - ''
+               - 'None'
+               - None
             
             num type: 'string'
             
@@ -4161,7 +4604,7 @@ Project settings
             values:
                
                - attrs[data_specs_version]
-               - common[data_specs_version][0][__call__]
+               - common[data_specs_version][0][drs_name]
             
             num type: 'string'
             
@@ -4206,11 +4649,16 @@ Project settings
             
             num type: 'string'
             
-         experiment_id
+         expid_in_filename
             
-            TODO
+            Experiment id to be used in file name.
             
-            fatal: True
+            output key: 'experiment_id'
+            
+            values:
+               
+               - attrs[expid_in_filename]
+               - common[expid_in_filename]
             
             num type: 'string'
             
@@ -4238,7 +4686,7 @@ Project settings
                - attrs[forcing_index]
                - common[forcing_index]
             
-            num type: 'int'
+            num type: 'string'
             
          frequency
             
@@ -4287,7 +4735,43 @@ Project settings
                
                - attrs[horizontal_label]
                - common_tag[variable][cmvar][horizontal_label]
+               -    Condition:
+               -    
+               -       value to check: common_tag[variable][type]
+               -       
+               -       check to perform: 'eq'
+               -       
+               -       reference values: 'extra'
+               -       
+               -       values: common_tag[variable][extravar][horizontal_label]
+               -       
                - common_tag[variable_esgvoc][horizontal_label]
+               -    Condition:
+               -    
+               -       value to check: common_tag[variable][type]
+               -       
+               -       check to perform: 'eq'
+               -       
+               -       reference values: 'extra'
+               -       
+               -       values: common_tag[variable][extravar][horizontal_label]
+               -       
+               -    Condition:
+               -    
+               -       value to check: common_tag[variable][type]
+               -       
+               -       check to perform: 'neq'
+               -       
+               -       reference values: 'cmor'
+               -       
+               -       values: 'undef'
+               -       
+            
+            forbidden values:
+               
+               - ''
+               - 'None'
+               - None
             
             num type: 'string'
             
@@ -4302,7 +4786,7 @@ Project settings
                - attrs[initialization_index]
                - common[initialization_index]
             
-            num type: 'int'
+            num type: 'string'
             
          institution
             
@@ -4330,9 +4814,18 @@ Project settings
             
             num type: 'string'
             
-         license_id
+         license
             
-            TODO
+            License associated with the file.
+            
+            output key: 'license_id'
+            
+            fatal: True
+            
+            values:
+               
+               - attrs[license]
+               - common[license][drs_name]
             
             num type: 'string'
             
@@ -4345,7 +4838,7 @@ Project settings
             values:
                
                - attrs[mip_era]
-               - common[mip_era][0]
+               - common[mip_era]
             
             num type: 'string'
             
@@ -4378,11 +4871,39 @@ Project settings
                -             - 'no parent'
                -             - ''
                -             - 'None'
+               -             - None
                -       
                -       values:
                -             
                -             - attrs[parent_activity_id]
                -             - common[parent_activity_id]
+               -       
+            
+            num type: 'string'
+            
+         parent_calendar
+            
+            Calendar associated with the parent experiment.
+            
+            values:
+               
+               -    Condition:
+               -    
+               -       value to check: common[parent_experiment_id]
+               -       
+               -       check to perform: 'neq'
+               -       
+               -       reference values:
+               -             
+               -             - 'no parent'
+               -             - ''
+               -             - 'None'
+               -             - None
+               -       
+               -       values:
+               -             
+               -             - attrs[parent_calendar]
+               -             - common[parent_calendar]
                -       
             
             num type: 'string'
@@ -4404,6 +4925,7 @@ Project settings
                -             - 'no parent'
                -             - ''
                -             - 'None'
+               -             - None
                -       
                -       values:
                -             
@@ -4430,6 +4952,7 @@ Project settings
                -             - 'no parent'
                -             - ''
                -             - 'None'
+               -             - None
                -       
                -       values:
                -             
@@ -4458,6 +4981,7 @@ Project settings
                -             - 'no parent'
                -             - ''
                -             - 'None'
+               -             - None
                -       
                -       values:
                -             
@@ -4485,6 +5009,7 @@ Project settings
                -             - 'no parent'
                -             - ''
                -             - 'None'
+               -             - None
                -       
                -       values:
                -             
@@ -4512,6 +5037,7 @@ Project settings
                -             - 'no parent'
                -             - ''
                -             - 'None'
+               -             - None
                -       
                -       values:
                -             
@@ -4533,7 +5059,7 @@ Project settings
                - attrs[physics_index]
                - common[physics_index]
             
-            num type: 'int'
+            num type: 'string'
             
          product
             
@@ -4559,7 +5085,7 @@ Project settings
                - attrs[realization_index]
                - internal[realization_index]
             
-            num type: 'int'
+            num type: 'string'
             
          realm
             
@@ -4582,7 +5108,7 @@ Project settings
             values:
                
                - attrs[region]
-               - common_tag[variable][cmvar][region]
+               - common_tag[region]
             
             num type: 'string'
             
@@ -4609,7 +5135,43 @@ Project settings
                
                - attrs[temporal_label]
                - common_tag[variable][cmvar][temporal_label]
+               -    Condition:
+               -    
+               -       value to check: common_tag[variable][type]
+               -       
+               -       check to perform: 'eq'
+               -       
+               -       reference values: 'extra'
+               -       
+               -       values: common_tag[variable][extravar][temporal_label]
+               -       
                - common_tag[variable_esgvoc][temporal_label]
+               -    Condition:
+               -    
+               -       value to check: common_tag[variable][type]
+               -       
+               -       check to perform: 'eq'
+               -       
+               -       reference values: 'extra'
+               -       
+               -       values: common_tag[variable][extravar][temporal_label]
+               -       
+               -    Condition:
+               -    
+               -       value to check: common_tag[variable][type]
+               -       
+               -       check to perform: 'neq'
+               -       
+               -       reference values: 'cmor'
+               -       
+               -       values: 'undef'
+               -       
+            
+            forbidden values:
+               
+               - ''
+               - 'None'
+               - None
             
             num type: 'string'
             
@@ -4622,8 +5184,14 @@ Project settings
             values:
                
                - attrs[variable_id]
-               - common_tag[variable][name]
-               - common_tag[variable_esgvoc][variable_id]
+               - common_tag[variable_label]
+               - common_tag[variable_esgvoc][variable_root_name]
+            
+            forbidden values:
+               
+               - ''
+               - 'None'
+               - None
             
             num type: 'string'
             
@@ -4650,7 +5218,116 @@ Project settings
                
                - attrs[vertical_label]
                - common_tag[variable][cmvar][vertical_label]
+               -    Condition:
+               -    
+               -       value to check: common_tag[variable][type]
+               -       
+               -       check to perform: 'eq'
+               -       
+               -       reference values: 'extra'
+               -       
+               -       values: common_tag[variable][extravar][vertical_label]
+               -       
                - common_tag[variable_esgvoc][vertical_label]
+               -    Condition:
+               -    
+               -       value to check: common_tag[variable][type]
+               -       
+               -       check to perform: 'eq'
+               -       
+               -       reference values: 'extra'
+               -       
+               -       values: common_tag[variable][extravar][vertical_label]
+               -       
+               -    Condition:
+               -    
+               -       value to check: common_tag[variable][type]
+               -       
+               -       check to perform: 'neq'
+               -       
+               -       reference values: 'cmor'
+               -       
+               -       values: 'undef'
+               -       
+            
+            forbidden values:
+               
+               - ''
+               - 'None'
+               - None
+            
+            num type: 'string'
+            
+         dr2xml_version
+            
+            Version of dr2xml used.
+            
+            values:
+               
+               - attrs[dr2xml_version]
+               - common[dr2xml_version]
+            
+            num type: 'string'
+            
+         physical_parameter
+            
+            Physical parameter used to derive the variable
+            
+            fatal: True
+            
+            values:
+               
+               - common_tag[variable][mipVarLabel]
+            
+            num type: 'string'
+            
+         dr_version
+            
+            Version of the DR
+            
+            values:
+               
+               - common[data_request_version_string]
+            
+            num type: 'string'
+            
+         cv_version
+            
+            Version of the CVs
+            
+            values:
+               
+               - function from self named format('esgvoc_version'= vocabulary, 'project'= init[vocabulary_project], 'cv_content'= internal[CV_project][version])
+            
+            num type: 'string'
+            
+         contact
+            
+            Contact email.
+            
+            values:
+               
+               - attrs[contact]
+               - common[contact]
+            
+            forbidden values:
+               
+               - 'None'
+               - ''
+               - None
+            
+            num type: 'string'
+            
+         comment
+            
+            Comment associated with the file.
+            
+            values:
+               
+               - attrs[comment]
+               - function from self named format('var'= ,    ,          Condition:,          ,             value to check: common_tag[variable][comments],             ,             check to perform: 'neq',             ,             reference values:,                   ,                   - 'None',                   - None,             ,             values: common_tag[variable][comments],             , 'lset'= ,    ,          Condition:,          ,             value to check: common[comment_lset],             ,             check to perform: 'neq',             ,             reference values:,                   ,                   - 'None',                   - None,             ,             values: common[comment_lset],             , 'sset'= ,    ,          Condition:,          ,             value to check: common[comment_sset],             ,             check to perform: 'neq',             ,             reference values:,                   ,                   - 'None',                   - None,             ,             values: common[comment_sset],             )
+            
+            forbidden values: ''
             
             num type: 'string'
             
@@ -4823,6 +5500,7 @@ Project settings
                - ''
                - 'None'
                - None
+               - 'undef'
             
             num type: 'string'
             
@@ -4849,6 +5527,7 @@ Project settings
                - ''
                - 'None'
                - None
+               - 'undef'
             
             num type: 'string'
             
@@ -4880,6 +5559,7 @@ Project settings
                - ''
                - 'None'
                - None
+               - 'undef'
             
             num type: 'string'
             
@@ -4896,6 +5576,7 @@ Project settings
                - ''
                - 'None'
                - None
+               - 'undef'
             
             num type: 'string'
             
@@ -4912,6 +5593,7 @@ Project settings
                - ''
                - 'None'
                - None
+               - 'undef'
             
             num type: 'string'
             
@@ -4928,6 +5610,7 @@ Project settings
                - ''
                - 'None'
                - None
+               - 'undef'
             
             num type: 'string'
             
@@ -4944,6 +5627,7 @@ Project settings
                - ''
                - 'None'
                - None
+               - 'undef'
             
             num type: 'string'
             
@@ -4960,6 +5644,7 @@ Project settings
                - ''
                - 'None'
                - None
+               - 'undef'
             
             num type: 'string'
             
@@ -4976,6 +5661,7 @@ Project settings
                - ''
                - 'None'
                - None
+               - 'undef'
             
             num type: 'string'
             

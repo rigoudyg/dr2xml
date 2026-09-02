@@ -302,6 +302,17 @@ Internal values
       
       num type: 'string'
       
+   create_csv_file
+      
+      Pattern containing context if a csv file should be produced, else False.
+      
+      values:
+         
+         - laboratory[create_csv_file]
+         - False
+      
+      num type: 'string'
+      
    debug_parsing
       
       In order to identify which xml files generates a problem, you can use this flag.
@@ -310,6 +321,17 @@ Internal values
          
          - laboratory[debug_parsing]
          - False
+      
+      num type: 'string'
+      
+   default_region
+      
+      Default region to be used
+      
+      values:
+         
+         - laboratory[default_region]
+         - 'default'
       
       num type: 'string'
       
@@ -332,6 +354,19 @@ Internal values
          
          - simulation[end_year]
          - False
+      
+      num type: 'string'
+      
+   excluded_dimensions
+      
+      List of dimensions to be excluded.
+      
+      values:
+         
+         - laboratory[excluded_dimensions]
+         - []
+      
+      target type: 'list'
       
       num type: 'string'
       
@@ -413,6 +448,19 @@ Internal values
       
       num type: 'string'
       
+   excluded_regions
+      
+      List of regions to be excluded.
+      
+      values:
+         
+         - laboratory[excluded_regions]
+         - []
+      
+      target type: 'list'
+      
+      num type: 'string'
+      
    excluded_request_links
       
       List of links un data request that should not been followed (those request are not taken into account).
@@ -459,6 +507,19 @@ Internal values
       values:
          
          - simulation[excluded_tables]
+         - []
+      
+      target type: 'list'
+      
+      num type: 'string'
+      
+   excluded_tpshapes_lset
+      
+      The list of shapes that should be excluded (all variables in those shapes will be excluded from outputs).
+      
+      values:
+         
+         - laboratory[excluded_tpshapes]
          - []
       
       target type: 'list'
@@ -517,6 +578,32 @@ Internal values
       
       num type: 'string'
       
+   excluded_vars_per_frequency
+      
+      A dictionary which keys are frequencies and values the list of variables that must be excluded for each frequency.
+      
+      values:
+         
+         - laboratory[excluded_vars_per_frequency]
+         - {}
+      
+      target type: 'dict'
+      
+      num type: 'string'
+      
+   excluded_vars_per_shape
+      
+      A dictionary which keys are shapes and values the list of variables that must be excluded for each shape.
+      
+      values:
+         
+         - laboratory[excluded_vars_per_shape]
+         - {}
+      
+      target type: 'dict'
+      
+      num type: 'string'
+      
    excluded_vars_sset
       
       List of CMOR variables to exclude from the result based on previous Data Request extraction from simulation settings.
@@ -552,6 +639,20 @@ Internal values
       values:
          
          - simulation[experiment_id]
+      
+      num type: 'string'
+      
+   extravar_regions
+      
+      Dictionnary containing the default values for region for each variables
+      
+      values:
+         
+         - laboratory[extravar_regions]
+         -    
+         -    - 'default': 'default'
+      
+      target type: 'dict'
       
       num type: 'string'
       
@@ -624,7 +725,62 @@ Internal values
       
       values:
          
-         - laboratory[grids]
+         - function from functions_file named format_grids('grids'= laboratory[grids], 'variables_per_grid_type'= internal[variables_per_grid_type])
+      
+      num type: 'string'
+      
+   grids_default_DR
+      
+      DR default grids
+      
+      fatal: True
+      
+      values:
+         
+         - laboratory[grids_default_DR]
+         -    
+         -    - 'cfsites': 
+         -    
+         -          
+         -          - 'gn'
+         -          - '100 km'
+         -          - 'data sampled in model native grid by nearest neighbour method '
+         -    - '1deg': 
+         -    
+         -          
+         -          - 'gr1'
+         -          - '1x1 degree'
+         -          - 'data regridded to a CMIP6 standard 1x1 degree latxlon grid from the native grid'
+         -    - '2deg': 
+         -    
+         -          
+         -          - 'gr2'
+         -          - '2x2 degree'
+         -          - 'data regridded to a CMIP6 standard 2x2 degree latxlon grid from the native grid'
+         -    - '100km': 
+         -    
+         -          
+         -          - 'gr3'
+         -          - '100 km'
+         -          - 'data regridded to a CMIP6 standard 100 km resol grid from the native grid'
+         -    - '50km': 
+         -    
+         -          
+         -          - 'gr4'
+         -          - '50 km'
+         -          - 'data regridded to a CMIP6 standard 50 km resol grid from the native grid'
+         -    - '25km': 
+         -    
+         -          
+         -          - 'gr5'
+         -          - '25 km'
+         -          - 'data regridded to a CMIP6 standard 25 km resol grid from the native grid'
+         -    - 'default': 
+         -    
+         -          
+         -          - 'grx'
+         -          - '?x? degree'
+         -          - 'grid has no description - please fix DR_grid_to_grid_atts for grid %s'
       
       num type: 'string'
       
@@ -841,6 +997,22 @@ Internal values
       values:
          
          - laboratory[max_priority]
+      
+      num type: 'string'
+      
+   max_priority_per_frequency
+      
+      Max variable priority level per frequency to be output from lab settings.
+      
+      fatal: True
+      
+      values:
+         
+         - simulation[max_priority_per_frequency]
+         - laboratory[max_priority_per_frequency]
+         - {}
+      
+      target type: 'dict'
       
       num type: 'string'
       
@@ -1072,11 +1244,39 @@ Internal values
          
          - dict[select]
       
+      corrections:
+         
+         - '': 'on_expt_and_year'
+      
       authorized values:
          
          - 'on_expt_and_year'
          - 'on_expt'
+         - 'on_inc_and_exc'
          - 'no'
+      
+      num type: 'string'
+      
+   select_excluded_dimensions
+      
+      Excluded dimensions for variable selection.
+      
+      fatal: True
+      
+      values:
+         
+         -    Condition:
+         -    
+         -       value to check: internal[select_on_inc_and_exc]
+         -       
+         -       check to perform: 'eq'
+         -       
+         -       reference values: True
+         -       
+         -       values: internal[excluded_dimensions]
+         -       
+      
+      target type: 'list'
       
       num type: 'string'
       
@@ -1090,23 +1290,13 @@ Internal values
          
          -    Condition:
          -    
-         -       value to check: internal[select_on_expt]
+         -       value to check: internal[select_on_inc_and_exc]
          -       
          -       check to perform: 'eq'
          -       
          -       reference values: True
          -       
          -       values: merge_lists()
-         -       
-         -    Condition:
-         -    
-         -       value to check: internal[select_on_expt]
-         -       
-         -       check to perform: 'eq'
-         -       
-         -       reference values: False
-         -       
-         -       values: internal[excluded_expgroups_lset]
          -       
       
       num type: 'string'
@@ -1121,23 +1311,13 @@ Internal values
          
          -    Condition:
          -    
-         -       value to check: internal[select_on_expt]
+         -       value to check: internal[select_on_inc_and_exc]
          -       
          -       check to perform: 'eq'
          -       
          -       reference values: True
          -       
          -       values: merge_lists()
-         -       
-         -    Condition:
-         -    
-         -       value to check: internal[select_on_expt]
-         -       
-         -       check to perform: 'eq'
-         -       
-         -       reference values: False
-         -       
-         -       values: internal[excluded_opportunities_lset]
          -       
       
       num type: 'string'
@@ -1152,7 +1332,7 @@ Internal values
          
          -    Condition:
          -    
-         -       value to check: internal[select_on_expt]
+         -       value to check: internal[select_on_inc_and_exc]
          -       
          -       check to perform: 'eq'
          -       
@@ -1160,15 +1340,26 @@ Internal values
          -       
          -       values: merge_lists()
          -       
+      
+      num type: 'string'
+      
+   select_excluded_regions
+      
+      Excluded regions for variable selection.
+      
+      fatal: True
+      
+      values:
+         
          -    Condition:
          -    
-         -       value to check: internal[select_on_expt]
+         -       value to check: internal[select_on_inc_and_exc]
          -       
          -       check to perform: 'eq'
          -       
-         -       reference values: False
+         -       reference values: True
          -       
-         -       values: internal[excluded_pairs_lset]
+         -       values: internal[excluded_regions]
          -       
       
       num type: 'string'
@@ -1183,23 +1374,13 @@ Internal values
          
          -    Condition:
          -    
-         -       value to check: internal[select_on_expt]
+         -       value to check: internal[select_on_inc_and_exc]
          -       
          -       check to perform: 'eq'
          -       
          -       reference values: True
          -       
          -       values: internal[excluded_request_links]
-         -       
-         -    Condition:
-         -    
-         -       value to check: internal[select_on_expt]
-         -       
-         -       check to perform: 'eq'
-         -       
-         -       reference values: False
-         -       
-         -       values: None
          -       
       
       num type: 'string'
@@ -1214,23 +1395,13 @@ Internal values
          
          -    Condition:
          -    
-         -       value to check: internal[select_on_expt]
+         -       value to check: internal[select_on_inc_and_exc]
          -       
          -       check to perform: 'eq'
          -       
          -       reference values: True
          -       
          -       values: merge_lists()
-         -       
-         -    Condition:
-         -    
-         -       value to check: internal[select_on_expt]
-         -       
-         -       check to perform: 'eq'
-         -       
-         -       reference values: False
-         -       
-         -       values: internal[excluded_tables_lset]
          -       
       
       num type: 'string'
@@ -1245,23 +1416,13 @@ Internal values
          
          -    Condition:
          -    
-         -       value to check: internal[select_on_expt]
+         -       value to check: internal[select_on_inc_and_exc]
          -       
          -       check to perform: 'eq'
          -       
          -       reference values: True
          -       
          -       values: merge_lists()
-         -       
-         -    Condition:
-         -    
-         -       value to check: internal[select_on_expt]
-         -       
-         -       check to perform: 'eq'
-         -       
-         -       reference values: False
-         -       
-         -       values: internal[excluded_vargroups_lset]
          -       
       
       num type: 'string'
@@ -1276,23 +1437,13 @@ Internal values
          
          -    Condition:
          -    
-         -       value to check: internal[select_on_expt]
+         -       value to check: internal[select_on_inc_and_exc]
          -       
          -       check to perform: 'eq'
          -       
          -       reference values: True
          -       
          -       values: merge_lists()
-         -       
-         -    Condition:
-         -    
-         -       value to check: internal[select_on_expt]
-         -       
-         -       check to perform: 'eq'
-         -       
-         -       reference values: False
-         -       
-         -       values: internal[excluded_vars_lset]
          -       
       
       num type: 'string'
@@ -1315,16 +1466,6 @@ Internal values
          -       
          -       values: internal[grid_choice]
          -       
-         -    Condition:
-         -    
-         -       value to check: internal[select_on_expt]
-         -       
-         -       check to perform: 'eq'
-         -       
-         -       reference values: False
-         -       
-         -       values: 'LR'
-         -       
       
       num type: 'string'
       
@@ -1338,23 +1479,13 @@ Internal values
          
          -    Condition:
          -    
-         -       value to check: internal[select_on_expt]
+         -       value to check: internal[select_on_inc_and_exc]
          -       
          -       check to perform: 'eq'
          -       
          -       reference values: True
          -       
          -       values: internal[included_expgroups]
-         -       
-         -    Condition:
-         -    
-         -       value to check: internal[select_on_expt]
-         -       
-         -       check to perform: 'eq'
-         -       
-         -       reference values: False
-         -       
-         -       values: internal[included_expgroups_lset]
          -       
       
       num type: 'string'
@@ -1369,23 +1500,13 @@ Internal values
          
          -    Condition:
          -    
-         -       value to check: internal[select_on_expt]
+         -       value to check: internal[select_on_inc_and_exc]
          -       
          -       check to perform: 'eq'
          -       
          -       reference values: True
          -       
          -       values: internal[included_opportunities]
-         -       
-         -    Condition:
-         -    
-         -       value to check: internal[select_on_expt]
-         -       
-         -       check to perform: 'eq'
-         -       
-         -       reference values: False
-         -       
-         -       values: internal[included_opportunities_lset]
          -       
       
       num type: 'string'
@@ -1400,23 +1521,13 @@ Internal values
          
          -    Condition:
          -    
-         -       value to check: internal[select_on_expt]
+         -       value to check: internal[select_on_inc_and_exc]
          -       
          -       check to perform: 'eq'
          -       
          -       reference values: True
          -       
          -       values: internal[included_request_links]
-         -       
-         -    Condition:
-         -    
-         -       value to check: internal[select_on_expt]
-         -       
-         -       check to perform: 'eq'
-         -       
-         -       reference values: False
-         -       
-         -       values: None
          -       
       
       num type: 'string'
@@ -1431,23 +1542,13 @@ Internal values
          
          -    Condition:
          -    
-         -       value to check: internal[select_on_expt]
+         -       value to check: internal[select_on_inc_and_exc]
          -       
          -       check to perform: 'eq'
          -       
          -       reference values: True
          -       
          -       values: internal[included_tables]
-         -       
-         -    Condition:
-         -    
-         -       value to check: internal[select_on_expt]
-         -       
-         -       check to perform: 'eq'
-         -       
-         -       reference values: False
-         -       
-         -       values: internal[included_tables_lset]
          -       
       
       num type: 'string'
@@ -1462,23 +1563,13 @@ Internal values
          
          -    Condition:
          -    
-         -       value to check: internal[select_on_expt]
+         -       value to check: internal[select_on_inc_and_exc]
          -       
          -       check to perform: 'eq'
          -       
          -       reference values: True
          -       
          -       values: internal[included_vargroups]
-         -       
-         -    Condition:
-         -    
-         -       value to check: internal[select_on_expt]
-         -       
-         -       check to perform: 'eq'
-         -       
-         -       reference values: False
-         -       
-         -       values: internal[included_vargroups_lset]
          -       
       
       num type: 'string'
@@ -1493,23 +1584,13 @@ Internal values
          
          -    Condition:
          -    
-         -       value to check: internal[select_on_expt]
+         -       value to check: internal[select_on_inc_and_exc]
          -       
          -       check to perform: 'eq'
          -       
          -       reference values: True
          -       
          -       values: internal[included_vars]
-         -       
-         -    Condition:
-         -    
-         -       value to check: internal[select_on_expt]
-         -       
-         -       check to perform: 'eq'
-         -       
-         -       reference values: False
-         -       
-         -       values: internal[included_vars_lset]
          -       
       
       num type: 'string'
@@ -1532,16 +1613,29 @@ Internal values
          -       
          -       values: internal[max_priority]
          -       
+      
+      num type: 'string'
+      
+   select_max_priority_per_frequency
+      
+      Max priority per frequency for variable selection.
+      
+      fatal: True
+      
+      values:
+         
          -    Condition:
          -    
-         -       value to check: internal[select_on_expt]
+         -       value to check: internal[select_on_inc_and_exc]
          -       
          -       check to perform: 'eq'
          -       
-         -       reference values: False
+         -       reference values: True
          -       
-         -       values: internal[max_priority_lset]
+         -       values: internal[max_priority_per_frequency]
          -       
+      
+      target type: 'dict'
       
       num type: 'string'
       
@@ -1555,23 +1649,13 @@ Internal values
          
          -    Condition:
          -    
-         -       value to check: internal[select_on_expt]
+         -       value to check: internal[select_on_inc_and_exc]
          -       
          -       check to perform: 'eq'
          -       
          -       reference values: True
          -       
          -       values: function from functions_file named sort_mips('mips'= internal[mips][internal[select_grid_choice]])
-         -       
-         -    Condition:
-         -    
-         -       value to check: internal[select_on_expt]
-         -       
-         -       check to perform: 'eq'
-         -       
-         -       reference values: False
-         -       
-         -       values: function from functions_file named sort_mips('mips'= internal[mips])
          -       
       
       num type: 'string'
@@ -1597,15 +1681,30 @@ Internal values
          -       
          -       values: True
          -       
+      
+      num type: 'string'
+      
+   select_on_inc_and_exc
+      
+      Should data be selected on inclusions and exclusions?
+      
+      fatal: True
+      
+      values:
+         
          -    Condition:
          -    
          -       value to check: internal[select]
          -       
          -       check to perform: 'eq'
          -       
-         -       reference values: 'no'
+         -       reference values:
+         -             
+         -             - 'on_expt_and_year'
+         -             - 'on_expt'
+         -             - 'on_inc_and_exc'
          -       
-         -       values: False
+         -       values: True
          -       
       
       num type: 'string'
@@ -1628,19 +1727,6 @@ Internal values
          -       
          -       values: True
          -       
-         -    Condition:
-         -    
-         -       value to check: internal[select]
-         -       
-         -       check to perform: 'eq'
-         -       
-         -       reference values:
-         -             
-         -             - 'on_expt'
-         -             - 'no'
-         -       
-         -       values: False
-         -       
       
       num type: 'string'
       
@@ -1662,16 +1748,8 @@ Internal values
          -       
          -       values: internal[sizes]
          -       
-         -    Condition:
-         -    
-         -       value to check: internal[select_on_expt]
-         -       
-         -       check to perform: 'eq'
-         -       
-         -       reference values: False
-         -       
-         -       values: None
-         -       
+      
+      target type: 'dict'
       
       num type: 'string'
       
@@ -1692,16 +1770,6 @@ Internal values
          -       reference values: True
          -       
          -       values: internal[tierMax]
-         -       
-         -    Condition:
-         -    
-         -       value to check: internal[select_on_expt]
-         -       
-         -       check to perform: 'eq'
-         -       
-         -       reference values: False
-         -       
-         -       values: internal[tierMax_lset]
          -       
       
       num type: 'string'
@@ -1828,6 +1896,17 @@ Internal values
       
       num type: 'string'
       
+   update_grid_label
+      
+      Should grid label be updated according to table?
+      
+      values:
+         
+         - laboratory[update_grid_label]
+         - True
+      
+      num type: 'string'
+      
    useAtForInstant
       
       Should xml output files use the `@` symbol for definitions for instant variables?
@@ -1863,6 +1942,19 @@ Internal values
       
       num type: 'string'
       
+   variables_per_grid_type
+      
+      List of variables associated with a grid type
+      
+      values:
+         
+         - laboratory[variables_per_grid_type]
+         - {}
+      
+      target type: 'dict'
+      
+      num type: 'string'
+      
    vertical_interpolation_operation
       
       Operation done for vertical interpolation.
@@ -1881,6 +1973,23 @@ Internal values
       values:
          
          - laboratory[vertical_interpolation_sample_freq]
+      
+      num type: 'string'
+      
+   write_split_freq
+      
+      Should a split_freq file be generated with values computed by dr2xml?
+      
+      values:
+         
+         - laboratory[write_split_freq]
+         - False
+      
+      forbidden values:
+         
+         - None
+         - 'None'
+         - ''
       
       num type: 'string'
       
@@ -2009,6 +2118,12 @@ Common values
          - simulation[branch_method]
          - 'standard'
       
+      forbidden values:
+         
+         - None
+         - 'None'
+         - ''
+      
       num type: 'string'
       
    branch_month_in_parent
@@ -2125,7 +2240,7 @@ Common values
       
       num type: 'string'
       
-   data_specs_version
+   data_request_version_string
       
       Version of the data request used.
       
@@ -2134,6 +2249,18 @@ Common values
       values:
          
          - function from data_request named get_version({})
+      
+      num type: 'string'
+      
+   data_specs_version
+      
+      Version of the data request used.
+      
+      fatal: True
+      
+      values:
+         
+         - common[data_request_version_string]
       
       num type: 'string'
       
@@ -2545,7 +2672,7 @@ Project settings
             
          positive
             
-            Hox is the axis oriented?
+            How is the axis oriented?
             
             values:
                
@@ -2576,6 +2703,7 @@ Project settings
                - ''
                - 'None'
                - None
+               - 'undef'
             
             num type: 'string'
             
@@ -2612,6 +2740,7 @@ Project settings
                - ''
                - 'None'
                - None
+               - 'undef'
             
             num type: 'string'
             
@@ -2653,6 +2782,7 @@ Project settings
                - ''
                - 'None'
                - None
+               - 'undef'
             
             num type: 'string'
             
@@ -2669,6 +2799,7 @@ Project settings
                - ''
                - 'None'
                - None
+               - 'undef'
             
             num type: 'string'
             
@@ -2685,6 +2816,7 @@ Project settings
                - ''
                - 'None'
                - None
+               - 'undef'
             
             num type: 'string'
             
@@ -2701,6 +2833,7 @@ Project settings
                - ''
                - 'None'
                - None
+               - 'undef'
             
             num type: 'string'
             
@@ -2717,6 +2850,7 @@ Project settings
                - ''
                - 'None'
                - None
+               - 'undef'
             
             num type: 'string'
             
@@ -2733,6 +2867,7 @@ Project settings
                - ''
                - 'None'
                - None
+               - 'undef'
             
             num type: 'string'
             
@@ -2749,6 +2884,7 @@ Project settings
                - ''
                - 'None'
                - None
+               - 'undef'
             
             num type: 'string'
             
@@ -2797,7 +2933,7 @@ Project settings
             
             values:
                
-               - function from self named format('data_request_used'= init[data_request_used], 'data_specs_version'= common[data_specs_version])
+               - function from self named format('data_request_used'= init[data_request_used], 'data_request_version_string'= common[data_request_version_string])
             
             num type: 'string'
             
@@ -3175,6 +3311,27 @@ Project settings
             
             num type: 'string'
             
+         variable_label
+            
+            Variable label
+            
+            fatal: True
+            
+            values:
+               
+               - common_tag[variable][label]
+            
+            target type: 'str'
+            
+            forbidden values:
+               
+               - ''
+               - 'None'
+               - None
+               - 'undef'
+            
+            num type: 'string'
+            
       
       Attributes:
          field_ref
@@ -3211,6 +3368,7 @@ Project settings
                - ''
                - 'None'
                - None
+               - 'undef'
             
             num type: 'string'
             
@@ -3227,6 +3385,7 @@ Project settings
                - ''
                - 'None'
                - None
+               - 'undef'
             
             num type: 'string'
             
@@ -3346,6 +3505,7 @@ Project settings
                - ''
                - 'None'
                - None
+               - 'undef'
             
             num type: 'string'
             
@@ -3362,6 +3522,7 @@ Project settings
                - ''
                - 'None'
                - None
+               - 'undef'
             
             num type: 'string'
             
@@ -3374,14 +3535,15 @@ Project settings
             values:
                
                - attrs[comment]
-               - simulation[comments][common_tag[variable][label]]
-               - laboratory[comments][common_tag[variable][label]]
+               - simulation[comments][common_tag[variable_label]]
+               - laboratory[comments][common_tag[variable_label]]
             
             forbidden values:
                
                - ''
                - 'None'
                - None
+               - 'undef'
             
             num type: 'string'
             
@@ -3399,6 +3561,7 @@ Project settings
                - ''
                - 'None'
                - None
+               - 'undef'
             
             num type: 'string'
             
@@ -3452,6 +3615,7 @@ Project settings
                - ''
                - 'None'
                - None
+               - 'undef'
             
             num type: 'string'
             
@@ -3473,6 +3637,7 @@ Project settings
                - ''
                - 'None'
                - None
+               - 'undef'
             
             num type: 'string'
             
@@ -3490,6 +3655,7 @@ Project settings
                - ''
                - 'None'
                - None
+               - 'undef'
             
             num type: 'string'
             
@@ -3507,6 +3673,7 @@ Project settings
                - ''
                - 'None'
                - None
+               - 'undef'
             
             num type: 'string'
             
@@ -3524,6 +3691,7 @@ Project settings
                - ''
                - 'None'
                - None
+               - 'undef'
             
             num type: 'string'
             
@@ -3644,7 +3812,28 @@ Project settings
             
             values:
                
-               - variable
+               - attrs[variable][0]
+            
+            num type: 'string'
+            
+         variable_label
+            
+            Variable label
+            
+            fatal: True
+            
+            values:
+               
+               - common_tag[variable][label]
+            
+            target type: 'str'
+            
+            forbidden values:
+               
+               - ''
+               - 'None'
+               - None
+               - 'undef'
             
             num type: 'string'
             
@@ -3659,7 +3848,7 @@ Project settings
             values:
                
                - attrs[id]
-               - function from self named format('grid'= attrs[grid_label], 'table'= attrs[table_id], 'variable'= common_tag[variable][label])
+               - function from self named format('grid'= attrs[grid_label], 'table'= attrs[table_id], 'variable'= common_tag[variable_label])
             
             num type: 'string'
             
@@ -3710,6 +3899,7 @@ Project settings
                - 'None'
                - ''
                - None
+               - 'undef'
             
             num type: 'string'
             
@@ -3727,6 +3917,7 @@ Project settings
                - 'None'
                - ''
                - None
+               - 'undef'
             
             num type: 'string'
             
@@ -3752,6 +3943,7 @@ Project settings
                - ''
                - 'None'
                - None
+               - 'undef'
             
             num type: 'string'
             
@@ -3777,6 +3969,7 @@ Project settings
                - ''
                - 'None'
                - None
+               - 'undef'
             
             num type: 'string'
             
@@ -3804,6 +3997,7 @@ Project settings
                - None
                - 'False'
                - False
+               - 'undef'
             
             num type: 'string'
             
@@ -3831,6 +4025,7 @@ Project settings
                - None
                - 'False'
                - False
+               - 'undef'
             
             num type: 'string'
             
@@ -3856,6 +4051,7 @@ Project settings
                - ''
                - 'None'
                - None
+               - 'undef'
             
             num type: 'string'
             
@@ -3940,6 +4136,7 @@ Project settings
                - 'None'
                - ''
                - None
+               - 'undef'
             
             num type: 'string'
             
@@ -3968,6 +4165,7 @@ Project settings
                - 'None'
                - ''
                - None
+               - 'undef'
             
             num type: 'string'
             
@@ -4606,6 +4804,7 @@ Project settings
                - ''
                - 'None'
                - None
+               - 'undef'
             
             num type: 'string'
             
@@ -4632,6 +4831,7 @@ Project settings
                - ''
                - 'None'
                - None
+               - 'undef'
             
             num type: 'string'
             
@@ -4663,6 +4863,7 @@ Project settings
                - ''
                - 'None'
                - None
+               - 'undef'
             
             num type: 'string'
             
@@ -4679,6 +4880,7 @@ Project settings
                - ''
                - 'None'
                - None
+               - 'undef'
             
             num type: 'string'
             
@@ -4695,6 +4897,7 @@ Project settings
                - ''
                - 'None'
                - None
+               - 'undef'
             
             num type: 'string'
             
@@ -4711,6 +4914,7 @@ Project settings
                - ''
                - 'None'
                - None
+               - 'undef'
             
             num type: 'string'
             
@@ -4727,6 +4931,7 @@ Project settings
                - ''
                - 'None'
                - None
+               - 'undef'
             
             num type: 'string'
             
@@ -4743,6 +4948,7 @@ Project settings
                - ''
                - 'None'
                - None
+               - 'undef'
             
             num type: 'string'
             
@@ -4759,6 +4965,7 @@ Project settings
                - ''
                - 'None'
                - None
+               - 'undef'
             
             num type: 'string'
             
