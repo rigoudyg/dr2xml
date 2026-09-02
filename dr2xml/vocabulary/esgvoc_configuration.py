@@ -45,7 +45,7 @@ def setup_esgvoc_config(config_name, project, config_file="vocabulary.json"):
             except Exception:
                 snapshot = None
             target = UserState.db_path(project_id, version)
-            raise ValueError("!!!DEBUG!!! %s" % target)
+            raise ValueError("!!!DEBUG!!! %s %s %s" % (target, os.path.exists(str(target)), target.exists()))
 
             if not target.exists():
                 target.parent.mkdir(parents=True, exist_ok=True)
