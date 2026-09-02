@@ -43,4 +43,5 @@ jobs:
         esgvoc use cordex-cmip6@v1.0.0
         esgvoc use cmip7@1.1.0
         export ESGVOC_OFFLINE=TRUE
+        esgvoc list
         bash launch_tests.sh
