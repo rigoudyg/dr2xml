@@ -27,7 +27,10 @@ def setup_esgvoc_config(config_name, project, config_file="vocabulary.json"):
     if config_name is not None:
         # Create minimal configuration with Universe and CMIP7
         config_data = get_config_data(config_name, project, config_file=config_file)
-        os.environ["ESGVOC_HOME"] = config_data["database_directory"]
+        esgvoc_home = config_data["database_directory"]
+        if "__package-root__" in esgvoc_home:
+            esgvoc_home = esgvoc_home.replace("__package-root__", os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+        os.environ["ESGVOC_HOME"] = esgvoc_home
         os.environ["ESGVOC_OFFLINE"] = str(config_data.get("offline", False)).upper()
         from esgvoc.core.service.user_state import UserState
         from esgvoc.core.db_fetcher import DBFetcher

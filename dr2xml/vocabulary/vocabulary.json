@@ -1,7 +1,7 @@
 {
   "dr2xml_default": {
     "default": {
-      "database_directory": "esgvoc_dbs",
+      "database_directory": "__package-root__/vocabulary/esgvoc_dbs",
       "offline": false
     },
     "cmip6": {
@@ -17,9 +17,37 @@
       "universe_version": "1.0.2"
     }
   },
+  "dr2xml_latest": {
+    "default": {
+      "database_directory": "__package-root__/vocabulary/esgvoc_dbs",
+      "offline": false
+    },
+    "cmip6": {
+      "project_version": "latest",
+      "universe_version": "latest"
+    },
+    "cmip7": {
+      "project_version": "latest",
+      "universe_version": "latest"
+    },
+    "cordex-cmip6": {
+      "project_version": "latest",
+      "universe_version": "latest"
+    }
+  },
+  "dr2xml_polmip": {
+    "default": {
+      "database_directory": "__package-root__/vocabulary/esgvoc_dbs",
+      "offline": false
+    },
+    "cmip7": {
+      "project_version": "polmip",
+      "universe_version": "1.0.23"
+    }
+  },
   "dr2xml_test": {
     "default": {
-      "database_directory": "esgvoc_dbs",
+      "database_directory": "__package-root__/vocabulary/esgvoc_dbs",
       "offline": true
     },
     "cmip6": {
